@@ -46,7 +46,7 @@ export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
 
 // description : 트렌드 절대 URL PATH
-export const TREND_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${SERVER_TREND_BOARD_MODULE_URL}`;
+export const TREND_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${TREND_BOARD_PATH}`;
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}`
 export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
 export const TREND_BOARD_DETAIL_ABSOLUTE_PATH =(trendBoardNumber : number | string) => 
@@ -55,7 +55,7 @@ export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | str
 	`${SERVICE_URL}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`
 export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
-export const TREND_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment/delete${trendBoardNumber}`;
+
 
 // description : QNA 절대 URL PATH
 export const QNA_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${SERVER_QNA_BOARD_MODULE_URL}`;
@@ -67,7 +67,7 @@ export const QNA_BOARD_UPDATE_ABSOLUTE_PATH = (qnaBoardNumber : number | string)
 	`${SERVICE_URL}/${TREND_BOARD_PATH}/update/${qnaBoardNumber}`
 export const QNA_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment${qnaBoardNumber}`;
 export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment/update${qnaBoardNumber}`;
-export const QNA_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment/delete${qnaBoardNumber}`;
+
 
 // description : 디자이너 절대 URL PATH
 export const DESIGNER_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/${SERVER_DESIGNER_BOARD_MODULE_URL}`;
@@ -78,7 +78,6 @@ export const DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number
 export const DESIGNER_BOARD_DELETE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/delete${designerBoardNumber}`;
 export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment${designerBoardNumber}`;
 export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment/update${designerBoardNumber}`;
-export const DESIGNER_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment/delete${designerBoardNumber}`;
 
 // description: Navigation 절대 URL PATH
 // export const AUTH_ABSOLUTE_PATH = AUTH_PATH;
