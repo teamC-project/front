@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../project_example/service.tsx", "../project_example/exa.tsx"  ]
 }
