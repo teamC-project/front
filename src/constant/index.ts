@@ -42,5 +42,6 @@ export const POST_DESIGNER_BOARD_COMMENT_WRITE_REQUEST_URL =(designerBoardNumber
 export const  PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 
+
 // description: 게시물 상수
 
