@@ -50,6 +50,18 @@ export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL =
 (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 
+export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
+export const POST_DESIGNER_BOARD_WRITE_URL = `${SERVER_DESIGNER_BOARD_MODULE_URL}/`;
+export const PUT_DESIGNER_BOARD_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}`;
+export const DELETE_DESIGNER_BOARD_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}`;
+export const GET_DESIGNER_BOARD_LIST_URL = `${SERVER_DESIGNER_BOARD_MODULE_URL}/list`;
+export const GET_SEARCH_DESIGNER_BOARD_LIST_URL = `${SERVER_DESIGNER_BOARD_MODULE_URL}/list/search`;
+export const GET_DESIGNER_BOARD_DETAIL_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}`;
+export const PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/increase-view-count`;
+export const POST_DESIGNER_BOARD_COMMENT_WRITE_REQUEST_URL =(designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+export const  PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+
 
 // description: 게시물 상수
 
