@@ -118,7 +118,7 @@ export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcem
 export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
 export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
 export const GET_ANNOUNCEMENT_BOARD_SEARCH_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
-export const GET_ANNONOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = 
 (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
@@ -135,3 +135,16 @@ export const PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL = (designerBoardNumber
 export const POST_DESIGNER_BOARD_COMMENT_WRITE_URL =(designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const  PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+
+// description : 소통 플랫폼 API URL PATH
+export const SERVER_CUSTOMER_BOARD_MODULE_URL = `${SERVER_API_URL}/customer_board`;
+export const POST_CUSTOMER_BOARD_WRITE_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/`;
+export const PUT_CUSTOMER_BOARD_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const DELETE_CUSTOMER_BOARD_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const GET_CUSTOMER_BOARD_LIST_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/list`;
+export const GET_SEARCH_CUSTOMER_BOARD_LIST_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/list/search`;
+export const GET_CUSTOMER_BOARD_DETAIL_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/increase-view-count`;
+export const POST_CUSTOMER_BOARD_COMMENT_WRITE_REQUEST_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const  PUT_CUSTOMER_BOARD_COMMENT_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
