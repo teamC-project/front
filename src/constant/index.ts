@@ -15,18 +15,19 @@ Auth
 
 - url : /api/v1/auth
 
-***
+
 
 #### - 이메일 인증  
 
-- method : **POST**  
+- method : **POST**     
 - URL : **/email_auth**  
 
 ```bash
 curl -v -X POST "http://localhost:4200/api/v1/auth/email-auth" \
  -d "userEmail=email@email.com"
 ```
-***
+
+
 
 #### - 이메일 인증 확인
 
