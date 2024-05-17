@@ -1,6 +1,6 @@
 // description : Navigation URL PATH
 // export const AUTH_PATH = "/authentication";
-
+export const AUNNOUNCEMENT_BOARD_PATH = "/aunnouncement_board";
 
 // description: Navigation 절대 URL PATH
 // export const AUTH_ABSOLUTE_PATH = AUTH_PATH;
@@ -29,7 +29,6 @@ export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBo
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = 
 (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
-
 
 // description: 게시물 상수
 
