@@ -19,6 +19,13 @@ export const TREND_BOARD_DELETE_PATH = "delete/:trendBoardNumber";
 export const TREND_BOARD_COMMENT_WRITE_PATH = "comment/write/:trendBoardNumber";
 export const TREND_BOARD_COMMENT_UPDATE_PATH = "comment/update/:trendBoardNumber";
 export const TREND_BOARD_COMMENT_DELETE_PATH = "comment/delete/:trendBoardNumber";
+
+export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
+export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
+export const AUNNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
+export const AUNNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
+export const AUNNOUNCEMENT_BOARD_DELETE_PATH = "delete/:aunnouncementBoardNumber";
+
 export const QNA_BOARD_PATH = 'qna_board'
 export const QNA_BOARD_WRITE_PATH = "write";
 export const QNA_BOARD_DETAIL_PATH = ":qnaBoardNumber";
@@ -27,6 +34,7 @@ export const QNA_BOARD_DELETE_PATH = "delete/:qnaBoardNumber";
 export const QNA_BOARD_COMMENT_WRITE_PATH = "comment/write/:qnaBoardNumber";
 export const QNA_BOARD_COMMENT_UPDATE_PATH = "comment/update/:qnaBoardNumber";
 export const QNA_BOARD_COMMENT_DELETE_PATH = "comment/delete/:qnaBoardNumber";
+
 export const DESIGNER_BOARD_PATH = "designer_board"
 export const DESIGNER_BOARD_WRITE_PATH = "write";
 export const DESIGNER_BOARD_DETAIL_PATH = ":designerBoardNumber";
@@ -35,11 +43,6 @@ export const DESIGNER_BOARD_DELETE_PATH   = "delete/:designerBoardNumber";
 export const DESIGNER_BOARD_COMMENT_WRITE_PATH = "comment/write/:designerBoardNumber";
 export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoardNumber";
 export const DESIGNER_BOARD_COMMENT_DELETE_PATH = "comment/delete/:designerBoardNumber";
-export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
-export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
-export const AUNNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
-export const AUNNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
-export const AUNNOUNCEMENT_BOARD_DELETE_PATH = "delete/:aunnouncementBoardNumber";
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = "http://localhost:4200";
@@ -60,8 +63,17 @@ export const LOGOUT_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${LOGOUT_REQUEST_PATH}
 export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
 
+// description : 공지사항 절대 URL PATH
+export const ANNOUNCEMENT_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${AUNNOUNCEMENT_BOARD_PATH}`;
+export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}`
+export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}/${AUNNOUNCEMENT_BOARD_WRITE_PATH}`;
+export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber : number | string) => 
+	`${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_DETAIL_PATH}/${announcementBoardNumber}`;
+export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
+	`${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_UPDATE_PATH}/update/${announcementBoardNumber}`
+
 // description : 트렌드 절대 URL PATH
-export const TREND_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${SERVER_TREND_BOARD_MODULE_URL}`;
+export const TREND_BOARD_ABSOLUTE_PATH = `${SERVICE_URL}/ ${TREND_BOARD_PATH}`;
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}`
 export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
 export const TREND_BOARD_DETAIL_ABSOLUTE_PATH =(trendBoardNumber : number | string) => 
@@ -105,8 +117,17 @@ export const MY_PAGE_URL = `${SERVER_AUTH_MODULE_URL}/my_page`;
 export const UPDATE_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/update`;
 export const USER_DELETE_URL = `${SERVER_AUTH_MODULE_URL}/user_delete`;
 
+// description: ANNOUNCEMENT API URL PATH
+export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
+export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
+export const GET_ANNOUNCEMENT_BOARD_SEARCH_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
+export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
+export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+
 // description : TREND API URL PATH 
-export const TREND_BOARD_MODULE_URL = `${SERVER_API_URL}/trend_board`;
 export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}/`;
 export const GET_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}/list`
 export const GET_TREND_BOARD_SEARCH_URL = `${SERVER_TREND_BOARD_MODULE_URL}/list/search`;
@@ -130,15 +151,7 @@ export const POST_QNA_BOARD_COMMENT_WRITE_URL =(qnaBoardNumber: number | string)
 export const  PUT_QNA_BOARD_COMMENT_PUT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 export const DELETE_QNA_BOARD_COMMENT_DELETE_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 
-// description: ANNOUNCEMENT API URL PATH
-export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
-export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
-export const GET_ANNOUNCEMENT_BOARD_SEARCH_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
-export const GET_ANNONOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
-export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
-export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
-export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
-export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+
 
 // description : DESIGNER API URL PATH
 export const POST_DESIGNER_BOARD_WRITE_URL = `${SERVER_DESIGNER_BOARD_MODULE_URL}/`;
@@ -151,3 +164,16 @@ export const PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL = (designerBoardNumber
 export const POST_DESIGNER_BOARD_COMMENT_WRITE_URL =(designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const  PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+
+// description : 소통 플랫폼 API URL PATH
+export const SERVER_CUSTOMER_BOARD_MODULE_URL = `${SERVER_API_URL}/customer_board`;
+export const POST_CUSTOMER_BOARD_WRITE_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/`;
+export const PUT_CUSTOMER_BOARD_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const DELETE_CUSTOMER_BOARD_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const GET_CUSTOMER_BOARD_LIST_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/list`;
+export const GET_SEARCH_CUSTOMER_BOARD_LIST_URL = `${SERVER_CUSTOMER_BOARD_MODULE_URL}/list/search`;
+export const GET_CUSTOMER_BOARD_DETAIL_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
+export const PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/increase-view-count`;
+export const POST_CUSTOMER_BOARD_COMMENT_WRITE_REQUEST_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const  PUT_CUSTOMER_BOARD_COMMENT_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
