@@ -20,5 +20,16 @@ export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_aut
 export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
 
 
+export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;
+export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
+export const GET_ANNONOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
+export const GET_ANNOUNCEMENT_BOARD_SEARCH_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
+export const GET_ANNONOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
+export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = 
+(announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+
+
 // description: 게시물 상수
 
