@@ -2,6 +2,10 @@
 export const AUTH_PATH = "/authentication";
 export const SERVICE_URL = "/service";
 
+export const MAIN_URL = "/main";
+export const ON_URL = "/on";
+export const OFF_URL = "/off"
+
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
 export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
@@ -62,6 +66,10 @@ export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}/trend_board`;
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`
 export const SERVER_CUSTOMER_BOARD_MODULE_URL = `${SERVER_API_URL}/customer_board`;
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
+
+// description : Main 절대 URL PATH
+export const MAIN_ON_PATH = `${MAIN_URL}/${OFF_URL}`
+export const MAIN_OFF_PATH = `${MAIN_URL}/${ON_URL}`
 
 // description : Auth 절대 URL PATH
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;

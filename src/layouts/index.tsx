@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import UseUserStore from "../stores/user.store";
 
-type Path = "지역 평균" | "비율 계산" | "Q&A 게시판" | "";
+type Path = "공지 사항" | "트렌드 게시판" | "소통 플랫폼" | "디자이너 게시판" | "Q&A 게시판" | "";
 
 //                    interface                    //
 interface Props {
@@ -32,11 +32,17 @@ function TopBar({ path }: Props) {
 
 //                    component                    //
 function SideNavigation({ path }: Props) {
-  const localClass = `side-navigation-item${
-    path === "지역 평균" ? " active" : ""
+  const announcementClass = `side-navigation-item${
+    path === "공지 사항" ? " active" : ""
   }`;
-  const ratioClass = `side-navigation-item${
-    path === "비율 계산" ? " active" : ""
+  const trendClass = `side-navigation-item${
+    path === "트렌드 게시판" ? " active" : ""
+  }`;
+  const costomerClass = `side-navigation-item${
+    path === "소통 플랫폼" ? " active" : ""
+  }`;
+  const designerClass = `side-navigation-item${
+    path === "디자이너 게시판" ? " active" : ""
   }`;
   const qnaClass = `side-navigation-item${
     path === "Q&A 게시판" ? " active" : ""
@@ -54,16 +60,24 @@ function SideNavigation({ path }: Props) {
   //                    render                    //
   return (
     <div className="side-navigation-container">
-      <div className={localClass}>
-        <div className="side-navigation-icon chart"></div>
-        <div className="side-navigation-title">지역 평균</div>
+      <div className={announcementClass}>
+        <div className="side-navigation-icon"></div>
+        <div className="side-navigation-title">공지 사항</div>
       </div>
-      <div className={ratioClass} >
-        <div className="side-navigation-icon pie"></div>
-        <div className="side-navigation-title">비율 계산</div>
+      <div className={trendClass} >
+        <div className="side-navigation-icon"></div>
+        <div className="side-navigation-title">트렌드 게시판</div>
+      </div>
+      <div className={costomerClass} >
+        <div className="side-navigation-icon"></div>
+        <div className="side-navigation-title">소통 플랫폼</div>
+      </div>
+      <div className={designerClass} >
+        <div className="side-navigation-icon"></div>
+        <div className="side-navigation-title">디자이너 게시판</div>
       </div>
       <div className={qnaClass} >
-        <div className="side-navigation-icon edit"></div>
+        <div className="side-navigation-icon"></div>
         <div className="side-navigation-title">Q&A 게시판</div>
       </div>
     </div>
@@ -71,12 +85,8 @@ function SideNavigation({ path }: Props) {
 }
 
 //                    component                    //
-export default function ServiceContainer() {
+
   //                    state                    //
-  const { pathname } = useLocation();
-  const { setLoginUserId, setLoginUserRole } = UseUserStore();
-  const [cookies] = useCookies();
-  const [path, setPath] = useState<Path>("");
 
   //                    function                    //
   const navigator = useNavigate();
@@ -88,12 +98,8 @@ export default function ServiceContainer() {
 
   //                    render                    //
   return (
-    <div id="wrapper">
-      <TopBar path={path} />
-      <SideNavigation path={path} />
-      <div className="main-container">
-        <Outlet />
-      </div>
+    < div>
+
     </div>
   );
 }
