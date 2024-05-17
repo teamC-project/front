@@ -1,0 +1,130 @@
+.tb_area {
+
+}
+    
+.blind {
+    display: none;
+}
+
+.board caption {
+    display: none;
+}
+    
+.board {
+    width: 100%;
+    border-collapse: collapse;
+}
+    
+.board th,
+.board td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    }
+    
+.board th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    }
+    
+.board caption {
+    caption-side: top;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.side-container {
+    background-color: rgba(255, 255, 0,  0.5);
+}
+
+.logo {
+    grid-area: logo;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(255, 255, 0,  0.7);
+    border-bottom: 1px solid rgba(233, 236, 239, 1);
+
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 173%;
+    color: rgba(64, 64, 64, 1);
+}
+
+.top-bar-container {
+    grid-area: topbar;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 24px;
+
+    border-left: 1px solid rgba(233, 236, 239, 1);
+    border-bottom: 1px solid rgba(233, 236, 239, 1);
+
+}
+
+.top-bar-title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.top-bar-role {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+    
+    color: rgba(138, 146, 165, 1);
+}
+
+.side-navigation-container {
+    grid-area: sidenav;
+    padding: 16px 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.side-navigation-item {
+    border-radius: 6px;
+    padding: 8px 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    color: rgba(138, 146, 166, 1);
+    background-color: rgba(87, 52, 232, 1);
+}
+
+.side-navigation-item:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.side-navigation-item.active {
+    background-color: rgba(58, 87, 232, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.side-navigation-icon {
+    width: 24px;
+    height: 24px;
+    background-size: 100% 100%;
+}
