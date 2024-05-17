@@ -18,6 +18,10 @@ export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_in`;
 export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth`;
 export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth_check`;
 export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
+export const LOGOUT_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/logout`;
+export const MY_PAGE_MODULE_URL = `${SERVER_AUTH_MODULE_URL}/my_page`;
+export const UPDATE_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/update`;
+export const USER_DELETE_URL = `${SERVER_AUTH_MODULE_URL}/user_delete`;
 export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}/trend_board`;
 
 // description : 트렌드 절대 URL PATH
@@ -34,12 +38,9 @@ export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | str
 // export const AUTH_ABSOLUTE_PATH = AUTH_PATH;
 
 
-export const LOGOUT_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/logout`;
-export const MY_PAGE_MODULE_URL = `${SERVER_AUTH_MODULE_URL}/my_page`;
-export const UPDATE_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/update`;
-export const USER_DELETE_URL = `${SERVER_AUTH_MODULE_URL}/user_delete`;
 
 
+// description: 공지사항 API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;
 export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
 export const GET_ANNONOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
@@ -50,6 +51,7 @@ export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL =
 (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const POST_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 
+// description : 디자이너 API URL PATH
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
 export const POST_DESIGNER_BOARD_WRITE_URL = `${SERVER_DESIGNER_BOARD_MODULE_URL}/`;
 export const PUT_DESIGNER_BOARD_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}`;
@@ -61,7 +63,3 @@ export const PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL = (designerBoardNumber
 export const POST_DESIGNER_BOARD_COMMENT_WRITE_REQUEST_URL =(designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const  PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
-
-
-// description: 게시물 상수
-
