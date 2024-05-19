@@ -31,18 +31,18 @@ function TopBar({ path }: Props) {
   //                    render                    //
   return (
     <>
-      <div className="logo-container">임대주택 가격 서비스</div>
-      <div className="top-bar-container">
-        <div className="top-bar-title">{path}</div>
-        <div className="top-bar-right">
-          {loginUserRole === "ROLE_ADMIN" && (
-            <div className="top-bar-role">관리자</div>
-          )}
-          <div className="second-button" onClick={onLogoutClickHandler}>
-            로그아웃
+      <div>
+        <div className="logo-container">헤어어드바</div>
+        <div className="top-bar-container">
+          <div className="top-bar-title">{path}</div>
+            <div className="second-button" onClick={onLogoutClickHandler}>
+              내 정보
+            </div>
+            <div className="second-button" onClick={onLogoutClickHandler}>
+              로그아웃
+            </div>
           </div>
         </div>
-      </div>
     </>
   );
 }
@@ -82,10 +82,10 @@ function SideNavigation({ path }: Props) {
 
   const onDesignerBoardClickHandler = () => navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
 
-  const onQnaClickHandler = () => {
-    if (pathname === QNA_LIST_ABSOLUTE_PATH) window.location.reload();
-    else navigator(QNA_LIST_ABSOLUTE_PATH);
-  };
+  // const onQnaClickHandler = () => {
+  //   if (pathname === QNA_LIST_ABSOLUTE_PATH) window.location.reload();
+  //   else navigator(QNA_LIST_ABSOLUTE_PATH);
+  // };
 
   //                    render                    //
   return (
@@ -125,27 +125,27 @@ export default function ServiceContainer() {
   //                    function                    //
   const navigator = useNavigate();
 
-  const getSignInUserResponse = (
-    result: GetSignInUserResponseDto | ResponseDto | null
-  ) => {
-    const message = !result
-      ? "서버에 문제가 있습니다."
-      : result.code === "AF"
-      ? "인증에 실패했습니다."
-      : result.code === "DBE"
-      ? "서버에 문제가 있습니다."
-      : "";
+  // const getSignInUserResponse = (
+  //   result: GetSignInUserResponseDto | ResponseDto | null
+  // ) => {
+  //   const message = !result
+  //     ? "서버에 문제가 있습니다."
+  //     : result.code === "AF"
+  //     ? "인증에 실패했습니다."
+  //     : result.code === "DBE"
+  //     ? "서버에 문제가 있습니다."
+  //     : "";
 
-    if (!result || result.code !== "SU") {
-      alert(message);
-      navigator(MAIN_OFF_PATH);
-      return;
-    }
+  //   if (!result || result.code !== "SU") {
+  //     alert(message);
+  //     navigator(MAIN_OFF_PATH);
+  //     return;
+  //   }
 
-    const { userId, userRole } = result as GetSignInUserResponseDto;
-    setLoginUserId(userId);
-    setLoginUserRole(userRole);
-  };
+  //   const { userId, userRole } = result as GetSignInUserResponseDto;
+  //   setLoginUserId(userId);
+  //   setLoginUserRole(userRole);
+  // };
 
   //                    effect                    //
   useEffect(() => {
@@ -165,15 +165,15 @@ export default function ServiceContainer() {
     setPath(path);
   }, [pathname]);
 
-  useEffect(() => {
-    if (!cookies.accessToken) {
-      navigator(MAIN_OFF_PATH);
-      return;
-    }
+  // useEffect(() => {
+  //   if (!cookies.accessToken) {
+  //     navigator(MAIN_OFF_PATH);
+  //     return;
+  //   }
  
 
-    getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [cookies.accessToken]);
+  //   getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+  // }, [cookies.accessToken]);
 
   //                    render                    //
   return (
