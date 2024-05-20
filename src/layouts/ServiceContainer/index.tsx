@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import { Outlet, useLocation, useNavigate } from "react-router";
-import { useCookies } from "react-cookie";
 import UseUserStore from "src/stores/user.store";
+import { useCookies } from "react-cookie";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_OFF_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from "src/constant";
+import { GetSignInUserResponseDto } from "src/apis/user/dto/response";
+import ResponseDto from "src/apis/response.dto";
+import { getSignInUserRequest } from "src/apis/user";
+
 
 
 type Path = "공지 사항" | "트렌드 게시판" | "소통 플랫폼" | "디자이너 게시판" | "Q&A 게시판" | "";
@@ -156,30 +160,23 @@ export default function ServiceContainer() {
   //                    effect                    //
   useEffect(() => {
     const path =
-      pathname === ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH
-        ? "공지 사항"
-        : pathname === TREND_BOARD_LIST_ABSOLUTE_PATH
-        ? "트렌드 게시판"
-        : pathname.startsWith(QNA_BOARD_LIST_ABSOLUTE_PATH)
-        ? "소통 플랫폼"
-        : pathname.startsWith(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH)
-        ? "디자이너 게시판"
-        : pathname.startsWith(DESIGNER_BOARD_LIST_ABSOLUTE_PATH)
-        ? "Q&A 게시판"
-        : "";
-
+      pathname === ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH ? "공지 사항" : 
+      pathname === TREND_BOARD_LIST_ABSOLUTE_PATH ? "트렌드 게시판" : 
+      pathname === (QNA_BOARD_LIST_ABSOLUTE_PATH) ? "소통 플랫폼" : 
+      pathname === (CUSTOMER_BOARD_LIST_ABSOLUTE_PATH) ? "디자이너 게시판" : 
+      pathname.startsWith(DESIGNER_BOARD_LIST_ABSOLUTE_PATH) ? "Q&A 게시판" : "";
     setPath(path);
   }, [pathname]);
 
-  // useEffect(() => {
-  //   if (!cookies.accessToken) {
-  //     navigator(MAIN_OFF_PATH);
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!cookies.accessToken) {
+      navigator(MAIN_OFF_PATH);
+      return;
+    }
 
 
-  //   getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  // }, [cookies.accessToken]);
+    getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+  }, [cookies.accessToken]);
 
   //                    render                    //
   return (
