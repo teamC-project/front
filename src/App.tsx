@@ -29,10 +29,14 @@ function Index() {
 function App() {
   return (
     <Routes >
-      <Route index element={<Index />} />
-      {/* <Route path={SNS_PATH} element={<Sns />} />
-      <Route path={AUTH_PATH} element={<Authentication />} /> */}
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
+      {/* <Route index element={<Index />} /> */}
+      {/* <Route path={SNS_PATH} element={<Sns />} /> */}
+      {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
+      {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
+      {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
+      {/*  */}
+      {/*  */}
 
       </Route>
     </Routes>

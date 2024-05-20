@@ -1,10 +1,10 @@
 // description : Navigation URL PATH
+export const MAIN_PATH = "/main";
+export const ON_PATH = "on";
+export const OFF_PATH = "off"
+
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
-
-export const MAIN_PATH = "/main";
-export const ON_PATH = "/on";
-export const OFF_PATH = "/off"
 
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
