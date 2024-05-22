@@ -68,8 +68,8 @@ export const SERVER_CUSTOMER_BOARD_MODULE_URL = `${SERVER_API_URL}/customer_boar
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
 
 // description : Main 절대 URL PATH
-export const MAIN_ON_PATH = `${MAIN_PATH}/${OFF_PATH}`
-export const MAIN_OFF_PATH = `${MAIN_PATH}/${ON_PATH}`
+export const MAIN_ON_PATH = `${MAIN_PATH}/${ON_PATH}`
+export const MAIN_OFF_PATH = `${MAIN_PATH}/${OFF_PATH}`
 
 // description : Auth 절대 URL PATH
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
