@@ -1,10 +1,10 @@
 // description : Navigation URL PATH
-export const AUTH_PATH = "/authentication";
-export const SERVICE_URL = "/service";
+export const MAIN_PATH = "/main";
+export const ON_PATH = "on";
+export const OFF_PATH = "off"
 
-export const MAIN_URL = "/main";
-export const ON_URL = "/on";
-export const OFF_URL = "/off"
+export const AUTH_PATH = "/authentication";
+export const SERVICE_PATH = "/service";
 
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
@@ -68,8 +68,8 @@ export const SERVER_CUSTOMER_BOARD_MODULE_URL = `${SERVER_API_URL}/customer_boar
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;
 
 // description : Main 절대 URL PATH
-export const MAIN_ON_PATH = `${MAIN_URL}/${OFF_URL}`
-export const MAIN_OFF_PATH = `${MAIN_URL}/${ON_URL}`
+export const MAIN_ON_PATH = `${MAIN_PATH}/${OFF_PATH}`
+export const MAIN_OFF_PATH = `${MAIN_PATH}/${ON_PATH}`
 
 // description : Auth 절대 URL PATH
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
@@ -82,56 +82,56 @@ export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
 
 // description : 공지사항 절대 URL PATH
-export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}`
-export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}/${AUNNOUNCEMENT_BOARD_WRITE_PATH}`;
+export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}`
+export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/${AUNNOUNCEMENT_BOARD_WRITE_PATH}`;
 export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber : number | string) => 
-	`${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
+	`${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
-	`${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`
-export const ANNOUNCEMENT_BOARD_DELETE_ABSOLUTE_PATH =  (announcementBoardNumber: number | string) => `${SERVICE_URL}/${AUNNOUNCEMENT_BOARD_PATH}/delete${announcementBoardNumber}`;
+	`${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`
+export const ANNOUNCEMENT_BOARD_DELETE_ABSOLUTE_PATH =  (announcementBoardNumber: number | string) => `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/delete${announcementBoardNumber}`;
 
 // description : 트렌드 절대 URL PATH
-export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}`
-export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
+export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
+export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
 export const TREND_BOARD_DETAIL_ABSOLUTE_PATH =(trendBoardNumber : number | string) => 
-	`${SERVICE_URL}/${TREND_BOARD_PATH}/${trendBoardNumber}`;
+	`${SERVICE_PATH}/${TREND_BOARD_PATH}/${trendBoardNumber}`;
 export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | string) =>
-	`${SERVICE_URL}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`
-export const TREND_BOARD_DELETE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/delete${trendBoardNumber}`;
-export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
-export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_URL}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
+	`${SERVICE_PATH}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`
+export const TREND_BOARD_DELETE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/delete${trendBoardNumber}`;
+export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
+export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
 
 
 // description : QNA 절대 URL PATH
-export const QNA_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${QNA_BOARD_PATH}`
-export const QNA_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${QNA_BOARD_PATH}/${QNA_BOARD_WRITE_PATH}`;
+export const QNA_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}`
+export const QNA_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}/${QNA_BOARD_WRITE_PATH}`;
 export const QNA_BOARD_DETAIL_ABSOLUTE_PATH =(qnaBoardNumber : number | string) => 
-`${SERVICE_URL}/${QNA_BOARD_PATH}/${qnaBoardNumber}`;
+`${SERVICE_PATH}/${QNA_BOARD_PATH}/${qnaBoardNumber}`;
 export const QNA_BOARD_UPDATE_ABSOLUTE_PATH = (qnaBoardNumber : number | string) =>
-	`${SERVICE_URL}/${QNA_BOARD_PATH}/update/${qnaBoardNumber}`
-export const QNA_BOARD_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${QNA_BOARD_PATH}/delete${qnaBoardNumber}`;
-export const QNA_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${QNA_BOARD_PATH}/comment${qnaBoardNumber}`;
-export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${QNA_BOARD_PATH}/comment/update${qnaBoardNumber}`;
-export const QNA_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_URL}/${QNA_BOARD_PATH}/comment/delete${qnaBoardNumber}`;
+	`${SERVICE_PATH}/${QNA_BOARD_PATH}/update/${qnaBoardNumber}`
+export const QNA_BOARD_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/delete${qnaBoardNumber}`;
+export const QNA_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment${qnaBoardNumber}`;
+export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment/update${qnaBoardNumber}`;
+export const QNA_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment/delete${qnaBoardNumber}`;
 
 // description : 소통 플랫폼 절대 URL PATH
-export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${DESIGNER_BOARD_PATH}`;
-export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
-export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/${customerBoardNumber}`;
-export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/update${customerBoardNumber}`;
-export const CUSTOMER_BOARD_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/delete${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment/update${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment/delete${customerBoardNumber}`;
+export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}`;
+export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
+export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${customerBoardNumber}`;
+export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/update${customerBoardNumber}`;
+export const CUSTOMER_BOARD_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/delete${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/delete${customerBoardNumber}`;
 
 // description : 디자이너 절대 URL PATH
-export const DESIGNER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_URL}/${DESIGNER_BOARD_PATH}`;
-export const DESIGNER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
-export const DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/${designerBoardNumber}`;
-export const DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/update${designerBoardNumber}`;
-export const DESIGNER_BOARD_DELETE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/delete${designerBoardNumber}`;
-export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment${designerBoardNumber}`;
-export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_URL}/${DESIGNER_BOARD_PATH}/comment/update${designerBoardNumber}`;
+export const DESIGNER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}`;
+export const DESIGNER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
+export const DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${designerBoardNumber}`;
+export const DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/update${designerBoardNumber}`;
+export const DESIGNER_BOARD_DELETE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/delete${designerBoardNumber}`;
+export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment${designerBoardNumber}`;
+export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update${designerBoardNumber}`;
 
 // description : AUTH API URL PATH 
 export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_in`;

@@ -1,0 +1,40 @@
+.a {
+  display: flex;
+  flex-direction: column;
+
+  background-color: salmon;
+  height: 1024px;
+  width: 1440px;
+}
+
+.a1 {
+  height: 100px;
+}
+
+.b {
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.c {
+  background-color: aqua;
+  display: flex;
+  width: 10%;
+  height: 924px;
+}
+
+.d {
+  background-color: blue;
+  display: flex;
+  width: 100%;
+  height: 924px;
+}
+
+.e {
+  background-color: greenyellow;
+  display: flex;
+  width: 10%;
+  height: 924px;
+}

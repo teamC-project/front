@@ -37,3 +37,12 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### `npm run build`
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Q&A 게시판
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+### `npm run build`
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
