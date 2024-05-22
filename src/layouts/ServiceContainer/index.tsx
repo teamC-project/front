@@ -2,23 +2,21 @@ import React from 'react';
 import './style.css';
 
 export default function ServiceContainer() {
+
+  //                    render                    //
     return (
-        <div className='wrapper'>
-            <div className='Header'>
-                <div className='header-right'>헤어어드바</div>
-                <div className='header-title'>디자이너 게시판</div>
+        <>
+        <div  className="logo-container">헤어 어드바이저</div>
+        <div className='header-title'>디자이너 게시판</div>
                 <div className='header-left'>
                     <div className='header-role'>내정보</div>
                     <div className='log-out-button'>로그아웃</div>
                 </div>
-            </div>
-            <div className='Search'>
-                <div className='search-box'>
-                    <div className='search-keyword'>검색 키워드</div>
-                    <input className='list-search-input' placeholder='검색어를 입력해주세요.'></input>
-                    <div className='search-button' >검색</div>
-                </div>
-            </div>
+            </>
+    );
+            //                    render                    //
+            return (
+            <>
             <div className='Menu'>
                 <div className='side-navigation-container'>
                     <div className='click-button'>
@@ -38,10 +36,27 @@ export default function ServiceContainer() {
                     </div>
                 </div>
             </div>
+            </>
+            );
+            //                    render                    //
+            return (
+            <>
             <div className='Main'>4</div>
             <div className='Bottom'>5</div>
             <div className='Footer'>6</div>
-        </div>
+            </>
     );
+
+        //                    render                    //
+    //     return (
+    //       <div id="wrapper">
+    //           <TopBar path={path} />
+    //           <SideNavigation path={path} />
+    //           <div className="main-container">
+    //               <Outlet />
+    //           </div>
+    //       </div>
+    //   );
+
 }
 
