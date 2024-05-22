@@ -16,7 +16,6 @@ export default function Login() {
           <div>아이디</div>
           <div>비밀번호</div>
           <div>로그인</div>
-          
         </div>
       </div>
     </div>
