@@ -1,8 +1,32 @@
 .idCheck-wrapper {
-  display: flex;/
+  display: flex;
   width: 100%; 
   height: 100vh; 
-  min-height: 1024px;*/
-  background-color: rgba(255, 255, 255, 0.1);
+  min-height: 1024px;
+  background-color: aqua;
 }
 
+.image-box {
+  min-width: 900px;
+  background-image: url("../../assets/image/다운로드.jpg");
+  background-size: cover; 
+}
+
+.top-bar-container {
+  grid-area: topbar;
+  display: flex;
+  justify-content: right;
+  
+  padding: 0 24px;
+  font-family: Pretendard;
+}
+
+.top-bar-box {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.second-box {
+  display: flex;
+}
