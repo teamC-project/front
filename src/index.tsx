@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-// import App from './App';
-// import Service from '../../project_example/service';
-// import Exa from '../../project_example/exa';
+import ServiceContainer from './layouts/ServiceContainer';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +11,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      {/* <App /> */}
+      <ServiceContainer />
     </BrowserRouter>
   </React.StrictMode>
 );
