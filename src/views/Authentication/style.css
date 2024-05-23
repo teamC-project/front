@@ -1,40 +1,148 @@
-.a {
+#sign-up-wrapper {
   display: flex;
   flex-direction: column;
-
-  background-color: salmon;
-  height: 1024px;
-  width: 1440px;
-}
-
-.a1 {
-  height: 100px;
-}
-
-.b {
-  background-color: antiquewhite;
-  display: flex;
-  flex-direction: row;
-
-}
-
-.c {
-  background-color: aqua;
-  display: flex;
-  width: 10%;
-  height: 924px;
-}
-
-.d {
-  background-color: blue;
-  display: flex;
+  height: 100vh;
   width: 100%;
-  height: 924px;
 }
 
-.e {
-  background-color: greenyellow;
+.top-bar {
   display: flex;
-  width: 10%;
-  height: 924px;
+  justify-content: end;
+  text-align: center;
+  gap: 20px;
+  margin: 30px;
+
+  font-size: 18px;
+}
+
+.top-bar-login {
+  padding: 10px;
+  cursor: pointer;
+}
+.top-bar-line {
+  padding: 10px;
+}
+
+.top-bar-sign-up {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.welcome-image-box {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.welcome-image {
+  display: block;
+  text-align: center;
+  align-items: center;
+  height: 150px;
+  width: 550px;
+  background-image: url('../../assets/image/welcome-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.welcome-text {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.choose-type-text {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.type-image {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.type-image-customer {
+  display: block;
+  text-align: center;
+  align-items: center;
+  height: 270px;
+  width: 270px;
+  background-image: url('../../assets/image/customer-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  cursor: pointer;
+}
+
+.type-image-designer {
+  display: block;
+  text-align: center;
+  align-items: center;
+  height: 270px;
+  width: 270px;
+  background-image: url('../../assets/image/designer-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  cursor: pointer;
+}
+
+.type-text {
+  display: flex;
+  gap: 220px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.type-text-customer {
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.type-text-designer {
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.sign-up-sns {
+  display: flex;
+  flex-direction: column;
+  
+  gap: 20px;
+}
+
+.sign-up-naver {
+  margin: auto;
+  height: 53px;
+  width: 530px;
+
+  background-image: url(../../assets/image/naver-button\ 2.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  cursor: pointer;
+}
+
+.sign-up-kakao {
+  margin: auto;
+  height: 53px;
+  width: 530px;
+
+  background-image: url(../../assets/image/kakao-button\ 1.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  cursor: pointer;
 }
