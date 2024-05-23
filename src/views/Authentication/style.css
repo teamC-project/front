@@ -165,7 +165,6 @@
   min-height: 950px;
   gap: 100px;
 
-  background-color: aquamarine;
 }
 
 .customer-sign-up-image-box {
@@ -184,6 +183,7 @@
   display: flex;
   justify-content: end;
   background-color: rgb(33, 91, 72);
+  margin: 10px 10px 0 0;
 }
 
 .sign-up-top-bar-login {
@@ -204,6 +204,7 @@
   display: flex;
   justify-content: center;
   background-color: yellowgreen;
+  margin-top: 100px;
   padding: 40px;
 
   font-size: 24px;
@@ -247,13 +248,14 @@
 }
 
 .sign-up-text {
-  margin-right: 100px;
+  padding: 5px;
   font-size: 24px;
   font-weight: 400;
+  width: 200px;
 }
 
 .submit-box {
   display: flex;
   justify-content: center;
-  background-color: darkorchid;
+
 }

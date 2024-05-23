@@ -53,6 +53,7 @@ export function CustomerSignUp() {
       </div>
 
         <div className='customer-sign-up-title'>고객 가입 페이지 입니다.</div>
+
         <div className='id-input-box'>
           <div className='sign-up-text'>아이디</div>
           <div><InputBox /></div>
@@ -65,32 +66,38 @@ export function CustomerSignUp() {
 
         <div className='password-check-input-box'>
           <div className='sign-up-text'>비밀번호 확인</div>
-          <div><InputBox /></div>
+          <div className='sign-up-box'><InputBox /></div>
         </div>
 
         <div className='email-input-box'>
           <div className='sign-up-text'>이메일</div>
-          <div><InputBox /></div>
-          <div>보내기</div>
+          <div className='sign-up-box'><InputBox /></div>
+          <div className='primary-button'>보내기</div>
         </div>
 
         <div className='auth-number-input-box'>
           <div className='sign-up-text'>이메일인증</div>
-          <div><InputBox /></div>
-          <div>확인</div>
+          <div className='sign-up-box'><InputBox /></div>
+          <div className='primary-button'>확인</div>
         </div>
 
         <div className='gender-select-box'>
           <div className='sign-up-text'>성별</div>
-          <div><InputBox /></div>
+          <div className='sign-up-box'><SelectBox value={''} onChange={function (value: string): void {
+            throw new Error('Function not implemented.');
+          } } /></div>
+          <div className='primary-button'>확인</div>
         </div>
 
         <div className='age-select-box'>
           <div className='sign-up-text'>연령대</div>
-          <div><InputBox /></div>
+          <div className='sign-up-box'><SelectBox value={''} onChange={function (value: string): void {
+            throw new Error('Function not implemented.');
+          } } /></div>
+          <div className='primary-button'>확인</div>
         </div>
 
-        <div className='submit-box'>가입하기</div>
+        <div className='submit-box primary-button'>가입하기</div>
       </div>
 
     </div>

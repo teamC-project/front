@@ -15,6 +15,7 @@ export const LOGOUT_REQUEST_PATH = "logout";
 export const MY_PAGE_PATH = "my_page;"
 export const UPDATE_REQUEST_PATH = "update";
 export const USER_DELETE_PATH = "user_delete";
+export const CHOOSE_TYPE = "choose_type"
 
 export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
@@ -73,7 +74,7 @@ export const MAIN_ON_PATH = `${MAIN_PATH}/${ON_PATH}`
 export const MAIN_OFF_PATH = `${MAIN_PATH}/${OFF_PATH}`
 
 // description : Auth 절대 URL PATH
-export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
+export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}/${CHOOSE_TYPE}`;
 export const SIGN_IN_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`
 export const EMAIL_AUTH_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_REQUEST_PATH}`;
 export const EMAIL_AUTH_CHECK_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_CHECK_REQUEST_PATH}`;

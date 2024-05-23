@@ -35,9 +35,10 @@ function App() {
   return (
     <Routes >
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-        <Route path={MAIN_ON_PATH} element={<Main />} />
       </Route>
 
+
+      <Route path={MAIN_ON_PATH} element={<Main />} />
       <Route path={DESIGNER_BOARD_WRITE_ABSOLUTE_PATH} element={<DesignerWrite />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
       <Route index element={<Index />} />
