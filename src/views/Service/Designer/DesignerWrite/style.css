@@ -69,6 +69,18 @@
     line-height: 175%;
 }
 
+.upload-file {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.upload-file-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .write-button {
     display: flex;
     justify-content: end;
@@ -77,6 +89,10 @@
 }
 
 .button {
+    display: flex;
+    justify-content: center;
+    width: 80px;
+    height: auto;
     box-sizing: border-box;
     background-color: white;
     border-radius: 6px;
