@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import '@toast-ui/editor/dist/toastui-editor.css';
 import './style.css'
-
 
 
 // 											component										 //
@@ -9,11 +9,12 @@ export default function TrendBoard({  }) {
 
 
 
+
 //										 render										 //
 	return (
 		<div id='trend_board_write_wrapper'>
 			<div className='trend_board_write_tooltip'>
-				<div className= "trend_board_write_toast"></div>
+				
 				<div className='trend_board_write_submit_button'></div>
 				<div className='trend_board_write_cancel_button'></div>
 			</div>

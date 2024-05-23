@@ -1,10 +1,10 @@
 #trend_board_wrapper {
-	position: absolute;
+	/* position: absolute;
 	top: 100px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 1200px;
-	height:850px;
+	height:850px; */
 	background-color: bisque;
 }
 
@@ -12,7 +12,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 24px;
 }
 
 .trend_board_list_container {
