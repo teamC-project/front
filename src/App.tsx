@@ -20,7 +20,7 @@ function Index() {
   const navigator = useNavigate();
 
   //                    effect                    //
-  useEffect(() => {
+  useEffect(() => {   
     const accessToken = cookies.accessToken;
     if (accessToken) navigator(MAIN_ON_PATH);
     else navigator(MAIN_OFF_PATH);
