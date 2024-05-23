@@ -15,7 +15,7 @@ import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 
 
 import Main from "./views/Main";
-import CustomerList from "./views/Service/customer/CustomerList";
+import CustomerList from "./views/Service/Customer/CustomerList";
 
 // component: root 경로 컴포넌트 //
 function Index() {
@@ -27,7 +27,7 @@ function Index() {
   const navigator = useNavigate();
 
   //                    effect                    //
-  useEffect(() => {   
+  useEffect(() => {     
     const accessToken = cookies.accessToken;
     if (accessToken) navigator(MAIN_ON_PATH);
     else navigator(MAIN_OFF_PATH);
