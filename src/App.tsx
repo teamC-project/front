@@ -3,10 +3,12 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-import { MAIN_OFF_PATH, MAIN_ON_PATH, SERVICE_PATH, SIGN_IN_PATH } from "./constant";
+import { MAIN_OFF_PATH, MAIN_ON_PATH, SERVICE_PATH, SIGN_IN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_WRITE_ABSOLUTE_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import Login from "./views/Login";
 import Main from "./views/Main";
+import TrendBoardList from "./views/Service/TrendBoard/TrendBoardList";
+import TrendBoard from "./views/Service/TrendBoard/TrendBoard";
 
 // // component: root 경로 컴포넌트 //
 // function Index() {
@@ -33,6 +35,8 @@ function App() {
     <Routes >
       <Route path={MAIN_ON_PATH} element={<Main />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
+			<Route path={TREND_BOARD_LIST_ABSOLUTE_PATH} element={<TrendBoardList />} />
+			<Route path={TREND_BOARD_WRITE_ABSOLUTE_PATH} element={<TrendBoard />} />
       {/* <Route index element={<Index />} /> */}
       {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
       {/* <Route path={SERVICE_PATH} element={<ServiceContainer />} > */}
