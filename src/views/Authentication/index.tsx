@@ -1,5 +1,7 @@
 import React from 'react'
 import "./style.css";
+import InputBox from 'src/components/Inputbox';
+import SelectBox from 'src/components/Selectbox';
 
 export function ChooseSingUp() {
   return (
@@ -38,10 +40,76 @@ export function ChooseSingUp() {
   )
 }
 
+export function CustomerSignUp() {
+  return (
+    <div id='customer-sign-up-wrapper'>
+      <div className='customer-sign-up-image-box'></div>
+
+      <div className='right-full-sign-up'>
+      <div className='sign-up-top-bar'>
+        <div className='sign-up-top-bar-login'>로그인</div>
+        <div className='sign-up-top-bar-line'>|</div>
+        <div className='sign-up-top-bar-sign-up'>회원가입</div>
+      </div>
+
+        <div className='customer-sign-up-title'>고객 가입 페이지 입니다.</div>
+        <div className='id-input-box'>
+          <div className='sign-up-text'>아이디</div>
+          <div><InputBox /></div>
+        </div>
+
+        <div className='password-input-box'>
+          <div className='sign-up-text'>비밀번호</div>
+          <div><InputBox /></div>
+        </div>
+
+        <div className='password-check-input-box'>
+          <div className='sign-up-text'>비밀번호 확인</div>
+          <div><InputBox /></div>
+        </div>
+
+        <div className='email-input-box'>
+          <div className='sign-up-text'>이메일</div>
+          <div><InputBox /></div>
+          <div>보내기</div>
+        </div>
+
+        <div className='auth-number-input-box'>
+          <div className='sign-up-text'>이메일인증</div>
+          <div><InputBox /></div>
+          <div>확인</div>
+        </div>
+
+        <div className='gender-select-box'>
+          <div className='sign-up-text'>성별</div>
+          <div><InputBox /></div>
+        </div>
+
+        <div className='age-select-box'>
+          <div className='sign-up-text'>연령대</div>
+          <div><InputBox /></div>
+        </div>
+
+        <div className='submit-box'>가입하기</div>
+      </div>
+
+    </div>
+  )
+}
+
+export function DesignerSignUp() {
+  return (
+    <div>index</div>
+  )
+}
+
+
 export default function Authentication() {
   return (
     <div>
-      <ChooseSingUp />
+      {/* <ChooseSingUp /> */}
+      <CustomerSignUp />
+      <DesignerSignUp />
     </div>
   )
 }

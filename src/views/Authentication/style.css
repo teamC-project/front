@@ -80,8 +80,11 @@
   background-image: url('../../assets/image/customer-image.png');
   background-repeat: no-repeat;
   background-size: auto;
+}
 
+.type-image-customer:hover {
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .type-image-designer {
@@ -93,8 +96,11 @@
   background-image: url('../../assets/image/designer-image.png');
   background-repeat: no-repeat;
   background-size: auto;
+}
 
+.type-image-designer:hover {
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .type-text {
@@ -132,7 +138,11 @@
   background-repeat: no-repeat;
   background-size: auto;
 
+}
+
+.sign-up-naver:hover {
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .sign-up-kakao {
@@ -143,6 +153,107 @@
   background-image: url(../../assets/image/kakao-button\ 1.png);
   background-repeat: no-repeat;
   background-size: auto;
+}
 
+.sign-up-kakao:hover {
   cursor: pointer;
+  opacity: 0.9;
+}
+
+#customer-sign-up-wrapper {
+  display: flex;
+  min-height: 950px;
+  gap: 100px;
+
+  background-color: aquamarine;
+}
+
+.customer-sign-up-image-box {
+  background-image: url(../../assets/image/customer-sign-up-image.png);
+  min-width: 725px;
+}
+.right-full-sign-up {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  background-color: brown;
+}
+
+.sign-up-top-bar {
+  display: flex;
+  justify-content: end;
+  background-color: rgb(33, 91, 72);
+}
+
+.sign-up-top-bar-login {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sign-up-top-bar-line {
+  padding: 10px;
+}
+
+.sign-up-top-bar-sign-up{
+  padding: 10px;
+  cursor: pointer;
+}
+
+.customer-sign-up-title {
+  display: flex;
+  justify-content: center;
+  background-color: yellowgreen;
+  padding: 40px;
+
+  font-size: 24px;
+  font-weight: 700;
+
+}
+
+.id-input-box {
+  display: flex;
+  background-color: cornsilk;
+}
+
+.password-input-box {
+  display: flex;
+  background-color: cornflowerblue;
+}
+
+.password-check-input-box {
+  display: flex;
+  background-color: rosybrown;
+}
+
+.email-input-box {
+  display: flex;
+  background-color: chartreuse;
+}
+
+.auth-number-input-box {
+  display: flex;
+  background-color: darkkhaki;
+}
+
+.gender-select-box {
+  display: flex;
+  background-color: coral;
+}
+
+.age-select-box {
+  display: flex;
+  background-color: rgb(208, 186, 160);
+}
+
+.sign-up-text {
+  margin-right: 100px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.submit-box {
+  display: flex;
+  justify-content: center;
+  background-color: darkorchid;
 }
