@@ -41,3 +41,40 @@
   font-weight: 400;
   line-height: normal;
 }
+
+
+.Main {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
+
+  width: 1503px;
+  height: 1260px;
+
+  background-color: rgba(255, 2, 255, 0.2);
+}
+
+.Bottom {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  width: 203px;
+  height: 1260px;
+
+  background-color: rgba(25, 2, 25, 0.8);
+}
+
+.Footer {
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  grid-row-start: 5;
+  grid-row-end: 5;
+
+
+  width: 1903px;
+  height: 120px;
+  background-color: rgba(55, 255, 255, 0.8);
+}
