@@ -11,17 +11,6 @@ export default function CustomerList() {
 
   return (
     <div>
-      <div className="top-left-bar">헤어 어드바이저</div>
-      <div className="top-bar">소통 플랫폼</div>
-      <div className="top-right-bar1">내 정보</div>
-      <div className="top-right-bar2">로그아웃</div>
-      <div className="left-bar">
-        <div className="left-bar1">공지사항</div>
-        <div className="left-bar2">트렌드 게시판</div>
-        <div className="left-bar3">소통 플랫폼</div>
-        <div className="left-bar4">디자이너 게시판</div>
-        <div className="left-bar5">Q&A 게시판</div>
-      </div>
       <div className="search">
         <div className="search-box">
           <div className="search-keyword">검색 키워드</div>
@@ -55,9 +44,6 @@ export default function CustomerList() {
         <div className="customer-list-title8">게시물 제목 8</div>
         <div className="customer-list-title9">게시물 제목 9</div>
         <div className="customer-list-title10">게시물 제목 10</div>
-      </div>
-      <div className="chatroom">
-        <div className="chatroom-view">채팅방</div>
       </div>
       <div className="pagination">
         <a href="#">1</a>

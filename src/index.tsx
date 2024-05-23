@@ -11,10 +11,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-<<<<<<< HEAD
-      {/* <ServiceContainer /> */}
-=======
->>>>>>> d7329a5c82b76ed591a1e5d4be928b223a67f25d
     </BrowserRouter>
   </React.StrictMode>
 );
