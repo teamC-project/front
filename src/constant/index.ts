@@ -6,6 +6,8 @@ export const OFF_PATH = "off"
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
 
+export const ID_FOUND_PATH = "id_found";
+export const PASSWORD_FOUND_PATH = "password_found";
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
 export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
@@ -72,6 +74,8 @@ export const MAIN_ON_PATH = `${MAIN_PATH}/${ON_PATH}`
 export const MAIN_OFF_PATH = `${MAIN_PATH}/${OFF_PATH}`
 
 // description : Auth 절대 URL PATH
+export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
+export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const SIGN_IN_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`
 export const EMAIL_AUTH_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_REQUEST_PATH}`;
