@@ -41,9 +41,12 @@ function App() {
       <Route index element={<Index />} />
       <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
-      <Route path={AUTH_PATH} element={<Authentication />} />
-      <Route path={MAIN_ON_PATH} element={<Main />} />
 
+      <Route path={AUTH_PATH} >
+        <Route index element={<Authentication />} />
+      </Route>
+
+      <Route path={MAIN_ON_PATH} element={<Main />} />
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
         {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
