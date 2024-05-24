@@ -1,17 +1,17 @@
-#qna_board_write_wrapper {
+#qna-board-write-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	background-color: gold;
 }
 
-.qna_board_write_top{
+.qna-board-write-top{
 	display: flex;
 	align-items: center;
 	gap: 12px;
 }
 
-.qna_write_title {
+.qna-write-title {
 	display: flex;
 	width: 8%;
 	
@@ -22,14 +22,14 @@
 	background-color: gold;
 }
 
-.qna_board_write_title_box {
+.qna-board-write-title-box {
 	display: flex;
 	align-items: center;
 	flex-grow: 1;
 	padding: 8px 16px;
 }
 
-.qna_write_title_input {
+.qna-write-title-input {
 	border: none;
 	outline: none;
 	background: none;
@@ -48,7 +48,7 @@
 	border-radius: 6px;
 }
 
-.qna_board_write_contents_box {
+.qna-board-write-contents-box {
 	border: 1px solid rgba(238, 238, 238, 1);
 	border-radius: 6px;
 	padding: 12px 16px;
@@ -58,7 +58,7 @@
 	background-color: rgba(255, 255, 255, 1);
 }
 
-.qna_board_write_contents_textarea {
+.qna-board-write-contents-textarea {
 	border: none;
 	outline: none;
 	background: none;
@@ -79,32 +79,32 @@
 
 .click-button {
 	/* Variables */
-	--button_radius: 0.75em;
-	--button_color: #e8e8e8;
-	--button_outline_color: #000000;
+	--button-radius: 0.75em;
+	--button-color: #e8e8e8;
+	--button-outline-color: #000000;
 	font-size: 17px;
 	font-weight: bold;
 	border: none;
-	border-radius: var(--button_radius);
-	background: var(--button_outline_color);
+	border-radius: var(--button-radius);
+	background: var(--button-outline-color);
 }
 
-.button_top {
+.button-top {
 	display: block;
 	box-sizing: border-box;
-	border: 2px solid var(--button_outline_color);
-	border-radius: var(--button_radius);
+	border: 2px solid var(--button-outline-color);
+	border-radius: var(--button-radius);
 	padding: 0.75em 1.5em;
-	background: var(--button_color);
-	color: var(--button_outline_color);
+	background: var(--button-color);
+	color: var(--button-outline-color);
 	transform: translateY(-0.2em);
 	transition: transform 0.1s ease;
 }
 
-.click-button:hover .button_top {
+.click-button:hover .button-top {
 	transform: translateY(-0.33em);
 }
 
-.click-button:active .button_top {
+.click-button:active .button-top {
 	transform: translateY(0);
 }
