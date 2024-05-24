@@ -3,7 +3,7 @@ import "./App.css";
 
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-import { AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_OFF_PATH, MAIN_ON_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_PAGE_PATH, MAIN_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_IN_REQUEST_ABSOLUTE_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import Authentication from "./views/Authentication";
 import Login from "./views/Login";
@@ -38,8 +38,8 @@ function Index() {
   //                    effect                    //
   useEffect(() => {
     const accessToken = cookies.accessToken;
-    if (accessToken) navigator(MAIN_ON_PATH);
-    else navigator(MAIN_OFF_PATH);
+    if (accessToken) navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    else navigator(MAIN_PAGE_PATH);
   }, []);
 
   //                    render                    //
@@ -51,6 +51,7 @@ function Index() {
 function App() {
   return (
     <Routes >
+      <Route path={MAIN_PATH} element={<Main />} />
       <Route index element={<Index />} />
       <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
@@ -59,7 +60,6 @@ function App() {
         <Route index element={<Authentication />} />
       </Route>
       
-      <Route path={MAIN_ON_PATH} element={<Main />} />
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
         {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
