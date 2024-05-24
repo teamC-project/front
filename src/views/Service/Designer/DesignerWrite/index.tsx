@@ -36,7 +36,9 @@ export default function DesignerWrite() {
                     />
             </div>
             <div className='write-button'>
-                <div className='button'>올리기</div>
+                <button className='click-button'>
+                    <span className="button_top"> 올리기 </span>
+                </button>
             </div>
         </div>
     );

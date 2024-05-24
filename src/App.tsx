@@ -9,13 +9,10 @@ import Authentication from "./views/Authentication";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
-<<<<<<< HEAD
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
 import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
-=======
->>>>>>> fff2294e6ea08f9bc289d965f60c42ad5fdc412a
 
 
 //  component: root 경로 컴포넌트 //
@@ -47,18 +44,12 @@ function App() {
       <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
 
-<<<<<<< HEAD
-
-
-      <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-=======
       <Route path={AUTH_PATH} >
         <Route index element={<Authentication />} />
       </Route>
 
       <Route path={MAIN_ON_PATH} element={<Main />} />
-      {/* <Route path={SERVICE_PATH} element={<ServiceContainer />} > */}
->>>>>>> fff2294e6ea08f9bc289d965f60c42ad5fdc412a
+      <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
         {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
           {/* <Route index element={<AnnouncementBoard />} /> */}

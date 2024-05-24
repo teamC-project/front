@@ -36,7 +36,9 @@ export default function DesignerUpdate() {
                     />
             </div>
             <div className='write-button'>
-                <div className='button'>수정</div>
+                <button className='click-button'>
+                    <span className="button_top"> 수정 </span>
+                </button>
             </div>
         </div>
     );
