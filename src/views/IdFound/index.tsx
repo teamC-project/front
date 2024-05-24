@@ -4,13 +4,15 @@ import "./style.css";
 
 export default function IdFound() {
   return (
-    <div id='wrapper'>
-      <div className='top-bar-container'>
-        <div className='title'>헤어어드바이저</div>
-          <div className='top-bar-right'>
-          <div className='login-button'>로그인</div>
-          <div className='signup-button'>회원가입</div>
-          </div>
+    <div id='idfound-wrapper'>
+            <div className='top-bar'>
+        <div className='logo-image'></div>
+        
+        <div className='top-right-bar'>
+          <div className='top-right-bar-login'>로그인</div>
+          <div className='top-right-bar-line'>|</div>
+          <div className='top-right-bar-sign-up'>회원가입</div>
+        </div>
       </div>
 
 
