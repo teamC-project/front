@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 .primary-button {
   box-sizing: border-box;
   display: flex;
@@ -69,6 +71,7 @@ opacity: 0.85;
   cursor: pointer;
   opacity: 0.85;
   }
+>>>>>>> f8fe0e7bdffe8f2c96aa458cd5bb216096f257be
 body {
   margin: 0;
   padding: 0;
@@ -82,13 +85,13 @@ body {
 .search {
   margin-bottom: 20px;
 }
-.search input {
+.search_input {
   width: 80%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-.search button {
+.search_button {
   padding: 10px 20px;
   background-color: #007BFF;
   color: white;
