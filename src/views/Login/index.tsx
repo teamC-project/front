@@ -1,5 +1,6 @@
 import React from 'react'
 import "./style.css";
+import InputBox from 'src/components/Inputbox';
 
 export default function Login() {
   return (
@@ -20,13 +21,17 @@ export default function Login() {
             <div className='sign-in-contents'>
               <div className='user-id'>
                 <div className='input-label'>아이디</div>
-                <div className='input-box'></div>
+                <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
               </div>
                 <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
 
               <div className='user-password'>
                 <div className='input-label'>비밀번호</div>
-                <div className='input-box'></div>
+                <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
               </div>
               <div>로그인 정보가 일치하지 않습니다</div>
 
