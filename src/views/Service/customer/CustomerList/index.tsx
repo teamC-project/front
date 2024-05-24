@@ -1,6 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
+<<<<<<< HEAD
+=======
 import { useNavigate } from 'react-router-dom';
+>>>>>>> ad58eb20a915ff3c6eadedeadf5660632e7707ee
 
 export default function CustomerList() {
   const [searchTerm, setSearchTerm] = useState('');
