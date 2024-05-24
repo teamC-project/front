@@ -1,8 +1,6 @@
 // description : Navigation URL PATH
 export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
-export const ON_PATH = "on";
-export const OFF_PATH = "off"
 
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
@@ -12,9 +10,9 @@ export const PASSWORD_FOUND_PATH = "password_found";
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
 export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
-export const SIGN_UP_REQUEST_PATH = "sign_up;";
+export const SIGN_UP_REQUEST_PATH = "sign_up";
 export const LOGOUT_REQUEST_PATH = "logout";
-export const MY_PAGE_PATH = "my_page;";
+export const MY_PAGE_PATH = "my_page";
 export const UPDATE_REQUEST_PATH = "update";
 export const USER_DELETE_PATH = "user_delete";
 export const CHOOSE_TYPE = "choose_type";
@@ -115,9 +113,9 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber
 export const SERVER_DOMAIN_URL = "http://localhost:4200";
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 
-// description : Main  URL PATH
-export const MAIN_ON_PATH = `${MAIN_PATH}/${ON_PATH}`
-export const MAIN_OFF_PATH = `${MAIN_PATH}/${OFF_PATH}`
+// description : AUTH API URL PATH 
+export const MAIN_PAGE_PATH = `${SERVER_API_URL}/main`;
+
 
 // description : AUTH API URL PATH 
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;

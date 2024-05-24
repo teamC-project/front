@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export default function CustomerList() {
   const [searchTerm, setSearchTerm] = useState('');
