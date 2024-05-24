@@ -6,6 +6,8 @@ export const OFF_PATH = "off"
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
 
+export const ID_FOUND_PATH = "id_found";
+export const PASSWORD_FOUND_PATH = "password_found";
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
 export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
@@ -72,6 +74,8 @@ export const MAIN_ON_PATH = `${MAIN_PATH}/${ON_PATH}`
 export const MAIN_OFF_PATH = `${MAIN_PATH}/${OFF_PATH}`
 
 // description : Auth 절대 URL PATH
+export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
+export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const SIGN_IN_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`
 export const EMAIL_AUTH_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_REQUEST_PATH}`;
@@ -116,7 +120,7 @@ export const QNA_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number |
 
 // description : 소통 플랫폼 절대 URL PATH
 export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}`;
-export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${CUSTOMER_BOARD_WRITE_PATH}`;
+export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
 export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${customerBoardNumber}`;
 export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/update${customerBoardNumber}`;
 export const CUSTOMER_BOARD_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/delete${customerBoardNumber}`;
