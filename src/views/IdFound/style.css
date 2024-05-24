@@ -118,13 +118,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* position: relative;
-  left: 140px; */
+
 }
 
 .next {
   display: flex;
   position: relative;
-  left: 140px;
+  top: 180px;
   justify-content: center;
+
+  border: 1px solid rgba(192, 192, 192, 1);
+  padding: 10px 20px;
 }
