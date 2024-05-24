@@ -6,6 +6,7 @@ type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디�
 
 
 export default function ServiceContainer() {
+    //                    render                       //
     return (
         <div id='full'>
             <div className='top'>
