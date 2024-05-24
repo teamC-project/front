@@ -2,7 +2,7 @@ import React from 'react'
 import "./style.css";
 
 
-export default function Id_Found() {
+export default function IdFound() {
   return (
     <div id='wrapper'>
       <div className='top-bar-container'>
