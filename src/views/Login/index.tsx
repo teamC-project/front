@@ -3,17 +3,18 @@ import "./style.css";
 
 export default function Login() {
   return (
-    <div className="wrapper">
-
+    <div id='wrapper'>
       <div className='image-box'></div>
-      
-      <div className='top-bar-container'> 
-          <div className='signup-button'>회원가입</div>
-      </div>
-      
-      <div className='login-container'>
-        <div className='login-page'>로그인 페이지</div>
-
+      <div className='login-box'>
+        <div className='top-bar-container'>
+          <div className='title-image'></div>
+            <div className='top-bar-right'>
+            <div className='signup-button'>회원가입</div>
+          </div>
+        </div>
+        <div className='login-container'>
+        <div className='login-page h1'>로그인 페이지</div>
+        <div className='sign-in-container'>
           <div className='user-id'>
             <div>아이디</div>
             <div className='input-box'></div>
@@ -38,6 +39,8 @@ export default function Login() {
         <div className='user-found'>
           <div className='id-found'>아이디 찾기</div>
           <div className='password-found'>비밀번호 찾기</div>
+        </div>
+        </div>
         </div>
       </div>
 

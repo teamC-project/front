@@ -1,46 +1,68 @@
-.wrapper {
+#wrapper {
   display: flex;
   width: 100%; 
   height: 100vh; 
   min-height: 1024px;
-  background-color: aqua;
-}
-
-.image-box {
-  min-width: 900px;
-  background-image: url("../../assets/image/Rectangle\ 4.png ");
-  background-size: cover; 
 }
 
 .top-bar-container {
-  grid-area: topbar;
-  display: flex;
-  justify-content: right;
-  
-  padding: 0 24px;
-  font-family: Pretendard;
-}
-
-.signup-button {
   position: fixed;
   top: 0px;
-  left: 0px;
+  left: 50%;
   right: 0px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-family: Pretendard;
+  background-color: rgb(249, 253, 5);
+}
+
+.title-image {
+  display: flex;
+  background-image: url("../../assets/image/logo-image\ 1.png");
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.top-bar-right {
+  gap: 24px;
 
   justify-content: right;
   display: flex;
-  background-color: blue;
+}
+
+.login-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 610px;
 }
 
 .login-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 380px;
+}
 
-  gap: 25px;
-  width: 100%;
-  background-color: rebeccapurple;
+.login-page{
+  /* font */
+}
+
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.login-button {
+  cursor: pointer;
+}
+
+.signup-button {
+  cursor: pointer;
 }
 
 .user-id {
@@ -49,6 +71,11 @@
 
 .user-password {
   display: flex;
+}
+
+.image-box {
+  min-width: 840px;
+  background-image: url("../../assets/image/Rectangle\ 4.png");
 }
 
 .input-box {

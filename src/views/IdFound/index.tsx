@@ -36,7 +36,14 @@ export default function IdFound() {
                   <div>인증번호가 일치하지 않습니다.</div>
                   <div>인증번호가 확인 되었습니다.</div>
                 </div>
-                  <div className='next'>다음</div>
+                <div className='id-box'>
+                  <div className='id-title'>고객님의 정보와 일치하는 아이디입니다.</div>
+                  <div className='id'>ID:john0256</div>
+                  <div className='id-check'>확인</div>
+                </div>
+                <div className='next-box'>
+                  <div className='next'>찾기</div>
+                </div>
             </div>
         </div>
       </div>
