@@ -4,7 +4,7 @@ import './style.css'
 
 
 // 											component										 //
-export default function TrendBoard({  }) {
+export default function TrendWrite({  }) {
 
 
 

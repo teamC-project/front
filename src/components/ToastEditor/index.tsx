@@ -38,6 +38,7 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ body, setBody }) => {
       height="500px" // 에디터 창 높이
 			hooks={{ addImageBlobHook: imageHandler }}
       initialEditType="wysiwyg" // 기본 에디터 타입 (or wysiwyg)
+			hideModeSwitch
       previewStyle="tab" // 미리보기 스타일 (or tab) (vertical은 양쪽이 나뉨)
       ref={editorRef} // ref 참조
       onChange={onChangeGetHTML} // onChange 이벤트

@@ -1,6 +1,6 @@
 import React from 'react'
 import'./style.css'
-export default function TrendBoardList() {
+export default function TrendList() {
 	return (
 		<div id='trend_board_wrapper'>
 			<div className="trend_board_list_top_bar">

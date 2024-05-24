@@ -1,0 +1,48 @@
+.customer-detail-title {
+  
+}
+
+
+
+.customer-detail-container {
+  margin: 20px auto;
+  max-width: 100%; /* customer-detail-main-view의 너비에 맞춤 */
+  padding: 0;
+}
+
+.customer-detail-information {
+  display: flex;
+  justify-content: space-between;
+  padding: 0; /* 여백 제거 */
+  background-color: #f2f2f2;
+}
+
+.customer-detail-information > div {
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.customer-detail-information1 {
+  flex: 0.5; /* 크기 조정 가능 */
+}
+
+.customer-detail-information2 {
+  flex: 6; /* 크기 조정 가능 */
+}
+
+.customer-detail-information3 {
+  flex: 1; /* 크기 조정 가능 */
+}
+
+.customer-detail-information4 {
+  flex: 0.5; /* 크기 조정 가능 */
+}
+
+.customer-detail-information5 {
+  flex: 0.5; /* 크기 조정 가능 */
+}
