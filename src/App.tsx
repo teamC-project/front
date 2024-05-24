@@ -3,14 +3,6 @@ import "./App.css";
 
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-<<<<<<< HEAD
-import { AUTH_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_OFF_PATH, MAIN_ON_PATH, SERVICE_PATH, SIGN_IN_PATH } from "./constant";
-import ServiceContainer from "./layouts/ServiceContainer";
-import Authentication from "./views/Authentication";
-import Login from "./views/Login";
-import Id_Found from "./views/IdFound";
-import IdFound from "./views/IdFound";
-=======
 import { AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_OFF_PATH, MAIN_ON_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import Authentication from "./views/Authentication";
@@ -18,7 +10,6 @@ import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
 
->>>>>>> 1d686fe2f122439d9d139da47d0afdc804da454d
 
 //  component: root 경로 컴포넌트 //
 function Index() {

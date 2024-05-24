@@ -124,6 +124,7 @@
 
 .next {
   display: flex;
+  position: relative;
+  left: 140px;
   justify-content: center;
-  
 }
