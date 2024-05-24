@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
 
-
 export default function CustomerList() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -25,7 +24,7 @@ export default function CustomerList() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="customer-list-container">
         <div className="customer-list-information">
           <div className="customer-list-information1">번호</div>
           <div className="customer-list-information2">제목</div>

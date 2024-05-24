@@ -9,16 +9,21 @@ import Authentication from "./views/Authentication";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
-import DesignerWrite from "./views/Service/Designer/DesignerWrite";
-import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
-import DesignerDetail from "./views/Service/Designer/DesignerDetail";
-import DesignerList from "./views/Service/Designer/DesignerList";
 import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
 import QnaList from "./views/Service/qna/qnaList";
 import QnaWrite from "./views/Service/qna/qnaWrite";
 import QnaDetail from "./views/Service/qna/qnaDetail";
+import DesignerWrite from "./views/Service/Designer/DesignerWrite";
+import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
+import DesignerDetail from "./views/Service/Designer/DesignerDetail";
+import DesignerList from "./views/Service/Designer/DesignerList";
+import CustomerWrite from "./views/Service/customer/CustomerWrite";
+import CustomerDetail from "./views/Service/customer/CustomerDetail";
+import CustomerUpdate from "./views/Service/customer/CustomerUpdate";
+import CustomerList from "./views/Service/customer/CustomerList";
+
 
 
 //  component: root 경로 컴포넌트 //
@@ -53,7 +58,7 @@ function App() {
       <Route path={AUTH_PATH} >
         <Route index element={<Authentication />} />
       </Route>
-
+      
       <Route path={MAIN_ON_PATH} element={<Main />} />
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
@@ -78,12 +83,12 @@ function App() {
           {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
         </Route>
 
-        {/* <Route path={CUSTOMER_BOARD_PATH} > */}
-          {/* <Route index element={<CustomerList />} /> */}
-          {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerBoardWrite />} /> */}
-          {/* <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerBoardDetail />} /> */}
-          {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerBoardUpdate />} /> */}
-        {/* </Route> */}
+        <Route path={CUSTOMER_BOARD_PATH} >
+          <Route index element={<CustomerList />} />
+          <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} />
+          <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
+          <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} />
+        </Route>
 
         <Route path={DESIGNER_BOARD_PATH} >
           <Route index element={<DesignerList />} />
