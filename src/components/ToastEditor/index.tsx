@@ -17,7 +17,7 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ body, setBody }) => {
 
   const onChangeGetHTML = () => {
     if (editorRef.current) {
-      // 에디터에 입력된 내용을 HTML 태그 형태로 취득
+      // 에디터에 입력된 내용을 HTML 태그 형태
       const data = editorRef.current.getInstance().getHTML();
       // Body에 담기
       setBody(data);

@@ -21,10 +21,10 @@ import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
 
 import PasswordFound from "./views/PasswordFound";
-import CustomerList from "./views/Service/customer/CustomerList";
-import CustomerWrite from "./views/Service/customer/CustomerWrite";
-import CustomerDetail from "./views/Service/customer/CustomerDetail";
-import CustomerUpdate from "./views/Service/customer/CustomerUpdate";
+import CustomerList from "./views/Service/Customer/CustomerList";
+import CustomerWrite from "./views/Service/Customer/CustomerWrite";
+import CustomerDetail from "./views/Service/Customer/CustomerDetail";
+import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 import MyPage from "./views/MyPage";
 
 
