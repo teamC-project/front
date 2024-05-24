@@ -1,12 +1,22 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
-
+import { useNavigate } from 'react-router-dom';
 
 export default function CustomerList() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
     console.log('검색어:', searchTerm);
+  };
+
+  const navigate = useNavigate();
+
+  const handleGoToWrite = () => {
+    navigate('/service/customer_board/write');
+  };
+
+  const handleGoToDetail = () => {
+    navigate('/service/customer_board/1');
   };
 
   return (
@@ -33,8 +43,8 @@ export default function CustomerList() {
           <div className="customer-list-information4">조회</div>
         </div>
       </div> 
-      <div className="customer-list-main-view">
-        <div className="customer-list-title1">게시물 제목 1</div>
+      <div className="customer-list-title">
+        <div className="customer-list-title1" onClick={handleGoToDetail}>게시물 제목 1</div>
         <div className="customer-list-title2">게시물 제목 2</div>
         <div className="customer-list-title3">게시물 제목 3</div>
         <div className="customer-list-title4">게시물 제목 4</div>
@@ -45,14 +55,19 @@ export default function CustomerList() {
         <div className="customer-list-title9">게시물 제목 9</div>
         <div className="customer-list-title10">게시물 제목 10</div>
       </div>
-      <div className="pagination">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">&gt;</a>
-        <a href="#">&gt;&gt;</a>
+      <div className="pagination-wrapper">
+        <div className="pagination">
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">&gt;</a>
+          <a href="#">&gt;&gt;</a>
+        </div>
+        <div className="write-button" onClick={handleGoToWrite}>
+          글쓰기
+        </div>
       </div>
     </div>
   );
