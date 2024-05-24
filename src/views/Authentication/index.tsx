@@ -90,7 +90,7 @@ export function CustomerSignUp() {
             <div className='sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
                 throw new Error('Function not implemented.');
               } } /></div>
-            <div className='primary-button'>보내기</div>
+            <div className='primary-button sign-in-button-size'>보내기</div>
           </div>
 
           <div className='sign-up-box-text'>
@@ -98,16 +98,19 @@ export function CustomerSignUp() {
             <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
                 throw new Error('Function not implemented.');
               } } /></div>
-            <div className='primary-button'>확인</div>
+            <div className='primary-button sign-in-button-size'>확인</div>
           </div>
 
           <div className='sign-up-box-text'>
             <div className='sign-up-text'>성별</div>
             <div className='sign-up-next-box'>
-              <div className='sign-up-radio-box'><input type="radio" />MALE</div>
-              <div className='sign-up-radio-box'><input type="radio" />FEMALE</div>
+              <div className='sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={'MALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
+              <div className='sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
             </div>
-            <div className='primary-button'>확인</div>
           </div>
 
           <div className='sign-up-box-text'>
@@ -115,7 +118,7 @@ export function CustomerSignUp() {
             <div className='sign-up-next-box'><SelectBox value={''} onChange={function (value: string): void {
               throw new Error('Function not implemented.');
             } } /></div>
-            <div className='primary-button'>확인</div>
+            <div className='primary-button sign-in-button-size'>확인</div>
           </div>
 
           <div className='submit-box'>
@@ -146,80 +149,93 @@ export function DesignerSignUp() {
         </div>
       </div>
 
-        <div className='sign-up-title'>디자이너 가입 페이지 입니다.</div>
+      <div className='under-bar'>
+        <div className='left-null'></div>
 
-        <div className='sign-up-text-box'>
-          <div className='sign-up-text'>아이디</div>
-          <div><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-        </div>
+        <div  className='center-value'>
+        <div className='sign-up-box'>
+          <div className='sign-up-title'>디자이너 회원가입</div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>비밀번호</div>
-          <div><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>아이디</div>
+            <div className='sign-up-next-box'><InputBox  label={''} type={'text'} value={''} placeholder={'아이디를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              } } /></div>
+          </div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>비밀번호 확인</div>
-          <div className='sign-up-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>비밀번호</div>
+            <div className='sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              } } /></div>
+          </div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>이메일</div>
-          <div className='sign-up-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-          <div className='primary-button'>보내기</div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>비밀번호 확인</div>
+            <div className='sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              } } /></div>
+          </div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>이메일인증</div>
-          <div className='sign-up-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-          <div className='primary-button'>확인</div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>이메일</div>
+            <div className='sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              } } /></div>
+            <div className='primary-button sign-in-button-size'>보내기</div>
+          </div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>성별</div>
-          <div className='sign-up-box'><SelectBox value={''} onChange={function (value: string): void {
-            throw new Error('Function not implemented.');
-          } } /></div>
-          <div className='primary-button'>확인</div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>이메일인증</div>
+            <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              } } /></div>
+            <div className='primary-button sign-in-button-size'>확인</div>
+          </div>
 
-        <div className='sign-in-box'>
-          <div className='sign-up-text'>연령대</div>
-          <div className='sign-up-box'><SelectBox value={''} onChange={function (value: string): void {
-            throw new Error('Function not implemented.');
-          } } /></div>
-          <div className='primary-button'>확인</div>
-        </div>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>성별</div>
+            <div className='sign-up-next-box'>
+              <div className='sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={'MALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
+              <div className='sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+                  throw new Error('Function not implemented.');
+                } } /></div>
+            </div>
+          </div>
 
-        <div className='sign-up-text-box'>
+          <div className='sign-up-box-text'>
+            <div className='sign-up-text'>연령대</div>
+            <div className='sign-up-next-box'><SelectBox value={''} onChange={function (value: string): void {
+              throw new Error('Function not implemented.');
+            } } /></div>
+            <div className='primary-button sign-in-button-size'>확인</div>
+          </div>
+
+        <div className='sign-up-box-text'>
           <div className='sign-up-text'>업체명</div>
-          <div className='sign-up-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+          <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'업체명을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         } } /></div>
         </div>
 
-        <div className='sign-in-box'>
+        <div className='sign-up-box-text'>
           <div className='sign-up-text'>면허증사진</div>
-          <div className='sign-up-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+          <div className='sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         } } /></div>
         </div>
 
         <div className='submit-box'>
-          <div className='submit-box primary-button'>가입하기</div>
-          <div className='submit-box primary-button'>가입취소</div>
+            <div className='submit-box primary-button'>가입하기</div>
+            <div className='submit-box primary-button'>가입취소</div>
+          </div>
+        </div>
         </div>
 
+        <div className='right-null'></div>
+      </div>
 
     </div>
   )
@@ -231,7 +247,7 @@ export default function Authentication() {
     <div>
       {/* <ChooseSingUp /> */}
       <CustomerSignUp />
-      {/* <DesignerSignUp /> */}
+      <DesignerSignUp />
     </div>
   )
 }

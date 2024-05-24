@@ -17,7 +17,7 @@
   justify-content: start;
 
   width: 200px;
-  height: 72.32px;
+  height: 80px;
 
   background-image: url('../../assets/image/logo-image\ 1.png');
   background-repeat: no-repeat;
@@ -181,8 +181,8 @@
 .sign-up-title {
   display: flex;
   justify-content: start;
-  background-color: yellowgreen;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 
   font-size: 24px;
   font-weight: 700;
@@ -202,13 +202,11 @@
 .sign-up-box {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: rgb(175, 232, 232);
+  gap: 10px;
 }
 
 .under-bar {
   display: flex;
-  background-color: beige;
 }
 
 .left-null {
@@ -240,7 +238,6 @@
 
 .sign-up-box-text {
   display: flex;
-  background-color: rgb(225, 122, 78);
 }
 
 .submit-box {
@@ -258,9 +255,11 @@
 .sign-up-next-box {
   display: flex;
   gap: 50px;
-
   margin-right: 30px;
-
   width: 300px;
 
+}
+
+.sign-in-button-size {
+  width: 120px;
 }
