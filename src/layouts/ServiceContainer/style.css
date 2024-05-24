@@ -26,14 +26,10 @@
 .top-logo {
   grid-area: logo;
   display: flex;
-  align-items: end;
+  width: 200px; 
+  height: 73.23px;
 
-  height: 58px;
-
-  font: inherit;
-  line-height: 16px;
-  font-weight: 400;
-  font-size: 32px;
+  background-image: url('../../assets/image/logo-image\ 1.png');
 }
 
 .top-bar-title {
@@ -82,21 +78,15 @@
 
 .under {
   display:  flex;
-  background-color: greenyellow;
 }
 
 .left-bar {
-  background-color: rgb(179, 190, 64);
   width: 300px;
-
 }
 
 .left-bar-container {
   grid-area: sidenav;
   padding: 16px 12px;
-
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 1);
 
   display: flex;
   flex-direction: column;
@@ -105,10 +95,47 @@
 }
 
 .left-bar-title {
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.left-bar-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms
+}
+
+.left-bar-title:hover {
+  color: #e8e8e8;
+}
+
+.left-bar-title:hover::before {
+  width: 100%;
+}
+
+
+.left-bar-title:hover {
+  cursor: pointer;
 }
 
 .center-bar {

@@ -9,6 +9,10 @@ import Authentication from "./views/Authentication";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
+import DesignerWrite from "./views/Service/Designer/DesignerWrite";
+import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
+import DesignerDetail from "./views/Service/Designer/DesignerDetail";
+import DesignerList from "./views/Service/Designer/DesignerList";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 
@@ -72,17 +76,17 @@ function App() {
 
         <Route path={CUSTOMER_BOARD_PATH} >
           <Route index element={<CustomerList />} />
-          {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerBoardWrite />} /> */}
+          {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} /> */}
           <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
           {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} /> */}
         </Route>
 
-        {/* <Route path={DESIGNER_BOARD_PATH} > */}
-          {/* <Route index element={<DesignerBoard />} /> */}
-          {/* <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerBoardWrite />} /> */}
-          {/* <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerBoardDetail />} /> */}
-          {/* <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerBoardUpdate />} /> */}
-        {/* </Route> */}
+        <Route path={DESIGNER_BOARD_PATH} >
+          <Route index element={<DesignerList />} />
+          <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerWrite />} />
+          <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
+          <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
+        </Route>
       </Route>
 
     </Routes>
