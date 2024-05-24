@@ -10,6 +10,7 @@ import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
 import CustomerList from "./views/Service/Customer/CustomerList";
+import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 
 
 //  component: root 경로 컴포넌트 //
@@ -43,7 +44,7 @@ function App() {
       <Route path={AUTH_PATH} element={<Authentication />} />
       <Route path={MAIN_ON_PATH} element={<Main />} />
 
-      {/* <Route path={SERVICE_PATH} element={<ServiceContainer />} > */}
+      <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
         {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
           {/* <Route index element={<AnnouncementBoard />} /> */}
@@ -66,12 +67,12 @@ function App() {
           {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
         {/* </Route> */}
 
-        {/* <Route path={CUSTOMER_BOARD_PATH} > */}
-          {/* <Route index element={<CustomerList />} /> */}
+        <Route path={CUSTOMER_BOARD_PATH} >
+          <Route index element={<CustomerList />} />
           {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerBoardWrite />} /> */}
-          {/* <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerBoardDetail />} /> */}
-          {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerBoardUpdate />} /> */}
-        {/* </Route> */}
+          <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
+          {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} /> */}
+        </Route>
 
         {/* <Route path={DESIGNER_BOARD_PATH} > */}
           {/* <Route index element={<DesignerBoard />} /> */}
@@ -79,7 +80,7 @@ function App() {
           {/* <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerBoardDetail />} /> */}
           {/* <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerBoardUpdate />} /> */}
         {/* </Route> */}
-      {/* </Route> */}
+      </Route>
 
     </Routes>
   );
