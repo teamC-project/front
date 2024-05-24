@@ -127,12 +127,12 @@ export const QNA_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (qnaBoardNumber: number |
 // description : 소통 플랫폼 절대 URL PATH
 export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}`;
 export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
-export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${customerBoardNumber}`;
-export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/update${customerBoardNumber}`;
-export const CUSTOMER_BOARD_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/delete${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/delete${customerBoardNumber}`;
+export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${customerBoardNumber}`;
+export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/update${customerBoardNumber}`;
+export const CUSTOMER_BOARD_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/delete${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/update${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_DELETE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/delete${customerBoardNumber}`;
 
 // description : 디자이너 절대 URL PATH
 export const DESIGNER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}`;
