@@ -21,11 +21,12 @@ import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
 
 import PasswordFound from "./views/PasswordFound";
-import CustomerList from "./views/Service/customer/CustomerList";
+
+import MyPage from "./views/MyPage";
 import CustomerWrite from "./views/Service/customer/CustomerWrite";
+import CustomerList from "./views/Service/customer/CustomerList";
 import CustomerDetail from "./views/Service/customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/customer/CustomerUpdate";
-import MyPage from "./views/MyPage";
 
 
 //  component: root 경로 컴포넌트 //
