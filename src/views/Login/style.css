@@ -1,4 +1,4 @@
-.idCheck-wrapper {
+.wrapper {
   display: flex;
   width: 100%; 
   height: 100vh; 
@@ -8,7 +8,7 @@
 
 .image-box {
   min-width: 900px;
-  background-image: url("../../assets/image/다운로드.jpg");
+  background-image: url("../../assets/image/Rectangle\ 4.png ");
   background-size: cover; 
 }
 
@@ -21,12 +21,86 @@
   font-family: Pretendard;
 }
 
-.top-bar-box {
+.signup-button {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+
+  justify-content: right;
   display: flex;
-  justify-content: center;
-  
+  background-color: blue;
 }
 
-.second-box {
+.login-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 25px;
+  width: 100%;
+  background-color: rebeccapurple;
+}
+
+.user-id {
+  display: flex;
+}
+
+.user-password {
+  display: flex;
+}
+
+.input-box {
+  width: 150px;
+  height: 50px;
+  background-color: black;
+}
+
+.login-button {
+
+  background-color: aqua;
+
+  cursor: pointer;
+}
+
+.socal-login {
+  display: flex;
+  
+  gap: 20px;
+
+  background-color: rgb(51, 182, 84);
+}
+
+.kakao-login {
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+
+  cursor: pointer;
+  background-image: url("../../assets/image/kakao-button.png");
+}
+
+.naver-login {
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+
+  cursor: pointer;
+  background-image: url("../../assets/image/naver-button.png");
+}
+
+.user-found {
+  display: flex;
+  gap: 20px;
+
+  background-color: brown;
+}
+
+.id-found {
+  cursor: pointer;
+}
+
+.password-found {
+  cursor: pointer;
 }
