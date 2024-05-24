@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import '@toast-ui/editor/dist/toastui-editor.css';
+import ToastEditor from 'src/components/ToastEditor'
 import './style.css'
 
 
@@ -23,7 +23,8 @@ export default function TrendBoard({  }) {
 				<div className='trend_board_thumbnail_image_select_button'></div>
 			</div>
 			<div className='trend_board_textarea_container'>
-				<textarea name="trend_board" id="trend_board"></textarea>
+			<ToastEditor body={''} setBody={function (body: string): void { } } imageHandler={function (blob: File, callback: FunctionConstructor): void {
+				} } />
 			</div>
 		</div>
 	)
