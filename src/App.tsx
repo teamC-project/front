@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-
 import "./App.css";
+
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-import { AUTH_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_OFF_PATH, MAIN_ON_PATH, SERVICE_PATH, SIGN_IN_PATH } from "./constant";
+import { AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_OFF_PATH, MAIN_ON_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import Authentication from "./views/Authentication";
 import Login from "./views/Login";
-import Id_Found from "./views/Id_Found";
-import DesignerWrite from "./views/Service/Designer/DesignerWrite";
-import CustomerList from "./views/Service/Customer/CustomerList";
 import Main from "./views/Main";
+import IdFound from "./views/IdFound";
+
 
 //  component: root 경로 컴포넌트 //
 function Index() {
@@ -37,27 +36,54 @@ function Index() {
 function App() {
   return (
     <Routes >
-      <Route path={ID_FOUND_ABSOLUTE_PATH} element={<Id_Found />} />
-      <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-  
-      <Route path={DESIGNER_BOARD_WRITE_ABSOLUTE_PATH} element={<DesignerWrite />} />
-      <Route path={CUSTOMER_BOARD_LIST_ABSOLUTE_PATH} element={<CustomerList />} />
-      </Route>
-      <Route path={SIGN_IN_PATH} element={<Login />} />
       <Route index element={<Index />} />
-      <Route path={AUTH_PATH} element={<Authentication />} />
-      <Route path={MAIN_ON_PATH} element={<Main />} />
+      <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
-      
-      {/* <Route index element={<Index />} /> */}
-      {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
-      {/* <Route path={SERVICE_PATH} element={<ServiceContainer />} > */}
-        
-      {/* <Route path={AUTH_PATH} element={<Authentication />} /> */}
-      {/*  */}
-      {/*  */}
+      <Route path={AUTH_PATH} element={<Authentication />} />
 
+
+      <Route path={MAIN_ON_PATH} element={<Main />} />
+
+
+
+      {/* <Route path={SERVICE_PATH} element={<ServiceContainer />} > */}
+
+        {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
+          {/* <Route index element={<AnnouncementBoard />} */}
+          {/* <Route path={AUNNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementBoardWrite />} */}
+          {/* <Route path={AUNNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} */}
+          {/* <Route path={AUNNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} */}
+        {/* </Route> */}
+
+        {/* <Route path={TREND_BOARD_PATH} > */}
+          {/* <Route index element={<TrandBoard />} */}
+          {/* <Route path={TREND_BOARD_WRITE_PATH} element={<TrandBoardWrite />} */}
+          {/* <Route path={TREND_BOARD_DETAIL_PATH} element={<TrandBoardDetail />} */}
+          {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrandBoardUpdate />} */}
+        {/* </Route> */}
+
+        {/* <Route path={QNA_BOARD_PATH} > */}
+          {/* <Route index element={<QnaBoard />} */}
+          {/* <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} */}
+          {/* <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} */}
+          {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} */}
+        {/* </Route> */}
+
+        {/* <Route path={CUSTOMER_BOARD_PATH} > */}
+          {/* <Route index element={<CustomerBoard />} */}
+          {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerBoardWrite />} */}
+          {/* <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerBoardDetail />} */}
+          {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerBoardUpdate />} */}
+        {/* </Route> */}
+
+        {/* <Route path={DESIGNER_BOARD_PATH} > */}
+          {/* <Route index element={<DesignerBoard />} */}
+          {/* <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerBoardWrite />} */}
+          {/* <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerBoardDetail />} */}
+          {/* <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerBoardUpdate />} */}
+        {/* </Route> */}
       {/* </Route> */}
+
     </Routes>
   );
 }
