@@ -26,14 +26,6 @@ export default function DesignerWrite() {
             </div>
             <div className='upload-file'>첨부 파일
                 <div className='upload-file-button' onClick={onUploadFileClickHandler}>파일 첨부하기</div>
-                <input type="file" ref={fileInputRef} style={{ display: 'none' }}
-                onChange={(event) => {
-                    const selectedFile = event.target.files?.[0];
-                    if (selectedFile) {
-                        console.log('선택된 파일:', selectedFile);
-                    }
-                }}
-                    />
             </div>
             <div className='write-button'>
                 <button className='click-button'>
