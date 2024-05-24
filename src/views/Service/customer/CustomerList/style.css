@@ -20,7 +20,7 @@
   margin-left: 10px; /* 검색 버튼과의 간격 조정 */
   }
 
-.container {
+.customer-list-container {
   margin: 20px auto;
   max-width: 100%; /* customer-list-main-view의 너비에 맞춤 */
   padding: 0;
