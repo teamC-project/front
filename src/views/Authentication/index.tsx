@@ -80,7 +80,7 @@ export function CustomerSignUp() {
 
           <div className='sign-up-box-text'>
             <div className='sign-up-text'>비밀번호 확인</div>
-            <div className='sign-up-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+            <div className='sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
                 throw new Error('Function not implemented.');
               } } /></div>
           </div>
@@ -103,8 +103,10 @@ export function CustomerSignUp() {
 
           <div className='sign-up-box-text'>
             <div className='sign-up-text'>성별</div>
-            <div className='sign-up-radio-box'><input type="radio" />MALE</div>
-            <div className='sign-up-radio-box'><input type="radio" />FEMALE</div>
+            <div className='sign-up-next-box'>
+              <div className='sign-up-radio-box'><input type="radio" />MALE</div>
+              <div className='sign-up-radio-box'><input type="radio" />FEMALE</div>
+            </div>
             <div className='primary-button'>확인</div>
           </div>
 
