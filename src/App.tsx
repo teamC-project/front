@@ -9,19 +9,16 @@ import Authentication from "./views/Authentication";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
-<<<<<<< HEAD
-import TrendList from "./views/Service/Trend/TrendList";
-import TrendWrite from "./views/Service/Trend/TrendWrite";
-import TrendDetail from "./views/Service/Trend/TrendDetail";
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
-=======
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
 import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
->>>>>>> f8fe0e7bdffe8f2c96aa458cd5bb216096f257be
+import TrendWrite from "./views/Service/Trend/TrendWrite";
+import TrendDetail from "./views/Service/Trend/TrendDetail";
+import QnaWrite from "./views/Service/qna/qnaWrite";
+import QnaDetail from "./views/Service/qna/qnaDetail";
+import TrendList from "./views/Service/Trend/TrendList";
+import QnaList from "./views/Service/qna/qnaList";
 
 
 //  component: root 경로 컴포넌트 //
@@ -53,14 +50,11 @@ function App() {
       <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
       <Route path={SIGN_IN_PATH} element={<Login />} />
 
-<<<<<<< HEAD
-=======
       <Route path={AUTH_PATH} >
         <Route index element={<Authentication />} />
       </Route>
 
       <Route path={MAIN_ON_PATH} element={<Main />} />
->>>>>>> f8fe0e7bdffe8f2c96aa458cd5bb216096f257be
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
         {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
@@ -91,21 +85,12 @@ function App() {
           {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerBoardUpdate />} /> */}
         {/* </Route> */}
 
-<<<<<<< HEAD
-        {/* <Route path={DESIGNER_BOARD_PATH} > */}
-          {/* <Route index element={<DesignerBoard />} /> */}
-          {/* <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerBoardWrite />} /> */}
-          {/* <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerBoardDetail />} /> */}
-          {/* <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerBoardUpdate />} /> */}
-        {/* </Route> */}
-=======
         <Route path={DESIGNER_BOARD_PATH} >
           <Route index element={<DesignerList />} />
           <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerWrite />} />
           <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
           <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
         </Route>
->>>>>>> f8fe0e7bdffe8f2c96aa458cd5bb216096f257be
       </Route>
 
     </Routes>
