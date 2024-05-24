@@ -1,0 +1,42 @@
+#trend_board_write_wrapper {
+	/* position: absolute;
+	top: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 1200px;
+	height:850px; */
+	background-color: bisque;
+}
+.trend_board_write_top_bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height : 80px;	
+	padding : 12px;
+	background-color: cornsilk;
+}
+
+.trend_board_write_title {
+	width: 80%;
+	height: 50px;
+	border: none;
+	border-radius: 12px;
+}
+
+.trend_board_write_footer {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	height: 80px;
+	background-color: beige;
+}
+
+.trend_board_button_container {
+	width: 200px;
+	display: flex;
+	justify-content: right;
+	gap:16px;
+	padding: 12px;
+}
+
+

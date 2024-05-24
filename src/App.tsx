@@ -9,6 +9,12 @@ import Authentication from "./views/Authentication";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
+import TrendList from "./views/Service/Trend/TrendList";
+import TrendWrite from "./views/Service/Trend/TrendWrite";
+import TrendDetail from "./views/Service/Trend/TrendDetail";
+import QnaList from "./views/Service/qna/qnaList";
+import QnaWrite from "./views/Service/qna/qnaWrite";
+import QnaDetail from "./views/Service/qna/qnaDetail";
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
 import DesignerDetail from "./views/Service/Designer/DesignerDetail";
@@ -60,19 +66,19 @@ function App() {
           {/* <Route path={AUNNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} /> */}
         {/* </Route> */}
 
-        {/* <Route path={TREND_BOARD_PATH} > */}
-          {/* <Route index element={<TrandBoard />} /> */}
-          {/* <Route path={TREND_BOARD_WRITE_PATH} element={<TrandBoardWrite />} /> */}
-          {/* <Route path={TREND_BOARD_DETAIL_PATH} element={<TrandBoardDetail />} /> */}
-          {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrandBoardUpdate />} /> */}
-        {/* </Route> */}
+        <Route path={TREND_BOARD_PATH} >
+          <Route index element={<TrendList />} />
+          <Route path={TREND_BOARD_WRITE_PATH} element={<TrendWrite />} />
+          <Route path={TREND_BOARD_DETAIL_PATH} element={<TrendDetail />} />
+          {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendBoardUpdate />} /> */}
+        </Route>
 
-        {/* <Route path={QNA_BOARD_PATH} > */}
-          {/* <Route index element={<QnaBoard />} /> */}
-          {/* <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} /> */}
-          {/* <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} /> */}
+        <Route path={QNA_BOARD_PATH} >
+          <Route index element={<QnaList />} />
+          <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
+          <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
           {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
-        {/* </Route> */}
+        </Route>
 
         <Route path={CUSTOMER_BOARD_PATH} >
           <Route index element={<CustomerList />} />
