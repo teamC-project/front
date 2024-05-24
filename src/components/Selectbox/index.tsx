@@ -9,11 +9,6 @@ interface Prop {
 //                     component                       //
 export default function SelectBox({ value, onChange}: Prop) {
 
-  const genderListItem = [
-    { name: 'MALE', value: 'MALE' },
-    { name: 'FEMALE', value: 'FEMALE' },
-  ];
-  
   const ageListItem = [
     { name: '10대', value: 'MALE' },
     { name: '20대', value: 'FEMALE' },
@@ -38,7 +33,7 @@ export default function SelectBox({ value, onChange}: Prop) {
   };
 
   const onItemClickHandler = (value: string) => {
-    genderListItem.forEach(item => {
+    ageListItem.forEach(item => {
       if (item.value === value) setName(item.name);
     })
     onChange(value);
@@ -50,7 +45,7 @@ export default function SelectBox({ value, onChange}: Prop) {
   return (
     <div className='select-box'>
       { value === '' ?
-        <div className='select-none'>지역</div> :
+        <div className='select-none'>연령대</div> :
         <div className='select-item'>{name}</div>
       }
       
@@ -58,7 +53,7 @@ export default function SelectBox({ value, onChange}: Prop) {
 
       {show && 
         <div className='select-list'>
-          {genderListItem.map((item) => 
+          {ageListItem.map((item) => 
           <div className='select-list-item-box' onClick={() => onItemClickHandler(item.value)}>
             <div className='select-item'>{item.name}</div>
           </div>
