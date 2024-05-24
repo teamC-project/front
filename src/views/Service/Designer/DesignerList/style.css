@@ -1,144 +1,83 @@
-/* .wrapper {
-    display: grid;
-}
-
-.Header {
-    display: flex;
-    justify-content: space-between;
-    grid-column-start: 1;
-    grid-column-end: 4;
-
-    grid-row-start: 1;
-    grid-row-end: 1;
-
-    width: 1903px;
-    height: 60px;
-
-    background-color: rgba(0, 255, 255, 0.8);
-}
-
-.header-right {
-    display: flex;
-    align-items: flex-end;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-
-    color: rgba(64, 64, 64, 1);
-}
-
-.header-left {
-    display: flex;
-    
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 175%;
-    
-    color: rgba(138, 146, 165, 1);
-}
-
-.header-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: rgba( 10, 10, 0, 0.5);
-}
-
-.Search {
-    display: flex;
-    justify-content: center;
-
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 3;
-    grid-row-end: 3;
-
-    
-    width: 1903px;
-    height: 60px;
-
-    background-color: rgba(255, 0, 0, 0.7);
-}
-
 .search-box {
-    display: flex;
-    justify-content: space-between;
+  background-color: rgb(218, 218, 218);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  }
+  .search-keyword {
+  margin-right: 10px;
+  }
+  .list-search-input {
+  flex: 1; /* 검색어 입력 부분의 너비 조절 */
+  padding: 5px;
+  }
+  .search-button {
+  background-color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px; /* 검색 버튼과의 간격 조정 */
+  }
+
+.container {
+  margin: 20px auto;
+  max-width: 100%; /* designer-list-main-view의 너비에 맞춤 */
+  padding: 0;
 }
 
-.list-search-input {
-    padding: 60px 26px;
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 6px;
-    padding: 8px 16px;
-    width: 168px;
-
-    background-color: rgba(255, 255, 255, 1);
+.designer-list-information {
+  display: flex;
+  justify-content: space-between;
+  padding: 0; /* 여백 제거 */
+  background-color: #f2f2f2;
 }
 
-.Menu {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 4;
-    grid-row-end: 4;
-
-    width: 203px;
-    height: 1260px;
-
-    background-color: rgba(0, 0, 255, 0.8);
+.designer-list-information > div {
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.side-navigation-container {
-    grid-area: sidenav;
-    padding: 16px 12px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.designer-list-information1 {
+  flex: 0.5; /* 크기 조정 가능 */
 }
 
-.side-navigation-title {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.designer-list-information2 {
+  flex: 6; /* 크기 조정 가능 */
 }
 
-
-.Main {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 4;
-    grid-row-end: 4;
-
-    width: 1503px;
-    height: 1260px;
-
-    background-color: rgba(255, 2, 255, 0.2);
+.designer-list-information3 {
+  flex: 1; /* 크기 조정 가능 */
 }
 
-.Bottom {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 4;
-    grid-row-end: 4;
-    width: 203px;
-    height: 1260px;
-
-    background-color: rgba(25, 2, 25, 0.8);
+.designer-list-information4 {
+  flex: 0.5; /* 크기 조정 가능 */
 }
 
-.Footer {
-    grid-column-start: 1;
-    grid-column-end: 4;
+.designer-list-main-view {
+  display: flex;
+  flex-direction: column;
+}
+.designer-list-main-view > div {
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+  background-color: rgb(218, 218, 218)
+}
 
-    grid-row-start: 5;
-    grid-row-end: 5;
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-
-    width: 1903px;
-    height: 120px;
-    background-color: rgba(55, 255, 255, 0.8);
-} */
+.pagination a {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}

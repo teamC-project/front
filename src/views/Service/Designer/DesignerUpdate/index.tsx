@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import "./style.css";
 
-export default function DesignerWrite() {
+export default function DesignerUpdate() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
@@ -36,7 +36,7 @@ export default function DesignerWrite() {
                     />
             </div>
             <div className='write-button'>
-                <div className='button'>올리기</div>
+                <div className='button'>수정</div>
             </div>
         </div>
     );
