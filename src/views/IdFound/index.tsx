@@ -5,7 +5,7 @@ import "./style.css";
 export default function IdFound() {
   return (
     <div id='idfound-wrapper'>
-            <div className='top-bar'>
+        <div className='top-bar'>
         <div className='logo-image'></div>
         
         <div className='top-right-bar'>
