@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import "./style.css";
 
-export default function DesignerWrite() {
+export default function CustomerWrite() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
@@ -14,15 +14,15 @@ export default function DesignerWrite() {
 
     //                    render                    //
     return (
-        <div id='designer-write-wrapper'>
-            <div className='designer-write-top'>
-                <div className='designer-write-title-box'>
-                    <div className='designer-write-title'>제목</div>
-                    <input className='designer-write-title-input' placeholder='제목을 입력해주세요.'></input>
+        <div id='customer-write-wrapper'>
+            <div className='customer-write-top'>
+                <div className='customer-write-title-box'>
+                    <div className='customer-write-title'>제목</div>
+                    <input className='customer-write-title-input' placeholder='제목을 입력해주세요.'></input>
                 </div>
             </div>
-            <div className='designer-write-contents-box'>
-                <textarea className='designer-write-contents-textarea' placeholder='내용을 입력해주세요.'></textarea>
+            <div className='customer-write-contents-box'>
+                <textarea className='customer-write-contents-textarea' placeholder='내용을 입력해주세요.'></textarea>
             </div>
             <div className='write-button'>
                 <button className='click-button'>
