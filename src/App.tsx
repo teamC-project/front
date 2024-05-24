@@ -11,6 +11,10 @@ import Main from "./views/Main";
 import IdFound from "./views/IdFound";
 import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
+import TrendDetail from "./views/Service/Trend/TrendDetail";
+import QnaList from "./views/Service/qna/qnaList";
+import QnaWrite from "./views/Service/qna/qnaWrite";
+import QnaDetail from "./views/Service/qna/qnaDetail";
 
 
 //  component: root 경로 컴포넌트 //
@@ -56,16 +60,16 @@ function App() {
         <Route path={TREND_BOARD_PATH} >
           <Route index element={<TrendList />} />
           <Route path={TREND_BOARD_WRITE_PATH} element={<TrendWrite />} />
-          {/* <Route path={TREND_BOARD_DETAIL_PATH} element={<TrandBoardDetail />} /> */}
-          {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrandBoardUpdate />} /> */}
+          <Route path={TREND_BOARD_DETAIL_PATH} element={<TrendDetail />} />
+          {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendBoardUpdate />} /> */}
         </Route>
 
-        {/* <Route path={QNA_BOARD_PATH} > */}
-          {/* <Route index element={<QnaBoard />} /> */}
-          {/* <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} /> */}
-          {/* <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} /> */}
+        <Route path={QNA_BOARD_PATH} >
+          <Route index element={<QnaList />} />
+          <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
+          <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
           {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
-        {/* </Route> */}
+        </Route>
 
         {/* <Route path={CUSTOMER_BOARD_PATH} > */}
           {/* <Route index element={<CustomerList />} /> */}

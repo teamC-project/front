@@ -12,6 +12,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height:50px;
+	gap:16px;
 }
 
 .trend_board_list_container {

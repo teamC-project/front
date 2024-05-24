@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import './style.css'; 
 import { HookCallback } from '@toast-ui/editor/types/editor';
 
 interface ToastEditorProps {
   body: string;
-	imageHandler: (blob: File, callback: typeof Function) => void;
+  imageHandler: (blob: File, callback: typeof Function) => void;
   setBody: (body: string) => void;
 }
 
@@ -21,9 +24,9 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ body, setBody }) => {
     }
   };
 
-	function imageHandler(blob: File | Blob, callback: HookCallback): void {
-		throw new Error('Function not implemented.');
-	}
+  function imageHandler(blob: File | Blob, callback: HookCallback): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <Editor
@@ -33,16 +36,15 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ body, setBody }) => {
         ['hr', 'quote'],
         ['ul', 'ol', 'task', 'indent', 'outdent'],
         ['table', 'image', 'link'],
-        ['code', 'codeblock']
       ]}
-      height="500px" // 에디터 창 높이
-			hooks={{ addImageBlobHook: imageHandler }}
-      initialEditType="wysiwyg" // 기본 에디터 타입 (or wysiwyg)
-			hideModeSwitch
-      previewStyle="tab" // 미리보기 스타일 (or tab) (vertical은 양쪽이 나뉨)
+      height="600px" // 에디터 창 높이
+      hooks={{ addImageBlobHook: imageHandler }}
+      initialEditType="wysiwyg" // 기본 에디터 타입 (또는 wysiwyg)
+      hideModeSwitch
+      previewStyle="tab" // 미리보기 스타일 (또는 tab) (vertical은 양쪽이 나뉨)
       ref={editorRef} // ref 참조
       onChange={onChangeGetHTML} // onChange 이벤트
-
+      plugins={[colorSyntax]} // color syntax 플러그인 추가
     />
   );
 };

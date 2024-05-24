@@ -1,10 +1,12 @@
 import React from 'react'
 import'./style.css'
+import '../../../../App.css'
 export default function TrendList() {
 	return (
 		<div id='trend_board_wrapper'>
 			<div className="trend_board_list_top_bar">
-				<input className='trend_board_search_input' placeholder='제목을 입력하세요.'/>
+				<input className='search_input' placeholder='제목을 입력하세요.'/>
+				<div className='search_button'>검색</div>
 			</div>
 			<div className="trend_board_list_container">
 				<div className='trend_board_list'>
