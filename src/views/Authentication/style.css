@@ -1,18 +1,18 @@
 /* 회원가입 선택 공통 */
-#sign-up-wrapper {
+#auth-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
 }
 
-.top-bar {
+.auth-top-bar {
   display: flex;
   justify-content: space-between;
   margin: 30px;
 }
 
-.logo-image {
+.auth-logo-image {
   display: flex;
   justify-content: start;
 
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.top-right-bar {
+.auth-top-right-bar {
   display: flex;
   justify-content: end;
   text-align: center;
@@ -35,27 +35,27 @@
   font-size: 16px;
 }
 
-.top-right-bar-login {
+.auth-top-right-bar-login {
   padding: 10px;
   cursor: pointer;
 }
 
-.top-right-bar-line {
+.auth-top-right-bar-line {
   padding: 10px;
 }
 
-.top-right-bar-sign-up {
+.auth-top-right-bar-sign-up {
   padding: 10px;
   cursor: pointer;
 }
 
 /* 회원가입 선택 */
-.welcome-image-box {
+.auth-welcome-image-box {
   display: flex;
   justify-content: center;
 }
 
-.welcome-image {
+.auth-welcome-image {
   display: block;
   text-align: center;
   align-items: center;
@@ -66,7 +66,7 @@
   background-size: auto;
 }
 
-.choose-type-text {
+.auth-choose-type-text {
   display: flex;
   justify-content: center;
 
@@ -76,13 +76,13 @@
   font-weight: 700;
 }
 
-.type-image {
+.auth-type-image {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
 
-.type-image-customer {
+.auth-type-image-customer {
   display: block;
   text-align: center;
   align-items: center;
@@ -90,19 +90,19 @@
   width: 270px;
 
   border: 1px solid white;
-  border-radius: 25%;
+  border-radius: 10%;
 
   background-image: url('../../assets/image/customer-image.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
 
-.type-image-customer:hover {
+.auth-type-image-customer:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
-.type-image-designer {
+.auth-type-image-designer {
   display: block;
   text-align: center;
   align-items: center;
@@ -110,36 +110,36 @@
   width: 270px;
 
   border: 1px solid white;
-  border-radius: 25%;
+  border-radius: 10%;
 
   background-image: url('../../assets/image/designer-image.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
 
-.type-image-designer:hover {
+.auth-type-image-designer:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
-.type-text {
+.auth-type-text {
   display: flex;
   gap: 270px;
   padding: 10px;
   justify-content: center;
 }
 
-.type-text-customer {
+.auth-type-text-customer {
   font-size: 24px;
   font-weight: 400;
 }
 
-.type-text-designer {
+.auth-type-text-designer {
   font-size: 24px;
   font-weight: 400;
 }
 
-.sign-up-sns {
+.auth-sign-up-sns {
   display: flex;
   flex-direction: column;
   margin-top: 60px;
@@ -147,7 +147,7 @@
   gap: 20px;
 }
 
-.sign-up-naver {
+.auth-sign-up-naver {
   margin: auto;
   height: 50px;
   width: 400px;
@@ -155,14 +155,17 @@
   background-image: url(../../assets/image/naver-sign-up-button.png);
   background-repeat: no-repeat;
   background-size: auto;
+
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
-.sign-up-naver:hover {
+.auth-sign-up-naver:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
-.sign-up-kakao {
+.auth-sign-up-kakao {
   margin: auto;
   height: 50px;
   width: 400px;
@@ -170,15 +173,18 @@
   background-image: url(../../assets/image/kakao-sign-up-button.png);
   background-repeat: no-repeat;
   background-size: auto;
+
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
-.sign-up-kakao:hover {
+.auth-sign-up-kakao:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
 /* 회원가입 공통 */
-.sign-up-title {
+.auth-sign-up-title {
   display: flex;
   justify-content: start;
   margin-top: 50px;
@@ -190,7 +196,7 @@
   min-width: 800px;
 }
 
-.sign-up-text {
+.auth-sign-up-text {
   padding: 5px;
   font-size: 24px;
   font-weight: 400;
@@ -199,17 +205,17 @@
   line-height: 50px;
 }
 
-.sign-up-box {
+.auth-sign-up-box {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.under-bar {
+.auth-under-bar {
   display: flex;
 }
 
-.left-null {
+.auth-left-null {
   display: flex;
   justify-content: start;
   width: 600px;
@@ -217,14 +223,14 @@
 
 }
 
-.center-value {
+.auth-center-value {
   display: flex;
   justify-content: center;
   width: 100%;
   flex: 1;
 }
 
-.right-null {
+.auth-right-null {
   display: flex;
   justify-content: end;
   width: 600px;
@@ -234,25 +240,24 @@
 
 
 
-/* 고객 회원가입 */
-
-.sign-up-box-text {
+/* 회원가입 세부 */
+.auth-sign-up-box-text {
   display: flex;
 }
 
-.submit-box {
+.auth-submit-box {
   display: flex;
   justify-content: center;
   gap: 40px;
 }
 
-.sign-up-radio-box {
+.auth-sign-up-radio-box {
   font-size: 24px;
   height: 50px;
   line-height: 50px;
 }
 
-.sign-up-next-box {
+.auth-sign-up-next-box {
   display: flex;
   gap: 50px;
   margin-right: 30px;
@@ -260,6 +265,6 @@
 
 }
 
-.sign-in-button-size {
+.auth-sign-in-button-size {
   width: 120px;
 }
