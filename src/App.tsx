@@ -21,6 +21,8 @@ import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
+import CustomerWrite from "./views/Service/Customer/CustomerWrite";
+import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 
 
 //  component: root 경로 컴포넌트 //
@@ -82,9 +84,9 @@ function App() {
 
         <Route path={CUSTOMER_BOARD_PATH} >
           <Route index element={<CustomerList />} />
-          {/* <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} /> */}
+          <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} />
           <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
-          {/* <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} /> */}
+          <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} />
         </Route>
 
         <Route path={DESIGNER_BOARD_PATH} >
