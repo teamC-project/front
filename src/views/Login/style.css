@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
-  width: 100%; 
-  height: 100vh; 
+  width: 100%;
+  height: 100vh;
   min-height: 1024px;
   background-color: aqua;
 }
@@ -9,14 +9,14 @@
 .image-box {
   min-width: 900px;
   background-image: url("../../assets/image/Rectangle\ 4.png ");
-  background-size: cover; 
+  background-size: cover;
 }
 
 .top-bar-container {
   grid-area: topbar;
   display: flex;
   justify-content: right;
-  
+
   padding: 0 24px;
   font-family: Pretendard;
 }
@@ -51,12 +51,6 @@
   display: flex;
 }
 
-.input-box {
-  width: 150px;
-  height: 50px;
-  background-color: black;
-}
-
 .login-button {
 
   background-color: aqua;
@@ -66,7 +60,7 @@
 
 .socal-login {
   display: flex;
-  
+
   gap: 20px;
 
   background-color: rgb(51, 182, 84);
