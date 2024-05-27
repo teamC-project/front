@@ -48,30 +48,6 @@
   cursor: pointer;
 }
 
-.top-bar-container {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  display: flex;
-  justify-content: space-between;
-
-  padding: 0 24px;
-  font-family: Pretendard;
-  background-color: rgb(249, 253, 5);
-}
-
-.title {
-  cursor: pointer;
-}
-
-.top-bar-right {
-  gap: 30px;
-
-  justify-content: right;
-  display: flex;
-}
-
 .login-button {
   cursor: pointer;
 }
@@ -79,6 +55,8 @@
 .signup-button {
   cursor: pointer;
 }
+
+
 
 .sub-wrapper {
   flex-direction: column;
@@ -93,7 +71,7 @@
 .id-found-box {
 
   border: 1px solid rgba(238, 238, 238, 1);
-  
+  background-color: aqua;
   padding: 200px 200px;
 }
 
@@ -110,20 +88,11 @@
 }
 
 .email {
+  background-color: aquamarine;
   border: 1px solid rgba(192, 192, 192, 1);
   justify-content: center;
   align-items: center;
   padding: 10px 24px;
-}
-
-/* .input-box {
-  width: 200px;
-  height: 30px;
-  background-color: rgba(192, 192, 192, 1);
-} */
-
-.error-text {
-  color: red;
 }
 
 .send-authnumber{
