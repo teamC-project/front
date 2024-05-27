@@ -1,8 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import "./style.css";
 
 export default function CustomerWrite() {
-
+    const [isSecret, setIsSecret] = useState(false);
+    const handleSecretChange = () => {
+        setIsSecret(!isSecret);
+    };
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -19,6 +22,16 @@ export default function CustomerWrite() {
                 <div className='customer-write-title-box'>
                     <div className='customer-write-title'>제목</div>
                     <input className='customer-write-title-input' placeholder='제목을 입력해주세요.'></input>
+                    <div className='customer-write-secret'>
+                        <label>
+                            <input
+                                type='checkbox'
+                                checked={isSecret}
+                                onChange={handleSecretChange}
+                            />
+                            <span>비밀글</span>
+                        </label>
+                    </div>
                 </div>
             </div>
             <div className='customer-write-contents-box'>
