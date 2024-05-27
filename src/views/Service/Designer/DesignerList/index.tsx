@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
+import { useNavigate } from 'react-router';
 
 
 export default function DesignerList() {
@@ -7,6 +8,16 @@ export default function DesignerList() {
 
   const handleSearch = () => {
     console.log('검색어:', searchTerm);
+  };
+
+  const navigate = useNavigate();
+
+  const handleGoToWrite = () => {
+    navigate('/service/designer_board/write');
+  };
+
+  const handleGoToDetail = () => {
+    navigate('/service/designer_board/1');
   };
 
   return (
@@ -25,7 +36,7 @@ export default function DesignerList() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="designer-list-container">
         <div className="designer-list-information">
           <div className="designer-list-information1">번호</div>
           <div className="designer-list-information2">제목</div>
@@ -33,8 +44,8 @@ export default function DesignerList() {
           <div className="designer-list-information4">조회</div>
         </div>
       </div> 
-      <div className="designer-list-main-view">
-        <div className="designer-list-title1">게시물 제목 1</div>
+      <div className="designer-list-title">
+        <div className="designer-list-title1" onClick={handleGoToDetail}>게시물 제목 1</div>
         <div className="designer-list-title2">게시물 제목 2</div>
         <div className="designer-list-title3">게시물 제목 3</div>
         <div className="designer-list-title4">게시물 제목 4</div>
@@ -45,14 +56,19 @@ export default function DesignerList() {
         <div className="designer-list-title9">게시물 제목 9</div>
         <div className="designer-list-title10">게시물 제목 10</div>
       </div>
-      <div className="pagination">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">&gt;</a>
-        <a href="#">&gt;&gt;</a>
+      <div className="pagination-wrapper">
+        <div className="pagination">
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">&gt;</a>
+          <a href="#">&gt;&gt;</a>
+        </div>
+        <div className="write-button" onClick={handleGoToWrite}>
+          글쓰기
+        </div>
       </div>
     </div>
   );

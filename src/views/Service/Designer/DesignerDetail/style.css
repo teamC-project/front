@@ -1,0 +1,149 @@
+.designer-detail {
+    padding: 20px;
+}
+
+.designer-detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    background-color: rgba(218, 218, 218, 1);
+}
+  
+  .designer-detail-container {
+    margin: 20px auto;
+    max-width: 100%; /* designer-detail-main-view의 너비에 맞춤 */
+    padding: 0;
+}
+  
+  .designer-detail-information {
+    display: flex;
+    justify-content: space-between;
+    padding: 0; /* 여백 제거 */
+    background-color: #f2f2f2;
+}
+  
+  .designer-detail-information > div {
+    padding: 10px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+  
+  .designer-detail-information1 {
+    flex: 0.5; /* 크기 조정 가능 */
+  }
+  
+  .designer-detail-information2 {
+    flex: 6; /* 크기 조정 가능 */
+  }
+  
+  .designer-detail-information3 {
+    flex: 1; /* 크기 조정 가능 */
+  }
+  
+  .designer-detail-information4 {
+    flex: 0.5; /* 크기 조정 가능 */
+  }
+  
+  .designer-detail-information5 {
+    flex: 0.5; /* 크기 조정 가능 */
+    cursor: pointer;
+  }
+  
+  .designer-detail-view {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    min-height: 300px;
+    background-color: rgba(218, 218, 218, 1);
+  }
+  
+  .designer-detail-comment {
+    margin-top: 20px;
+    background-color: rgba(218, 218, 218, 1);
+    position: relative;
+  }
+  
+  .designer-detail-comment-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .designer-detail-comment-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .designer-detail-comment-item:last-child {
+    border-bottom: none;
+  }
+  
+  .designer-detail-comment-meta {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  .designer-detail-comment-author {
+    font-weight: bold;
+    margin-right: 30px;
+  }
+  
+  .designer-detail-comment-content {
+    font-weight: bold;
+    padding-left: 30px;
+  }
+  
+  .designer-detail-comment-date {
+    margin-left: 700px;
+    flex: 1;
+    padding-left: 30px;
+    font-weight: bold;
+  }
+  
+  .designer-detail-comment-date-text {
+    margin-left: 700px;
+    flex: 1;
+  }
+  
+  
+  .designer-detail-comment-details {
+    display: flex;
+  }
+  
+  .designer-detail-comment-author-name {
+    margin-right: 30px;
+  }
+  
+  .designer-detail-comment-content-text {
+    margin-left: 30px;
+  }
+  
+  .designer-detail-comment-delete {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  
+  .designer-detail-comment-put {
+    margin-right: 10px;
+  }
+  
+  .designer-detail-comment-write {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .designer-detail-go-to-designerList {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+  }

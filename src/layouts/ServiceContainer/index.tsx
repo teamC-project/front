@@ -161,7 +161,7 @@ export default function ServiceContainer() {
             <div className='center-bar'>
                 <Outlet />
             </div>
-                <div className='right-bar'>구현미정
+                <div className='right-bar'>
                     <div className='customer-chat'>채팅
                         {/* <Outlet /> */}
                     </div>
