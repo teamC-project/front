@@ -14,12 +14,17 @@ export default function Main() {
         <div className='main-page-top-right-bar-sign-up'>회원가입</div>
       </div>
     </div>
-    
-    <div className='main-page-image-box'>
-      <div className='main-page-title-image'></div>
-      <div className='main-page-image'></div>
-    </div>
 
+    <div className='auth-under-bar'>
+      <div className='auth-left-null'></div>
+      <div  className='auth-center-value'>
+        <div className='main-page-image-box'>
+          <div className='main-page-title-image'></div>
+          <div className='main-page-image'></div>
+        </div>
+      </div>
+      <div className='auth-right-null'></div>
+    </div>
 
   </div>
 
