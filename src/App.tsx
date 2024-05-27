@@ -3,26 +3,30 @@ import "./App.css";
 
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSWORD_FOUND_ABSOLUTE_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, ID_FOUND_ABSOLUTE_PATH, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSWORD_FOUND_ABSOLUTE_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 import Authentication from "./views/Authentication";
+
 import Login from "./views/Login";
 import Main from "./views/Main";
 import IdFound from "./views/IdFound";
+import PasswordFound from "./views/PasswordFound";
+import MyPage from "./views/MyPage";
+
 import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
+
 import QnaList from "./views/Service/qna/qnaList";
 import QnaWrite from "./views/Service/qna/qnaWrite";
 import QnaDetail from "./views/Service/qna/qnaDetail";
+
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
 import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
 
-import PasswordFound from "./views/PasswordFound";
 
-import MyPage from "./views/MyPage";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
@@ -59,7 +63,6 @@ function App() {
 
       <Route path={AUTH_PATH} >
         <Route index element={<Authentication />} />
-        <Route path={SIGN_IN_PATH} element={<Login />} />
         <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
         <Route path={PASSWORD_FOUND_ABSOLUTE_PATH} element={<PasswordFound />} />
       </Route>
