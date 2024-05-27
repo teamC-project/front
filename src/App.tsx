@@ -15,6 +15,9 @@ import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
 
+import QnaList from "./views/Service/qna/QnaList";
+import QnaWrite from "./views/Service/qna/QnaWrite";
+import QnaDetail from "./views/Service/qna/QnaDetail";
 
 
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
@@ -29,9 +32,6 @@ import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
 import PasswordFoundPage from "./views/PasswordFound";
 
 
