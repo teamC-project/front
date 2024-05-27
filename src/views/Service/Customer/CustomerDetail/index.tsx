@@ -8,6 +8,11 @@ export default function CustomerDetail() {
   const handleGoToList = () => {
     navigate('/service/customer_board');
   };
+
+  const handleEdit = () => {
+    navigate('/service/customer_board/update/1');
+  };
+
   return (
     <div className="customer-detail">
       <div className="customer-detail-title">제목</div>
@@ -17,7 +22,7 @@ export default function CustomerDetail() {
           <div className="customer-detail-information2">작성일</div>
           <div className="customer-detail-information3">조회</div>
           <div className="customer-detail-information4">삭제</div>
-          <div className="customer-detail-information5">수정</div>
+          <div className="customer-detail-information5" onClick={handleEdit}>수정</div>
         </div>
       </div>
       <div className="customer-detail-view">

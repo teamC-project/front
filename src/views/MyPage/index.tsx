@@ -4,29 +4,22 @@ import "./style.css";
 export default function MyPage() {
   return (
     <div id='mypage-wrapper'>
-      <div className='mypage-image'></div>
-      <div id='full'>
-        <div className='top'>
-          <div className='top-group'>
-            <div className='top-logo'></div>
-            <div className='top-bar-title'>내 정보</div>
-            <div className='top-bar-service'>
-              <div className='logout-button'>로그아웃</div>
-            </div>
+      <div className='john'></div>
+      <div className='mypage'>
+          <div className='information'>
+            <div className='information-image'></div>
+            <div className='edit-personal-information'>개인정보수정</div>
+          </div>
+          <div className='password-change-container'>
+            <div className='password-change-image'></div>
+            <div className='password-change'>비밀번호 재설정</div>
+          </div>
+          <div className='user-delete-container'>
+            <div className='user-delete-image'></div>
+            <div className='user-delete'>회원탈퇴</div>
           </div>
         </div>
-        <div className='under'>
-          <div className='left-bar'>
-            <div className='left-bar-container'>
-              <button className='left-bar-title' >공지사항</button>
-              <button className='left-bar-title'>트렌드 게시판</button>
-              <button className='left-bar-title'>고객 게시판</button>
-              <button className='left-bar-title'>디자이너 게시판</button>
-              <button className='left-bar-title'>Q&A  게시판</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className='john1'></div>
     </div>
   );
 }
