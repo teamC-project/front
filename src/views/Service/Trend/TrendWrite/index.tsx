@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import ToastEditor from 'src/components/ToastEditor'
+import React from 'react'
+
 import './style.css'
 import '../../../../App.css'
+import ToolBar from '../../../../components/ToolBar'
 
 
 // 											component										 //
@@ -15,8 +16,7 @@ export default function TrendWrite() {
 				<div className='search_button'>썸네일 이미지 선택</div>
 			</div>
 			<div className='trend_board_textarea_container'>
-			<ToastEditor body={''} setBody={function (body: string): void { } } imageHandler={function (blob: File, callback: FunctionConstructor): void {
-				} } />
+			<ToolBar />
 			</div>
 			<div className='trend_board_write_footer'>
 				<div className='trend_board_button_container'>

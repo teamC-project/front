@@ -1,22 +1,23 @@
-#idfound-wrapper {
+/* 회원가입 선택 공통 */
+#auth-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
 }
 
-.top-bar {
+.auth-top-bar {
   display: flex;
   justify-content: space-between;
   margin: 30px;
 }
 
-.logo-image {
+.auth-logo-image {
   display: flex;
   justify-content: start;
 
   width: 200px;
-  height: 72.32px;
+  height: 80px;
 
   background-image: url('../../assets/image/logo-image\ 1.png');
   background-repeat: no-repeat;
@@ -25,7 +26,7 @@
   cursor: pointer;
 }
 
-.top-right-bar {
+.auth-top-right-bar {
   display: flex;
   justify-content: end;
   text-align: center;
@@ -34,167 +35,235 @@
   font-size: 16px;
 }
 
-.top-right-bar-login {
+.auth-top-right-bar-login {
   padding: 10px;
   cursor: pointer;
 }
 
-.top-right-bar-line {
+.auth-top-right-bar-line {
   padding: 10px;
 }
 
-.top-right-bar-sign-up {
+.auth-top-right-bar-sign-up {
   padding: 10px;
   cursor: pointer;
 }
 
-.top-bar-container {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+/* 회원가입 선택 */
+.auth-welcome-image-box {
   display: flex;
-  justify-content: space-between;
-
-  padding: 0 24px;
-  font-family: Pretendard;
-  background-color: rgb(249, 253, 5);
-}
-
-.title {
-  cursor: pointer;
-}
-
-.top-bar-right {
-  gap: 30px;
-
-  justify-content: right;
-  display: flex;
-}
-
-.login-button {
-  cursor: pointer;
-}
-
-.signup-button {
-  cursor: pointer;
-}
-
-.sub-wrapper {
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  display: flex;
-  
-  width: 100%;
-  background-color: blueviolet;
 }
 
-.id-found-box {
-
-  border: 1px solid rgba(238, 238, 238, 1);
-  
-  padding: 200px 200px;
-}
-
-.id-found-title {
+.auth-welcome-image {
   display: block;
-  position: relative;
-  top: -200px;
-  left: -200px;
+  text-align: center;
+  align-items: center;
+  height: 150px;
+  width: 550px;
+  background-image: url('../../assets/image/welcome-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
-.id-found {
+.auth-choose-type-text {
   display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.auth-type-image {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.auth-type-image-customer {
+  display: block;
+  text-align: center;
+  align-items: center;
+  height: 270px;
+  width: 270px;
+
+  border: 1px solid white;
+  border-radius: 10%;
+
+  background-image: url('../../assets/image/customer-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.auth-type-image-customer:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.auth-type-image-designer {
+  display: block;
+  text-align: center;
+  align-items: center;
+  height: 270px;
+  width: 270px;
+
+  border: 1px solid white;
+  border-radius: 10%;
+
+  background-image: url('../../assets/image/designer-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.auth-type-image-designer:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.auth-type-text {
+  display: flex;
+  gap: 270px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.auth-type-text-customer {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.auth-type-text-designer {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.auth-sign-up-sns {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
   gap: 20px;
 }
 
-.email {
-  border: 1px solid rgba(192, 192, 192, 1);
-  justify-content: center;
-  align-items: center;
-  padding: 10px 24px;
+.auth-sign-up-naver {
+  margin: auto;
+  height: 50px;
+  width: 400px;
+
+  background-image: url(../../assets/image/naver-sign-up-button.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
-/* .input-box {
+.auth-sign-up-naver:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.auth-sign-up-kakao {
+  margin: auto;
+  height: 50px;
+  width: 400px;
+
+  background-image: url(../../assets/image/kakao-sign-up-button.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.auth-sign-up-kakao:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* 회원가입 공통 */
+.auth-sign-up-title {
+  display: flex;
+  justify-content: start;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  min-width: 800px;
+}
+
+.auth-sign-up-text {
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 400;
   width: 200px;
-  height: 30px;
-  background-color: rgba(192, 192, 192, 1);
-} */
-
-.error-text {
-  color: red;
+  height: 50px;
+  line-height: 50px;
 }
 
-.send-authnumber{
-  border: 1px solid rgba(192, 192, 192, 1);
-  padding: 10px 24px;
-  cursor: pointer;
-}
-
-.email-check {
+.auth-sign-up-box {
   display: flex;
   flex-direction: column;
-  
-  position: relative;
-  left: 140px;
+  gap: 10px;
 }
 
-.auth {
+.auth-under-bar {
   display: flex;
-  gap: 20px;
 }
 
-.authnumber {
-  border: 1px solid rgba(192, 192, 192, 1);
-  justify-content: center;
-  align-items: center;
-  padding: 10px 33px;
-}
-
-.check {
-  border: 1px solid rgba(192, 192, 192, 1);
-  justify-content: center;
-  align-items: center;
-  padding: 10px 60px;
-  cursor: pointer;
-}
-
-.auth-check {
+.auth-left-null {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: start;
+  width: 600px;
+  height: 600px;
+
 }
 
-.id-box {
-  position: relative;
-  top: 80px;
-  border: 1px solid rgba(192, 192, 192, 1);
-  width: 430px;
-  padding: 10px 20px;
-}
-
-.id-check {
-    display: flex;
-    justify-content: right;
-    cursor: pointer;
-}
-
-.next-box {
-  box-sizing: border-box;
-  display: flex;  
+.auth-center-value {
+  display: flex;
   justify-content: center;
-  border: 1px solid rgba(192, 192, 192, 1);
-  width: 100px;
-  
-  position: relative;
-  top: 170px;
-  left: 150px;
-  padding: 10px 20px;
-  cursor: pointer;
+  width: 100%;
+  flex: 1;
 }
 
-.next {
-  /* font */
+.auth-right-null {
+  display: flex;
+  justify-content: end;
+  width: 600px;
+  height: 600px;
+
+}
+
+
+
+/* 회원가입 세부 */
+.auth-sign-up-box-text {
+  display: flex;
+}
+
+.auth-submit-box {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.auth-sign-up-radio-box {
+  font-size: 24px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.auth-sign-up-next-box {
+  display: flex;
+  gap: 50px;
+  margin-right: 30px;
+  width: 300px;
+}
+
+.auth-sign-in-button-size {
+  width: 120px;
 }

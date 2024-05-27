@@ -5,19 +5,20 @@ export const MAIN_PATH = "/main";
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
 
-export const ID_FOUND_PATH = "id_found";
-export const PASSWORD_FOUND_PATH = "password_found";
-export const SIGN_IN_PATH = "sign_in";
-export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
-export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
-export const SIGN_UP_REQUEST_PATH = "sign_up";
-export const LOGOUT_REQUEST_PATH = "logout";
+
+
+
 export const MY_PAGE_PATH = "my_page";
 export const UPDATE_REQUEST_PATH = "update";
 export const USER_DELETE_PATH = "user_delete";
-export const CHOOSE_TYPE = "choose_type";
 
-export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
+
+export const ID_FOUND_PATH = "id_found";
+export const PASSWORD_FOUND_PATH = "password_found";
+export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
+export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
+
+export const AUNNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
 export const AUNNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
 export const AUNNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
@@ -51,14 +52,7 @@ export const DESIGNER_BOARD_COMMENT_WRITE_PATH = "comment/write/:designerBoardNu
 export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoardNumber";
 
 // description : Auth 절대 URL PATH
-export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
-export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
-export const SIGN_IN_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`
-export const EMAIL_AUTH_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_REQUEST_PATH}`;
-export const EMAIL_AUTH_CHECK_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_CHECK_REQUEST_PATH}`;
-export const SIGN_UP_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_REQUEST_PATH}`;
-export const LOGOUT_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${LOGOUT_REQUEST_PATH}`;
 export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
 
@@ -114,16 +108,16 @@ export const SERVER_DOMAIN_URL = "http://localhost:4200";
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 
 // description : AUTH API URL PATH 
-export const MAIN_PAGE_PATH = `${SERVER_API_URL}/main`;
-
-
-// description : AUTH API URL PATH 
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_in`;
 export const ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth`;
 export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth_check`;
 export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
+export const CHOOSE_TYPE_SIGN_IN_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/choose_type`;
+
+
+
 
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
