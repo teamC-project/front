@@ -430,7 +430,7 @@ const onSignInButtonClickHandler = () => {
 };
 
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-
+ 
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
 
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
@@ -460,7 +460,7 @@ const onSignInButtonClickHandler = () => {
 
                 <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox label="비밀번호" type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+            <div className='auth-sign-up-next-box'><InputBox label="비밀번호" type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
           </div>
           <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
 
