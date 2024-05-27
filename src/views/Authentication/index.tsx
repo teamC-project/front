@@ -148,10 +148,11 @@ const onClickMainHandler = () => navigator(MAIN_PATH);
   )
 }
 
+//                    component                   //
 export function CustomerSignUp() {
-    //                  function                 //
+//                     function                    //
     const navigator = useNavigate();
-    //                event handler               //
+//                  event handler                  //
     const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     
     const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
