@@ -1,11 +1,31 @@
 import React, { useState } from 'react'
 import './style.css'
 import '../../../../App.css'
+import { QnaBoardListItem } from 'src/types';
+import { useNavigate } from 'react-router';
+//												component												//
 export default function QnaList() {
+
+	// 										state										// 
 	const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = () => {
-    console.log('검색어:', searchTerm);
+	const [qnaBoardList, setQnaBoardList] = useState<QnaBoardListItem[]>([]);
+	const [qnaBoardViewList, setViewList] = useState<QnaBoardListItem[]>([]);
+	const [qnaBoardTotalLength , setQnaBoardTotalLength] = useState<number>(0);
+	const [qnaBoardTotalPage, setQnaBoardTotalPage]= useState<number>(1);
+	const [qnaBoardCurrentPage ,setQnaBoardCurrentPage] = useState<number>(1);
+	const [qnaBoardPageList, setQnaBoardPageList] = useState<number[]>([1]);
+	const [qnaBoardCurrentSection , setQnaBoardCurrentSection] = useState<number>(1);
+	const [qnaBoardIsToggleOn, setQnaBoardToggleOn] = useState<boolean>(false);
+	
+	const [qnaBoardSearchWord, setQnaBoardSearchWord] = useState<string>("");
+
+//										function										// 
+const navigator = useNavigate();
+
+
+
+  const handleSearch = () => { 
   };
 	return (
 	<div id='qna-board-list-wrapper'>
