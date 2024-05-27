@@ -17,9 +17,9 @@ import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
 
-import QnaList from "./views/Service/Qna/QnaList";
-import QnaWrite from "./views/Service/Qna/QnaWrite";
-import QnaDetail from "./views/Service/Qna/QnaDetail";
+import QnaList from "./views/Service/qna/QnaList";
+import QnaWrite from "./views/Service/qna/QnaWrite";
+import QnaDetail from "./views/Service/qna/QnaDetail";
 
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
