@@ -26,7 +26,7 @@ export default function QnaDetail() {
         내용 상세
       </div>
 			<div id = 'qna-board-comment-wrapper'>
-			        <div className="qna-board-comment-write-box">
+				<div className="qna-board-comment-write-box">
           <div className="qna-board-comment-textarea-box">
             <textarea
               className="qna-board-comment-textarea"
