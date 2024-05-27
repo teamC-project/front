@@ -1,9 +1,116 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+import { useNavigate, useParams } from 'react-router';
+import { useCookies } from 'react-cookie';
 
+export function Main() {
+
+  //                  function                 //
+  const navigator = useNavigate();
+  //                event handler               //
+  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+    return (
+      <div id='main-page-wrapper'>
+  
+      <div className='main-page-top-bar'>
+        <div className='main-page-logo-image'></div>
+        
+        <div className='main-page-top-right-bar'>
+          <div className='main-page-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
+          <div className='main-page-top-right-bar-line'>|</div>
+          <div className='main-page-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
+        </div>
+      </div>
+  
+      <div className='auth-under-bar'>
+        <div className='auth-left-null'></div>
+        <div  className='auth-center-value'>
+          <div className='main-page-image-box'>
+            <div className='main-page-title-image'></div>
+            <div className='main-page-image'></div>
+          </div>
+        </div>
+        <div className='auth-right-null'></div>
+      </div>
+  
+    </div>
+  
+    )
+  }
+
+
+//           component           //
+export function Sns () {
+  //           state          //
+    const {accessToken, expires} = useParams();
+    const [cookies, setCookie] = useCookies();
+  //           function          //
+    const navigator = useNavigate();
+  //           effect          //
+    useEffect (() => {
+      if (!accessToken || !expires) return;
+      const expiration = new Date(Date.now() + (Number(expires) * 1000));
+      setCookie('accessToken', accessToken, { path: '/', expires: expiration});
+      
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    }, []);
+  //          render           //
+    return <></>;
+  }
+  
+
+type AuthPage = 'sign_in' | 'sign_up';
+
+//           interface           //
+interface SnsContainerProps{
+  title: string;
+}
+
+// component //
+function SnsContainer({title}: SnsContainerProps) {
+  
+  // event handler // 
+  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+    window.location.href = 'http://localhost:4000/api/v1/auth/oauth2/' + type;
+  };
+//           render           //
+  return (
+    <div className="authentication-sns-container">
+      <div className="sns-container-title label">{title}</div>
+      <div className="sns-button-container">
+        <div className="sns-button kakao-button" onClick={() =>onSnsButtonClickHandler('kakao')}></div>
+        <div className="sns-button naver-button" onClick={() =>onSnsButtonClickHandler('naver')}></div>
+      </div>
+    </div>
+  );
+};
+
+
+//                 component                 //
 export function ChooseSingUp() {
+
+//                    state                  //
+
+//                  function                 //
+const navigator = useNavigate();
+//                event handler               //
+const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+  window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
+};
+
+const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
+
+const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH);
+
+const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  
+
+//                   render                  //
   return (
     <div id='auth-wrapper'>
 
@@ -11,9 +118,7 @@ export function ChooseSingUp() {
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
         </div>
       </div>
 
@@ -25,18 +130,18 @@ export function ChooseSingUp() {
       <div className='auth-choose-type-text'>회원가입 방식을 선택해주세요.</div>
 
       <div className='auth-type-image'>
-        <div className='auth-type-image-customer'></div>
-        <div className='auth-type-image-designer'></div>
+        <div className='auth-type-image-customer' onClick={onClickCustomerSignUpHandler}></div>
+        <div className='auth-type-image-designer' onClick={onClickDesignerSignUpHandler}></div>
       </div>
 
       <div className='auth-type-text'>
-        <div className='auth-type-text-customer'>고객</div>
-        <div className='auth-type-text-designer'>디자이너</div>
+        <div className='auth-type-text-customer' onClick={onClickCustomerSignUpHandler}>고객</div>
+        <div className='auth-type-text-designer' onClick={onClickDesignerSignUpHandler}>디자이너</div>
       </div>
 
       <div className='auth-sign-up-sns'>
-          <div className='auth-sign-up-naver'></div>
-          <div className='auth-sign-up-kakao'></div>
+          <div className='auth-sign-up-naver' onClick={() =>onSnsButtonClickHandler('naver')}></div>
+          <div className='auth-sign-up-kakao' onClick={() =>onSnsButtonClickHandler('kakao')}></div>
       </div>
 
     </div>
@@ -44,6 +149,12 @@ export function ChooseSingUp() {
 }
 
 export function CustomerSignUp() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='auth-wrapper'>
 
@@ -51,9 +162,9 @@ export function CustomerSignUp() {
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
@@ -136,6 +247,12 @@ export function CustomerSignUp() {
 }
 
 export function DesignerSignUp() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='auth-wrapper'>
 
@@ -143,9 +260,9 @@ export function DesignerSignUp() {
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
@@ -241,20 +358,28 @@ export function DesignerSignUp() {
   )
 }
 
-export function Login() {
+export function SignIn() {
+
+//                  function                 //
+  const navigator = useNavigate();
+//                event handler               //
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+  const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
+
+  const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
+
   return (
-    <div id='login-wrapper'>
+    <div id='auth-wrapper'>
       <div className='auth-top-bar'>
         <div className='auth-logo-image'></div>
-        
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
       <div className='sign-in-main-box'>
         <div className='image-box'></div>
-
         <div className='login-box'>
           <div className='login-container'>
             <div className='login-page h1'>로그인 페이지</div>
@@ -288,8 +413,8 @@ export function Login() {
               <div className="short-divider"></div>
 
               <div className='user-found'>
-                <div className='id-found'>아이디 찾기</div>
-                <div className='password-found'>비밀번호 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
               </div>
             </div>
           </div>
@@ -305,10 +430,6 @@ export function Login() {
 export default function Authentication() {
   return (
     <div>
-      <ChooseSingUp />
-      <CustomerSignUp />
-      <DesignerSignUp />
-      <Login />
     </div>
   )
 }
