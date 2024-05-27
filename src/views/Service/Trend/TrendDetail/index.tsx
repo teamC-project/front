@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css'
 import '../../../../App.css'
+import TrendBoardComment from '../TrendBoardComment'
 
 export default function TrendDetail() {
 	return (
@@ -25,7 +26,7 @@ export default function TrendDetail() {
 			</div>
 
 			<div className='trend_board_detail_comment_container'>
-				<div className='trend_board_detail_comment'></div>
+				<TrendBoardComment />
 			</div>
 		</div>
 	)
