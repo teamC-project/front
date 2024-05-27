@@ -475,7 +475,6 @@ const onSignInButtonClickHandler = () => {
 
               <div className='auth-submit-box'>
             <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
-            {/* <SnsContainer title="SNS 로그인" /> */}
           </div>
 
               <div className='socal-login'>
