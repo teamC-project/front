@@ -2,13 +2,11 @@ import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
-import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
+import { useCookies } from 'react-cookie';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { SignInRequestDto } from 'src/apis/auth/dto/request';
-import { SignInRequest } from 'src/apis/auth';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 
 export function Main() {
 
@@ -113,13 +111,13 @@ const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOL
 
 const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   
-
+const onClickMainHandler = () => navigator(MAIN_PATH);
 //                   render                  //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -152,18 +150,21 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   )
 }
 
+//                    component                   //
 export function CustomerSignUp() {
-    //                  function                 //
+//                     function                    //
     const navigator = useNavigate();
-    //                event handler               //
+//                  event handler                  //
     const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     
     const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+    const onClickMainHandler = () => navigator(MAIN_PATH);
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -238,7 +239,6 @@ export function CustomerSignUp() {
 
           <div className='auth-submit-box'>
             <div className='auth-submit-box primary-button'>가입하기</div>
-            <div className='auth-submit-box primary-button'>가입취소</div>
           </div>
         </div>
         </div>
@@ -257,11 +257,14 @@ export function DesignerSignUp() {
     const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     
     const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+    const onClickMainHandler = () => navigator(MAIN_PATH);
+    //                    render                  //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -348,9 +351,8 @@ export function DesignerSignUp() {
         } } /></div>
         </div>
 
-        <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button'>가입하기</div>
-            <div className='auth-submit-box primary-button'>가입취소</div>
+          <div className='auth-submit-box'>
+              <div className='auth-submit-box primary-button'>가입하기</div>
           </div>
         </div>
         </div>
@@ -435,11 +437,12 @@ const onSignInButtonClickHandler = () => {
 
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
-//                    render                    //
+  const onClickMainHandler = () => navigator(MAIN_PATH);
+
   return (
     <div id='auth-wrapper'>
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>

@@ -247,8 +247,7 @@
 .auth-submit-box {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .auth-sign-up-radio-box {
