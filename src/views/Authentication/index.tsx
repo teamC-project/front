@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 
@@ -42,7 +42,6 @@ export function Main() {
   
     )
   }
-
 
 
 //           component           //
@@ -89,7 +88,6 @@ function SnsContainer({title}: SnsContainerProps) {
       </div>
     </div>
   );
-  // onClick={() =>onSnsButtonClickHandler('naver')} 익명의 1회성 함수를 만들어서 함수를 호출하게 만듬(매개변수 적기)
 };
 
 
@@ -101,10 +99,16 @@ export function ChooseSingUp() {
 //                  function                 //
 const navigator = useNavigate();
 //                event handler               //
+const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+  window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
+};
+
 const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
 
 const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH);
 
+const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  
 
 //                   render                  //
   return (
@@ -114,9 +118,7 @@ const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOL
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
         </div>
       </div>
 
@@ -138,8 +140,8 @@ const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOL
       </div>
 
       <div className='auth-sign-up-sns'>
-          <div className='auth-sign-up-naver'></div>
-          <div className='auth-sign-up-kakao'></div>
+          <div className='auth-sign-up-naver' onClick={() =>onSnsButtonClickHandler('naver')}></div>
+          <div className='auth-sign-up-kakao' onClick={() =>onSnsButtonClickHandler('kakao')}></div>
       </div>
 
     </div>
@@ -345,12 +347,22 @@ export function DesignerSignUp() {
 }
 
 export function SignIn() {
+
+//                  function                 //
+  const navigator = useNavigate();
+//                event handler               //
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+  const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
+
+  const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
+
   return (
     <div id='auth-wrapper'>
       <div className='auth-top-bar'>
         <div className='auth-logo-image'></div>
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
@@ -389,8 +401,8 @@ export function SignIn() {
               <div className="short-divider"></div>
 
               <div className='user-found'>
-                <div className='auth-sign-up-text text-cusor-pointer'>아이디 찾기</div>
-                <div className='auth-sign-up-text text-cusor-pointer'>비밀번호 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
               </div>
             </div>
           </div>

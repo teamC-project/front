@@ -2,13 +2,17 @@
 export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
 
-export const AUTH_PATH = "/authentication";
+export const AUTH_PATH = "/auth";
 export const SERVICE_PATH = "/service";
 
-export const SIGN_IN_PATH = `authentication/sign_in`;
-export const SIGN_UP_PATH = "authentication/sign_up";
-export const CUSTOMER_PATH = "authentication/sign_up /customer";
-export const DESIGNER_PATH = "authentication/sign_up/designer";
+export const SIGN_IN_PATH = `sign_in`;
+export const SIGN_UP_PATH = "sign_up";
+export const CUSTOMER_PATH = "customer";
+export const DESIGNER_PATH = "designer";
+
+export const ID_FOUND_PATH = "id_found";
+export const PASSWORD_FOUND_PATH = "password_found";
+
 
 
 
@@ -16,9 +20,6 @@ export const MY_PAGE_PATH = "my_page";
 export const UPDATE_REQUEST_PATH = "update";
 export const USER_DELETE_PATH = "user_delete";
 
-
-export const ID_FOUND_PATH = "id_found";
-export const PASSWORD_FOUND_PATH = "password_found";
 export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
 export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 
@@ -59,8 +60,10 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoard
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const AUTH_SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const AUTH_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
-export const AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${CUSTOMER_PATH}`;
-export const AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${DESIGNER_PATH}`;
+
+export const AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${CUSTOMER_PATH}`;
+export const AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${DESIGNER_PATH}`;
+
 export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
 
@@ -124,8 +127,8 @@ export const ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth`;
 export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth_check`;
 export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
-export const CUSTOMER_SIGN_IN_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/customer`;
-export const DESIGNER_SIGN_IN_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`;
+export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/customer`;
+export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`;
 
 
 
