@@ -62,9 +62,9 @@ function App() {
         <Route index element={<Authentication />} />
       </Route>
 
-      <Route path={MY_PAGE_PATH} element={<MyPage />} />
+      
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-
+        <Route path={MY_PAGE_PATH} element={<MyPage />} />
 
       {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
       {/* <Route index element={<AnnouncementBoard />} /> */}
