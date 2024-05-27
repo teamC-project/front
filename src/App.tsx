@@ -17,9 +17,9 @@ import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
 
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
+import QnaList from "./views/Service/Qna/QnaList";
+import QnaWrite from "./views/Service/Qna/QnaWrite";
+import QnaDetail from "./views/Service/Qna/QnaDetail";
 
 import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
@@ -31,6 +31,8 @@ import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
+import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
+import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
 //  component: root 경로 컴포넌트 //
@@ -71,12 +73,12 @@ function App() {
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
 
-      {/* <Route path={AUNNOUNCEMENT_BOARD_PATH} > */}
-      {/* <Route index element={<AnnouncementBoard />} /> */}
-      {/* <Route path={AUNNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementBoardWrite />} /> */}
+      <Route path={AUNNOUNCEMENT_BOARD_PATH} >
+      <Route index element={<AnnouncementList />} />
+      <Route path={AUNNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
       {/* <Route path={AUNNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} /> */}
       {/* <Route path={AUNNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} /> */}
-      {/* </Route> */}
+      </Route>
 
       <Route path={TREND_BOARD_PATH} >
         <Route index element={<TrendList />} />
