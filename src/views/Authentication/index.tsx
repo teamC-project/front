@@ -130,8 +130,8 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
       <div className='auth-choose-type-text'>회원가입 방식을 선택해주세요.</div>
 
       <div className='auth-type-image'>
-        <div className='auth-type-image-customer'></div>
-        <div className='auth-type-image-designer'></div>
+        <div className='auth-type-image-customer' onClick={onClickCustomerSignUpHandler}></div>
+        <div className='auth-type-image-designer' onClick={onClickDesignerSignUpHandler}></div>
       </div>
 
       <div className='auth-type-text'>
@@ -149,6 +149,12 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 }
 
 export function CustomerSignUp() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='auth-wrapper'>
 
@@ -156,9 +162,9 @@ export function CustomerSignUp() {
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
@@ -241,6 +247,12 @@ export function CustomerSignUp() {
 }
 
 export function DesignerSignUp() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='auth-wrapper'>
 
@@ -248,9 +260,9 @@ export function DesignerSignUp() {
         <div className='auth-logo-image'></div>
         
         <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login'>로그인</div>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up'>회원가입</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 

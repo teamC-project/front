@@ -23,7 +23,7 @@ export const USER_DELETE_PATH = "user_delete";
 export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
 export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 
-export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
+export const AUNNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
 export const AUNNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
 export const AUNNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
