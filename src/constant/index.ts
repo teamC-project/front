@@ -5,8 +5,7 @@ export const MAIN_PATH = "/main";
 export const AUTH_PATH = "/authentication";
 export const SERVICE_PATH = "/service";
 
-export const ID_FOUND_PATH = "id_found";
-export const PASSWORD_FOUND_PATH = "password_found";
+
 export const SIGN_IN_PATH = "sign_in";
 export const EMAIL_AUTH_REQUEST_PATH = "email_auth";
 export const EMAIL_AUTH_CHECK_REQUEST_PATH = "email_auth_check";
@@ -16,6 +15,11 @@ export const MY_PAGE_PATH = "my_page";
 export const UPDATE_REQUEST_PATH = "update";
 export const USER_DELETE_PATH = "user_delete";
 export const CHOOSE_TYPE = "choose_type";
+
+export const ID_FOUND_PATH = "id_found";
+export const PASSWORD_FOUND_PATH = "password_found";
+export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
+export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 
 export const AUNNOUNCEMENT_BOARD_PATH = "aunnouncement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
@@ -51,8 +55,6 @@ export const DESIGNER_BOARD_COMMENT_WRITE_PATH = "comment/write/:designerBoardNu
 export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoardNumber";
 
 // description : Auth 절대 URL PATH
-export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
-export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const SIGN_IN_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`
 export const EMAIL_AUTH_REQUEST_ABSOLUTE_PATH = `${AUTH_PATH}/${EMAIL_AUTH_REQUEST_PATH}`;

@@ -53,14 +53,15 @@ function Index() {
 function App() {
   return (
     <Routes >
+
       <Route index element={<Index />} />
       <Route path={MAIN_PATH} element={<Main />} />
-      <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
-      <Route path={PASSWORD_FOUND_ABSOLUTE_PATH} element={<PasswordFound />} />
-      <Route path={SIGN_IN_PATH} element={<Login />} />
 
       <Route path={AUTH_PATH} >
         <Route index element={<Authentication />} />
+        <Route path={SIGN_IN_PATH} element={<Login />} />
+        <Route path={ID_FOUND_ABSOLUTE_PATH} element={<IdFound />} />
+        <Route path={PASSWORD_FOUND_ABSOLUTE_PATH} element={<PasswordFound />} />
       </Route>
 
       <Route path={MY_PAGE_PATH} element={<MyPage />} />
