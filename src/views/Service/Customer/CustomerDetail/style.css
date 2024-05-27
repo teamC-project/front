@@ -51,6 +51,7 @@
 
 .customer-detail-information5 {
   flex: 0.5; /* 크기 조정 가능 */
+  cursor: pointer;
 }
 
 .customer-detail-view {
