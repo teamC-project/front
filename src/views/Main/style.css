@@ -67,10 +67,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  min-width: 1700px;
+  width: 100vw;
   height: 750px;
 
   background-image: url('../../assets/image/main-page-image.png');
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+.auth-under-bar {
+  display: flex;
+}
+
+.auth-left-null {
+  display: flex;
+  justify-content: start;
+  width: 600px;
+  height: 600px;
+
+}
+
+
+.auth-center-value {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+.auth-right-null {
+  display: flex;
+  justify-content: end;
+  width: 600px;
+  height: 600px;
+
 }
