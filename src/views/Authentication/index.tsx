@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 
@@ -109,13 +109,13 @@ const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOL
 
 const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   
-
+const onClickMainHandler = () => navigator(MAIN_PATH);
 //                   render                  //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -155,11 +155,13 @@ export function CustomerSignUp() {
     const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     
     const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+    const onClickMainHandler = () => navigator(MAIN_PATH);
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -234,7 +236,6 @@ export function CustomerSignUp() {
 
           <div className='auth-submit-box'>
             <div className='auth-submit-box primary-button'>가입하기</div>
-            <div className='auth-submit-box primary-button'>가입취소</div>
           </div>
         </div>
         </div>
@@ -253,11 +254,14 @@ export function DesignerSignUp() {
     const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     
     const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+
+    const onClickMainHandler = () => navigator(MAIN_PATH);
+    //                    render                  //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
@@ -344,9 +348,8 @@ export function DesignerSignUp() {
         } } /></div>
         </div>
 
-        <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button'>가입하기</div>
-            <div className='auth-submit-box primary-button'>가입취소</div>
+          <div className='auth-submit-box'>
+              <div className='auth-submit-box primary-button'>가입하기</div>
           </div>
         </div>
         </div>
@@ -369,10 +372,12 @@ export function SignIn() {
 
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
+  const onClickMainHandler = () => navigator(MAIN_PATH);
+
   return (
     <div id='auth-wrapper'>
       <div className='auth-top-bar'>
-        <div className='auth-logo-image'></div>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>

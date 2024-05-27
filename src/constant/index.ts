@@ -12,6 +12,7 @@ export const DESIGNER_PATH = "designer";
 
 export const ID_FOUND_PATH = "id_found";
 export const PASSWORD_FOUND_PATH = "password_found";
+export const PASSOWORD_SETUP_PATH = "password_setup";
 
 
 
@@ -63,6 +64,9 @@ export const AUTH_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 
 export const AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${CUSTOMER_PATH}`;
 export const AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${DESIGNER_PATH}`;
+
+
+export const AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_SETUP_PATH}`;
 
 export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
