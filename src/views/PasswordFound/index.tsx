@@ -1,8 +1,16 @@
 import React from 'react'
 import "./style.css"; 
 import InputBox from 'src/components/Inputbox';
+import { useNavigate } from 'react-router';
+import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
 
 export function SettingPassword() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='auth-wrapper'>
 
@@ -10,9 +18,9 @@ export function SettingPassword() {
       <div className='auth-logo-image'></div>
       
       <div className='auth-top-right-bar'>
-        <div className='auth-top-right-bar-login'>로그인</div>
+        <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
         <div className='auth-top-right-bar-line'>|</div>
-        <div className='auth-top-right-bar-sign-up'>회원가입</div>
+        <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
       </div>
     </div>
 
@@ -51,18 +59,23 @@ export function SettingPassword() {
 }
 
 export function PasswordFoundPage() {
+    //                  function                 //
+    const navigator = useNavigate();
+    //                event handler               //
+    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+    
+    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     
-
   <div id='auth-wrapper'>
 
 <div className='auth-top-bar'>
   <div className='auth-logo-image'></div>
   
   <div className='auth-top-right-bar'>
-    <div className='auth-top-right-bar-login'>로그인</div>
+    <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
     <div className='auth-top-right-bar-line'>|</div>
-    <div className='auth-top-right-bar-sign-up'>회원가입</div>
+    <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
   </div>
 </div>
 

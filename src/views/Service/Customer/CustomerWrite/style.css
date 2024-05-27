@@ -34,7 +34,8 @@
   outline: none;
   background: none;
 
-  width: 100%;
+  width: 70%;
+  margin-right: 10px;
 
   font-family: Inter;
   font-size: 16px;
@@ -67,6 +68,23 @@
   width: 100%;
 
   line-height: 175%;
+}
+
+.customer-write-secret {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+
+.customer-write-secret label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.customer-write-secret input[type='checkbox'] {
+  margin-right: 5px;
 }
 
 .upload-file {
