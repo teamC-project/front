@@ -8,7 +8,7 @@ import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { SignInRequestDto } from 'src/apis/auth/dto/request';
-import { signInRequest, signUpRequest } from 'src/apis/auth';
+import { signInRequest } from 'src/apis/auth';
 
 export function Main() {
 
