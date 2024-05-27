@@ -7,6 +7,8 @@ import { useCookies } from 'react-cookie';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+import { SignInRequestDto } from 'src/apis/auth/dto/request';
+import { signInRequest, signUpRequest } from 'src/apis/auth';
 
 export function Main() {
 
@@ -410,7 +412,7 @@ export function SignIn (){
   };
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
+    setPassword(event.target.value);
     setMessage('');
   };
 
@@ -423,12 +425,14 @@ const onSignInButtonClickHandler = () => {
   if (!id || !password) {
     setMessage('아이디와 비밀번호를 모두 입력하세요.')
     return;
+  
   }
 
   const requestBody: SignInRequestDto = {
     userId: id,
     userPassword: password
   }
+  signInRequest(requestBody).then(signInResponse);
 };
 
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
@@ -438,6 +442,8 @@ const onSignInButtonClickHandler = () => {
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
   const onClickMainHandler = () => navigator(MAIN_PATH);
+
+  
 
   return (
     <div id='auth-wrapper'>
@@ -456,20 +462,20 @@ const onSignInButtonClickHandler = () => {
             <div className='sign-in-contents'>
             <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'><InputBox label={'아이디'} type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
+            <div className='auth-sign-up-next-box'><InputBox label='' type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
           </div>
 
                 
 
                 <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox label="비밀번호" type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+            <div className='auth-sign-up-next-box'><InputBox label="" type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
           </div>
           <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
 
               <div className='auth-submit-box'>
             <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
-            <SnsContainer title="SNS 로그인" />
+            {/* <SnsContainer title="SNS 로그인" /> */}
           </div>
 
               <div className='socal-login'>
