@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import './style.css';
 
+
 const ToolBar = () => {
 	const fileInputRef = useRef<HTMLInputElement>(null);
   const [selection, setSelection] = useState<Range | null>(null);
-
+	
   const saveSelection = () => {
     const sel = window.getSelection();
     if (sel && sel.rangeCount > 0) {
