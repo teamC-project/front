@@ -32,6 +32,7 @@ import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 import QnaList from "./views/Service/qna/qnaList";
 import QnaWrite from "./views/Service/qna/qnaWrite";
 import QnaDetail from "./views/Service/qna/qnaDetail";
+import { SignInRequest } from "./apis/auth";
 
 
 //  component: root 경로 컴포넌트 //
@@ -75,14 +76,8 @@ function App() {
 
       </Route>
 
-
-
-      <Route path={MY_PAGE_PATH} element={<MyPage />} />
-
-
-
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-
+        <Route path={MY_PAGE_PATH} element={<MyPage />} />
 
       <Route path={AUNNOUNCEMENT_BOARD_PATH} >
       <Route index element={<AnnouncementList />} />
