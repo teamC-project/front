@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import ResponseDto from 'src/apis/reponse.dto';
@@ -28,7 +28,7 @@ function Top({ path }: Props) {
     //                    event handler                    //
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
-        navigator(AUTH_ABSOLUTE_PATH);
+        navigator(MAIN_PATH);
     };
 
     //                    render                       //
