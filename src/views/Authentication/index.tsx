@@ -800,7 +800,7 @@ export function DesignerSignUp() {
 
   const onSignUpButtonClickHandler = () => {
     if(!isSignUpActive) return;
-    if(!id || !password || !passwordCheck || !email || !authNumber) {
+    if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
       alert('모든 내용을 입력해주세요.')
       return;
     };
@@ -880,12 +880,12 @@ export function DesignerSignUp() {
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>업체명</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={''} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>면허증사진</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={''} placeholder={''} onChangeHandler={onImageChangeHandler} /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} /></div>
           </div>
 
           <div className='auth-submit-box'>
