@@ -80,7 +80,7 @@ function SnsContainer({title}: SnsContainerProps) {
   
   // event handler // 
   const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-    window.location.href = 'http://localhost:4000/api/v1/auth/oauth2/' + type;
+    window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
   };
 //           render           //
   return (
@@ -94,6 +94,135 @@ function SnsContainer({title}: SnsContainerProps) {
   );
 };
 
+interface Props {
+  onLinkClickHandler : () => void;
+}
+
+//                    component                    //
+export function SignIn (){
+  //                    state                    //
+  const [cookies, setCookie] = useCookies();
+  
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const [message, setMessage] = useState<string>('');
+
+  //                    function                    //
+  const navigator = useNavigate();
+
+  const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
+
+      const message =
+          !result ? '서버에 문제가 있습니다.' :
+          result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
+          result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+          result.code === 'TF' ? '서버에 문제가 있습니다.' :
+          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      setMessage(message);
+
+      const isSuccess = result && result.code === 'SU';
+      if (!isSuccess) return;
+
+      const { accessToken, expires } = result as SignInResponseDto;
+      const expiration = new Date(Date.now() + (expires * 1000));
+      setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+  };
+
+
+  //                    event handler                    //
+  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setId(event.target.value);
+    setMessage('');
+  };
+
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+    setMessage('');
+  };
+
+  const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== 'Enter') return;
+    onSignInButtonClickHandler();
+};
+
+const onSignInButtonClickHandler = () => {
+  if (!id || !password) {
+    setMessage('아이디와 비밀번호를 모두 입력하세요.')
+    return;
+  
+  }
+
+  const requestBody: SignInRequestDto = {
+    userId: id,
+    userPassword: password
+  }
+  signInRequest(requestBody).then(signInResponse);
+};
+
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+ 
+  const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
+
+  const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
+
+  const onClickMainHandler = () => navigator(MAIN_PATH);
+
+  
+
+  return (
+    <div id='auth-wrapper'>
+      <div className='auth-top-bar'>
+        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
+        <div className='auth-top-right-bar'>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
+        </div>
+      </div>
+
+      <div className='sign-in-main-box'>
+        <div className='image-box'></div>
+        <div className='login-box'>
+
+          <div className='login-container'>
+            <div className='login-page h1'>로그인 페이지</div>
+
+            <div className='sign-in-contents'>
+              <div className='auth-sign-up-box-text'>
+                <div className='auth-sign-up-text'>아이디</div>
+                <div className='auth-sign-up-next-box'><InputBox label='' type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
+              </div>
+
+            <div className='auth-sign-up-box-text'>
+              <div className='auth-sign-up-text'>비밀번호</div>
+              <div className='auth-sign-up-next-box'><InputBox label='' type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+            </div>
+          <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
+
+          <div className='auth-submit-box'>
+            <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
+          </div>
+
+          <div className='socal-login'>
+            <div className='kakao-login'></div>
+            <div className='naver-login'></div>
+          </div>
+
+          <div className="short-divider"></div>
+
+          <div className='user-found'>
+            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
+          </div>
+          </div>
+          </div>
+        </div>
+      <div className='under-right-bar'></div>
+      </div>
+    </div>
+  )
+}
 
 //                 component                 //
 export function ChooseSingUp() {
@@ -126,10 +255,9 @@ const onClickMainHandler = () => navigator(MAIN_PATH);
         </div>
       </div>
 
-        <div className='auth-welcome-image-box'>
-          <div className='auth-welcome-image'></div>
-        </div>
-
+      <div className='auth-welcome-image-box'>
+        <div className='auth-welcome-image'></div>
+      </div>
 
       <div className='auth-choose-type-text'>회원가입 방식을 선택해주세요.</div>
 
@@ -151,6 +279,7 @@ const onClickMainHandler = () => navigator(MAIN_PATH);
     </div>
   )
 }
+
 
 //                    component                   //
 export function CustomerSignUp() {
@@ -366,136 +495,7 @@ export function DesignerSignUp() {
   )
 }
 
-//                    interface                    //
-interface Props {
-    onLinkClickHandler: () => void
-}
 
-//                    component                    //
-export function SignIn (){
-  //                    state                    //
-  const [cookies, setCookie] = useCookies();
-  
-  const [id, setId] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const [message, setMessage] = useState<string>('');
-
-  //                    function                    //
-  const navigator = useNavigate();
-
-  const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
-
-      const message =
-          !result ? '서버에 문제가 있습니다.' :
-          result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
-          result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-          result.code === 'TF' ? '서버에 문제가 있습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-      setMessage(message);
-
-      const isSuccess = result && result.code === 'SU';
-      if (!isSuccess) return;
-
-      const { accessToken, expires } = result as SignInResponseDto;
-      const expiration = new Date(Date.now() + (expires * 1000));
-      setCookie('accessToken', accessToken, { path: '/', expires: expiration });
-
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-  };
-
-
-  //                    event handler                    //
-  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
-    setMessage('');
-  };
-
-  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    setMessage('');
-  };
-
-  const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== 'Enter') return;
-    onSignInButtonClickHandler();
-};
-
-const onSignInButtonClickHandler = () => {
-  if (!id || !password) {
-    setMessage('아이디와 비밀번호를 모두 입력하세요.')
-    return;
-  
-  }
-
-  const requestBody: SignInRequestDto = {
-    userId: id,
-    userPassword: password
-  }
-  signInRequest(requestBody).then(signInResponse);
-};
-
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
- 
-  const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
-
-  const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
-
-  const onClickMainHandler = () => navigator(MAIN_PATH);
-
-  
-
-  return (
-    <div id='auth-wrapper'>
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
-      </div>
-
-      <div className='sign-in-main-box'>
-        <div className='image-box'></div>
-        <div className='login-box'>
-          <div className='login-container'>
-            <div className='login-page h1'>로그인 페이지</div>
-            <div className='sign-in-contents'>
-            <div className='auth-sign-up-box-text'>
-            <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'><InputBox label='' type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
-          </div>
-
-                
-
-                <div className='auth-sign-up-box-text'>
-            <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox label="" type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
-          </div>
-          <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
-
-              <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
-          </div>
-
-              <div className='socal-login'>
-                <div className='kakao-login'></div>
-                <div className='naver-login'></div>
-              </div>
-
-              <div className="short-divider"></div>
-
-              <div className='user-found'>
-                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
-                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div className='under-right-bar'></div>
-      </div>
-    </div>
-  )
-}
 
 
 
