@@ -14,7 +14,8 @@ export const PASSOWORD_SETUP_PATH = "password_setup";
 export const SERVICE_PATH = "/service";
 
 export const MY_PAGE_PATH = "my_page";
-export const UPDATE_INFO_PATH = "update_user_info";
+export const UPDATE_CUSTOMER_INFO_PATH = "update_user_info";
+export const UPDATE_DESIGNER_INFO_PATH = "update_user_info";
 export const UPDATE_PASSWORD_PATH = "update_user_password"
 export const DELETE_INFO_PATH = "delete_user_info";
 
@@ -63,7 +64,8 @@ export const AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_SETU
 
 // description : MYPAGE 절대 URL PATH
 export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
-export const UPDATE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_INFO_PATH}`;
+export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
+export const UPDATE_DESIGNER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_DESIGNER_INFO_PATH}`;
 export const UPDATE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_PASSWORD_PATH}`;
 export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
 
@@ -120,13 +122,13 @@ export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 
 // description : AUTH API URL PATH 
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
-export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_in`;
+export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 export const ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
-export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth`;
-export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth_check`;
-export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
-export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/customer`;
-export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`;
+export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth`;
+export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth-check`;
+export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
+export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/customer`;
+export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`;
 
 
 
@@ -135,9 +137,9 @@ export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
-export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my_page`;
+export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my-page`;
 export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
-export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user_delete`;
+export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;

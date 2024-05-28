@@ -17,22 +17,22 @@ export function Main() {
 //                event handler               //
   const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-    return (
-      <div id='main-page-wrapper'>
-  
+  return (
+    <div id='main-page-wrapper'>
+
       <div className='main-page-top-bar'>
         <div className='main-page-logo-image'></div>
-        
+
         <div className='main-page-top-right-bar'>
           <div className='main-page-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='main-page-top-right-bar-line'>|</div>
           <div className='main-page-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
-  
+
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
-        <div  className='auth-center-value'>
+        <div className='auth-center-value'>
           <div className='main-page-image-box'>
             <div className='main-page-title-image'></div>
             <div className='main-page-image'></div>
@@ -40,67 +40,69 @@ export function Main() {
         </div>
         <div className='auth-right-null'></div>
       </div>
-  
+
     </div>
-  
-    )
-  }
+
+  )
+}
 
 
 //           component           //
-export function Sns () {
+export function Sns() {
   //           state          //
-    const {accessToken, expires} = useParams();
-    const [cookies, setCookie] = useCookies();
+  const { accessToken, expires } = useParams();
+  const [cookies, setCookie] = useCookies();
   //           function          //
-    const navigator = useNavigate();
+  const navigator = useNavigate();
   //           effect          //
-    useEffect (() => {
-      if (!accessToken || !expires) return;
-      const expiration = new Date(Date.now() + (Number(expires) * 1000));
-      setCookie('accessToken', accessToken, { path: '/', expires: expiration});
-      
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }, []);
+  useEffect(() => {
+    if (!accessToken || !expires) return;
+    const expiration = new Date(Date.now() + (Number(expires) * 1000));
+    setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+  }, []);
   //          render           //
-    return <></>;
-  }
-  
+  return <></>;
+}
+
 
 type AuthPage = 'sign_in' | 'sign_up';
 
 //           interface           //
-interface SnsContainerProps{
+interface SnsContainerProps {
   title: string;
 }
 
 // component //
-function SnsContainer({title}: SnsContainerProps) {
-  
+function SnsContainer({ title }: SnsContainerProps) {
+
   // event handler // 
   const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
   };
-//           render           //
+  //           render           //
   return (
     <div className="authentication-sns-container">
       <div className="sns-container-title label">{title}</div>
       <div className="sns-button-container">
-        <div className="sns-button kakao-button" onClick={() =>onSnsButtonClickHandler('kakao')}></div>
-        <div className="sns-button naver-button" onClick={() =>onSnsButtonClickHandler('naver')}></div>
+        <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
+        <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
       </div>
     </div>
   );
 };
 
+//                    interface                    //
 interface Props {
-  onLinkClickHandler : () => void;
+  onLinkClickHandler: () => void;
 }
 //                    component                    //
-export function SignIn (){
+export function SignIn() {
+
   //                    state                    //
   const [cookies, setCookie] = useCookies();
-  
+
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -111,22 +113,23 @@ export function SignIn (){
 
   const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
 
-      const message =
-          !result ? '서버에 문제가 있습니다.' :
-          result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
           result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-          result.code === 'TF' ? '서버에 문제가 있습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-      setMessage(message);
+            result.code === 'TF' ? '서버에 문제가 있습니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    setMessage(message);
 
-      const isSuccess = result && result.code === 'SU';
-      if (!isSuccess) return;
+    const isSuccess = result && result.code === 'SU';
+    if (!isSuccess) return;
 
-      const { accessToken, expires } = result as SignInResponseDto;
-      const expiration = new Date(Date.now() + (expires * 1000));
-      setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+    const { accessToken, expires } = result as SignInResponseDto;
+    const expiration = new Date(Date.now() + (expires * 1000));
+    setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
 
 
@@ -145,32 +148,28 @@ export function SignIn (){
   const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== 'Enter') return;
     onSignInButtonClickHandler();
-};
+  };
 
-const onSignInButtonClickHandler = () => {
-  if (!id || !password) {
-    setMessage('아이디와 비밀번호를 모두 입력하세요.')
-    return;
-  
-  }
+  const onSignInButtonClickHandler = () => {
+    if (!id || !password) {
+      setMessage('아이디와 비밀번호를 모두 입력하세요.')
+      return;
+    }
 
-  const requestBody: SignInRequestDto = {
-    userId: id,
-    userPassword: password
-  }
-  signInRequest(requestBody).then(signInResponse);
-};
+    const requestBody: SignInRequestDto = {
+      userId: id,
+      userPassword: password
+    }
+    signInRequest(requestBody).then(signInResponse);
+  };
 
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
- 
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
-
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
-
   const onClickMainHandler = () => navigator(MAIN_PATH);
 
-  
 
+  //                    render                    //
   return (
     <div id='auth-wrapper'>
       <div className='auth-top-bar'>
@@ -193,31 +192,31 @@ const onSignInButtonClickHandler = () => {
                 <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
               </div>
 
-            <div className='auth-sign-up-box-text'>
-              <div className='auth-sign-up-text'>비밀번호</div>
-              <div className='auth-sign-up-next-box'><InputBox type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+              <div className='auth-sign-up-box-text'>
+                <div className='auth-sign-up-text'>비밀번호</div>
+                <div className='auth-sign-up-next-box'><InputBox label='' type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+              </div>
+              <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
+
+              <div className='auth-submit-box'>
+                <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
+              </div>
+
+              <div className='socal-login'>
+                <div className='kakao-login'></div>
+                <div className='naver-login'></div>
+              </div>
+
+              <div className="short-divider"></div>
+
+              <div className='user-found'>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
+              </div>
             </div>
-          <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
-
-          <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
-          </div>
-
-          <div className='socal-login'>
-            <div className='kakao-login'></div>
-            <div className='naver-login'></div>
-          </div>
-
-          <div className="short-divider"></div>
-
-          <div className='user-found'>
-            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
-            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
-          </div>
-          </div>
           </div>
         </div>
-      <div className='under-right-bar'></div>
+        <div className='under-right-bar'></div>
       </div>
     </div>
   )
@@ -226,14 +225,14 @@ const onSignInButtonClickHandler = () => {
 //                 component                 //
 export function ChooseSingUp() {
 
-//                    state                  //
+  //                    state                  //
 
-//                  function                 //
-const navigator = useNavigate();
-//                event handler               //
-const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-  window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
-};
+  //                  function                 //
+  const navigator = useNavigate();
+  //                event handler               //
+  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+    window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
+  };
 
 const onClickMainHandler = () => navigator(MAIN_PATH);
 const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
@@ -246,7 +245,7 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
         </div>
@@ -269,10 +268,8 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
       </div>
 
       <div className='auth-sign-up-sns'>
-      <SnsContainer title='SNS 회원가입' />
-      <div className='short-divider'></div>
-          <div className='auth-sign-up-naver' onClick={() =>onSnsButtonClickHandler('naver')}></div>
-          <div className='auth-sign-up-kakao' onClick={() =>onSnsButtonClickHandler('kakao')}></div>
+        <div className='auth-sign-up-naver' onClick={() => onSnsButtonClickHandler('naver')}></div>
+        <div className='auth-sign-up-kakao' onClick={() => onSnsButtonClickHandler('kakao')}></div>
       </div>
 
     </div>
@@ -498,7 +495,7 @@ const signUpResponse = (result: ResponseDto | null) => {
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
@@ -509,9 +506,9 @@ const signUpResponse = (result: ResponseDto | null) => {
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
 
-        <div  className='auth-center-value'>
-        <div className='auth-sign-up-box'>
-          <div className='auth-sign-up-title'>고객 회원가입</div>
+        <div className='auth-center-value'>
+          <div className='auth-sign-up-box'>
+            <div className='auth-sign-up-title'>고객 회원가입</div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
@@ -676,21 +673,6 @@ export function DesignerSignUp() {
   setIsAuthNumberError(authNumberError);
   };
 
-  // const ageCheckResponse = (result: ResponseDto | null) => {
-
-  //   const ageMessage =
-  //     !result ? '서버에 문제가 있습니다.':
-  //     result.code === 'VF' ? '연령대를 선택해주세요.' :
-  //     result.code === 'DBE' ? '서버에 문제가 있습니다.':
-  //     result.code === 'SU' ? '연령대가 확인되었습니다.' : '';
-  //   const ageCheck = result !== null && result.code === 'SU';
-  //   const ageError = !ageCheck;
-
-  //   setAgeMessage(ageMessage);
-  //   setIsAgeCheck(ageCheck);
-  //   setIsAgeError(ageError);
-  // };
-
   const signUpResponse = (result: ResponseDto | null) => {
 
   const message = 
@@ -841,7 +823,7 @@ export function DesignerSignUp() {
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
@@ -852,9 +834,9 @@ export function DesignerSignUp() {
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
 
-        <div  className='auth-center-value'>
-        <div className='auth-sign-up-box'>
-          <div className='auth-sign-up-title'>디자이너 회원가입</div>
+        <div className='auth-center-value'>
+          <div className='auth-sign-up-box'>
+            <div className='auth-sign-up-title'>디자이너 회원가입</div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
@@ -919,12 +901,6 @@ export function DesignerSignUp() {
   )
 }
 
-
-
-
-
-
-//           component           //
 export default function Authentication() {
 
   //              render             //
