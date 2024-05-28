@@ -28,6 +28,10 @@ import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
+
+import QnaList from "./views/Service/qna/QnaList";
+import QnaWrite from "./views/Service/qna/QnaWrite";
+import QnaDetail from "./views/Service/qna/QnaDetail";
 import QnaList from "./views/Service/qna/qnaList";
 import QnaWrite from "./views/Service/qna/qnaWrite";
 import QnaDetail from "./views/Service/qna/qnaDetail";
