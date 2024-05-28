@@ -27,8 +27,8 @@ function Top({ path }: Props) {
 
     //                    event handler                    //
     const onLogoutClickHandler = () => {
-        // removeCookie('accessToken', { path: '/' });
-        // navigator(AUTH_ABSOLUTE_PATH);
+        removeCookie('accessToken', { path: '/' });
+        navigator(AUTH_ABSOLUTE_PATH);
     };
 
     //                    render                       //
@@ -39,7 +39,7 @@ function Top({ path }: Props) {
             <div className='top-bar-title'>{ path }</div>
             <div className='top-bar-service'>
                 { loginUserRole !== 'ROLE_ADMIN' && <div className='top-bar-role'>내정보</div>}
-                <div className='logout-button' onClick={onLogoutClickHandler}>로그아웃</div>
+                <div className='second-button' onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
         </div>
         </>
