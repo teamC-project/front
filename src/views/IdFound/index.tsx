@@ -36,7 +36,7 @@ export default function IdFound() {
 
     <div className='auth-sign-up-box-text'>
       <div className='auth-sign-up-text'>이메일</div>
-      <div className='auth-sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+      <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         } } /></div>
       <div className='primary-button auth-sign-in-button-size'>보내기</div>
@@ -49,7 +49,7 @@ export default function IdFound() {
 
     <div className='auth-sign-up-box-text'>
       <div className='auth-sign-up-text'>이메일인증</div>
-      <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+      <div className='auth-sign-up-next-box'><InputBox type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         } } /></div>
       <div className='primary-button auth-sign-in-button-size'>확인</div>

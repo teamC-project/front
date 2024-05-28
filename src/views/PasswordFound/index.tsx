@@ -36,14 +36,14 @@ export function SettingPassword() {
 
         <div className='auth-sign-up-box-text'>
           <div className='auth-sign-up-text'>비밀번호</div>
-          <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+          <div className='auth-sign-up-next-box'><InputBox type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
               throw new Error('Function not implemented.');
             } } /></div>
         </div>
 
         <div className='auth-sign-up-box-text'>
           <div className='auth-sign-up-text'>비밀번호 확인</div>
-          <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+          <div className='auth-sign-up-next-box'><InputBox type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
               throw new Error('Function not implemented.');
             } } /></div>
         </div>
@@ -95,14 +95,14 @@ export default function PasswordFoundPage() {
   
       <div className='auth-sign-up-box-text'>
         <div className='auth-sign-up-text'>아이디</div>
-        <div className='auth-sign-up-next-box'><InputBox  label={''} type={'text'} value={''} placeholder={'아이디를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+        <div className='auth-sign-up-next-box'><InputBox type={'text'} value={''} placeholder={'아이디를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
             throw new Error('Function not implemented.');
           } } /></div>
       </div>
   
       <div className='auth-sign-up-box-text'>
         <div className='auth-sign-up-text'>이메일</div>
-        <div className='auth-sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+        <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
             throw new Error('Function not implemented.');
           } } /></div>
         <div className='primary-button auth-sign-in-button-size'>보내기</div>
@@ -110,7 +110,7 @@ export default function PasswordFoundPage() {
   
       <div className='auth-sign-up-box-text'>
         <div className='auth-sign-up-text'>이메일인증</div>
-        <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
+        <div className='auth-sign-up-next-box'><InputBox type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
             throw new Error('Function not implemented.');
           } } /></div>
         <div className='primary-button auth-sign-in-button-size'>확인</div>

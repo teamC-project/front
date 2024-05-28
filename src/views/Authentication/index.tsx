@@ -7,33 +7,32 @@ import { useCookies } from 'react-cookie';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
-import { SignInRequestDto } from 'src/apis/auth/dto/request';
-import { signInRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpRequestDto } from 'src/apis/auth/dto/request';
+import { emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest, signUpRequest } from 'src/apis/auth';
 
 export function Main() {
 
-  //                  function                 //
+//                  function                 //
   const navigator = useNavigate();
-  //                event handler               //
+//                event handler               //
   const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-    return (
-      <div id='main-page-wrapper'>
-  
+  return (
+    <div id='main-page-wrapper'>
+
       <div className='main-page-top-bar'>
         <div className='main-page-logo-image'></div>
-        
+
         <div className='main-page-top-right-bar'>
           <div className='main-page-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='main-page-top-right-bar-line'>|</div>
           <div className='main-page-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
-  
+
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
-        <div  className='auth-center-value'>
+        <div className='auth-center-value'>
           <div className='main-page-image-box'>
             <div className='main-page-title-image'></div>
             <div className='main-page-image'></div>
@@ -41,68 +40,69 @@ export function Main() {
         </div>
         <div className='auth-right-null'></div>
       </div>
-  
+
     </div>
-  
-    )
-  }
+
+  )
+}
 
 
 //           component           //
-export function Sns () {
+export function Sns() {
   //           state          //
-    const {accessToken, expires} = useParams();
-    const [cookies, setCookie] = useCookies();
+  const { accessToken, expires } = useParams();
+  const [cookies, setCookie] = useCookies();
   //           function          //
-    const navigator = useNavigate();
+  const navigator = useNavigate();
   //           effect          //
-    useEffect (() => {
-      if (!accessToken || !expires) return;
-      const expiration = new Date(Date.now() + (Number(expires) * 1000));
-      setCookie('accessToken', accessToken, { path: '/', expires: expiration});
-      
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }, []);
+  useEffect(() => {
+    if (!accessToken || !expires) return;
+    const expiration = new Date(Date.now() + (Number(expires) * 1000));
+    setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+  }, []);
   //          render           //
-    return <></>;
-  }
-  
+  return <></>;
+}
+
 
 type AuthPage = 'sign_in' | 'sign_up';
 
 //           interface           //
-interface SnsContainerProps{
+interface SnsContainerProps {
   title: string;
 }
 
 // component //
-function SnsContainer({title}: SnsContainerProps) {
-  
+function SnsContainer({ title }: SnsContainerProps) {
+
   // event handler // 
   const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
   };
-//           render           //
+  //           render           //
   return (
     <div className="authentication-sns-container">
       <div className="sns-container-title label">{title}</div>
       <div className="sns-button-container">
-        <div className="sns-button kakao-button" onClick={() =>onSnsButtonClickHandler('kakao')}></div>
-        <div className="sns-button naver-button" onClick={() =>onSnsButtonClickHandler('naver')}></div>
+        <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
+        <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
       </div>
     </div>
   );
 };
 
+//                    interface                    //
 interface Props {
-  onLinkClickHandler : () => void;
+  onLinkClickHandler: () => void;
 }
-
 //                    component                    //
-export function SignIn (){
+export function SignIn() {
+
   //                    state                    //
   const [cookies, setCookie] = useCookies();
-  
+
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -113,22 +113,23 @@ export function SignIn (){
 
   const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
 
-      const message =
-          !result ? '서버에 문제가 있습니다.' :
-          result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
           result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-          result.code === 'TF' ? '서버에 문제가 있습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-      setMessage(message);
+            result.code === 'TF' ? '서버에 문제가 있습니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    setMessage(message);
 
-      const isSuccess = result && result.code === 'SU';
-      if (!isSuccess) return;
+    const isSuccess = result && result.code === 'SU';
+    if (!isSuccess) return;
 
-      const { accessToken, expires } = result as SignInResponseDto;
-      const expiration = new Date(Date.now() + (expires * 1000));
-      setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+    const { accessToken, expires } = result as SignInResponseDto;
+    const expiration = new Date(Date.now() + (expires * 1000));
+    setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
 
 
@@ -138,6 +139,7 @@ export function SignIn (){
     setMessage('');
   };
 
+
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     setMessage('');
@@ -146,32 +148,28 @@ export function SignIn (){
   const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== 'Enter') return;
     onSignInButtonClickHandler();
-};
+  };
 
-const onSignInButtonClickHandler = () => {
-  if (!id || !password) {
-    setMessage('아이디와 비밀번호를 모두 입력하세요.')
-    return;
-  
-  }
+  const onSignInButtonClickHandler = () => {
+    if (!id || !password) {
+      setMessage('아이디와 비밀번호를 모두 입력하세요.')
+      return;
+    }
 
-  const requestBody: SignInRequestDto = {
-    userId: id,
-    userPassword: password
-  }
-  signInRequest(requestBody).then(signInResponse);
-};
+    const requestBody: SignInRequestDto = {
+      userId: id,
+      userPassword: password
+    }
+    signInRequest(requestBody).then(signInResponse);
+  };
 
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
- 
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
-
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
-
   const onClickMainHandler = () => navigator(MAIN_PATH);
 
-  
 
+  //                    render                    //
   return (
     <div id='auth-wrapper'>
       <div className='auth-top-bar'>
@@ -191,34 +189,34 @@ const onSignInButtonClickHandler = () => {
             <div className='sign-in-contents'>
               <div className='auth-sign-up-box-text'>
                 <div className='auth-sign-up-text'>아이디</div>
-                <div className='auth-sign-up-next-box'><InputBox label='' type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
+                <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
               </div>
 
-            <div className='auth-sign-up-box-text'>
-              <div className='auth-sign-up-text'>비밀번호</div>
-              <div className='auth-sign-up-next-box'><InputBox label='' type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={ onPasswordChangeHandler } onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+              <div className='auth-sign-up-box-text'>
+                <div className='auth-sign-up-text'>비밀번호</div>
+                <div className='auth-sign-up-next-box'><InputBox label='' type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+              </div>
+              <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
+
+              <div className='auth-submit-box'>
+                <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
+              </div>
+
+              <div className='socal-login'>
+                <div className='kakao-login'></div>
+                <div className='naver-login'></div>
+              </div>
+
+              <div className="short-divider"></div>
+
+              <div className='user-found'>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
+              </div>
             </div>
-          <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
-
-          <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
-          </div>
-
-          <div className='socal-login'>
-            <div className='kakao-login'></div>
-            <div className='naver-login'></div>
-          </div>
-
-          <div className="short-divider"></div>
-
-          <div className='user-found'>
-            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
-            <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
-          </div>
-          </div>
           </div>
         </div>
-      <div className='under-right-bar'></div>
+        <div className='under-right-bar'></div>
       </div>
     </div>
   )
@@ -227,29 +225,27 @@ const onSignInButtonClickHandler = () => {
 //                 component                 //
 export function ChooseSingUp() {
 
-//                    state                  //
+  //                    state                  //
 
-//                  function                 //
-const navigator = useNavigate();
-//                event handler               //
-const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-  window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
-};
+  //                  function                 //
+  const navigator = useNavigate();
+  //                event handler               //
+  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+    window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
+  };
 
-const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
-
-const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH);
-
-const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  
 const onClickMainHandler = () => navigator(MAIN_PATH);
+const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
+const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH);
+const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+
 //                   render                  //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
         </div>
@@ -272,8 +268,8 @@ const onClickMainHandler = () => navigator(MAIN_PATH);
       </div>
 
       <div className='auth-sign-up-sns'>
-          <div className='auth-sign-up-naver' onClick={() =>onSnsButtonClickHandler('naver')}></div>
-          <div className='auth-sign-up-kakao' onClick={() =>onSnsButtonClickHandler('kakao')}></div>
+        <div className='auth-sign-up-naver' onClick={() => onSnsButtonClickHandler('naver')}></div>
+        <div className='auth-sign-up-kakao' onClick={() => onSnsButtonClickHandler('kakao')}></div>
       </div>
 
     </div>
@@ -283,20 +279,223 @@ const onClickMainHandler = () => navigator(MAIN_PATH);
 
 //                    component                   //
 export function CustomerSignUp() {
+
+//                      state                     //
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [authNumber, setAuthNumber] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+
+  const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
+  const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
+
+  const [isIdCheck, setIsIdCheck] = useState<boolean>(false);
+  const [isPasswordPattern,setIsPasswordPattern] = useState<boolean>(false);
+  const [isEqaulPassword,setIsEqaulPassword] = useState<boolean>(false);
+  const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
+  const [isAuthNumberCheck,setIsAuthNumberCheck] = useState<boolean>(false);
+  const [isGenderCheck,setIsGenderCheck] = useState<boolean>(false);
+  const [isAgeCheck,setIsAgeCheck] = useState<boolean>(false);
+
+  const [idMessage, setIdMessage] = useState<string>('');
+  const [passwordMessage, setPasswordMessage] = useState<string>('');
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+  const [emailMessage, setEmailMessage] = useState<string>('');
+  const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
+  const [genderMessage, setGenderMessage] = useState<string>('');
+
+  const [isIdError, setIsIdError] = useState<boolean>(false);
+  const [isEmailError, setIsEmailError] = useState<boolean>(false);
+  const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
+
+  const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqaulPassword && isAgeCheck && isGenderCheck;
+
+  const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`
+
 //                     function                    //
-    const navigator = useNavigate();
+const navigator = useNavigate();
+
+const emailAuthResponse = (result: ResponseDto | null) => {
+
+  const emailMessage = 
+    !result ? '서버에 문제가 있습니다.' : 
+    result.code === 'VF' ? '이메일 형식이 아닙니다.' :
+    result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
+    result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+    result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+  const emailCheck = result !== null && result.code === 'SU';
+  const emailError = !emailCheck;
+
+  setEmailMessage(emailMessage);
+  setIsEmailCheck(emailCheck);
+  setIsEmailError(emailError);
+};
+
+const emailAuthCheckResponse = (result: ResponseDto | null) => {
+
+  const authNumberMessage =
+    !result ? '서버에 문제가 있습니다.':
+    result.code === 'VF' ? '인증번호를 입력해주세요.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.':
+    result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+  const authNumberCheck = result !== null && result.code === 'SU';
+  const authNumberError = !authNumberCheck;
+
+  setAuthNumberMessage(authNumberMessage);
+  setIsAuthNumberCheck(authNumberCheck);
+  setIsAuthNumberError(authNumberError);
+};
+
+const signUpResponse = (result: ResponseDto | null) => {
+
+  const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+    result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
+    result.code === 'DE' ? '중복된 이메일입니다.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+  const isSuccess = result && result.code === 'SU'
+  if (!isSuccess) {
+    alert(message);
+    return;
+  } 
+};
+
+
 //                  event handler                  //
-    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-    
-    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+  const onClickMainHandler = () => navigator(MAIN_PATH);
 
-    const onClickMainHandler = () => navigator(MAIN_PATH);
+  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setId(value);
+    const idPattern = /^[a-zA-Z0-9].{6,15}$/;
+    const isIdPattern = idPattern.test(value);
+    setIsIdCheck(isIdPattern);
+    const idMessage =
+      isIdCheck ? '' :
+      value ? '영문, 숫자를 혼용하여 6 ~ 15자 입력해주세요.' : ''; 
+    setIdMessage(idMessage);
+  }
+
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPassword(value)
+    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
+    const isPassworPattern = passwordPattern.test(value);
+    setIsPasswordPattern(isPassworPattern);
+    const passwordMessage =
+      isPassworPattern ? '':
+      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
+    setPasswordMessage(passwordMessage);
+
+    const isEqaulPassword = passwordCheck === value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
+  }
+
+  const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPasswordCheck(value);
+    const isEqaulPassword = password === value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
+  }
+
+  const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setEmail(value);
+    setEmailButtonStatus(value !=='');
+    setIsEmailCheck(false);
+    setIsAuthNumberCheck(false); 
+    setEmailMessage('');
+  }
+
+  const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setAuthNumber(value);
+    setAuthNumberButtonStatus(value !=='');
+    setIsAuthNumberCheck(false);  
+    setAuthNumberMessage('');
+  };
+
+  const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setGender(value);
+    setIsGenderCheck(false);
+    const genderMessage =
+      isGenderCheck ? '' :
+      value ? '성별을 선택해주세요.' : '';
+    setGenderMessage(genderMessage);
+  };
+
+  const onAgeChangeHandler = (age: string) => {
+    setAge(age);
+  };
+
+  const onEmailButtonClickHandler = () => {
+    if(!emailButtonStatus) return;
+
+    const emailPattern = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+    const isEmailPattern = emailPattern.test(email);
+    if(!isEmailPattern) {
+      setEmailMessage('이메일 형식이 아닙니다.');
+      setIsEmailError(true);
+      setIsEmailCheck(false);
+      return;
+    }
+    const requestBody: EmailAuthRequestDto = { userEmail : email};
+    emailAuthRequest(requestBody).then(emailAuthResponse);
+  };
+
+  const onAuthNumberButtonClickHandler = () => {
+    if(!authNumberButtonStatus) return;
+    if(!authNumber) return;
+
+    const requsetBody: EmailAuthCheckRequestDto = { 
+      userEmail: email,
+      authNumber
+    };
+    emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
+  };  
+
+  const onSignUpButtonClickHandler = () => {
+    if(!isSignUpActive) return;
+    if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
+      alert('모든 내용을 입력해주세요.')
+      return;
+    };
+
+    const requestBody: SignUpRequestDto = {
+      userId: id,
+      userPassword: password,
+      userEmail: email,
+      authNumber,
+      userAge: age,
+      userGender: gender
+    };
+  signUpRequest(requestBody).then(signUpResponse);
+  };
+
+//                      render                      //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
@@ -307,96 +506,324 @@ export function CustomerSignUp() {
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
 
-        <div  className='auth-center-value'>
-        <div className='auth-sign-up-box'>
-          <div className='auth-sign-up-title'>고객 회원가입</div>
+        <div className='auth-center-value'>
+          <div className='auth-sign-up-box'>
+            <div className='auth-sign-up-title'>고객 회원가입</div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'><InputBox  label={''} type={'text'} value={''} placeholder={'아이디를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'>
+              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} message={idMessage} error={isIdError} />
+            </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'>
+              <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+            </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호 확인</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'>
+              <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+            </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일</div>
-            <div className='auth-sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
-            <div className='primary-button auth-sign-in-button-size'>보내기</div>
+            <div className='auth-sign-up-next-box' >
+              <InputBox type={'text'} value={email} placeholder={'이메일을 입력해주세요.'} onChangeHandler={onEmailChangeHandler} message={emailMessage} error={isEmailError}  />
+            </div>
+            <div className='primary-button auth-sign-in-button-size' onClick={onEmailButtonClickHandler}>보내기</div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일인증</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
-            <div className='primary-button auth-sign-in-button-size'>확인</div>
+            <div className='auth-sign-up-next-box'>
+              <InputBox type={'text'} value={authNumber} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={onAuthNumberChangeHandler} message={authNumberMessage} error={isAuthNumberError} />
+            </div>
+            <div className='primary-button auth-sign-in-button-size' onClick={onAuthNumberButtonClickHandler}>확인</div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>성별</div>
             <div className='auth-sign-up-next-box'>
-              <div className='auth-sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={'MALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                  throw new Error('Function not implemented.');
-                } } /></div>
-              <div className='auth-sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                  throw new Error('Function not implemented.');
-                } } /></div>
+              <div className='auth-sign-up-radio-box'>
+                <InputBox label={'MALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+              </div>
+              <div className='auth-sign-up-radio-box'>
+                <InputBox label={'FEMALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+              </div>
             </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
-            <div className='auth-sign-up-next-box'><SelectBox value={''} onChange={function (value: string): void {
-              throw new Error('Function not implemented.');
-            } } /></div>
-            <div className='primary-button auth-sign-in-button-size'>확인</div>
+            <div className='auth-sign-up-next-box'>
+              <SelectBox value={age} onChange={onAgeChangeHandler} />
+            </div>
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button'>가입하기</div>
+            <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
-        </div>
+      </div>
 
-        <div className='auth-right-null'></div>
+      <div className='auth-right-null'></div>
       </div>
 
     </div>
   )
 }
 
+//                     component                      //
 export function DesignerSignUp() {
-    //                  function                 //
-    const navigator = useNavigate();
-    //                event handler               //
-    const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-    
-    const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+//                      state                     //
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [authNumber, setAuthNumber] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+  const [companyName, setCompanyName] = useState<string>('');
+  const [image, setImage] = useState<string>('');
 
-    const onClickMainHandler = () => navigator(MAIN_PATH);
-    //                    render                  //
+  const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
+  const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
+
+  const [isIdCheck, setIsIdCheck] = useState<boolean>(false);
+  const [isPasswordPattern,setIsPasswordPattern] = useState<boolean>(false);
+  const [isEqaulPassword,setIsEqaulPassword] = useState<boolean>(false);
+  const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
+  const [isAuthNumberCheck,setIsAuthNumberCheck] = useState<boolean>(false);
+  const [isGenderCheck,setIsGenderCheck] = useState<boolean>(false);
+  const [isAgeCheck,setIsAgeCheck] = useState<boolean>(false);
+  const [isCompanyNameCheck,setIsCompanyNameCheck] = useState<boolean>(false);
+  const [isImageCheck,setIsImageCheck] = useState<boolean>(false);
+
+  const [idMessage, setIdMessage] = useState<string>('');
+  const [passwordMessage, setPasswordMessage] = useState<string>('');
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+  const [emailMessage, setEmailMessage] = useState<string>('');
+  const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
+  const [genderMessage, setGenderMessage] = useState<string>('');
+  const [ageMessage, setAgeMessage] = useState<string>('');
+  const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
+  const [imageMessage, setImageMessage] = useState<string>('');
+  const [isIdError, setIsIdError] = useState<boolean>(false);
+  const [isEmailError, setIsEmailError] = useState<boolean>(false);
+  const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
+
+  const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqaulPassword && isAgeCheck && isGenderCheck && isCompanyNameCheck && isImageCheck;
+
+  const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`
+
+//                     function                    //
+  const navigator = useNavigate();
+  const idCheckResponse = (result: ResponseDto | null) => {
+
+  const idMessage = 
+    !result ? '서버에 문제가 있습니다.' : 
+    result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
+    result.code === 'DI' ? '이미 사용중인 아이디 입니다.' :
+    result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
+    result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
+  const idError = !(result && result.code === 'SU');
+  const idCheck = !idError;
+
+  setIdMessage(idMessage);
+  setIsIdError(idError);
+  setIsIdCheck(idCheck);
+  };
+
+  const emailAuthResponse = (result: ResponseDto | null) => {
+
+  const emailMessage = 
+    !result ? '서버에 문제가 있습니다.' : 
+    result.code === 'VF' ? '이메일 형식이 아닙니다.' :
+    result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
+    result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+    result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+  const emailCheck = result !== null && result.code === 'SU';
+  const emailError = !emailCheck;
+
+  setEmailMessage(emailMessage);
+  setIsEmailCheck(emailCheck);
+  setIsEmailError(emailError);
+  };
+
+  const emailAuthCheckResponse = (result: ResponseDto | null) => {
+
+  const authNumberMessage =
+    !result ? '서버에 문제가 있습니다.':
+    result.code === 'VF' ? '인증번호를 입력해주세요.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.':
+    result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+  const authNumberCheck = result !== null && result.code === 'SU';
+  const authNumberError = !authNumberCheck;
+
+  setAuthNumberMessage(authNumberMessage);
+  setIsAuthNumberCheck(authNumberCheck);
+  setIsAuthNumberError(authNumberError);
+  };
+
+  const signUpResponse = (result: ResponseDto | null) => {
+
+  const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+    result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
+    result.code === 'DE' ? '중복된 이메일입니다.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+  const isSuccess = result && result.code === 'SU'
+  if (!isSuccess) {
+    alert(message);
+    return;
+  } 
+
+  }; 
+
+//                     event handler                    //
+  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+  const onClickMainHandler = () => navigator(MAIN_PATH);
+
+  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setId(value);
+    setIsIdCheck(false);
+    setIdMessage('');
+  }
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPassword(value)
+    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,13}$/
+    const isPassworPattern = passwordPattern.test(value);
+    setIsPasswordPattern(isPassworPattern);
+    const passwordMessage =
+      isPassworPattern ? '':
+      value ? '영문, 숫자를 혼용하여 8 ~ 13자 입력해주세요.' : '';
+    setPasswordMessage(passwordMessage);
+
+    const isEqaulPassword = passwordCheck === value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
+  }
+
+  const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPasswordCheck(value);
+    const isEqaulPassword = password === value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
+  }
+
+  const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setEmail(value);
+    setEmailButtonStatus(value !=='');
+    setIsEmailCheck(false);
+    setIsAuthNumberCheck(false);
+    setEmailMessage('');
+  }
+
+  const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setAuthNumber(value);
+    setAuthNumberButtonStatus(value !=='');
+    setIsAuthNumberCheck(false);  
+    setAuthNumberMessage('');
+  };
+
+  const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setGender(value);
+    setIsGenderCheck(false);
+    setGenderMessage('');
+  };
+
+  const onAgeChangeHandler = (age: string) => {
+    setAge(age);
+  };
+
+  const onCompanyNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setCompanyName(value);
+    setIsCompanyNameCheck(false);
+    setCompanyNameMessage('');
+  };
+
+  const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setImage(value);
+    setIsImageCheck(false);
+    setImageMessage('');
+  };
+
+  const onEmailButtonClickHandler = () => {
+    if(!emailButtonStatus) return;
+
+    const emailPattern = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+    const isEmailPattern = emailPattern.test(email);
+    if(!isEmailPattern) {
+      setEmailMessage('이메일 형식이 아닙니다.');
+      setIsEmailError(true);
+      setIsEmailCheck(false);  
+      return;
+    }
+    const requestBody: EmailAuthRequestDto = { userEmail : email};
+    emailAuthRequest(requestBody).then(emailAuthResponse);
+  };
+
+  const onAuthNumberButtonClickHandler = () => {
+    if(!authNumberButtonStatus) return;
+    if(!authNumber) return;
+
+    const requsetBody: EmailAuthCheckRequestDto = { 
+      userEmail: email,
+      authNumber
+    };
+    emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
+  };  
+
+  const onSignUpButtonClickHandler = () => {
+    if(!isSignUpActive) return;
+    if(!id || !password || !passwordCheck || !email || !authNumber) {
+      alert('모든 내용을 입력해주세요.')
+      return;
+    };
+
+    const requestBody: SignUpRequestDto = {
+      userId: id,
+      userPassword: password,
+      userEmail: email,
+      authNumber,
+      userAge: age,
+      userGender: gender,
+      userCompanyName : companyName,
+      userImage : image
+    };
+  signUpRequest(requestBody).then(signUpResponse);
+  };
+//                        render                       //
   return (
     <div id='auth-wrapper'>
 
       <div className='auth-top-bar'>
         <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
+
         <div className='auth-top-right-bar'>
           <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
           <div className='auth-top-right-bar-line'>|</div>
@@ -407,83 +834,62 @@ export function DesignerSignUp() {
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
 
-        <div  className='auth-center-value'>
-        <div className='auth-sign-up-box'>
-          <div className='auth-sign-up-title'>디자이너 회원가입</div>
+        <div className='auth-center-value'>
+          <div className='auth-sign-up-box'>
+            <div className='auth-sign-up-title'>디자이너 회원가입</div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'><InputBox  label={''} type={'text'} value={''} placeholder={'아이디를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} message={idMessage} error={isIdError} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordChangeHandler} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호 확인</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'password'} value={''} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordCheckChangeHandler} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일</div>
-            <div className='auth-sign-up-next-box' ><InputBox label={''} type={'text'} value={''} placeholder={'이메일을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={email} placeholder={'이메일을 입력해주세요.'} onChangeHandler={onEmailChangeHandler} /></div>
             <div className='primary-button auth-sign-in-button-size'>보내기</div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일인증</div>
-            <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                throw new Error('Function not implemented.');
-              } } /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={authNumber} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={onAuthNumberChangeHandler} /></div>
             <div className='primary-button auth-sign-in-button-size'>확인</div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>성별</div>
             <div className='auth-sign-up-next-box'>
-              <div className='auth-sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={'MALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                  throw new Error('Function not implemented.');
-                } } /></div>
-              <div className='auth-sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-                  throw new Error('Function not implemented.');
-                } } /></div>
+              <div className='auth-sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={gender} name={'gender'} onChangeHandler={onGenderChangeHandler} /></div>
+              <div className='auth-sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={gender} name={'gender'} onChangeHandler={onGenderChangeHandler} /></div>
             </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
-            <div className='auth-sign-up-next-box'><SelectBox value={''} onChange={function (value: string): void {
-              throw new Error('Function not implemented.');
-            } } /></div>
-            <div className='primary-button auth-sign-in-button-size'>확인</div>
+            <div className='auth-sign-up-next-box'><SelectBox value={age} onChange={onAgeChangeHandler} /></div>
           </div>
 
-        <div className='auth-sign-up-box-text'>
-          <div className='auth-sign-up-text'>업체명</div>
-          <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={'업체명을 입력해주세요.'} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-        </div>
+          <div className='auth-sign-up-box-text'>
+            <div className='auth-sign-up-text'>업체명</div>
+            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={''} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} /></div>
+          </div>
 
-        <div className='auth-sign-up-box-text'>
-          <div className='auth-sign-up-text'>면허증사진</div>
-          <div className='auth-sign-up-next-box'><InputBox label={''} type={'text'} value={''} placeholder={''} onChangeHandler={function (event: React.ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        } } /></div>
-        </div>
+          <div className='auth-sign-up-box-text'>
+            <div className='auth-sign-up-text'>면허증사진</div>
+            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={''} placeholder={''} onChangeHandler={onImageChangeHandler} /></div>
+          </div>
 
           <div className='auth-submit-box'>
-              <div className='auth-submit-box primary-button'>가입하기</div>
+              <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
         </div>
@@ -494,13 +900,10 @@ export function DesignerSignUp() {
     </div>
   )
 }
-
-
-
-
-
 
 export default function Authentication() {
+
+  //              render             //
   return (
     <div>
     </div>
