@@ -29,9 +29,9 @@ import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
+import QnaList from "./views/Service/Qna/QnaList";
+import QnaWrite from "./views/Service/Qna/QnaWrite";
+import QnaDetail from "./views/Service/Qna/QnaDetail";
 import PasswordFoundPage from "./views/PasswordFound";
 
 
