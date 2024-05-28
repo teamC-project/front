@@ -3,7 +3,7 @@ import "./style.css";
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/reponse.dto';
+import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 
 //              component               //
