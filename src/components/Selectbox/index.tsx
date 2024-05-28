@@ -10,15 +10,15 @@ interface Prop {
 export default function SelectBox({ value, onChange}: Prop) {
 
   const ageListItem = [
-    { name: '10대', value: 'MALE' },
-    { name: '20대', value: 'FEMALE' },
-    { name: '30대', value: 'FEMALE' },
-    { name: '40대', value: 'FEMALE' },
-    { name: '50대', value: 'FEMALE' },
-    { name: '60대', value: 'FEMALE' },
-    { name: '70대', value: 'FEMALE' },
-    { name: '80대', value: 'FEMALE' },
-    { name: '90대', value: 'FEMALE' },
+    { name: '10대', value: '10대' },
+    { name: '20대', value: '20대' },
+    { name: '30대', value: '30대' },
+    { name: '40대', value: '40대' },
+    { name: '50대', value: '50대' },
+    { name: '60대', value: '60대' },
+    { name: '70대', value: '70대' },
+    { name: '80대', value: '80대' },
+    { name: '90대', value: '90대' },
   ];
 
 

@@ -3,26 +3,21 @@ export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
 
 export const AUTH_PATH = "/auth";
-export const SERVICE_PATH = "/service";
-
-export const SIGN_IN_PATH = `sign_in`;
-export const SIGN_UP_PATH = "sign_up";
+export const SIGN_IN_PATH = `sign-in`;
+export const SIGN_UP_PATH = "sign-up";
 export const CUSTOMER_PATH = "customer";
 export const DESIGNER_PATH = "designer";
+export const ID_FOUND_PATH = "id-found";
+export const PASSWORD_FOUND_PATH = "password-found";
+export const PASSOWORD_SETUP_PATH = "password-setup";
 
-export const ID_FOUND_PATH = "id_found";
-export const PASSWORD_FOUND_PATH = "password_found";
-export const PASSOWORD_SETUP_PATH = "password_setup";
+export const SERVICE_PATH = "/service";
 
-
-
-
-export const MY_PAGE_PATH = "my_page";
-export const UPDATE_REQUEST_PATH = "update";
-export const USER_DELETE_PATH = "user_delete";
-
-export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
-export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
+export const MY_PAGE_PATH = "my-page";
+export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
+export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
+export const UPDATE_PASSWORD_PATH = "update-user-password"
+export const DELETE_INFO_PATH = "delete-user-info";
 
 export const AUNNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
@@ -61,17 +56,18 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoard
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const AUTH_SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const AUTH_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
-
 export const AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${CUSTOMER_PATH}`;
 export const AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${DESIGNER_PATH}`;
-
-
+export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
+export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_SETUP_PATH}`;
 
-export const MY_PAGE_ABSOLUTE_PATH = `${AUTH_PATH}/${UPDATE_REQUEST_PATH}`;
-export const USER_DELETE_ABSOLUTE_PATH = `${AUTH_PATH}/${USER_DELETE_PATH}`;
-
-
+// description : MYPAGE 절대 URL PATH
+export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
+export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
+export const UPDATE_DESIGNER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_DESIGNER_INFO_PATH}`;
+export const UPDATE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_PASSWORD_PATH}`;
+export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
 
 // description : 공지사항 절대 URL PATH
 export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}`;
@@ -128,11 +124,11 @@ export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
 export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 export const ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
-export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth`;
-export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email_auth_check`;
-export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign_up`;
-export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/customer`;
-export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`;
+export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth`;
+export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth-check`;
+export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
+export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/customer`;
+export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`;
 
 
 
@@ -141,9 +137,9 @@ export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign_up/designer`
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
-export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my_page`;
+export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my-page`;
 export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
-export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user_delete`;
+export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;

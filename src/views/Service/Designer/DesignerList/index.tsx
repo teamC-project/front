@@ -1,75 +1,200 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
 import { useNavigate } from 'react-router';
+import { DesignerBoardListItem } from 'src/types';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import { useCookies } from 'react-cookie';
+import { GetDesignerBoardListResponseDto, GetSearchDesignerBoardListResponseDto } from 'src/apis/designerBoard/dto/response';
+import ResponseDto from 'src/apis/response.dto';
+import { getSearchDesignerBoardListRequest } from 'src/apis/designerBoard';
 
+//                    component                    //
+function ListItem ({
+  designerBoardNumber,
+  designerBoardTitle,
+  designerBoardWriterId,
+  designerBoardWriteDatetime,
+  designerBoardViewCount
+}: DesignerBoardListItem) {
 
-export default function DesignerList() {
-  const [searchTerm, setSearchTerm] = useState('');
+  //              function              //
+  const navigator = useNavigate();
 
-  const handleSearch = () => {
-    console.log('검색어:', searchTerm);
-  };
+  //              event handler              //
+  const onClickHandler = () => navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber));
 
-  const navigate = useNavigate();
-
-  const handleGoToWrite = () => {
-    navigate('/service/designer_board/write');
-  };
-
-  const handleGoToDetail = () => {
-    navigate('/service/designer_board/1');
-  };
-
+  //              render              //
   return (
-    <div>
-      <div className="search">
-        <div className="search-box">
-          <div className="search-keyword">검색 키워드</div>
-          <input
-            className="list-search-input"
-            placeholder="검색어를 입력해주세요."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <div className="search-button" onClick={handleSearch}>
-            검색
-          </div>
+    <div className='designerboard-list-table-tr' onClick={onClickHandler}>
+      <div className='designerboard-list-table-number'>{designerBoardNumber}</div>
+      <div className='designerboard-list-table-title' style={{ textAlign:'left' }}>{designerBoardTitle}</div>
+      <div className='designerboard-list-table-writer-id'>{designerBoardWriterId}</div>
+      <div className='designerboard-list-table-write-date'>{designerBoardWriteDatetime}</div>
+      <div className='designerboard-list-table-viewcount'>{designerBoardViewCount}</div>
+    </div>
+  );
+}
+
+//                    component                    //
+export default function DesignerList() {
+
+  //                    state                    //
+  const {loginUserRole} = useUserStore();
+  const [cookies] = useCookies();
+  const [designerBoardList, setDesignerBoardList] = useState<DesignerBoardListItem[]>([]);
+  const [viewList, setViewList] = useState<DesignerBoardListItem[]>([]);
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [totalPage, setTotalPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageList, setPageList] = useState<number[]>([1]);
+  const [totalSection, setTotalSection] = useState<number>(1);
+  const [currentSection, setCurrentSection] = useState<number>(1);
+  const [isToggleOn, setToggleOn] = useState<boolean>(false);
+  const [searchWord, setSearchWord] = useState<string>('');
+
+  //                    function                    //
+  const navigator = useNavigate();
+
+  const changePage = (designerBoardList: DesignerBoardListItem[], totalLength: number) => {
+    if (!currentPage) return;
+    const startIndex = (currentPage -1) * COUNT_PER_PAGE;
+    let endIndex = currentPage * COUNT_PER_PAGE;
+    if (endIndex > totalLength - 1) endIndex = totalLength;
+    const viewList = designerBoardList.slice(startIndex, endIndex);
+    setViewList(viewList);
+  };
+
+  const changeSection = (totalPage: number) => {
+    if (!currentSection) return;
+    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION -1);
+    let endPage = currentSection * COUNT_PER_SECTION;
+    if (endPage > totalPage) endPage = totalPage;
+    const pageList: number[] = [];
+    for (let page = startPage; page <= endPage; page++) pageList.push(page);
+    setPageList(pageList);
+  };
+
+  const changeDesignerBoardList = (designerBoardList: DesignerBoardListItem[]) => {
+    const totalLength = designerBoardList.length;
+    setTotalLength(totalLength);
+
+    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
+    setTotalPage(totalPage);
+
+    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
+    setTotalSection(totalSection);
+
+    changePage(designerBoardList, totalLength);
+
+    changeSection(totalPage);
+  };
+
+  const getDesignerBoardResponse = (result: GetDesignerBoardListResponseDto | ResponseDto | null) => {
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+      if (!result || result.code !== 'SU') {
+        alert(message);
+        if (result?.code === 'AF') navigator(MAIN_PATH);
+        return;
+      }
+
+      const { designerBoardList } = result as GetDesignerBoardListResponseDto;
+      changeDesignerBoardList(designerBoardList);
+
+      setCurrentPage(!designerBoardList.length ? 0 : 1);
+      setCurrentSection(!designerBoardList.length ? 0 : 1);
+  };
+
+  const getSearchDesignerBoardListResponse = (result: GetSearchDesignerBoardListResponseDto | ResponseDto | null) => {
+
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '검색어를 입력하세요.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      if (result?.code === 'AF') navigator(MAIN_PATH);
+      return;
+    }
+
+    const { designerBoardList } = result as GetSearchDesignerBoardListResponseDto;
+    changeDesignerBoardList(designerBoardList);
+
+    setCurrentPage(!designerBoardList.length ? 0 : 1);
+    setCurrentSection(!designerBoardList.length ? 0 : 1);
+  };
+
+  //                    event handler                    //
+  const onWriteButtonClickHandler = () => {
+    if (loginUserRole !== 'ROLE_USER') return;
+    navigator(DESIGNER_BOARD_WRITE_ABSOLUTE_PATH);
+  };
+
+  const  onPageClickHandler = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const onPreSectionClickHandler = () => {
+    if (currentSection <= 1) return;
+    setCurrentSection(currentSection -1);
+    setCurrentPage((currentSection -1) * COUNT_PER_SECTION);
+  };
+
+  const onNextSectionClickHandler = () => {
+    if (currentSection === totalSection) return;
+    setCurrentSection(currentSection + 1);
+    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+  };
+
+  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchWord = event.target.value;
+    setSearchWord(searchWord);
+  };
+
+  const onSearchButtonClickHandler = () => {
+    if (!searchWord) return;
+    if (!cookies.accessToken) return;
+
+    getSearchDesignerBoardListRequest(searchWord, cookies.accessToken).then(getSearchDesignerBoardListResponse);
+  };
+
+  //                    effect                    //
+  useEffect(() => {
+    if (!designerBoardList.length) return;
+    changePage(designerBoardList, totalLength);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (!designerBoardList.length) return;
+    changeSection(totalPage);
+  }, [currentSection]);
+
+  //                    render                    //
+  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+  return (
+    <div className='designerboard-list-wrapper'>
+      <div className='designerboard-list-search-box'>
+        <div className='designerboard-list-search-input-box'>
+          <input className='designerboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
         </div>
+        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
       </div>
-      <div className="designer-list-container">
-        <div className="designer-list-information">
-          <div className="designer-list-information1">번호</div>
-          <div className="designer-list-information2">제목</div>
-          <div className="designer-list-information3">작성일</div>
-          <div className="designer-list-information4">조회</div>
-        </div>
-      </div> 
-      <div className="designer-list-title">
-        <div className="designer-list-title1" onClick={handleGoToDetail}>게시물 제목 1</div>
-        <div className="designer-list-title2">게시물 제목 2</div>
-        <div className="designer-list-title3">게시물 제목 3</div>
-        <div className="designer-list-title4">게시물 제목 4</div>
-        <div className="designer-list-title5">게시물 제목 5</div>
-        <div className="designer-list-title6">게시물 제목 6</div>
-        <div className="designer-list-title7">게시물 제목 7</div>
-        <div className="designer-list-title8">게시물 제목 8</div>
-        <div className="designer-list-title9">게시물 제목 9</div>
-        <div className="designer-list-title10">게시물 제목 10</div>
-      </div>
-      <div className="pagination-wrapper">
-        <div className="pagination">
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">&gt;</a>
-          <a href="#">&gt;&gt;</a>
-        </div>
-        <div className="write-button" onClick={handleGoToWrite}>
-          글쓰기
+      <div className='designerboard-list-table'>
+        <div className='designerboard-table-th'>
+          <div className='qna-list-table-reception-number'>접수번호</div>
+          <div className='qna-list-table-title'>제목</div>
+          <div className='qna-list-table-writer-id'>작성자</div>
+          <div className='qna-list-table-write-date'>작성일</div>
+          <div className='qna-list-table-viewcount'>조회수</div>
         </div>
       </div>
     </div>
   );
+
 }
