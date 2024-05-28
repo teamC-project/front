@@ -35,7 +35,7 @@
 .information-image {
   min-width: 303px;
   min-height: 167px;
-  background-image: url("../../assets/image/Rectangle\ 366.png");
+  background-image: url("../../../assets/image/Rectangle\ 366.png");
 }
 
 .password-change-container {
@@ -49,7 +49,7 @@
 .password-change-image {
   min-width: 303px;
   min-height: 167px;
-  background-image: url("../../assets/image/Rectangle\ 364.png");
+  background-image: url("../../../assets/image/Rectangle\ 364.png");
 }
 
 .user-delete-container {
@@ -63,5 +63,5 @@
 .user-delete-image {
   min-width: 303px;
   min-height: 167px;
-  background-image: url("../../assets/image/Rectangle\ 368.png");
+  background-image: url("../../../assets/image/Rectangle\ 368.png");
 }
