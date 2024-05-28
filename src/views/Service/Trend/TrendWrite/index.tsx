@@ -1,11 +1,20 @@
-import React, { useRef } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import ToolBar from '../../../../components/ToolBar'; 
 import './style.css';
-import '../../../../App.css';
-
 
 export default function TrendWrite() {
 	const textAreaRef = useRef<HTMLDivElement>(null);
+	const [content, setContent] = useState<string>('');
+
+	const onChangeHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+		// ;
+		if (event.key === 'Backspace') setContent(content.substring(0, content.length-1));
+		else if (event.key === 'Enter') {
+			event.preventDefault();
+			setContent(content + '<br />');
+		};
+		console.log(event.key)
+	}
 
   return (
     <div id='trend-board-write-wrapper'>
@@ -17,8 +26,11 @@ export default function TrendWrite() {
         <ToolBar />
 				<div
 				ref={textAreaRef}
+				onKeyDown={onChangeHandler}
 				contentEditable
-				className='trend-board-textarea'></div>
+				content={content}
+				className='trend-board-textarea'>
+				</div>
       </div>
       <div className='trend-board-write-footer'>
         <div className='trend-board-button-container'>
