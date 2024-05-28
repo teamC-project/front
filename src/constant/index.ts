@@ -3,21 +3,21 @@ export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
 
 export const AUTH_PATH = "/auth";
-export const SIGN_IN_PATH = `sign_in`;
-export const SIGN_UP_PATH = "sign_up";
+export const SIGN_IN_PATH = `sign-in`;
+export const SIGN_UP_PATH = "sign-up";
 export const CUSTOMER_PATH = "customer";
 export const DESIGNER_PATH = "designer";
-export const ID_FOUND_PATH = "id_found";
-export const PASSWORD_FOUND_PATH = "password_found";
-export const PASSOWORD_SETUP_PATH = "password_setup";
+export const ID_FOUND_PATH = "id-found";
+export const PASSWORD_FOUND_PATH = "password-found";
+export const PASSOWORD_SETUP_PATH = "password-setup";
 
 export const SERVICE_PATH = "/service";
 
-export const MY_PAGE_PATH = "my_page";
-export const UPDATE_CUSTOMER_INFO_PATH = "update_user_info";
-export const UPDATE_DESIGNER_INFO_PATH = "update_user_info";
-export const UPDATE_PASSWORD_PATH = "update_user_password"
-export const DELETE_INFO_PATH = "delete_user_info";
+export const MY_PAGE_PATH = "my-page";
+export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
+export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
+export const UPDATE_PASSWORD_PATH = "update-user-password"
+export const DELETE_INFO_PATH = "delete-user-info";
 
 export const AUNNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";

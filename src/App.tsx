@@ -24,14 +24,19 @@ import DesignerList from "./views/Service/Designer/DesignerList";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
-import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
+
 import QnaList from "./views/Service/qna/QnaList";
 import QnaWrite from "./views/Service/qna/QnaWrite";
 import QnaDetail from "./views/Service/qna/QnaDetail";
+import QnaList from "./views/Service/qna/qnaList";
+import QnaWrite from "./views/Service/qna/qnaWrite";
+import QnaDetail from "./views/Service/qna/qnaDetail";
+import CustomerUpdate from "./views/User/CustomerUpdate";
+import InfoCustomer from "./views/User/CustomerUpdate";
 
 
 //  component: root 경로 컴포넌트 //
@@ -76,15 +81,17 @@ function App() {
       </Route>
 
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-        <Route path={MY_PAGE_PATH} >
-          <Route index element={<MyPage />} />
-          <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<SettingPassword />} />
-          <Route path={UPDATE_DESIGNER_INFO_PATH} element={<SettingPassword />} />
-          <Route path={UPDATE_PASSWORD_PATH} element={<SettingPassword />} />
-          <Route path={DELETE_INFO_PATH} element={<SettingPassword />} />
-        </Route>
+
+      <Route path={MY_PAGE_PATH} >
+      <Route index element={<MyPage />} />
+      <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
+      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoCustomer />} />
+      <Route path={UPDATE_PASSWORD_PATH} element={<CustomerUpdate />} />
+      <Route path={DELETE_INFO_PATH} element={<CustomerUpdate />} />
+      </Route>
       
       <Route path={AUNNOUNCEMENT_BOARD_PATH} >
+        
       <Route index element={<AnnouncementList />} />
       <Route path={AUNNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
       {/* <Route path={AUNNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} /> */}
