@@ -31,9 +31,9 @@ import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 import PasswordFoundPage from "./views/PasswordFound";
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
+import QnaList from "./views/Service/qna/QnaList";
+import QnaWrite from "./views/Service/qna/QnaWrite";
+import QnaDetail from "./views/Service/qna/QnaDetail";
 
 
 //  component: root 경로 컴포넌트 //
