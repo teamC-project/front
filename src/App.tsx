@@ -9,11 +9,12 @@ import Authentication, { ChooseSingUp, CustomerSignUp, DesignerSignUp, Main, Sig
 
 import IdFound from "./views/IdFound";
 import PasswordFound, { SettingPassword } from "./views/PasswordFound";
-import MyPage from "./views/MyPage";
+import MyPage from "./views/User/MyPage";
 
 import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
 import TrendDetail from "./views/Service/Trend/TrendDetail";
+
 
 
 
@@ -29,10 +30,17 @@ import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
+<<<<<<< HEAD
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
 import PasswordFoundPage from "./views/PasswordFound";
+=======
+import PasswordFoundPage from "./views/PasswordFound";
+import QnaList from "./views/Service/qna/qnaList";
+import QnaWrite from "./views/Service/qna/qnaWrite";
+import QnaDetail from "./views/Service/qna/qnaDetail";
+>>>>>>> 10133a81d7da9b09d555e61577020918be5825d4
 
 
 //  component: root 경로 컴포넌트 //
@@ -78,7 +86,8 @@ function App() {
       </Route>
 
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
-        <Route path={MY_PAGE_PATH} element={<MyPage />} />
+
+      <Route path={MY_PAGE_PATH} element={<MyPage />} />
 
       <Route path={AUNNOUNCEMENT_BOARD_PATH} >
       <Route index element={<AnnouncementList />} />
