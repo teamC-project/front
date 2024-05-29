@@ -27,23 +27,13 @@ import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
-<<<<<<< HEAD
-import PasswordFoundPage from "./views/PasswordFound";
+
+
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
-=======
-
-
-import QnaList from "./views/Service/qna/QnaList";
-import QnaWrite from "./views/Service/qna/QnaWrite";
-import QnaDetail from "./views/Service/qna/QnaDetail";
-import QnaList from "./views/Service/qna/qnaList";
-import QnaWrite from "./views/Service/qna/qnaWrite";
-import QnaDetail from "./views/Service/qna/qnaDetail";
 import CustomerUpdate from "./views/User/CustomerUpdate";
 import InfoCustomer from "./views/User/CustomerUpdate";
->>>>>>> 72188c605ba7b2cf1be11f074c88eb33ceea1e48
 
 
 //  component: root 경로 컴포넌트 //
