@@ -6,3 +6,12 @@ export interface QnaBoardListItem {
 	qnaBoardWriteDatetime : string ;
 	qnaBoardViewCount : number;
 }
+
+export interface CustomerBoardListItem {
+	customerBoardNumber : number;
+	customerBoardStatus : boolean;
+	customerBoardTitle : string;
+	customerBoardWriterId : string;
+	customerBoardWriteDatetime : string ;
+	customerBoardViewCount : number;
+}
