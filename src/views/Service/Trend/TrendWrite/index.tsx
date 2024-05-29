@@ -18,6 +18,7 @@ export default function TrendWrite() {
 	const [cookies] = useCookies();
 	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
+	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<string[]>([]);
 
 	
   //                    function                    //
@@ -49,21 +50,32 @@ export default function TrendWrite() {
 			setTrendBoardTitle(trendBoardTitle);
 		}
 
-		const onTrendBoardContentsChangeHandler = (trendBoardContents: string) => {
+		const onTrendBoardContentsChangeHandler = (trendBoardContents: string ) => {
 			setTrendBoardContents(trendBoardContents);
+			setTrendBoardUrlList(trendBoardUrlList);
 		}
-	
-	const onTrendPostClickHandler = () => {
-		if(!trendBoardTitle.trim() ||  !trendBoardContents.trim()) return;
-		if(!cookies.accessToken) return;
 
-		const requestBody : PostTrendBoardRequestDto ={
-			trendBoardTitle,
-			trendBoardContents,
-		}
-		postTrendBoardRequest(requestBody, cookies.accessToken.then(postTrendBoardResponse))
-		navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
-	}
+		
+	
+    const onTrendPostClickHandler = async () => {
+      if (!trendBoardTitle.trim() || !trendBoardContents.trim()) return;
+      if (!cookies.accessToken) return;
+  
+      const requestBody: PostTrendBoardRequestDto = {
+          trendBoardTitle,
+          trendBoardContents,
+					trendBoardUrlList
+      };
+  
+      try {
+          const token = await Promise.resolve(cookies.accessToken); 
+          const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
+          navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); 
+      } catch (error) {
+          console.error("Error posting trend board request:", error);
+
+      }
+  };
 
 	  //                    effect                    //
 		useEffect(() => {
