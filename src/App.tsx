@@ -36,6 +36,7 @@ import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
 
 
+
 //  component: root 경로 컴포넌트 //
 function Index() {
 

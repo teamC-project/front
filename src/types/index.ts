@@ -7,6 +7,14 @@ export interface QnaBoardListItem {
 	qnaBoardViewCount : number;
 };
 
+export interface CustomerBoardListItem {
+	customerBoardNumber : number;
+	customerBoardStatus : boolean;
+	customerBoardTitle : string;
+	customerBoardWriterId : string;
+	customerBoardWriteDatetime : string ;
+	customerBoardViewCount : number;
+}	
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
 	designerBoardTitle : string;
