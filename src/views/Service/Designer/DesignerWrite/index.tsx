@@ -8,6 +8,7 @@ import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
 import { postDesignerBoardRequest } from 'src/apis/designerBoard';
 import ToastEditor from 'src/components/ToastEditor';
+import Editor from '@toast-ui/editor';
 
 //              component               //
 export default function DesignerWrite() {
@@ -20,6 +21,7 @@ export default function DesignerWrite() {
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
+    const editorRef = useRef<Editor|null>(null);
 
     //              function               //
     const navigator = useNavigate();
@@ -124,8 +126,7 @@ export default function DesignerWrite() {
             </div>
 
 
-            <ToastEditor body={''} setBody={function (body: string): void { } } imageHandler={function (blob: File, callback: FunctionConstructor): void {
-				} } />
+            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
 
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
