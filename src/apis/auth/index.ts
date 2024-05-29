@@ -1,6 +1,6 @@
 import axios from "axios";
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpRequestDto } from "./dto/request";
-import { EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, ID_CHECK_REQUEST_URL, SIGN_IN_REQUEST_URL, SIGN_UP_REQUEST_URL } from "src/constant";
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
+import { CUSTOMER_SIGN_UP_URL, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, ID_CHECK_REQUEST_URL, SIGN_IN_REQUEST_URL } from "src/constant";
 import { SignInResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
 import { requestErrorHandler, requestHandler } from "..";
@@ -37,9 +37,17 @@ export const emailAuthCheckRequest = async (requestBody: EmailAuthCheckRequestDt
     return result;
 }
 
-// function: 회원가입 API 함수
-export const signUpRequest = async (requestBody: SignUpRequestDto) => {
-  const result = await axios.post(SIGN_UP_REQUEST_URL, requestBody)
+// function: 고객 회원가입 API 함수
+export const customerSignUpRequest = async (requestBody: SignUpCustomerRequestDto) => {
+  const result = await axios.post(CUSTOMER_SIGN_UP_URL, requestBody)
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
+
+// function: 디자이너 회원가입 API 함수
+export const designerSignUpRequest = async (requestBody: SignUpDesignerRequestDto) => {
+  const result = await axios.post(DESIGNER_SIGN_UP_URL, requestBody)
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;

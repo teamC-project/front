@@ -190,19 +190,21 @@
   margin-top: 50px;
   margin-bottom: 50px;
 
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
 
   min-width: 800px;
 }
 
 .auth-sign-up-text {
   padding: 5px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   width: 200px;
   height: 50px;
   line-height: 50px;
+
+  color: rgba(42, 38, 38, 1);
 }
 
 .auth-sign-up-box {
@@ -242,6 +244,7 @@
 /* 회원가입 세부 */
 .auth-sign-up-box-text {
   display: flex;
+  width: 800px;
 }
 
 .auth-submit-box {
@@ -250,19 +253,16 @@
   margin-top: 15px;
 }
 
+.auth-radio-box {
+  display: flex;
+  text-align:center
+}
+
 .auth-sign-up-radio-box {
   font-size: 24px;
   height: 50px;
   line-height: 50px;
 }
-
-.auth-sign-up-next-box {
-  display: flex;
-  gap: 50px;
-  margin-right: 30px;
-  width: 300px;
-}
-
 
 .auth-sign-in-button-size {
   width: 120px;
