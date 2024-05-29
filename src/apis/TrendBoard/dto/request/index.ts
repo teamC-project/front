@@ -1,6 +1,7 @@
 export interface PostTrendBoardRequestDto {
 	trendBoardTitle : string;
 	trendBoardContents : string;
+	trendBoardUrlList : string[];
 }
 
 export interface PostTrendBoardCommentRequestDto {
@@ -8,6 +9,7 @@ export interface PostTrendBoardCommentRequestDto {
 }
 
 export interface PutTrendBoardRequestDto {
-	title :string;
-	contents : string;
+	trendBoardTitle :string;
+	trendBoardContents : string;
+	trendBoardUrlList : string;
 }
