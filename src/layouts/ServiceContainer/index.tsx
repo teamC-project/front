@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import useUserStore from "src/stores/user.store";
@@ -25,6 +25,10 @@ function Top({ path }: Props) {
     const navigator = useNavigate();
 
     //                    event handler                    //
+    const onMyPageClickHandler = () => {
+      navigator(MY_PAGE_ABSOLUTE_PATH);
+  };
+
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         navigator(MAIN_PATH);
@@ -37,7 +41,7 @@ function Top({ path }: Props) {
             <div className='top-logo'></div>
             <div className='top-bar-title'>{ path }</div>
             <div className='top-bar-service'>
-                { loginUserRole !== 'ROLE_ADMIN' && <div className='top-bar-role'>내정보</div>}
+                <div className='second-button' onClick={onMyPageClickHandler}>내정보</div>
                 <div className='second-button' onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
         </div>
