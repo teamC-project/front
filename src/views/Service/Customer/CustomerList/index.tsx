@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
+import { useUserStore } from 'src/stores';
 import { useNavigate } from 'react-router-dom';
+import { MAIN_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { CustomerBoardListItem} from 'src/types';
 import { GetCustomerBoardListResponseDto } from 'src/apis/CustomerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { CustomerBoardListItem} from 'src/types';
+
 
 
 
@@ -19,6 +22,7 @@ export default function CustomerList() {
 	const [customerBoardIsToggleOn, setCustomerBoardToggleOn] = useState<boolean>(false);
 	
 	const [customerBoardSearchWord, setCustomerBoardSearchWord] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export default function CustomerList() {
 
   const fetchBoardList = async (page: number) => {
     try {
-      const response = await fetch(`/api/customer-board?page=${page}&search=${searchTerm}`);
+      const response = await fetch(`/api/customer-board?page=${customerBoardCurrentPage}&search=${customerBoardSearchWord}`);
       const data = await response.json();
       setCustomerBoardList(data);
     } catch (error) {

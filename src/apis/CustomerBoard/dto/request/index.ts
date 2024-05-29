@@ -1,3 +1,4 @@
+// description: Customer 작성 Request Body DTO //
 export interface PostCustomerBoardRequestDto {
   title: string;
   contents: string;

@@ -10,10 +10,11 @@ export interface GetCustomerBoardListResponseDto extends ResponseDto {
 }
 
 export interface GetCustomerBoardResponseDto extends ResponseDto {
-  customerBoardNumber: number;
-  customerBoardTitle: string;
-  customerBoardWriterId: string;
-  customerBoardContents: string;
-  customerBoardViewCount: number;
-  customerBoardWriteDatetime: string;
+	customerBoardNumber  : number;
+	customerBoardStatus  : boolean;
+	customerBoardTitle : string;
+	customerBoardWriterId  : string;
+	customerBoardContents : string;
+	customerBoardViewCount : number;
+	customerBoardComment : string | null;
 }
