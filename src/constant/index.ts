@@ -126,12 +126,12 @@ export const SIGN_IN_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-in`;
 export const ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/id-check`;
 export const EMAIL_AUTH_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth`;
 export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-auth-check`;
-export const SIGN_UP_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/sign-up`;
 export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/customer`;
 export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`;
 
-
-
+export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
+export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
+export const SETUP_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/assword-setup`;
 
 
 // description : USER API URL PATH 

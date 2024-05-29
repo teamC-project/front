@@ -20,14 +20,25 @@ export interface EmailAuthCheckRequestDto {
   authNumber : string;
 }
 
-// description: 회원가입 Requset Body DTO
-export interface SignUpRequestDto {
+// description: 고객 회원가입 Requset Body DTO
+export interface SignUpCustomerRequestDto {
   userId : string;
   userPassword : string;
   userEmail : string;
   authNumber : string;
-  userAge : string;
   userGender : string;
-  userCompanyName? : string;
-  userImage? : string;
+  userAge : string;
+  joinPath: string;
+}
+
+// description: 디자이너 회원가입 Requset Body DTO
+export interface SignUpDesignerRequestDto {
+  userId : string;
+  userPassword : string;
+  userEmail : string;
+  authNumber : string;
+  userGender : string;
+  userAge : string;
+  userCompanyName : string;
+  userImage : string;
 }
