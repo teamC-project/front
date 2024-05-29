@@ -41,4 +41,5 @@ export interface SignUpDesignerRequestDto {
   userAge : string;
   userCompanyName : string;
   userImage : string;
+  joinPath: string;
 }
