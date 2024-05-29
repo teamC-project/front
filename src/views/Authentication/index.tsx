@@ -95,10 +95,8 @@ export function SignIn() {
 
   //                    state                    //
   const [cookies, setCookie] = useCookies();
-
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
   const [message, setMessage] = useState<string>('');
 
   //                    function                    //
@@ -109,11 +107,10 @@ export function SignIn() {
     const message =
       !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
-          result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-            result.code === 'TF' ? '서버에 문제가 있습니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+        result.code === 'TF' ? '서버에 문제가 있습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
     setMessage(message);
-
     const isSuccess = result && result.code === 'SU';
     if (!isSuccess) return;
 
@@ -132,7 +129,6 @@ export function SignIn() {
     setMessage('');
   };
 
-
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     setMessage('');
@@ -148,7 +144,6 @@ export function SignIn() {
       setMessage('아이디와 비밀번호를 모두 입력하세요.')
       return;
     }
-
     const requestBody: SignInRequestDto = {
       userId: id,
       userPassword: password
@@ -182,14 +177,15 @@ export function SignIn() {
             <div className='sign-in-contents'>
               <div className='auth-sign-up-box-text'>
                 <div className='auth-sign-up-text'>아이디</div>
-                <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} /></div>
+                <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler}  />
+                </div>
               </div>
 
               <div className='auth-sign-up-box-text'>
                 <div className='auth-sign-up-text'>비밀번호</div>
-                <div className='auth-sign-up-next-box'><InputBox label='' type='password' value={password} placeholder='비밀번호를 입력해주세요.' onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error /></div>
+                <div className='auth-sign-up-next-box'><InputBox label='' type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
+                </div>
               </div>
-              <div className='error-text'>로그인 정보가 일치하지 않습니다</div>
 
               <div className='auth-submit-box'>
                 <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>

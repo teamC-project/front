@@ -43,3 +43,9 @@ export interface SignUpDesignerRequestDto {
   userImage : string;
   joinPath: string;
 }
+
+// description: 아이디 찾기 Requset Body DTO
+export interface FoundIdCheckRequestDto {
+  userEmail : string;
+  authNumber : string;
+}
