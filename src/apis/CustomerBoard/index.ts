@@ -47,4 +47,3 @@ export const putCustomerBoardRequest = async (customerBoardNumber: number | stri
 };
 
 
-// function :  CustomerBoard 검색 리스트 불러오기 API 함수

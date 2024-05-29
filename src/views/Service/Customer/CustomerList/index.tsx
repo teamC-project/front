@@ -12,6 +12,7 @@ import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
 //                    component                    //
 function ListItem ({
   customerBoardNumber,
+  customerBoardStatus,
   customerBoardTitle,
   customerBoardWriterId,
   customerBoardWriteDatetime,
@@ -52,6 +53,7 @@ export default function CustomerList() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
+  const [isSearched, setIsSearched] = useState<boolean>(false);
 
   //                    function                    //
   const navigator = useNavigate();
@@ -124,20 +126,21 @@ export default function CustomerList() {
     }
 
     const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
+    setCustomerBoardList(customerBoardList);
     changeCustomerBoardList(customerBoardList);
-
+    changePage(customerBoardList, customerBoardList.length); // 변경: 반환된 customerBoardList 사용
     setCurrentPage(!customerBoardList.length ? 0 : 1);
     setCurrentSection(!customerBoardList.length ? 0 : 1);
-  };
+  };  
 
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_CUSTOMER') return;
     navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   const  onPageClickHandler = (page: number) => {
     setCurrentPage(page);
+    changePage(customerBoardList, totalLength);
   };
 
   const onPreSectionClickHandler = () => {
@@ -158,13 +161,32 @@ export default function CustomerList() {
   };
 
   const onSearchButtonClickHandler = () => {
-    if (!searchWord) return;
-    if (!cookies.accessToken) return;
+    if (!searchWord) {
+      alert('검색어를 입력하세요.');
+      return;
+    }
 
-    getSearchCustomerBoardListRequest(searchWord, cookies.accessToken).then(getSearchCustomerBoardListResponse);
-  };
+    if (!cookies.accessToken) return;
+    
+    setIsSearched(true);
+    getSearchCustomerBoardListRequest(searchWord, cookies.accessToken)
+    .then(getSearchCustomerBoardListResponse);
+};
+
+useEffect(() => {
+  if (!isSearched) return; // 변경
+
+  getSearchCustomerBoardListRequest(searchWord, cookies.accessToken)
+    .then(getSearchCustomerBoardListResponse);
+}, [isSearched, searchWord, cookies.accessToken]);
 
   //                    effect                    //
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getSearchCustomerBoardListRequest('', cookies.accessToken)
+      .then(getSearchCustomerBoardListResponse);
+  }, [cookies.accessToken]);
+  
   useEffect(() => {
     if (!customerBoardList.length) return;
     changePage(customerBoardList, totalLength);
@@ -180,10 +202,11 @@ export default function CustomerList() {
   return (
     <div className='customerboard-list-wrapper'>
       <div className='customerboard-list-search-box'>
+        <div className='customerboard-list-search-keyword'>검색 키워드</div>
         <div className='customerboard-list-search-input-box'>
           <input className='customerboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
         </div>
-        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+        <div className='primary-button' onClick={onSearchButtonClickHandler}>검색</div>
       </div>
       <div className='customerboard-list-table'>
         <div className='customerboard-table-th'>
@@ -208,7 +231,7 @@ export default function CustomerList() {
           </div>
           <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
+        <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div> 
       </div>
     </div>
   );

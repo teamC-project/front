@@ -3,6 +3,14 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.customerboard-list-search-keyword {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .customerboard-list-search-input-box {
@@ -15,6 +23,16 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.primary-button {
+  padding: 8px 16px;
+  background-color: #3a57e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 /* 수정: 게시물 목록 테이블 스타일 */
@@ -40,15 +58,17 @@
 }
 
 .customerboard-list-table-title {
-  flex: 3;
-  text-align: center;
+  flex: 6;
+  text-align: left;
+  padding-left: 10px; /* 제목 왼쪽 패딩 추가 */
 }
 
 .customerboard-list-table-tr {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e0e0e0; /* 회색 테두리 */
+  background-color: #ffffff; /* 흰색 배경 */
   cursor: pointer;
 }
 
