@@ -29,7 +29,6 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
-
 import CustomerUpdate from "./views/User/CustomerUpdate";
 import InfoCustomer from "./views/User/CustomerUpdate";
 import QnaList from "./views/Service/Qna/QnaList";
@@ -104,7 +103,7 @@ function App() {
       </Route>
 
       <Route path={QNA_BOARD_PATH} >
-        <Route index element={<QnaList />} />
+        <Route index element={<QnaList  />} />
         <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
         <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
         {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}

@@ -22,4 +22,8 @@ img {
   height: auto;
 }
 
+.trend-board-textarea {
+	white-space: pre-wrap;
+}
+
 

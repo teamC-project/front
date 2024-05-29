@@ -3,119 +3,119 @@ import'./style.css'
 import '../../../../App.css'
 export default function TrendList() {
 	return (
-		<div id='trend_board_wrapper'>
-			<div className="trend_board_list_top_bar">
-				<input className='search_input' placeholder='제목을 입력하세요.'/>
-				<div className='search_button'>검색</div>
+		<div id='trend-board-wrapper'>
+			<div className="trend-board-list-top-bar">
+				<input className='search-input' placeholder='제목을 입력하세요.'/>
+				<div className='search-button'>검색</div>
 			</div>
-			<div className="trend_board_list_container">
-				<div className='trend_board_list'>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+			<div className="trend-board-list-container">
+				<div className='trend-board-list'>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
-						</div>
-					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
-						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
-						</div>
-					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
-						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
+						</div>
+					</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
+						</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
+						</div>
+					</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
+						</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
 				</div>
-				<div className='trend_board_list'>
-				<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+				<div className='trend-board-list'>
+				<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
-						</div>
-					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
-						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
-						</div>
-					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
-						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
-					<div className='trend_board_card'>
-						<div className='trend_board_image'></div>
-						<div className='trend_board_title_box'>
-						<div className='trend_board_title'>트렌드 게시판 게시물 제목</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
 						</div>
-						<div className='trend_board_card_bottom_bar'>
-							<div className = 'trend_board_card_datetime'>2024.05.23</div>
-							<div className='trend_board_comment_count'>25</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
+						</div>
+					</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
+						</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
+						</div>
+					</div>
+					<div className='trend-board-card'>
+						<div className='trend-board-image'></div>
+						<div className='trend-board-title-box'>
+						<div className='trend-board-title'>트렌드 게시판 게시물 제목</div>
+						</div>
+						<div className='trend-board-card-bottom-bar'>
+							<div className = 'trend-board-card-datetime'>2024.05.23</div>
+							<div className='trend-board-comment-count'>25</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='trend_board_list_bottom_bar'>
-				<div className='board_pagenation'></div>
+			<div className='trend-board-list-bottom-bar'>
+				<div className='board-pagenation'></div>
 			</div>
 		</div>
 	)
