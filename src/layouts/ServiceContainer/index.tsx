@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
-import useUserStore from "src/stores/user.store";
+import useUserStore from "src/stores/use.store";
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
