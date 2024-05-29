@@ -7,6 +7,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
 import { postDesignerBoardRequest } from 'src/apis/designerBoard';
+import ToastEditor from 'src/components/ToastEditor';
+import Editor from '@toast-ui/editor';
 
 //              component               //
 export default function DesignerWrite() {
@@ -19,6 +21,7 @@ export default function DesignerWrite() {
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
+    const editorRef = useRef<Editor|null>(null);
 
     //              function               //
     const navigator = useNavigate();
@@ -121,19 +124,10 @@ export default function DesignerWrite() {
                     <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
-            <div className='designer-write-contents-box'>
-                <textarea ref={contentsRef} className='designer-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
-            </div>
-            <div className='upload-file'>첨부 파일
-            <button onClick={handleImageUpload}>파일 선택</button>
-        <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={handleFileInputChange}
-        />
-        </div>
+
+
+            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
+
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );
