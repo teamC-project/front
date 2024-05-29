@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
-import ResponseDto from 'src/apis/reponse.dto';
 import useUserStore from "src/stores/user.store";
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
@@ -27,8 +26,8 @@ function Top({ path }: Props) {
 
     //                    event handler                    //
     const onLogoutClickHandler = () => {
-        // removeCookie('accessToken', { path: '/' });
-        // navigator(AUTH_ABSOLUTE_PATH);
+        removeCookie('accessToken', { path: '/' });
+        navigator(MAIN_PATH);
     };
 
     //                    render                       //
@@ -39,7 +38,7 @@ function Top({ path }: Props) {
             <div className='top-bar-title'>{ path }</div>
             <div className='top-bar-service'>
                 { loginUserRole !== 'ROLE_ADMIN' && <div className='top-bar-role'>내정보</div>}
-                <div className='logout-button' onClick={onLogoutClickHandler}>로그아웃</div>
+                <div className='second-button' onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
         </div>
         </>

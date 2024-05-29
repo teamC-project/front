@@ -1,0 +1,17 @@
+/* 색상 선택 창을 가로로 변경하는 스타일 */
+.toastui-editor-popup-add-colors .tui-colorpicker-palette-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.toastui-editor-popup-add-colors .tui-colorpicker-palette-container .tui-colorpicker-palette {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.toastui-editor-popup-add-colors .tui-colorpicker-palette-container .tui-colorpicker-palette-item {
+  margin: 2px;
+}

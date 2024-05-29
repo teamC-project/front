@@ -1,7 +1,5 @@
 import { AxiosResponse } from "axios";
-import ResponseDto from "./reponse.dto";
-
-
+import ResponseDto from "./response.dto";
 
 // function: Request 처리 함수 
 export const requestHandler = <T>(response: AxiosResponse<T, any>) => {
@@ -17,4 +15,4 @@ export const requestErrorHandler = (error: any) => {
 }
 
 // function: Authorization Bearer 헤더
-export const bearerAuthorization = (accessToken:string) => ({ headers: { 'Authorization': `Bearer ${accessToken}` } })
+export const bearerAuthorization = (accessToken: string) => ({ headers: { 'Authorization': `Bearer ${accessToken}` } })
