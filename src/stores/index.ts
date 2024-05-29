@@ -1,3 +1,3 @@
-import useUserStore from "./user.store";
+import useUserStore from "./use.store";
 
 export { useUserStore };
