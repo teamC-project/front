@@ -62,6 +62,7 @@ export default function TrendWrite() {
 			trendBoardContents,
 		}
 		postTrendBoardRequest(requestBody, cookies.accessToken.then(postTrendBoardResponse))
+		navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 	}
 
 	  //                    effect                    //

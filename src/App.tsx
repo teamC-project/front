@@ -29,21 +29,11 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
-<<<<<<< HEAD
-import QnaList from "./views/Service/Qna/QnaList";
-import QnaWrite from "./views/Service/Qna/QnaWrite";
-import QnaDetail from "./views/Service/Qna/QnaDetail";
-
-
-import CustomerUpdate from "./views/User/CustomerUpdate";
-import InfoCustomer from "./views/User/CustomerUpdate";
-=======
 import CustomerUpdate from "./views/User/CustomerUpdate";
 import InfoCustomer from "./views/User/CustomerUpdate";
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
->>>>>>> 200b81c7137291d6e8b2e0859d510b4820590c5d
 
 
 //  component: root 경로 컴포넌트 //
