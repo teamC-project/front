@@ -3,12 +3,12 @@
   flex-direction: column;
 }
 
-.sdf {
+.white-space1 {
   display: flex;
   background-color: chartreuse;
 }
 
-.asd {
+.white-space2 {
   width: 400px;
   background-color: darksalmon;
 }
@@ -99,7 +99,7 @@
   line-height: 50px;
 }
 
-.white-space1 {
+.white-space4 {
   min-width: 200px;
   height: 200px;
   background-color: yellow;

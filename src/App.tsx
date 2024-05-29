@@ -34,6 +34,7 @@ import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
 import CustomerUpdate from "./views/User/InfoCustomer";
 import InfoCustomer from "./views/User/InfoCustomer";
+import InfoDesigner from "./views/User/InfoDesigner";
 
 
 //  component: root 경로 컴포넌트 //
@@ -82,7 +83,7 @@ function App() {
       <Route path={MY_PAGE_PATH} >
       <Route index element={<MyPage />} />
       <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
-      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoCustomer />} />
+      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={UPDATE_PASSWORD_PATH} element={<CustomerUpdate />} />
       <Route path={DELETE_INFO_PATH} element={<CustomerUpdate />} />
       </Route>
