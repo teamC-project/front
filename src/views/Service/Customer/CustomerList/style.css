@@ -1,127 +1,97 @@
-.search-box {
+/* 추가: 검색 박스 스타일 */
+.customerboard-list-search-box {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #f2f2f2;
-  border-radius: 4px;
   margin-bottom: 20px;
 }
 
-.search-keyword {
-  font-size: 16px;
-  font-weight: bold;
+.customerboard-list-search-input-box {
+  flex: 1;
   margin-right: 10px;
 }
 
-.list-search-input {
-  flex: 1;
+.customerboard-list-search-input {
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
 }
 
-.search-button {
-  padding: 8px 16px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 10px;
+/* 수정: 게시물 목록 테이블 스타일 */
+.customerboard-list-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.customer-list-container {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.customer-list-header {
+.customerboard-table-th {
   display: flex;
-  align-items: center;
-  padding: 12px;
   background-color: #f2f2f2;
-  border-bottom: 1px solid #ccc;
+  padding: 10px;
   font-weight: bold;
+  border-bottom: 1px solid #ccc;
 }
 
-.customer-list-header-item {
+.customerboard-list-table-reception-number,
+.customerboard-list-table-writer-id,
+.customerboard-list-table-write-date,
+.customerboard-list-table-viewcount {
   flex: 1;
   text-align: center;
-  font-size: 14px;
 }
 
-.customer-list-item {
+.customerboard-list-table-title {
+  flex: 3;
+  text-align: center;
+}
+
+.customerboard-list-table-tr {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.customer-list-item:hover {
+.customerboard-list-table-tr:hover {
   background-color: #f9f9f9;
 }
 
-.customer-list-item-number,
-.customer-list-item-views {
-  flex: 0.5;
-  text-align: center;
-  font-size: 14px;
-}
-
-.customer-list-item-title {
-  flex: 6;
-  text-align: left;
-  font-size: 14px;
-}
-
-.customer-list-item-date {
-  flex: 1;
-  text-align: center;
-  font-size: 14px;
-}
-
-.pagination-wrapper {
+/* 수정: 페이지네이션과 글쓰기 버튼 스타일 */
+.customerboard-list-bottom {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
 }
 
-.pagination {
+.customerboard-list-pagenation {
   display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  align-items: center;
 }
 
-.pagination li {
-  margin: 0 4px;
+.customerboard-list-page-left,
+.customerboard-list-page-right {
+  cursor: pointer;
+  margin: 0 5px;
 }
 
-.pagination a {
-  display: block;
-  padding: 8px 12px;
-  text-decoration: none;
-  color: #333;
-  background-color: #f2f2f2;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+.customerboard-list-page-box {
+  display: flex;
 }
 
-.pagination a:hover {
-  background-color: #ddd;
+.customerboard-list-page,
+.customerboard-list-page-active {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-.write-button {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
+.customerboard-list-page-active {
+  font-weight: bold;
+}
+
+/* 추가: 글쓰기 버튼 스타일 */
+.customerboard-list-write-button {
   padding: 8px 16px;
   background-color: #4caf50;
   color: white;
@@ -129,5 +99,4 @@
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
-  
 }

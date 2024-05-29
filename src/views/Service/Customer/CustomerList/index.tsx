@@ -1,109 +1,216 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
+import './style.css'
+import { useNavigate } from 'react-router';
+import { CustomerBoardListItem } from 'src/types';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { useNavigate } from 'react-router-dom';
-import { MAIN_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH } from 'src/constant';
-import { CustomerBoardListItem} from 'src/types';
-import { GetCustomerBoardListResponseDto } from 'src/apis/CustomerBoard/dto/response';
+import { useCookies } from 'react-cookie';
+import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
+import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
 
+//                    component                    //
+function ListItem ({
+  customerBoardNumber,
+  customerBoardTitle,
+  customerBoardWriterId,
+  customerBoardWriteDatetime,
+  customerBoardViewCount
+}: CustomerBoardListItem) {
 
+  //              function              //
+  const navigator = useNavigate();
 
+  //              event handler              //
+  const onClickHandler = () => navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
 
+  //              render              //
+  return (
+    <div className='customerboard-list-table-tr' onClick={onClickHandler}>
+      <div className='customerboard-list-table-number'>{customerBoardNumber}</div>
+      <div className='customerboard-list-table-title' style={{ textAlign:'left' }}>{customerBoardTitle}</div>
+      <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
+      <div className='customerboard-list-table-write-date'>{customerBoardWriteDatetime}</div>
+      <div className='customerboard-list-table-viewcount'>{customerBoardViewCount}</div>
+    </div>
+  );
+}
+
+//                    component                    //
 export default function CustomerList() {
-  const [searchTerm, setSearchTerm] = useState('');
+
+  //                    state                    //
+  const {loginUserRole} = useUserStore();
+  const [cookies] = useCookies();
   const [customerBoardList, setCustomerBoardList] = useState<CustomerBoardListItem[]>([]);
-	const [customerBoardViewList, setCustomerViewList] = useState<CustomerBoardListItem[]>([]);
-	const [customerBoardTotalLength , setCustomerBoardTotalLength] = useState<number>(0);
-	const [customerBoardTotalPage, setCustomerBoardTotalPage]= useState<number>(1);
-	const [customerBoardCurrentPage ,setCustomerBoardCurrentPage] = useState<number>(1);
-	const [customerBoardPageList, setCustomerBoardPageList] = useState<number[]>([1]);
-	const [customerBoardCurrentSection , setCustomerBoardCurrentSection] = useState<number>(1);
-	const [customerBoardIsToggleOn, setCustomerBoardToggleOn] = useState<boolean>(false);
-	
-	const [customerBoardSearchWord, setCustomerBoardSearchWord] = useState<string>("");
+  const [viewList, setViewList] = useState<CustomerBoardListItem[]>([]);
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const navigate = useNavigate();
+  const [pageList, setPageList] = useState<number[]>([1]);
+  const [totalSection, setTotalSection] = useState<number>(1);
+  const [currentSection, setCurrentSection] = useState<number>(1);
+  const [isToggleOn, setToggleOn] = useState<boolean>(false);
+  const [searchWord, setSearchWord] = useState<string>('');
 
-  useEffect(() => {
-    fetchBoardList(currentPage);
-  }, [currentPage]);
+  //                    function                    //
+  const navigator = useNavigate();
 
-  const fetchBoardList = async (page: number) => {
-    try {
-      const response = await fetch(`/api/customer-board?page=${customerBoardCurrentPage}&search=${customerBoardSearchWord}`);
-      const data = await response.json();
-      setCustomerBoardList(data);
-    } catch (error) {
-      console.error('Failed to fetch board list:', error);
+  const changePage = (customerBoardList: CustomerBoardListItem[], totalLength: number) => {
+    if (!currentPage) return;
+    const startIndex = (currentPage -1) * COUNT_PER_PAGE;
+    let endIndex = currentPage * COUNT_PER_PAGE;
+    if (endIndex > totalLength - 1) endIndex = totalLength;
+    const viewList = customerBoardList.slice(startIndex, endIndex);
+    setViewList(viewList);
+  };
+
+  const changeSection = (totalPage: number) => {
+    if (!currentSection) return;
+    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION -1);
+    let endPage = currentSection * COUNT_PER_SECTION;
+    if (endPage > totalPage) endPage = totalPage;
+    const pageList: number[] = [];
+    for (let page = startPage; page <= endPage; page++) pageList.push(page);
+    setPageList(pageList);
+  };
+
+  const changeCustomerBoardList = (customerBoardList: CustomerBoardListItem[]) => {
+    const totalLength = customerBoardList.length;
+    setTotalLength(totalLength);
+
+    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
+    setTotalPage(totalPage);
+
+    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
+    setTotalSection(totalSection);
+
+    changePage(customerBoardList, totalLength);
+
+    changeSection(totalPage);
+  };
+
+  const getCustomerBoardResponse = (result: GetCustomerBoardListResponseDto | ResponseDto | null) => {
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+      if (!result || result.code !== 'SU') {
+        alert(message);
+        if (result?.code === 'AF') navigator(MAIN_PATH);
+        return;
+      }
+
+      const { customerBoardList } = result as GetCustomerBoardListResponseDto;
+      changeCustomerBoardList(customerBoardList);
+
+      setCurrentPage(!customerBoardList.length ? 0 : 1);
+      setCurrentSection(!customerBoardList.length ? 0 : 1);
+  };
+
+  const getSearchCustomerBoardListResponse = (result: GetSearchCustomerBoardListResponseDto | ResponseDto | null) => {
+
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '검색어를 입력하세요.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      if (result?.code === 'AF') navigator(MAIN_PATH);
+      return;
     }
+
+    const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
+    changeCustomerBoardList(customerBoardList);
+
+    setCurrentPage(!customerBoardList.length ? 0 : 1);
+    setCurrentSection(!customerBoardList.length ? 0 : 1);
   };
 
-  const handleSearch = () => {
-    setCurrentPage(1);
-    fetchBoardList(1);
+  //                    event handler                    //
+  const onWriteButtonClickHandler = () => {
+    if (loginUserRole !== 'ROLE_CUSTOMER') return;
+    navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
-  const handlePageChange = (page: number) => {
+  const  onPageClickHandler = (page: number) => {
     setCurrentPage(page);
   };
 
-  const handleGoToWrite = () => {
-    navigate('/service/customer_board/write');
+  const onPreSectionClickHandler = () => {
+    if (currentSection <= 1) return;
+    setCurrentSection(currentSection -1);
+    setCurrentPage((currentSection -1) * COUNT_PER_SECTION);
   };
 
-  const handleGoToDetail = (boardNumber: number) => {
-    navigate(`/service/customer_board/${boardNumber}`);
+  const onNextSectionClickHandler = () => {
+    if (currentSection === totalSection) return;
+    setCurrentSection(currentSection + 1);
+    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
 
-  return (<div>
-    {/* 검색 기능 */}
-    <div className="search">
-      <div className="search-box">
-        <div className="search-keyword">검색 키워드</div>
-        <input
-          className="list-search-input"
-          placeholder="검색어를 입력해주세요."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <div className="search-button" onClick={handleSearch}>
-          검색
+  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchWord = event.target.value;
+    setSearchWord(searchWord);
+  };
+
+  const onSearchButtonClickHandler = () => {
+    if (!searchWord) return;
+    if (!cookies.accessToken) return;
+
+    getSearchCustomerBoardListRequest(searchWord, cookies.accessToken).then(getSearchCustomerBoardListResponse);
+  };
+
+  //                    effect                    //
+  useEffect(() => {
+    if (!customerBoardList.length) return;
+    changePage(customerBoardList, totalLength);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (!customerBoardList.length) return;
+    changeSection(totalPage);
+  }, [currentSection]);
+
+  //                    render                    //
+  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+  return (
+    <div className='customerboard-list-wrapper'>
+      <div className='customerboard-list-search-box'>
+        <div className='customerboard-list-search-input-box'>
+          <input className='customerboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
         </div>
+        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+      </div>
+      <div className='customerboard-list-table'>
+        <div className='customerboard-table-th'>
+          <div className='customerboard-list-table-reception-number'>접수번호</div>
+          <div className='customerboard-list-table-title'>제목</div>
+          <div className='customerboard-list-table-writer-id'>작성자</div>
+          <div className='customerboard-list-table-write-date'>작성일</div>
+          <div className='customerboard-list-table-viewcount'>조회수</div>
+        </div>
+        {viewList.map(item => <ListItem {...item} />)}
+      </div>
+      <div className='customerboard-list-bottom'>
+        <div style={{ width: '299px' }}></div>
+        <div className='customerboard-list-pagenation'>
+          <div className='customerboard-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='customerboard-list-page-box'>
+            {pageList.map(page => 
+              page === currentPage ? 
+              <div className='customerboard-list-page-active'>{page}</div> :
+              <div className='customerboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            )}
+          </div>
+          <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
       </div>
     </div>
-
-    {/* 게시물 목록 */}
-    <div className="customer-list-container">
-      <div className="customer-list-header">
-        <div className="customer-list-header-item">번호</div>
-        <div className="customer-list-header-item">제목</div>
-        <div className="customer-list-header-item">작성일</div>
-        <div className="customer-list-header-item">조회</div>
-      </div>
-      {customerBoardList.map((board) => (
-        <div
-          key={board.customerBoardNumber}
-          className="customer-list-item"
-          onClick={() => handleGoToDetail(board.customerBoardNumber)}
-        >
-          <div className="customer-list-item-number">{board.customerBoardNumber}</div>
-          <div className="customer-list-item-title">{board.customerBoardTitle}</div>
-          <div className="customer-list-item-date">{board.customerBoardWriteDatetime}</div>
-          <div className="customer-list-item-views">{board.customerBoardViewCount}</div>
-        </div>
-      ))}
-    </div>
-
-    {/* 페이지네이션 */}
-    <div className="pagination-wrapper">
-      {/* ... */}
-    </div>
-
-    {/* 글쓰기 버튼 */}
-    <div className="write-button" onClick={handleGoToWrite}>
-      글쓰기
-    </div>
-  </div>
   );
+
 }

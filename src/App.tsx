@@ -29,23 +29,11 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
-<<<<<<< HEAD
-import QnaList from "./views/Service/Qna/QnaList";
-import QnaWrite from "./views/Service/Qna/QnaWrite";
-import QnaDetail from "./views/Service/Qna/QnaDetail";
-
-
-
-
-import CustomerUpdate from "./views/User/CustomerUpdate";
-import InfoCustomer from "./views/User/CustomerUpdate";
-=======
 import CustomerUpdate from "./views/User/CustomerUpdate";
 import InfoCustomer from "./views/User/CustomerUpdate";
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
->>>>>>> b5cb3acb1147168d712bedd23216a3c1d109e85c
 
 
 

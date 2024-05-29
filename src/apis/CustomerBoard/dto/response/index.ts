@@ -1,7 +1,7 @@
 import ResponseDto from "src/apis/response.dto";
 import { CustomerBoardListItem } from "src/types";
 
-export interface GetSearchCustomerBoardResponseDto extends ResponseDto {
+export interface GetSearchCustomerBoardListResponseDto extends ResponseDto {
 	customerBoardList : CustomerBoardListItem[];
 }
 
