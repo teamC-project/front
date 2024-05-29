@@ -1,11 +1,11 @@
-#trend_board_detail_wrapper {
+#trend-board-detail-wrapper {
 	background-color: bisque;
 	height:1000px;
 	display: flex;
 	flex-direction: column;
 }
 
-.trend_board_detail_top_bar {
+.trend-board-detail-top-bar {
 	display: flex;
 	height: 100px;
 	width: 100%;
@@ -14,38 +14,38 @@
 	background-color: skyblue
 }
 
-.trend_board_detail_top_bar_left_container {
+.trend-board-detail-top-bar-left-container {
 	display: flex;
 	gap:16px;
 	padding: 24px;
 }
 
-.trend_board_detail_title {
+.trend-board-detail-title {
 	font-size: 32px;
 	font-weight: 800;
 	
 }
 
-.trend_board_detail_datetime {
+.trend-board-detail-datetime {
 	font-size: 32px;
 	font-weight: 800;
 	
 }
 
-.trend_board_detail_writer_id {
+.trend-board-detail-writer-id {
 	font-size: 32px;
 	font-weight: 800;
 	
 }
 
-.trend_board_detail_top_bar_right_container {
+.trend-board-detail-top-bar-right-container {
 	display: flex;
 	justify-content: right;
 	gap:16px;
 	padding:24px;
 }
 
-.trend_board_detail_contents_container {
+.trend-board-detail-contents-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -54,7 +54,7 @@
 	background-color: aquamarine;
 }
 
-.trend_board_detail_middle_container {
+.trend-board-detail-middle-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -62,7 +62,7 @@
 	background-color: cornflowerblue;
 }
 
-.trend_board_detail_middle_item {
+.trend-board-detail-middle-item {
 	font-size: 16px;
 	font-weight:400;
 	padding: 12px;
