@@ -41,8 +41,8 @@ const ToolBar = () => {
     }
   };
 
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -61,8 +61,8 @@ const ToolBar = () => {
   };
 
 
-  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+  const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
     switch (value) {
       case 'bold':
         applyStyle('fontWeight', 'bold');
@@ -78,8 +78,8 @@ const ToolBar = () => {
     }
   };
 
-  const handleFontChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+  const handleFontChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
     applyStyle('fontFamily', value);
   };
 
