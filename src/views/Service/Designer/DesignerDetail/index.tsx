@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 import { DesignerBoardCommentListItem } from 'src/types';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { getDesignerBoardRequest } from 'src/apis/designerBoard';
+import { getDesignerBoardRequest, postDesignerBoardCommentRequest } from 'src/apis/designerBoard';
+import { useUserStore } from 'src/stores';
+import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
 
 interface Props {
     contents: string;
@@ -14,46 +16,10 @@ interface Props {
 
 
 //                    component                    //
-const CommentPost = ({ contents}: Props) => {
-    //              state               //
-
-    //              render              //
-    return (
-        <div className="comment-post">
-            <p>{contents}</p>
-            <div className="comment-section">
-                <div className="comment-list">
-                </div>
-                <div className="designer-comment-write-contents-box">
-                    <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'></textarea>
-                    <button>작성</button>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-//                    component                    //
-function ListItem ({
-    designerBoardCommentNumber,
-    designerBoardCommentWriterId,
-    designerBoardCommentDatetime
-}: DesignerBoardCommentListItem) {
-
-    //              render              //
-    return (
-        <div className="designer-detail-comment-meta">
-            <div className='designer-detail-comment-number'>{designerBoardCommentNumber}</div>
-            <div className="designer-detail-comment-author">{designerBoardCommentWriterId}</div>
-            <div className="designer-detail-comment-date">{designerBoardCommentDatetime}</div>
-        </div>
-    );
-}
-
-//                    component                    //
 export default function DesignerDetail() {
 
     //              state               //
+    const { loginUserId, loginUserRole } = useUserStore();
     const { designerBoardNumber } = useParams();
     const [cookies] = useCookies();
     const [viewList, setViewList] = useState<DesignerBoardCommentListItem[]>([]);
@@ -114,29 +80,63 @@ export default function DesignerDetail() {
         getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardResponse);
     };
 
+    //                   event handler                    //
     const handleGoToList = () => {
-    navigate(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+        navigate(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+    };
+    
+    const onUpdateClickHandler = () => {
+        if (!designerBoardNumber || loginUserId !== writerId) return;
+        navigate(DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH(designerBoardNumber));
     };
 
-    const handleEdit = () => {
-    navigate('/service/designer_board/update/1');
+    const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        if (loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_CUSTOMER') return;
+        const comment = event.target.value;
+        setComment(comment);
+
+        const commentRows = comment.split('\n').length;
+        setCommentRows(commentRows);
     };
 
-//              render              //
+    const onCommentSubmitClickHandler = () => {
+        if (!comment || !comment.trim()) return;
+        if (!designerBoardNumber || loginUserRole !== 'ROLE_DESIGNER' && 'ROLE_CUSTOMER') return;
+
+        const requestBody: PostDesignerBoardCommentRequestDto = { comment };
+        postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken).then(postDesignerBoardCommentResponse);
+    };
+
+    //                    component                    //
+        const CommentPost = ({ contents}: Props) => {
+    //              state               //
+
+    //              render              //
+        return (
+            <div className="designer-comment-post">
+                <div className="designer-comment-write-contents-box">
+                    <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'>{contents}</textarea>
+                    <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
+                </div>
+            </div>
+        );
+    };
+
+    //              render              //
     return (
     <div className="designer-detail">
-        <div className="designer-detail-title">제목</div>
+        <div className="designer-detail-title">제목{title}</div>
         <div className="designer-detail-container">
-        <div className="designer-detail-information">
-            <div className="designer-detail-information1">작성자</div>
-            <div className="designer-detail-information2">작성일</div>
-            <div className="designer-detail-information3">조회</div>
-            <div className="designer-detail-information4">삭제</div>
-            <div className="designer-detail-information5" onClick={handleEdit}>수정</div>
-        </div>
+            <div className="designer-detail-information">
+                <div className="designer-detail-information1">작성자{writerId}</div>
+                <div className="designer-detail-information2">작성일{writeDate}</div>
+                <div className="designer-detail-information3">조회{viewCount}</div>
+                <div className="designer-detail-information4">삭제</div>
+                <div className="designer-detail-information5" onClick={onUpdateClickHandler}>수정</div>
+            </div>
         </div>
         <div className="designer-detail-view">
-        내용 상세
+        {contents}
         </div>
         <div className='designer-comment-wrap'>
             <div className='comment-inner'>
@@ -146,6 +146,12 @@ export default function DesignerDetail() {
                 </div>
                 <div className='comment-write-box'>
                 <CommentPost contents='' />
+                {/* <p>{contents}</p> */}
+                <div className="designer-comment-section">
+                    <div className="designe-comment-list">
+                    {/* {viewList.map(item => <ListItem {...item} />)} */}
+                        </div>
+                </div>
                 </div>
             </div>
         </div>
