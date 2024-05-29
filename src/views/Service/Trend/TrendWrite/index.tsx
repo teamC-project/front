@@ -18,6 +18,7 @@ export default function TrendWrite() {
 	const [cookies] = useCookies();
 	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
+	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<string[]>([]);
 
 	
   //                    function                    //
@@ -49,21 +50,32 @@ export default function TrendWrite() {
 			setTrendBoardTitle(trendBoardTitle);
 		}
 
-		const onTrendBoardContentsChangeHandler = (trendBoardContents: string) => {
+		const onTrendBoardContentsChangeHandler = (trendBoardContents: string ) => {
 			setTrendBoardContents(trendBoardContents);
+			setTrendBoardUrlList(trendBoardUrlList);
 		}
-	
-	const onTrendPostClickHandler = () => {
-		if(!trendBoardTitle.trim() ||  !trendBoardContents.trim()) return;
-		if(!cookies.accessToken) return;
 
-		const requestBody : PostTrendBoardRequestDto ={
-			trendBoardTitle,
-			trendBoardContents,
-		}
-		postTrendBoardRequest(requestBody, cookies.accessToken.then(postTrendBoardResponse))
-		navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
-	}
+		
+	
+    const onTrendPostClickHandler = async () => {
+      if (!trendBoardTitle.trim() || !trendBoardContents.trim()) return;
+      if (!cookies.accessToken) return;
+  
+      const requestBody: PostTrendBoardRequestDto = {
+          trendBoardTitle,
+          trendBoardContents,
+					trendBoardUrlList
+      };
+  
+      try {
+          const token = await Promise.resolve(cookies.accessToken); // 토큰을 프로미스로 감쌉니다.
+          const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
+          navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); // 성공 시 이동합니다.
+      } catch (error) {
+          console.error("Error posting trend board request:", error);
+          // 에러 처리 로직을 여기에 추가할 수 있습니다.
+      }
+  };
 
 	  //                    effect                    //
 		useEffect(() => {
