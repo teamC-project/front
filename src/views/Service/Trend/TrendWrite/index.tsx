@@ -68,12 +68,12 @@ export default function TrendWrite() {
       };
   
       try {
-          const token = await Promise.resolve(cookies.accessToken); // 토큰을 프로미스로 감쌉니다.
+          const token = await Promise.resolve(cookies.accessToken); 
           const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
-          navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); // 성공 시 이동합니다.
+          navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); 
       } catch (error) {
           console.error("Error posting trend board request:", error);
-          // 에러 처리 로직을 여기에 추가할 수 있습니다.
+
       }
   };
 
