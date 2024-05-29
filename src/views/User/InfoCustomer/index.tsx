@@ -23,7 +23,6 @@ export default function InfoCustomer() {
   //                     function                       //
   const navigator = useNavigate();
 
-  navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
 
   //                     event handler                     //
   const onAgeChangeHandler = (age: string) => {
@@ -44,12 +43,15 @@ export default function InfoCustomer() {
   return (
     <div id='info-customer-wrapper'>
       <div className='white-space'></div>
+      <div className='sdf'>
+      <div className='asd'></div>
+      
       <div className='info-customer-container'>
         <div className='customer-id-contents'>
           <div className='customer-id'>아이디</div>
           <div className='customer-id-container'>
-            <div className='input-box'>
-              <div className=''></div>
+            <div className='id-input-box'>
+              <div className='customer-id-info'>asd</div>
             </div>
           </div>
         </div>
@@ -66,11 +68,14 @@ export default function InfoCustomer() {
         </div>
         <div className='info-customer-box-text'>
           <div className='info-customer-text'>연령대</div>
-          <SelectBox value={''} onChange={onAgeChangeHandler} />
+          <SelectBox value={age} onChange={onAgeChangeHandler} />
         </div>
         <div className='submit-box'>
           <div className='complete-text primary-button'>완료</div>
         </div>
+      </div>
+      
+      <div className='asd'></div>
       </div>
       <div className='white-space1'></div>
     </div>

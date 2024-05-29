@@ -19,7 +19,7 @@
     color: rgba(138, 146, 166, 1);
 }
 
-input[type="radio"] {margin-right: 150px;}
+input[type="radio"] {margin-right: 250px;}
 
 .input-box {
   width: 200px;
@@ -33,7 +33,7 @@ input[type="radio"] {margin-right: 150px;}
 .input-content-box{
     display: flex;
     gap: 10px;
-    width: 350px;
+    width: 450px;
 
     margin-top: 8px;
     margin-bottom: 4px;

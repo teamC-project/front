@@ -1,7 +1,19 @@
 import React from 'react'
 import "./style.css";
 
+//                    component                    //
 export default function MyPage() {
+
+  //                    state                    //
+
+
+  //                    function                    //
+
+
+  //                    event handler                    //
+
+
+  //                    render                    //
   return (
     <div id='mypage-wrapper'>
       <div className='john'></div>
