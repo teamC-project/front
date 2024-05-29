@@ -5,9 +5,9 @@ import { CustomerBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
+import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/CustomerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
+import { getSearchCustomerBoardListRequest } from 'src/apis/CustomerBoard';
 
 //                    component                    //
 function ListItem ({

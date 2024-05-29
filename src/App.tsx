@@ -29,11 +29,12 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
-import CustomerUpdate from "./views/User/CustomerUpdate";
-import InfoCustomer from "./views/User/CustomerUpdate";
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
+import CustomerUpdate from "./views/User/InfoCustomer";
+import InfoCustomer from "./views/User/InfoCustomer";
+import InfoDesigner from "./views/User/InfoDesigner";
 
 
 
@@ -83,7 +84,7 @@ function App() {
       <Route path={MY_PAGE_PATH} >
       <Route index element={<MyPage />} />
       <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
-      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoCustomer />} />
+      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={UPDATE_PASSWORD_PATH} element={<CustomerUpdate />} />
       <Route path={DELETE_INFO_PATH} element={<CustomerUpdate />} />
       </Route>

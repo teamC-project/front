@@ -46,7 +46,7 @@ function Top({ path }: Props) {
             </div>
         </div>
         </>
-    );
+    ); 
 }
 
 //                    component                    //
