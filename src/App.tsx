@@ -29,12 +29,13 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
-import QnaList from "./views/Service/qna/QnaList";
-import QnaWrite from "./views/Service/qna/QnaWrite";
-import QnaDetail from "./views/Service/qna/QnaDetail";
+
 
 import CustomerUpdate from "./views/User/CustomerUpdate";
 import InfoCustomer from "./views/User/CustomerUpdate";
+import QnaList from "./views/Service/Qna/QnaList";
+import QnaWrite from "./views/Service/Qna/QnaWrite";
+import QnaDetail from "./views/Service/Qna/QnaDetail";
 
 
 //  component: root 경로 컴포넌트 //
@@ -104,7 +105,7 @@ function App() {
       </Route>
 
       <Route path={QNA_BOARD_PATH} >
-        <Route index element={<QnaList />} />
+        <Route index element={<QnaList  />} />
         <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
         <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
         {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
