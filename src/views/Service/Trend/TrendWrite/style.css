@@ -1,4 +1,4 @@
-#trend_board_write_wrapper {
+#trend-board-write-wrapper {
 	/* position: absolute;
 	top: 100px;
 	left: 50%;
@@ -7,7 +7,7 @@
 	height:850px; */
 	background-color: bisque;
 }
-.trend_board_write_top_bar {
+.trend-board-write-top-bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -16,14 +16,14 @@
 	background-color: cornsilk;
 }
 
-.trend_board_write_title {
+.trend-board-write-title {
 	width: 80%;
 	height: 50px;
 	border: none;
 	border-radius: 12px;
 }
 
-.trend_board_write_footer {
+.trend-board-write-footer {
 	display: flex;
 	justify-content: right;
 	align-items: center;
@@ -31,12 +31,19 @@
 	background-color: beige;
 }
 
-.trend_board_button_container {
+.trend-board-button-container {
 	width: 200px;
 	display: flex;
 	justify-content: right;
 	gap:16px;
 	padding: 12px;
+}
+
+.trend-board-textarea {
+	display: flex;
+	min-height: 300px;
+	border: none;
+	
 }
 
 
