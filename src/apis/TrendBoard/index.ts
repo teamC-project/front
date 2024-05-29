@@ -9,7 +9,8 @@ export const postTrendBoardRequest = async (
 	requestBody : PostTrendBoardRequestDto,
 	accessToken : string 
 ) => {
-		const result = await axios.post(POST_TREND_BOARD_WRITE_URL, requestBody, bearerAuthorization(accessToken))
+		const result = await axios
+    .post(POST_TREND_BOARD_WRITE_URL, requestBody, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 		return result;
