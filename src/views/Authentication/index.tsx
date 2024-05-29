@@ -7,8 +7,8 @@ import { useCookies } from 'react-cookie';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest, signUpRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
+import { customerSignUpRequest, designerSignUpRequest, emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest } from 'src/apis/auth';
 
 export function Main() {
 
@@ -66,9 +66,6 @@ export function Sns() {
   return <></>;
 }
 
-
-type AuthPage = 'sign_in' | 'sign_up';
-
 //           interface           //
 interface SnsContainerProps {
   title: string;
@@ -93,10 +90,6 @@ function SnsContainer({ title }: SnsContainerProps) {
   );
 };
 
-//                    interface                    //
-interface Props {
-  onLinkClickHandler: () => void;
-}
 //                    component                    //
 export function SignIn() {
 
@@ -289,6 +282,7 @@ export function CustomerSignUp() {
   const [gender, setGender] = useState<string>('');
   const [age, setAge] = useState<string>('');
 
+  const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
   const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
   const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
@@ -305,21 +299,30 @@ export function CustomerSignUp() {
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
   const [emailMessage, setEmailMessage] = useState<string>('');
   const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-  const [genderMessage, setGenderMessage] = useState<string>('');
-
   const [isIdError, setIsIdError] = useState<boolean>(false);
   const [isEmailError, setIsEmailError] = useState<boolean>(false);
   const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
 
-  const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqaulPassword && isAgeCheck && isGenderCheck;
-
-  const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`
-
 //                     function                    //
 const navigator = useNavigate();
 
-const emailAuthResponse = (result: ResponseDto | null) => {
+const idCheckResponse = (result: ResponseDto | null) => {
+  const idMessage = 
+    !result ? '서버에 문제가 있습니다.' : 
+    result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
+    result.code === 'DI' ? '이미 사용중인 아이디 입니다.' :
+    result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
+    result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
+  const idError = !(result && result.code === 'SU');
+  const idCheck = !idError;
 
+  setIdMessage(idMessage);
+  setIsIdError(idError);
+  setIsIdCheck(idCheck);
+};
+
+
+const emailAuthResponse = (result: ResponseDto | null) => {
   const emailMessage = 
     !result ? '서버에 문제가 있습니다.' : 
     result.code === 'VF' ? '이메일 형식이 아닙니다.' :
@@ -336,7 +339,6 @@ const emailAuthResponse = (result: ResponseDto | null) => {
 };
 
 const emailAuthCheckResponse = (result: ResponseDto | null) => {
-
   const authNumberMessage =
     !result ? '서버에 문제가 있습니다.':
     result.code === 'VF' ? '인증번호를 입력해주세요.' :
@@ -352,7 +354,6 @@ const emailAuthCheckResponse = (result: ResponseDto | null) => {
 };
 
 const signUpResponse = (result: ResponseDto | null) => {
-
   const message = 
     !result ? '서버에 문제가 있습니다.' :
     result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
@@ -366,6 +367,7 @@ const signUpResponse = (result: ResponseDto | null) => {
     alert(message);
     return;
   } 
+  navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
 
 
@@ -377,13 +379,9 @@ const signUpResponse = (result: ResponseDto | null) => {
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
-    const idPattern = /^[a-zA-Z0-9].{6,15}$/;
-    const isIdPattern = idPattern.test(value);
-    setIsIdCheck(isIdPattern);
-    const idMessage =
-      isIdCheck ? '' :
-      value ? '영문, 숫자를 혼용하여 6 ~ 15자 입력해주세요.' : ''; 
-    setIdMessage(idMessage);
+    setIdButtonStatus(value !=='');
+    setIsIdCheck(false);
+    setIdMessage('');
   }
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -435,15 +433,18 @@ const signUpResponse = (result: ResponseDto | null) => {
     const {value} = event.target;
     setGender(value);
     setIsGenderCheck(false);
-    const genderMessage =
-      isGenderCheck ? '' :
-      value ? '성별을 선택해주세요.' : '';
-    setGenderMessage(genderMessage);
   };
-
+  
   const onAgeChangeHandler = (age: string) => {
     setAge(age);
   };
+
+  const onIdButtonClickHandler = () => {
+    if(!idButtonStatus) return;
+
+    const requsetBody: IdCheckRequestDto = { userId: id };
+    idCheckRequest(requsetBody).then(idCheckResponse);
+  };  
 
   const onEmailButtonClickHandler = () => {
     if(!emailButtonStatus) return;
@@ -472,21 +473,21 @@ const signUpResponse = (result: ResponseDto | null) => {
   };  
 
   const onSignUpButtonClickHandler = () => {
-    if(!isSignUpActive) return;
     if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
       alert('모든 내용을 입력해주세요.')
       return;
     };
 
-    const requestBody: SignUpRequestDto = {
+    const requestBody: SignUpCustomerRequestDto = {
       userId: id,
       userPassword: password,
       userEmail: email,
       authNumber,
       userAge: age,
-      userGender: gender
+      userGender: gender,
+      joinPath: 'HOME'
     };
-  signUpRequest(requestBody).then(signUpResponse);
+    customerSignUpRequest(requestBody).then(signUpResponse);
   };
 
 //                      render                      //
@@ -512,56 +513,45 @@ const signUpResponse = (result: ResponseDto | null) => {
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'>
-              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} message={idMessage} error={isIdError} />
-            </div>
+              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='중복 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
           </div>
+
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'>
-              <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-            </div>
+              <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호 확인</div>
-            <div className='auth-sign-up-next-box'>
-              <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-            </div>
+              <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일</div>
-            <div className='auth-sign-up-next-box' >
-              <InputBox type={'text'} value={email} placeholder={'이메일을 입력해주세요.'} onChangeHandler={onEmailChangeHandler} message={emailMessage} error={isEmailError}  />
-            </div>
-            <div className='primary-button auth-sign-in-button-size' onClick={onEmailButtonClickHandler}>보내기</div>
+              <InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='보내기' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일인증</div>
-            <div className='auth-sign-up-next-box'>
-              <InputBox type={'text'} value={authNumber} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={onAuthNumberChangeHandler} message={authNumberMessage} error={isAuthNumberError} />
-            </div>
-            <div className='primary-button auth-sign-in-button-size' onClick={onAuthNumberButtonClickHandler}>확인</div>
+              <InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>성별</div>
-            <div className='auth-sign-up-next-box'>
+            <div className='auth-radio-box'>
               <div className='auth-sign-up-radio-box'>
-                <InputBox label={'MALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
               </div>
               <div className='auth-sign-up-radio-box'>
-                <InputBox label={'FEMALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
               </div>
             </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
-            <div className='auth-sign-up-next-box'>
+            <div>
               <SelectBox value={age} onChange={onAgeChangeHandler} />
             </div>
           </div>
@@ -581,6 +571,7 @@ const signUpResponse = (result: ResponseDto | null) => {
 
 //                     component                      //
 export function DesignerSignUp() {
+
 //                      state                     //
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -592,6 +583,7 @@ export function DesignerSignUp() {
   const [companyName, setCompanyName] = useState<string>('');
   const [image, setImage] = useState<string>('');
 
+  const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
   const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
   const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
@@ -610,88 +602,81 @@ export function DesignerSignUp() {
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
   const [emailMessage, setEmailMessage] = useState<string>('');
   const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-  const [genderMessage, setGenderMessage] = useState<string>('');
-  const [ageMessage, setAgeMessage] = useState<string>('');
   const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
   const [imageMessage, setImageMessage] = useState<string>('');
   const [isIdError, setIsIdError] = useState<boolean>(false);
   const [isEmailError, setIsEmailError] = useState<boolean>(false);
   const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
-
-  const isSignUpActive = isIdCheck && isEmailCheck && isAuthNumberCheck && isPasswordPattern && isEqaulPassword && isAgeCheck && isGenderCheck && isCompanyNameCheck && isImageCheck;
-
-  const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`
+  const [isCompanyNameError, setIsCompanyNameError] = useState<boolean>(false);
+  const [isImageError, setIsImageError] = useState<boolean>(false);
 
 //                     function                    //
   const navigator = useNavigate();
+
   const idCheckResponse = (result: ResponseDto | null) => {
+    const idMessage = 
+      !result ? '서버에 문제가 있습니다.' : 
+      result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
+      result.code === 'DI' ? '이미 사용중인 아이디 입니다.' :
+      result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
+      result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
+    const idError = !(result && result.code === 'SU');
+    const idCheck = !idError;
 
-  const idMessage = 
-    !result ? '서버에 문제가 있습니다.' : 
-    result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
-    result.code === 'DI' ? '이미 사용중인 아이디 입니다.' :
-    result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
-    result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
-  const idError = !(result && result.code === 'SU');
-  const idCheck = !idError;
-
-  setIdMessage(idMessage);
-  setIsIdError(idError);
-  setIsIdCheck(idCheck);
+    setIdMessage(idMessage);
+    setIsIdError(idError);
+    setIsIdCheck(idCheck);
   };
 
   const emailAuthResponse = (result: ResponseDto | null) => {
+    const emailMessage = 
+      !result ? '서버에 문제가 있습니다.' : 
+      result.code === 'VF' ? '이메일 형식이 아닙니다.' :
+      result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
+      result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+      result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+    const emailCheck = result !== null && result.code === 'SU';
+    const emailError = !emailCheck;
 
-  const emailMessage = 
-    !result ? '서버에 문제가 있습니다.' : 
-    result.code === 'VF' ? '이메일 형식이 아닙니다.' :
-    result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
-    result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-    result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
-  const emailCheck = result !== null && result.code === 'SU';
-  const emailError = !emailCheck;
-
-  setEmailMessage(emailMessage);
-  setIsEmailCheck(emailCheck);
-  setIsEmailError(emailError);
+    setEmailMessage(emailMessage);
+    setIsEmailCheck(emailCheck);
+    setIsEmailError(emailError);
   };
 
   const emailAuthCheckResponse = (result: ResponseDto | null) => {
-
-  const authNumberMessage =
-    !result ? '서버에 문제가 있습니다.':
-    result.code === 'VF' ? '인증번호를 입력해주세요.' :
-    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.':
-    result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
-  const authNumberCheck = result !== null && result.code === 'SU';
-  const authNumberError = !authNumberCheck;
-
-  setAuthNumberMessage(authNumberMessage);
-  setIsAuthNumberCheck(authNumberCheck);
-  setIsAuthNumberError(authNumberError);
+    const authNumberMessage =
+      !result ? '서버에 문제가 있습니다.':
+      result.code === 'VF' ? '인증번호를 입력해주세요.' :
+      result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.':
+      result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+    const authNumberCheck = result !== null && result.code === 'SU';
+    const authNumberError = !authNumberCheck;
+  
+    setAuthNumberMessage(authNumberMessage);
+    setIsAuthNumberCheck(authNumberCheck);
+    setIsAuthNumberError(authNumberError);
   };
 
   const signUpResponse = (result: ResponseDto | null) => {
+    const message = 
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+      result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
+      result.code === 'DE' ? '중복된 이메일입니다.' :
+      result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  
+    const isSuccess = result && result.code === 'SU'
+    if (!isSuccess) {
+      alert(message);
+      return;
+    } 
+    navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  };
 
-  const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
-    result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
-    result.code === 'DE' ? '중복된 이메일입니다.' :
-    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-  const isSuccess = result && result.code === 'SU'
-  if (!isSuccess) {
-    alert(message);
-    return;
-  } 
-
-  }; 
-
-//                     event handler                    //
+//                  event handler                  //
   const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   const onClickMainHandler = () => navigator(MAIN_PATH);
@@ -699,18 +684,20 @@ export function DesignerSignUp() {
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
+    setIdButtonStatus(value !=='');
     setIsIdCheck(false);
     setIdMessage('');
   }
+
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPassword(value)
-    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,13}$/
+    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
     const isPassworPattern = passwordPattern.test(value);
     setIsPasswordPattern(isPassworPattern);
     const passwordMessage =
       isPassworPattern ? '':
-      value ? '영문, 숫자를 혼용하여 8 ~ 13자 입력해주세요.' : '';
+      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
 
     const isEqaulPassword = passwordCheck === value
@@ -735,7 +722,7 @@ export function DesignerSignUp() {
     setEmail(value);
     setEmailButtonStatus(value !=='');
     setIsEmailCheck(false);
-    setIsAuthNumberCheck(false);
+    setIsAuthNumberCheck(false); 
     setEmailMessage('');
   }
 
@@ -751,7 +738,6 @@ export function DesignerSignUp() {
     const {value} = event.target;
     setGender(value);
     setIsGenderCheck(false);
-    setGenderMessage('');
   };
 
   const onAgeChangeHandler = (age: string) => {
@@ -764,13 +750,20 @@ export function DesignerSignUp() {
     setIsCompanyNameCheck(false);
     setCompanyNameMessage('');
   };
-
+  
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setImage(value);
     setIsImageCheck(false);
     setImageMessage('');
   };
+
+  const onIdButtonClickHandler = () => {
+    if(!idButtonStatus) return;
+
+    const requsetBody: IdCheckRequestDto = { userId: id };
+    idCheckRequest(requsetBody).then(idCheckResponse);
+  };  
 
   const onEmailButtonClickHandler = () => {
     if(!emailButtonStatus) return;
@@ -780,7 +773,7 @@ export function DesignerSignUp() {
     if(!isEmailPattern) {
       setEmailMessage('이메일 형식이 아닙니다.');
       setIsEmailError(true);
-      setIsEmailCheck(false);  
+      setIsEmailCheck(false);
       return;
     }
     const requestBody: EmailAuthRequestDto = { userEmail : email};
@@ -799,13 +792,12 @@ export function DesignerSignUp() {
   };  
 
   const onSignUpButtonClickHandler = () => {
-    if(!isSignUpActive) return;
     if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
       alert('모든 내용을 입력해주세요.')
       return;
     };
 
-    const requestBody: SignUpRequestDto = {
+    const requestBody: SignUpDesignerRequestDto = {
       userId: id,
       userPassword: password,
       userEmail: email,
@@ -813,23 +805,25 @@ export function DesignerSignUp() {
       userAge: age,
       userGender: gender,
       userCompanyName : companyName,
-      userImage : image
+      userImage : image,
+      joinPath: 'HOME'
     };
-  signUpRequest(requestBody).then(signUpResponse);
+  designerSignUpRequest(requestBody).then(signUpResponse);
   };
-//                        render                       //
-  return (
-    <div id='auth-wrapper'>
+//                      render                      //
+return (
+  <div id='auth-wrapper'>
 
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
+    <div className='auth-top-bar'>
+      <div className='auth-logo-image' onClick={onClickMainHandler}></div>
 
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
+      <div className='auth-top-right-bar'>
+        <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
+        <div className='auth-top-right-bar-line'>|</div>
+        <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
       </div>
+    </div>
+
 
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
@@ -840,70 +834,74 @@ export function DesignerSignUp() {
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>아이디</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요.'} onChangeHandler={onIdChangeHandler} message={idMessage} error={isIdError} /></div>
+              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='중복 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordChangeHandler} /></div>
+              <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호 확인</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요.'} onChangeHandler={onPasswordCheckChangeHandler} /></div>
+              <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일</div>
-            <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={email} placeholder={'이메일을 입력해주세요.'} onChangeHandler={onEmailChangeHandler} /></div>
-            <div className='primary-button auth-sign-in-button-size'>보내기</div>
+              <InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='보내기' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>이메일인증</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={authNumber} placeholder={'인증번호를 입력해주세요.'} onChangeHandler={onAuthNumberChangeHandler} /></div>
-            <div className='primary-button auth-sign-in-button-size'>확인</div>
+              <InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>성별</div>
-            <div className='auth-sign-up-next-box'>
-              <div className='auth-sign-up-radio-box'><InputBox label={'MALE'} type={'radio'} value={gender} name={'gender'} onChangeHandler={onGenderChangeHandler} /></div>
-              <div className='auth-sign-up-radio-box'><InputBox label={'FEMALE'} type={'radio'} value={gender} name={'gender'} onChangeHandler={onGenderChangeHandler} /></div>
+            <div className='auth-radio-box'>
+              <div className='auth-sign-up-radio-box'>
+                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
+              </div>
+              <div className='auth-sign-up-radio-box'>
+                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
+              </div>
             </div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
-            <div className='auth-sign-up-next-box'><SelectBox value={age} onChange={onAgeChangeHandler} /></div>
+            <div>
+              <SelectBox value={age} onChange={onAgeChangeHandler} />
+            </div>
           </div>
-
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>업체명</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>면허증사진</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} /></div>
+            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
           </div>
 
           <div className='auth-submit-box'>
-              <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
-        </div>
+      </div>
 
-        <div className='auth-right-null'></div>
+      <div className='auth-right-null'></div>
       </div>
 
     </div>
   )
 }
 
+//                component                  //
 export default function Authentication() {
 
-  //              render             //
+  //                   render                //
   return (
     <div>
     </div>

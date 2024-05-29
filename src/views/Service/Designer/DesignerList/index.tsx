@@ -187,11 +187,25 @@ export default function DesignerList() {
       </div>
       <div className='designerboard-list-table'>
         <div className='designerboard-table-th'>
-          <div className='qna-list-table-reception-number'>접수번호</div>
-          <div className='qna-list-table-title'>제목</div>
-          <div className='qna-list-table-writer-id'>작성자</div>
-          <div className='qna-list-table-write-date'>작성일</div>
-          <div className='qna-list-table-viewcount'>조회수</div>
+          <div className='designerboard-list-table-reception-number'>접수번호</div>
+          <div className='designerboard-list-table-title'>제목</div>
+          <div className='designerboard-list-table-writer-id'>작성자</div>
+          <div className='designerboard-list-table-write-date'>작성일</div>
+          <div className='designerboard-list-table-viewcount'>조회수</div>
+        </div>
+        {viewList.map(item => <ListItem {...item} />)}
+      </div>
+      <div className='designerboard-list-bottom'>
+        <div style={{ width: '299px' }}></div>
+        <div className='designerboard-list-pagenation'>
+          <div className='designerboard-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='designerboard-list-page-box'>
+            {pageList.map(page => 
+              page === currentPage ? 
+              <div className='designerboard-list-page-active'>{page}</div> :
+              <div className='designerboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            )}
+            </div>
         </div>
       </div>
     </div>

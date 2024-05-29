@@ -3,7 +3,7 @@ import "./App.css";
 
 import { useCookies } from "react-cookie";
 import { Route, Routes, useNavigate } from "react-router";
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, CUSTOMER_PATH, CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, DESIGNER_PATH, DESIGNER_SIGN_UP_URL, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSOWORD_SETUP_PATH,PASSWORD_FOUND_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SIGN_UP_REQUEST_URL, SNS_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_PATH, UPDATE_PASSWORD_PATH } from "./constant";
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, CUSTOMER_PATH, CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, DESIGNER_PATH, DESIGNER_SIGN_UP_URL, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSOWORD_SETUP_PATH,PASSWORD_FOUND_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_PATH, UPDATE_PASSWORD_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 
 import { ChooseSingUp, CustomerSignUp, DesignerSignUp, Main, SignIn, Sns } from "./views/Authentication";
@@ -29,11 +29,19 @@ import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 
+<<<<<<< HEAD
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
 import CustomerUpdate from "./views/User/InfoCustomer";
 import InfoCustomer from "./views/User/InfoCustomer";
+=======
+import CustomerUpdate from "./views/User/CustomerUpdate";
+import InfoCustomer from "./views/User/CustomerUpdate";
+import QnaList from "./views/Service/Qna/QnaList";
+import QnaWrite from "./views/Service/Qna/QnaWrite";
+import QnaDetail from "./views/Service/Qna/QnaDetail";
+>>>>>>> 200b81c7137291d6e8b2e0859d510b4820590c5d
 
 
 //  component: root 경로 컴포넌트 //
@@ -103,7 +111,7 @@ function App() {
       </Route>
 
       <Route path={QNA_BOARD_PATH} >
-        <Route index element={<QnaList />} />
+        <Route index element={<QnaList  />} />
         <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
         <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
         {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
