@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
 import { emailAuthCheckRequest, emailAuthRequest, foundIdRequest } from 'src/apis/auth';
 import ResponseDto from 'src/apis/response.dto';
+import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
 
 //                    component                    //
 export default function IdFound() {
@@ -59,7 +60,7 @@ export default function IdFound() {
     setIsAuthNumberError(authNumberError);
   };
 
-const foundIdResponse = (result: ResponseDto | null) => {
+const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
   const message = 
     !result ? '서버에 문제가 있습니다.' :
     result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
@@ -72,6 +73,7 @@ const foundIdResponse = (result: ResponseDto | null) => {
     alert(message);
     return;
   } 
+
   navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
 //                   event handler                  //
@@ -154,10 +156,10 @@ const foundIdResponse = (result: ResponseDto | null) => {
   <div className='auth-left-null'></div>
 
   <div  className='auth-center-value'>
-  <div className='auth-sign-up-box'>
-    <div className='auth-sign-up-title'>아이디 찾기</div>
+    <div className='auth-sign-up-box'>
+      <div className='auth-sign-up-title'>아이디 찾기</div>
 
-    <div className='auth-sign-up-box-text'>
+      <div className='auth-sign-up-box-text'>
       <div className='auth-sign-up-text'>이메일</div>
       <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='이메일 인증' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  /> 
       </div>
@@ -170,25 +172,16 @@ const foundIdResponse = (result: ResponseDto | null) => {
       </div>
     </div>
 
-
-    <div className='id-box'>
-                  <div className='id-title'>고객님의 정보와 일치하는 아이디입니다.</div>
-                  <div className='id'>ID:john0256</div>
-                  <div className='id-check'>확인</div>
-                </div>
-
     <div className='auth-submit-box'>
-      <div className='auth-submit-box primary-button'>확인</div>
+      <div className='auth-submit-box primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
+    </div>
 
     </div>
   </div>
-  </div>
 
   <div className='auth-right-null'></div>
-</div>
-
-</div>
-      
+  </div>
+  </div>
   )
 }
 

@@ -49,3 +49,9 @@ export interface FoundIdCheckRequestDto {
   userEmail : string;
   authNumber : string;
 }
+
+export interface PasswordResetRequestDto {
+  userId : string;
+  userEmail : string;
+  authNumber : string;
+}
