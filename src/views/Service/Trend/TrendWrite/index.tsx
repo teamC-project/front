@@ -18,7 +18,8 @@ export default function TrendWrite() {
 	const [cookies] = useCookies();
 	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
-	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<string[]>([]);
+	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<{base64: string; url: string}[]>([]);
+	const [selectedThumbnail, setSelectedThumbnail] = useState<string>('');
 
 	
   //                    function                    //
@@ -52,39 +53,40 @@ export default function TrendWrite() {
 
 		const onTrendBoardContentsChangeHandler = (trendBoardContents: string ) => {
 			setTrendBoardContents(trendBoardContents);
-			setTrendBoardUrlList(trendBoardUrlList);
 		}
 
-		
-	
+		const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
+			setTrendBoardUrlList(imageList);
+		}
+
     const onTrendPostClickHandler = async () => {
       if (!trendBoardTitle.trim() || !trendBoardContents.trim()) return;
       if (!cookies.accessToken) return;
   
       const requestBody: PostTrendBoardRequestDto = {
           trendBoardTitle,
-          trendBoardContents,
-					trendBoardUrlList
-      };
-  
+          trendBoardContents
+      }
       try {
           const token = await Promise.resolve(cookies.accessToken); 
           const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
           navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); 
       } catch (error) {
-          console.error("Error posting trend board request:", error);
-
-      }
+			}
   };
+
+	const onThumbnailSelectHandler = (url: string) => {
+		setSelectedThumbnail(url);
+	}
 
 	  //                    effect                    //
 		useEffect(() => {
-			if (loginUserRole !== "ROLE_CUSTOMER" && "ROLE_DESIGNER") {
+			if (!loginUserRole) return;
+			if (loginUserRole === "ROLE_CUSTOMER" || loginUserRole === "ROLE_DESIGNER" ) {
 				navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 				return;
 			}
 		}, [loginUserRole])
-
 
   return (
     <div id='trend-board-write-wrapper'>
@@ -96,11 +98,24 @@ export default function TrendWrite() {
 				onChange={onTrendBoardTitleChangeHandler}
 				/>
         <div className='search-button'>썸네일 이미지 선택</div>
+				<div style={{}}>
+					{trendBoardUrlList.map((item, index) => <div 
+					style={{ 
+						width: '100px',
+						height: '100px',
+						backgroundImage: `url(${item.url})`, 
+						backgroundSize: '100% 100%' , 
+						border: selectedThumbnail === item.url ? '2px solid blue' : 'none', 
+						cursor: 'pointer',
+						margin: '5px'
+						}} onClick={ () => onThumbnailSelectHandler(item.url)} ></div>)}
+				</div>
       </div>
       <div className='trend-board-textarea-container'>
-			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} />
+			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} imageList={trendBoardUrlList} setImageList={onImageChangeHandler} />
       </div>
-      <div className='trend-board-write-footer'>
+			
+      <div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>
           <div className='search-button' onClick={onTrendPostClickHandler}>올리기</div>
           <div className='search-button'>취소</div>

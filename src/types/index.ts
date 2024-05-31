@@ -7,6 +7,14 @@ export interface QnaBoardListItem {
 	qnaBoardViewCount : number;
 };
 
+export interface TrendBoardListItem {
+	trendBoardNumber : number ;
+	trendBoardTitle : string;
+	trendBoardWriterId : string;
+	trendBoardWriteDatetime : string;
+	trendBoardLikeCount : number;
+}
+
 export interface CustomerBoardListItem {
 	customerBoardNumber : number;
 	customerBoardStatus : boolean;
@@ -15,6 +23,12 @@ export interface CustomerBoardListItem {
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
 }	
+export interface CustomerBoardCommentListItem {
+	customerBoardCommentNumber : number;
+	customerBoardCommentWriterId : string;
+	customerBoardCommentDatetime : string;
+	customerBoardCommentContents : string;
+};
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
 	designerBoardTitle : string;

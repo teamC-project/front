@@ -14,6 +14,7 @@ export interface GetCustomerBoardResponseDto extends ResponseDto {
 	customerBoardStatus  : boolean;
 	customerBoardTitle : string;
 	customerBoardWriterId  : string;
+	customerBoardWriteDatetime: string;
 	customerBoardContents : string;
 	customerBoardViewCount : number;
 	customerBoardComment : string | null;
