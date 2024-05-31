@@ -15,6 +15,12 @@ export interface CustomerBoardListItem {
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
 }	
+export interface CustomerBoardCommentListItem {
+	customerBoardCommentNumber : number;
+	customerBoardCommentWriterId : string;
+	customerBoardCommentDatetime : string;
+	customerBoardCommentContents : string;
+};
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
 	designerBoardTitle : string;
