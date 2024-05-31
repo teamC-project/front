@@ -60,3 +60,4 @@ export const foundIdRequest = async (requestBody: FoundIdCheckRequestDto) => {
     .catch(requestErrorHandler);
     return result;
 }
+

@@ -175,6 +175,11 @@ export default function DesignerList() {
     changeSection(totalPage);
   }, [currentSection]);
 
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getSearchDesignerBoardListRequest(searchWord, cookies.accessToken).then(getSearchDesignerBoardListResponse);
+  })
+
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (

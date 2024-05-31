@@ -5,7 +5,8 @@ export interface QnaBoardListItem {
 	qnaBoardWriterId : string;
 	qnaBoardWriteDatetime : string ;
 	qnaBoardViewCount : number;
-}
+};
+
 export interface CustomerBoardListItem {
 	customerBoardNumber : number;
 	customerBoardStatus : boolean;
@@ -20,4 +21,10 @@ export interface DesignerBoardListItem {
 	designerBoardWriterId : string;
 	designerBoardWriteDatetime : string ;
 	designerBoardViewCount : number;
-}
+};
+
+export interface DesignerBoardCommentListItem {
+	designerBoardCommentNumber : number;
+	designerBoardCommentWriterId : string;
+	designerBoardCommentDatetime : string;
+};
