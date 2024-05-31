@@ -4,14 +4,17 @@ import InputBox from 'src/components/Inputbox';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, foundIdRequest } from 'src/apis/auth';
+import { emailAuthCheckRequest, emailAuthRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
 import ResponseDto from 'src/apis/response.dto';
 import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
+import axios from 'axios';
 
 //                    component                    //
 export default function IdFound() {
 
 //                     state                        //
+  const [success, setSuccess] = useState<boolean>(false);
+  const [id, setId] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [authNumber, setAuthNumber] = useState<string>('');
 
@@ -33,7 +36,7 @@ export default function IdFound() {
     const emailMessage = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '이메일 형식이 아닙니다.' :
-      result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
+      result.code === 'NE' ? '존재하지 않는 이메일 입니다.' :
       result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
@@ -65,17 +68,24 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
     !result ? '서버에 문제가 있습니다.' :
     result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
     result.code === 'NE' ? '존재하지 않는 이메일 입니다.' :
+    result.code === 'NI' ? '존재하지 않는 아이디 입니다.':
     result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
   const isSuccess = result && result.code === 'SU'
   if (!isSuccess) {
     alert(message);
+    setSuccess(false);
     return;
-  } 
+  }
 
-  navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+  const { userId } = result as IdFoundResponseDto;
+  setSuccess(true);
+  setId(userId);
+
+  // navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
+
 //                   event handler                  //
   const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
@@ -109,7 +119,7 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
       return;
     }
     const requestBody: EmailAuthRequestDto = { userEmail : email};
-    emailAuthRequest(requestBody).then(emailAuthResponse);
+    foundIdEmailAuthRequest(requestBody).then(emailAuthResponse);
   };
 
   const onAuthNumberButtonClickHandler = () => {
@@ -175,7 +185,7 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
     <div className='auth-submit-box'>
       <div className='auth-submit-box primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
     </div>
-
+      {success && <div className=''>{id}</div>}
     </div>
   </div>
 
