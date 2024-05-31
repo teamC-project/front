@@ -1,6 +1,22 @@
 import React from 'react'
 import'./style.css'
 import '../../../../App.css'
+import { TrendBoardListItem } from 'src/types'
+import { useNavigate } from 'react-router'
+import { TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant'
+//														component														//
+function ListItem ({
+		trendBoardNumber,
+		trendBoardTitle,
+		trendBoardWriterId,
+		trendBoardWriteDatetime,
+		trendBoardLikeCount
+} : TrendBoardListItem) {
+	// 										function 										//
+	const navigator =  useNavigate();
+
+	// 										event handler										// 
+}
 export default function TrendList() {
 	return (
 		<div id='trend-board-wrapper'>

@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import "./style.css";
 import SelectBox from 'src/components/Selectbox';
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import { useCookies } from 'react-cookie';
 
 //                     interface                       //
 interface Props {
@@ -19,6 +21,9 @@ export default function InfoCustomer() {
   const [gender, setGender] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
+
+  const [cookies] = useCookies();
+  const {loginUserRole} = useUserStore();
 
   //                     function                       //
   const navigator = useNavigate();
@@ -38,6 +43,20 @@ export default function InfoCustomer() {
         value ? '성별을 선택해주세요.' : '';
     setGenderMessage(genderMessage);
   };
+
+  const onInfoCUstomerUpdateClickHandler = () => {
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH)
+  }
+
+  //                     effect                     //
+  useEffect(() => {
+    if (loginUserRole !== 'ROLE_CUSTOMER') {
+      if (!cookies.accessToken) return;
+      if (!loginUserRole) return;
+      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      return;
+    }
+  }, [loginUserRole]);
 
   //                     render                     //
   return (
@@ -70,7 +89,7 @@ export default function InfoCustomer() {
           <div className='info-customer-text'>연령대</div>
           <SelectBox value={age} onChange={onAgeChangeHandler} />
         </div>
-        <div className='submit-box'>
+        <div className='submit-box' onClick={onInfoCUstomerUpdateClickHandler}>
           <div className='complete-text primary-button'>완료</div>
         </div>
       </div>

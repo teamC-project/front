@@ -130,11 +130,12 @@ export function SettingPassword() {
 //                component               //
 export default function PasswordFoundPage() {
 //                  state                //
+const [success, setSuccess] = useState<boolean>(false);
 const [id, setId] = useState<string>('');
 const [email, setEmail] = useState<string>('');
 const [authNumber, setAuthNumber] = useState<string>('');
 
-const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
+
 const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
 const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
@@ -220,7 +221,6 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
-    setIdButtonStatus(value !=='');
     setIsIdCheck(false);
     setIdMessage('');
   }

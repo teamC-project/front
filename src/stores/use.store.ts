@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 interface UserStore {
+  // accessToken: string;
+  // setAccessToken: (accessToken: string) => void;
   loginUserId: string;
   setLoginUserId: (loginUserId: string) => void;
   loginUserRole: string;
@@ -8,6 +10,8 @@ interface UserStore {
 }
 
 export const useUserStore = create<UserStore>((set) => ({
+  // accessToken: "",
+  // setAccessToken: (accessToken: string) => set((state) => ({...state, accessToken})),
   loginUserId: "",
   setLoginUserId: (loginUserId: string) =>
     set((state) => ({ ...state, loginUserId })),
