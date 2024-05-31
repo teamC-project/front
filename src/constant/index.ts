@@ -103,18 +103,18 @@ export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number |
 export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}`;
 export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${CUSTOMER_BOARD_WRITE_PATH}`;
 export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${customerBoardNumber}`;
-export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/update${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment${customerBoardNumber}`;
-export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/update${customerBoardNumber}`;
+export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/update/${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/${customerBoardNumber}`;
+export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/update/${customerBoardNumber}`;
 
 
 // description : 디자이너 절대 URL PATH
 export const DESIGNER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}`;
 export const DESIGNER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${DESIGNER_BOARD_WRITE_PATH}`;
 export const DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/${designerBoardNumber}`;
-export const DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/update${designerBoardNumber}`;
-export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment${designerBoardNumber}`;
-export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update${designerBoardNumber}`;
+export const DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/update/${designerBoardNumber}`;
+export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/${designerBoardNumber}`;
+export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update/${designerBoardNumber}`;
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = "http://localhost:4200";

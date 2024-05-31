@@ -125,11 +125,15 @@ export default function CustomerList() {
     }
   
     const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
-    setCustomerBoardList(customerBoardList);
-    changeCustomerBoardList(customerBoardList);
-    changePage(customerBoardList, customerBoardList.length);
-    setCurrentPage(!customerBoardList.length ? 0 : 1);
-    setCurrentSection(!customerBoardList.length ? 0 : 1);
+    const updatedCustomerBoardList = customerBoardList.map(item => ({
+      ...item,
+      customerBoardViewCount: item.customerBoardViewCount || 0, // 조회수가 없으면 0으로 설정
+    }));
+    setCustomerBoardList(updatedCustomerBoardList);
+    changeCustomerBoardList(updatedCustomerBoardList);
+    changePage(updatedCustomerBoardList, updatedCustomerBoardList.length);
+    setCurrentPage(!updatedCustomerBoardList.length ? 0 : 1);
+    setCurrentSection(!updatedCustomerBoardList.length ? 0 : 1);
     setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
   };
   //                    event handler                    //
@@ -247,11 +251,11 @@ export default function CustomerList() {
           </div>
           <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        
+        {loginUserRole === 'ROLE_CUSTOMER' && (
           <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
           </div>
-        
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ interface UserStore {
   loginUserId: string;
   setLoginUserId: (loginUserId: string) => void;
   loginUserRole: string;
-  setloginUserRole: (loginUserRole: string) => void;
+  setLoginUserRole: (loginUserRole: string) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -12,7 +12,7 @@ export const useUserStore = create<UserStore>((set) => ({
   setLoginUserId: (loginUserId: string) =>
     set((state) => ({ ...state, loginUserId })),
   loginUserRole: "",
-  setloginUserRole: (loginUserRole: string) =>
+  setLoginUserRole: (loginUserRole: string) =>
     set((state) => ({ ...state, loginUserRole })),
 }));
 

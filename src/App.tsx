@@ -24,6 +24,7 @@ import DesignerList from "./views/Service/Designer/DesignerList";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
+import CustomerUpdate from "./views/User/InfoCustomer";
 
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
@@ -32,7 +33,6 @@ import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
 import QnaDetail from "./views/Service/Qna/QnaDetail";
-import CustomerUpdate from "./views/User/InfoCustomer";
 import InfoCustomer from "./views/User/InfoCustomer";
 import InfoDesigner from "./views/User/InfoDesigner";
 
