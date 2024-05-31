@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+import { DELETE_CUSTOMER_BOARD_DELETE_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL } from "src/constant";
+import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
+=======
 import { GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL } from "src/constant";
 
+>>>>>>> b2ae6805720a86658d589c1e667c961ba4b090b3
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
@@ -57,4 +62,19 @@ export const putCustomerBoardRequest = async (customerBoardNumber: number | stri
 };
 
 
-// function :  CustomerBoard 검색 리스트 불러오기 API 함수
+// function: CustomerBoard 게시물 조회수 증가 API 함수 
+export const increaseViewCountRequest = async (customerBoardNumber: number | string, accessToken: string) => {
+    const result = await axios.patch(PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL(customerBoardNumber), {}, bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+
+// function: CustomerBoard 게시물 삭제 API 함수 
+export const deleteBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
+    const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
