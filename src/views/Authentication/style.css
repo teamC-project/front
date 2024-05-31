@@ -284,12 +284,7 @@
 
 
 /* 로그인 UI */
-.auth-sign-up-next-box {
-  display: flex;
-  gap: 50px;
-  margin-right: 30px;
-  width: 300px;
-}
+
 
 .login-box {
   display: flex;

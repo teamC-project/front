@@ -5,9 +5,9 @@ import { CustomerBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/CustomerBoard/dto/response';
+import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { getSearchCustomerBoardListRequest } from 'src/apis/CustomerBoard';
+import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
 
 //                    component                    //
 function ListItem ({
@@ -112,27 +112,26 @@ export default function CustomerList() {
   };
 
   const getSearchCustomerBoardListResponse = (result: GetSearchCustomerBoardListResponseDto | ResponseDto | null) => {
-
     const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '검색어를 입력하세요.' :
-    result.code === 'AF' ? '인증에 실패했습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '검색어를 입력하세요.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  
     if (!result || result.code !== 'SU') {
       alert(message);
       if (result?.code === 'AF') navigator(MAIN_PATH);
       return;
     }
-
+  
     const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
     setCustomerBoardList(customerBoardList);
     changeCustomerBoardList(customerBoardList);
-    changePage(customerBoardList, customerBoardList.length); // 변경: 반환된 customerBoardList 사용
+    changePage(customerBoardList, customerBoardList.length);
     setCurrentPage(!customerBoardList.length ? 0 : 1);
     setCurrentSection(!customerBoardList.length ? 0 : 1);
-  };  
-
+    setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
+  };
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
     navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
@@ -160,21 +159,30 @@ export default function CustomerList() {
     setSearchWord(searchWord);
   };
 
-  const onSearchButtonClickHandler = () => {
+  const onSearchButtonClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    handleSearch();
+  };
+  
+  const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+  
+  const handleSearch = () => {
     if (!searchWord) {
       alert('검색어를 입력하세요.');
       return;
     }
-
+  
     if (!cookies.accessToken) return;
-    
+  
     setIsSearched(true);
     getSearchCustomerBoardListRequest(searchWord, cookies.accessToken)
-    .then(getSearchCustomerBoardListResponse);
-};
-
-useEffect(() => {
-  if (!isSearched) return; // 변경
+      .then(getSearchCustomerBoardListResponse);
+  };
+  useEffect(() => {
+  if (!isSearched || !cookies.accessToken) return;
 
   getSearchCustomerBoardListRequest(searchWord, cookies.accessToken)
     .then(getSearchCustomerBoardListResponse);
@@ -198,15 +206,23 @@ useEffect(() => {
   }, [currentSection]);
 
   //                    render                    //
-  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+  
   return (
     <div className='customerboard-list-wrapper'>
       <div className='customerboard-list-search-box'>
         <div className='customerboard-list-search-keyword'>검색 키워드</div>
         <div className='customerboard-list-search-input-box'>
-          <input className='customerboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+          <input
+            className='customerboard-list-search-input'
+            placeholder='검색어를 입력하세요.'
+            value={searchWord}
+            onChange={onSearchWordChangeHandler}
+            onKeyDown={onSearchInputKeyDown}
+          />
         </div>
-        <div className='primary-button' onClick={onSearchButtonClickHandler}>검색</div>
+        <div className='customerboard-list-search-input-button' onClick={onSearchButtonClickHandler}>
+          검색
+        </div>
       </div>
       <div className='customerboard-list-table'>
         <div className='customerboard-table-th'>
@@ -231,7 +247,11 @@ useEffect(() => {
           </div>
           <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div> 
+        
+          <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>
+            글쓰기
+          </div>
+        
       </div>
     </div>
   );

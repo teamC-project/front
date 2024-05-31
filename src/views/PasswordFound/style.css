@@ -12,20 +12,6 @@
   margin: 30px;
 }
 
-.auth-logo-image {
-  display: flex;
-  justify-content: start;
-
-  width: 200px;
-  height: 80px;
-
-  background-image: url('../../assets/image/logo-image\ 1.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-
-  cursor: pointer;
-}
-
 .auth-top-right-bar {
   display: flex;
   justify-content: end;
@@ -55,17 +41,6 @@
   justify-content: center;
 }
 
-.auth-welcome-image {
-  display: block;
-  text-align: center;
-  align-items: center;
-  height: 150px;
-  width: 550px;
-  background-image: url('../../assets/image/welcome-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
 .auth-choose-type-text {
   display: flex;
   justify-content: center;
@@ -80,46 +55,6 @@
   display: flex;
   gap: 40px;
   justify-content: center;
-}
-
-.auth-type-image-customer {
-  display: block;
-  text-align: center;
-  align-items: center;
-  height: 270px;
-  width: 270px;
-
-  border: 1px solid white;
-  border-radius: 10%;
-
-  background-image: url('../../assets/image/customer-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.auth-type-image-customer:hover {
-  cursor: pointer;
-  opacity: 0.9;
-}
-
-.auth-type-image-designer {
-  display: block;
-  text-align: center;
-  align-items: center;
-  height: 270px;
-  width: 270px;
-
-  border: 1px solid white;
-  border-radius: 10%;
-
-  background-image: url('../../assets/image/designer-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.auth-type-image-designer:hover {
-  cursor: pointer;
-  opacity: 0.9;
 }
 
 .auth-type-text {
@@ -147,41 +82,8 @@
   gap: 20px;
 }
 
-.auth-sign-up-naver {
-  margin: auto;
-  height: 50px;
-  width: 400px;
 
-  background-image: url(../../assets/image/naver-sign-up-button.png);
-  background-repeat: no-repeat;
-  background-size: auto;
 
-  border: 1px solid white;
-  border-radius: 10px;
-}
-
-.auth-sign-up-naver:hover {
-  cursor: pointer;
-  opacity: 0.9;
-}
-
-.auth-sign-up-kakao {
-  margin: auto;
-  height: 50px;
-  width: 400px;
-
-  background-image: url(../../assets/image/kakao-sign-up-button.png);
-  background-repeat: no-repeat;
-  background-size: auto;
-
-  border: 1px solid white;
-  border-radius: 10px;
-}
-
-.auth-sign-up-kakao:hover {
-  cursor: pointer;
-  opacity: 0.9;
-}
 
 /* 회원가입 공통 */
 .auth-sign-up-title {
