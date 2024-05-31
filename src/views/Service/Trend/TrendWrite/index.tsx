@@ -79,7 +79,7 @@ export default function TrendWrite() {
 
 	  //                    effect                    //
 		useEffect(() => {
-			if (loginUserRole === "ROLE_CUSTOMER" && "ROLE_DESIGNER") {
+			if (loginUserRole !== "ROLE_CUSTOMER" && "ROLE_DESIGNER") {
 				navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 				return;
 			}
