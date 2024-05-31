@@ -50,8 +50,13 @@ export interface FoundIdCheckRequestDto {
   authNumber : string;
 }
 
+// description: 비밀번호 찾기 유저 인증 Requset Body DTO
 export interface PasswordResetRequestDto {
   userId : string;
   userEmail : string;
   authNumber : string;
+}
+// description: 비밀번호 재설정 Requset Body DTO
+export interface SetUpPasswordRequestDto {
+  userPassword : string;
 }

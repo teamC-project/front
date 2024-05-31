@@ -129,9 +129,10 @@ export const EMAIL_AUTH_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-aut
 export const CUSTOMER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/customer`;
 export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`;
 
+export const FOUND_ID_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/id-found-email-auth`;
 export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
-export const SETUP_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/assword-setup`;
+export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/assword-reset`;
 
 
 // description : USER API URL PATH 
@@ -186,7 +187,7 @@ export const GET_CUSTOMER_BOARD_DETAIL_URL = (customerBoardNumber: number | stri
 export const PUT_CUSTOMER_BOARD_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
 export const DELETE_CUSTOMER_BOARD_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}`;
 export const PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/increase-view-count`;
-export const POST_CUSTOMER_BOARD_COMMENT_WRITE_REQUEST_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const POST_CUSTOMER_BOARD_COMMENT_WRITE_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const PUT_CUSTOMER_BOARD_COMMENT_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 
@@ -202,6 +203,7 @@ export const PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL = (designerBoardNumber
 export const POST_DESIGNER_BOARD_COMMENT_WRITE_URL =(designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const PUT_DESIGNER_BOARD_COMMENT_PUT_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
 export const DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}/${designerBoardNumber}/comment`;
+export const GET_DESIGNER_BOARD_COMMENT_LIST_URL = (designerBoardNumber: number | string) => `${SERVER_DESIGNER_BOARD_MODULE_URL}${designerBoardNumber}/comment`;
 
 // description: 게시물 상수
 export const COUNT_PER_PAGE = 10;

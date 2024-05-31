@@ -81,8 +81,12 @@ export default function TrendWrite() {
 
 	  //                    effect                    //
 		useEffect(() => {
+<<<<<<< HEAD
 			if (!loginUserRole) return;
 			if (loginUserRole === "ROLE_CUSTOMER" || loginUserRole === "ROLE_DESIGNER" ) {
+=======
+			if (loginUserRole !== "ROLE_CUSTOMER" && "ROLE_DESIGNER") {
+>>>>>>> 55d578ba4bde047c361cfa4c021aa480aadfbc6a
 				navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 				return;
 			}
