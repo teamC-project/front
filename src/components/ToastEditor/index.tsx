@@ -4,24 +4,57 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import './style.css'; 
+import { base64ToFile } from 'src/utils';
+import axios from 'axios';
 
 interface ToastEditorProps {
   body: string;
+	imageList: {base64: string; url: string}[];
   setBody: (body: string) => void;
+	setImageList: (imageList :{base64: string; url: string}[]) =>void;
 }
 
-const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, setBody }, ref) => {
+const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, imageList, setBody, setImageList}, ref) => {
 
 	const editorRef = useRef<Editor | null>(null);
+	const bodyRef = useRef<string>('');
+	const imageCountRef = useRef<number>(0);
 
   useImperativeHandle(ref, () => editorRef.current as Editor);
 
-  const onChangeGetHTML = () => {
+  const onChangeGetHTML = async () => {
     if (!editorRef.current) return;
-		// 에디터에 입력된 내용을 HTML 태그 형태로 취득
-		const data = editorRef.current.getInstance().getHTML();
-		// Body에 담기
+		let data = editorRef.current.getInstance().getHTML();
+		const isNewImage = imageCountRef.current < (data.split('data:image/').length - 1);
+		for (const imageItem of imageList) {
+			data = data.replace(imageItem.base64, imageItem.url);
+		}
+		if (isNewImage) {
+			data = data.replaceAll('<br>', '').substring(bodyRef.current.replaceAll('<br>', '').length - 4);
+			const base64 = data.substring(data.indexOf("data:image/"), data.indexOf('" contenteditable='));
+			const file = base64ToFile(base64);
+
+			const formData = new FormData();
+			formData.append('file', file);
+
+			const url = await axios.post('http://localhost:4200/upload', formData, { headers: { 'Content-Type' : 'multipart/form-data' } })
+				.then(response => {
+					return response.data;
+				})
+				.catch(error => '');
+
+				const newBody = body + data.replace(base64, url);
+				setBody(newBody);
+				console.log(newBody);
+
+				imageCountRef.current = imageCountRef.current + 1;
+
+				setImageList([...imageList, { base64, url }]);
+		} else {
 			setBody(data);
+		}
+		bodyRef.current = data;
+		// Body에 담기
   };
 
 
