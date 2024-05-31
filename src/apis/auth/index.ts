@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
 import { CUSTOMER_SIGN_UP_URL, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, FOUND_ID_URL, ID_CHECK_REQUEST_URL, SIGN_IN_REQUEST_URL } from "src/constant";
 import { SignInResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
@@ -60,4 +60,21 @@ export const foundIdRequest = async (requestBody: FoundIdCheckRequestDto) => {
     .catch(requestErrorHandler);
     return result;
 }
+
+// function: 비밀번호 찾기 사용자 확인 API 함수
+export const foundPasswordUserCheckRequest = async (requestBody: PasswordResetRequestDto) => {
+  const result = await axios.post(EMAIL_AUTH_CHECK_REQUEST_URL, requestBody)
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
+
+// function: 비밀번호 변경 API 함수
+export const setUpPasswordRequest = async (requestBody: SetUpPasswordRequestDto) => {
+  const result = await axios.post(FOUND_ID_URL, requestBody)
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
+
 

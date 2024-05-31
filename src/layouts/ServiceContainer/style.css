@@ -115,7 +115,7 @@
   grid-area: main;
   grid-column: 2;
   grid-row: 2;
-  background-color: rgb(52, 127, 192);
+  background-color: rgba(102, 178, 245, 0.91);
   flex: 1;
   min-width:  1320px;
   width: 100%;
@@ -125,7 +125,7 @@
   grid-area: rightbar;
   grid-column: 3;
   grid-row: 2;
-  background-color: rgb(13, 73, 73);
+  background-color: rgba(150, 237, 237, 0.887);
   width: 300px;
 }
 
