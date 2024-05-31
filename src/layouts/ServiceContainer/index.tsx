@@ -6,6 +6,7 @@ import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOA
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import useUserStore from "src/stores/use.store";
+import ResponseDto from 'src/apis/response.dto';
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
@@ -107,31 +108,31 @@ export default function ServiceContainer() {
 
     //                    state                    //
     const { pathname } = useLocation();
-    // const { setLoginUserId, setLoginUserRole } = useUserStore();
+    const { setLoginUserId, setLoginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
 
     //                    function                    //
-    // const navigator = useNavigate();
+    const navigator = useNavigate();
 
-    // const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+    const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
 
-    //     const message = 
-    //     !result ? '서버에 문제가 있습니다.' :
-    //     result.code === 'AF' ? '인증에 실패했습니다.' :
-    //     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        const message = 
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '인증에 실패했습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    //     if (!result || result.code !== 'SU') {
-    //         alert(message);
-    //         navigator(AUTH_ABSOLUTE_PATH);
-    //         return;
-    //     }
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            navigator(AUTH_ABSOLUTE_PATH);
+            return;
+        }
 
-    //     const { userId, userRole } = result as GetSignInUserResponseDto;
-    //     setLoginUserId(userId);
-    //     setLoginUserRole(userRole);
+        const { userId, userRole } = result as GetSignInUserResponseDto;
+        setLoginUserId(userId);
+        setLoginUserRole(userRole);
 
-    // };
+    };
 
     //                    effect                    //
     useEffect(() => {
@@ -145,16 +146,16 @@ export default function ServiceContainer() {
         setPath(path);
     }, [pathname]);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (!cookies.accessToken) {
-    //         navigator(AUTH_ABSOLUTE_PATH);
-    //         return;
-    //     }
+        // if (!cookies.accessToken) {
+        //     navigator(AUTH_ABSOLUTE_PATH);
+        //     return;
+        // }
 
-    //     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+        // getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
 
-    // }, [cookies.accessToken]);
+    }, [cookies.accessToken]);
 
     //                    render                       //
     return (

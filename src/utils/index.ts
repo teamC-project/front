@@ -1,4 +1,5 @@
-export const base64ToFile = (base64: string, type: string) => {
+export const base64ToFile = (base64: string) => {
+	const type = base64.substring(5, base64.indexOf(';base64'));
   const base64Data = base64.split(',')[1];
   const binaryString = atob(base64Data);
 
