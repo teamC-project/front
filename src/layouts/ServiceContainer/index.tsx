@@ -148,21 +148,12 @@ export default function ServiceContainer() {
 
     useEffect(() => {
 
-<<<<<<< HEAD
-        // if (!cookies.accessToken) {
-        //     navigator(AUTH_ABSOLUTE_PATH);
-        //     return;
-        // }
-
-        // getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-=======
         if (!cookies.accessToken) {
             navigator(AUTH_ABSOLUTE_PATH);
             return;
         }
 
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
->>>>>>> 55d578ba4bde047c361cfa4c021aa480aadfbc6a
 
     }, [cookies.accessToken]);
 
