@@ -9,10 +9,7 @@ import { useCookies } from 'react-cookie';
 import { getDesignerBoardRequest, postDesignerBoardCommentRequest } from 'src/apis/designerBoard';
 import { useUserStore } from 'src/stores';
 import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
-
-interface Props {
-    contents: string;
-}
+import DesignerBoardComment from '../DesignerComment';
 
 
 //                    component                    //
@@ -21,8 +18,8 @@ export default function DesignerDetail() {
     //              state               //
     const { loginUserId, loginUserRole } = useUserStore();
     const { designerBoardNumber } = useParams();
+    const { designerBoardCommentNumber = '' } = useParams<{ designerBoardCommentNumber: string }>();
     const [cookies] = useCookies();
-    const [viewList, setViewList] = useState<DesignerBoardCommentListItem[]>([]);
 
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
@@ -30,7 +27,6 @@ export default function DesignerDetail() {
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
     const [comment, setComment] = useState<string | null>(null);
-    const [commentRows, setCommentRows] = useState<number>(1);
 
     //                  function                    //
     const navigate = useNavigate();
@@ -62,24 +58,6 @@ export default function DesignerDetail() {
         setComment(comment);
     };
 
-    const postDesignerBoardCommentResponse = (result: ResponseDto | null) => {
-
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            return;
-        }
-
-        if (!designerBoardNumber || !cookies.accessToken) return;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardResponse);
-    };
-
     //                   event handler                    //
     const handleGoToList = () => {
         navigate(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
@@ -88,38 +66,6 @@ export default function DesignerDetail() {
     const onUpdateClickHandler = () => {
         if (!designerBoardNumber || loginUserId !== writerId) return;
         navigate(DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH(designerBoardNumber));
-    };
-
-    const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if (loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_CUSTOMER') return;
-        const comment = event.target.value;
-        setComment(comment);
-
-        const commentRows = comment.split('\n').length;
-        setCommentRows(commentRows);
-    };
-
-    const onCommentSubmitClickHandler = () => {
-        if (!comment || !comment.trim()) return;
-        if (!designerBoardNumber || loginUserRole !== 'ROLE_DESIGNER' && 'ROLE_CUSTOMER') return;
-
-        const requestBody: PostDesignerBoardCommentRequestDto = { comment };
-        postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken).then(postDesignerBoardCommentResponse);
-    };
-
-    //                    component                    //
-        const CommentPost = ({ contents}: Props) => {
-    //              state               //
-
-    //              render              //
-        return (
-            <div className="designer-comment-post">
-                <div className="designer-comment-write-contents-box">
-                    <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'>{contents}</textarea>
-                    <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
-                </div>
-            </div>
-        );
     };
 
     //              render              //
@@ -136,25 +82,8 @@ export default function DesignerDetail() {
             </div>
         </div>
         <div className="designer-detail-view">
-        {contents}
         </div>
-        <div className='designer-comment-wrap'>
-            <div className='comment-inner'>
-                <div className='comment-head'>
-                    <h5>댓글</h5>
-                    <span className='comment-count'>2</span>
-                </div>
-                <div className='comment-write-box'>
-                <CommentPost contents='' />
-                {/* <p>{contents}</p> */}
-                <div className="designer-comment-section">
-                    <div className="designe-comment-list">
-                    {/* {viewList.map(item => <ListItem {...item} />)} */}
-                        </div>
-                </div>
-                </div>
-            </div>
-        </div>
+        <DesignerBoardComment />
         <div className="designer-detail-go-to-designerList" onClick={handleGoToList}>
         목록으로
         </div>
