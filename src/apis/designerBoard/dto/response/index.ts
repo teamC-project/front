@@ -1,8 +1,12 @@
 import ResponseDto from "src/apis/response.dto";
-import { DesignerBoardListItem } from "src/types";
+import { DesignerBoardCommentListItem, DesignerBoardListItem } from "src/types";
 
 export interface GetDesignerBoardListResponseDto extends ResponseDto {
     designerBoardList: DesignerBoardListItem[];
+}
+
+export interface GetDesignerBoardCommentListResponseDto extends ResponseDto {
+    designerBoardCommentList: DesignerBoardCommentListItem[];
 }
 
 export interface GetSearchDesignerBoardListResponseDto extends ResponseDto {
