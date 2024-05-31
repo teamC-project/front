@@ -7,25 +7,25 @@
   font-weight: bold;
   margin-bottom: 20px;
   padding-left: 20px;
-  background-color: rgba(218, 218, 218, 1);
+  background-color: #F5F5F5;
 }
 
 .customer-detail-container {
   margin: 20px auto;
-  max-width: 100%; /* customer-detail-main-view의 너비에 맞춤 */
+  max-width: 100%;
   padding: 0;
 }
 
 .customer-detail-information {
   display: flex;
   justify-content: space-between;
-  padding: 0; /* 여백 제거 */
-  background-color: #f2f2f2;
+  padding: 0;
+  background-color: #E0E0E0;
 }
 
 .customer-detail-information > div {
   padding: 10px;
-  border: 1px solid #000000;
+  border: 1px solid #ccc;
   background-color: #ffffff;
   display: flex;
   justify-content: center;
@@ -59,91 +59,102 @@
   border: 1px solid #ccc;
   margin-bottom: 20px;
   min-height: 300px;
-  background-color: rgba(218, 218, 218, 1);
+  background-color: #F5F5F5;
 }
 
-.customer-detail-comment {
-  margin-top: 20px;
-  background-color: rgba(218, 218, 218, 1);
-  position: relative;
+
+
+.customer-comment-list {
+  margin-bottom: 20px;
 }
 
-.customer-detail-comment-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.customer-detail-comment-item {
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
+.customer-comment-box {
   border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
 }
 
-.customer-detail-comment-item:last-child {
-  border-bottom: none;
+.primary-bedge {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #3a57e8;
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 5px;
 }
-
-.customer-detail-comment-meta {
-  display: flex;
+.primary-bedge {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #3a57e8;
+  color: white;
+  border-radius: 4px;
   margin-bottom: 5px;
 }
 
-.customer-detail-comment-author {
-  font-weight: bold;
-  margin-right: 30px;
+.customer-comment {
+  margin-left: 10px;
 }
 
-.customer-detail-comment-content {
-  font-weight: bold;
-  padding-left: 30px;
+.customer-comment-write-box {
+  margin-bottom: 20px;
 }
 
-.customer-detail-comment-date {
-  margin-left: 700px;
-  flex: 1;
-  padding-left: 30px;
-  font-weight: bold;
+.customer-comment-textarea-box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #ffffff;
 }
 
-.customer-detail-comment-date-text {
-  margin-left: 700px;
-  flex: 1;
+.customer-comment-textarea {
+  width: 100%;
+  height: auto; /* 또는 계산된 높이를 사용하세요 */
+  padding: 10px;
+  border: none;
+  resize: none;
+}
+
+.primary-button {
+  padding: 8px 16px;
+  background-color: #3a57e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 
-.customer-detail-comment-details {
-  display: flex;
-}
 
-.customer-detail-comment-author-name {
-  margin-right: 30px;
-}
 
-.customer-detail-comment-content-text {
-  margin-left: 30px;
-}
-
-.customer-detail-comment-delete {
-  margin-left: auto;
-  margin-right: 10px;
-}
-
-.customer-detail-comment-put {
-  margin-right: 10px;
-}
-
-.customer-detail-comment-write {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.customer-detail-go-to-CustomerList {
+.customer-detail-go-to-customerList {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f2f2f2;
+  background-color: #E0E0E0;
   border: 1px solid #ccc;
   text-align: center;
   cursor: pointer;
+}
+
+.customer-comment-write-contents-textarea {
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+
+  width: 100%;
+
+  line-height: 175%;
+}
+
+.customer-comment-write-contents-box {
+border: 1px solid rgba(238, 238, 238, 1);
+border-radius: 6px;
+padding: 12px 16px;
+
+min-height: 248px;
+
+background-color: rgba(255, 255, 255, 1);
 }
