@@ -26,5 +26,6 @@ export interface DesignerBoardListItem {
 export interface DesignerBoardCommentListItem {
 	designerBoardCommentNumber : number;
 	designerBoardCommentWriterId : string;
+	designerBoardCommentContents : string;
 	designerBoardCommentDatetime : string;
 };

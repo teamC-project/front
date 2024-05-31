@@ -14,9 +14,10 @@ interface Props {
 }
 
 //                    component                    //
-function ListItem ({
+function ListItem({
     designerBoardCommentNumber,
     designerBoardCommentWriterId,
+    designerBoardCommentContents,
     designerBoardCommentDatetime
 }: DesignerBoardCommentListItem) {
 
@@ -25,8 +26,9 @@ function ListItem ({
     return (
         <div className='designer-comment-table-tr'>
             <div className='designer-comment-number'>{designerBoardCommentNumber}</div>
-            <div className='designer-comment-author'>작성자{designerBoardCommentWriterId}</div>
-            <div className='designer-comment-date'>작성일{designerBoardCommentDatetime}</div>
+            <div className='designer-comment-author'>작성자: {designerBoardCommentWriterId}</div>
+            <div className='designer-comment-contents'>{designerBoardCommentContents}</div>
+            <div className='designer-comment-date'>작성일: {designerBoardCommentDatetime}</div>
         </div>
     );
 }
@@ -37,8 +39,9 @@ export default function DesignerBoardComment() {
     //                    state                    //
     const { loginUserId, loginUserRole } = useUserStore();
     const { designerBoardNumber } = useParams();
-    const [ designerBoardCommentNumber, setDesignerBoardCommentNumber ] = useState<number>(1);
-    const [ designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
+    // const { designerBoardCommentNumber } = useParams();
+    const [designerBoardCommentNumber, setDesignerBoardCommentNumber] = useState<number>(1);
+    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
     const [writerId, setWriterId] = useState<string>('');
     const [comment, setComment] = useState<string | null>(null);
     const [cookies] = useCookies();
@@ -50,12 +53,12 @@ export default function DesignerBoardComment() {
 
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
 
-        const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패 했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'VF' ? '잘못된 접수 번호입니다.' :
+                    result.code === 'AF' ? '인증에 실패 했습니다.' :
+                        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -73,10 +76,10 @@ export default function DesignerBoardComment() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'AF' ? '권한이 없습니다.' :
+                    result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
+                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -103,12 +106,12 @@ export default function DesignerBoardComment() {
 
     const deleteDesignerBoardCommentResponse = (result: ResponseDto | null) => {
 
-        const message = 
+        const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-            result.code === 'NB' ? ' 존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? ' 서버에 문제가 있습니다.' : '';
+                result.code === 'AF' ? '권한이 없습니다.' :
+                    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+                        result.code === 'NB' ? ' 존재하지 않는 게시물입니다.' :
+                            result.code === 'DBE' ? ' 서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -129,10 +132,12 @@ export default function DesignerBoardComment() {
 
     const onCommentSubmitClickHandler = () => {
         if (!comment || !comment.trim()) return;
-        if (!designerBoardNumber || loginUserRole !== 'ROLE_DESIGNER' && 'ROLE_CUSTOMER') return;
+        if (!designerBoardNumber || (loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_CUSTOMER')) return;
 
         const requestBody: PostDesignerBoardCommentRequestDto = { comment };
         postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken).then(postDesignerBoardCommentResponse);
+
+        getDesignerBoardCommentListRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardCommentListResponse);
     };
 
     const onDeleteClikcHandler = () => {
@@ -147,21 +152,24 @@ export default function DesignerBoardComment() {
     useEffect(() => {
         if (!cookies.accessToken) return;
         getDesignerBoardCommentListRequest(designerBoardCommentNumber, cookies.accessToken).then(getDesignerBoardCommentListResponse);
-    })
+
+    }, [designerBoardNumber]);
+
+
 
     //                    component                    //
-    const CommentPost = ({ contents}: Props) => {
-    
+    const CommentPost = ({ contents }: Props) => {
+
         //              render              //
-            return (
-                <div className="designer-comment-post">
-                    <div className="designer-comment-write-contents-box">
-                        <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'>{contents}</textarea>
-                        <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
-                    </div>
+        return (
+            <div className="designer-comment-post">
+                <div className="designer-comment-write-contents-box">
+                    <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'>{contents}</textarea>
+                    <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
                 </div>
-            );
-        };
+            </div>
+        );
+    };
 
     //              render              //
     return (
@@ -172,14 +180,15 @@ export default function DesignerBoardComment() {
                     <span className='comment-count'></span>
                 </div>
                 <div className='comment-write-box'>
-                <CommentPost contents='' />
-                {comment && (
+                    <CommentPost contents='' />
+                    {comment && (
+                        <></>
+                    )}
                     <div className="designer-comment-section">
                         <div className="designe-comment-list">
-                        {viewList.map(item => <ListItem {...item} />)}
+                            {designerBoardCommentList.map(item => <ListItem {...item} />)}
                         </div>
                     </div>
-                )}
                 </div>
             </div>
         </div>
