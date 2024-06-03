@@ -211,6 +211,8 @@ export function SignIn() {
   )
 }
 
+
+
 //                 component                 //
 export function ChooseSingUp() {
 
