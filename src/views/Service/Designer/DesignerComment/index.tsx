@@ -55,10 +55,10 @@ export default function DesignerBoardComment() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-                    result.code === 'AF' ? '인증에 실패 했습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 접수 번호입니다.' :
+            result.code === 'AF' ? '인증에 실패 했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -76,10 +76,10 @@ export default function DesignerBoardComment() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -108,10 +108,10 @@ export default function DesignerBoardComment() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-                        result.code === 'NB' ? ' 존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? ' 서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+            result.code === 'NB' ? ' 존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? ' 서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
