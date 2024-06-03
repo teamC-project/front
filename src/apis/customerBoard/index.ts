@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { DELETE_CUSTOMER_BOARD_DELETE_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL } from "src/constant";
-import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
-=======
-import { GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL } from "src/constant";
 
->>>>>>> b2ae6805720a86658d589c1e667c961ba4b090b3
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
