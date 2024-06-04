@@ -1,15 +1,18 @@
-// description: Customer 작성 Request Body DTO //
 export interface PostCustomerBoardRequestDto {
-  title: string;
-  contents: string;
+  customerBoardTitle: string;
+  customerBoardContents: string;
   isSecret: boolean;
 }
 
 export interface PostCustomerBoardCommentRequestDto {
-	comment : string;
+	customerBoardComment : string;
 }
 
 export interface PutCustomerBoardRequestDto {
-	title : string ;
-	contents : string;
+	customerBoardTitle : string ;
+	customerBoardContents : string;
+}
+
+export interface PutCustomerBoardCommentRequestDto {
+  customerBoardComment : string;
 }

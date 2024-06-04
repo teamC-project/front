@@ -1,10 +1,13 @@
 import ResponseDto from "src/apis/response.dto";
-import { CustomerBoardListItem } from "src/types";
+import { CustomerBoardListItem, CustomerBoardCommentListItem } from "src/types";
 
 export interface GetSearchCustomerBoardListResponseDto extends ResponseDto {
 	customerBoardList : CustomerBoardListItem[];
 }
 
+export interface GetCustomerBoardCommentListResponseDto extends ResponseDto {
+	customerBoardCommentList: CustomerBoardCommentListItem[];
+}
 export interface GetCustomerBoardListResponseDto extends ResponseDto {
 	customerBoardList : CustomerBoardListItem[];
 }
@@ -18,4 +21,5 @@ export interface GetCustomerBoardResponseDto extends ResponseDto {
 	customerBoardContents : string;
 	customerBoardViewCount : number;
 	customerBoardComment : string | null;
+	customerBoardIsSecret: boolean;
 }
