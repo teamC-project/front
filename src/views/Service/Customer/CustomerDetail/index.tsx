@@ -31,7 +31,9 @@ export default function CustomerDetail() {
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
     const [comment, setComment] = useState<string | null>(null);
+    const [commentList, setCommentList] = useState<CustomerBoardCommentListItem[]>([]);
     const [commentRows, setCommentRows] = useState<number>(1);
+    const [isSecret, setIsSecret] = useState<boolean>(false);
 
     //                  function                    //
     const navigator = useNavigate();
@@ -82,13 +84,22 @@ export default function CustomerDetail() {
           customerBoardWriteDatetime: writeDatetime,
           customerBoardViewCount: viewCount,
           customerBoardContents: contents,
-          customerBoardComment: comment } = result as GetCustomerBoardResponseDto;
+          customerBoardComment: comment,
+          customerBoardIsSecret: isSecret } = result as GetCustomerBoardResponseDto;
+
+          if (isSecret && loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== writerId) {
+            alert('비밀글입니다.');
+            navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+          }
+
         setTitle(title);
         setWriterId(writerId);
         setWriteDate(writeDatetime);
         setViewCount(viewCount);
         setContents(contents);
         setComment(comment);
+        setIsSecret(isSecret);
     };
 
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
@@ -106,7 +117,9 @@ export default function CustomerDetail() {
         }
 
         if (!customerBoardNumber || !cookies.accessToken) return;
-        getCustomerBoardRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardResponse);
+        getCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
+            .then(getCustomerBoardResponse);
+            
     };
 
     //                   event handler                    //
@@ -132,7 +145,7 @@ export default function CustomerDetail() {
         if (!comment || !comment.trim()) return;
         if (!customerBoardNumber || (loginUserRole !== 'ROLE_DESIGNER' && 'ROLE_CUSTOMER')) return;
 
-        const requestBody: PostCustomerBoardCommentRequestDto = { comment };
+        const requestBody: PostCustomerBoardCommentRequestDto = { customerBoardComment:comment };
         postCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken).then(postCustomerBoardCommentResponse);
     };
 

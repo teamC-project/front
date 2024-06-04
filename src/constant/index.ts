@@ -190,6 +190,8 @@ export const PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL = (customerBoardNumber
 export const POST_CUSTOMER_BOARD_COMMENT_WRITE_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const PUT_CUSTOMER_BOARD_COMMENT_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const GET_CUSTOMER_BOARD_COMMENT_LIST_URL = (customerBoardCommentNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardCommentNumber}/comment/list`;
+export const GET_CUSTOMERR_BOARD_COMMENT_URL = (customerBoardCommentNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardCommentNumber}/comment`;
 
 // description : DESIGNER API URL PATH
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;

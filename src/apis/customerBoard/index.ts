@@ -1,11 +1,9 @@
-import { DELETE_CUSTOMER_BOARD_DELETE_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL } from "src/constant";
-
+import { DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL, GET_CUSTOMER_BOARD_COMMENT_LIST_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL } from "src/constant";
+import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
-import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
-import { GetCustomerBoardListResponseDto, GetCustomerBoardResponseDto, GetSearchCustomerBoardListResponseDto } from "./dto/response";
-
+import { GetCustomerBoardCommentListResponseDto, GetCustomerBoardListResponseDto, GetCustomerBoardResponseDto, GetSearchCustomerBoardListResponseDto } from "./dto/response";
 
 // function: CustomerBoard 작성 API 함수 
 export const postCustomerBoardRequest = async (requestBody: PostCustomerBoardRequestDto, accessToken: string) => {
@@ -28,7 +26,7 @@ export const getCustomerBoardListRequest = async (accessToken: string) => {
     const result = await axios.get(GET_CUSTOMER_BOARD_LIST_URL, bearerAuthorization(accessToken))
         .then(requestHandler<GetCustomerBoardListResponseDto>)
         .catch(requestErrorHandler);
-        return result;
+    return result;
 };
 
 // function: CustomerBoard 검색 리스트 불러오기 API 함수 
@@ -37,8 +35,16 @@ export const getSearchCustomerBoardListRequest = async (word: string, accessToke
     const result = await axios.get(GET_SEARCH_CUSTOMER_BOARD_LIST_URL, config)
         .then(requestHandler<GetSearchCustomerBoardListResponseDto>)
         .catch(requestErrorHandler);
-        return result;
+    return result;
 };
+
+// function: CustomerBoard Comment 전체 리스트 불러오기 API 함수 
+export const getCustomerBoardCommentListRequest = async (customerBoardCommentNumber: number | string, accessToken: string) => {
+    const result = await axios.get(GET_CUSTOMER_BOARD_COMMENT_LIST_URL(customerBoardCommentNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<GetCustomerBoardCommentListResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+} 
 
 // function: CustomerBoard 게시물 불러오기 API 함수 
 export const getCustomerBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
@@ -56,6 +62,13 @@ export const putCustomerBoardRequest = async (customerBoardNumber: number | stri
     return result;
 };
 
+// function: CustomerBoard 답글 삭제 API 함수 
+export const deleteCustomerBoardCommentRequest = async (customerBoardCommentNumber: number | string, accessToken: string) => {
+    const result = await axios.delete(DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL(customerBoardCommentNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
 
 // function: CustomerBoard 게시물 조회수 증가 API 함수 
 export const increaseViewCountRequest = async (customerBoardNumber: number | string, accessToken: string) => {
@@ -65,11 +78,3 @@ export const increaseViewCountRequest = async (customerBoardNumber: number | str
     return result;
 };
 
-
-// function: CustomerBoard 게시물 삭제 API 함수 
-export const deleteBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
-    const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), bearerAuthorization(accessToken))
-        .then(requestHandler<ResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-};
