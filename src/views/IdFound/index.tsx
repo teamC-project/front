@@ -40,6 +40,7 @@ export default function IdFound() {
       result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+      
     const emailCheck = result !== null && result.code === 'SU';
     const emailError = !emailCheck;
 
@@ -55,6 +56,7 @@ export default function IdFound() {
       result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.':
       result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+
     const authNumberCheck = result !== null && result.code === 'SU';
     const authNumberError = !authNumberCheck;
 
