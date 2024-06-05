@@ -4,3 +4,7 @@ import { TrendBoardListItem } from 'src/types';
 		trendBoardList : TrendBoardListItem[];
 	}
 
+	export interface GetSearchTrendBoardListResponseDto extends ResponseDto {
+		trendBoardList : TrendBoardListItem[];
+	}
+
