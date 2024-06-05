@@ -7,6 +7,7 @@ import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_PATH, UPDATE
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 
 //                     component                       //
 export default function InfoDesigner() {
@@ -15,15 +16,16 @@ export default function InfoDesigner() {
   const [userId, serUserId] = useState(null);
   const [age, setAge] = useState<string>('');
   const [gender, setGender] = useState<string>('');
+  const [ageMessage, setAgeMessage] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
   const [image, setImage] = useState<string>('');
   const [companyName, setCompanyName] = useState<string>('');
-  const [imageMessage, setImageMessage] = useState<string>('');
   const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-  const [writeId, setWriteId] = useState<string>('');
+  const [imageMessage, setImageMessage] = useState<string>('');
   const {loginUserRole, loginUserId} = useUserStore();
   const [cookies] = useCookies();
 
+  const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
   const [isImageCheck, setIsImageCheck] = useState<boolean>(false);
   const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
@@ -33,37 +35,43 @@ export default function InfoDesigner() {
   //                     function                       //
   const navigator = useNavigate();
 
-  const infoDesignerResponse = (result: ResponseDto | null) => {
-    const infoDesignerMessage =
+  const infoDesignerResponse = (result:GetSignInUserResponseDto | ResponseDto | null) => {
+    const message =
     !result ? '서버에 문제가 있습니다.':
     result.code === 'TF' ? '토큰 생성에 실팼습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.': '';
+    result.code === 'DBE' ? '서버에 문제가 있습니다.': '' ;
 
-    const designerGender = result !== null && result.code === 'SU';
-    const genderError = !designerGender;
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    }
 
-    const designerAge = result !==null && result.code === 'SU';
-    const ageError = !designerAge;
-  
-    const companyNameCheck = result !==null && result.code ==='SU';
-    const companyNameError = !companyNameCheck;
-
-    const image = result !==null && result.code ==='SU';
-    const imageError = !image;
-
+    const {userId ,userGender, userAge, userCompanyName, userImage} = result as GetSignInUserResponseDto;
+    if (userId !== loginUserId) {
+      alert('권한이 없습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+      return;
+    }
     setGender(gender);
     setAge(age);
     setCompanyName(companyName);
-  }
-
-  //                     event handler                       //
-  const onAgeChangeHandler = (age: string) => {
-    setAge(age);
+    setImage(image);
   };
 
+  //                     event handler                       //
   const onInfoDesignerUpdateClickHandler = () => {
     navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH)
-  }
+  };
+
+  const onAgeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setAge(value);
+    setIsAgeCheck(false);
+    const ageMessage =
+      isAgeCheck ? '' :
+        value ? '연령대를 선택해주세요.' : '';
+    setAgeMessage(ageMessage);
+  };
 
   const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

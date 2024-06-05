@@ -137,7 +137,7 @@ export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/assword-reset`;
 
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
-export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
+export const GET_SIGN_IN_USER_REQUEST_URL =(userId:string) => `${SERVER_USER_MODULE_URL}/${userId}`;
 export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my-page`;
 export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
 export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
