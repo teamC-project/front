@@ -44,7 +44,6 @@ export default function TrendWrite() {
 		navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 	}
 
-	
 	  //                    event handler                    //
 		const onTrendBoardTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 			const trendBoardTitle = event.target.value;
@@ -64,9 +63,10 @@ export default function TrendWrite() {
       if (!cookies.accessToken) return;
   
       const requestBody: PostTrendBoardRequestDto = {
-          trendBoardTitle,
-          trendBoardContents
-      }
+				trendBoardTitle,
+				trendBoardContents,
+				trendBoardThumbNailImage: ''
+			}
       try {
           const token = await Promise.resolve(cookies.accessToken); 
           const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
@@ -82,7 +82,7 @@ export default function TrendWrite() {
 	  //                    effect                    //
 		useEffect(() => {
 			if (!loginUserRole) return;
-			if (loginUserRole === "ROLE_CUSTOMER" || loginUserRole === "ROLE_DESIGNER" ) {
+			if (loginUserRole !=="ROLE_ADMIN" ) {
 				navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 				return;
 			}
@@ -99,7 +99,7 @@ export default function TrendWrite() {
 				/>
         <div className='search-button'>썸네일 이미지 선택</div>
 				<div style={{}}>
-					{trendBoardUrlList.map((item, index) => <div 
+					{trendBoardUrlList.map((item) => <div 
 					style={{ 
 						width: '100px',
 						height: '100px',
@@ -114,7 +114,6 @@ export default function TrendWrite() {
       <div className='trend-board-textarea-container'>
 			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} imageList={trendBoardUrlList} setImageList={onImageChangeHandler} />
       </div>
-			
       <div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>
           <div className='search-button' onClick={onTrendPostClickHandler}>올리기</div>
