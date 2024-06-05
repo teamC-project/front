@@ -87,11 +87,7 @@ export default function CustomerDetail() {
           customerBoardComment: comment,
           customerBoardIsSecret: isSecret } = result as GetCustomerBoardResponseDto;
 
-          if (isSecret && loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== writerId) {
-            alert('비밀글입니다.');
-            navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-          }
+          
 
         setTitle(title);
         setWriterId(writerId);

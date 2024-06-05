@@ -102,7 +102,7 @@ export default function CustomerWrite() {
     const onSecretChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSecret(event.target.checked);
     };
-
+    
     const onPostButtonClickHandler = () => {
         if (!title.trim() || !contents.trim()) return;
         if (!cookies.accessToken) return;
