@@ -21,8 +21,6 @@ export default function SelectBox({ value, onChange}: Prop) {
     { name: '90대', value: '90대' },
   ];
 
-
-
   //                     state                       //
   const [show, setShow] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
