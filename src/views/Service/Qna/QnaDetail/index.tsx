@@ -1,15 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css';
 import'../../../../App.css'
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import {  QNA_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
 
+//												component													//
 export default function QnaDetail() {
-	const navigate = useNavigate();
 
-	const handleGoToList = () => {
-    navigate(`${QNA_BOARD_LIST_ABSOLUTE_PATH}`);
-  };
+	//										state										//
+	const {loginUserId, loginUserRole} = useUserStore();
+	const {qnaBoardNumber} = useParams();
+	const [cookies] = useCookies();
+
+	const [title, setTItle] = useState<string>('');
+	const [writerId, setWriterId] = useState<string>('');
+	const [writeDate, setWriteDate] = useState<string>('');
+	const [viewCount, setViewCount] = useState<number>(0);
+	const [contents, setContents] = useState<string>('');
+	const [status, setStatus] = useState<string | null>(null);
+	const [comment, setComment] = useState<string | null>(null);
+	const [commentRows, setCommentRows] = useState<number>(1);
+
+	  //                    function                    //
+		const navigator = useNavigate();
+
+		const increaseViewCountResponse = (result : ResponseDto | null) => {
+			
+		}
 	return (
     <div id="qna-board-detail-wrapper">
       <div className="qna-board-detail-title">제목</div>
@@ -43,7 +63,7 @@ export default function QnaDetail() {
 				</div>
 				</div>
 		</div>
-      <div className="qna-board-detail-go-to-qna-boardList" onClick={handleGoToList} >
+      <div className="qna-board-detail-go-to-qna-boardList"  >
         목록으로
       </div>
     </div>
