@@ -2,10 +2,12 @@ import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, foundPasswordUserCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import { emailAuthCheckRequest, emailAuthRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+
+let globalId = '';
 
 export function SettingPassword() {
 //                      state                     //
@@ -17,7 +19,7 @@ export function SettingPassword() {
 
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
-  
+
 //                     function                     //
   const navigator = useNavigate();
 
@@ -32,6 +34,10 @@ export function SettingPassword() {
       alert(message);
       return;
     } 
+    if(password === passwordCheck) {
+      alert('비밀번호가 일치하지 않습니다.')
+    return;
+    }
     navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   };
 
@@ -43,7 +49,7 @@ export function SettingPassword() {
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPassword(value)
-    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/;
     const isPassworPattern = passwordPattern.test(value);
     setIsPasswordPattern(isPassworPattern);
     const passwordMessage =
@@ -69,13 +75,15 @@ export function SettingPassword() {
   };
 
   
-  const onSignUpButtonClickHandler = () => {
+  const onSetUpPasswordButtonClickHandler = () => {
     if(!password || !passwordCheck) {
       alert('모든 내용을 입력해주세요.')
+
       return;
     };
 
     const requestBody: SetUpPasswordRequestDto = {
+      userId: globalId,
       userPassword: password
     };
     setUpPasswordRequest(requestBody).then(passwordSetupResponse);
@@ -114,7 +122,7 @@ export function SettingPassword() {
             </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>비밀번호 변경</div>
+            <div className='auth-submit-box auth-primary-button' onClick={onSetUpPasswordButtonClickHandler}>비밀번호 변경</div>
           </div>
         </div>
     </div>
@@ -172,7 +180,7 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
     const emailMessage = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '이메일 형식이 아닙니다.' :
-      result.code === 'DE' ? '이미 사용중인 이메일 입니다.' :
+      result.code === 'NE' ? '존재하지 않는 이메일입니다.' :
       result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
@@ -210,8 +218,9 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
     if (!isSuccess) {
       alert(message);
       return;
-    } 
-    navigator(AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH);
+    }
+    globalId = id;
+    navigator(AUTH_PASSOWORD_RESET_ABSOLUTE_PATH);
   };
 //                event handler               //
   const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
@@ -254,7 +263,7 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
       return;
     }
     const requestBody: EmailAuthRequestDto = { userEmail : email};
-    emailAuthRequest(requestBody).then(emailAuthResponse);
+    foundPasswordEmailAuthRequest(requestBody).then(emailAuthResponse);
   };
 
   const onAuthNumberButtonClickHandler = () => {
@@ -321,7 +330,7 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onFoundPasswordButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box auth-primary-button' onClick={onFoundPasswordButtonClickHandler}>확인</div>
           </div>
         </div>
     </div>

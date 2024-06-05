@@ -267,3 +267,10 @@
 .auth-sign-in-button-size {
   width: 120px;
 }
+
+.is-user-id {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: rgba(64, 64, 64, 0.8);
+}

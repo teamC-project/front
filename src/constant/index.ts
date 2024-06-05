@@ -9,7 +9,7 @@ export const CUSTOMER_PATH = "customer";
 export const DESIGNER_PATH = "designer";
 export const ID_FOUND_PATH = "id-found";
 export const PASSWORD_FOUND_PATH = "password-found";
-export const PASSOWORD_SETUP_PATH = "password-setup";
+export const PASSOWORD_RESET_PATH = "password-reset";
 
 export const SERVICE_PATH = "/service";
 
@@ -60,7 +60,7 @@ export const AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}
 export const AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}/${DESIGNER_PATH}`;
 export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
 export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
-export const AUTH_PASSOWORD_SETUP_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_SETUP_PATH}`;
+export const AUTH_PASSOWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_RESET_PATH}`;
 
 // description : MYPAGE 절대 URL PATH
 export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
@@ -131,8 +131,9 @@ export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`
 
 export const FOUND_ID_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/id-found-email-auth`;
 export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
+export const FOUND_PASSWORD_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/password-found-email-auth`;
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
-export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/assword-reset`;
+export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 
 
 // description : USER API URL PATH 
@@ -190,6 +191,8 @@ export const PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL = (customerBoardNumber
 export const POST_CUSTOMER_BOARD_COMMENT_WRITE_URL =(customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const PUT_CUSTOMER_BOARD_COMMENT_PUT_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
 export const DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL = (customerBoardNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardNumber}/comment`;
+export const GET_CUSTOMER_BOARD_COMMENT_LIST_URL = (customerBoardCommentNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardCommentNumber}/comment/list`;
+export const GET_CUSTOMERR_BOARD_COMMENT_URL = (customerBoardCommentNumber: number | string) => `${SERVER_CUSTOMER_BOARD_MODULE_URL}/${customerBoardCommentNumber}/comment`;
 
 // description : DESIGNER API URL PATH
 export const SERVER_DESIGNER_BOARD_MODULE_URL = `${SERVER_API_URL}/designer_board`;

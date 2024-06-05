@@ -22,6 +22,7 @@ export interface CustomerBoardListItem {
 	customerBoardWriterId : string;
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
+	customerBoardIsSecret: boolean;
 }	
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;

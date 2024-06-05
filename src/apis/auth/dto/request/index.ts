@@ -58,5 +58,6 @@ export interface PasswordResetRequestDto {
 }
 // description: 비밀번호 재설정 Requset Body DTO
 export interface SetUpPasswordRequestDto {
+  userId: string;
   userPassword : string;
 }

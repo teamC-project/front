@@ -83,7 +83,6 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
   setSuccess(true);
   setId(userId);
 
-  // navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
 
 //                   event handler                  //
@@ -183,9 +182,9 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
     </div>
 
     <div className='auth-submit-box'>
-      <div className='auth-submit-box primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
+      <div className='auth-submit-box auth-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
     </div>
-      {success && <div className=''>{id}</div>}
+      {success && <div className='is-user-id'>아이디는 {id} 입니다.</div>}
     </div>
   </div>
 
