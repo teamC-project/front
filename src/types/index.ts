@@ -13,6 +13,7 @@ export interface TrendBoardListItem {
 	trendBoardWriterId : string;
 	trendBoardWriteDatetime : string;
 	trendBoardLikeCount : number;
+	trendBoardThumbNailImage : string;
 }
 
 export interface CustomerBoardListItem {

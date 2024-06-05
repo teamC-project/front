@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
 
 let globalId = '';
 
@@ -34,7 +34,7 @@ export function SettingPassword() {
       alert(message);
       return;
     } 
-    if(password === passwordCheck) {
+    if(password !== passwordCheck) {
       alert('비밀번호가 일치하지 않습니다.')
     return;
     }

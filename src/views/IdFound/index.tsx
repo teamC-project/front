@@ -4,10 +4,9 @@ import InputBox from 'src/components/Inputbox';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
+import { emailAuthCheckRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
 import ResponseDto from 'src/apis/response.dto';
 import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
-import axios from 'axios';
 
 //                    component                    //
 export default function IdFound() {
@@ -40,6 +39,7 @@ export default function IdFound() {
       result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+      
     const emailCheck = result !== null && result.code === 'SU';
     const emailError = !emailCheck;
 
@@ -55,6 +55,7 @@ export default function IdFound() {
       result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.':
       result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+
     const authNumberCheck = result !== null && result.code === 'SU';
     const authNumberError = !authNumberCheck;
 
