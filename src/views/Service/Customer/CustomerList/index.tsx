@@ -16,20 +16,30 @@ function ListItem ({
   customerBoardTitle,
   customerBoardWriterId,
   customerBoardWriteDatetime,
-  customerBoardViewCount
+  customerBoardViewCount,
+  customerBoardIsSecret
 }: CustomerBoardListItem) {
 
   //              function              //
   const navigator = useNavigate();
+  const { loginUserRole, loginUserId } = useUserStore();
 
   //              event handler              //
-  const onClickHandler = () => navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
+  const onClickHandler = () => {
+    if (customerBoardIsSecret && loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== customerBoardWriterId) {
+      alert('비밀글입니다.');
+      return;
+    }
+    navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
+  };
+  const isNotAuthor = loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== customerBoardWriterId;
+  const title = customerBoardIsSecret && isNotAuthor ? '비밀글입니다' : customerBoardTitle;
 
   //              render              //
   return (
-    <div className='customerboard-list-table-tr' onClick={onClickHandler}>
+    <div className='customerboard-list-table-tr' onClick={isNotAuthor && customerBoardIsSecret ? undefined : onClickHandler}>
       <div className='customerboard-list-table-number'>{customerBoardNumber}</div>
-      <div className='customerboard-list-table-title' style={{ textAlign:'left' }}>{customerBoardTitle}</div>
+      <div className='customerboard-list-table-title'>{title}</div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
       <div className='customerboard-list-table-write-date'>{customerBoardWriteDatetime}</div>
       <div className='customerboard-list-table-viewcount'>{customerBoardViewCount}</div>
@@ -41,7 +51,7 @@ function ListItem ({
 export default function CustomerList() {
 
   //                    state                    //
-  const {loginUserRole} = useUserStore();
+  const { loginUserRole, loginUserId } = useUserStore();
   const [cookies] = useCookies();
   const [customerBoardList, setCustomerBoardList] = useState<CustomerBoardListItem[]>([]);
   const [viewList, setViewList] = useState<CustomerBoardListItem[]>([]);
@@ -125,11 +135,15 @@ export default function CustomerList() {
     }
   
     const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
-    setCustomerBoardList(customerBoardList);
-    changeCustomerBoardList(customerBoardList);
-    changePage(customerBoardList, customerBoardList.length);
-    setCurrentPage(!customerBoardList.length ? 0 : 1);
-    setCurrentSection(!customerBoardList.length ? 0 : 1);
+    const updatedCustomerBoardList = customerBoardList.map(item => ({
+      ...item,
+      customerBoardViewCount: item.customerBoardViewCount || 0, // 조회수가 없으면 0으로 설정
+    }));
+    setCustomerBoardList(updatedCustomerBoardList);
+    changeCustomerBoardList(updatedCustomerBoardList);
+    changePage(updatedCustomerBoardList, updatedCustomerBoardList.length);
+    setCurrentPage(!updatedCustomerBoardList.length ? 0 : 1);
+    setCurrentSection(!updatedCustomerBoardList.length ? 0 : 1);
     setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
   };
   //                    event handler                    //
@@ -247,11 +261,11 @@ export default function CustomerList() {
           </div>
           <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        
+        {loginUserRole === 'ROLE_CUSTOMER' && (
           <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
           </div>
-        
+        )}
       </div>
     </div>
   );

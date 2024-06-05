@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { deleteDesignerBoardCommentRequest, getDesignerBoardCommentListRequest, getDesignerBoardRequest, postDesignerBoardCommentRequest } from 'src/apis/designerBoard';
-import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
-import { GetDesignerBoardCommentListResponseDto, GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
+import { deleteCustomerBoardCommentRequest, getCustomerBoardCommentListRequest, getCustomerBoardRequest, postCustomerBoardCommentRequest } from 'src/apis/customerBoard';
+import { PostCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
+import { GetCustomerBoardCommentListResponseDto, GetCustomerBoardResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { DesignerBoardCommentListItem } from 'src/types';
+import { CustomerBoardCommentListItem } from 'src/types';
 
 interface Props {
     contents: string;
@@ -15,43 +15,43 @@ interface Props {
 
 //                    component                    //
 function ListItem({
-    designerBoardCommentNumber,
-    designerBoardCommentWriterId,
-    designerBoardCommentContents,
-    designerBoardCommentDatetime
-}: DesignerBoardCommentListItem) {
+    customerBoardCommentNumber,
+    customerBoardCommentWriterId,
+    customerBoardCommentContents,
+    customerBoardCommentDatetime
+}: CustomerBoardCommentListItem) {
 
 
     //              render              //
     return (
-        <div className='designer-comment-table-tr'>
-            <div className='designer-comment-number'>{designerBoardCommentNumber}</div>
-            <div className='designer-comment-author'>작성자: {designerBoardCommentWriterId}</div>
-            <div className='designer-comment-contents'>{designerBoardCommentContents}</div>
-            <div className='designer-comment-date'>작성일: {designerBoardCommentDatetime}</div>
+        <div className='customer-comment-table-tr'>
+            <div className='customer-comment-number'>{customerBoardCommentNumber}</div>
+            <div className='customer-comment-author'>작성자: {customerBoardCommentWriterId}</div>
+            <div className='customer-comment-contents'>{customerBoardCommentContents}</div>
+            <div className='customer-comment-date'>작성일: {customerBoardCommentDatetime}</div>
         </div>
     );
 }
 
 //                    component                    //
-export default function DesignerBoardComment() {
+export default function CustomerBoardComment() {
 
     //                    state                    //
     const { loginUserId, loginUserRole } = useUserStore();
-    const { designerBoardNumber } = useParams();
-    // const { designerBoardCommentNumber } = useParams();
-    const [designerBoardCommentNumber, setDesignerBoardCommentNumber] = useState<number>(1);
-    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
+    const { customerBoardNumber } = useParams();
+    // const { customerBoardCommentNumber } = useParams();
+    const [customerBoardCommentNumber, setCustomerBoardCommentNumber] = useState<number>(1);
+    const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
     const [writerId, setWriterId] = useState<string>('');
-    const [comment, setComment] = useState<string | null>(null);
+    const [comment, setComment] = useState<string>('');
     const [cookies] = useCookies();
     const [commentRows, setCommentRows] = useState<number>(1);
-    const [viewList, setViewList] = useState<DesignerBoardCommentListItem[]>([]);
+    const [viewList, setViewList] = useState<CustomerBoardCommentListItem[]>([]);
 
     //                  function                    //
     const navigator = useNavigate();
 
-    const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
+    const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -66,13 +66,13 @@ export default function DesignerBoardComment() {
                 navigator(MAIN_PATH);
                 return;
             }
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+            navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
     };
 
-    const postDesignerBoardCommentResponse = (result: ResponseDto | null) => {
+    const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -86,25 +86,25 @@ export default function DesignerBoardComment() {
             return;
         }
 
-        if (!designerBoardNumber || !cookies.accessToken) return;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardResponse);
+        if (!customerBoardNumber || !cookies.accessToken) return;
+        getCustomerBoardRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardResponse);
     };
 
-    const chagneDesignerBoardCommentList = (designerBoardCommentList: DesignerBoardCommentListItem[]) => {
-        setDesignerBoardCommentList(designerBoardCommentList);
+    const chagneCustomerBoardCommentList = (customerBoardCommentList: CustomerBoardCommentListItem[]) => {
+        setCustomerBoardCommentList(customerBoardCommentList);
     };
 
-    const getDesignerBoardCommentListResponse = (result: GetDesignerBoardCommentListResponseDto | ResponseDto | null) => {
-        if (!result || !('designerBoardCommentList' in result)) {
+    const getCustomerBoardCommentListResponse = (result: GetCustomerBoardCommentListResponseDto | ResponseDto | null) => {
+        if (!result || !('customerBoardCommentList' in result)) {
             console.log('데이터가 없습니다.');
             return;
         }
 
-        const { designerBoardCommentList } = result as GetDesignerBoardCommentListResponseDto;
-        chagneDesignerBoardCommentList(designerBoardCommentList);
+        const { customerBoardCommentList } = result as GetCustomerBoardCommentListResponseDto;
+        chagneCustomerBoardCommentList(customerBoardCommentList);
     };
 
-    const deleteDesignerBoardCommentResponse = (result: ResponseDto | null) => {
+    const deleteCustomerBoardCommentResponse = (result: ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -122,7 +122,7 @@ export default function DesignerBoardComment() {
 
     //                   event handler                    //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if (loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_CUSTOMER') return;
+        if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_CUSTOMER') return;
         const comment = event.target.value;
         setComment(comment);
 
@@ -132,28 +132,28 @@ export default function DesignerBoardComment() {
 
     const onCommentSubmitClickHandler = () => {
         if (!comment || !comment.trim()) return;
-        if (!designerBoardNumber || (loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_CUSTOMER')) return;
+        if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_CUSTOMER')) return;
 
-        const requestBody: PostDesignerBoardCommentRequestDto = { comment };
-        postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken).then(postDesignerBoardCommentResponse);
+        const requestBody: PostCustomerBoardCommentRequestDto = { customerBoardComment: comment };
+        postCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken).then(postCustomerBoardCommentResponse);
 
-        getDesignerBoardCommentListRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardCommentListResponse);
+        getCustomerBoardCommentListRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardCommentListResponse);
     };
 
     const onDeleteClikcHandler = () => {
-        if (!designerBoardCommentNumber || loginUserId !== writerId || !cookies.accessToken) return;
+        if (!customerBoardCommentNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니다?');
         if (!isConfirm) return;
 
-        deleteDesignerBoardCommentRequest(designerBoardCommentNumber, cookies.accessToken).then(deleteDesignerBoardCommentResponse);
+        deleteCustomerBoardCommentRequest(customerBoardCommentNumber, cookies.accessToken).then(deleteCustomerBoardCommentResponse);
     };
 
     //                   effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
-        getDesignerBoardCommentListRequest(designerBoardCommentNumber, cookies.accessToken).then(getDesignerBoardCommentListResponse);
+        getCustomerBoardCommentListRequest(customerBoardCommentNumber, cookies.accessToken).then(getCustomerBoardCommentListResponse);
 
-    }, [designerBoardNumber]);
+    }, [customerBoardNumber, cookies.accessToken]);
 
 
 
@@ -162,9 +162,9 @@ export default function DesignerBoardComment() {
 
         //              render              //
         return (
-            <div className="designer-comment-post">
-                <div className="designer-comment-write-contents-box">
-                    <textarea placeholder="댓글을 입력하세요" className='designer-comment-write-contents-textarea'>{contents}</textarea>
+            <div className="customer-comment-post">
+                <div className="customer-comment-write-contents-box">
+                    <textarea placeholder="댓글을 입력하세요" className='customer-comment-write-contents-textarea'>{contents}</textarea>
                     <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
                 </div>
             </div>
@@ -173,7 +173,7 @@ export default function DesignerBoardComment() {
 
     //              render              //
     return (
-        <div id='designer-baord-comment-wrapper'>
+        <div id='customer-baord-comment-wrapper'>
             <div className='comment-inner'>
                 <div className='comment-head'>
                     <h5>댓글</h5>
@@ -184,9 +184,9 @@ export default function DesignerBoardComment() {
                     {comment && (
                         <></>
                     )}
-                    <div className="designer-comment-section">
+                    <div className="customer-comment-section">
                         <div className="designe-comment-list">
-                            {designerBoardCommentList.map(item => <ListItem {...item} />)}
+                            {customerBoardCommentList.map(item => <ListItem {...item} />)}
                         </div>
                     </div>
                 </div>

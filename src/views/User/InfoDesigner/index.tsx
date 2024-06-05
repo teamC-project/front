@@ -1,16 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
-import { useNavigate, useParams } from 'react-router';
+import { Await, useNavigate, useParams } from 'react-router';
 import SelectBox from 'src/components/Selectbox';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
 
 //                     component                       //
 export default function InfoDesigner() {
 
   //                     state                       //
+  const [userId, serUserId] = useState(null);
   const [age, setAge] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
@@ -19,7 +21,7 @@ export default function InfoDesigner() {
   const [imageMessage, setImageMessage] = useState<string>('');
   const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
   const [writeId, setWriteId] = useState<string>('');
-  const {loginUserRole} = useUserStore();
+  const {loginUserRole, loginUserId} = useUserStore();
   const [cookies] = useCookies();
 
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
@@ -30,6 +32,29 @@ export default function InfoDesigner() {
 
   //                     function                       //
   const navigator = useNavigate();
+
+  const infoDesignerResponse = (result: ResponseDto | null) => {
+    const infoDesignerMessage =
+    !result ? '서버에 문제가 있습니다.':
+    result.code === 'TF' ? '토큰 생성에 실팼습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.': '';
+
+    const designerGender = result !== null && result.code === 'SU';
+    const genderError = !designerGender;
+
+    const designerAge = result !==null && result.code === 'SU';
+    const ageError = !designerAge;
+  
+    const companyNameCheck = result !==null && result.code ==='SU';
+    const companyNameError = !companyNameCheck;
+
+    const image = result !==null && result.code ==='SU';
+    const imageError = !image;
+
+    setGender(gender);
+    setAge(age);
+    setCompanyName(companyName);
+  }
 
   //                     event handler                       //
   const onAgeChangeHandler = (age: string) => {
@@ -64,6 +89,14 @@ export default function InfoDesigner() {
     setImageMessage('');
   };
 
+  const formData = new FormData();
+  formData.append('companyName', companyName);
+  formData.append('gender', gender);
+  formData.append('age', age);
+  if (image) {
+    formData.append('image', image);
+  }
+
   //                     effect                       //
   useEffect(() => {
     if (loginUserRole !== 'ROLE_DESIGNER') {
@@ -86,7 +119,7 @@ export default function InfoDesigner() {
             <div className='designer-id'>아이디</div>
             <div className='designer-id-container'>
               <div className='id-input-box'>
-                <div className='designer-id-info'>{writeId}</div>
+                <div className='designer-id-info'>{loginUserId}</div>
               </div>
             </div>
           </div>
@@ -117,7 +150,7 @@ export default function InfoDesigner() {
             <div className='info-designer-update-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
           </div>
           <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>
-            <div className='complete-text primary-button'>완료</div>
+            <div className='complete-text primary-button btn btn-primary'>완료</div>
           </div>
         </div>
 

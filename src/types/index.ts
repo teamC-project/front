@@ -23,6 +23,7 @@ export interface CustomerBoardListItem {
 	customerBoardWriterId : string;
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
+	customerBoardIsSecret: boolean;
 }	
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;
@@ -41,5 +42,6 @@ export interface DesignerBoardListItem {
 export interface DesignerBoardCommentListItem {
 	designerBoardCommentNumber : number;
 	designerBoardCommentWriterId : string;
+	designerBoardCommentContents : string;
 	designerBoardCommentDatetime : string;
 };
