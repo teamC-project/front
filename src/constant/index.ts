@@ -156,10 +156,10 @@ export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: num
 export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
 
 // description : TREND API URL PATH 
-export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/trend_board`;
-export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}/write`;
-export const GET_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}/list`;
-export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}/list/search`;
+export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/trend_board/`;
+export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}write`;
+export const GET_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}`;
+export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}search`;
 export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;
 export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;
 export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;

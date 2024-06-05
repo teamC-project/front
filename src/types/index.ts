@@ -3,7 +3,7 @@ export interface QnaBoardListItem {
 	qnaBoardStatus : boolean;
 	qnaBoardTitle : string;
 	qnaBoardWriterId : string;
-	qnaBoardWriteDatetime : string ;
+	qnaBoardWriteDatetime : string;
 	qnaBoardViewCount : number;
 };
 
