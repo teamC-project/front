@@ -188,7 +188,7 @@ export function SignIn() {
               </div>
 
               <div className='auth-submit-box'>
-                <div className='auth-submit-box primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
+                <div className='auth-submit-box auth-primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
               </div>
 
               <div className='socal-login'>
@@ -555,7 +555,7 @@ const signUpResponse = (result: ResponseDto | null) => {
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box auth-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
       </div>
@@ -884,7 +884,7 @@ return (
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box auth-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
       </div>

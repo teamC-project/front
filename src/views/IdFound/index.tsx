@@ -4,10 +4,9 @@ import InputBox from 'src/components/Inputbox';
 import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, emailAuthRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
+import { emailAuthCheckRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
 import ResponseDto from 'src/apis/response.dto';
 import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
-import axios from 'axios';
 
 //                    component                    //
 export default function IdFound() {
@@ -85,7 +84,6 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
   setSuccess(true);
   setId(userId);
 
-  // navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
 
 //                   event handler                  //
@@ -185,9 +183,9 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
     </div>
 
     <div className='auth-submit-box'>
-      <div className='auth-submit-box primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
+      <div className='auth-submit-box auth-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
     </div>
-      {success && <div className=''>{id}</div>}
+      {success && <div className='is-user-id'>아이디는 {id} 입니다.</div>}
     </div>
   </div>
 
