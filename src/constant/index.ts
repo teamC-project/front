@@ -138,10 +138,12 @@ export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
-export const GET_SIGN_IN_USER_REQUEST_URL =(userId:string) => `${SERVER_USER_MODULE_URL}/${userId}`;
+export const GET_SIGN_IN_USER_REQUEST_URL =`${SERVER_USER_MODULE_URL}/`;
 export const MY_PAGE_URL = `${SERVER_USER_MODULE_URL}/my-page`;
 export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
 export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
+export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-update`;
+export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;
