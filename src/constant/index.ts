@@ -1,6 +1,7 @@
 // description : Navigation URL PATH
 export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
+export const FOOTER_PATH = "footer";
 
 export const AUTH_PATH = "/auth";
 export const SIGN_IN_PATH = "sign-in";
@@ -10,6 +11,7 @@ export const DESIGNER_PATH = "designer";
 export const ID_FOUND_PATH = "id-found";
 export const PASSWORD_FOUND_PATH = "password-found";
 export const PASSOWORD_RESET_PATH = "password-reset";
+
 
 export const SERVICE_PATH = "/service";
 
