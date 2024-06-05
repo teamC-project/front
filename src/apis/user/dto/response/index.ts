@@ -4,4 +4,8 @@ import ResponseDto from "src/apis/response.dto";
 export interface GetSignInUserResponseDto extends ResponseDto {
   userId: string;
   userRole: string;
+  userGender: string;
+  userAge: string;
+  userCompanyName?: string;
+  userImage?: string;
 }
