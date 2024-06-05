@@ -27,7 +27,7 @@ function  CardItem ({
 
 	//										render										/./
 	return (
-		<div className='trend-board-card'>
+		<div className='trend-board-card' onClick={onClickHandler}>
 						<div className='trend-board-image'>{trendBoardThumbNailImage}</div>
 						<div className='trend-board-title-box'>
 						<div className='trend-board-title'>{trendBoardTitle}</div>
@@ -202,11 +202,20 @@ useEffect(() => {
 				<div className='trend-board-list'>
 			{viewList.map(item => <CardItem {...item} />)}
 				</div>
-
 			</div>
-			<div className='trend-board-list-bottom-bar'>
-				<div className='board-pagenation'></div>
-			</div>
+			<div className='trend-board-list-bottom'>
+        <div style={{ width: '299px' }}></div>
+        <div className='trendboard-list-pagenation'>
+          <div className='trend-board-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='trend-board-list-page-box'>
+            {pageList.map(page => 
+              page === currentPage ? 
+              <div className='trend-board-list-page-active'>{page}</div> :
+              <div className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            )}
+            </div>
+        </div>
+      </div>
 		</div>
 	)
 }

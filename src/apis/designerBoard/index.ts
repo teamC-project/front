@@ -1,5 +1,5 @@
-import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
-import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
+import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_COMMENT_PUT_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
+import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
@@ -38,9 +38,9 @@ export const getSearchDesignerBoardListRequest = async (word: string, accessToke
     return result;
 };
 
-// function: DesignerBoard Comment 전체 리스트 불러오기 API 함수 
-export const getDesignerBoardCommentListRequest = async (designerBoardCommentNumber: number | string, accessToken: string) => {
-    const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardCommentNumber), bearerAuthorization(accessToken))
+// function: DesignerBoard 게시물의 Comment 전체 리스트 불러오기 API 함수 
+export const getDesignerBoardCommentsByBoardNumberRequest = async (designerBoardNumber: number | string, accessToken: string) => {
+    const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
         .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
         .catch(requestErrorHandler);
     return result;
@@ -62,10 +62,18 @@ export const putDesignerBoardRequest = async (designerBoardNumber: number | stri
     return result;
 };
 
+// function: DesignerBoard 게시물 답글 수정 API 함수 
+export const putDesignerBoardCommentRequest = async (designerBoardCommentNumber: number | string, requestBody: PutDesignerBoardCommentRequestDto, accessToken: string) => {
+    const result = await axios.put(PUT_DESIGNER_BOARD_COMMENT_PUT_URL(designerBoardCommentNumber), requestBody, bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
 // function: DesignerBoard 답글 삭제 API 함수 
 export const deleteDesignerBoardCommentRequest = async (designerBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL(designerBoardCommentNumber), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};

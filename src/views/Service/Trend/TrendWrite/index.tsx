@@ -19,7 +19,7 @@ export default function TrendWrite() {
 	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
 	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<{base64: string; url: string}[]>([]);
-	const [selectedThumbnail, setSelectedThumbnail] = useState<string>('');
+	const [trendBoardThumbNailImage, setTrendBoardThumbNailImage] = useState<string>('');
 
 	
   //                    function                    //
@@ -65,7 +65,7 @@ export default function TrendWrite() {
       const requestBody: PostTrendBoardRequestDto = {
 				trendBoardTitle,
 				trendBoardContents,
-				trendBoardThumbNailImage: ''
+				trendBoardThumbNailImage
 			}
       try {
           const token = await Promise.resolve(cookies.accessToken); 
@@ -76,7 +76,7 @@ export default function TrendWrite() {
   };
 
 	const onThumbnailSelectHandler = (url: string) => {
-		setSelectedThumbnail(url);
+		setTrendBoardThumbNailImage(url);
 	}
 
 	  //                    effect                    //
@@ -105,7 +105,7 @@ export default function TrendWrite() {
 						height: '100px',
 						backgroundImage: `url(${item.url})`, 
 						backgroundSize: '100% 100%' , 
-						border: selectedThumbnail === item.url ? '2px solid blue' : 'none', 
+						border: trendBoardThumbNailImage === item.url ? '2px solid blue' : 'none', 
 						cursor: 'pointer',
 						margin: '5px'
 						}} onClick={ () => onThumbnailSelectHandler(item.url)} ></div>)}
