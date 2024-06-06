@@ -162,9 +162,9 @@ export default function InfoDesigner() {
             <div className='info-designer-update-text'>면허증사진</div>
             <div className='info-designer-update-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
           </div>
-          <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>
+          {/* <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>
             <div className='complete-text primary-button btn btn-primary'>완료</div>
-          </div>
+          </div> */}
         </div>
 
         <div className='white-space2'></div>

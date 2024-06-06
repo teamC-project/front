@@ -1,5 +1,26 @@
 .footer-size-check {
-  width: 700px;
-  height: 150px;
   background-color: aqua;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-top-bar {
+  background-color: yellowgreen;
+
+  display: flex;
+
+}
+
+.footer-under-bar {
+  background-color: tomato;
+
+  display: flex;
+
+}
+
+.footer-total-user-box {
+  background-color: silver;
+
+  display: flex; 
 }
