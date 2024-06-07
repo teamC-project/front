@@ -26,7 +26,7 @@ function ListItem ({
 
   //              event handler              //
   const isCustomer = loginUserRole === 'ROLE_CUSTOMER';
-  const isNotAuthor = isCustomer && loginUserId !== customerBoardWriterId;
+  const isNotAuthor = isCustomer && (loginUserId !== customerBoardWriterId);
   const isSecretPost = customerBoardIsSecret && isNotAuthor;
 
   const onClickHandler = () => {
@@ -41,7 +41,7 @@ function ListItem ({
 
   //              render              //
   return (
-    <div className='customerboard-list-table-tr' onClick={isSecretPost ? undefined : onClickHandler}>
+    <div className='customerboard-list-table-tr' onClick={onClickHandler}>
       <div className='customerboard-list-table-number'>{customerBoardNumber}</div>
       <div className='customerboard-list-table-title'>{title}</div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
