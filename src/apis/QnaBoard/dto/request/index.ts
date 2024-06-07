@@ -1,13 +1,13 @@
 export interface PostQnaBoardRequestDto {
-	title : string;
-	contents : string;
+	qnaBoardTitle : string;
+	qnaBoardContents : string;
 }
 
 export interface PostQnaBoardCommentRequestDto {
-	comment : string;
+qnaBoardComment : string;
 }
 
 export interface PutQnaBoardRequestDto {
-	title : string ;
-	contents : string;
+	qnaBoardTitle : string ;
+	qnaBoardContents : string;
 }

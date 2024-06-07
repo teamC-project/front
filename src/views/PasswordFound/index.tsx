@@ -11,6 +11,7 @@ let globalId = '';
 
 export function SettingPassword() {
 //                      state                     //
+
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
