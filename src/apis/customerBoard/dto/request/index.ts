@@ -11,6 +11,7 @@ export interface PostCustomerBoardCommentRequestDto {
 export interface PutCustomerBoardRequestDto {
 	customerBoardTitle : string ;
 	customerBoardContents : string;
+  isSecret: boolean;
 }
 
 export interface PutCustomerBoardCommentRequestDto {

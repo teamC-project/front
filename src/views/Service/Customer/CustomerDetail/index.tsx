@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 import { getCustomerBoardRequest, postCustomerBoardCommentRequest, increaseViewCountRequest } from 'src/apis/customerBoard';
 import { useUserStore } from 'src/stores';
 import { PostCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
+import CustomerBoardComment from '../CustomerComment';
 
 
 interface Props {
@@ -87,11 +88,7 @@ export default function CustomerDetail() {
           customerBoardComment: comment,
           customerBoardIsSecret: isSecret } = result as GetCustomerBoardResponseDto;
 
-          if (isSecret && loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== writerId) {
-            alert('비밀글입니다.');
-            navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-          }
+          
 
         setTitle(title);
         setWriterId(writerId);
@@ -158,22 +155,6 @@ export default function CustomerDetail() {
         .then(getCustomerBoardResponse);
     }, [cookies.accessToken, customerBoardNumber]);
 
-    
-
-    //                    component                    //
-        const CommentPost = ({ contents}: Props) => {
-    //              state               //
-
-    //              render              //
-        return (
-            <div className="customer-comment-post">
-                <div className="customer-comment-write-contents-box">
-                    <textarea placeholder="댓글을 입력하세요" className='customer-comment-write-contents-textarea'>{contents}</textarea>
-                    <button className='primary-button' onClick={onCommentSubmitClickHandler}>작성</button>
-                </div>
-            </div>
-        );
-    };
 
     //              render              //
     return (
@@ -199,27 +180,7 @@ export default function CustomerDetail() {
         {/* 내용 표시 */}
         {contents}
       </div>
-      <div className='customer-comment-list'>
-        {viewList.map((item) => (
-          <div key={item.customerBoardCommentWriterId} className='customer-comment-box'>
-            <div className='primary-bedge'>댓글</div>
-            <div className='customer-comment'>{item.customerBoardCommentContents}</div>
-          </div>
-        ))}
-      </div>
-      {/* 수정: 댓글 작성 박스는 항상 표시 */}
-      <div className='customer-comment-write-box'>
-        <div className='customer-comment-textarea-box'>
-          <textarea
-            style={{ height: `${28 * commentRows}px` }}
-            className='customer-comment-textarea'
-            placeholder='댓글을 작성해주세요.'
-            value={comment || ''}
-            onChange={onCommentChangeHandler}
-          />
-        </div>
-        <div className='primary-button' onClick={onCommentSubmitClickHandler}>댓글 작성</div>
-      </div>
+      <CustomerBoardComment />
       <div className="customer-detail-go-to-customerList" onClick={handleGoToList}>
         목록으로
       </div>

@@ -25,19 +25,23 @@ function ListItem ({
   const { loginUserRole, loginUserId } = useUserStore();
 
   //              event handler              //
+  const isCustomer = loginUserRole === 'ROLE_CUSTOMER';
+  const isNotAuthor = isCustomer && (loginUserId !== customerBoardWriterId);
+  const isSecretPost = customerBoardIsSecret && isNotAuthor;
+
   const onClickHandler = () => {
-    if (customerBoardIsSecret && loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== customerBoardWriterId) {
+    if (isSecretPost) {
       alert('비밀글입니다.');
       return;
     }
     navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
   };
-  const isNotAuthor = loginUserRole === 'ROLE_CUSTOMER' && loginUserId !== customerBoardWriterId;
-  const title = customerBoardIsSecret && isNotAuthor ? '비밀글입니다' : customerBoardTitle;
+
+  const title = isSecretPost ? '비밀글입니다' : customerBoardTitle;
 
   //              render              //
   return (
-    <div className='customerboard-list-table-tr' onClick={isNotAuthor && customerBoardIsSecret ? undefined : onClickHandler}>
+    <div className='customerboard-list-table-tr' onClick={onClickHandler}>
       <div className='customerboard-list-table-number'>{customerBoardNumber}</div>
       <div className='customerboard-list-table-title'>{title}</div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
