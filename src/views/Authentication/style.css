@@ -434,9 +434,7 @@
 .main-page-title-image {
   display: flex;
   justify-content: center;
-  position: absolute;
-  top: 130px;
-  width: 100%;
+  width: 2000px;
   height: 155px;
 
   background-image: url('../../assets/image/main-page-title-image.png');
@@ -448,13 +446,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 1700px;
-  width: 100vw;
-  height: 750px;
+  width: 2000px;
+  height: 740px;
 
   background-image: url('../../assets/image/main-page-image.png');
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+
+
+.null-box{
+  min-width: 300px;
 }
 
 .auth-under-bar {

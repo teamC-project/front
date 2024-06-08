@@ -64,6 +64,10 @@ opacity: 0.85;
   
   color: rgba(255, 255, 255, 1);
   }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
   
   .error-button:hover {
   cursor: pointer;
@@ -119,3 +123,4 @@ th, td {
 .pagination a:hover {
   background-color: #ddd;
 }
+
