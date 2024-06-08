@@ -1,26 +1,37 @@
 .footer-size-check {
-  background-color: aqua;
-
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+
+  position: fixed; 
+  bottom: 0;
+
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .footer-top-bar {
-  background-color: yellowgreen;
-
   display: flex;
+  gap: 20px;
 
+  padding: 20px;
 }
 
 .footer-under-bar {
-  background-color: tomato;
-
   display: flex;
+  gap: 20px;
 
+  padding: 20px;
 }
 
 .footer-total-user-box {
-  background-color: silver;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-  display: flex; 
+.footer-head-light {
+  font-weight: 700;
 }

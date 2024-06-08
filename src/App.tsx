@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 
 import { useCookies } from "react-cookie";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUNNOUNCEMENT_BOARD_DETAIL_PATH, AUNNOUNCEMENT_BOARD_PATH, AUNNOUNCEMENT_BOARD_UPDATE_PATH, AUNNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, CUSTOMER_PATH, CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_PATH, DESIGNER_PATH, DESIGNER_SIGN_UP_URL, FOOTER_PATH, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSOWORD_RESET_PATH,PASSWORD_FOUND_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_PATH, UPDATE_PASSWORD_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 
@@ -62,6 +62,9 @@ function Index() {
 
 // component: Application 컴포넌트 //
 function App() {
+
+  const location = useLocation();
+
   return (
     <>
     <Routes >
@@ -126,13 +129,11 @@ function App() {
         <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerWrite />} />
         <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
         <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
+        </Route>
       </Route>
-    </Route>
-    <Route path='*' element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
-    
-    <Footer />
-
+    {location.pathname !== '*' && <Footer />}
   </>
   );
 }
