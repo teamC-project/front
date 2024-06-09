@@ -37,6 +37,8 @@ import InfoCustomer from "./views/User/InfoCustomer";
 import InfoDesigner from "./views/User/InfoDesigner";
 import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
+import InfoDeleteCustomer from "./views/User/InfoDeleteCustomer";
+import InfoDeleteDesigner from "./views/User/InfoDeleteDesigner";
 
 
 
@@ -92,7 +94,8 @@ function App() {
       <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
       <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={UPDATE_PASSWORD_PATH} element={<CustomerUpdate />} />
-      <Route path={DELETE_INFO_PATH} element={<CustomerUpdate />} />
+      <Route path={DELETE_INFO_PATH} element={<InfoDeleteCustomer />} />
+      <Route path={DELETE_INFO_PATH} element={<InfoDeleteDesigner />} />
       </Route>
       
       <Route path={AUNNOUNCEMENT_BOARD_PATH} >
