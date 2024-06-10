@@ -110,7 +110,7 @@ export default function DesignerUpdate() {
         if (!cookies.accessToken || !designerBoardNumber) return;
         if (!title.trim() || !contents.trim()) return;
 
-        const requestBody: PutDesignerBoardRequestDto = { title, contents};
+        const requestBody: PutDesignerBoardRequestDto = { designerBoardTitle: title, designerBoardContents: contents };
         putDesignerBoardRequest(designerBoardNumber, requestBody, cookies.accessToken).then(putDesignerBoardResponse);
     };
 
