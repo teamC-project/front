@@ -6,8 +6,7 @@ import {  AUTH_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABS
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
-import { getQnaBoardRequest } from 'src/apis/QnaBoard';
+import { getQnaBoardRequest,  } from 'src/apis/QnaBoard';
 import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
 
 //												component													//
@@ -159,20 +158,21 @@ const { loginUserId, loginUserRole } = useUserStore();
     setCommentRows(commentRows);
   };
 
-  const onCommentSubmitClickHandler = () => {
-    if (!comment || !comment.trim()) return;
-    if (
-      !receptionNumber ||
-      loginUserRole !== "ROLE_ADMIN" ||
-      !cookies.accessToken
-    )
-      return;
+  // const onCommentSubmitClickHandler = () => {
+  //   if (!comment || !comment.trim()) return;
+  //   if (
+  //     !receptionNumber ||
+  //     loginUserRole !== "ROLE_ADMIN" ||
+  //     !cookies.accessToken
+  //   )
+	// 	return;
 
-    // const requestBody: PostQnaBoardCommentRequestDto = { comment };
-    // postCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(
-    //   postCommentResponse
-    // );
-  };
+  //   const requestBody: PostQnaBoardCommentRequestDto = {qnaBoardComment};
+  //   postQnaBoardCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(
+  //     postCommentResponse
+  //   );
+		
+  // };
 
   const onListClickHandler = () => {
     navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
@@ -183,16 +183,16 @@ const { loginUserId, loginUserRole } = useUserStore();
     navigator(QNA_BOARD_UPDATE_ABSOLUTE_PATH(receptionNumber));
   };
 
-  const onDeleteClickHandler = () => {
-    if (!receptionNumber || loginUserId !== writerId || !cookies.accessToken)
-      return;
-    const isConfirm = window.confirm("정말로 삭제하시겠습니까?");
-    if (!isConfirm) return;
+  // const onDeleteClickHandler = () => {
+  //   if (!receptionNumber || loginUserId !== writerId || !cookies.accessToken)
+  //     return;
+  //   const isConfirm = window.confirm("정말로 삭제하시겠습니까?");
+  //   if (!isConfirm) return;
 
-    // deleteQnaBoardRequest(receptionNumber, cookies.accessToken).then(
-    //   deleteBoardResponse
-    // );
-  };
+  //   deleteQnaBoardRequest(receptionNumber, cookies.accessToken).then(
+  //     deleteBoardResponse
+  //   );
+  // };
 
   //                    effect                    //
   // useEffect(() => {
@@ -240,11 +240,3 @@ const { loginUserId, loginUserRole } = useUserStore();
     </div>
   );
 }
-function deleteQnaBoardRequest(receptionNumber: string, accessToken: any) {
-  throw new Error('Function not implemented.');
-}
-
-function increaseQnaBoardCountRequest(receptionNumber: string, accessToken: any) {
-  throw new Error('Function not implemented.');
-}
-

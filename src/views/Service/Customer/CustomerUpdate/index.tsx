@@ -1,6 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import "./style.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUserStore } from 'src/stores';
+import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
+import { CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { getCustomerBoardRequest, putCustomerBoardRequest } from 'src/apis/customerBoard';
+import { GetCustomerBoardResponseDto } from 'src/apis/customerBoard/dto/response';
+import { PutCustomerBoardRequestDto } from 'src/apis/customerBoard/dto/request';
 
 export default function CustomerUpdate() {
 
@@ -10,8 +17,27 @@ export default function CustomerUpdate() {
     const [isSecret, setIsSecret] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const navigate = useNavigate();
+    const { customerBoardNumber } = useParams();
+    const [title, setTitle] = useState('');
+    const [contents, setContents] = useState('');
+    const [cookies] = useCookies();
+
+    useEffect(() => {
+        if (!cookies.accessToken || !customerBoardNumber) return;
+        getCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
+            .then(getCustomerBoardResponse);
+    }, [cookies.accessToken, customerBoardNumber]);
 
     //              event handler               //
+    const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
+        // ... (응답 처리 로직) ...
+        if (result && result.code === 'SU') {
+            const { customerBoardTitle, customerBoardContents } = result as GetCustomerBoardResponseDto;
+            setTitle(customerBoardTitle);
+            setContents(customerBoardContents);
+        }
+    };
+    
     const onUploadFileClickHandler = () => {
         // 파일 업로드 로직 추가
     };
@@ -25,8 +51,28 @@ export default function CustomerUpdate() {
 
 
     const handleConfirmYes = () => {
-        // 수정된 내용 적용 로직 추가
-        navigate('/service/customer_board/1');
+        if (!cookies.accessToken || !customerBoardNumber) return;
+    
+        const requestBody: PutCustomerBoardRequestDto = {
+            customerBoardTitle: title,
+            customerBoardContents: contents,
+            isSecret: isSecret
+        };
+    
+        putCustomerBoardRequest(customerBoardNumber, requestBody, cookies.accessToken)
+            .then((result: ResponseDto | null) => {
+                if (result && result.code === 'SU') {
+                    navigate(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber!));
+            }
+            });
+            
+    };
+    
+    const putCustomerBoardResponse = (result: ResponseDto | null) => {
+        // ... (응답 처리 로직) ...
+        if (result && result.code === 'SU') {
+            navigate(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber!));
+        }
     };
 
     const handleConfirmNo = () => {
@@ -34,42 +80,55 @@ export default function CustomerUpdate() {
     };
 
     
+
+
+    
     
     //                    render                    //
     return (
-        <div id='customer-write-wrapper'>
-            <div className='customer-write-top'>
-                <div className='customer-write-title-box'>
-                    <div className='customer-write-title'>제목</div>
-                    <input className='customer-write-title-input' placeholder='제목을 입력해주세요.'></input>
-                    <div className='customer-write-secret'>
+        <div id='customer-update-wrapper'>
+            <div className='customer-update-top'>
+                <div className='customer-update-title-box'>
+                    <div className='customer-update-title'>제목</div>
+                    <input
+                        className='customer-update-title-input'
+                        placeholder='제목을 입력해주세요.'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <div className='customer-update-secret'>
                         <label>
                             <input
                                 type='checkbox'
                                 checked={isSecret}
                                 onChange={handleSecretChange}
                             />
-                            <span>비밀글</span>
+                            <span className='customer-update-secret-text'>비밀글</span>
                         </label>
                     </div>
                 </div>
             </div>
-            <div className='customer-write-contents-box'>
-                <textarea className='customer-write-contents-textarea' placeholder='내용을 입력해주세요.'></textarea>
+            <div className='customer-update-contents-box'>
+            <textarea
+                className='customer-update-contents-textarea'
+                placeholder='내용을 입력해주세요.'
+                value={contents}
+                onChange={(e) => setContents(e.target.value)}
+            />
             </div>
-            <div className='upload-file'>첨부 파일
-                <div className='upload-file-button' onClick={onUploadFileClickHandler}>파일 첨부하기</div>
+            <div className='update-upload-file'>첨부 파일
+                <div className='update-upload-file-button' onClick={onUploadFileClickHandler}>파일 첨부하기</div>
             </div>
-            <div className='write-button'>
-                <button className='click-button' onClick={handleUpdate}>
-                    <span className="button_top"> 수정 </span>
+            <div className='update-button'>
+                <button className='update-click-button' onClick={handleUpdate}>
+                    <span className="update-button_top"> 수정 </span>
                 </button>
             </div>
             {showConfirmation && (
-                <div className="confirmation-modal">
-                    <div className="confirmation-modal-content">
+                <div className="update-confirmation-modal">
+                    <div className="update-confirmation-modal-content">
                         <p>정말 수정하시겠습니까?</p>
-                        <div className="confirmation-modal-buttons">
+                        <div className="update-confirmation-modal-buttons">
                             <button onClick={handleConfirmYes}>Yes</button>
                             <button onClick={handleConfirmNo}>No</button>
                         </div>
