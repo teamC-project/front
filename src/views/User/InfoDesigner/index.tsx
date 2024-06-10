@@ -1,14 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
-import { updateCustomerInfoRequest, updateDesignerInfoRequest } from 'src/apis/user';
+import { getSignInUserRequest, updateCustomerInfo, updateCustomerInfoRequest, updateDesignerInfo, updateDesignerInfoRequest } from 'src/apis/user';
+import { DesignerInfoResponseDto } from 'src/apis/auth/dto/response';
 
 export default function InfoDesigner() {
 
@@ -23,6 +24,7 @@ export default function InfoDesigner() {
   const [imageMessage, setImageMessage] = useState<string>('');
   const { loginUserRole, loginUserId } = useUserStore();
   const [cookies] = useCookies();
+  const { receptionNumber } = useParams();
 
   const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
@@ -30,50 +32,50 @@ export default function InfoDesigner() {
   const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
   const [isCompanyNameError, setIsCompanyNameError] = useState<boolean>(false);
   const [isImageError, setIsImageError] = useState<boolean>(false);
-  //  function  //
+
+  //                    function                    //
   const navigator = useNavigate();
 
-  const infoDesignerResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-    const message =
-      !result ? '서버에 문제가 있습니다.' :
-        result.code === 'TF' ? '토큰 생성에 실패했습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  const getInfoResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
 
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  
     if (!result || result.code !== 'SU') {
-      alert(message);
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-      return;
+    alert(message);
+    navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+    return;
     }
-
-    const { userId, userGender, userAge, userCompanyName, userImage } = result as GetSignInUserResponseDto;
-    if (userId !== loginUserId) {
-      alert('권한이 없습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-      return;
-    }
-    setGender(userGender);
-    setAge(userAge);
-    setCompanyName(companyName);
-    setImage(image);
+  
+  const { userId, userGender, userAge, userCompanyName, userImage} = result as DesignerInfoResponseDto;
+  if (userId !== loginUserId) {
+  alert('권한이 없습니다.');
+  navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+  return;
+  }
+  
+  setGender(gender);
+  setAge(age);
+  setCompanyName(companyName);
+  setImage(image);
   };
+
   //  event handler  //
 
-
-  // const onInfoDesignerUpdateClickHandler = async () => {
-  //   try {
-  //     await updateDesignerInfoRequest(cookies.accessToken, {
-  //       age,
-  //       gender,
-  //       companyName,
-  //       image
-  //     });
-  //     alert('개인정보가 업데이트되었습니다.');
-  //     navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-  //   } catch (error) {
-  //     console.error('Error updating user info:', error);
-  //     alert('개인정보 업데이트에 실패했습니다.');
-  //   }
-  // };
+  const onInfoDesignerUpdateClickHandler = async () => {
+    try {
+      await updateDesignerInfoRequest(cookies.accessToken);
+      alert('개인정보가 업데이트되었습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    } catch (error) {
+      console.error('Error updating user info:', error);
+      alert('개인정보 업데이트에 실패했습니다.');
+    }
+  };
 
   const onAgeChangeHandler = (value: string) => {
     setAge(value);
@@ -112,14 +114,25 @@ export default function InfoDesigner() {
     formData.append('image', image);
   }
 
-  useEffect(() => {
-    if (loginUserRole !== 'ROLE_DESIGNER') {
-      if (!cookies.accessToken) return;
-      if (!loginUserRole) return;
-      navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
-      return;
-    }
-  }, [loginUserRole]);
+  //                    effect                    //
+    let effectFlag = false;
+    
+     useEffect(() => {
+
+        if (!receptionNumber || !cookies.accessToken) return;
+        if (!loginUserRole) return;
+        if (effectFlag) return;
+
+        effectFlag = true;
+        if (loginUserRole !== 'ROLE_DESIGNER') {
+            navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+            return;
+        }
+
+        getSignInUserRequest(receptionNumber)
+        .then(getInfoResponse);
+        }, [loginUserRole]);
+
   //   render   //
   return (
     <div id='info-designer-wrapper'>
@@ -162,9 +175,9 @@ export default function InfoDesigner() {
             <div className='info-designer-update-text'>면허증사진</div>
             <div className='info-designer-update-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
           </div>
-          {/* <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>
+          <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>
             <div className='complete-text primary-button btn btn-primary'>완료</div>
-          </div> */}
+          </div>
         </div>
 
         <div className='white-space2'></div>
