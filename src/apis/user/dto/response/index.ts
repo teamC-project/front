@@ -9,3 +9,11 @@ export interface GetSignInUserResponseDto extends ResponseDto {
   userCompanyName?: string;
   userImage?: string;
 }
+
+export interface GetUserInfoResponseDto extends ResponseDto {
+  userId : string;
+  userGender?: string;
+  userAge?: string;
+  userCompanyName?: string;
+  userImage?: string;
+}

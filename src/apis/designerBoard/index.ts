@@ -1,4 +1,4 @@
-import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_COMMENT_PUT_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
+import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, DELETE_DESIGNER_BOARD_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_COMMENT_PUT_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
 import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
@@ -70,9 +70,25 @@ export const putDesignerBoardCommentRequest = async (designerBoardCommentNumber:
     return result;
 };
 
+// function: DesignerBoard 게시물 삭제 API 함수 
+export const deleteDesignerBoardRequest = async (designerBoardNumber: number | string, accessToken: string) => {
+    const result = await axios.delete(DELETE_DESIGNER_BOARD_DELETE_URL(designerBoardNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
 // function: DesignerBoard 답글 삭제 API 함수 
 export const deleteDesignerBoardCommentRequest = async (designerBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL(designerBoardCommentNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+// function: DesignerBoard 게시물 조회수 증가 API 함수 
+export const increaseViewCountRequest = async (designerBoardNumber: number | string, accessToken: string) => {
+    const result = await axios.patch(PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL(designerBoardNumber), {}, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
