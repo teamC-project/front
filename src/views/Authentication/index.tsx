@@ -31,25 +31,10 @@ export function Main() {
       </div>
 
       <div className='auth-under-bar'>
-        <div className='auth-left-null'></div>
-        <div className='auth-center-value'>
           <div className='main-page-image-box'>
-
-            <div className=''>
-              <div className='null-box'></div>
-              <div className='main-page-title-image'></div>
-              <div className='null-box'></div>
-            </div>
-
-            <div className=''>
-              <div className='null-box'></div>
-              <div className='main-page-image'></div>
-              <div className='null-box'></div>
-            </div>
-            
-            </div>
-        </div>
-        <div className='auth-right-null'></div>
+            <div className='main-page-title-image'></div>
+            <div className='main-page-image'></div>
+          </div>
       </div>
 
     </div>

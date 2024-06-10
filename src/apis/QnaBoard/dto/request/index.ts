@@ -13,5 +13,5 @@ export interface PutQnaBoardRequestDto {
 }
 
 export interface PutQnaBoardCommentRequestDto {
-    comment : string;
+    qnaBoardComment : string;
 }

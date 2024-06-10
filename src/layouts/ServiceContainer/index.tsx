@@ -166,7 +166,12 @@ export default function ServiceContainer() {
                 <Outlet />
             </div>
                 <div className='right-bar'>
-                    <div className='customer-chat'>채팅
+                    <div className='customer-chat'>
+                    <div className='footer-total-user-box'>
+                      <div className=''>총 방문자: </div>
+                      <div>|</div>
+                      <div className=''>오늘 접속자: </div>
+                    </div>
                         {/* <Outlet /> */}
                     </div>
                 </div>
