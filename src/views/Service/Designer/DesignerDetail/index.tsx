@@ -1,14 +1,12 @@
 import React, { ChangeEvent, useState } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
-import { DesignerBoardCommentListItem } from 'src/types';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { getDesignerBoardRequest, postDesignerBoardCommentRequest } from 'src/apis/designerBoard';
 import { useUserStore } from 'src/stores';
-import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
 import DesignerBoardComment from '../DesignerComment';
 
 
