@@ -26,7 +26,7 @@ export default function InputBox({ label, type, value, name, placeholder, onChan
     <div className="input-box">
       <div className="input-label label">{label}</div>
       <div className="input-content-box">
-        <input className="input" type={type} value={value} name={name} placeholder={placeholder} onChange={onChangeHandler} onKeyDown={onKeydownHandler} />
+        <input className="input" type={type} value={value} name={name} placeholder={placeholder} onChange={onChangeHandler} onKeyDown={onKeydownHandler} checked />
         { buttonTitle && 
         <div className={buttonClass} onClick={onButtonClickHandler}>
           {buttonTitle}

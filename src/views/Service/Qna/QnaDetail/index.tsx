@@ -241,10 +241,6 @@ const { loginUserId, loginUserRole } = useUserStore();
   );
 }
 
-<<<<<<< HEAD
 function increaseQnaBoardCountRequest(receptionNumber: string, accessToken: any) {
   throw new Error('Function not implemented.');
 }
-=======
-
->>>>>>> 19a8ce598b8b155a5dfef6e2ad540e1f9113db6d
