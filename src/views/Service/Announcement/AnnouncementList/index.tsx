@@ -175,10 +175,10 @@ export default function AnnouncementBoardList() {
     changeSection(totalPage);
   }, [currentSection]);
 
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
-  })
+  // useEffect(() => {
+  //   if (!cookies.accessToken) return;
+  //   getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
+  // },[])
 
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
