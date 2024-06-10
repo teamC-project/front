@@ -1,83 +1,135 @@
-.search-box {
-  background-color: rgb(218, 218, 218);
+/* 추가: 검색 박스 스타일 */
+.announcementboard-list-search-box {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
   padding: 10px;
-  }
-  .search-keyword {
+  background-color: #F5F5F5;
+}
+
+.announcementboard-list-search-keyword {
+  font-weight: bold;
   margin-right: 10px;
-  }
-  .list-search-input {
-  flex: 1; /* 검색어 입력 부분의 너비 조절 */
-  padding: 5px;
-  }
-  .search-button {
-  background-color: rgb(0, 0, 0);
-  padding: 5px 10px;
-  color: white;
-  cursor: pointer;
-  margin-left: 10px; /* 검색 버튼과의 간격 조정 */
-  }
-
-.announcement-board-container {
-  margin: 20px auto;
-  max-width: 100%; /* designer-list-main-view의 너비에 맞춤 */
-  padding: 0;
 }
 
-.announcement-board-list-information {
+.announcementboard-list-search-input-box {
+  flex: 1;
+  
+}
+
+.announcementboard-list-search-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.announcementboard-list-search-input-button {
+  margin-left: 20px; /* 검색 버튼과 입력창 사이 간격 */
+  padding: 8px 16px; /* 검색 버튼 패딩 */
+  background-color: #3a57e8; /* 검색 버튼 배경색 */
+  color: white; /* 검색 버튼 텍스트 색상 */
+  border: none; /* 검색 버튼 테두리 제거 */
+  border-radius: 4px; /* 검색 버튼 모서리 둥글기 */
+  font-size: 14px; /* 검색 버튼 글자 크기 */
+  cursor: pointer; /* 검색 버튼 커서 모양 */
+}
+
+
+
+/* 수정: 게시물 목록 테이블 스타일 */
+.announcementboard-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.announcementboard-table-th {
   display: flex;
-  justify-content: space-between;
-  padding: 0; /* 여백 제거 */
-  background-color: #f2f2f2;
-}
-
-.announcement-board-list-information  > div {
+  background-color: #E0E0E0;
   padding: 10px;
-  border: 1px solid #000000;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.announcementboard-list-table-reception-number,
+.announcementboard-list-table-writer-id,
+.announcementboard-list-table-write-date,
+.announcementboard-list-table-viewcount {
+  flex: 1;
   text-align: center;
 }
 
-.announcement-board-list-information1 {
-  flex: 0.5; /* 크기 조정 가능 */
+.announcementboard-list-table-title {
+  flex: 6;
+  text-align: left;
+  padding-left: 10px; /* 제목 왼쪽 패딩 추가 */
 }
 
-announcement-board-list-information2 {
-  flex: 6; /* 크기 조정 가능 */
-}
-
-.announcement-board-list-information3 {
-  flex: 1; /* 크기 조정 가능 */
-}
-
-.announcement-board-list-information4 {
-  flex: 0.5; /* 크기 조정 가능 */
-}
-
-.announcement-board-list-main-view {
+.announcementboard-list-table-tr {
   display: flex;
-  flex-direction: column;
-}
-.announcement-board-list-main-view > div {
+  align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #000000;
-  background-color: rgb(218, 218, 218)
+  border-bottom: 1px solid #e0e0e0; /* 회색 테두리 */
+  background-color: #ffffff; /* 흰색 배경 */
+  cursor: pointer;
 }
 
-.pagination {
+.announcementboard-list-table-tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* 수정: 페이지네이션과 글쓰기 버튼 스타일 */
+.announcementboard-list-bottom {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
 }
 
-.pagination a {
+.announcementboard-list-pagenation {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; 
+}
+
+.announcementboard-list-page-left,
+.announcementboard-list-page-right {
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.announcementboard-list-page-box {
+  display: flex;
+  margin-left: 0; /* 0으로 설정하여 왼쪽으로 이동 */
+}
+
+/* 페이지네이션 숫자 스타일 */
+.announcementboard-list-page {
   padding: 5px 10px;
   margin: 0 5px;
-  border: 1px solid #ddd;
+  cursor: pointer;
+  background-color: #FFFFFF; /* 흰색 배경 */
+  color: #333333; /* 검은색 텍스트 */
+}
+
+/* 활성화된 페이지네이션 숫자 스타일 */
+.announcementboard-list-page-active {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #A9A9A9; /* 진한 회색 배경 */
+  color: #333333;
+  font-weight: bold;
+}
+/* 추가: 글쓰기 버튼 스타일 */
+.announcementboard-list-write-button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
   cursor: pointer;
 }

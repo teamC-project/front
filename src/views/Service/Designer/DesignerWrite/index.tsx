@@ -99,12 +99,28 @@ export default function DesignerWrite() {
     };
 
     const onPostButtonClickHandler = () => {
-        if (!title.trim() || !contents.trim()) return;
+        if (!title.trim() || !contents.trim()) {
+            alert('제목과 내용을 모두 입력해주세요.');
+            return;
+        }
         if (!cookies.accessToken) return;
 
-        const requestBody: PostDesignerBoardRequestDto = { title, contents };
+        // 서버가 기대하는 필드 이름으로 수정합니다.
+        const requestBody = {
+            designerBoardTitle: title,
+            designerBoardContents: contents
+        };
 
-        postDesignerBoardRequest(requestBody, cookies.accessToken).then(postDesignerBoardResponse);
+        // 요청 본문 로그
+        console.log('Request Body:', requestBody);
+
+        postDesignerBoardRequest(requestBody, cookies.accessToken)
+            .then(postDesignerBoardResponse)
+            .catch((error) => {
+                // 에러 메시지 로그
+                console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
+                alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
+            });
     };
 
     //             effect               //
@@ -127,6 +143,15 @@ export default function DesignerWrite() {
 
 
             {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
+
+            <div className='customer-write-contents-box'>
+                <textarea
+                    className='customer-write-contents-textarea'
+                    placeholder='내용을 입력해주세요.'
+                    value={contents}
+                    onChange={onContentsChangeHandler}
+                ></textarea>
+            </div>
 
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
