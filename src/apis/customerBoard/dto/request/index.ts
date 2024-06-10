@@ -6,6 +6,7 @@ export interface PostCustomerBoardRequestDto {
 
 export interface PostCustomerBoardCommentRequestDto {
 	customerBoardCommentContents : string;
+  customerBoardParentCommentNumber?: number;
 }
 
 export interface PutCustomerBoardRequestDto {

@@ -1,42 +1,35 @@
-/* 추가: customer-board-comment-wrapper 스타일 */
 #customer-board-comment-wrapper {
   margin-top: 20px;
   padding: 20px;
   background-color: #F5F5F5;
 }
 
-/* 추가: customer-board-comment-inner 스타일 */
 .customer-board-comment-inner {
   max-width: 100%;
   margin: 0 auto;
 }
 
-/* 추가: customer-board-comment-head 스타일 */
 .customer-board-comment-head {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-/* 추가: customer-board-comment-head h5 스타일 */
 .customer-board-comment-head h5 {
   font-size: 18px;
   font-weight: bold;
   margin-right: 10px;
 }
 
-/* 추가: customer-board-comment-count 스타일 */
 .customer-board-comment-count {
   font-size: 14px;
   color: #888;
 }
 
-/* 수정: customer-board-comment-write-box 스타일 */
 .customer-board-comment-write-box {
   margin-bottom: 20px;
 }
 
-/* 수정: customer-board-comment-write-contents-box 스타일 */
 .customer-board-comment-write-contents-box {
   display: flex;
   align-items: center;
@@ -46,7 +39,6 @@
   background-color: #ffffff;
 }
 
-/* 수정: customer-board-comment-write-contents-textarea 스타일 */
 .customer-board-comment-write-contents-textarea {
   flex: 1;
   height: auto;
@@ -55,7 +47,6 @@
   resize: none;
 }
 
-/* 추가: customer-board-comment-primary-button 스타일 */
 .customer-board-comment-primary-button {
   padding: 8px 16px;
   background-color: #3a57e8;
@@ -67,17 +58,14 @@
   margin-left: 10px;
 }
 
-/* 추가: customer-board-comment-section 스타일 */
 .customer-board-comment-section {
   margin-top: 20px;
 }
 
-/* 추가: customer-board-comment-list 스타일 */
 .customer-board-comment-list {
   border-top: 1px solid #ccc;
 }
 
-/* 추가: customer-board-comment-table-tr 스타일 */
 .customer-board-comment-table-tr {
   display: flex;
   flex-direction: column;
@@ -85,31 +73,26 @@
   padding: 10px 0;
 }
 
-/* 추가: customer-board-comment-author 스타일 */
 .customer-board-comment-author {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* 추가: customer-board-comment-contents 스타일 */
 .customer-board-comment-contents {
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-/* 추가: customer-board-comment-date 스타일 */
 .customer-board-comment-date {
   font-size: 12px;
   color: #888;
 }
 
-/* 추가: customer-board-comment-actions 스타일 */
 .customer-board-comment-actions {
   margin-top: 10px;
 }
 
-/* 추가: customer-board-comment-actions button 스타일 */
 .customer-board-comment-actions button {
   padding: 4px 8px;
   background-color: #eee;
@@ -121,12 +104,22 @@
   margin-right: 5px;
 }
 
-/* 추가: customer-board-comment-update 스타일 */
+.customer-board-comment-actions-right {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.customer-board-comment-actions-right > * {
+  margin-right: 10px;
+}
+
+
+
 .customer-board-comment-update {
   margin-top: 10px;
 }
 
-/* 추가: customer-board-comment-update-contents-textarea 스타일 */
 .customer-board-comment-update-contents-textarea {
   width: 100%;
   height: auto;
@@ -136,14 +129,28 @@
   resize: none;
 }
 
-/* 추가: customer-board-comment-update-primary-button 스타일 */
-.customer-board-comment-update-primary-button {
-  padding: 8px 16px;
-  background-color: #3a57e8;
-  color: white;
-  border: none;
+.customer-board-comment-reply-container {
+  margin-left: 20px; /* 들여쓰기 값 조절 */
+}
+
+.customer-board-comment-reply {
+  /* 대댓글 스타일 */
+  border: 1px solid #ccc; /* 대댓글 테두리 추가 */
+  padding: 10px; /* 대댓글 내부 여백 추가 */
+  background-color: #f9f9f9; /* 대댓글 배경색 변경 */
+}
+
+.customer-board-comment-reply-textarea {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
+  resize: none;
+}
+
+.customer-board-comment-reply-indicator {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #888;
 }

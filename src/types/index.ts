@@ -37,6 +37,7 @@ export interface CustomerBoardCommentListItem {
 	customerBoardCommentWriterId : string;
 	customerBoardCommentDatetime : string;
 	customerBoardCommentContents : string;
+	customerBoardParentCommentNumber?: number;
 };
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
