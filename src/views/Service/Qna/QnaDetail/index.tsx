@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css';
 import'../../../../App.css'
 import { useNavigate, useParams } from 'react-router';
@@ -247,4 +247,3 @@ function deleteQnaBoardRequest(receptionNumber: string, accessToken: any) {
 function increaseQnaBoardCountRequest(receptionNumber: string, accessToken: any) {
   throw new Error('Function not implemented.');
 }
-
