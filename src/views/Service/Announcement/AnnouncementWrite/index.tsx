@@ -10,7 +10,7 @@ import { postAnnnouncementBoardRequest } from 'src/apis/announcement';
 
 
 //              component               //
-export default function AnnouncementWrite() {
+export default function AnnouncementBoardWrite() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
@@ -70,12 +70,12 @@ export default function AnnouncementWrite() {
     };
 
     //             effect               //
-    useEffect(() => {
-        if (loginUserRole === 'ROLE_ADMIN') {
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-    }, [loginUserRole]);
+    // useEffect(() => {
+    //     if (loginUserRole !== 'ROLE_ADMIN') {
+    //         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    //         return;
+    //     }
+    // }, [loginUserRole]);
 
     //                    render                    //\
     return (
@@ -86,9 +86,12 @@ export default function AnnouncementWrite() {
                     <input className='announcement-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
-
-
-            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
+						<textarea
+						ref={contentsRef} 
+						name=""
+						id=""
+						placeholder='내용을 입력해주세요.'
+						/>
 
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>

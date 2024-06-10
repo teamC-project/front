@@ -37,7 +37,7 @@ function ListItem ({
   
 }
 
-export default function AnnouncementList() {
+export default function AnnouncementBoardList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();

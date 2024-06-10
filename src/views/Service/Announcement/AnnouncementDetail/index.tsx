@@ -11,7 +11,7 @@ import { useUserStore } from 'src/stores';
 
 
 //                    component                    //
-export default function AnnouncementDetail() {
+export default function AnnouncementBoardDetail() {
 
     //              state               //
     const { loginUserId, loginUserRole } = useUserStore();
