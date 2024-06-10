@@ -152,7 +152,15 @@ export default function CustomerWrite() {
                     onChange={onContentsChangeHandler}
                 ></textarea>
             </div>
-            <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
+            <div className='customer-write-upload-file'>첨부 파일 {/* 추가: 첨부 파일 기능 */}
+                <div className='customer-write-upload-file-button' onClick={handleImageUpload}>파일 첨부하기</div> {/* 추가: 파일 첨부 버튼 */}
+                <input type='file' ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileInputChange} /> {/* 추가: 파일 입력 필드 */}
+            </div>
+            <div className='customer-write-button'>
+                <button className='customer-write-click-button' onClick={onPostButtonClickHandler}> {/* 변경: 버튼 클래스 이름 변경 */}
+                    올리기
+                </button>
+            </div>
         </div>
     );
 }

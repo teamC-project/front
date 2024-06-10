@@ -24,7 +24,7 @@ import DesignerList from "./views/Service/Designer/DesignerList";
 import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
-import CustomerUpdate from "./views/User/InfoCustomer";
+import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 
 import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";

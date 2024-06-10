@@ -129,22 +129,6 @@ export default function CustomerDetail() {
         navigator(CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH(customerBoardNumber));
     };
 
-    const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESiGNER') return;
-        const comment = event.target.value;
-        setComment(comment);
-
-        const commentRows = comment.split('\n').length;
-        setCommentRows(commentRows);
-    };
-
-    const onCommentSubmitClickHandler = () => {
-        if (!comment || !comment.trim()) return;
-        if (!customerBoardNumber || (loginUserRole !== 'ROLE_DESIGNER' && 'ROLE_CUSTOMER')) return;
-
-        const requestBody: PostCustomerBoardCommentRequestDto = { customerBoardComment:comment };
-        postCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken).then(postCustomerBoardCommentResponse);
-    };
 
     //                   effect                        //
     useEffect(() => {
