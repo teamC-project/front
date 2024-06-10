@@ -1,27 +1,143 @@
-.customer-comment-write-box {
-  margin-left: 10px;
+/* 추가: customer-board-comment-wrapper 스타일 */
+#customer-board-comment-wrapper {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #F5F5F5;
 }
 
-.customer-comment-post {
+/* 추가: customer-board-comment-inner 스타일 */
+.customer-board-comment-inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 추가: customer-board-comment-head 스타일 */
+.customer-board-comment-head {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.customer-comment-write-contents-box {
+/* 추가: customer-board-comment-head h5 스타일 */
+.customer-board-comment-head h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* 추가: customer-board-comment-count 스타일 */
+.customer-board-comment-count {
+  font-size: 14px;
+  color: #888;
+}
+
+/* 수정: customer-board-comment-write-box 스타일 */
+.customer-board-comment-write-box {
+  margin-bottom: 20px;
+}
+
+/* 수정: customer-board-comment-write-contents-box 스타일 */
+.customer-board-comment-write-contents-box {
+  display: flex;
+  align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
   background-color: #ffffff;
 }
 
-.customer-comment-write-contents-textarea {
-  width: 100%;
-  height: auto; /* 또는 계산된 높이를 사용하세요 */
+/* 수정: customer-board-comment-write-contents-textarea 스타일 */
+.customer-board-comment-write-contents-textarea {
+  flex: 1;
+  height: auto;
   padding: 10px;
   border: none;
   resize: none;
 }
 
-.primary-button {
+/* 추가: customer-board-comment-primary-button 스타일 */
+.customer-board-comment-primary-button {
+  padding: 8px 16px;
+  background-color: #3a57e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* 추가: customer-board-comment-section 스타일 */
+.customer-board-comment-section {
+  margin-top: 20px;
+}
+
+/* 추가: customer-board-comment-list 스타일 */
+.customer-board-comment-list {
+  border-top: 1px solid #ccc;
+}
+
+/* 추가: customer-board-comment-table-tr 스타일 */
+.customer-board-comment-table-tr {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+/* 추가: customer-board-comment-author 스타일 */
+.customer-board-comment-author {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* 추가: customer-board-comment-contents 스타일 */
+.customer-board-comment-contents {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* 추가: customer-board-comment-date 스타일 */
+.customer-board-comment-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 추가: customer-board-comment-actions 스타일 */
+.customer-board-comment-actions {
+  margin-top: 10px;
+}
+
+/* 추가: customer-board-comment-actions button 스타일 */
+.customer-board-comment-actions button {
+  padding: 4px 8px;
+  background-color: #eee;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+/* 추가: customer-board-comment-update 스타일 */
+.customer-board-comment-update {
+  margin-top: 10px;
+}
+
+/* 추가: customer-board-comment-update-contents-textarea 스타일 */
+.customer-board-comment-update-contents-textarea {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+/* 추가: customer-board-comment-update-primary-button 스타일 */
+.customer-board-comment-update-primary-button {
   padding: 8px 16px;
   background-color: #3a57e8;
   color: white;

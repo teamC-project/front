@@ -85,15 +85,14 @@ export default function QnaWrite() {
                 </div>
             </div>
 						<textarea
-          ref={contentsRef}
-          className="qna-write-contents-textarea"
-          placeholder="내용을 입력해주세요. / 1000자" 
-          maxLength={1000}
-          value={qnaBoardContents}
-          onChange={onContentsChangeHandler}
+        ref={contentsRef}
+        className="qna-write-contents-textarea"
+        placeholder="내용을 입력해주세요. / 1000자" 
+        maxLength={1000}
+        value={qnaBoardContents}
+        onChange={onContentsChangeHandler}
         />
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );
 }
-
