@@ -9,3 +9,25 @@ export interface SignInResponseDto extends ResponseDto {
 export interface IdFoundResponseDto extends ResponseDto {
   userId : string;
 }
+
+export interface CUSTOMERDELETERESPONSEDTO extends ResponseDto {
+  userId : string;
+  userPassword : string;
+  userEmail : string;
+  authNumber : string;
+  userGender : string;
+  userAge : string;
+  joinPath: string;
+}
+
+export interface DESIGNERDELETERESPONSEDTO extends ResponseDto {
+  userId : string;
+  userPassword : string;
+  userEmail : string;
+  authNumber : string;
+  userGender : string;
+  userAge : string;
+  userCompanyName : string;
+  userImage : string;
+  joinPath: string;
+}

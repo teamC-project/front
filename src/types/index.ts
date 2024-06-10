@@ -15,6 +15,13 @@ export interface QnaBoardListItem {
 	qnaBoardViewCount : number;
 };
 
+export interface QnaBoardCommentListItem {
+	qnaBoardCommentNumber : number;
+	qnaBoardCommentWriterId : string;
+	qnaBoardCommentContents : string;
+	qnaBoardCommentDatetime : string;
+};
+
 export interface TrendBoardListItem {
 	trendBoardNumber : number ;
 	trendBoardTitle : string;
@@ -53,3 +60,10 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentContents : string;
 	designerBoardCommentDatetime : string;
 };
+export interface AnnouncementBoardListItem {
+	announcementBoardNumber : number;
+	announcementBoardTitle : string;
+	announcementBoardWriterId : string;
+	announcementBoardWriteDatetime : string;
+	announcementBoardViewCount  : string;
+}
