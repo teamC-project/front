@@ -19,11 +19,6 @@ export default function Footer() {
       </div>
       <div className='footer-under-bar'>
         <div className='footer-head-light'>헤어어드바이저 2024~ <span className=''>&copy;</span> All Rights Reserved.</div>
-        <div className='footer-total-user-box'>
-          <div className=''>오늘 접속자</div>
-          <div>|</div>
-          <div className=''>총 접속자</div>
-        </div>
       </div>
     </div>
   )
