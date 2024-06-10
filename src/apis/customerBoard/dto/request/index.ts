@@ -5,7 +5,7 @@ export interface PostCustomerBoardRequestDto {
 }
 
 export interface PostCustomerBoardCommentRequestDto {
-	customerBoardComment : string;
+	customerBoardCommentContents : string;
 }
 
 export interface PutCustomerBoardRequestDto {
@@ -15,5 +15,5 @@ export interface PutCustomerBoardRequestDto {
 }
 
 export interface PutCustomerBoardCommentRequestDto {
-  customerBoardComment : string;
+  customerBoardCommentContents : string;
 }
