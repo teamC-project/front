@@ -1,3 +1,11 @@
+export interface AnnouncementBoardListItem {
+	announcementBoardNumber : number;
+	announcementBoardTitle : string;
+	announcementBoardWriterId : string;
+	announcementBoardWriteDatetime : string ;
+	announcementBoardViewCount : number;
+};
+
 export interface QnaBoardListItem {
 	qnaBoardNumber : number;
 	qnaBoardStatus : boolean;
