@@ -60,10 +60,3 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentContents : string;
 	designerBoardCommentDatetime : string;
 };
-export interface AnnouncementBoardListItem {
-	announcementBoardNumber : number;
-	announcementBoardTitle : string;
-	announcementBoardWriterId : string;
-	announcementBoardWriteDatetime : string;
-	announcementBoardViewCount  : string;
-}
