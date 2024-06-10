@@ -8,12 +8,17 @@ import { useUserStore } from 'src/stores';
 import { DesignerBoardCommentListItem } from 'src/types';
 import './style.css';
 
+// Define the interface to include the originalDesignerBoardCommentWriterId
+interface DesignerBoardCommentListItemWithOriginal extends DesignerBoardCommentListItem {
+    originalDesignerBoardCommentWriterId: string;
+}
+
 //                    component                    //
 export default function DesignerBoardComment() {
 
     //                    state                    //
     const { designerBoardNumber } = useParams();
-    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
+    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItemWithOriginal[]>([]);
     const [comment, setComment] = useState<string>('');
     const [editingComment, setEditingComment] = useState<string>('');
     const [editingCommentNumber, setEditingCommentNumber] = useState<number | null>(null);
@@ -39,10 +44,10 @@ export default function DesignerBoardComment() {
         }
 
         if (!designerBoardNumber || !cookies.accessToken) return;
-        setComment(''); 
+        setComment('');
         getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'designerBoardCommentList' in result) {
-                setDesignerBoardCommentList(result.designerBoardCommentList);
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
             }
         });
     };
@@ -61,11 +66,11 @@ export default function DesignerBoardComment() {
         }
 
         if (!designerBoardNumber) return;
-        setEditingComment(''); 
+        setEditingComment('');
         setEditingCommentNumber(null);
         getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'designerBoardCommentList' in result) {
-                setDesignerBoardCommentList(result.designerBoardCommentList);
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
             }
         });
     };
@@ -86,7 +91,7 @@ export default function DesignerBoardComment() {
         if (!designerBoardNumber) return;
         getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'designerBoardCommentList' in result) {
-                setDesignerBoardCommentList(result.designerBoardCommentList);
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
             }
         });
     };
@@ -108,11 +113,10 @@ export default function DesignerBoardComment() {
         const requestBody: PostDesignerBoardCommentRequestDto = { designerBoardCommentContents: comment };
 
         postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken)
-        .then(postDesignerBoardCommentResponse)
-        .catch((error) => {
-            console.error('댓글 작성 중 오류가 발생했습니다:', error);
-            alert('댓글 작성 중 오류가 발생했습니다.');
-        });
+            .then(postDesignerBoardCommentResponse)
+            .catch(() => {
+                alert('댓글 작성 중 오류가 발생했습니다.');
+            });
     };
 
     const onUpdateCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -135,20 +139,19 @@ export default function DesignerBoardComment() {
                     setEditingCommentNumber(null);
                     getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
                         if (result && 'designerBoardCommentList' in result) {
-                            setDesignerBoardCommentList(result.designerBoardCommentList);
+                            setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
                         }
                     });
                 } else {
                     alert('댓글 수정에 실패했습니다.');
                 }
             })
-            .catch((error) => {
-                console.error('댓글 수정 중 오류가 발생했습니다:', error);
+            .catch(() => {
                 alert('댓글 수정 중 오류가 발생했습니다.');
             });
     };
 
-    const onEditButtonClickHandler = (commentNumber: number, currentComment: string) => { 
+    const onEditButtonClickHandler = (commentNumber: number, currentComment: string) => {
         setEditingComment(currentComment);
         setEditingCommentNumber(commentNumber);
     };
@@ -160,19 +163,17 @@ export default function DesignerBoardComment() {
 
         deleteDesignerBoardCommentRequest(commentNumber, cookies.accessToken)
             .then(deleteDesignerBoardCommentResponse)
-            .catch((error) => {
-                console.error('댓글 삭제 중 오류가 발생했습니다:', error);
+            .catch(() => {
                 alert('댓글 삭제 중 오류가 발생했습니다.');
             });
     };
-
 
     //                   effect                    //
     useEffect(() => {
         if (!cookies.accessToken || designerBoardNumber === undefined) return;
         getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'designerBoardCommentList' in result) {
-                setDesignerBoardCommentList(result.designerBoardCommentList);
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
             }
         });
     }, [designerBoardNumber, cookies.accessToken]);
@@ -207,12 +208,12 @@ export default function DesignerBoardComment() {
                                 <div className='designer-comment-author'>작성자: {item.designerBoardCommentWriterId}</div>
                                 <div className='designer-comment-contents'>{item.designerBoardCommentContents}</div>
                                 <div className='designer-comment-date'>작성일: {item.designerBoardCommentDatetime}</div>
-                                {/* {item.designerBoardCommentWriterId === loginUserId ? ( */}
+                                {item.originalDesignerBoardCommentWriterId === loginUserId && (
                                     <div className='comment-actions'>
                                         <button onClick={() => onEditButtonClickHandler(item.designerBoardCommentNumber, item.designerBoardCommentContents)}>수정</button>
                                         <button onClick={() => onDeleteButtonClickHandler(item.designerBoardCommentNumber)}>삭제</button>
                                     </div>
-                                {/* // ) : null} */}
+                                )}
                                 {editingCommentNumber === item.designerBoardCommentNumber && (
                                     <div className="designer-comment-edit">
                                         <textarea
