@@ -41,16 +41,16 @@ export default function DesignerUpdate() {
             return;
         }
 
-        const { writerId, title, contents } = result as GetDesignerBoardResponseDto;
+        const { designerBoardWriterId, designerBoardTitle, designerBoardContents } = result as GetDesignerBoardResponseDto;
         if (writerId !== loginUserId) {
             alert('권한이 없습니다.');
             navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
         
-        setTitle(title);
-        setContents(contents);
-        setWriterId(writerId);
+        setTitle(designerBoardTitle);
+        setContents(designerBoardContents);
+        setWriterId(designerBoardWriterId);
 
     };
 
