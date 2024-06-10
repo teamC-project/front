@@ -14,7 +14,7 @@
 
   padding: 8px 24px;
 
-  background-color: rgba(255,190,152,1);
+  background-color: rgba(255, 190, 152, 1);
   border-radius: 6px;
 
   font-size: 16px;
@@ -274,7 +274,7 @@
 
 .auth-radio-box {
   display: flex;
-  text-align:center
+  text-align: center
 }
 
 .auth-sign-up-radio-box {
@@ -380,14 +380,13 @@
 }
 
 #main-page-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 800px;
   min-width: none;
   width: 100%;
 }
 
 .main-page-top-bar {
+  margin: 0 auto;
+  max-width: 1920px;
   display: flex;
   justify-content: space-between;
   margin: 30px;
@@ -425,16 +424,10 @@
 }
 
 .main-page-image-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .main-page-title-image {
-  display: flex;
-  justify-content: center;
-  width: 2000px;
   height: 155px;
 
   background-image: url('../../assets/image/main-page-title-image.png');
@@ -446,7 +439,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2000px;
   height: 740px;
 
   background-image: url('../../assets/image/main-page-image.png');
@@ -456,11 +448,13 @@
 
 
 
-.null-box{
+.null-box {
   min-width: 300px;
 }
 
 .auth-under-bar {
+  max-width: 1920px;
+  margin: 0 auto;
   display: flex;
 }
 
@@ -474,8 +468,6 @@
 
 
 .auth-center-value {
-  display: flex;
-  justify-content: center;
   width: 100%;
   flex: 1;
 }
