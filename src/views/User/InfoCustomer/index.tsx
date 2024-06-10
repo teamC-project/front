@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
+import { CustomerInfoResponseDto, DesignerInfoResponseDto, SignInResponseDto } from 'src/apis/auth/dto/response';
 
 //                     interface                       //
 interface Props {
@@ -17,17 +20,43 @@ export default function InfoCustomer() {
 
 
   //                     state                     //
+  const { loginUserId, loginUserRole } = useUserStore();
   const [age, setAge] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
+  const [companyName, setCompanyName] = useState<string>('');
+  const [userimage, setImage] = useState<string>('');
 
   const [cookies] = useCookies();
-  const {loginUserRole} = useUserStore();
 
   //                     function                       //
   const navigator = useNavigate();
 
+  const getInfoUpdate = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+  const message = 
+  !result ? '서버에 문제가 있습니다.' :
+  result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+  result.code === 'AF' ? '인증에 실패했습니다.' :
+  result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+  result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+  if (!result || result.code !== 'SU') {
+  alert(message);
+  navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+  return;
+  }
+
+const { userId, userGender, userAge} = result as CustomerInfoResponseDto;
+if (userId !== loginUserId) {
+alert('권한이 없습니다.');
+navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+return;
+}
+
+setGender(gender);
+setAge(age);
+};
 
   //                     event handler                     //
   const onAgeChangeHandler = (age: string) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 
 interface Prop {
@@ -37,6 +37,13 @@ export default function SelectBox({ value, onChange}: Prop) {
     onChange(value);
     setShow(false);
   };
+
+  useEffect(() => {
+    ageListItem.forEach(item => {
+      if (item.value === value) setName(item.name);
+    })
+    setShow(false);
+  }, [value]);
 
   //                       render                    //
   const buttonClass = show ? 'select-close-button' : 'select-open-button'
