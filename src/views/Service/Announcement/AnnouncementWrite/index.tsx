@@ -4,24 +4,21 @@ import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PostAnnouncementBoardRequestDto } from 'src/apis/announcementBoard/dto/request';
-import { postAnnouncementBoardRequest } from 'src/apis/announcementBoard';
-import ToastEditor from 'src/components/ToastEditor';
-import Editor from '@toast-ui/editor';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { PostAnnouncementBoardRequestDto } from 'src/apis/announcement/dto/request';
+import { postAnnnouncementBoardRequest } from 'src/apis/announcement';
+
 
 //              component               //
-export default function AnnouncementWrite() {
+export default function AnnouncementBoardWrite() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [selection, setSelection] = useState<Range | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const editorRef = useRef<Editor|null>(null);
+
 
     //              function               //
     const navigator = useNavigate();
@@ -42,20 +39,6 @@ export default function AnnouncementWrite() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    const restoreSelection = () => {
-        const sel = window.getSelection();
-        sel?.removeAllRanges();
-        if (selection) {
-            sel?.addRange(selection);
-        }
-    };
-
-    const saveSelection = () => {
-        const sel = window.getSelection();
-        if (sel && sel.rangeCount > 0) {
-            setSelection(sel.getRangeAt(0));
-        }
-    };
 
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -73,53 +56,28 @@ export default function AnnouncementWrite() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-	const handleImageUpload = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
 
-    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-            const img = document.createElement('img');
-            img.src = event.target?.result as string;
-            
-            restoreSelection();
-            if (selection) {
-                selection.deleteContents();
-                selection.insertNode(img);
-            }
-            saveSelection();
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+
+
 
     const onPostButtonClickHandler = () => {
         if (!title.trim() || !contents.trim()) return;
         if (!cookies.accessToken) return;
-    
-        const requestBody: PostAnnouncementBoardRequestDto = { 
-            announcementBoardTitle: title, 
-            announcementBoardContents: contents, 
-        };
-    
-        postAnnouncementBoardRequest(requestBody, cookies.accessToken)
-            .then(postAnnouncementBoardResponse);
+
+        const requestBody: PostAnnouncementBoardRequestDto = { title, contents };
+
+        postAnnnouncementBoardRequest(requestBody, cookies.accessToken).then(postAnnouncementBoardResponse);
     };
 
     //             effect               //
-    useEffect(() => {
-        if (loginUserRole === 'ROLE_ADMIN') {
-            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-    }, [loginUserRole]);
+    // useEffect(() => {
+    //     if (loginUserRole !== 'ROLE_ADMIN') {
+    //         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    //         return;
+    //     }
+    // }, [loginUserRole]);
 
-    //                    render                    //
+    //                    render                    //\
     return (
         <div id='announcement-write-wrapper'>
             <div className='announcement-write-top'>
@@ -128,18 +86,13 @@ export default function AnnouncementWrite() {
                     <input className='announcement-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
+						<textarea
+						ref={contentsRef} 
+						name=""
+						id=""
+						placeholder='내용을 입력해주세요.'
+						/>
 
-
-            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
-
-            <div className='announcement-write-contents-box'>
-                <textarea
-                    className='announcement-write-contents-textarea'
-                    placeholder='내용을 입력해주세요.'
-                    value={contents}
-                    onChange={onContentsChangeHandler}
-                ></textarea>
-            </div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );

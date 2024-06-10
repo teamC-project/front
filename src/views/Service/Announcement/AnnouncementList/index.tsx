@@ -1,52 +1,46 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css'
-import { useNavigate } from 'react-router';
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import './style.css';
 import { AnnouncementBoardListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { useNavigate } from 'react-router';
+import { ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { GetAnnouncementBoardListResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcementBoard/dto/response';
+import { useUserStore } from 'src/stores';
+import { GetAnnouncementBoardListResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcementBoard';
+import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
 
-//                    component                    //
+
 function ListItem ({
   announcementBoardNumber,
-  announcementBoardTitle,
-  announcementBoardWriterId,
-  announcementBoardWriteDatetime,
-  announcementBoardViewCount,
-}: AnnouncementBoardListItem) {
+	announcementBoardTitle ,
+	announcementBoardWriterId, 
+	announcementBoardWriteDatetime, 
+	announcementBoardViewCount 
+  }: AnnouncementBoardListItem) {
 
-  //              function              //
+      //              function              //
   const navigator = useNavigate();
-  const { loginUserRole, loginUserId } = useUserStore();
 
   //              event handler              //
-  const isAdmin = loginUserRole === 'ROLE_ADMIN';
-  
-
-  const onClickHandler = () => {
-    navigator(ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH(announcementBoardNumber));
-  };
+  const onClickHandler = () => navigator(ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH(announcementBoardNumber));
 
   //              render              //
   return (
     <div className='announcementboard-list-table-tr' onClick={onClickHandler}>
       <div className='announcementboard-list-table-number'>{announcementBoardNumber}</div>
-      <div className='announcementboard-list-table-title'>{announcementBoardTitle}</div>
+      <div className='announcementboard-list-table-title' style={{ textAlign:'left' }}>{announcementBoardTitle}</div>
       <div className='announcementboard-list-table-writer-id'>{announcementBoardWriterId}</div>
       <div className='announcementboard-list-table-write-date'>{announcementBoardWriteDatetime}</div>
       <div className='announcementboard-list-table-viewcount'>{announcementBoardViewCount}</div>
     </div>
   );
+  
 }
 
-//                    component                    //
-export default function AnnouncementList() {
+export default function AnnouncementBoardList() {
 
   //                    state                    //
-  const { loginUserRole, loginUserId } = useUserStore();
+  const {loginUserRole} = useUserStore();
   const [cookies] = useCookies();
   const [announcementBoardList, setAnnouncementBoardList] = useState<AnnouncementBoardListItem[]>([]);
   const [viewList, setViewList] = useState<AnnouncementBoardListItem[]>([]);
@@ -58,7 +52,6 @@ export default function AnnouncementList() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
-  const [isSearched, setIsSearched] = useState<boolean>(false);
 
   //                    function                    //
   const navigator = useNavigate();
@@ -117,38 +110,34 @@ export default function AnnouncementList() {
   };
 
   const getSearchAnnouncementBoardListResponse = (result: GetSearchAnnouncementBoardListResponseDto | ResponseDto | null) => {
+
     const message = 
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '검색어를 입력하세요.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
     if (!result || result.code !== 'SU') {
       alert(message);
       if (result?.code === 'AF') navigator(MAIN_PATH);
       return;
     }
-  
+
     const { announcementBoardList } = result as GetSearchAnnouncementBoardListResponseDto;
-    const updatedAnnouncementBoardList = announcementBoardList.map(item => ({
-      ...item,
-      announcementBoardViewCount: item.announcementBoardViewCount || 0, // 조회수가 없으면 0으로 설정
-    }));
-    setAnnouncementBoardList(updatedAnnouncementBoardList);
-    changeAnnouncementBoardList(updatedAnnouncementBoardList);
-    changePage(updatedAnnouncementBoardList, updatedAnnouncementBoardList.length);
-    setCurrentPage(!updatedAnnouncementBoardList.length ? 0 : 1);
-    setCurrentSection(!updatedAnnouncementBoardList.length ? 0 : 1);
-    setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
+    changeAnnouncementBoardList(announcementBoardList);
+
+    setCurrentPage(!announcementBoardList.length ? 0 : 1);
+    setCurrentSection(!announcementBoardList.length ? 0 : 1);
   };
+
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
+    if (loginUserRole !== 'ROLE_USER') return;
     navigator(ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   const  onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-    changePage(announcementBoardList, totalLength);
   };
 
   const onPreSectionClickHandler = () => {
@@ -168,42 +157,14 @@ export default function AnnouncementList() {
     setSearchWord(searchWord);
   };
 
-  const onSearchButtonClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    handleSearch();
-  };
-  
-  const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
-  
-  const handleSearch = () => {
-    if (!searchWord) {
-      alert('검색어를 입력하세요.');
-      return;
-    }
-  
+  const onSearchButtonClickHandler = () => {
+    if (!searchWord) return;
     if (!cookies.accessToken) return;
-  
-    setIsSearched(true);
-    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken)
-      .then(getSearchAnnouncementBoardListResponse);
-  };
-  useEffect(() => {
-  if (!isSearched || !cookies.accessToken) return;
 
-  getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken)
-    .then(getSearchAnnouncementBoardListResponse);
-}, [isSearched, searchWord, cookies.accessToken]);
+    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
+  };
 
   //                    effect                    //
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getSearchAnnouncementBoardListRequest('', cookies.accessToken)
-      .then(getSearchAnnouncementBoardListResponse);
-  }, [cookies.accessToken]);
-  
   useEffect(() => {
     if (!announcementBoardList.length) return;
     changePage(announcementBoardList, totalLength);
@@ -214,24 +175,20 @@ export default function AnnouncementList() {
     changeSection(totalPage);
   }, [currentSection]);
 
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
+  })
+
   //                    render                    //
-  
+  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='announcementboard-list-wrapper'>
       <div className='announcementboard-list-search-box'>
-        <div className='announcementboard-list-search-keyword'>검색 키워드</div>
         <div className='announcementboard-list-search-input-box'>
-          <input
-            className='announcementboard-list-search-input'
-            placeholder='검색어를 입력하세요.'
-            value={searchWord}
-            onChange={onSearchWordChangeHandler}
-            onKeyDown={onSearchInputKeyDown}
-          />
+          <input className='announcementboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
         </div>
-        <div className='announcementboard-list-search-input-button' onClick={onSearchButtonClickHandler}>
-          검색
-        </div>
+        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
       </div>
       <div className='announcementboard-list-table'>
         <div className='announcementboard-table-th'>
@@ -253,16 +210,9 @@ export default function AnnouncementList() {
               <div className='announcementboard-list-page-active'>{page}</div> :
               <div className='announcementboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
-          </div>
-          <div className='announcementboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+            </div>
         </div>
-        {loginUserRole === 'ROLE_ADMIN' && (
-          <div className='announcementboard-list-write-button' onClick={onWriteButtonClickHandler}>
-            글쓰기
-          </div>
-        )}
       </div>
     </div>
   );
-
 }
