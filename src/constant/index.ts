@@ -21,10 +21,10 @@ export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
 export const UPDATE_PASSWORD_PATH = "update-user-password"
 export const DELETE_INFO_PATH = "delete-user-info";
 
-export const AUNNOUNCEMENT_BOARD_PATH = "announcement_board";
-export const AUNNOUNCEMENT_BOARD_WRITE_PATH  = "write";
-export const AUNNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
-export const AUNNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
+export const ANNOUNCEMENT_BOARD_PATH = "announcement_board";
+export const ANNOUNCEMENT_BOARD_WRITE_PATH  = "write";
+export const ANNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
+export const ANNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
 
 export const TREND_BOARD_PATH = "trend_board";
 export const TREND_BOARD_WRITE_PATH  = "write";
@@ -72,12 +72,12 @@ export const UPDATE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${
 export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
 
 // description : 공지사항 절대 URL PATH
-export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}`;
-export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/${AUNNOUNCEMENT_BOARD_WRITE_PATH}`;
+export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}`;
+export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${ANNOUNCEMENT_BOARD_WRITE_PATH}`;
 export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber : number | string) => 
-	`${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
+	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
-	`${SERVICE_PATH}/${AUNNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
+	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
 
 // description : 트렌드 절대 URL PATH
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
@@ -147,8 +147,8 @@ export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-upda
 export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
 
 // description: ANNOUNCEMENT API URL PATH
-export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/announcement_board`;
-export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
+export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/announcement_board`;
+export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${ANNOUNCEMENT_BOARD_WRITE_PATH}`;
 export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
 export const GET_SEARCH_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
 export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
