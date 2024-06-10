@@ -19,7 +19,7 @@ interface Props {
 function Top({ path }: Props) {
 
     //                    state                    //
-    const { loginUserRole } = useUserStore();
+    const { loginUserRole, loginUserId } = useUserStore();
     const [cookies, setCookie, removeCookie] = useCookies();
 
     //                    function                    //
@@ -35,19 +35,18 @@ function Top({ path }: Props) {
         navigator(MAIN_PATH);
     };
 
-    //                    render                       //
-    return (
-        <>
-        <div className='top-group'>
-            <div className='top-logo'></div>
-            <div className='top-bar-title'>{ path }</div>
-            <div className='top-bar-service'>
-                <div className='second-button' onClick={onMyPageClickHandler}>내정보</div>
-                <div className='second-button' onClick={onLogoutClickHandler}>로그아웃</div>
-            </div>
-        </div>
-        </>
-    ); 
+  //                    render                       //
+  return (
+    <div className='top-group'>
+      <div className='top-logo'></div>
+      <div className='top-bar-title'>{ path }</div>
+      <div className='top-bar-service'>
+        <div className='third-button' >{loginUserId} 님 환영합니다. </div>
+        <div className='second-button' onClick={onMyPageClickHandler}>내정보</div>
+        <div className='second-button' onClick={onLogoutClickHandler}>로그아웃</div>
+      </div>
+    </div>
+  ); 
 }
 
 //                    component                    //
@@ -58,6 +57,7 @@ function LeftBar({ path }: Props) {
     const customerClass =  `left-bar-title${path === '고객 게시판' ? ' active' : ''}`;
     const designerClass =  `left-bar-title${path === '디자이너 게시판' ? ' active' : ''}`;
     const qnaClass =  `left-bar-title${path === 'Q&A 게시판' ? ' active' : ''}`;
+
 
     //                    state                    //
     const { pathname } = useLocation();
@@ -82,25 +82,25 @@ function LeftBar({ path }: Props) {
     };
 
     //                    render                    //
-    return (
-        <div className='left-bar-container'>
-            <button className={announcementClass} onClick={onAnnouncementClickHandler} >
-                공지사항
-            </button>
-            <button className={trendClass} onClick={onTrendClickHandler}>
-                트렌드 게시판
-            </button>
-            <button className={customerClass} onClick={onCustomerClickHandler}>
-                고객 게시판
-            </button>
-            <button className={designerClass} onClick={onDesignerClickHandler}>
-                디자이너 게시판
-            </button>
-            <button className={qnaClass} onClick={onQnaClickHandler}>
-                Q&A 게시판
-            </button>
-        </div>
-    );
+  return (
+    <div className='left-bar-container'>
+      <button className={announcementClass} onClick={onAnnouncementClickHandler} >
+        공지사항
+      </button>
+      <button className={trendClass} onClick={onTrendClickHandler}>
+        트렌드 게시판
+      </button>
+      <button className={customerClass} onClick={onCustomerClickHandler}>
+        고객 게시판
+      </button>
+      <button className={designerClass} onClick={onDesignerClickHandler}>
+        디자이너 게시판
+      </button>
+      <button className={qnaClass} onClick={onQnaClickHandler}>
+        Q&A 게시판
+      </button>
+    </div>
+  );
 }
 
 //                    component                    //
@@ -172,7 +172,9 @@ export default function ServiceContainer() {
                       <div>|</div>
                       <div className=''>오늘 접속자: </div>
                     </div>
-                        {/* <Outlet /> */}
+                      <div className=''>
+                        채팅 미구현
+                      </div>
                     </div>
                 </div>
         </div>
