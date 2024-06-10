@@ -2,7 +2,7 @@
 #auth-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   width: 100%;
 }
 
@@ -240,7 +240,7 @@
   display: flex;
   justify-content: start;
   width: 600px;
-  height: 600px;
+  height: 400px;
 
 }
 
@@ -255,7 +255,7 @@
   display: flex;
   justify-content: end;
   width: 600px;
-  height: 600px;
+  height: 400px;
 }
 
 

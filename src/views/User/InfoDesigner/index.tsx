@@ -7,7 +7,7 @@ import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PA
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { GetSignInUserResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest, updateDesignerInfoRequest } from 'src/apis/user';
 import { DesignerInfoResponseDto } from 'src/apis/auth/dto/response';
 import axios from 'axios';
@@ -36,13 +36,13 @@ export default function InfoDesigner() {
   //                    function                    //
   const navigator = useNavigate();
 
-  const getInfoResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
+  const getInfoResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
@@ -65,6 +65,24 @@ export default function InfoDesigner() {
     // setImage(image);
   };
 
+
+  const getImageResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      return;
+    }
+    setImage(image);
+  }
+
   //                    event handler                    //
 
   const onInfoDesignerUpdateClickHandler = async () => {
@@ -73,7 +91,7 @@ export default function InfoDesigner() {
     const data = new FormData();
     data.append('file', image);
 
-    const userImage = await axios.post('http://localhost:4200/api/v1/designer_board/upload', data, {headers: { "Content-Type": 'multipart/form-data', Authorization: `Bearer ${cookies.accessToken}` }})
+    const userImage = await axios.post('http://localhost:4200/api/v1/designer_board/upload', data, { headers: { "Content-Type": 'multipart/form-data', Authorization: `Bearer ${cookies.accessToken}` } })
       .then(response => response.data).catch(error => '');
 
     try {
@@ -83,14 +101,15 @@ export default function InfoDesigner() {
         userAge: age,
         userImage: userImage
       };
+      
       updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then();
+      alert('개인정보가 업데이트되었습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
 
-      // alert('개인정보가 업데이트되었습니다.');
-      // navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     } catch (error) {
-      // console.error('Error updating user info:', error);
-      // alert('개인정보 업데이트에 실패했습니다.');
-      // navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+      console.error('Error updating user info:', error);
+      alert('개인정보 업데이트에 실패했습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     }
   };
 
@@ -167,11 +186,11 @@ export default function InfoDesigner() {
             <div className='info-designer-text'>성별</div>
             <div className='info-designer-next-box'>
               <div className='info-designer-radio-box'>
-              <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
+                <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
                 {/* <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}
               </div>
               <div className='info-designer-radio-box'>
-              <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
+                <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
                 {/* <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}
               </div>
             </div>
@@ -189,8 +208,8 @@ export default function InfoDesigner() {
           <div className='info-designer-update-box-text'>
             <div className='info-designer-update-text'>면허증사진</div>
             <div className='info-designer-update-next-box'>
-            {/* <InputBox type={'file'} value='' placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /> */}
-            <input type='file' onChange={onImageChangeHandler} />
+              {/* <InputBox type={'file'} value='' placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /> */}
+              <input type='file' onChange={onImageChangeHandler} />
             </div>
           </div>
           <div className='submit-box' onClick={onInfoDesignerUpdateClickHandler}>

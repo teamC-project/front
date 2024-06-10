@@ -79,6 +79,7 @@ export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber :
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
 	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
 
+
 // description : 트렌드 절대 URL PATH
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
 export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
@@ -137,6 +138,15 @@ export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
 export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 
 
+// description : Footer  PATH
+export const ADVERTISEMENT_PATH ="/advertisement"
+export const MAILCONTECT_PATH = "/mailcontect"
+export const PERSONAL_INFO_PROCESSING_POLICY_PATH = "/personal-info-policy"
+export const SITE_DESCRIPTION_PATH = "/site-description"
+export const TEARMS_AND_CONDTIONS_PATH ="/terms-and-conditions"
+export const YOUTH_PROTECTION_POLICY_PATH = "/youth-protection-policy"
+
+
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL =`${SERVER_USER_MODULE_URL}/`;
@@ -147,11 +157,11 @@ export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-upda
 export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
 
 // description: ANNOUNCEMENT API URL PATH
-export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/announcement_board`;
+export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/service/announcement_board`;
 export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${ANNOUNCEMENT_BOARD_WRITE_PATH}`;
 export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
 export const GET_SEARCH_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
-export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
+export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
