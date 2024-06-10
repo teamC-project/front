@@ -116,19 +116,19 @@ export default function CustomerUpdate() {
                 onChange={(e) => setContents(e.target.value)}
             />
             </div>
-            <div className='update-upload-file'>첨부 파일
-                <div className='update-upload-file-button' onClick={onUploadFileClickHandler}>파일 첨부하기</div>
+            <div className='customer-update-upload-file'>첨부 파일
+                <div className='customer-update-upload-file-button' onClick={onUploadFileClickHandler}>파일 첨부하기</div>
             </div>
-            <div className='update-button'>
-                <button className='update-click-button' onClick={handleUpdate}>
-                    <span className="update-button_top"> 수정 </span>
+            <div className='customer-update-button'>
+                <button className='customer-update-click-button' onClick={handleUpdate}>
+                    <span className="customer-update-button_top"> 수정 </span>
                 </button>
             </div>
             {showConfirmation && (
-                <div className="update-confirmation-modal">
-                    <div className="update-confirmation-modal-content">
+                <div className="customer-update-confirmation-modal">
+                    <div className="customer-update-confirmation-modal-content">
                         <p>정말 수정하시겠습니까?</p>
-                        <div className="update-confirmation-modal-buttons">
+                        <div className="customer-update-confirmation-modal-buttons">
                             <button onClick={handleConfirmYes}>Yes</button>
                             <button onClick={handleConfirmNo}>No</button>
                         </div>
