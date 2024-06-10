@@ -15,10 +15,10 @@ export interface GetSearchDesignerBoardListResponseDto extends ResponseDto {
 
 export interface GetDesignerBoardResponseDto extends ResponseDto {
     designerBoardNumber: number;
-    title: string;
-    writerId: string;
-    writeDatetime: string;
-    viewCount: number;
-    contents: string;
-    comment: string | null; 
+    designerBoardTitle: string;
+    designerBoardWriterId: string;
+    designerBoardWriteDatetime: string;
+    designerBoardViewCount: number;
+    designerBoardContents: string;
+    designerBoardComment: string | null; 
 }

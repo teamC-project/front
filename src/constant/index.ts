@@ -79,6 +79,7 @@ export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber :
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
 	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
 
+
 // description : 트렌드 절대 URL PATH
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
 export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
@@ -135,6 +136,15 @@ export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
 export const FOUND_PASSWORD_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/password-found-email-auth`;
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
 export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
+
+
+// description : Footer  PATH
+export const ADVERTISEMENT_PATH ="/advertisement"
+export const MAILCONTECT_PATH = "/mailcontect"
+export const PERSONAL_INFO_PROCESSING_POLICY_PATH = "/personal-info-policy"
+export const SITE_DESCRIPTION_PATH = "/site-description"
+export const TEARMS_AND_CONDTIONS_PATH ="/terms-and-conditions"
+export const YOUTH_PROTECTION_POLICY_PATH = "/youth-protection-policy"
 
 
 // description : USER API URL PATH 

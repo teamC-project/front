@@ -1,77 +1,38 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { deleteDesignerBoardCommentRequest,  getDesignerBoardCommentsByBoardNumberRequest,  getDesignerBoardRequest, postDesignerBoardCommentRequest, putDesignerBoardCommentRequest } from 'src/apis/designerBoard';
+import { deleteDesignerBoardCommentRequest, getDesignerBoardCommentsByBoardNumberRequest, postDesignerBoardCommentRequest, putDesignerBoardCommentRequest } from 'src/apis/designerBoard';
 import { PostDesignerBoardCommentRequestDto, PutDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
-import { GetDesignerBoardCommentListResponseDto, GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { DesignerBoardCommentListItem } from 'src/types';
+import './style.css';
 
-interface Props {
-    comment: string;
+// Define the interface to include the originalDesignerBoardCommentWriterId
+interface DesignerBoardCommentListItemWithOriginal extends DesignerBoardCommentListItem {
+    originalDesignerBoardCommentWriterId: string;
 }
-
-
 
 //                    component                    //
 export default function DesignerBoardComment() {
 
     //                    state                    //
-    const commentRef = useRef<HTMLTextAreaElement | null>(null);
-    const { loginUserId, loginUserRole } = useUserStore();
     const { designerBoardNumber } = useParams();
-    // const { designerBoardCommentNumber } = useParams();
-    const [designerBoardCommentNumber, setDesignerBoardCommentNumber] = useState<number>(1);
-    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
-    const [title, setTitle] = useState<string>('');
-    const [writerId, setWriterId] = useState<string>('');
-    const [writeDate, setWriteDate] = useState<string>('');
-    const [viewCount, setViewCount] = useState<number>(0);
-    const [contents, setContents] = useState<string>('');
+    const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItemWithOriginal[]>([]);
     const [comment, setComment] = useState<string>('');
+    const [editingComment, setEditingComment] = useState<string>('');
+    const [editingCommentNumber, setEditingCommentNumber] = useState<number | null>(null);
     const [cookies] = useCookies();
+    const { loginUserRole, loginUserId } = useUserStore();
+    const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
-    const [viewList, setViewList] = useState<DesignerBoardCommentListItem[]>([]);
 
     //                  function                    //
     const navigator = useNavigate();
 
-    const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
-
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-            result.code === 'AF' ? '인증에 실패 했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            if (result?.code === 'AF') {
-                navigator(MAIN_PATH);
-                return;
-            }
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-
-        const { title, writerId, writeDatetime, viewCount, contents, comment } = result as GetDesignerBoardResponseDto;
-        setTitle(title);
-        setWriterId(writerId);
-        setWriteDate(writeDatetime);
-        setViewCount(viewCount);
-        setContents(contents);
-        if (comment !== null){
-            setComment(comment);
-        }
-    };
-
     const postDesignerBoardCommentResponse = (result: ResponseDto | null) => {
-
         const message =
-            !result ? '서버에 문제가 있습니다.' :
+        !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
             result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
@@ -83,33 +44,20 @@ export default function DesignerBoardComment() {
         }
 
         if (!designerBoardNumber || !cookies.accessToken) return;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardResponse);
-    };
-
-    const chagneDesignerBoardCommentList = (designerBoardCommentList: DesignerBoardCommentListItem[]) => {
-        setDesignerBoardCommentList(designerBoardCommentList);
-    };
-
-    const getDesignerBoardCommentListResponse = (result: GetDesignerBoardCommentListResponseDto | ResponseDto | null) => {
-        if (!result) {
-            console.log('응답이 없습니다.');
-            return;
-        }
-
-        if ('designerBoardCommentList' in result) {
-            const { designerBoardCommentList } = result as GetDesignerBoardCommentListResponseDto;
-            setDesignerBoardCommentList(designerBoardCommentList);
-        } else {
-            console.log('데이터가 없습니다.');
-        }
+        setComment('');
+        getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
+            if (result && 'designerBoardCommentList' in result) {
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
+            }
+        });
     };
 
     const putDesignerBoardCommentResponse = (result: ResponseDto | null) => {
-        const message = 
+        const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '모든 값을 입력해 주세요.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
@@ -117,27 +65,35 @@ export default function DesignerBoardComment() {
             return;
         }
 
-        if (!designerBoardCommentNumber) return;
-        navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardCommentNumber));
+        if (!designerBoardNumber) return;
+        setEditingComment('');
+        setEditingCommentNumber(null);
+        getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
+            if (result && 'designerBoardCommentList' in result) {
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
+            }
+        });
     };
 
     const deleteDesignerBoardCommentResponse = (result: ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-            result.code === 'NB' ? ' 존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? ' 서버에 문제가 있습니다.' : '';
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
         }
 
-        if(!designerBoardNumber) return;
-        navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber));
-
+        if (!designerBoardNumber) return;
+        getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
+            if (result && 'designerBoardCommentList' in result) {
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
+            }
+        });
     };
 
     //                   event handler                    //
@@ -148,121 +104,134 @@ export default function DesignerBoardComment() {
 
         const commentRows = comment.split('\n').length;
         setCommentRows(commentRows);
-
     };
 
     const onPostButtonClickHandler = () => {
         if (!comment.trim()) return;
-        if (!cookies.accessToken) return;
+        if (!designerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
 
-        const requestBody: PostDesignerBoardCommentRequestDto = { comment };
+        const requestBody: PostDesignerBoardCommentRequestDto = { designerBoardCommentContents: comment };
 
-        if (designerBoardNumber !== undefined) {
-        postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken).then(postDesignerBoardCommentResponse);
-        }
-        console.log("ok");
+        postDesignerBoardCommentRequest(designerBoardNumber, requestBody, cookies.accessToken)
+            .then(postDesignerBoardCommentResponse)
+            .catch(() => {
+                alert('댓글 작성 중 오류가 발생했습니다.');
+            });
     };
 
-    const onUpdateCommentHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const comment = event.target.value;
-        if (comment.length > 1000) return;
-        setComment(comment);
+    const onUpdateCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        const updatedComment = event.target.value;
+        setEditingComment(updatedComment);
 
-        if (!commentRef.current) return;
-        commentRef.current.style.height = 'auto';
-        commentRef.current.style.height = `${commentRef.current.scrollHeight}px`;
+        const updatedCommentRows = updatedComment.split('\n').length;
+        setCommentRows(updatedCommentRows);
     };
 
     const onUpdateButtonClickHandler = () => {
-        if (!cookies.accessToken || !designerBoardCommentNumber) return;
+        if (!editingComment.trim() || editingCommentNumber === null) return;
+        if (!designerBoardNumber || !cookies.accessToken) return;
 
-        const requestBody: PutDesignerBoardCommentRequestDto = {comment};
-        putDesignerBoardCommentRequest(designerBoardCommentNumber, requestBody, cookies.accessToken).then(putDesignerBoardCommentResponse);
-        console.log("ok");
+        const requestBody: PutDesignerBoardCommentRequestDto = { designerBoardCommentContents: editingComment };
+        putDesignerBoardCommentRequest(editingCommentNumber, requestBody, cookies.accessToken)
+            .then((result) => {
+                if (result && result.code === 'SU') {
+                    setEditingComment('');
+                    setEditingCommentNumber(null);
+                    getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
+                        if (result && 'designerBoardCommentList' in result) {
+                            setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
+                        }
+                    });
+                } else {
+                    alert('댓글 수정에 실패했습니다.');
+                }
+            })
+            .catch(() => {
+                alert('댓글 수정 중 오류가 발생했습니다.');
+            });
     };
 
-    const onDeleteClikcHandler = () => {
-        if (!designerBoardCommentNumber || loginUserId !== writerId || !cookies.accessToken) return;
-        const isConfirm = window.confirm('정말로 삭제하시겠습니다?');
+    const onEditButtonClickHandler = (commentNumber: number, currentComment: string) => {
+        setEditingComment(currentComment);
+        setEditingCommentNumber(commentNumber);
+    };
+
+    const onDeleteButtonClickHandler = (commentNumber: number) => {
+        if (!commentNumber || !cookies.accessToken) return;
+        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
-        deleteDesignerBoardCommentRequest(designerBoardCommentNumber, cookies.accessToken).then(deleteDesignerBoardCommentResponse);
-        console.log("ok");
+        deleteDesignerBoardCommentRequest(commentNumber, cookies.accessToken)
+            .then(deleteDesignerBoardCommentResponse)
+            .catch(() => {
+                alert('댓글 삭제 중 오류가 발생했습니다.');
+            });
     };
 
     //                   effect                    //
     useEffect(() => {
         if (!cookies.accessToken || designerBoardNumber === undefined) return;
-        getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardCommentListResponse);
-
-    }, [designerBoardNumber]);
-
-    //                    component                    //
-    const CommentPost = () => {
-
-        //              render              //
-        return (
-            <div className="designer-comment-post">
-                <div className="designer-comment-write-contents-box"><textarea className='designer-comment-write-contents-textarea' style={{ height: `${28 * commentRows}px` }}    />
-                    {/* <textarea ref={commentRef} placeholder="댓글을 입력하세요" maxLength={1000} className='designer-comment-write-contents-textarea' value={comment === null ? '' : comment} onChange={onCommentChangeHandler} style={{ height: `${28 * commentRows}px` }} /> */}
-                    <button className='primary-button' onClick={onPostButtonClickHandler}>작성</button>
-                </div>
-            </div>
-        );
-    };
-
-    //                    component                    //
-function ListItem({
-    designerBoardCommentNumber,
-    designerBoardCommentWriterId,
-    designerBoardCommentContents,
-    designerBoardCommentDatetime,
-    onDeleteClick,
-    onUpdateClick
-}: DesignerBoardCommentListItem & { onDeleteClick: () => void, onUpdateClick: () => void }) {
-
+        getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then((result) => {
+            if (result && 'designerBoardCommentList' in result) {
+                setDesignerBoardCommentList(result.designerBoardCommentList as DesignerBoardCommentListItemWithOriginal[]);
+            }
+        });
+    }, [designerBoardNumber, cookies.accessToken]);
 
     //              render              //
     return (
-        <div className='designer-comment-table-tr'>
-            <div className='designer-comment-number'>{designerBoardCommentNumber}</div>
-            <div className='designer-comment-author'>작성자: {designerBoardCommentWriterId}</div>
-            <div className='designer-comment-contents'>{designerBoardCommentContents}</div>
-            <div className='designer-comment-date'>작성일: {designerBoardCommentDatetime}</div>
-            <div>
-                <button onClick={onDeleteClick}>삭제</button>
-                <button onClick={onUpdateClick}>수정</button>
-            </div>
-        </div>
-    );
-}
-
-    //              render              //
-    return (
-        <div id='designer-baord-comment-wrapper'>
+        <div id='designer-board-comment-wrapper'>
             <div className='comment-inner'>
                 <div className='comment-head'>
                     <h5>댓글</h5>
-                    <span className='comment-count'></span>
+                    <span className='comment-count'>{designerBoardCommentList.length}</span>
                 </div>
                 <div className='comment-write-box'>
-                    <CommentPost  />
-                    {comment && (
-                        <></>
-                    )}
-                    <div className="designer-comment-section">
-                        <div className="designe-comment-list">
-                            {designerBoardCommentList.map((item, index) => <ListItem 
-                            key={index} 
-                            {...item}
-                            onDeleteClick={onDeleteClikcHandler}
-                            onUpdateClick={onUpdateButtonClickHandler}
-                            />)}
+                    <div className="designer-comment-post">
+                        <div className="designer-comment-write-contents-box">
+                            <textarea
+                                className='designer-comment-write-contents-textarea'
+                                style={{ height: `${28 * commentRows}px` }}
+                                value={comment}
+                                onChange={onCommentChangeHandler}
+                                placeholder="댓글을 입력하세요"
+                            />
+                            <button className='primary-button' onClick={onPostButtonClickHandler}>작성</button>
                         </div>
+                    </div>
+                </div>
+                <div className="designer-comment-section">
+                    <div className="designer-comment-list">
+                        {designerBoardCommentList.map((item) => (
+                            <div key={item.designerBoardCommentNumber} className='designer-comment-table-tr'>
+                                <div className='designer-comment-number hidden'>{item.designerBoardCommentNumber}</div>
+                                <div className='designer-comment-author'>작성자: {item.designerBoardCommentWriterId}</div>
+                                <div className='designer-comment-contents'>{item.designerBoardCommentContents}</div>
+                                <div className='designer-comment-date'>작성일: {item.designerBoardCommentDatetime}</div>
+                                {item.originalDesignerBoardCommentWriterId === loginUserId && (
+                                    <div className='comment-actions'>
+                                        <button onClick={() => onEditButtonClickHandler(item.designerBoardCommentNumber, item.designerBoardCommentContents)}>수정</button>
+                                        <button onClick={() => onDeleteButtonClickHandler(item.designerBoardCommentNumber)}>삭제</button>
+                                    </div>
+                                )}
+                                {editingCommentNumber === item.designerBoardCommentNumber && (
+                                    <div className="designer-comment-edit">
+                                        <textarea
+                                            ref={commentRef}
+                                            className='designer-comment-write-contents-textarea'
+                                            style={{ height: `${28 * commentRows}px` }}
+                                            value={editingComment}
+                                            onChange={onUpdateCommentChangeHandler}
+                                            placeholder="댓글을 수정하세요"
+                                        />
+                                        <button className='primary-button' onClick={onUpdateButtonClickHandler}>저장</button>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
