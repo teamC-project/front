@@ -1,4 +1,4 @@
-.designer-comment-write-box {
+/* .designer-comment-write-box {
     margin-left: 10px;
 }
 
@@ -15,13 +15,17 @@
 
 .designer-comment-write-contents-textarea {
     width: 100%;
-    height: auto; /* 또는 계산된 높이를 사용하세요 */
+    height: auto; 
     padding: 10px;
     border: none;
     resize: none;
+} */
+
+.hidden {
+    display: none;
 }
 
-.primary-button {
+/* .primary-button {
     padding: 8px 16px;
     background-color: #3a57e8;
     color: white;
@@ -30,4 +34,4 @@
     font-size: 14px;
     cursor: pointer;
     margin-top: 10px;
-}
+} */

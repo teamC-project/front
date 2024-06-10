@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css';
 import'../../../../App.css'
 import { useNavigate, useParams } from 'react-router';
@@ -168,10 +168,10 @@ const { loginUserId, loginUserRole } = useUserStore();
     )
       return;
 
-    const requestBody: PostQnaBoardCommentRequestDto = { comment };
-    postCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(
-      postCommentResponse
-    );
+    // const requestBody: PostQnaBoardCommentRequestDto = { comment };
+    // postCommentRequest(receptionNumber, requestBody, cookies.accessToken).then(
+    //   postCommentResponse
+    // );
   };
 
   const onListClickHandler = () => {
@@ -189,18 +189,18 @@ const { loginUserId, loginUserRole } = useUserStore();
     const isConfirm = window.confirm("정말로 삭제하시겠습니까?");
     if (!isConfirm) return;
 
-    deleteQnaBoardRequest(receptionNumber, cookies.accessToken).then(
-      deleteBoardResponse
-    );
+    // deleteQnaBoardRequest(receptionNumber, cookies.accessToken).then(
+    //   deleteBoardResponse
+    // );
   };
 
   //                    effect                    //
-  useEffect(() => {
-    if (!cookies.accessToken || !receptionNumber) return;
-    increaseQnaBoardCountRequest(receptionNumber, cookies.accessToken).then(
-      increaseViewCountResponse
-    );
-  }, []);
+  // useEffect(() => {
+  //   if (!cookies.accessToken || !receptionNumber) return;
+  //   increaseQnaBoardCountRequest(receptionNumber, cookies.accessToken).then(
+  //     increaseViewCountResponse
+  //   );
+  // }, []);
 	return (
     <div id="qna-board-detail-wrapper">
       <div className="qna-board-detail-title">제목</div>

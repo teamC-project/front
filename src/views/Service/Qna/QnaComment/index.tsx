@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { deleteQnaBoardCommentRequest,  getQnaBoardCommentsByBoardNumberRequest,  getQnaBoardRequest, postQnaBoardCommentRequest, putQnaBoardCommentRequest } from 'src/apis/qnaBoard';
-import { PostQnaBoardCommentRequestDto, PutQnaBoardCommentRequestDto } from 'src/apis/qnaBoard/dto/request';
-import { GetQnaBoardCommentListResponseDto, GetQnaBoardResponseDto } from 'src/apis/qnaBoard/dto/response';
+import { deleteQnaBoardCommentRequest,    getQnaBoardRequest, postQnaBoardCommentRequest, putQnaBoardCommentRequest } from 'src/apis/QnaBoard';
+import { PostQnaBoardCommentRequestDto, PutQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
+import { GetQnaBoardCommentListResponseDto, GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
@@ -57,16 +57,16 @@ export default function QnaBoardComment() {
             return;
         }
 
-        const { title, writerId, writeDatetime, viewCount, contents, comment } = result as GetQnaBoardResponseDto;
-        setTitle(title);
-        setWriterId(writerId);
-        setWriteDate(writeDatetime);
-        setViewCount(viewCount);
-        setContents(contents);
-        if (comment !== null){
-            setComment(comment);
-        }
-    };
+    //     const { title, writerId, writeDatetime, viewCount, contents, comment } = result as GetQnaBoardResponseDto;
+    //     setTitle(title);
+    //     setWriterId(writerId);
+    //     setWriteDate(writeDatetime);
+    //     setViewCount(viewCount);
+    //     setContents(contents);
+    //     if (comment !== null){
+    //         setComment(comment);
+    //     }
+    // };
 
     const postQnaBoardCommentResponse = (result: ResponseDto | null) => {
 
@@ -151,17 +151,17 @@ export default function QnaBoardComment() {
 
     };
 
-    const onPostButtonClickHandler = () => {
-        if (!comment.trim()) return;
-        if (!cookies.accessToken) return;
+    // const onPostButtonClickHandler = () => {
+    //     if (!comment.trim()) return;
+    //     if (!cookies.accessToken) return;
 
-        const requestBody: PostQnaBoardCommentRequestDto = { comment };
+    //     const requestBody: PostQnaBoardCommentRequestDto = { comment };
 
-        if (qnaBoardNumber !== undefined) {
-        postQnaBoardCommentRequest(qnaBoardNumber, requestBody, cookies.accessToken).then(postQnaBoardCommentResponse);
-        }
-        console.log("ok");
-    };
+    //     if (qnaBoardNumber !== undefined) {
+    //     postQnaBoardCommentRequest(qnaBoardNumber, requestBody, cookies.accessToken).then(postQnaBoardCommentResponse);
+    //     }
+    //     console.log("ok");
+    // };
 
     const onUpdateCommentHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const comment = event.target.value;
@@ -191,11 +191,11 @@ export default function QnaBoardComment() {
     };
 
     //                   effect                    //
-    useEffect(() => {
-        if (!cookies.accessToken || qnaBoardNumber === undefined) return;
-        getQnaBoardCommentsByBoardNumberRequest(qnaBoardNumber, cookies.accessToken).then(getQnaBoardCommentListResponse);
+    // useEffect(() => {
+    //     if (!cookies.accessToken || qnaBoardNumber === undefined) return;
+    //     getQnaBoardCommentsByBoardNumberRequest(qnaBoardNumber, cookies.accessToken).then(getQnaBoardCommentListResponse);
 
-    }, [qnaBoardNumber]);
+    // }, [qnaBoardNumber]);
 
     //                    component                    //
     const CommentPost = () => {
@@ -205,7 +205,7 @@ export default function QnaBoardComment() {
             <div className="qna-comment-post">
                 <div className="qna-comment-write-contents-box"><textarea className='qna-comment-write-contents-textarea' style={{ height: `${28 * commentRows}px` }}    />
                     {/* <textarea ref={commentRef} placeholder="댓글을 입력하세요" maxLength={1000} className='qna-comment-write-contents-textarea' value={comment === null ? '' : comment} onChange={onCommentChangeHandler} style={{ height: `${28 * commentRows}px` }} /> */}
-                    <button className='primary-button' onClick={onPostButtonClickHandler}>작성</button>
+                    {/* <button className='primary-button' onClick={onPostButtonClickHandler}>작성</button> */}
                 </div>
             </div>
         );
@@ -265,4 +265,4 @@ function ListItem({
         </div>
     );
 }
-
+}

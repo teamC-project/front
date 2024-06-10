@@ -1,17 +1,17 @@
 export interface PostDesignerBoardRequestDto {
-    title : string;
-    contents : string;
+    designerBoardTitle : string;
+    designerBoardContents : string;
 }
 
 export interface PostDesignerBoardCommentRequestDto {
-    comment : string;
+    designerBoardCommentContents : string;
 }
 
 export interface PutDesignerBoardRequestDto {
-    title : string;
-    contents : string;
+    designerBoardTitle : string;
+    designerBoardContents : string;
 }
 
 export interface PutDesignerBoardCommentRequestDto {
-    comment : string;
+    designerBoardCommentContents : string;
 }
