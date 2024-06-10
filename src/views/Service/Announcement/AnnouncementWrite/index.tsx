@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent,useEffect,useRef, useState } from 'react';
 import "./style.css";
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH,  } from 'src/constant';
 import { PostAnnouncementBoardRequestDto } from 'src/apis/announcement/dto/request';
-import { postAnnnouncementBoardRequest } from 'src/apis/announcement';
+import { postAnnouncementBoardRequest } from 'src/apis/announcement';
 
 
 //              component               //
@@ -16,8 +16,8 @@ export default function AnnouncementBoardWrite() {
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
-    const [title, setTitle] = useState<string>('');
-    const [contents, setContents] = useState<string>('');
+    const [announcementBoardTitle, setAnnouncementBoardTitle] = useState<string>('');
+    const [announcementBoardContents, setAnnouncementBoardContents] = useState<string>('');
 
 
     //              function               //
@@ -43,51 +43,50 @@ export default function AnnouncementBoardWrite() {
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
-        setTitle(title);
+        setAnnouncementBoardTitle(title);
     };
 
     const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const contents = event.target.value;
         if (contents.length > 1000) return;
-        setContents(contents);
+        setAnnouncementBoardContents(contents);
 
         if (!contentsRef.current) return;
         contentsRef.current.style.height = 'auto';
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-
-
-
-
     const onPostButtonClickHandler = () => {
-        if (!title.trim() || !contents.trim()) return;
+        if (!announcementBoardTitle.trim() || !announcementBoardContents.trim()) return;
         if (!cookies.accessToken) return;
 
-        const requestBody: PostAnnouncementBoardRequestDto = { title, contents };
+        const requestBody: PostAnnouncementBoardRequestDto = { announcementBoardTitle, announcementBoardContents };
 
-        postAnnnouncementBoardRequest(requestBody, cookies.accessToken).then(postAnnouncementBoardResponse);
+        postAnnouncementBoardRequest(requestBody, cookies.accessToken).then(postAnnouncementBoardResponse);
     };
 
     //             effect               //
-    // useEffect(() => {
-    //     if (loginUserRole !== 'ROLE_ADMIN') {
-    //         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    //         return;
-    //     }
-    // }, [loginUserRole]);
+		useEffect(() => {
+			if (!loginUserRole) return;
+			if (loginUserRole !=="ROLE_ADMIN" ) {
+				navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+				return;
+			}
+		}, [loginUserRole])
 
-    //                    render                    //\
+
+    //                    render                    //
     return (
         <div id='announcement-write-wrapper'>
             <div className='announcement-write-top'>
                 <div className='announcement-write-title-box'>
                     <div className='announcement-write-title'>제목</div>
-                    <input className='announcement-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+                    <input className='announcement-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
 						<textarea
 						ref={contentsRef} 
+						onChange={onContentsChangeHandler}
 						name=""
 						id=""
 						placeholder='내용을 입력해주세요.'

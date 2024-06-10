@@ -100,7 +100,6 @@ function App() {
       </Route>
       
       <Route path={ANNOUNCEMENT_BOARD_PATH} >
-        
       <Route index element={<AnnouncementList />} />
       <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
       <Route path={ANNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} />

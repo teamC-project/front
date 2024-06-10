@@ -53,9 +53,9 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentDatetime : string;
 };
 export interface AnnouncementBoardListItem {
-	announcementBoardNumber : number;
-	announcementBoardTitle : string;
-	announcementBoardWriterId : string;
-	announcementBoardWriteDatetime : string;
-	announcementBoardViewCount  : string;
+	announcementBoardNumber: number;
+	announcementBoardTitle: string;
+	announcementBoardWriterId: string;
+	announcementBoardWriteDatetime: string;
+	announcementBoardViewCount: number;
 }
