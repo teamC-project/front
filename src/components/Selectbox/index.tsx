@@ -55,17 +55,19 @@ export default function SelectBox({ value, onChange}: Prop) {
       }
       
       <div className={buttonClass} onClick={onButtonClickHandler}></div>
-
-      {show && 
+      {show && (
         <div className='select-list'>
-          {ageListItem.map((item) => 
-          <div className='select-list-item-box' onClick={() => onItemClickHandler(item.value)}>
-            <div className='select-item'>{item.name}</div>
-          </div>
-          )}
+          {ageListItem.map((item) => (
+            <div
+              key={item.value}
+              className='select-list-item-box'
+              onClick={() => onItemClickHandler(item.value)}
+            >
+              <div className='select-item'>{item.name}</div>
+            </div>
+          ))}
         </div>
-      }
-
+      )}
     </div>
-  )
+  );
 }

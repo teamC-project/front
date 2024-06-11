@@ -12,8 +12,8 @@ export interface GetSignInUserResponseDto extends ResponseDto {
 
 export interface GetUserInfoResponseDto extends ResponseDto {
   userId : string;
-  userGender?: string;
-  userAge?: string;
-  userCompanyName?: string;
-  userImage?: string;
+  userGender: string;
+  userAge: string;
+  userCompanyName: string;
+  userImage: string;
 }
