@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 .announcementboard-list-search-box {
   background-color: rgb(218, 218, 218);
-=======
-/* 추가: 검색 박스 스타일 */
-.announcementboard-list-search-box {
->>>>>>> 20400e0ad6b469388ff5d498cc31f9b4fc771414
   display: flex;
   align-items: center;
   flex: 1;
   flex-direction: row;
   align-items: center;
   padding: 10px;
-<<<<<<< HEAD
   }
 
   /* .search-keyword {
@@ -54,66 +48,11 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-=======
-  background-color: #F5F5F5;
-}
-
-.announcementboard-list-search-keyword {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.announcementboard-list-search-input-box {
-  flex: 1;
-  
-}
-
-.announcementboard-list-search-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.announcementboard-list-search-input-button {
-  margin-left: 20px; /* 검색 버튼과 입력창 사이 간격 */
-  padding: 8px 16px; /* 검색 버튼 패딩 */
-  background-color: #3a57e8; /* 검색 버튼 배경색 */
-  color: white; /* 검색 버튼 텍스트 색상 */
-  border: none; /* 검색 버튼 테두리 제거 */
-  border-radius: 4px; /* 검색 버튼 모서리 둥글기 */
-  font-size: 14px; /* 검색 버튼 글자 크기 */
-  cursor: pointer; /* 검색 버튼 커서 모양 */
-}
-
-
-
-/* 수정: 게시물 목록 테이블 스타일 */
-.announcementboard-list-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.announcementboard-table-th {
-  display: flex;
-  background-color: #E0E0E0;
-  padding: 10px;
-  font-weight: bold;
-  border-bottom: 1px solid #ccc;
-}
-
-.announcementboard-list-table-reception-number,
-.announcementboard-list-table-writer-id,
-.announcementboard-list-table-write-date,
-.announcementboard-list-table-viewcount {
-  flex: 1;
->>>>>>> 20400e0ad6b469388ff5d498cc31f9b4fc771414
   text-align: center;
 
   color: rgba(64, 64, 64, 1);
 }
 
-<<<<<<< HEAD
 
 .announcement-list-information1 {
   flex: 0.5; /* 크기 조정 가능 */
@@ -148,21 +87,6 @@
   align-items: center;
   margin-top: 20px;
   position: relative;
-=======
-.announcementboard-list-table-title {
-  flex: 6;
-  text-align: left;
-  padding-left: 10px; /* 제목 왼쪽 패딩 추가 */
-}
-
-.announcementboard-list-table-tr {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #e0e0e0; /* 회색 테두리 */
-  background-color: #ffffff; /* 흰색 배경 */
-  cursor: pointer;
->>>>>>> 20400e0ad6b469388ff5d498cc31f9b4fc771414
 }
 
 .announcementboard-list-table-tr:hover {
@@ -172,14 +96,8 @@
 /* 수정: 페이지네이션과 글쓰기 버튼 스타일 */
 .announcementboard-list-bottom {
   display: flex;
-<<<<<<< HEAD
   justify-content: center;
   align-items: center;
-=======
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
->>>>>>> 20400e0ad6b469388ff5d498cc31f9b4fc771414
 }
 
 .announcementboard-list-pagenation {
