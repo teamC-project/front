@@ -92,52 +92,56 @@ export default function QnaBoardList() {
     changeSection(totalPage);
   };
 
-  const getQnaBoardListResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
-    const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(MAIN_PATH);
-      return;
-    }
-
-    const { qnaBoardList } = result as GetQnaBoardListResponseDto;
-    changeQnaBoardList(qnaBoardList);
-
-    setCurrentPage(!qnaBoardList.length ? 0 : 1);
-    setCurrentSection(!qnaBoardList.length ? 0 : 1);
-  };
-
-  const getSearchQnaBoardListResponse = (result: GetSearchQnaBoardListResponseDto | ResponseDto | null) =>  {
-    const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(MAIN_PATH);
-      return;
-    }
-
-    const { qnaBoardList } = result as GetSearchQnaBoardListResponseDto;
-    
+	const getQnaBoardListResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
+		const message =
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'AF' ? '인증에 실패했습니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+	
+		if (!result || result.code !== 'SU') {
+			alert(message);
+			if (result?.code === 'AF') navigator(MAIN_PATH);
+			return;
+		}
+	
+		const { qnaBoardList } = result as GetQnaBoardListResponseDto;
+		changeQnaBoardList(qnaBoardList);
+	
+		setCurrentPage(!qnaBoardList.length ? 0 : 1);
+		setCurrentSection(!qnaBoardList.length ? 0 : 1);
+	};
+	
+	const getSearchQnaBoardListResponse = (result: GetSearchQnaBoardListResponseDto | ResponseDto | null) => {
+		const message =
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'VF' ? '검색어를 입력하세요.' :
+			result.code === 'AF' ? '인증에 실패했습니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+	
+		if (!result || result.code !== 'SU') {
+			alert(message);
+			if (result?.code === 'AF') navigator(MAIN_PATH);
+			return;
+		}
+	
+		const { qnaBoardList } = result as GetSearchQnaBoardListResponseDto;
+		
 		const updatedQnaBoardList = qnaBoardList.map(item => ({
-      ...item,
-      qnaBoardViewCount: item.qnaBoardViewCount || 0,
-    }));
-    setCurrentPage(!updatedQnaBoardList.length ? 0 : 1);
-    setCurrentSection(!updatedQnaBoardList.length ? 0 : 1);
-    setIsSearched(false);
-  };
-
-  const fetchQnaBoardList = () => {
-    getSearchQnaBoardListRequest('', cookies.accessToken).then(getQnaBoardListResponse);
-  };
+			...item,
+			qnaBoardViewCount: item.qnaBoardViewCount || 0,
+		}));
+		setQnaBoardList(updatedQnaBoardList);
+		changeQnaBoardList(updatedQnaBoardList);
+		changePage(updatedQnaBoardList, updatedQnaBoardList.length);
+		setCurrentPage(!updatedQnaBoardList.length ? 0 : 1);
+		setCurrentSection(!updatedQnaBoardList.length ? 0 : 1);
+		setIsSearched(false);
+	};
+	
+	const fetchQnaBoardList = () => {
+		getSearchQnaBoardListRequest('', cookies.accessToken)
+			.then(result => getQnaBoardListResponse(result as GetQnaBoardListResponseDto | ResponseDto | null));
+	};
 
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
@@ -171,16 +175,17 @@ export default function QnaBoardList() {
     }
   };
 
-  const onSearchButtonClickHandler = () => {
-    if (!searchWord) {
-      setIsSearched(false); 
-      fetchQnaBoardList();
-      return;  
-    }
-    if (!cookies.accessToken) return;
-    setIsSearched(true);
-    getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
-  };
+	const onSearchButtonClickHandler = () => {
+		if (!searchWord) {
+			setIsSearched(false); 
+			fetchQnaBoardList();
+			return;  
+		}
+		if (!cookies.accessToken) return;
+		setIsSearched(true);
+		getSearchQnaBoardListRequest(searchWord, cookies.accessToken)
+			.then(result => getSearchQnaBoardListResponse(result as GetSearchQnaBoardListResponseDto | ResponseDto | null));
+	};
 
   const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') onSearchButtonClickHandler();
