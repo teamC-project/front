@@ -1,9 +1,9 @@
 export interface PostAnnouncementBoardRequestDto {
-    title : string;
-    contents : string;
+    announcementBoardTitle : string;
+    announcementBoardContents : string;
 }
 
 export interface PutAnnouncementBoardRequestDto {
-    title : string;
-    contents : string;
+	announcementBoardTitle : string;
+	announcementBoardContents : string;
 }
