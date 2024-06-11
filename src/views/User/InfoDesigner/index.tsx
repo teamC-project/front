@@ -3,7 +3,7 @@ import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
 import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
@@ -36,7 +36,7 @@ export default function InfoDesigner() {
   //                    function                    //
   const navigator = useNavigate();
 
-  const getInfoResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+  const getInfoDesignerResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -102,7 +102,7 @@ export default function InfoDesigner() {
         userImage: userImage
       };
       
-      updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then();
+      updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
       alert('개인정보가 업데이트되었습니다.');
       navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
 
@@ -157,12 +157,13 @@ export default function InfoDesigner() {
     if (!cookies.accessToken || !loginUserRole) return;
 
     if (loginUserRole !== 'ROLE_DESIGNER') {
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      alert('잘못된 접근입니다.')
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
     getSignInUserRequest(cookies.accessToken)
-      .then(getInfoResponse);
+      .then(getInfoDesignerResponse);
   }, [loginUserRole, cookies.accessToken]);
 
   //                    render                    //
@@ -171,7 +172,6 @@ export default function InfoDesigner() {
       <div className='white-space'></div>
       <div className='white-space1'>
         <div className='white-space2'></div>
-
         <div className='info-designer-container'>
           <div className='designer-id-contents'>
             <div className='designer-id'>아이디</div>
@@ -181,7 +181,6 @@ export default function InfoDesigner() {
               </div>
             </div>
           </div>
-
           <div className='info-designer-box-text'>
             <div className='info-designer-text'>성별</div>
             <div className='info-designer-next-box'>
@@ -189,6 +188,7 @@ export default function InfoDesigner() {
                 <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
                 {/* <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}
               </div>
+              
               <div className='info-designer-radio-box'>
                 <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
                 {/* <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}

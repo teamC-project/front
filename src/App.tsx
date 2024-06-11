@@ -30,9 +30,10 @@ import AnnouncementBoardList from "./views/Service/Announcement/AnnouncementList
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
 import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
 
-import QnaList from "./views/Service/Qna/QnaList";
-import QnaWrite from "./views/Service/Qna/QnaWrite";
-import QnaDetail from "./views/Service/Qna/QnaDetail";
+import QnaBoardList from "./views/Service/Qna/QnaList";
+import QnaBoardWrite from "./views/Service/Qna/QnaWrite";
+import QnaBoardDetail from "./views/Service/Qna/QnaDetail";
+import QnaBoardUpdate from "./views/Service/Qna/QnaUpdate";
 import InfoCustomer from "./views/User/InfoCustomer";
 import InfoDesigner from "./views/User/InfoDesigner";
 import Footer from "./layouts/Footer";
@@ -47,6 +48,7 @@ import SiteDescription from "./layouts/SiteDescription";
 import YouthProtectionPolicy from "./layouts/YouthProtectionPolicy";
 import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
+
 
 
 
@@ -122,10 +124,10 @@ function App() {
       </Route>
 
       <Route path={QNA_BOARD_PATH} >
-        <Route index element={<QnaList  />} />
-        <Route path={QNA_BOARD_WRITE_PATH} element={<QnaWrite />} />
-        <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaDetail />} />
-        {/* <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} /> */}
+        <Route index element={<QnaBoardList  />} />
+        <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} />
+        <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} />
+        <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} />
       </Route>
 
       <Route path={CUSTOMER_BOARD_PATH} >
@@ -151,7 +153,7 @@ function App() {
     <Route path={ADVERTISEMENT_PATH} element = {<Advertisement/>}/> {/*광고 및 제휴 */}
     </Routes>
     {location.pathname !== '*' && <Footer />}
- 
+
   </>
   );
 }

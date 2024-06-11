@@ -26,12 +26,12 @@ function ListItem ({
 
   //              render              //
   return (
-    <div className='announcementboard-list-table-tr' onClick={onClickHandler}>
-      <div className='announcementboard-list-table-number'>{announcementBoardNumber}</div>
-      <div className='announcementboard-list-table-title'>{announcementBoardTitle}</div>
-      <div className='announcementboard-list-table-writer-id'>{announcementBoardWriterId}</div>
-      <div className='announcementboard-list-table-write-date'>{announcementBoardWriteDatetime}</div>
-      <div className='announcementboard-list-table-viewcount'>{announcementBoardViewCount}</div>
+    <div className='announcement-board-list-table-tr' onClick={onClickHandler}>
+      <div className='announcement-board-list-table-number'>{announcementBoardNumber}</div>
+      <div className='announcement-board-list-table-title'>{announcementBoardTitle}</div>
+      <div className='announcement-board-list-table-writer-id'>{announcementBoardWriterId}</div>
+      <div className='announcement-board-list-table-write-date'>{announcementBoardWriteDatetime}</div>
+      <div className='announcement-board-list-table-viewcount'>{announcementBoardViewCount}</div>
     </div>
   );
 }
@@ -205,47 +205,47 @@ export default function AnnouncementBoardList() {
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
-    <div className='announcementboard-list-wrapper'>
-      <div className='announcementboard-list-search-box'>
-        <div className='announcementboard-list-search-keyword'>검색 키워드</div>
-        <div className='announcementboard-list-search-input-box'>
+    <div className='announcement-board-list-wrapper'>
+      <div className='announcement-board-list-search-box'>
+        <div className='announcement-board-list-search-keyword'>검색 키워드</div>
+        <div className='announcement-board-list-search-input-box'>
           <input
-            className='announcementboard-list-search-input'
+            className='announcement-board-list-search-input'
             placeholder='검색어를 입력하세요.'
             value={searchWord}
             onChange={onSearchWordChangeHandler}
             onKeyDown={onSearchInputKeyDown}
           />
         </div>
-        <div className='announcementboard-list-search-input-button' onClick={onSearchButtonClickHandler}>
+        <div className='announcement-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
           검색
         </div>
       </div>
-      <div className='announcementboard-list-table'>
-        <div className='announcementboard-table-th'>
-          <div className='announcementboard-list-table-reception-number'>접수번호</div>
-          <div className='announcementboard-list-table-title'>제목</div>
-          <div className='announcementboard-list-table-writer-id'>작성자</div>
-          <div className='announcementboard-list-table-write-date'>작성일</div>
-          <div className='announcementboard-list-table-viewcount'>조회수</div>
+      <div className='announcement-board-list-table'>
+        <div className='announcement-board-table-th'>
+          <div className='announcement-board-list-table-reception-number'>접수번호</div>
+          <div className='announcement-board-list-table-title'>제목</div>
+          <div className='announcement-board-list-table-writer-id'>작성자</div>
+          <div className='announcement-board-list-table-write-date'>작성일</div>
+          <div className='announcement-board-list-table-viewcount'>조회수</div>
         </div>
         {viewList.map(item => <ListItem key={item.announcementBoardNumber} {...item} />)}
       </div>
-      <div className='announcementboard-list-bottom'>
+      <div className='announcement-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
-        <div className='announcementboard-list-pagenation'>
-          <div className='announcementboard-list-page-left' onClick={onPreSectionClickHandler}></div>
-          <div className='announcementboard-list-page-box'>
+        <div className='announcement-board-list-pagenation'>
+          <div className='announcement-board-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='announcement-board-list-page-box'>
             {pageList.map(page => 
               page === currentPage ? 
-              <div key={page} className='announcementboard-list-page-active'>{page}</div> :
-              <div key={page} className='announcementboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+              <div key={page} className='announcement-board-list-page-active'>{page}</div> :
+              <div key={page} className='announcement-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='announcementboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='announcement-board-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {loginUserRole === 'ROLE_ADMIN' && (
-          <div className='announcementboard-list-write-button' onClick={onWriteButtonClickHandler}>
+          <div className='announcement-board-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
           </div>
         )}

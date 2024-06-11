@@ -21,6 +21,10 @@ export default function CustomerBoardComment() {
     const { loginUserRole, loginUserId } = useUserStore();
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
+    const [replyComment, setReplyComment] = useState<string>('');
+    const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
+    const [commentDates, setCommentDates] = useState<Record<number, string>>({});
+
 
     //                  function                    //
     const navigator = useNavigate();
@@ -123,47 +127,64 @@ export default function CustomerBoardComment() {
         setCommentRows(updatedCommentRows);
     };
 
-    const onUpdateButtonClickHandler = () => {
-        if (!editingComment.trim() || editingCommentNumber === null) return;
-        if (!customerBoardNumber || !cookies.accessToken) return;
+    const onEditButtonClickHandler = (commentNumber: number, currentComment: string, commentWriterId: string) => {
+        if (commentWriterId === loginUserId) {
+            setEditingComment(currentComment);
+            setEditingCommentNumber(commentNumber);
+        } else {
+            alert('작성자만 수정할 수 있습니다.');
+        }
+    };
+    const onDeleteButtonClickHandler = (commentNumber: number, commentWriterId: string) => {
+        if (!commentNumber || !cookies.accessToken) return;
+        if (commentWriterId === loginUserId) {
+            const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+            if (isConfirm) {
+                deleteCustomerBoardCommentRequest(commentNumber, cookies.accessToken)
+                    .then(deleteCustomerBoardCommentResponse)
+                    .catch((error) => {
+                        console.error('댓글 삭제 중 오류가 발생했습니다:', error);
+                        alert('댓글 삭제 중 오류가 발생했습니다.');
+                    });
+            }
+        } else {
+            alert('작성자만 삭제할 수 있습니다.');
+        }
+    };
 
-        const requestBody: PutCustomerBoardCommentRequestDto = { customerBoardCommentContents: editingComment };
-        putCustomerBoardCommentRequest(editingCommentNumber, requestBody, cookies.accessToken)
+    const onReplyCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setReplyComment(event.target.value);
+    };
+
+    const onPostReplyButtonClickHandler = (parentCommentNumber: number) => {
+        if (!replyComment.trim()) return;
+        if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
+
+        const requestBody: PostCustomerBoardCommentRequestDto = { customerBoardCommentContents: replyComment, customerBoardParentCommentNumber: parentCommentNumber };
+
+        postCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken)
             .then((result) => {
                 if (result && result.code === 'SU') {
-                    setEditingComment('');
-                    setEditingCommentNumber(null);
+                    setReplyComment('');
+                    setReplyCommentParentNumber(null);
                     getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then((result) => {
                         if (result && 'customerBoardCommentList' in result) {
-                            setCustomerBoardCommentList(result.customerBoardCommentList);
+                            // 1. 댓글 리스트를 역순으로 표시
+                            setCustomerBoardCommentList(result.customerBoardCommentList.reverse());
                         }
                     });
                 } else {
-                    alert('댓글 수정에 실패했습니다.');
+                    alert('대댓글 작성에 실패했습니다.');
                 }
             })
             .catch((error) => {
-                console.error('댓글 수정 중 오류가 발생했습니다:', error);
-                alert('댓글 수정 중 오류가 발생했습니다.');
+                console.error('대댓글 작성 중 오류가 발생했습니다:', error);
+                alert('대댓글 작성 중 오류가 발생했습니다.');
             });
     };
 
-    const onEditButtonClickHandler = (commentNumber: number, currentComment: string) => { 
-        setEditingComment(currentComment);
-        setEditingCommentNumber(commentNumber);
-    };
-
-    const onDeleteButtonClickHandler = (commentNumber: number) => {
-        if (!commentNumber || !cookies.accessToken) return;
-        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
-        if (!isConfirm) return;
-
-        deleteCustomerBoardCommentRequest(commentNumber, cookies.accessToken)
-            .then(deleteCustomerBoardCommentResponse)
-            .catch((error) => {
-                console.error('댓글 삭제 중 오류가 발생했습니다:', error);
-                alert('댓글 삭제 중 오류가 발생했습니다.');
-            });
+    const onReplyButtonClickHandler = (commentNumber: number) => {
+        setReplyCommentParentNumber(commentNumber);
     };
 
 
@@ -172,10 +193,17 @@ export default function CustomerBoardComment() {
         if (!cookies.accessToken || customerBoardNumber === undefined) return;
         getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'customerBoardCommentList' in result) {
-                setCustomerBoardCommentList(result.customerBoardCommentList);
+                setCustomerBoardCommentList([...result.customerBoardCommentList].reverse());
+
+                const dates: { [key: number]: string } = result.customerBoardCommentList.reduce((acc, item) => {
+                    acc[item.customerBoardCommentNumber] = item.customerBoardCommentDatetime;
+                    return acc;
+                }, {} as Record<number, string>);
+                setCommentDates(dates);
             }
         });
     }, [customerBoardNumber, cookies.accessToken]);
+
 
     //              render              //
     return (
@@ -203,16 +231,18 @@ export default function CustomerBoardComment() {
                     <div className="customer-board-comment-list">
                         {customerBoardCommentList.map((item) => (
                             <div key={item.customerBoardCommentNumber} className='customer-board-comment-table-tr'>
-                                <div className='customer-board-comment-number hidden'>{item.customerBoardCommentNumber}</div>
+                                {item.customerBoardCommentWriterId === loginUserId && (
+                                    <div className='customer-board-comment-actions'>
+                                        <button onClick={() => onEditButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentContents, item.customerBoardCommentWriterId)}>수정</button>
+                                        <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentWriterId)}>삭제</button>
+                                    </div>
+                                )}
                                 <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
                                 <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
-                                <div className='customer-board-comment-date'>작성일: {item.customerBoardCommentDatetime}</div>
-                                {/* {item.customerBoardCommentWriterId === loginUserId ? ( */}
-                                    <div className='customer-board-comment-actions'>
-                                        <button onClick={() => onEditButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentContents)}>수정</button>
-                                        <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber)}>삭제</button>
-                                    </div>
-                                {/* // ) : null} */}
+                                <span className='customer-board-comment-actions-right' style={{ display: 'flex' }}>
+                                    <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
+                                    <button onClick={() => onReplyButtonClickHandler(item.customerBoardCommentNumber)}>대댓글</button>
+                                </span> 
                                 {editingCommentNumber === item.customerBoardCommentNumber && (
                                     <div className="customer-board-comment-update">
                                         <textarea
@@ -223,7 +253,34 @@ export default function CustomerBoardComment() {
                                             onChange={onUpdateCommentChangeHandler}
                                             placeholder="댓글을 수정하세요"
                                         />
-                                        <button className='customer-board-comment-update-primary-button' onClick={onUpdateButtonClickHandler}>저장</button>
+                                        <button className='customer-board-comment-primary-button' onClick={onPostButtonClickHandler}>작성</button>
+                                    </div>
+                                )}
+                                {replyCommentParentNumber === item.customerBoardCommentNumber && (
+                                    <div className="customer-board-comment-reply">
+                                        <textarea
+                                            className='customer-board-comment-reply-textarea'
+                                            value={replyComment}
+                                            onChange={onReplyCommentChangeHandler}
+                                            placeholder="대댓글을 입력하세요"
+                                        />
+                                        <button className='customer-board-comment-primary-button' onClick={() => onPostReplyButtonClickHandler(item.customerBoardCommentNumber)}>작성</button>
+                                    </div>
+                                )}
+                                {item.customerBoardParentCommentNumber && (
+                                    <div className="customer-board-comment-reply-indicator">
+                                        대댓글: {item.customerBoardParentCommentNumber}번 댓글에 대한 답글
+                                    </div>
+                                )}
+                                {item.customerBoardParentCommentNumber && (
+                                    <div className="customer-board-comment-reply-container">
+                                        <div className="customer-board-comment-reply">
+                                            <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
+                                            <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
+                                            <div className='customer-board-comment-actions-right'>
+                                                <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </div>
