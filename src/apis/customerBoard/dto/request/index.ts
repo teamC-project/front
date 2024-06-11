@@ -1,7 +1,7 @@
 export interface PostCustomerBoardRequestDto {
   customerBoardTitle: string;
   customerBoardContents: string;
-  isSecret: boolean;
+  secret: boolean;
 }
 
 export interface PostCustomerBoardCommentRequestDto {
@@ -12,7 +12,7 @@ export interface PostCustomerBoardCommentRequestDto {
 export interface PutCustomerBoardRequestDto {
 	customerBoardTitle : string ;
 	customerBoardContents : string;
-  isSecret: boolean;
+  secret: boolean;
 }
 
 export interface PutCustomerBoardCommentRequestDto {
