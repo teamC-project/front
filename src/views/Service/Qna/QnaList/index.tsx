@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
-import { useNavigate } from 'react-router';
 import { QnaBoardListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { useNavigate } from 'react-router';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/QnaBoard/dto/response';
