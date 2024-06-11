@@ -27,13 +27,13 @@ function ListItem ({
 
   //              render              //
   return (
-    <div className='qnaboard-list-table-tr' onClick={onClickHandler}>
-      <div className='qnaboard-list-table-number'>{qnaBoardNumber}</div>
-      <div className='qnaboard-list-table-title'>{qnaBoardTitle}</div>
-			<div className='qnaboard-list-table-status'>{qnaBoardStatus}</div>
-      <div className='qnaboard-list-table-writer-id'>{qnaBoardWriterId}</div>
-      <div className='qnaboard-list-table-write-date'>{qnaBoardWriteDatetime}</div>
-      <div className='qnaboard-list-table-viewcount'>{qnaBoardViewCount}</div>
+    <div className='qna-board-list-table-tr' onClick={onClickHandler}>
+      <div className='qna-board-list-table-number'>{qnaBoardNumber}</div>
+      <div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
+			<div className='qna-board-list-table-status'>{qnaBoardStatus}</div>
+      <div className='qna-board-list-table-writer-id'>{qnaBoardWriterId}</div>
+      <div className='qna-board-list-table-write-date'>{qnaBoardWriteDatetime}</div>
+      <div className='qna-board-list-table-viewcount'>{qnaBoardViewCount}</div>
     </div>
   );
 }
@@ -143,9 +143,9 @@ export default function QnaBoardList() {
 			.then(result => getQnaBoardListResponse(result as GetQnaBoardListResponseDto | ResponseDto | null));
 	};
 
-  //                    event handler                    //
+  //                    event handler                    // 
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_ADMIN') return;
+    if (loginUserRole === 'ROLE_ADMIN') return;
     navigator(QNA_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
@@ -194,7 +194,7 @@ export default function QnaBoardList() {
   //                    effect                    //
   useEffect(() => {
     if (!cookies.accessToken) return;
-    // fetchQnaBoardList();
+    fetchQnaBoardList();
   }, [cookies.accessToken]);
 
   useEffect(() => {
@@ -210,12 +210,12 @@ export default function QnaBoardList() {
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
-    <div className='qnaboard-list-wrapper'>
-      <div className='qnaboard-list-search-box'>
-        <div className='qnaboard-list-search-keyword'>검색 키워드</div>
-        <div className='qnaboard-list-search-input-box'>
+    <div className='qna-board-list-wrapper'>
+      <div className='qna-board-list-search-box'>
+        <div className='qna-board-list-search-keyword'>검색 키워드</div>
+        <div className='qna-board-list-search-input-box'>
           <input
-            className='qnaboard-list-search-input'
+            className='qna-board-list-search-input'
             placeholder='검색어를 입력하세요.'
             value={searchWord}
             onChange={onSearchWordChangeHandler}
@@ -226,31 +226,32 @@ export default function QnaBoardList() {
           검색
         </div>
       </div>
-      <div className='qnaboard-list-table'>
-        <div className='qnaboard-table-th'>
-          <div className='qnaboard-list-table-reception-number'>접수번호</div>
-          <div className='qnaboard-list-table-title'>제목</div>
-          <div className='qnaboard-list-table-writer-id'>작성자</div>
-          <div className='qnaboard-list-table-write-date'>작성일</div>
-          <div className='qnaboard-list-table-viewcount'>조회수</div>
+      <div className='qna-board-list-table'>
+        <div className='qna-board-table-th'>
+          <div className='qna-board-list-table-reception-number'>접수번호</div>
+					<div className='qna-board-list-table-statis'>접수 상태</div>
+          <div className='qna-board-list-table-title'>제목</div>
+          <div className='qna-board-list-table-writer-id'>작성자</div>
+          <div className='qna-board-list-table-write-date'>작성일</div>
+          <div className='qna-board-list-table-viewcount'>조회수</div>
         </div>
         {viewList.map(item => <ListItem key={item.qnaBoardNumber} {...item} />)}
       </div>
-      <div className='qnaboard-list-bottom'>
+      <div className='qna-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
-        <div className='qnaboard-list-pagenation'>
-          <div className='qnaboard-list-page-left' onClick={onPreSectionClickHandler}></div>
-          <div className='qnaboard-list-page-box'>
+        <div className='qna-board-list-pagenation'>
+          <div className='qna-board-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='qna-board-list-page-box'>
             {pageList.map(page => 
               page === currentPage ? 
-              <div key={page} className='qnaboard-list-page-active'>{page}</div> :
-              <div key={page} className='qnaboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+              <div key={page} className='qna-board-list-page-active'>{page}</div> :
+              <div key={page} className='qna-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='qnaboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='qna-board-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {loginUserRole !== 'ROLE_USER' && (
-          <div className='qnaboard-list-write-button' onClick={onWriteButtonClickHandler}>
+          <div className='qna-board-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
           </div>
         )}
