@@ -273,6 +273,7 @@ export function CustomerSignUp() {
   const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [authNumber, setAuthNumber] = useState<string>('');
+  
   const [gender, setGender] = useState<string>('');
   const [age, setAge] = useState<string>('');
 
@@ -424,10 +425,10 @@ const signUpResponse = (result: ResponseDto | null) => {
   };
 
   const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
-    setGender(value);
-    setIsGenderCheck(false);
+    setGender(event.target.value);
   };
+
+
   
   const onAgeChangeHandler = (age: string) => {
     setAge(age);
@@ -477,8 +478,8 @@ const signUpResponse = (result: ResponseDto | null) => {
       userPassword: password,
       userEmail: email,
       authNumber,
-      userAge: age,
       userGender: gender,
+      userAge: age,
       joinPath: 'HOME'
     };
     customerSignUpRequest(requestBody).then(signUpResponse);
@@ -535,13 +536,12 @@ const signUpResponse = (result: ResponseDto | null) => {
             <div className='auth-sign-up-text'>성별</div>
             <div className='auth-radio-box'>
               <div className='auth-sign-up-radio-box'>
-                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
-              </div>
+                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
               <div className='auth-sign-up-radio-box'>
-                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} />
-              </div>
+                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
             </div>
           </div>
+
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
