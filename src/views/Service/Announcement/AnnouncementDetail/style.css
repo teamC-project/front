@@ -1,8 +1,8 @@
-.announcement-detail {
+.announcement-board-detail {
   padding: 20px;
 }
 
-.announcement-detail-title {
+.announcement-board-detail-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -10,20 +10,20 @@
   background-color: #F5F5F5;
 }
 
-.announcement-detail-container {
+.announcement-board-detail-container {
   margin: 20px auto;
   max-width: 100%;
   padding: 0;
 }
 
-.announcement-detail-information {
+.announcement-board-detail-information {
   display: flex;
   justify-content: space-between;
   padding: 0;
   background-color: #E0E0E0;
 }
 
-.announcement-detail-information > div {
+.announcement-board-detail-information > div {
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #ffffff;
@@ -33,28 +33,28 @@
   text-align: center;
 }
 
-.announcement-detail-information1 {
+.announcement-board-detail-information1 {
   flex: 0.5; /* 크기 조정 가능 */
 }
 
-.announcement-detail-information2 {
+.announcement-board-detail-information2 {
   flex: 6; /* 크기 조정 가능 */
 }
 
-.announcement-detail-information3 {
+.announcement-board-detail-information3 {
   flex: 1; /* 크기 조정 가능 */
 }
 
-.announcement-detail-information4 {
+.announcement-board-detail-information4 {
   flex: 0.5; /* 크기 조정 가능 */
 }
 
-.announcement-detail-information5 {
+.announcement-board-detail-information5 {
   flex: 0.5; /* 크기 조정 가능 */
   cursor: pointer;
 }
 
-.announcement-detail-view {
+.announcement-board-detail-view {
   padding: 20px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
@@ -62,7 +62,7 @@
   background-color: #F5F5F5;
 }
 
-.announcement-detail-go-to-announcementList {
+.announcement-board-detail-go-to-announcementList {
   margin-top: 20px;
   padding: 10px;
   background-color: #E0E0E0;

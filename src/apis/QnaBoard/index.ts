@@ -1,7 +1,7 @@
 import axios from "axios"
 import { DELETE_QNA_BOARD_COMMENT_DELETE_URL, GET_QNA_BOARD_DETAIL_URL, GET_QNA_BOARD_LIST_URL, GET_SEARCH_QNA_BOARD_LIST_URL, POST_QNA_BOARD_COMMENT_WRITE_URL, POST_QNA_BOARD_WRITE_URL, PUT_QNA_BOARD_COMMENT_PUT_URL, PUT_QNA_BOARD_PUT_URL } from "src/constant"
 import { bearerAuthorization, requestErrorHandler, requestHandler } from ".."
-import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardResponseDto } from "./dto/response"
+import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "./dto/response"
 import { PostQnaBoardCommentRequestDto, PostQnaBoardRequestDto, PutQnaBoardCommentRequestDto, PutQnaBoardRequestDto } from "./dto/request"
 import ResponseDto from "../response.dto"
 
@@ -24,13 +24,13 @@ export const getQnaBoardListRequest  = async (accessToken : string) => {
 
 // function : Q&A 검색 리스트 불러오기 API 함수
 export const getSearchQnaBoardListRequest = async (
-qnaBoardSearchWord : string,
+word : string,
 accessToken: string
 ) => {
-	const config = {...bearerAuthorization(accessToken), params : {qnaBoardSearchWord}};
+	const config = {...bearerAuthorization(accessToken), params : {word}};
 	const result = await axios
 	.get(GET_SEARCH_QNA_BOARD_LIST_URL, config)
-	.then(requestHandler<GetSearchQnaBoardResponseDto>)
+	.then(requestHandler<GetSearchQnaBoardListResponseDto>)
 	.catch(requestHandler);
 	return result;
 }
