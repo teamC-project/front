@@ -3,21 +3,21 @@ import "./style.css";
 import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
+import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PutDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
-import { getDesignerBoardRequest, putDesignerBoardRequest } from 'src/apis/designerBoard';
+import { QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { PutQnaBoardRequestDto } from 'src/apis/QnaBoard/dto/request';
+import { getQnaBoardRequest, putQnaBoardRequest } from 'src/apis/QnaBoard';
 
 //                  component                   //
-export default function DesignerUpdate() {
+export default function QnaBoardUpdate() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selection, setSelection] = useState<Range | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
-    const { designerBoardNumber } = useParams();
+    const { qnaBoardNumber } = useParams<{ qnaBoardNumber: string }>();
     const [cookies] = useCookies();
     const [writerId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
@@ -26,7 +26,7 @@ export default function DesignerUpdate() {
     //              function               //
     const navigator = useNavigate();
 
-    const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
+    const getQnaBoardResponse = (result: GetQnaBoardResponseDto | ResponseDto | null) => {
         const message = 
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
@@ -36,17 +36,17 @@ export default function DesignerUpdate() {
     
         if  (!result || result.code !== 'SU') {
             alert(message);
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+            navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
     
-        const { designerBoardWriterId, designerBoardTitle, designerBoardContents } = result as GetDesignerBoardResponseDto;
-        setTitle(designerBoardTitle);
-        setContents(designerBoardContents);
-        setWriterId(designerBoardWriterId);
+        const { qnaBoardWriterId, qnaBoardTitle, qnaBoardContents } = result as GetQnaBoardResponseDto;
+        setTitle(qnaBoardTitle);
+        setContents(qnaBoardContents);
+        setWriterId(qnaBoardWriterId);
     };
 
-    const putDesignerBoardResponse = (result: ResponseDto | null) => {
+    const putQnaBoardResponse = (result: ResponseDto | null) => {
 
         const message = 
             !result ? '서버에 문제가 있습니다.' :
@@ -60,8 +60,8 @@ export default function DesignerUpdate() {
             return;
         }
 
-        if (!designerBoardNumber) return;
-        navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber));
+        if (!qnaBoardNumber) return;
+        navigator(QNA_BOARD_DETAIL_ABSOLUTE_PATH(qnaBoardNumber));
 
     };
 
@@ -99,11 +99,12 @@ export default function DesignerUpdate() {
     };
 
     const onUpdateButtonClickHandler = () => {
-        if (!cookies.accessToken || !designerBoardNumber) return;
+        if (!cookies.accessToken || !qnaBoardNumber) return;
         if (!title.trim() || !contents.trim()) return;
 
-        const requestBody: PutDesignerBoardRequestDto = { designerBoardTitle: title, designerBoardContents: contents };
-        putDesignerBoardRequest(designerBoardNumber, requestBody, cookies.accessToken).then(putDesignerBoardResponse);
+        const requestBody: PutQnaBoardRequestDto = { qnaBoardTitle: title, qnaBoardContents: contents };
+        putQnaBoardRequest(parseInt(qnaBoardNumber), requestBody, cookies.accessToken)
+            .then(result => putQnaBoardResponse(result as ResponseDto));
     };
 
     const handleImageUpload = () => {
@@ -117,15 +118,15 @@ export default function DesignerUpdate() {
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
-            const img = document.createElement('img');
-            img.src = event.target?.result as string;
-            
-            restoreSelection();
-            if (selection) {
-                selection.deleteContents();
-                selection.insertNode(img);
-            }
-            saveSelection();
+                const img = document.createElement('img');
+                img.src = event.target?.result as string;
+                
+                restoreSelection();
+                if (selection) {
+                    selection.deleteContents();
+                    selection.insertNode(img);
+                }
+                saveSelection();
             };
             reader.readAsDataURL(file);
         }
@@ -134,30 +135,30 @@ export default function DesignerUpdate() {
     //             effect               //
     let effectFlag = false;
     useEffect(() => {
-        if (!designerBoardNumber || !cookies.accessToken || !loginUserRole) return;
+        if (!qnaBoardNumber || !cookies.accessToken || !loginUserRole) return;
         if (effectFlag) return;
         effectFlag = true;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(result => {
-            if (loginUserRole !== 'ROLE_DESIGNER') {
+        getQnaBoardRequest(parseInt(qnaBoardNumber), cookies.accessToken).then(result => {
+            if (loginUserRole === 'ROLE_ADMIN') {
                 alert('권한이 없습니다.');
-                navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+                navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
                 return;
             }
-            getDesignerBoardResponse(result);
+            getQnaBoardResponse(result);
         });
-    }, [designerBoardNumber, cookies.accessToken, loginUserRole]);
+    }, [qnaBoardNumber, cookies.accessToken, loginUserRole]);
 
     //                    render                    //
     return (
-        <div id='designer-write-wrapper'>
-            <div className='designer-write-top'>
-                <div className='designer-write-title-box'>
-                    <div className='designer-write-title'>제목</div>
-                    <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+        <div id='qna-write-wrapper'>
+            <div className='qna-write-top'>
+                <div className='qna-write-title-box'>
+                    <div className='qna-write-title'>제목</div>
+                    <input className='qna-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
-            <div className='designer-write-contents-box'>
-                <textarea ref={contentsRef} className='designer-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
+            <div className='qna-write-contents-box'>
+                <textarea ref={contentsRef} className='qna-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
             </div>
             <div className='upload-file'>첨부 파일
             <button onClick={handleImageUpload}>파일 선택</button>

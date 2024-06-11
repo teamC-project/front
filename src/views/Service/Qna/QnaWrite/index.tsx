@@ -9,7 +9,7 @@ import { postQnaBoardRequest } from 'src/apis/QnaBoard';
 import { PostQnaBoardRequestDto } from 'src/apis/QnaBoard/dto/request';
 
 //              component               //
-export default function QnaWrite() {
+export default function QnaBoardWrite() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);

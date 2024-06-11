@@ -1,4 +1,4 @@
-.announcementboard-list-search-box {
+.announcement-board-list-search-box {
   background-color: rgb(218, 218, 218);
   display: flex;
   align-items: center;
@@ -6,6 +6,7 @@
   flex-direction: row;
   align-items: center;
   padding: 10px;
+
   }
 
   /* .search-keyword {
@@ -24,7 +25,7 @@
   margin-left: 10px; 
   } */
 
-.announcementboard-list-table {
+.announcement-board-list-table {
   margin: 20px auto;
   max-width: 100%; /* announcement-list-title의 너비에 맞춤 */
   padding: 0;
@@ -37,19 +38,16 @@
   background-color: #f2f2f2;
 }
 
-.announcementboard-table-th {
+.announcement-board-table-th {
   display: flex;
   align-items: center;
   gap: 95px;
-
   border-top: 1px solid rgba(238, 238, 238, 1);
   padding: 15px 24px;
-
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   text-align: center;
-
   color: rgba(64, 64, 64, 1);
 }
 
@@ -73,6 +71,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .announcement-list-title > div {
   padding: 10px;
   border-bottom: 1px solid #000000;
@@ -88,45 +87,43 @@
   position: relative;
 }
 
-.announcementboard-list-table-tr:hover {
+.announcement-board-list-table-tr:hover {
   background-color: #f9f9f9;
 }
 
 /* 수정: 페이지네이션과 글쓰기 버튼 스타일 */
-.announcementboard-list-bottom {
+.announcement-board-list-bottom {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.announcementboard-list-pagenation {
+.announcement-board-list-pagenation {
   display: flex;
   align-items: center;
   margin-right: 20px; 
 }
 
-.announcementboard-list-page-left,
-.announcementboard-list-page-right {
+.announcement-board-list-page-left,
+.announcement-board-list-page-right {
   cursor: pointer;
   margin: 0 5px;
 }
 
-.announcementboard-list-page-box {
+.announcement-board-list-page-box {
   display: flex;
   margin-left: 0; /* 0으로 설정하여 왼쪽으로 이동 */
 }
-
 /* 페이지네이션 숫자 스타일 */
-.announcementboard-list-page {
+.announcement-board-list-page {
   padding: 5px 10px;
   margin: 0 5px;
   cursor: pointer;
   background-color: #FFFFFF; /* 흰색 배경 */
   color: #333333; /* 검은색 텍스트 */
 }
-
 /* 활성화된 페이지네이션 숫자 스타일 */
-.announcementboard-list-page-active {
+.announcement-board-list-page-active {
   padding: 5px 10px;
   margin: 0 5px;
   cursor: pointer;
@@ -135,7 +132,7 @@
   font-weight: bold;
 }
 /* 추가: 글쓰기 버튼 스타일 */
-.announcementboard-list-write-button {
+.announcement-board-list-write-button {
   padding: 8px 16px;
   background-color: #4caf50;
   color: white;
@@ -144,7 +141,6 @@
   font-size: 14px;
   cursor: pointer;
 }
-
 .write-button {
   position: absolute;
   right: 0;

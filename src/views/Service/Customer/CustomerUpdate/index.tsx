@@ -14,7 +14,7 @@ export default function CustomerUpdate() {
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [isSecret, setIsSecret] = useState(false);
+    const [isSecret, setIsSecret] = useState<boolean>(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const navigate = useNavigate();
     const { customerBoardNumber } = useParams();
@@ -32,9 +32,10 @@ export default function CustomerUpdate() {
     const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
         // ... (응답 처리 로직) ...
         if (result && result.code === 'SU') {
-            const { customerBoardTitle, customerBoardContents } = result as GetCustomerBoardResponseDto;
+            const { customerBoardTitle, customerBoardContents, secret } = result as GetCustomerBoardResponseDto;
             setTitle(customerBoardTitle);
             setContents(customerBoardContents);
+            setIsSecret(secret);
         }
     };
     
@@ -56,7 +57,7 @@ export default function CustomerUpdate() {
         const requestBody: PutCustomerBoardRequestDto = {
             customerBoardTitle: title,
             customerBoardContents: contents,
-            isSecret: isSecret
+            secret: isSecret
         };
     
         putCustomerBoardRequest(customerBoardNumber, requestBody, cookies.accessToken)

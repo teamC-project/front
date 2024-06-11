@@ -9,9 +9,6 @@ export interface GetQnaBoardListResponseDto extends ResponseDto {
 	qnaBoardList : QnaBoardListItem[];
 }
 
-export interface GetQnaBoardCommentListResponseDto extends ResponseDto {
-    qnaBoardCommentList: QnaBoardCommentListItem[];
-}
 
 export interface GetQnaBoardResponseDto extends ResponseDto {
 	qnaBoardNumber  : number;

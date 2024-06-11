@@ -1,10 +1,10 @@
 export interface QnaBoardListItem {
-	qnaBoardNumber : number;
-	qnaBoardStatus : boolean;
-	qnaBoardTitle : string;
-	qnaBoardWriterId : string;
-	qnaBoardWriteDatetime : string;
-	qnaBoardViewCount : number;
+	qnaBoardNumber: number;
+	qnaBoardStatus: boolean;
+	qnaBoardTitle: string;
+	qnaBoardWriterId: string;
+	qnaBoardWriteDatetime: string;
+	qnaBoardViewCount: number;
 };
 
 export interface QnaBoardCommentListItem {
@@ -30,13 +30,14 @@ export interface CustomerBoardListItem {
 	customerBoardWriterId : string;
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
-	customerBoardIsSecret: boolean;
+	secret: boolean;
 }	
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;
 	customerBoardCommentWriterId : string;
 	customerBoardCommentDatetime : string;
 	customerBoardCommentContents : string;
+	customerBoardParentCommentNumber?: number;
 };
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
