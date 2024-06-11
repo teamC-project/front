@@ -157,7 +157,8 @@ export default function InfoDesigner() {
     if (!cookies.accessToken || !loginUserRole) return;
 
     if (loginUserRole !== 'ROLE_DESIGNER') {
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      alert('잘못된 접근입니다.')
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 

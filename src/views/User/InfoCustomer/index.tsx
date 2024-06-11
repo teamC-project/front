@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { CustomerInfoResponseDto, DesignerInfoResponseDto, SignInResponseDto } from 'src/apis/auth/dto/response';
-import { getSignInUserRequest } from 'src/apis/user';
+import { getSignInUserRequest, updateCustomerInfoRequest, updateDesignerInfoRequest } from 'src/apis/user';
 
 //                     interface                       //
 interface Props {
@@ -28,8 +28,10 @@ export default function InfoCustomer() {
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
   const [companyName, setCompanyName] = useState<string>('');
   const [userimage, setImage] = useState<string>('');
+  const [ageMessage, setAgeMessage] = useState<string>('');
 
   const [cookies] = useCookies();
+  const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
 
   //                     function                       //
   const navigator = useNavigate();
@@ -44,37 +46,54 @@ export default function InfoCustomer() {
 
   if (!result || result.code !== 'SU') {
   alert(message);
-  navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+  navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
   return;
   }
 
 const { userId, userGender, userAge} = result as CustomerInfoResponseDto;
 if (userId !== loginUserId) {
 alert('권한이 없습니다.');
-navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
 return;
 }
 
-setGender(gender);
-setAge(age);
+setGender(userGender);
+setAge(userAge);
 };
 
   //                     event handler                     //
-  const onInfoCUstomerUpdateClickHandler = () => {
-    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH)
-  }
-  
-  const onAgeChangeHandler = (age: string) => {
-    setAge(age);
+  const onInfoCustomerUpdateClickHandler = async () => {
+
+
+    try {
+      const customerInfoUpdate = {
+        userGender: gender,
+        userAge: age,
+      };
+      
+      updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate).then(getInfoUpdate);
+      alert('개인정보가 업데이트되었습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+
+    } catch (error) {
+      console.error('Error updating user info:', error);
+      alert('개인정보 업데이트에 실패했습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    }
+  };
+
+  const onAgeChangeHandler = (value: string) => {
+    setAge(value);
+    setIsAgeCheck(false);
+    const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
+    setAgeMessage(ageMessage);
   };
 
   const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setGender(value);
-    setIsGenderCheck(false);
-    const genderMessage =
-      isGenderCheck ? '' :
-        value ? '성별을 선택해주세요.' : '';
+    setIsGenderCheck(true);
+    // const genderMessage = isGenderCheck ? '' : (value ? '성별을 선택해주세요.' : '');
     setGenderMessage(genderMessage);
   };
 
@@ -84,9 +103,10 @@ setAge(age);
     if (!cookies.accessToken || !loginUserRole) return;
 
     if (loginUserRole !== 'ROLE_CUSTOMER') {
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
+
     getSignInUserRequest(cookies.accessToken)
       .then(getInfoUpdate);
   }, [loginUserRole, cookies.accessToken]);
@@ -96,7 +116,7 @@ setAge(age);
   //   if (loginUserRole !== 'ROLE_CUSTOMER') {
   //     if (!cookies.accessToken) return;
   //     if (!loginUserRole) return;
-  //     navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
+  //     navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
   //     return;
   //   }
   // }, [loginUserRole]);
@@ -121,10 +141,10 @@ setAge(age);
           <div className='info-customer-text'>성별</div>
           <div className='info-customer-next-box'>
             <div className='info-customer-radio-box'>
-              <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
+              <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} /> MALE
             </div>
             <div className='info-customer-radio-box'>
-            <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
+            <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} /> FEMALE
             </div>
           </div>
         </div>
@@ -132,11 +152,10 @@ setAge(age);
           <div className='info-customer-text'>연령대</div>
           <SelectBox value={age} onChange={onAgeChangeHandler} />
         </div>
-        <div className='submit-box' onClick={onInfoCUstomerUpdateClickHandler}>
+        <div className='submit-box' onClick={onInfoCustomerUpdateClickHandler}>
           <div className='complete-text primary-button'>완료</div>
         </div>
       </div>
-      
       <div className='white-space2'></div>
       </div>
       <div className='white-space4'></div>
