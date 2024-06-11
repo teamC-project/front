@@ -43,6 +43,12 @@ export const getDesignerBoardCommentsByBoardNumberRequest = async (designerBoard
     const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
         .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
         .catch(requestErrorHandler);
+        if (result && 'designerBoardCommentList' in result) {
+            result.designerBoardCommentList = result.designerBoardCommentList.map((item) => ({
+                ...item,
+                designerBoardCommentDatetime: item.designerBoardCommentDatetime || '작성일 없음'
+            }));
+        }
     return result;
 } 
 
