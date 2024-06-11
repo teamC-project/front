@@ -110,7 +110,7 @@ export default function CustomerWrite() {
         const requestBody: PostCustomerBoardRequestDto = { 
             customerBoardTitle: title, 
             customerBoardContents: contents, 
-            isSecret: isSecret
+            secret: isSecret
         };
     
         postCustomerBoardRequest(requestBody, cookies.accessToken)
