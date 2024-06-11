@@ -29,7 +29,6 @@ export const getSearchQnaBoardListRequest = async (word: string, accessToken: st
 	  .get(GET_SEARCH_QNA_BOARD_LIST_URL, config)
 	  .then((response) => response.data as GetSearchQnaBoardListResponseDto)
 	  .catch((error) => {
-		// Handle the error as needed
 		throw new Error(error.response?.data?.message || 'Error occurred while fetching QnA board list');
 	  });
 	return result;
