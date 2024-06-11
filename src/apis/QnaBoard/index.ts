@@ -23,17 +23,17 @@ export const getQnaBoardListRequest  = async (accessToken : string) => {
 }
 
 // function : Q&A 검색 리스트 불러오기 API 함수
-export const getSearchQnaBoardListRequest = async (
-word : string,
-accessToken: string
-) => {
-	const config = {...bearerAuthorization(accessToken), params : {word}};
+export const getSearchQnaBoardListRequest = async (word: string, accessToken: string): Promise<GetSearchQnaBoardListResponseDto> => {
+	const config = { headers: { Authorization: `Bearer ${accessToken}` }, params: { word } };
 	const result = await axios
-	.get(GET_SEARCH_QNA_BOARD_LIST_URL, config)
-	.then(requestHandler<GetSearchQnaBoardListResponseDto>)
-	.catch(requestHandler);
+	  .get(GET_SEARCH_QNA_BOARD_LIST_URL, config)
+	  .then((response) => response.data as GetSearchQnaBoardListResponseDto)
+	  .catch((error) => {
+		// Handle the error as needed
+		throw new Error(error.response?.data?.message || 'Error occurred while fetching QnA board list');
+	  });
 	return result;
-}
+  };
 
 // function : Q&A 게시물 불러오기 API 함수
 export const getQnaBoardRequest =  async(qnaBoardNumber : number | string, accessToken : string) => {
@@ -83,7 +83,7 @@ export const deleteQnaBoardCommentRequest = async (qnaBoardCommentNumber: number
         .catch(requestErrorHandler);
     return result;
 };
-
+// function : Q&A 조회수 증가 API 함수
 export const increaseViewCountRequest = async (qnaBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.patch(PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL(qnaBoardNumber), {}, bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
