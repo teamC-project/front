@@ -54,7 +54,7 @@ export default function DesignerDetail() {
         getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
             .then(getDesignerBoardResponse);
     };
-  
+
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
         const message = 
         !result ? '서버에 문제가 있습니다.' :
@@ -135,15 +135,12 @@ export default function DesignerDetail() {
     };
 
     const onDeleteButtonClickHandler = () => {
-        if (!designerBoardNumber || !cookies.accessToken) return;
+        if (!designerBoardNumber || loginUserId !== writerId || !cookies.accessToken) return;
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if (!isConfirm) return;
 
         deleteDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
             .then(deleteDesignerBoardResponse)
-            .catch(() => {
-                alert('게시물 삭제 중 오류가 발생했습니다.');
-            });
     };
 
     //                   effect                        //
