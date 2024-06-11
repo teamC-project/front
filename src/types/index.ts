@@ -1,10 +1,10 @@
 export interface QnaBoardListItem {
-	qnaBoardNumber : number;
-	qnaBoardStatus : boolean;
-	qnaBoardTitle : string;
-	qnaBoardWriterId : string;
-	qnaBoardWriteDatetime : string;
-	qnaBoardViewCount : number;
+	qnaBoardNumber: number;
+	qnaBoardStatus: boolean;
+	qnaBoardTitle: string;
+	qnaBoardWriterId: string;
+	qnaBoardWriteDatetime: string;
+	qnaBoardViewCount: number;
 };
 
 export interface QnaBoardCommentListItem {

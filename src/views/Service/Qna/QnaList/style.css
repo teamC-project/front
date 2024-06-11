@@ -1,65 +1,43 @@
-#qna-list-wrapper {
+.qna-board-list-search-box {
+  background-color: rgb(218, 218, 218);
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  }
+
+  /* .search-keyword {
+  margin-right: 10px;
+  }
+  .list-search-input { 
+  flex: 1; 
+  padding: 5px;
+  } */
+
+  /* .search-button {
+  background-color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px; 
+  } */
+
+.qna-board-list-table {
+  margin: 20px auto;
+  max-width: 100%; /* qna--list-title의 너비에 맞춤 */
+  padding: 0;
 }
 
-.qna-list-top {
+.qna--list-information {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  padding: 0; /* 여백 제거 */
+  background-color: #f2f2f2;
 }
 
-.qna-list-size-text {
-  font-size: 16px;
-  font-weight: 400;
-
-  color: rgba(138, 146, 166, 1);
-}
-
-.qna-list-size-text .emphasis {
-  color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-top-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.qna-list-top-admin-text {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-
-  color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  border: 1px solid rgba(238, 238, 238, 1);
-  border-radius: 8px;
-
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.qna-list-table-th {
-  display: flex;
-  align-items: center;
-  gap: 95px;
-  padding: 15px 24px;
-
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-
-  color: rgba(64, 64, 64, 1);
-}
-
-.qna-list-table-tr {
+.qna-board-table-th {
   display: flex;
   align-items: center;
   gap: 95px;
@@ -75,100 +53,104 @@
   color: rgba(64, 64, 64, 1);
 }
 
-.qna-list-table-reception-number {
-  width: 56px;
+.qna--list-information1 {
+  flex: 0.5; /* 크기 조정 가능 */
 }
 
-.qna-list-table-status {
-  width: 45px;
+.qna--list-information2 {
+  flex: 6; /* 크기 조정 가능 */
 }
 
-.qna-list-table-title {
-  width: 349px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.qna--list-information3 {
+  flex: 1; /* 크기 조정 가능 */
 }
 
-.qna-list-table-writer-id {
-  width: 67px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.qna--list-information4 {
+  flex: 0.5; /* 크기 조정 가능 */
 }
 
-.qna-list-table-write-date {
-  width: 54px;
-}
-
-.qna-list-table-viewcount {
-  width: 42px;
-}
-
-.qna-list-bottom {
+.qna--list-title {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
-
-.qna-list-pagenation {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-
-.qna-list-page-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.qna-list-page {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-
-  color: rgba(138, 146, 166, 1);
-
+.qna--list-title > div {
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+  background-color: rgb(218, 218, 218);
   cursor: pointer;
 }
 
-.qna-list-page-active {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-
-  color: rgba(64, 64, 64, 1);
-
-  cursor: default;
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
 }
 
-.qna-list-search-box {
+.qna-board-list-table-tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* 수정: 페이지네이션과 글쓰기 버튼 스타일 */
+.qna-board-list-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qna-board-list-pagenation {
   display: flex;
   align-items: center;
-  gap: 12px;
+  margin-right: 20px; 
 }
 
-.qna-list-search-input-box {
-  border: 1px solid rgba(238, 238, 238, 1);
-  border-radius: 6px;
+.qna-board-list-page-left,
+.qna-board-list-page-right {
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.qna-board-list-page-box {
+  display: flex;
+  margin-left: 0; /* 0으로 설정하여 왼쪽으로 이동 */
+}
+
+/* 페이지네이션 숫자 스타일 */
+.qna-board-list-page {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #FFFFFF; /* 흰색 배경 */
+  color: #333333; /* 검은색 텍스트 */
+}
+
+/* 활성화된 페이지네이션 숫자 스타일 */
+.qna-board-list-page-active {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #A9A9A9; /* 진한 회색 배경 */
+  color: #333333;
+  font-weight: bold;
+}
+/* 추가: 글쓰기 버튼 스타일 */
+.qna-board-list-write-button {
   padding: 8px 16px;
-  width: 168px;
-
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.qna-list-search-input {
-  border: none;
-  outline: none;
-  background: none;
-
-  width: 100%;
-
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 175%;
-
-  color: rgba(64, 64, 64, 1);
+.write-button {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 5px 10px;
+  cursor: pointer;
 }
