@@ -26,9 +26,9 @@ import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
 
-import AnnouncementList from "./views/Service/Announcement/AnnouncementList";
+import AnnouncementBoardList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
-
+import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
 
 import QnaList from "./views/Service/Qna/QnaList";
 import QnaWrite from "./views/Service/Qna/QnaWrite";
@@ -39,13 +39,15 @@ import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
 import InfoDeleteCustomer from "./views/User/InfoDeleteCustomer";
 import InfoDeleteDesigner from "./views/User/InfoDeleteDesigner";
-import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
+
 import MailContect from "./layouts/MailContect";
 import TermsAndConditions from "./layouts/TermsAndConditions";
 import PersonalInfoProcessingPolicy from "./layouts/PersonalInfoProcesssingPolicy";
 import SiteDescription from "./layouts/SiteDescription";
 import YouthProtectionPolicy from "./layouts/YouthProtectionPolicy";
 import Advertisement from "./layouts/Advertisement";
+import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
+
 
 
 
@@ -106,10 +108,10 @@ function App() {
       </Route>
       
       <Route path={ANNOUNCEMENT_BOARD_PATH} >
-      <Route index element={<AnnouncementList />} />
+      <Route index element={<AnnouncementBoardList />} />
       <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
       <Route path={ANNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} />
-      {/* <Route path={ANNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} /> */}
+			<Route path={ANNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} />
       </Route>
 
       <Route path={TREND_BOARD_PATH} >

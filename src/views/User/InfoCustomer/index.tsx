@@ -87,7 +87,6 @@ setAge(age);
       navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
       return;
     }
-
     getSignInUserRequest(cookies.accessToken)
       .then(getInfoUpdate);
   }, [loginUserRole, cookies.accessToken]);
