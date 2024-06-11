@@ -5,32 +5,27 @@ import { QnaBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetQnaBoardListResponseDto,  GetSearchQnaBoardListResponseDto,  } from 'src/apis/QnaBoard/dto/response';
+import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchQnaBoardListRequest } from 'src/apis/QnaBoard';
 
-//                    component                    //
-function ListItem ({
+function ListItem({
   qnaBoardNumber,
   qnaBoardTitle,
-	qnaBoardStatus,
+  qnaBoardStatus,
   qnaBoardWriterId,
   qnaBoardWriteDatetime,
   qnaBoardViewCount
 }: QnaBoardListItem) {
-
-  //              function              //
   const navigator = useNavigate();
 
-  //              event handler              //
   const onClickHandler = () => navigator(QNA_BOARD_DETAIL_ABSOLUTE_PATH(qnaBoardNumber));
 
-  //              render              //
   return (
     <div className='qnaboard-list-table-tr' onClick={onClickHandler}>
       <div className='qnaboard-list-table-number'>{qnaBoardNumber}</div>
       <div className='qnaboard-list-table-title'>{qnaBoardTitle}</div>
-			<div className='qnaboard-list-table-status'>{qnaBoardStatus}</div>
+      <div className='qnaboard-list-table-status'>{qnaBoardStatus}</div>
       <div className='qnaboard-list-table-writer-id'>{qnaBoardWriterId}</div>
       <div className='qnaboard-list-table-write-date'>{qnaBoardWriteDatetime}</div>
       <div className='qnaboard-list-table-viewcount'>{qnaBoardViewCount}</div>
@@ -38,10 +33,7 @@ function ListItem ({
   );
 }
 
-//                    component                    //
 export default function QnaBoardList() {
-
-  //                    state                    //
   const { loginUserRole } = useUserStore();
   const [cookies] = useCookies();
   const [qnaBoardList, setQnaBoardList] = useState<QnaBoardListItem[]>([]);
@@ -54,8 +46,6 @@ export default function QnaBoardList() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const [searchWord, setSearchWord] = useState<string>('');
   const [isSearched, setIsSearched] = useState<boolean>(false);
-
-  //                    function                    //
   const navigator = useNavigate();
 
   const changePage = (qnaBoardList: QnaBoardListItem[], totalLength: number) => {
@@ -143,7 +133,6 @@ export default function QnaBoardList() {
 			.then(result => getQnaBoardListResponse(result as GetQnaBoardListResponseDto | ResponseDto | null));
 	};
 
-  //                    event handler                    //
   const onWriteButtonClickHandler = () => {
     if (loginUserRole !== 'ROLE_ADMIN') return;
     navigator(QNA_BOARD_WRITE_ABSOLUTE_PATH);
@@ -171,7 +160,7 @@ export default function QnaBoardList() {
     setSearchWord(searchWord);
     if (!searchWord) {
       setIsSearched(false);
-      fetchQnaBoardList(); 
+      fetchQnaBoardList();
     }
   };
 
@@ -191,10 +180,9 @@ export default function QnaBoardList() {
     if (event.key === 'Enter') onSearchButtonClickHandler();
   };
 
-  //                    effect                    //
   useEffect(() => {
     if (!cookies.accessToken) return;
-    // fetchQnaBoardList();
+    fetchQnaBoardList();
   }, [cookies.accessToken]);
 
   useEffect(() => {
@@ -207,7 +195,6 @@ export default function QnaBoardList() {
     changeSection(totalPage);
   }, [currentSection]);
 
-  //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='qnaboard-list-wrapper'>

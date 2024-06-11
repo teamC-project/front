@@ -27,31 +27,23 @@ export default function DesignerUpdate() {
     const navigator = useNavigate();
 
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
-
         const message = 
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-            result.code === 'AF' ? '인증에 실패 했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
+                result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+                result.code === 'AF' ? '인증에 실패 했습니다.' :
+                result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    
         if  (!result || result.code !== 'SU') {
             alert(message);
             navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
-
+    
         const { designerBoardWriterId, designerBoardTitle, designerBoardContents } = result as GetDesignerBoardResponseDto;
-        if (writerId !== loginUserId) {
-            alert('권한이 없습니다.');
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-        
         setTitle(designerBoardTitle);
         setContents(designerBoardContents);
         setWriterId(designerBoardWriterId);
-
     };
 
     const putDesignerBoardResponse = (result: ResponseDto | null) => {
@@ -142,16 +134,18 @@ export default function DesignerUpdate() {
     //             effect               //
     let effectFlag = false;
     useEffect(() => {
-        if (!designerBoardNumber || !cookies.accessToken) return;
-        if (!loginUserRole) return;
+        if (!designerBoardNumber || !cookies.accessToken || !loginUserRole) return;
         if (effectFlag) return;
         effectFlag = true;
-        if (loginUserRole !== 'ROLE_USER') {
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardResponse);
-    }, [loginUserRole]);
+        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken).then(result => {
+            if (loginUserRole !== 'ROLE_DESIGNER') {
+                alert('권한이 없습니다.');
+                navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+                return;
+            }
+            getDesignerBoardResponse(result);
+        });
+    }, [designerBoardNumber, cookies.accessToken, loginUserRole]);
 
     //                    render                    //
     return (
