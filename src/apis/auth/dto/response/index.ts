@@ -12,8 +12,8 @@ export interface IdFoundResponseDto extends ResponseDto {
 
 export interface CustomerInfoResponseDto extends ResponseDto {
   userId: string;
-  userGender?: string;
-  userAge?: string;
+  userGender: string;
+  userAge: string;
 }
 
 export interface DesignerInfoResponseDto extends ResponseDto {

@@ -12,8 +12,10 @@ export const ID_FOUND_PATH = "id-found";
 export const PASSWORD_FOUND_PATH = "password-found";
 export const PASSOWORD_RESET_PATH = "password-reset";
 
-
 export const SERVICE_PATH = "/service";
+
+export const LOGIN_LOG_PATH = "/login-log";
+
 
 export const MY_PAGE_PATH = "my-page";
 export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
@@ -121,6 +123,12 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = "http://localhost:4200";
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
+
+// description: LOGIN_LOG API URL PATH
+export const LOGIN_LOG_URL = `${SERVER_API_URL}/login-log`;
+export const TOTAL_VISITORS_URL = `${LOGIN_LOG_URL}/total-visitors`;
+export const VISITORS_TODAY_URL = `${LOGIN_LOG_URL}/visitors-today`;
+
 
 // description : AUTH API URL PATH 
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;

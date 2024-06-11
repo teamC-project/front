@@ -7,6 +7,40 @@ import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import useUserStore from "src/stores/use.store";
 import ResponseDto from 'src/apis/response.dto';
+import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
+import { VisitorCountDto } from 'src/apis/loginLog/dto/response';
+
+//                   component                   //
+function VisitorCount() {
+    const [totalVisitors, setTotalVisitors] = useState<number>(0);
+    const [visitorsToday, setVisitorsToday] = useState<number>(0);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const totalResult = (await getTotalVisitorsRequest(totalVisitors)) as VisitorCountDto;
+          const todayResult = (await getVisitorsTodayRequest(visitorsToday)) as VisitorCountDto;
+          if (totalResult && todayResult) {
+            setTotalVisitors(totalResult.totalVisitors || 0);
+            setVisitorsToday(todayResult.visitorsToday || 0);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }   
+      };
+    
+      fetchData();
+    }, []);
+  
+    return (
+      <>
+        <div>총 방문자 수: {totalVisitors}</div>
+        <div>오늘 방문자 수: {visitorsToday}</div>
+      </>
+    );
+  }
+
+  
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
@@ -107,6 +141,8 @@ function LeftBar({ path }: Props) {
   );
 }
 
+
+
 //                    component                    //
 export default function ServiceContainer() {
 
@@ -115,6 +151,10 @@ export default function ServiceContainer() {
     const { setLoginUserId, setLoginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
+    // const [totalCount, setTotalCount] = useState<number>(0);
+    // const [todayCount], setTodayCount] = useState<number>(0);
+  
+    
 
     //                    function                    //
     const navigator = useNavigate();
@@ -173,9 +213,7 @@ export default function ServiceContainer() {
         </div>
         <div className='right-bar'>
           <div className='footer-total-user-box'>
-            <div className=''>총 방문자: </div>
-            <div>|</div>
-            <div className=''>오늘 접속자: </div>
+            <VisitorCount />
           </div>
           <div className='customer-chat'>
             <div className=''>채팅 미구현 </div>
