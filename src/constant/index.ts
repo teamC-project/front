@@ -23,8 +23,8 @@ export const DELETE_INFO_PATH = "delete-user-info";
 
 export const ANNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const ANNOUNCEMENT_BOARD_WRITE_PATH  = "write";
-export const ANNOUNCEMENT_BOARD_DETAIL_PATH = ":aunnouncementBoardNumber";
-export const ANNOUNCEMENT_BOARD_UPDATE_PATH = "update/:aunnouncementBoardNumber";
+export const ANNOUNCEMENT_BOARD_DETAIL_PATH = ":announcementBoardNumber";
+export const ANNOUNCEMENT_BOARD_UPDATE_PATH = "update/:announcementBoardNumber";
 
 export const TREND_BOARD_PATH = "trend_board";
 export const TREND_BOARD_WRITE_PATH  = "write";
@@ -164,7 +164,7 @@ export const GET_SEARCH_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOA
 export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
-export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =  (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_announcement_view_count`;
+export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =   (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_view_count`;
 
 // description : TREND API URL PATH 
 export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/trend_board/`;

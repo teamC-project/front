@@ -12,8 +12,8 @@ export interface GetSearchAnnouncementBoardListResponseDto extends ResponseDto {
 export interface GetAnnouncementBoardResponseDto extends ResponseDto {
     announcementBoardNumber: number;
     announcementBoardTitle: string;
+		announcementBoardContents: string;
     announcementBoardWriterId: string;
     announcementBoardWriteDatetime: string;
-    announcementBoardContents: string;
     announcementBoardViewCount: number;
 }
