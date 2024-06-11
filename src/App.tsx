@@ -151,7 +151,7 @@ function App() {
     <Route path={ADVERTISEMENT_PATH} element = {<Advertisement/>}/> {/*광고 및 제휴 */}
     </Routes>
     {location.pathname !== '*' && <Footer />}
- 
+
   </>
   );
 }
