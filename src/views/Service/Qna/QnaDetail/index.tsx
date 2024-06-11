@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 import { QnaBoardCommentListItem, QnaBoardListItem } from 'src/types';
@@ -8,6 +8,7 @@ import { QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH
 import { useCookies } from 'react-cookie';
 import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest, getQnaBoardListRequest } from 'src/apis/QnaBoard';
 import { useUserStore } from 'src/stores';
+import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
 
 //                    component                    //
 export default function QnaBoardDetail() {
@@ -22,8 +23,7 @@ export default function QnaBoardDetail() {
     const [writeDatetime, setWriteDatetime] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
-    const [comment, setComment] = useState<string | null>(null);
-    const [commentList, setCommentList] = useState<QnaBoardCommentListItem[]>([]);
+    const [qnaBoardComment, setComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
 
     //                  function                    //
@@ -124,9 +124,32 @@ export default function QnaBoardDetail() {
     };
 
     //                   event handler                    //
+		const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+			if (status || loginUserRole !== "ROLE_ADMIN") return;
+			const qnaBoardComment = event.target.value;
+			setComment(qnaBoardComment);
+	
+			const commentRows = qnaBoardComment.split("\n").length;
+			setCommentRows(commentRows);
+		};
     const handleGoToList = () => {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
     };
+
+		const onCommentSubmitClickHandler = () => {
+			if (!qnaBoardComment || !qnaBoardComment.trim()) return;
+			if (
+				!qnaBoardNumber ||
+				loginUserRole !== "ROLE_ADMIN" ||
+				!cookies.accessToken
+			)
+				return;
+	
+			const requestBody: PostQnaBoardCommentRequestDto = { qnaBoardComment };
+			postQnaBoardCommentRequest(qnaBoardNumber, requestBody, cookies.accessToken).then(
+				postQnaBoardCommentResponse
+			);
+		};
     
     const onUpdateClickHandler = () => {
         if (!qnaBoardNumber || loginUserId !== writerId) return;
@@ -164,19 +187,38 @@ export default function QnaBoardDetail() {
 										<div className="qna-detail-information2">접수 상태 {status}</div>
                     <div className="qna-detail-information3">작성일 {writeDatetime}</div>
                     <div className="qna-detail-information4">조회수 {viewCount}</div>
-										{loginUserId === writerId && (
-                    <>
-                        <div className="qna-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-                        <div className="qna-detail-information5" onClick={onUpdateClickHandler}>
-                        수정
-                        </div>
-                    </>
-                    )}
                 </div>
             </div>
             <div className="qna-detail-view">
                 {contents}
             </div>
+						{loginUserRole === "ROLE_ADMIN" && !status && (
+						<div className='qna-detail-comment-write-box'>
+							<div className='qna-detail-comment-textarea-box'>
+								<textarea 
+									className='qna-detail-comment-textarea'
+									placeholder='답글을 작성 해주세요.'
+									value = {qnaBoardComment === null ? "" : qnaBoardComment}
+								onChange={onCommentChangeHandler}
+								/>
+							</div>
+							<div className='primary-button' onClick = {onCommentSubmitClickHandler}>답글달기</div>
+						</div>
+					)}
+				{status && (
+        <div className="qna-detail-comment-box">
+          <div className="primary-bedge">답변</div>
+          <div className="qna-detail-comment">{qnaBoardComment}</div>
+        </div>
+      )}
+			{loginUserId === writerId && (
+				<div className='qna-detail-owner-button-box'>
+				{!status && (
+					<div className='second-button' onClick={onUpdateClickHandler}>수정</div>
+				)}
+				<div className='error-button' onClick={onDeleteButtonClickHandler}>삭제</div>
+			</div>
+			)}
             <div className="qna-detail-go-to-qnaList" onClick={handleGoToList}>
                 목록으로
             </div>
