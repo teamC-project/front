@@ -11,6 +11,7 @@ import './style.css';
 // Define the interface to include the originalDesignerBoardCommentWriterId
 interface DesignerBoardCommentListItemWithOriginal extends DesignerBoardCommentListItem {
     originalDesignerBoardCommentWriterId: string;
+    designerBoardCommentDatetime: string;
 }
 
 //                    component                    //
