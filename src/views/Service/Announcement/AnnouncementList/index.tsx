@@ -1,24 +1,24 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
-import { AnnouncementBoardListItem } from 'src/types';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, COUNT_PER_PAGE,COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
-import { useCookies } from 'react-cookie';
+import { AnnouncementBoardListItem } from 'src/types';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { GetAnnouncementBoardListResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
+import { useCookies } from 'react-cookie';
+import { GetAnnouncementBoardListResponseDto, GetAnnouncementBoardResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
 
 //                    component                    //
 function ListItem ({
   announcementBoardNumber,
-	announcementBoardTitle ,
-	announcementBoardWriterId, 
-	announcementBoardWriteDatetime, 
-	announcementBoardViewCount
-  }: AnnouncementBoardListItem) {
+  announcementBoardTitle,
+  announcementBoardWriterId,
+  announcementBoardWriteDatetime,
+  announcementBoardViewCount
+}: AnnouncementBoardListItem) {
 
-      //              function              //
+  //              function              //
   const navigator = useNavigate();
 
   //              event handler              //
@@ -28,18 +28,19 @@ function ListItem ({
   return (
     <div className='announcementboard-list-table-tr' onClick={onClickHandler}>
       <div className='announcementboard-list-table-number'>{announcementBoardNumber}</div>
-      <div className='announcementboard-list-table-title' style={{ textAlign:'left' }}>{announcementBoardTitle}</div>
+      <div className='announcementboard-list-table-title'>{announcementBoardTitle}</div>
       <div className='announcementboard-list-table-writer-id'>{announcementBoardWriterId}</div>
-      <div className='announcementboard-list-table-write-datetime'>{announcementBoardWriteDatetime}</div>
+      <div className='announcementboard-list-table-write-date'>{announcementBoardWriteDatetime}</div>
       <div className='announcementboard-list-table-viewcount'>{announcementBoardViewCount}</div>
     </div>
   );
 }
-//										component										//
+
+//                    component                    //
 export default function AnnouncementBoardList() {
 
   //                    state                    //
-  const {loginUserRole} = useUserStore();
+  const { loginUserRole } = useUserStore();
   const [cookies] = useCookies();
   const [announcementBoardList, setAnnouncementBoardList] = useState<AnnouncementBoardListItem[]>([]);
   const [viewList, setViewList] = useState<AnnouncementBoardListItem[]>([]);
@@ -50,13 +51,14 @@ export default function AnnouncementBoardList() {
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
   const [searchWord, setSearchWord] = useState<string>('');
+  const [isSearched, setIsSearched] = useState<boolean>(false);
 
   //                    function                    //
   const navigator = useNavigate();
 
   const changePage = (announcementBoardList: AnnouncementBoardListItem[], totalLength: number) => {
-		if (!currentPage) return;
-    const startIndex = (currentPage -1) * COUNT_PER_PAGE;
+    if (!currentPage) return;
+    const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = announcementBoardList.slice(startIndex, endIndex);
@@ -65,7 +67,7 @@ export default function AnnouncementBoardList() {
 
   const changeSection = (totalPage: number) => {
     if (!currentSection) return;
-    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION -1);
+    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
     let endPage = currentSection * COUNT_PER_SECTION;
     if (endPage > totalPage) endPage = totalPage;
     const pageList: number[] = [];
@@ -74,10 +76,7 @@ export default function AnnouncementBoardList() {
   };
 
   const changeAnnouncementBoardList = (announcementBoardList: AnnouncementBoardListItem[]) => {
-
-		setAnnouncementBoardList(announcementBoardList);
-
-  const totalLength = announcementBoardList.length;
+    const totalLength = announcementBoardList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -91,33 +90,31 @@ export default function AnnouncementBoardList() {
     changeSection(totalPage);
   };
 
-
-  const getAnnouncementBoardListResponse = (result: GetAnnouncementBoardListResponseDto | ResponseDto | null) => {
+  const getAnnouncementBoardResponse = (result: GetAnnouncementBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-      if (!result || result.code !== 'SU') {
-        alert(message);
-        if (result?.code === 'AF') navigator(MAIN_PATH);
-        return;
-      }
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      if (result?.code === 'AF') navigator(MAIN_PATH);
+      return;
+    }
 
-      const { announcementBoardList } = result as GetAnnouncementBoardListResponseDto;
-      changeAnnouncementBoardList(announcementBoardList);
+    const { announcementBoardList } = result as GetAnnouncementBoardListResponseDto;
+    changeAnnouncementBoardList(announcementBoardList);
 
-      setCurrentPage(!announcementBoardList.length ? 0 : 1);
-      setCurrentSection(!announcementBoardList.length ? 0 : 1);
+    setCurrentPage(!announcementBoardList.length ? 0 : 1);
+    setCurrentSection(!announcementBoardList.length ? 0 : 1);
   };
 
   const getSearchAnnouncementBoardListResponse = (result: GetSearchAnnouncementBoardListResponseDto | ResponseDto | null) => {
-
-    const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '검색어를 입력하세요.' :
-    result.code === 'AF' ? '인증에 실패했습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '검색어를 입력하세요.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -126,10 +123,20 @@ export default function AnnouncementBoardList() {
     }
 
     const { announcementBoardList } = result as GetSearchAnnouncementBoardListResponseDto;
-    changeAnnouncementBoardList(announcementBoardList);
+    const updatedAnnouncementBoardList = announcementBoardList.map(item => ({
+      ...item,
+      announcementBoardViewCount: item.announcementBoardViewCount || 0,
+    }));
+    setAnnouncementBoardList(updatedAnnouncementBoardList);
+    changeAnnouncementBoardList(updatedAnnouncementBoardList);
+    changePage(updatedAnnouncementBoardList, updatedAnnouncementBoardList.length);
+    setCurrentPage(!updatedAnnouncementBoardList.length ? 0 : 1);
+    setCurrentSection(!updatedAnnouncementBoardList.length ? 0 : 1);
+    setIsSearched(false);
+  };
 
-    setCurrentPage(!announcementBoardList.length ? 0 : 1);
-    setCurrentSection(!announcementBoardList.length ? 0 : 1);
+  const fetchAnnouncementBoardList = () => {
+    getSearchAnnouncementBoardListRequest('', cookies.accessToken).then(getAnnouncementBoardResponse);
   };
 
   //                    event handler                    //
@@ -138,14 +145,15 @@ export default function AnnouncementBoardList() {
     navigator(ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
-  const  onPageClickHandler = (page: number) => {
+  const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
+    changePage(announcementBoardList, totalLength);
   };
 
   const onPreSectionClickHandler = () => {
     if (currentSection <= 1) return;
-    setCurrentSection(currentSection -1);
-    setCurrentPage((currentSection -1) * COUNT_PER_SECTION);
+    setCurrentSection(currentSection - 1);
+    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
   };
 
   const onNextSectionClickHandler = () => {
@@ -154,22 +162,36 @@ export default function AnnouncementBoardList() {
     setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
   };
 
-
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
+    if (!searchWord) {
+      setIsSearched(false);
+      fetchAnnouncementBoardList(); 
+    }
   };
 
   const onSearchButtonClickHandler = () => {
-    if (!searchWord) return;
+    if (!searchWord) {
+      setIsSearched(false); 
+      fetchAnnouncementBoardList();
+      return; 
+    }
     if (!cookies.accessToken) return;
-
-    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(
-			// getSearchAnnouncementBoardListResponse
-		);
+    setIsSearched(true);
+    getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
   };
 
-  //                    effect                    /
+  const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') onSearchButtonClickHandler();
+  };
+
+  //                    effect                    //
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    fetchAnnouncementBoardList();
+  }, [cookies.accessToken]);
+
   useEffect(() => {
     if (!announcementBoardList.length) return;
     changePage(announcementBoardList, totalLength);
@@ -180,32 +202,34 @@ export default function AnnouncementBoardList() {
     changeSection(totalPage);
   }, [currentSection]);
 
-  // useEffect(() => {
-  //   if (!cookies.accessToken) return;
-  //   getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
-  // },[])
-
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='announcementboard-list-wrapper'>
       <div className='announcementboard-list-search-box'>
+        <div className='announcementboard-list-search-keyword'>검색 키워드</div>
         <div className='announcementboard-list-search-input-box'>
-          <input className='announcementboard-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+          <input
+            className='announcementboard-list-search-input'
+            placeholder='검색어를 입력하세요.'
+            value={searchWord}
+            onChange={onSearchWordChangeHandler}
+            onKeyDown={onSearchInputKeyDown}
+          />
         </div>
-        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+        <div className='announcementboard-list-search-input-button' onClick={onSearchButtonClickHandler}>
+          검색
+        </div>
       </div>
       <div className='announcementboard-list-table'>
         <div className='announcementboard-table-th'>
-          <div className='announcementboard-list-table-reception-number'>게시물 번호</div>
+          <div className='announcementboard-list-table-reception-number'>접수번호</div>
           <div className='announcementboard-list-table-title'>제목</div>
           <div className='announcementboard-list-table-writer-id'>작성자</div>
-          <div className='announcementboard-list-table-write-datetime'>작성일</div>
+          <div className='announcementboard-list-table-write-date'>작성일</div>
           <div className='announcementboard-list-table-viewcount'>조회수</div>
         </div>
-        {viewList.map((item) => (
-				<ListItem {...item} />
-			))}
+        {viewList.map(item => <ListItem key={item.announcementBoardNumber} {...item} />)}
       </div>
       <div className='announcementboard-list-bottom'>
         <div style={{ width: '299px' }}></div>
@@ -214,18 +238,18 @@ export default function AnnouncementBoardList() {
           <div className='announcementboard-list-page-box'>
             {pageList.map(page => 
               page === currentPage ? 
-              <div className='announcementboard-list-page-active'>{page}</div> :
-              <div className='announcementboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+              <div key={page} className='announcementboard-list-page-active'>{page}</div> :
+              <div key={page} className='announcementboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
-            </div>
-						<div className='announcemenboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+          </div>
+          <div className='announcementboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {loginUserRole === 'ROLE_ADMIN' && (
-          <div className='announcemenboard-list-write-button' onClick={onWriteButtonClickHandler}>
+          <div className='announcementboard-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
           </div>
         )}
-        </div>
       </div>
+    </div>
   );
 }
