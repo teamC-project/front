@@ -17,7 +17,7 @@ function ListItem ({
   customerBoardWriterId,
   customerBoardWriteDatetime,
   customerBoardViewCount,
-  customerBoardIsSecret
+  secret
 }: CustomerBoardListItem) {
 
   //              function              //
@@ -27,7 +27,7 @@ function ListItem ({
   //              event handler              //
   const isCustomer = loginUserRole === 'ROLE_CUSTOMER';
   const isNotAuthor = isCustomer && (loginUserId !== customerBoardWriterId);
-  const isSecretPost = customerBoardIsSecret && isNotAuthor;
+  const isSecretPost = secret && isNotAuthor;
 
   const onClickHandler = () => {
     if (isSecretPost) {

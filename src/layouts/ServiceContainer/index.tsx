@@ -12,20 +12,23 @@ import { VisitorCountDto } from 'src/apis/loginLog/dto/response';
 
 //                   component                   //
 function VisitorCount() {
-  function VisitorCount() {
     const [totalVisitors, setTotalVisitors] = useState<number>(0);
     const [visitorsToday, setVisitorsToday] = useState<number>(0);
   
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const totalResult = await getTotalVisitorsRequest(totalVisitors);
-          const todayResult = await getVisitorsTodayRequest(visitorsToday);
-            setTotalVisitors(totalResult);
-            setVisitorsToday(todayResult);
-        } 
+          const totalResult = (await getTotalVisitorsRequest(totalVisitors)) as VisitorCountDto;
+          const todayResult = (await getVisitorsTodayRequest(visitorsToday)) as VisitorCountDto;
+          if (totalResult && todayResult) {
+            setTotalVisitors(totalResult.totalVisitors || 0);
+            setVisitorsToday(todayResult.visitorsToday || 0);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }   
       };
-  
+    
       fetchData();
     }, []);
   

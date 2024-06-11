@@ -66,37 +66,37 @@ export default function CustomerDetail() {
         const message = 
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패 했습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
         result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
-            if (result?.code === 'AF') {
-                navigator(MAIN_PATH);
-                return;
-            }
             navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
-        const { customerBoardTitle: title,
-          customerBoardWriterId: writerId,
-          customerBoardWriteDatetime: writeDatetime,
-          customerBoardViewCount: viewCount,
-          customerBoardContents: contents,
-          customerBoardComment: comment,
-          customerBoardIsSecret: isSecret } = result as GetCustomerBoardResponseDto;
+        const { customerBoardTitle,
+          customerBoardWriterId,
+          customerBoardWriteDatetime,
+          customerBoardViewCount,
+          customerBoardContents,
+          customerBoardComment,
+          secret } = result as GetCustomerBoardResponseDto;
 
-          
+        if (secret && loginUserRole === 'ROLE_CUSTOMER' && (customerBoardWriterId !== loginUserId)) {
+          alert('권한이 없습니다.');
+          navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
+          return;
+        }
 
-        setTitle(title);
-        setWriterId(writerId);
-        setWriteDate(writeDatetime);
-        setViewCount(viewCount);
-        setContents(contents);
-        setComment(comment);
-        setIsSecret(isSecret);
+        setTitle(customerBoardTitle);
+        setWriterId(customerBoardWriterId);
+        setWriteDate(customerBoardWriteDatetime);
+        setViewCount(customerBoardViewCount);
+        setContents(customerBoardContents);
+        setComment(customerBoardComment);
+        setIsSecret(secret);
     };
 
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
