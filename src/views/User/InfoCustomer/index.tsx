@@ -3,12 +3,13 @@ import "./style.css";
 import SelectBox from 'src/components/Selectbox';
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { CustomerInfoResponseDto, DesignerInfoResponseDto, SignInResponseDto } from 'src/apis/auth/dto/response';
+import { getSignInUserRequest } from 'src/apis/user';
 
 //                     interface                       //
 interface Props {
@@ -59,6 +60,10 @@ setAge(age);
 };
 
   //                     event handler                     //
+  const onInfoCUstomerUpdateClickHandler = () => {
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH)
+  }
+  
   const onAgeChangeHandler = (age: string) => {
     setAge(age);
   };
@@ -73,19 +78,29 @@ setAge(age);
     setGenderMessage(genderMessage);
   };
 
-  const onInfoCUstomerUpdateClickHandler = () => {
-    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH)
-  }
 
   //                     effect                     //
   useEffect(() => {
+    if (!cookies.accessToken || !loginUserRole) return;
+
     if (loginUserRole !== 'ROLE_CUSTOMER') {
-      if (!cookies.accessToken) return;
-      if (!loginUserRole) return;
       navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
       return;
     }
-  }, [loginUserRole]);
+
+    getSignInUserRequest(cookies.accessToken)
+      .then(getInfoUpdate);
+  }, [loginUserRole, cookies.accessToken]);
+
+  // useEffect(() => {
+  //   if (!cookies.accessToken || !loginUserRole) return;
+  //   if (loginUserRole !== 'ROLE_CUSTOMER') {
+  //     if (!cookies.accessToken) return;
+  //     if (!loginUserRole) return;
+  //     navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
+  //     return;
+  //   }
+  // }, [loginUserRole]);
 
   //                     render                     //
   return (
@@ -99,7 +114,7 @@ setAge(age);
           <div className='customer-id'>아이디</div>
           <div className='customer-id-container'>
             <div className='id-input-box'>
-              <div className='customer-id-info'>asd</div>
+              <div className='customer-id-info'>{loginUserId}</div>
             </div>
           </div>
         </div>
@@ -107,10 +122,10 @@ setAge(age);
           <div className='info-customer-text'>성별</div>
           <div className='info-customer-next-box'>
             <div className='info-customer-radio-box'>
-              <InputBox label={'MALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+              <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
             </div>
             <div className='info-customer-radio-box'>
-              <InputBox label={'FEMALE'} type={'radio'} value={gender} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} />
+            <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
             </div>
           </div>
         </div>

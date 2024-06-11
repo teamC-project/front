@@ -16,4 +16,5 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userAge: string;
   userCompanyName: string;
   userImage: string;
+  userRole: string;
 }
