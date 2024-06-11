@@ -30,6 +30,10 @@ function Top({ path }: Props) {
       navigator(MY_PAGE_ABSOLUTE_PATH);
   };
 
+    const onMainPageClickHandler = () => {
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+  };
+
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         navigator(MAIN_PATH);
@@ -38,7 +42,7 @@ function Top({ path }: Props) {
   //                    render                       //
   return (
     <div className='top-group'>
-      <div className='top-logo'></div>
+      <div className='top-logo' onClick={onMainPageClickHandler}></div>
       <div className='top-bar-title'>{ path }</div>
       <div className='top-bar-service'>
         <div className='third-button' >{loginUserId} 님 환영합니다. </div>
@@ -157,26 +161,27 @@ export default function ServiceContainer() {
 
     }, [cookies.accessToken]);
 
-    //                    render                       //
-    return (
-        <div id='full'>
-            <Top path={path} />
-            <LeftBar path={path} />
-            <div className='center-bar'>
-                <Outlet />
-            </div>
-                <div className='right-bar'>
-                    <div className='customer-chat'>
-                    <div className='footer-total-user-box'>
-                      <div className=''>총 방문자: </div>
-                      <div>|</div>
-                      <div className=''>오늘 접속자: </div>
-                    </div>
-                      <div className=''>
-                        채팅 미구현
-                      </div>
-                    </div>
-                </div>
+  //                    render                       //
+  return (
+    <div id='full'>
+      <Top path={path} />
+
+      <div className='service-unber-box'>
+        <LeftBar path={path} />
+        <div className='center-bar'>
+          <Outlet />
         </div>
-    );
+        <div className='right-bar'>
+          <div className='footer-total-user-box'>
+            <div className=''>총 방문자: </div>
+            <div>|</div>
+            <div className=''>오늘 접속자: </div>
+          </div>
+          <div className='customer-chat'>
+            <div className=''>채팅 미구현 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
