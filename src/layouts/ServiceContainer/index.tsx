@@ -115,6 +115,10 @@ export default function ServiceContainer() {
     const { setLoginUserId, setLoginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
+    // const [totalCount, setTotalCount] = useState<number>(0);
+    // const [todayCount], setTodayCount] = useState<number>(0);
+  
+    
 
     //                    function                    //
     const navigator = useNavigate();
@@ -173,9 +177,8 @@ export default function ServiceContainer() {
         </div>
         <div className='right-bar'>
           <div className='footer-total-user-box'>
-            <div className=''>총 방문자: </div>
-            <div>|</div>
-            <div className=''>오늘 접속자: </div>
+            {/* <div className=''>총 방문자: {totalCount} </div> */}
+            {/* <div className=''>오늘 접속자: {todayCount} </div> */}
           </div>
           <div className='customer-chat'>
             <div className=''>채팅 미구현 </div>
