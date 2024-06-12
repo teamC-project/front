@@ -40,14 +40,14 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -56,7 +56,7 @@ export default function InfoDesigner() {
     const { userId, userGender, userAge, userCompanyName, userImage } = result as DesignerInfoResponseDto;
     if (userId !== loginUserId) {
       alert('권한이 없습니다.');
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     setGender(userGender);
@@ -70,14 +70,14 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     setImage(image);
@@ -101,7 +101,7 @@ export default function InfoDesigner() {
         userAge: age,
         userImage: userImage
       };
-      
+
       updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
       alert('개인정보가 업데이트되었습니다.');
       navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
@@ -185,14 +185,10 @@ export default function InfoDesigner() {
             <div className='info-designer-text'>성별</div>
             <div className='info-designer-next-box'>
               <div className='info-designer-radio-box'>
-                <input type='radio' name='gender' value='MALE' onChange={onGenderChangeHandler} checked={gender === 'MALE'} />
-                {/* <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}
-              </div>
-              
+                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
               <div className='info-designer-radio-box'>
-                <input type='radio' name='gender' value='FEMALE' onChange={onGenderChangeHandler} checked={gender === 'FEMALE'} />
-                {/* <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} message={genderMessage} onChangeHandler={onGenderChangeHandler} /> */}
-              </div>
+                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+
             </div>
           </div>
 
