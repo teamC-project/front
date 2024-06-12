@@ -50,6 +50,8 @@ export default function InfoCustomer() {
   return;
   }
 
+
+  
 const { userId, userGender, userAge} = result as CustomerInfoResponseDto;
 if (userId !== loginUserId) {
 alert('권한이 없습니다.');
