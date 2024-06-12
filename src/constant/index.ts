@@ -179,13 +179,16 @@ export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/t
 export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}write`;
 export const GET_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}`;
 export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}search`;
-export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;
-export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;
-export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}`;
-export const PATCH_TREND_BOARD_LIKE_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}/like_count`;
-export const POST_TREND_BOARD_COMMENT_WRITE_URL =(trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}/comment`;
-export const PUT_TREND_BOARD_COMMENT_PUT_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}/comment`;
-export const DELETE_TREND_BOARD_COMMENT_DELETE_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${SERVICE_PATH}/${trendBoardNumber}/comment`;
+export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
+export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
+export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}/${trendBoardNumber}`;
+export const PATCH_TREND_BOARD_LIKE_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_count`;
+export const POST_TREND_BOARD_COMMENT_WRITE_URL =(trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
+export const GET_TREND_BOARD_COMMENT_LIST_URL =  (trendBoardCommentNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment/list`
+export const PUT_TREND_BOARD_COMMENT_PUT_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
+export const DELETE_TREND_BOARD_COMMENT_DELETE_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
+export const GET_TREND_BOARD_COMMENT_URL = (trendBoardCommentNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment`;
+
 
 // description : Q&A API URL PATH
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`;
