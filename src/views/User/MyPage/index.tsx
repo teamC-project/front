@@ -21,7 +21,7 @@ export default function MyPage() {
 
   //                    event handler                    //
   const onInfoUpdatePageClickHandler = () => {
-    if( loginUserRole == 'ROLE_CUSTOMER')
+    if( loginUserRole === 'ROLE_CUSTOMER')
       navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
     else 
       navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
