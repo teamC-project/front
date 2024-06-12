@@ -241,7 +241,7 @@ export default function ServiceContainer() {
             <VisitorCount />
           </div>
           <div className='customer-chat'>
-            <div className=''>채팅 미구현 </div>
+            {/* <Chat /> */}
           </div>
         </div>
       </div>
