@@ -231,18 +231,38 @@ export default function CustomerBoardComment() {
                     <div className="customer-board-comment-list">
                         {customerBoardCommentList.map((item) => (
                             <div key={item.customerBoardCommentNumber} className='customer-board-comment-table-tr'>
-                                {item.customerBoardCommentWriterId === loginUserId && (
-                                    <div className='customer-board-comment-actions'>
-                                        <button onClick={() => onEditButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentContents, item.customerBoardCommentWriterId)}>수정</button>
-                                        <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentWriterId)}>삭제</button>
+                                {/* 상위 댓글인 경우 */}
+                                {!item.customerBoardParentCommentNumber && (
+                                    <div>
+                                        {item.customerBoardCommentWriterId === loginUserId && (
+                                            <div className='customer-board-comment-actions'>
+                                                <button onClick={() => onEditButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentContents, item.customerBoardCommentWriterId)}>수정</button>
+                                                <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentWriterId)}>삭제</button>
+                                            </div>
+                                        )}
+                                        <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
+                                        <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
+                                        <span className='customer-board-comment-actions-right' style={{ display: 'flex' }}>
+                                            <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
+                                            <button onClick={() => onReplyButtonClickHandler(item.customerBoardCommentNumber)}>대댓글</button>
+                                        </span>
+
+                                        {/* 대댓글 렌더링 로직 */}
+                                        <div className="customer-board-comment-reply-container">
+                                            {customerBoardCommentList
+                                                .filter((reply) => reply.customerBoardParentCommentNumber === item.customerBoardCommentNumber)
+                                                .map((reply) => (
+                                                    <div key={reply.customerBoardCommentNumber} className="customer-board-comment-reply">
+                                                        <div className="customer-board-comment-author">
+                                                            {item.customerBoardCommentWriterId}: {reply.customerBoardCommentContents}
+                                                        </div>
+                                                        {/* ... 기타 대댓글 관련 로직 ... */}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
                                 )}
-                                <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
-                                <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
-                                <span className='customer-board-comment-actions-right' style={{ display: 'flex' }}>
-                                    <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
-                                    <button onClick={() => onReplyButtonClickHandler(item.customerBoardCommentNumber)}>대댓글</button>
-                                </span> 
+
                                 {editingCommentNumber === item.customerBoardCommentNumber && (
                                     <div className="customer-board-comment-update">
                                         <textarea
@@ -265,22 +285,6 @@ export default function CustomerBoardComment() {
                                             placeholder="대댓글을 입력하세요"
                                         />
                                         <button className='customer-board-comment-primary-button' onClick={() => onPostReplyButtonClickHandler(item.customerBoardCommentNumber)}>작성</button>
-                                    </div>
-                                )}
-                                {item.customerBoardParentCommentNumber && (
-                                    <div className="customer-board-comment-reply-indicator">
-                                        대댓글: {item.customerBoardParentCommentNumber}번 댓글에 대한 답글
-                                    </div>
-                                )}
-                                {item.customerBoardParentCommentNumber && (
-                                    <div className="customer-board-comment-reply-container">
-                                        <div className="customer-board-comment-reply">
-                                            <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
-                                            <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
-                                            <div className='customer-board-comment-actions-right'>
-                                                <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
-                                            </div>
-                                        </div>
                                     </div>
                                 )}
                             </div>
