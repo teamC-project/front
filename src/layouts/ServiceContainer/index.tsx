@@ -9,6 +9,7 @@ import useUserStore from "src/stores/use.store";
 import ResponseDto from 'src/apis/response.dto';
 import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
 import { VisitorCountDto } from 'src/apis/loginLog/dto/response';
+import Chat from 'src/components/Chat';
 
 //                   component                   //
 function VisitorCount() {
@@ -216,7 +217,7 @@ export default function ServiceContainer() {
             <VisitorCount />
           </div>
           <div className='customer-chat'>
-            <div className=''>채팅 미구현 </div>
+            <Chat />
           </div>
         </div>
       </div>
