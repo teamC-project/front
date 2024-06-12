@@ -25,7 +25,13 @@ function ListItem({
     <div className='qna-board-list-table-tr' onClick={onClickHandler}>
       <div className='qna-board-list-table-number'>{qnaBoardNumber}</div>
       <div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
-			<div className='qna-board-list-table-status'>{qnaBoardStatus}</div>
+			<div className='qna-board-list-table-status'>
+			{qnaBoardStatus ? (
+          <div className="disable-bedge">완료</div>
+        ) : (
+          <div className="primary-bedge">접수</div>
+        )}
+			</div>
       <div className='qna-board-list-table-writer-id'>{qnaBoardWriterId}</div>
       <div className='qna-board-list-table-write-date'>{qnaBoardWriteDatetime}</div>
       <div className='qna-board-list-table-viewcount'>{qnaBoardViewCount}</div>
@@ -180,7 +186,7 @@ export default function QnaBoardList() {
   const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') onSearchButtonClickHandler();
   };
-
+		//										effect										// 
   useEffect(() => {
     if (!cookies.accessToken) return;
     fetchQnaBoardList();
@@ -196,6 +202,7 @@ export default function QnaBoardList() {
     changeSection(totalPage);
   }, [currentSection]);
 
+	//                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='qna-board-list-wrapper'>

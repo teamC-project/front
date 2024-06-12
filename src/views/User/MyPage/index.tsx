@@ -1,7 +1,9 @@
 import React from 'react'
 import "./style.css";
 import { Path, useNavigate } from 'react-router';
-import { DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH, UPDATE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { useStore } from 'zustand';
+import { useUserStore } from 'src/stores';
 
 //                    interface                    //
 interface Props {
@@ -12,14 +14,17 @@ interface Props {
 export default function MyPage() {
 
   //                    state                    //
-
+  const { loginUserRole } = useUserStore();
 
   //                    function                    //
   const navigator = useNavigate();
 
   //                    event handler                    //
-  const onInfoCustomerClickHandler = () => {
-    navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
+  const onInfoUpdatePageClickHandler = () => {
+    if( loginUserRole === 'ROLE_CUSTOMER')
+      navigator(UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH);
+    else 
+      navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
   };
 
   const onUpdatePasswordClickHandler = () => {
@@ -35,7 +40,7 @@ export default function MyPage() {
     <div id='mypage-wrapper'>
       <div className='john'></div>
       <div className='mypage'>
-          <div className='information' onClick={onInfoCustomerClickHandler}>
+          <div className='information' onClick={onInfoUpdatePageClickHandler}>
             <div className='information-image'></div>
             <div className='edit-personal-information'>개인정보수정</div>
           </div>

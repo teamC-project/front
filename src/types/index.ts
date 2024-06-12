@@ -23,6 +23,13 @@ export interface TrendBoardListItem {
 	trendBoardThumbNailImage : string;
 }
 
+export interface TrendBoardCommentListItem {
+	trendBoardCommentNumber : number;
+	trendBoardCommentWriterId : string;
+	trendBoardCommentContents : string;
+	trendBoardCommentDatetime : string;
+}
+
 export interface CustomerBoardListItem {
 	customerBoardNumber : number;
 	customerBoardStatus : boolean;

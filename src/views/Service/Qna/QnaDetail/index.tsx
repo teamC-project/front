@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
-import { QnaBoardCommentListItem, QnaBoardListItem } from 'src/types';
 import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest, getQnaBoardListRequest } from 'src/apis/QnaBoard';
+import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest } from 'src/apis/QnaBoard';
 import { useUserStore } from 'src/stores';
 import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
 
@@ -184,7 +183,6 @@ export default function QnaBoardDetail() {
             <div className="qna-detail-container">
                 <div className="qna-detail-information">
                     <div className="qna-detail-information1">작성자 {writerId}</div>
-										<div className="qna-detail-information2">접수 상태 {status}</div>
                     <div className="qna-detail-information3">작성일 {writeDatetime}</div>
                     <div className="qna-detail-information4">조회수 {viewCount}</div>
                 </div>

@@ -56,7 +56,7 @@ export const increaseAnnouncementBoardViewCountRequest = async(announcementBoard
 
 // function : 공지사항 게시물 삭제 API 함수 
 export const deleteAnnouncementBoardRequest = async(announcementBoardNumber : number | string, accessToken : string) => {
-	const result = await axios.get(DELETE_ANNOUCEMENT_BOARD_DELETE_URL(announcementBoardNumber), bearerAuthorization(accessToken))
+	const result = await axios.delete(DELETE_ANNOUCEMENT_BOARD_DELETE_URL(announcementBoardNumber), bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
 	.catch(requestErrorHandler);
 	return result;
