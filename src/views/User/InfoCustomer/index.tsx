@@ -41,7 +41,7 @@ export default function InfoCustomer() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -49,7 +49,7 @@ export default function InfoCustomer() {
     const { userId, userGender, userAge } = result as CustomerInfoResponseDto;
     if (userId !== loginUserId) {
       alert('권한이 없습니다.');
-      navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
