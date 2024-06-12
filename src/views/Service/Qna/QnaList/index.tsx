@@ -186,7 +186,7 @@ export default function QnaBoardList() {
   const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') onSearchButtonClickHandler();
   };
-
+		//										effect										// 
   useEffect(() => {
     if (!cookies.accessToken) return;
     fetchQnaBoardList();
@@ -202,6 +202,7 @@ export default function QnaBoardList() {
     changeSection(totalPage);
   }, [currentSection]);
 
+	//                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='qna-board-list-wrapper'>
