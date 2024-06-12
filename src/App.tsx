@@ -38,8 +38,6 @@ import InfoCustomer from "./views/User/InfoCustomer";
 import InfoDesigner from "./views/User/InfoDesigner";
 import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
-import InfoDeleteCustomer from "./views/User/InfoDeleteCustomer";
-import InfoDeleteDesigner from "./views/User/InfoDeleteDesigner";
 
 import MailContect from "./layouts/MailContect";
 import TermsAndConditions from "./layouts/TermsAndConditions";
@@ -48,6 +46,7 @@ import SiteDescription from "./layouts/SiteDescription";
 import YouthProtectionPolicy from "./layouts/YouthProtectionPolicy";
 import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
+import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
 
 
@@ -105,8 +104,7 @@ function App() {
       <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
       <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={UPDATE_PASSWORD_PATH} element={<CustomerUpdate />} />
-      <Route path={DELETE_INFO_PATH} element={<InfoDeleteCustomer />} />
-      <Route path={DELETE_INFO_PATH} element={<InfoDeleteDesigner />} />
+      <Route path={DELETE_INFO_PATH} element={<InfoDeleteUser />} />
       </Route>
       
       <Route path={ANNOUNCEMENT_BOARD_PATH} >
