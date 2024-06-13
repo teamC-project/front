@@ -9,27 +9,14 @@ import ResponseDto from 'src/apis/response.dto';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
 import { customerSignUpRequest, designerSignUpRequest, emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest } from 'src/apis/auth';
+import AuthTopBar from 'src/components/authTopBar';
+import { useSnsStore } from 'src/stores';
+import { useSearchParams } from 'react-router-dom';
 
 export function Main() {
-
-//                  function                 //
-  const navigator = useNavigate();
-//                event handler               //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
   return (
     <div id='main-page-wrapper'>
-
-      <div className='auth-top-bar'>
-        <div></div>
-        
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
-      </div>
-
+      <AuthTopBar />
       <div className='auth-under-bar'>
           <div className='main-page-image-box'>
             <div className='main-page-title-image'></div>
@@ -147,21 +134,19 @@ export function SignIn() {
     signInRequest(requestBody).then(signInResponse);
   };
 
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
+  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+    window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
+  };
+
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
+
 
 
   //                    render                    //
   return (
     <div id='auth-wrapper'>
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
-      </div>
+      <AuthTopBar />
 
       <div className='sign-in-main-box'>
         <div className='image-box'></div>
@@ -188,8 +173,8 @@ export function SignIn() {
               </div>
 
               <div className='socal-login'>
-                <div className='kakao-login'></div>
-                <div className='naver-login'></div>
+                <div className='kakao-login' onClick={() => onSnsButtonClickHandler('kakao')}></div>
+                <div className='naver-login' onClick={() => onSnsButtonClickHandler('naver')}></div>
               </div>
 
               <div className="short-divider"></div>
@@ -213,6 +198,8 @@ export function SignIn() {
 export function ChooseSingUp() {
 
   //                    state                  //
+  const { snsId, joinPath, setValue } = useSnsStore();
+  const [ params ] = useSearchParams();
 
   //                  function                 //
   const navigator = useNavigate();
@@ -221,22 +208,24 @@ export function ChooseSingUp() {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
   };
 
-const onClickMainHandler = () => navigator(MAIN_PATH);
 const onClickCustomerSignUpHandler = () => navigator(AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH);
 const onClickDesignerSignUpHandler = () => navigator(AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH);
-const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+
+useEffect(() => {
+  const snsId = params.get('snsId');
+  const joinPath = params.get('joinPath');
+  if (!snsId || !joinPath) {
+    setValue('', '');
+    return;
+  }
+  setValue(snsId, joinPath);
+}, [params])
 
 //                   render                  //
   return (
     <div id='auth-wrapper'>
 
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-        </div>
-      </div>
+      <AuthTopBar />
 
       <div className='auth-welcome-image-box'>
         <div className='auth-welcome-image'></div>
@@ -254,10 +243,13 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
         <div className='auth-type-text-designer' onClick={onClickDesignerSignUpHandler}>디자이너</div>
       </div>
 
+      {!snsId && !joinPath && (
       <div className='auth-sign-up-sns'>
         <div className='auth-sign-up-naver' onClick={() => onSnsButtonClickHandler('naver')}></div>
         <div className='auth-sign-up-kakao' onClick={() => onSnsButtonClickHandler('kakao')}></div>
       </div>
+      )}
+      
 
     </div>
   )
@@ -268,6 +260,8 @@ const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 export function CustomerSignUp() {
 
 //                      state                     //
+const { snsId, joinPath, setValue } = useSnsStore();
+
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
@@ -367,9 +361,6 @@ const signUpResponse = (result: ResponseDto | null) => {
 
 
 //                  event handler                  //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
 
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -480,7 +471,8 @@ const signUpResponse = (result: ResponseDto | null) => {
       authNumber,
       userGender: gender,
       userAge: age,
-      joinPath: 'HOME'
+      joinPath: joinPath ? joinPath : 'HOME',
+      snsId: snsId ? snsId : undefined
     };
     customerSignUpRequest(requestBody).then(signUpResponse);
   };
@@ -489,15 +481,7 @@ const signUpResponse = (result: ResponseDto | null) => {
   return (
     <div id='auth-wrapper'>
 
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
-      </div>
+<AuthTopBar />
 
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
@@ -671,9 +655,6 @@ export function DesignerSignUp() {
   };
 
 //                  event handler                  //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
 
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -807,18 +788,7 @@ export function DesignerSignUp() {
 //                      render                      //
 return (
   <div id='auth-wrapper'>
-
-    <div className='auth-top-bar'>
-      <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-
-      <div className='auth-top-right-bar'>
-        <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-        <div className='auth-top-right-bar-line'>|</div>
-        <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-      </div>
-    </div>
-
-
+    <AuthTopBar />
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
 
@@ -869,6 +839,7 @@ return (
               <SelectBox value={age} onChange={onAgeChangeHandler} />
             </div>
           </div>
+
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>업체명</div>
             <div className='auth-sign-up-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>

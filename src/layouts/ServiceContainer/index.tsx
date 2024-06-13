@@ -16,12 +16,15 @@ function VisitorCount() {
   const [totalVisitors, setTotalVisitors] = useState<number>(0);
   const [visitorsToday, setVisitorsToday] = useState<number>(0);
 
+  const [cookie] = useCookies();
+
   //                   function                  //
   const navigator = useNavigate();
 
   const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
     const message = 
     !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패하였습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
@@ -31,7 +34,6 @@ function VisitorCount() {
             return;
         }
     }
-
     const { totalVisitors } = result as getTotalVisitorsResponseDto;
     setTotalVisitors(totalVisitors);
   }
@@ -39,6 +41,7 @@ function VisitorCount() {
   const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {
     const message = 
     !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패하였습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
@@ -53,8 +56,10 @@ function VisitorCount() {
   }
   //                   effect                     //
   useEffect(() => {
-    getTotalVisitorsRequest().then(getTotalVisitorsResponse);
-    getVisitorsTodayRequest().then(getVisitorsTodayResponse);
+    const accessToken = cookie.accessToken;
+    if (!accessToken) return;
+    getTotalVisitorsRequest(accessToken).then(getTotalVisitorsResponse);
+    getVisitorsTodayRequest(accessToken).then(getVisitorsTodayResponse);
   }, []);
   //                    render                    //
   return (

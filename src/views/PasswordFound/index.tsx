@@ -4,8 +4,9 @@ import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
 import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
-import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
+import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, idCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import AuthTopBar from 'src/components/authTopBar';
 
 let globalId = '';
 
@@ -43,9 +44,6 @@ export function SettingPassword() {
   };
 
 //                    event handler                  //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -95,15 +93,7 @@ export function SettingPassword() {
   return (
     <div id='auth-wrapper'>
 
-      <div className='auth-top-bar'>
-        <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-        
-        <div className='auth-top-right-bar'>
-          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-          <div className='auth-top-right-bar-line'>|</div>
-          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-        </div>
-      </div>
+<AuthTopBar />
 
     <div className='auth-under-bar'>
       <div className='auth-left-null'></div>
@@ -147,6 +137,8 @@ const [authNumber, setAuthNumber] = useState<string>('');
 
 const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
 const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
+
+const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
 
 const [isIdCheck, setIsIdCheck] = useState<boolean>(false);
 const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
@@ -224,16 +216,22 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
     navigator(AUTH_PASSOWORD_RESET_ABSOLUTE_PATH);
   };
 //                event handler               //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
 
-  const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
-    setId(value);
-    setIsIdCheck(false);
-    setIdMessage('');
-  }
+const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const {value} = event.target;
+  setId(value);
+  setIdButtonStatus(value !=='');
+  setIsIdCheck(false);
+  setIdMessage('');
+}
+
+
+  const onIdButtonClickHandler = () => {
+    if(!idButtonStatus) return;
+
+    const requsetBody: IdCheckRequestDto = { userId: id };
+    idCheckRequest(requsetBody).then(idCheckResponse);
+  };  
 
   const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -294,18 +292,9 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
 
   //                      render                     //
   return(
-    
     <div id='auth-wrapper'>
   
-  <div className='auth-top-bar'>
-    <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-    
-    <div className='auth-top-right-bar'>
-      <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-      <div className='auth-top-right-bar-line'>|</div>
-      <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-    </div>
-  </div>
+    <AuthTopBar />
   
   <div className='auth-under-bar'>
     <div className='auth-left-null'></div>
@@ -317,7 +306,7 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
       <div className='auth-sign-up-box-text'>
 
             <div className='auth-sign-up-text'>아이디</div>
-              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} message={idMessage} error={isIdError} />
+              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='아이디 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
           </div>
 
           <div className='auth-sign-up-box-text'>

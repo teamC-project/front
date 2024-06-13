@@ -39,11 +39,11 @@ import InfoDesigner from "./views/User/InfoDesigner";
 import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
 
-import MailContect from "./layouts/MailContect";
-import TermsAndConditions from "./layouts/TermsAndConditions";
-import PersonalInfoProcessingPolicy from "./layouts/PersonalInfoProcesssingPolicy";
-import SiteDescription from "./layouts/SiteDescription";
-import YouthProtectionPolicy from "./layouts/YouthProtectionPolicy";
+import MailContect from "./views/FooterContents/MailContect";
+import TermsAndConditions from "./views/FooterContents/TermsAndConditions";
+import PersonalInfoProcessingPolicy from "./views/FooterContents/PersonalInfoProcesssingPolicy";
+import SiteDescription from "./views/FooterContents/SiteDescription";
+import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy";
 import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
