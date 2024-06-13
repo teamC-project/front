@@ -31,7 +31,6 @@ export default function DesignerDetail() {
 
     //                  function                    //
     const navigator = useNavigate();
-
     const increaseViewCountResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :

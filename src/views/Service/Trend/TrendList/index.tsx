@@ -8,7 +8,7 @@ import { useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie'
 import { GetSearchTrendBoardListResponseDto, GetTrendBoardListResponseDto } from 'src/apis/TrendBoard/dto/response'
 import ResponseDto from 'src/apis/response.dto'
-import { getSearchTrendBoardListRequest } from 'src/apis/TrendBoard'
+import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard'
 //														component														//
 function  CardItem ({
 		trendBoardNumber,
@@ -57,6 +57,7 @@ export default function TrendList() {
 	const [totalSection, setTotalSection] = useState<number>(1);
 	const [currentSection, setCurrentSection] = useState<number>(1);
 	const [isToggleOn, setToggleOn] = useState<boolean>(false);
+	const [isSearched, setIsSearched] = useState<boolean>(false);
 	const [searchWord, setSearchWord] = useState<string>('');
 
 	// 										function										// 
@@ -86,7 +87,10 @@ export default function TrendList() {
 		setTotalLength(totalLength)
 
 		const totalPage = (Math.floor(totalLength - 1) / COUNT_PER_PAGE) + 1;
-		setTotalPage(totalSection);
+		setTotalPage(totalPage);
+
+		const totalSection = Math.floor((totalPage -1) / COUNT_PER_SECTION + 1)
+		setTotalSection(totalSection);
 
 		changePage(trendBoardList, totalLength);
 
@@ -126,10 +130,22 @@ export default function TrendList() {
 		}
 
 		const {trendBoardList} = result as GetSearchTrendBoardListResponseDto;
-		changeTrendBoardList(trendBoardList);
 
+		const updatedTrendBoardList = trendBoardList.map(item => ({
+			...item,
+			trendBoardLikeCount : item.trendBoardLikeCount || 0
+		}))
+		changeTrendBoardList(trendBoardList);
+		setTrendBoardList(updatedTrendBoardList);
+		changePage(updatedTrendBoardList, updatedTrendBoardList.length)
 		setCurrentPage(!trendBoardList.length ? 0 : 1);
 		setCurrentSection(!trendBoardList.length ? 0 : 1);
+		setIsSearched(false);
+	}
+
+	const fetchTrendBoardList = () => {
+		getSearchTrendBoardListRequest('', cookies.accessToken)
+		.then(result => getTrendBoardResponse(result as GetTrendBoardListResponseDto | ResponseDto | null))
 	}
 
 	//										event handler										//
@@ -140,6 +156,7 @@ export default function TrendList() {
 
 	const onPageClickHandler = (page : number) => {
 		setCurrentPage(page);
+		changePage(trendBoardList, totalLength)
 	}
 
 	const onPreSectionClickHandler = () => {
@@ -157,16 +174,33 @@ export default function TrendList() {
 	const onSearchWordChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
 		const searchWord = event.target.value;
 		setSearchWord(searchWord);
+		if (!searchWord) {
+			setIsSearched(false);
+			getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
+		}
 	}
 
 	const onSearchButtonClickHandler = () => {
-		if(!searchWord) return;
+		if(!searchWord) {
+			setIsSearched(false);
+			getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
+			return;
+		}
 		if(!cookies.accessToken) return ;
+		setIsSearched(true);
 		getSearchTrendBoardListRequest(searchWord, cookies.accessToken)
 		.then(getSearchTrendBoardListResponse)
 	}
 
+	const onSearchInputKeyDown = (event : React.KeyboardEvent<HTMLInputElement>) => {
+		if(event.key === 'Enter') onSearchButtonClickHandler();
+	}
+
 	//										effect										// 
+	useEffect(() => {
+		if(!cookies.accessToken) return;
+		fetchTrendBoardList();
+	}, [cookies.accessToken])
 
 	useEffect(() => {
 		if(!trendBoardList.length) return ;
@@ -179,11 +213,13 @@ useEffect(() => {
 
 }, [currentSection]);
 
+
 useEffect(() => {
 	if (!cookies.accessToken) return;
-	getSearchTrendBoardListRequest(searchWord, cookies.accessToken).then
-	(getSearchTrendBoardListResponse)
-})
+	getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
+}, []);
+
+
 
 	  //                    render                    //
 		const searchButtonClass  = searchWord ? 'primary-button' : 'disable-button'
@@ -200,12 +236,12 @@ useEffect(() => {
 			</div>
 			<div className="trend-board-list-container">
 				<div className='trend-board-list'>
-			{viewList.map(item => <CardItem {...item} />)}
+			{viewList.map(item => <CardItem key = {item.trendBoardNumber} {...item} />)}
 				</div>
 			</div>
 			<div className='trend-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
-        <div className='trendboard-list-pagenation'>
+        <div className='trend-board-list-pagenation'>
           <div className='trend-board-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='trend-board-list-page-box'>
             {pageList.map(page => 
@@ -214,7 +250,11 @@ useEffect(() => {
               <div className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
             </div>
+						<div className='trend-board-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
+				{loginUserRole !== 'ROLE_ADMIN' &&(
+					<div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}></div>
+				)}
       </div>
 		</div>
 	)

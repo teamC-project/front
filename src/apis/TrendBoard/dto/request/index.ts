@@ -5,11 +5,15 @@ export interface PostTrendBoardRequestDto {
 }
 
 export interface PostTrendBoardCommentRequestDto {
-	comment : string;
+	trendBoardCommentContents : string;
 }
 
 export interface PutTrendBoardRequestDto {
 	trendBoardTitle :string;
 	trendBoardContents : string;
 	trendBoardUrlList : string;
+}
+
+export interface PutTrendBoardCommentRequestDto {
+	trendBoardCommentContents : string;
 }
