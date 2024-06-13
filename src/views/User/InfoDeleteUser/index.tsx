@@ -1,14 +1,37 @@
 import React from 'react'
 import "./style.css";
+import { useUserStore } from 'src/stores';
+import { useNavigate } from 'react-router';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
+import ResponseDto from 'src/apis/response.dto';
 
 //                     component                       //
 export default function InfoDeleteUser() {
 
   //                    state                   //
+  const {loginUserId, loginUserRole} = useUserStore();
+
+  
 
   //                  function                  //
+  // const navigator = useNavigate();
+
+  // const InfoDeleteRersponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+  //   const message =
+  //   !result? '서버에 문제가 있습니다.' :
+  //   result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+  //   result.code === 'AF' ? '인증에 실패했습니다.' :
+  //   result.code === 'NB' ? '존재하지 않는 권한입니다.' : 
+  //   result.code === 'DBE' ? '서버에 문제가 있습니다.' : '' ;
+
+  //   if(!result || result.code !== 'SU') {
+  //     alert(message);
+  //     navigator
+  //   }
+  // }
 
   //                event handler               //
+
 
   //                   render                   //
   return (
@@ -38,6 +61,11 @@ export default function InfoDeleteUser() {
             <div className='delete-account-main-detail'>- 탈퇴 후에는 동일한 아이디로 재가입 할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</div>
             <div className='delete-account-main-detail'>- 개인정보 처리 방침에 따라 불량 이용 및 제한에 관한 기록은 탈퇴 후에도 1년 동안 보관됩니다.</div>
             </div>
+          </div>
+
+          <div className='delete-agree'>
+          <input type={'checkbox'} name={'agreement'} value={'agree'} />
+          <div className='detail-agree'>안내 사항을 모두 확인하였으며, 이에 동의합니다.</div>
           </div>
 
           <div className='delete-complete-contents'>
