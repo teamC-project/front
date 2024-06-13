@@ -75,14 +75,12 @@ export default function TrendDetail() {
 			trendBoardWriterId,
 			trendBoardWriteDatetime,
 			trendBoardLikeCount,
-			trendBoardComment,
 		} = result as GetTrendBoardResponseDto;
 		setTrendBoardTitle(trendBoardTitle);
 		setTrendBoardWriterId(trendBoardWriterId);
 		setTrendBoardWriteDatetime(trendBoardWriteDatetime);
 		setTrendBoardLikeCount(trendBoardLikeCount);
 		setContents(trendBoardContents);
-		setComment(trendBoardComment);
 	}
 
 	const postTrendBoardCommentResponse = (result : ResponseDto | null) => {

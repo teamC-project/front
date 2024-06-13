@@ -20,6 +20,5 @@ import { TrendBoardCommentListItem, TrendBoardListItem } from 'src/types';
 		trendBoardWriterId  : string;
 		trendBoardWriteDatetime : string;
 		trendBoardLikeCount : string;
-		trendBoardComment : string;
 	}
 
