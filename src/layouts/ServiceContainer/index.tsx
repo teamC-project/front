@@ -70,8 +70,6 @@ function VisitorCount() {
   );
 }
 
-  
-
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
 //                    interface                    //
@@ -171,8 +169,6 @@ function LeftBar({ path }: Props) {
   );
 }
 
-
-
 //                    component                    //
 export default function ServiceContainer() {
 
@@ -181,11 +177,7 @@ export default function ServiceContainer() {
     const { setLoginUserId, setLoginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
-    // const [totalCount, setTotalCount] = useState<number>(0);
-    // const [todayCount], setTodayCount] = useState<number>(0);
   
-    
-
     //                    function                    //
     const navigator = useNavigate();
 
@@ -201,11 +193,9 @@ export default function ServiceContainer() {
             navigator(AUTH_ABSOLUTE_PATH);
             return;
         }
-
         const { userId, userRole } = result as GetSignInUserResponseDto;
         setLoginUserId(userId);
         setLoginUserRole(userRole);
-
     };
 
     //                    effect                    //
@@ -216,19 +206,15 @@ export default function ServiceContainer() {
             pathname === CUSTOMER_BOARD_LIST_ABSOLUTE_PATH ? '고객 게시판' :
             pathname === DESIGNER_BOARD_LIST_ABSOLUTE_PATH ? '디자이너 게시판' :
             pathname === QNA_BOARD_LIST_ABSOLUTE_PATH ? 'Q&A 게시판' : '';
-
         setPath(path);
     }, [pathname]);
 
     useEffect(() => {
-
         if (!cookies.accessToken) {
             navigator(AUTH_ABSOLUTE_PATH);
             return;
         }
-
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-
     }, [cookies.accessToken]);
 
   //                    render                       //

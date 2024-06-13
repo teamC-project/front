@@ -49,30 +49,6 @@ export function Sns() {
   return <></>;
 }
 
-//           interface           //
-interface SnsContainerProps {
-  title: string;
-}
-
-// component //
-function SnsContainer({ title }: SnsContainerProps) {
-
-  // event handler // 
-  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-    window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
-  };
-  //           render           //
-  return (
-    <div className="authentication-sns-container">
-      <div className="sns-container-title label">{title}</div>
-      <div className="sns-button-container">
-        <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
-        <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
-      </div>
-    </div>
-  );
-};
-
 //                    component                    //
 export function SignIn() {
 
@@ -141,8 +117,6 @@ export function SignIn() {
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
-
-
   //                    render                    //
   return (
     <div id='auth-wrapper'>
@@ -191,8 +165,6 @@ export function SignIn() {
     </div>
   )
 }
-
-
 
 //                 component                 //
 export function ChooseSingUp() {
