@@ -1,0 +1,37 @@
+.auth-top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.auth-logo-image {
+  width: 200px;
+  height: 80px;
+
+  background-image: url('../../assets/image/logo-image\ 1.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  cursor: pointer;
+}
+
+.auth-top-right-bar {
+  display: flex;
+  gap: 10px;
+
+  font-size: 20px;
+}
+
+.auth-top-right-bar-login {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.auth-top-right-bar-line {
+  padding: 10px;
+}
+
+.auth-top-right-bar-sign-up {
+  padding: 10px;
+  cursor: pointer;
+}

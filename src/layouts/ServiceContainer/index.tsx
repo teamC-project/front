@@ -16,6 +16,7 @@ import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/ap
 //   const [totalVisitors, setTotalVisitors] = useState<number>(0);
 //   const [visitorsToday, setVisitorsToday] = useState<number>(0);
 
+<<<<<<< HEAD
 //   //                   function                  //
 //   const navigator = useNavigate();
 
@@ -64,8 +65,61 @@ import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/ap
 //     </>
 //   );
 // }
+=======
+  const [cookie] = useCookies();
 
+  //                   function                  //
+  const navigator = useNavigate();
+
+  const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패하였습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        if (result?.code === 'AF') {
+            navigator(MAIN_PATH);
+            return;
+        }
+    }
+    const { totalVisitors } = result as getTotalVisitorsResponseDto;
+    setTotalVisitors(totalVisitors);
+  }
   
+  const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패하였습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        if (result?.code === 'AF') {
+            navigator(MAIN_PATH);
+            return;
+        }
+    }
+    const { visitorsToday } = result as getVisitorsTodayResponseDto;
+    setVisitorsToday(visitorsToday);
+  }
+  //                   effect                     //
+  useEffect(() => {
+    const accessToken = cookie.accessToken;
+    if (!accessToken) return;
+    getTotalVisitorsRequest(accessToken).then(getTotalVisitorsResponse);
+    getVisitorsTodayRequest(accessToken).then(getVisitorsTodayResponse);
+  }, []);
+  //                    render                    //
+  return (
+    <>
+      <div>총 방문자 수: {totalVisitors}</div>
+      <div>오늘 방문자 수: {visitorsToday}</div>
+    </>
+  );
+}
+>>>>>>> 1613d54d6d320b2489c6e0182a819ceb9c596617
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
@@ -166,8 +220,6 @@ function LeftBar({ path }: Props) {
   );
 }
 
-
-
 //                    component                    //
 export default function ServiceContainer() {
 
@@ -176,11 +228,7 @@ export default function ServiceContainer() {
     const { setLoginUserId, setLoginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
-    // const [totalCount, setTotalCount] = useState<number>(0);
-    // const [todayCount], setTodayCount] = useState<number>(0);
   
-    
-
     //                    function                    //
     const navigator = useNavigate();
 
@@ -196,11 +244,9 @@ export default function ServiceContainer() {
             navigator(AUTH_ABSOLUTE_PATH);
             return;
         }
-
         const { userId, userRole } = result as GetSignInUserResponseDto;
         setLoginUserId(userId);
         setLoginUserRole(userRole);
-
     };
 
     //                    effect                    //
@@ -211,19 +257,15 @@ export default function ServiceContainer() {
             pathname === CUSTOMER_BOARD_LIST_ABSOLUTE_PATH ? '고객 게시판' :
             pathname === DESIGNER_BOARD_LIST_ABSOLUTE_PATH ? '디자이너 게시판' :
             pathname === QNA_BOARD_LIST_ABSOLUTE_PATH ? 'Q&A 게시판' : '';
-
         setPath(path);
     }, [pathname]);
 
     useEffect(() => {
-
         if (!cookies.accessToken) {
             navigator(AUTH_ABSOLUTE_PATH);
             return;
         }
-
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-
     }, [cookies.accessToken]);
 
   //                    render                       //

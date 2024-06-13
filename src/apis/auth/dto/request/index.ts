@@ -29,6 +29,7 @@ export interface SignUpCustomerRequestDto {
   userGender : string;
   userAge : string;
   joinPath: string;
+  snsId?: string;
 }
 
 // description: 디자이너 회원가입 Requset Body DTO
@@ -42,6 +43,7 @@ export interface SignUpDesignerRequestDto {
   userCompanyName : string;
   userImage : string;
   joinPath: string;
+  snsId?: string;
 }
 
 // description: 아이디 찾기 Requset Body DTO
