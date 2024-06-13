@@ -3,6 +3,6 @@ import "./style.css";
 
 export default function AgreeAuth() {
   return (
-    <div>index</div>
+    <div>가입동의</div>
   )
 }

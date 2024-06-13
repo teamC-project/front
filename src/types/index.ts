@@ -20,7 +20,7 @@ export interface TrendBoardListItem {
 	trendBoardWriterId : string;
 	trendBoardWriteDatetime : string;
 	trendBoardLikeCount : number;
-	trendBoardThumbNailImage : string;
+	trendBoardThumbnailImage : string;
 }
 
 export interface TrendBoardCommentListItem {
@@ -42,7 +42,7 @@ export interface CustomerBoardListItem {
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;
 	customerBoardCommentWriterId : string;
-	customerBoardCommentDatetime : string;
+	customerBoardCommentWriteDatetime : string;
 	customerBoardCommentContents : string;
 	customerBoardParentCommentNumber?: number;
 };

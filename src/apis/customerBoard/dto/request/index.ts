@@ -17,4 +17,5 @@ export interface PutCustomerBoardRequestDto {
 
 export interface PutCustomerBoardCommentRequestDto {
   customerBoardCommentContents : string;
+  customerBoardCommentNumber: number;
 }
