@@ -20,13 +20,13 @@ export function Main() {
   return (
     <div id='main-page-wrapper'>
 
-      <div className='main-page-top-bar'>
-        <div className='main-page-logo-image'></div>
-
-        <div className='main-page-top-right-bar'>
-          <div className='main-page-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-          <div className='main-page-top-right-bar-line'>|</div>
-          <div className='main-page-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
+      <div className='auth-top-bar'>
+        <div></div>
+        
+        <div className='auth-top-right-bar'>
+          <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
+          <div className='auth-top-right-bar-line'>|</div>
+          <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
         </div>
       </div>
 
