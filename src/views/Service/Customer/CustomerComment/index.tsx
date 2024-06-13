@@ -11,20 +11,22 @@ import './style.css';
 //                    component                    //
 export default function CustomerBoardComment() {
 
-    //                    state                    //
-    const { customerBoardNumber } = useParams();
-    const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
-    const [comment, setComment] = useState<string>('');
-    const [editingComment, setEditingComment] = useState<string>('');
-    const [editingCommentNumber, setEditingCommentNumber] = useState<number | null>(null);
-    const [cookies] = useCookies();
-    const { loginUserRole, loginUserId } = useUserStore();
-    const commentRef = useRef<HTMLTextAreaElement | null>(null);
-    const [commentRows, setCommentRows] = useState<number>(1);
-    const [replyComment, setReplyComment] = useState<string>('');
-    const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
-    const [commentDates, setCommentDates] = useState<Record<number, string>>({});
-
+//                    state                    //
+const { customerBoardNumber } = useParams();
+const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
+const [comment, setComment] = useState<string>('');
+const [editingComment, setEditingComment] = useState<string>('');
+const [editingCommentNumber, setEditingCommentNumber] = useState<number | null>(null);
+const [cookies] = useCookies();
+const { loginUserRole, loginUserId } = useUserStore();
+const commentRef = useRef<HTMLTextAreaElement | null>(null);
+const [commentRows, setCommentRows] = useState<number>(1);
+const [replyComment, setReplyComment] = useState<string>('');
+const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
+const [commentDates, setCommentDates] = useState<Record<number, string>>({});
+const [showReplyInput, setShowReplyInput] = useState<boolean>(false);
+const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
+    
 
     //                  function                    //
     const navigator = useNavigate();
@@ -109,14 +111,17 @@ export default function CustomerBoardComment() {
         if (!comment.trim()) return;
         if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
 
-        const requestBody: PostCustomerBoardCommentRequestDto = { customerBoardCommentContents: comment };
+        const requestBody: PostCustomerBoardCommentRequestDto = { 
+            customerBoardCommentContents: comment,
+            customerBoardParentCommentNumber: replyCommentParentNumber ?? undefined
+        };
 
         postCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken)
-        .then(postCustomerBoardCommentResponse)
-        .catch((error) => {
-            console.error('댓글 작성 중 오류가 발생했습니다:', error);
-            alert('댓글 작성 중 오류가 발생했습니다.');
-        });
+            .then(postCustomerBoardCommentResponse)
+            .catch((error) => {
+                console.error('댓글 작성 중 오류가 발생했습니다:', error);
+                alert('댓글 작성 중 오류가 발생했습니다.');
+            });
     };
 
     const onUpdateCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -135,6 +140,23 @@ export default function CustomerBoardComment() {
             alert('작성자만 수정할 수 있습니다.');
         }
     };
+
+    const onUpdateButtonClickHandler = () => {
+        if (!editingComment.trim() || editingCommentNumber === null || !customerBoardNumber || !cookies.accessToken) return;
+
+        const requestBody: PutCustomerBoardCommentRequestDto = {
+            customerBoardCommentContents: editingComment,
+            customerBoardCommentNumber: editingCommentNumber
+        };
+
+        putCustomerBoardCommentRequest(customerBoardNumber, requestBody, cookies.accessToken)
+            .then(putCustomerBoardCommentResponse)
+            .catch((error) => {
+                console.error('댓글 수정 중 오류가 발생했습니다:', error);
+                alert('댓글 수정 중 오류가 발생했습니다.');
+            });
+    };
+
     const onDeleteButtonClickHandler = (commentNumber: number, commentWriterId: string) => {
         if (!commentNumber || !cookies.accessToken) return;
         if (commentWriterId === loginUserId) {
@@ -168,9 +190,9 @@ export default function CustomerBoardComment() {
                     setReplyComment('');
                     setReplyCommentParentNumber(null);
                     getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then((result) => {
-                        if (result && 'customerBoardCommentList' in result) {
-                            // 1. 댓글 리스트를 역순으로 표시
-                            setCustomerBoardCommentList(result.customerBoardCommentList.reverse());
+                        if (result && 'customerBoardCommentList' in result) {               
+                            const sortedCommentList = [...result.customerBoardCommentList].sort((a, b) => b.customerBoardCommentNumber - a.customerBoardCommentNumber);
+                            setCustomerBoardCommentList(sortedCommentList);
                         }
                     });
                 } else {
@@ -183,8 +205,25 @@ export default function CustomerBoardComment() {
             });
     };
 
+    // 대댓글 입력창 밖을 클릭했을 때 입력창 닫기
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            commentRef.current &&
+            !commentRef.current.contains(event.target as Node)
+        ) {
+            onCloseReplyInputHandler();
+        }
+    };
+
     const onReplyButtonClickHandler = (commentNumber: number) => {
-        setReplyCommentParentNumber(commentNumber);
+        setShowReplyInput(true);
+        setReplyInputParentNumber(commentNumber);
+    };
+    
+    const onCloseReplyInputHandler = () => {
+        setShowReplyInput(false);
+        setReplyInputParentNumber(null);
+        setReplyComment('');
     };
 
 
@@ -204,6 +243,12 @@ export default function CustomerBoardComment() {
         });
     }, [customerBoardNumber, cookies.accessToken]);
 
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     //              render              //
     return (
@@ -229,66 +274,98 @@ export default function CustomerBoardComment() {
                 </div>
                 <div className="customer-board-comment-section">
                     <div className="customer-board-comment-list">
-                        {customerBoardCommentList.map((item) => (
-                            <div key={item.customerBoardCommentNumber} className='customer-board-comment-table-tr'>
-                                {/* 상위 댓글인 경우 */}
-                                {!item.customerBoardParentCommentNumber && (
-                                    <div>
-                                        {item.customerBoardCommentWriterId === loginUserId && (
-                                            <div className='customer-board-comment-actions'>
-                                                <button onClick={() => onEditButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentContents, item.customerBoardCommentWriterId)}>수정</button>
-                                                <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentWriterId)}>삭제</button>
-                                            </div>
-                                        )}
-                                        <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
-                                        <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
-                                        <span className='customer-board-comment-actions-right' style={{ display: 'flex' }}>
-                                            <div className='customer-board-comment-date'>작성일: {commentDates[item.customerBoardCommentNumber]}</div>
-                                            <button onClick={() => onReplyButtonClickHandler(item.customerBoardCommentNumber)}>대댓글</button>
-                                        </span>
-
-                                        {/* 대댓글 렌더링 로직 */}
-                                        <div className="customer-board-comment-reply-container">
-                                            {customerBoardCommentList
-                                                .filter((reply) => reply.customerBoardParentCommentNumber === item.customerBoardCommentNumber)
-                                                .map((reply) => (
-                                                    <div key={reply.customerBoardCommentNumber} className="customer-board-comment-reply">
-                                                        <div className="customer-board-comment-author">
-                                                            {item.customerBoardCommentWriterId}: {reply.customerBoardCommentContents}
-                                                        </div>
-                                                        {/* ... 기타 대댓글 관련 로직 ... */}
+                        {customerBoardCommentList
+                            .filter((comment) => !comment.customerBoardParentCommentNumber)
+                            .sort((a, b) => b.customerBoardCommentNumber - a.customerBoardCommentNumber)
+                            .map((item) => (
+                                <div key={item.customerBoardCommentNumber} className='customer-board-comment-container'>
+                                    {/* 상위 댓글인 경우 */}
+                                    {!item.customerBoardParentCommentNumber && (
+                                        <>
+                                            <div className='customer-board-comment-header'>
+                                                <div className='customer-board-comment-author'>작성자: {item.customerBoardCommentWriterId}</div>
+                                                {item.customerBoardCommentWriterId === loginUserId && (
+                                                    <div className='customer-board-comment-actions'>
+                                                        <button onClick={() => onEditButtonClickHandler(
+                                                            item.customerBoardCommentNumber, 
+                                                            item.customerBoardCommentContents, 
+                                                            item.customerBoardCommentWriterId)}>수정</button>
+                                                        {editingCommentNumber === item.customerBoardCommentNumber && (
+                                                            <div className='customer-board-comment-update'>
+                                                                <textarea
+                                                                    className='customer-board-comment-update-contents-textarea'
+                                                                    value={editingComment}
+                                                                    onChange={onUpdateCommentChangeHandler}
+                                                                />
+                                                                <button onClick={onUpdateButtonClickHandler}>수정 완료</button>
+                                                            </div>
+                                                        )}    
+                                                        <button onClick={() => onDeleteButtonClickHandler(item.customerBoardCommentNumber, item.customerBoardCommentWriterId)}>삭제</button>
                                                     </div>
-                                                ))}
-                                        </div>
-                                    </div>
-                                )}
+                                                )}
+                                            </div>
+                                            <div className='customer-board-comment-contents'>{item.customerBoardCommentContents}</div>
+                                            <div className='customer-board-comment-footer'>
+                                                <div className='customer-board-comment-date'>{commentDates[item.customerBoardCommentNumber]}</div>
+                                                <button className='customer-board-comment-reply-button' onClick={() => onReplyButtonClickHandler(item.customerBoardCommentNumber)}>대댓글</button>
+                                            </div>
 
-                                {editingCommentNumber === item.customerBoardCommentNumber && (
-                                    <div className="customer-board-comment-update">
-                                        <textarea
-                                            ref={commentRef}
-                                            className='customer-board-comment-update-contents-textarea'
-                                            style={{ height: `${28 * commentRows}px` }}
-                                            value={editingComment}
-                                            onChange={onUpdateCommentChangeHandler}
-                                            placeholder="댓글을 수정하세요"
-                                        />
-                                        <button className='customer-board-comment-primary-button' onClick={onPostButtonClickHandler}>작성</button>
-                                    </div>
-                                )}
-                                {replyCommentParentNumber === item.customerBoardCommentNumber && (
-                                    <div className="customer-board-comment-reply">
-                                        <textarea
-                                            className='customer-board-comment-reply-textarea'
-                                            value={replyComment}
-                                            onChange={onReplyCommentChangeHandler}
-                                            placeholder="대댓글을 입력하세요"
-                                        />
-                                        <button className='customer-board-comment-primary-button' onClick={() => onPostReplyButtonClickHandler(item.customerBoardCommentNumber)}>작성</button>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                                            {/* 대댓글 렌더링 로직 */}
+                                            <div className="customer-board-comment-reply-container">
+                                                {customerBoardCommentList
+                                                    .filter((reply) => reply.customerBoardParentCommentNumber === item.customerBoardCommentNumber)
+                                                    .sort((a, b) => a.customerBoardCommentNumber - b.customerBoardCommentNumber)
+                                                    .map((reply) => (
+                                                        <div key={reply.customerBoardCommentNumber} className="customer-board-comment-reply">
+                                                            <div className='customer-board-comment-reply-container'>
+                                                                <div className='customer-board-comment-header'>
+                                                                    <div className='customer-board-comment-author'>
+                                                                        {reply.customerBoardParentCommentNumber !== null
+                                                                            ? `${item.customerBoardCommentWriterId}:`
+                                                                            : null}
+                                                                    </div>
+                                                                    {reply.customerBoardCommentWriterId === loginUserId && (
+                                                                        <div className='customer-board-comment-actions'>
+                                                                            <button onClick={() => onEditButtonClickHandler(reply.customerBoardCommentNumber, reply.customerBoardCommentContents, reply.customerBoardCommentWriterId)}>수정</button>
+                                                                            {editingCommentNumber === reply.customerBoardCommentNumber && (
+                                                                                <div className='customer-board-comment-update'>
+                                                                                    <textarea
+                                                                                        className='customer-board-comment-update-contents-textarea'
+                                                                                        value={editingComment}
+                                                                                        onChange={onUpdateCommentChangeHandler}
+                                                                                    />
+                                                                                    <button onClick={onUpdateButtonClickHandler}>수정 완료</button>
+                                                                                </div>
+                                                                            )}
+                                                                            <button onClick={() => onDeleteButtonClickHandler(reply.customerBoardCommentNumber, reply.customerBoardCommentWriterId)}>삭제</button>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                                <div className='customer-board-comment-contents'>{reply.customerBoardCommentContents}</div>
+                                                                <div className='customer-board-comment-footer'>
+                                                                    <div className='customer-board-comment-date'>{commentDates[reply.customerBoardCommentNumber]}</div>
+                                                                    {/* 대댓글에 대댓글 작성 버튼 추가 */}
+                                                                    <button className='customer-board-comment-reply-button' onClick={() => onReplyButtonClickHandler(reply.customerBoardCommentNumber)}>대댓글</button>
+                                                                </div>
+                                                            </div>
+                                                            {showReplyInput && replyInputParentNumber === reply.customerBoardCommentNumber && (
+                                                                <div className="customer-board-comment-reply-write">
+                                                                    <textarea
+                                                                        className="customer-board-comment-reply-textarea"
+                                                                        value={replyComment}
+                                                                        onChange={onReplyCommentChangeHandler}
+                                                                        placeholder="대댓글을 입력하세요"
+                                                                    />
+                                                                    <button onClick={() => onPostReplyButtonClickHandler(reply.customerBoardCommentNumber)}>작성</button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>

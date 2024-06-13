@@ -66,30 +66,51 @@
   border-top: 1px solid #ccc;
 }
 
-.customer-board-comment-table-tr {
+.customer-board-comment-container {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ccc;
-  padding: 10px 0;
+  padding: 20px;
   background-color: #fff;
 }
+
+.customer-board-comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  }
 
 .customer-board-comment-author {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .customer-board-comment-contents {
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.customer-board-comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .customer-board-comment-date {
   font-size: 12px;
   color: #888;
-  margin-left: auto;
-}
+} 
+
+.customer-board-comment-reply-button {
+  padding: 4px 8px;
+  background-color: #eee;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  }
 
 .customer-board-comment-actions {
   margin-top: 10px;
@@ -103,7 +124,7 @@
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
-  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .customer-board-comment-actions-right {
@@ -132,16 +153,21 @@
 }
 
 .customer-board-comment-reply-container {
-  margin-left: 30px;
-  border-left: 2px solid #ccc; /* 추가된 부분 */
-  padding-left: 10px; 
+  margin-left: 40px;
+  border-left: 1px solid #ccc;
+  padding-left: 20px;
 }
 
 .customer-board-comment-reply {
   border: 1px solid #ccc; /* 대댓글 테두리 추가 */
-  padding: 10px; /* 대댓글 내부 여백 추가 */
+  padding: 20px; /* 대댓글 내부 여백 추가 */
   background-color: #f5f5f5; /* 대댓글 배경색 변경 */
 }
+
+.customer-board-comment-reply-write {
+  margin-top: 10px;
+}
+
 
 .customer-board-comment-reply-textarea {
   width: 100%;
