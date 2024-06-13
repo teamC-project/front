@@ -11,7 +11,6 @@ export interface PostTrendBoardCommentRequestDto {
 export interface PutTrendBoardRequestDto {
 	trendBoardTitle :string;
 	trendBoardContents : string;
-	trendBoardUrlList : string;
 }
 
 export interface PutTrendBoardCommentRequestDto {
