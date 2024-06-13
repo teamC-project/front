@@ -1,7 +1,7 @@
 export interface PostTrendBoardRequestDto {
 	trendBoardTitle : string;
 	trendBoardContents : string;
-	trendBoardThumbNailImage : string;
+	trendBoardThumbnailImage : string;
 }
 
 export interface PostTrendBoardCommentRequestDto {
@@ -11,7 +11,6 @@ export interface PostTrendBoardCommentRequestDto {
 export interface PutTrendBoardRequestDto {
 	trendBoardTitle :string;
 	trendBoardContents : string;
-	trendBoardUrlList : string;
 }
 
 export interface PutTrendBoardCommentRequestDto {

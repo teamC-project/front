@@ -16,19 +16,20 @@ function  CardItem ({
 		trendBoardWriterId,
 		trendBoardWriteDatetime,
 		trendBoardLikeCount,
-		trendBoardThumbNailImage
+		trendBoardThumbnailImage
 } : TrendBoardListItem) {
 	// 										function 										//
 	const navigator =  useNavigate();
 
 	// 										event handler										// 
 
-	const onClickHandler =  () => navigator(TREND_BOARD_DETAIL_ABSOLUTE_PATH(trendBoardNumber))
+	const onClickHandler =  () => navigator(TREND_BOARD_DETAIL_ABSOLUTE_PATH(trendBoardNumber));
 
 	//										render										/./
 	return (
 		<div className='trend-board-card' onClick={onClickHandler}>
-						<div className='trend-board-image'>{trendBoardThumbNailImage}</div>
+						<div className='trend-board-image' style={{backgroundImage : `url(${trendBoardThumbnailImage})` }}>
+						</div>
 						<div className='trend-board-title-box'>
 						<div className='trend-board-title'>{trendBoardTitle}</div>
 						</div>
@@ -242,18 +243,18 @@ useEffect(() => {
 			<div className='trend-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
         <div className='trend-board-list-pagenation'>
-          <div className='trend-board-list-page-left' onClick={onPreSectionClickHandler}></div>
-          <div className='trend-board-list-page-box'>
-            {pageList.map(page => 
+          {/* <div className='trend-board-list-page-left' 
+					onClick={onPreSectionClickHandler}></div> */}
+          {/* <div className='trend-board-list-page-box'>
               page === currentPage ? 
               <div className='trend-board-list-page-active'>{page}</div> :
               <div className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
-            </div>
+            </div> */}
 						<div className='trend-board-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-				{loginUserRole !== 'ROLE_ADMIN' &&(
-					<div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}></div>
+				{loginUserRole === 'ROLE_ADMIN' &&(
+					<div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
 				)}
       </div>
 		</div>

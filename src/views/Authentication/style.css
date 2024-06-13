@@ -25,49 +25,6 @@
   color: rgba(255, 255, 255, 1);
 }
 
-.auth-top-bar {
-  display: flex;
-  justify-content: space-between;
-  margin: 30px;
-}
-
-.auth-logo-image {
-  display: flex;
-  justify-content: start;
-
-  width: 200px;
-  height: 80px;
-
-  background-image: url('../../assets/image/logo-image\ 1.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-
-  cursor: pointer;
-}
-
-.auth-top-right-bar {
-  display: flex;
-  justify-content: end;
-  text-align: center;
-  gap: 10px;
-
-  font-size: 16px;
-}
-
-.auth-top-right-bar-login {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.auth-top-right-bar-line {
-  padding: 10px;
-}
-
-.auth-top-right-bar-sign-up {
-  padding: 10px;
-  cursor: pointer;
-}
-
 /* 회원가입 선택 */
 .auth-welcome-image-box {
   display: flex;
@@ -384,44 +341,7 @@
   width: 100%;
 }
 
-.main-page-top-bar {
-  margin: 0 auto;
-  max-width: 1920px;
-  display: flex;
-  justify-content: space-between;
-  margin: 30px;
-}
 
-.main-page-logo-image {
-  display: flex;
-  justify-content: start;
-
-  width: 200px;
-  height: 80px;
-}
-
-.main-page-top-right-bar {
-  display: flex;
-  justify-content: end;
-  text-align: center;
-  gap: 10px;
-
-  font-size: 16px;
-}
-
-.main-page-top-right-bar-login {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.main-page-top-right-bar-line {
-  padding: 10px;
-}
-
-.main-page-top-right-bar-sign-up {
-  padding: 10px;
-  cursor: pointer;
-}
 
 .main-page-image-box {
   width: 100%;
@@ -447,10 +367,6 @@
 }
 
 
-
-.null-box {
-  min-width: 300px;
-}
 
 .auth-under-bar {
   max-width: 1920px;
