@@ -60,7 +60,6 @@ export default function InfoCustomer() {
   //                     event handler                     //
   const onInfoCustomerUpdateClickHandler = async () => {
 
-
     try {
       const customerInfoUpdate = {
         userGender: gender,
@@ -89,7 +88,6 @@ export default function InfoCustomer() {
     const { value } = event.target;
     setGender(value);
     setIsGenderCheck(true);
-    // const genderMessage = isGenderCheck ? '' : (value ? '성별을 선택해주세요.' : '');
     setGenderMessage(genderMessage);
   };
 
@@ -106,16 +104,6 @@ export default function InfoCustomer() {
     getSignInUserRequest(cookies.accessToken)
       .then(getInfoUpdate);
   }, [loginUserRole, cookies.accessToken]);
-
-  // useEffect(() => {
-  //   if (!cookies.accessToken || !loginUserRole) return;
-  //   if (loginUserRole !== 'ROLE_CUSTOMER') {
-  //     if (!cookies.accessToken) return;
-  //     if (!loginUserRole) return;
-  //     navigator(UPDATE_DESIGNER_INFO_ABSOLUTE_PATH);
-  //     return;
-  //   }
-  // }, [loginUserRole]);
 
   //                     render                     //
   return (

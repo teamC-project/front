@@ -24,22 +24,21 @@ export interface DesignerInfoResponseDto extends ResponseDto {
   userImage: string;
 }
 
-export interface CUSTOMERDELETERESPONSEDTO extends ResponseDto {
-  userId : string;
-  userPassword : string;
-  userEmail : string;
-  authNumber : string;
-  userGender : string;
-  userAge : string;
-  joinPath: string;
-}
+// export interface CUSTOMERDELETERESPONSEDTO extends ResponseDto {
+//   userId : string;
+//   userPassword : string;
+//   userEmail : string;
+//   authNumber : string;
+//   userGender : string;
+//   userAge : string;
+//   joinPath: string;
+// }
 
-export interface DESIGNERDELETERESPONSEDTO extends ResponseDto {
+export interface UserInfoDeleteResponseDto extends ResponseDto {
   userId : string;
   userEmail : string;
-  authNumber : string;
   userGender : string;
   userAge : string;
-  userCompanyName : string;
-  userImage : string;
+  userCompanyName? : string;
+  userImage? : string;
 }
