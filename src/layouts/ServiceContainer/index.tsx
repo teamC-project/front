@@ -11,11 +11,61 @@ import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/login
 import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
 
 //              component                   //
-function VisitorCount() {
-  //                   state                 //
-  const [totalVisitors, setTotalVisitors] = useState<number>(0);
-  const [visitorsToday, setVisitorsToday] = useState<number>(0);
+// function VisitorCount() {
+//   //                   state                 //
+//   const [totalVisitors, setTotalVisitors] = useState<number>(0);
+//   const [visitorsToday, setVisitorsToday] = useState<number>(0);
 
+<<<<<<< HEAD
+//   //                   function                  //
+//   const navigator = useNavigate();
+
+//   const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
+//     const message = 
+//     !result ? '서버에 문제가 있습니다.' :
+//     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+//     if (!result || result.code !== 'SU') {
+//         alert(message);
+//         if (result?.code === 'AF') {
+//             navigator(MAIN_PATH);
+//             return;
+//         }
+//     }
+
+//     const { totalVisitors } = result as getTotalVisitorsResponseDto;
+//     setTotalVisitors(totalVisitors);
+//   }
+  
+//   const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {
+//     const message = 
+//     !result ? '서버에 문제가 있습니다.' :
+//     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+//     if (!result || result.code !== 'SU') {
+//         alert(message);
+//         if (result?.code === 'AF') {
+//             navigator(MAIN_PATH);
+//             return;
+//         }
+//     }
+//     const { visitorsToday } = result as getVisitorsTodayResponseDto;
+//     setVisitorsToday(visitorsToday);
+//   }
+//   //                   effect                     //
+//   useEffect(() => {
+//     getTotalVisitorsRequest().then(getTotalVisitorsResponse);
+//     getVisitorsTodayRequest().then(getVisitorsTodayResponse);
+//   }, []);
+//   //                    render                    //
+//   return (
+//     <>
+//       <div>총 방문자 수: {totalVisitors}</div>
+//       <div>오늘 방문자 수: {visitorsToday}</div>
+//     </>
+//   );
+// }
+=======
   const [cookie] = useCookies();
 
   //                   function                  //
@@ -69,6 +119,7 @@ function VisitorCount() {
     </>
   );
 }
+>>>>>>> 1613d54d6d320b2489c6e0182a819ceb9c596617
 
 type Path = '공지사항' | '트렌드 게시판' | '고객 게시판' | '디자이너 게시판' | 'Q&A 게시판' | '';
 
@@ -229,7 +280,7 @@ export default function ServiceContainer() {
         </div>
         <div className='right-bar'>
           <div className='footer-total-user-box'>
-            <VisitorCount />
+            {/* <VisitorCount /> */}
           </div>
           <div className='customer-chat'>
             {/* <Chat /> */}

@@ -10,6 +10,7 @@ import ResponseDto from 'src/apis/response.dto'
 import { MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
 import { deleteTrendBoardRequest, getTrendBoardRequest } from 'src/apis/TrendBoard'
 import { GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
+import { Viewer } from '@toast-ui/react-editor'
 
 //															component															//
 export default function TrendDetail() {
@@ -17,13 +18,12 @@ export default function TrendDetail() {
 	const {loginUserId, loginUserRole} = useUserStore();
 	const {trendBoardNumber} = useParams();
 	const [cookies] = useCookies();
-	const [viewList, setViewList] = useState<TrendBoardCommentListItem[]>([]);
-
-	const [title, setTitle]  = useState<string>('');
-	const [writerId, setWriterId] =  useState<string>('');
-	const [writeDatetime, setWriteDatetime] = useState<string>('');
-	const [likeCount, setLikeCount] = useState<string>('');
-	const [contents, setContents] = useState<string>('');
+	const [viewList, setViewList] = useState<TrendBoardCommentListItem[]>([]);;
+	const [trendBoardTitle, setTrendBoardTitle]  = useState<string>('');
+	const [trendBoardWriterId, setTrendBoardWriterId] =  useState<string>('');
+	const [trendBoardWriteDatetime, setTrendBoardWriteDatetime] = useState<string>('');
+	const [trendBoardLikeCount, setTrendBoardLikeCount] = useState<string>('');
+	const [trendBoardContents, setContents] = useState<string>('');
 	const [comment, setComment] = useState<string | null>(null);
 
 	//										function										//
@@ -71,17 +71,16 @@ export default function TrendDetail() {
 
 		const {
 			trendBoardTitle,
-			trendBoardWriterId,
 			trendBoardContents,
+			trendBoardWriterId,
 			trendBoardWriteDatetime,
 			trendBoardLikeCount,
 			trendBoardComment,
 		} = result as GetTrendBoardResponseDto;
-
-		setTitle(trendBoardTitle);
-		setWriterId(trendBoardWriterId);
-		setWriteDatetime(trendBoardWriteDatetime);
-		setLikeCount(trendBoardLikeCount);
+		setTrendBoardTitle(trendBoardTitle);
+		setTrendBoardWriterId(trendBoardWriterId);
+		setTrendBoardWriteDatetime(trendBoardWriteDatetime);
+		setTrendBoardLikeCount(trendBoardLikeCount);
 		setContents(trendBoardContents);
 		setComment(trendBoardComment);
 	}
@@ -126,12 +125,12 @@ export default function TrendDetail() {
 	}
 
 	const onUpdateClickHandler = () => {
-		if(!trendBoardNumber || loginUserId !== writerId) return;
+		if(!trendBoardNumber || loginUserId !== trendBoardWriterId) return;
 		navigator(TREND_BOARD_UPDATE_ABSOLUTE_PATH(trendBoardNumber));
 	}
 
 	const onDeleteButtonClickHandler = () => {
-		if(!trendBoardNumber || loginUserId !== writerId || !cookies.accessToken)
+		if(!trendBoardNumber || loginUserId !== trendBoardWriterId || !cookies.accessToken)
 			return;
 		const isConfirm = window.confirm('정말로 삭제 하시겠습니까?');
 		if(!isConfirm) return;
@@ -139,15 +138,19 @@ export default function TrendDetail() {
 		deleteTrendBoardRequest(trendBoardNumber, cookies.accessToken)
 		.then(deleteTrendBoardResponse);
 	}
+	console.log(trendBoardTitle);
+	console.log(trendBoardWriterId);
+	console.log(trendBoardContents);
+	console.log(trendBoardLikeCount);
 	return (
 		<div className="trend-detail">
-		<div className="trend-detail-title">{title}</div>
+		<div className="trend-detail-title">{trendBoardTitle}</div>
 		<div className="trend-detail-container">
 				<div className="trend-detail-information">
-						<div className="trend-detail-information1">작성자: {writerId}</div>
-						<div className="trend-detail-information2">작성일: {writeDatetime}</div>
-						<div className="trend-detail-information3">조회수: {likeCount}</div>
-						{loginUserId === writerId && (
+						<div className="trend-detail-information1">작성자: {trendBoardWriterId}</div>
+						<div className="trend-detail-information2">작성일: {trendBoardWriteDatetime}</div>
+						<div className="trend-detail-information3">좋아요: {trendBoardLikeCount}</div>
+						{loginUserId === trendBoardWriterId && (
 						<>
 								<div className="trend-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
 								<div className="trend-detail-information5" onClick={onUpdateClickHandler}>
@@ -158,8 +161,7 @@ export default function TrendDetail() {
 				</div>
 		</div>
 		<div className="trend-detail-view">
-				{/* 내용 표시 */}
-				{contents}
+				<Viewer initialValue= {trendBoardContents} />
 		</div>
 		<TrendBoardComment />
 		<div className="trend-detail-go-to-trendList" onClick={handleGoToList}>
