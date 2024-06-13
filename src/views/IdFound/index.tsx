@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
-import { AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useNavigate } from 'react-router';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
 import { emailAuthCheckRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
 import ResponseDto from 'src/apis/response.dto';
 import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
+import AuthTopBar from 'src/components/authTopBar';
 
 //                    component                    //
 export default function IdFound() {
@@ -29,7 +28,6 @@ export default function IdFound() {
   const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
 
 //                   function                       //
-  const navigator = useNavigate();
 
   const emailAuthResponse = (result: ResponseDto | null) => {
     const emailMessage = 
@@ -87,9 +85,6 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
 };
 
 //                   event handler                  //
-  const onClickSignInHandler = () => navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-  const onClickSignUpHandler = () => navigator(AUTH_SIGN_UP_ABSOLUTE_PATH);
-  const onClickMainHandler = () => navigator(MAIN_PATH);
 
   const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -151,17 +146,7 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
 //                      render                      //
   return (
 <div id='auth-wrapper'>
-
-<div className='auth-top-bar'>
-  <div className='auth-logo-image' onClick={onClickMainHandler}></div>
-  
-  <div className='auth-top-right-bar'>
-    <div className='auth-top-right-bar-login' onClick={onClickSignInHandler}>로그인</div>
-    <div className='auth-top-right-bar-line'>|</div>
-    <div className='auth-top-right-bar-sign-up' onClick={onClickSignUpHandler}>회원가입</div>
-  </div>
-</div>
-
+<AuthTopBar />
 <div className='auth-under-bar'>
   <div className='auth-left-null'></div>
 
