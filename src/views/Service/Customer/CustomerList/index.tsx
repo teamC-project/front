@@ -42,7 +42,7 @@ function ListItem ({
   //              render              //
   return (
     <div className='customerboard-list-table-tr' onClick={onClickHandler}>
-      <div className='customerboard-list-table-number'>{customerBoardNumber}</div>
+      <div className='customerboard-list-table-board-number'>{customerBoardNumber}</div>
       <div className='customerboard-list-table-title'>{title}</div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
       <div className='customerboard-list-table-write-date'>{customerBoardWriteDatetime}</div>
@@ -244,16 +244,15 @@ export default function CustomerList() {
       </div>
       <div className='customerboard-list-table'>
         <div className='customerboard-table-th'>
-          <div className='customerboard-list-table-reception-number'>접수번호</div>
-          <div className='customerboard-list-table-title'>제목</div>
-          <div className='customerboard-list-table-writer-id'>작성자</div>
-          <div className='customerboard-list-table-write-date'>작성일</div>
-          <div className='customerboard-list-table-viewcount'>조회수</div>
+          <div className='customerboard-list-table-board-number-top'>번호</div>
+          <div className='customerboard-list-table-title-top'>제목</div>
+          <div className='customerboard-list-table-writer-id-top'>작성자</div>
+          <div className='customerboard-list-table-write-date-top'>작성일</div>
+          <div className='customerboard-list-table-viewcount-top'>조회수</div>
         </div>
         {viewList.map(item => <ListItem {...item} />)}
       </div>
       <div className='customerboard-list-bottom'>
-        <div style={{ width: '299px' }}></div>
         <div className='customerboard-list-pagenation'>
           <div className='customerboard-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='customerboard-list-page-box'>
@@ -265,11 +264,13 @@ export default function CustomerList() {
           </div>
           <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        {loginUserRole === 'ROLE_CUSTOMER' && (
-          <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>
-            글쓰기
-          </div>
-        )}
+        <div className='customerboard-list-write-button-container'>
+          {loginUserRole === 'ROLE_CUSTOMER' && (
+            <div className='customerboard-list-write-button' onClick={onWriteButtonClickHandler}>
+              글쓰기
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
