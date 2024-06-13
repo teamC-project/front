@@ -1,79 +1,181 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
-import socket from 'src/utils/socket';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
+import { useCookies } from 'react-cookie';
+import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+import { useNavigate, useParams } from 'react-router';
+import ResponseDto from 'src/apis/response.dto';
+import { CHAT_ROOM_DETAIL_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { getChatMessagesRequest, getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
+import socket from 'src/utils/socket';
+import { useUserStore } from 'src/stores';
+import { ChatMessageList, ChatroomList } from 'src/types';
+import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
 
-interface ChatMessage {
-    sender: string;
-    message: string;
-    timestamp: string;
+interface ChatRoomProps {
+    selectedDesignerId: string;
 }
 
 //                    component                    //
-const Chat: React.FC = () => {
+const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
 
     //                    state                    //
+    const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
+
+    const [cookies] = useCookies();
+    const [rooms, setRooms] = useState<ChatroomList[]>([]);
+    const [newRoomName, setNewRoomName] = useState<string>('');
+    const { roomId } = useParams<string>();
     const [message, setMessage] = useState<string>('');
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
+    const [messages, setMessages] = useState<ChatMessageList[]>([]);
+    const { loginUserRole, loginUserId } = useUserStore();
+    // const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
+
+    //                  function                    //
+    const navigator = useNavigate();
+
+    const getChatroomListResponse = (result: GetChatroomListResponseDto | ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            if (result?.code === 'AF') navigator(MAIN_PATH);
+            return;
+        }
+
+        const { chatRoomList } = result as GetChatroomListResponseDto;
+        setRooms(chatRoomList);
+    };
+
+    const getChatMessagesResponse = (result: any) => {
+        const message = 
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            if (result?.code === 'AF') navigator(MAIN_PATH);
+            return;
+        }
+
+        const { messages } = result;
+        setMessages(messages);
+    };
+
+    const createRoom = () => {
+        if (loginUserRole !== 'ROLE_CUSTOMER') {
+            alert('채팅방 생성은 고객만 가능합니다.');
+            return;
+        };
+
+        if (!newRoomName.trim()) return;
+
+        const requestBody : PostChatroomRequestDto = {
+            chatRoomName: newRoomName,
+            chatCustomerId: loginUserId,
+            chatDesignerId: selectedDesignerId
+        };
+        
+        postChatRoomRequest(requestBody, cookies.accessToken)
+            .then(() => {
+                getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
+            });
+        setNewRoomName('');
+        // setSelectedDesignerId(''); // 상태 초기화 -> 다음번 새로운 디자이너 Id 선택할 수 있게 함
+    };
+
+
+    //              event handler              //
+    const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewRoomName(event.target.value);
+    };
+
+    //                   effect                    //
+    useEffect(() => {
+        if(!cookies.accessToken) return;
+        getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
+        console.log('Selected Designer ID:', selectedDesignerId);
+
+        function onConnect() {
+            console.log(socket);
+            setIsConnected(true);
+        }
+
+        function onDisconnect() {
+            setIsConnected(false);
+        }
+
+        function onMessage(args: any) {
+            console.log('message');
+            console.log(args);
+        }
+    
+        socket.on('connect', onConnect);
+        socket.on('disconnect', onDisconnect);
+        socket.on('message',onMessage );
+    
+        return () => {
+            socket.off('connect', onConnect);
+            socket.off('disconnect', onDisconnect);
+        };
 
         
-    //                    function                    //
-    const sendMessage = () => {    // 메시지가 공백이 아니면 소켓을 통해 서버로 메시지를 전송하고, message 상태를 초기화함
-        if (message.trim()) {
-            socket.emit('message', { sender: 'User', message, timestamp: new Date().toISOString() });
-            setMessage('');
-        }
-    };
 
-    //                    event handler                    //
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
-    };
 
-    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-        sendMessage();
-        }
-    };
+        // if (roomId) {
+        //     getChatMessagesRequest(roomId, cookies.accessToken).then(getChatMessagesResponse)
+        //     socket.connect();
+        //     socket.emit('joinRoom', roomId);
+        //     socket.on('message', (newMessage: ChatMessageList) => {  //  prevMessages = 현재 메시지 목록의 이전 상태
+        //         setMessages(prevMessages => [...prevMessages, newMessage]);  // prevMessages 배열에 모든 기준 요소를 새로운 배열로 복사 후, newMessage 추가     즉 현재 메시지 목록의 이전 상태에 newMessage 를 넣은후 새로운 배열상태인 setMessages 를 추가 함.
+        //     });
 
-    //                    effect                    //
+        //     return () => {  // 컴포넌트가 언마운트되거나 roomId가 변경될 때 실행
+        //         socket.emit('leaveRoom', roomId);
+        //         socket.disconnect();
+        //     };
+        // }
+    }, [cookies.accessToken, roomId]);
+
     useEffect(() => {
-        socket.connect();
-    
-        socket.on('message', (newMessage: ChatMessage) => {
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
-        });
+        if (selectedDesignerId) {
+            const roomName = prompt('채팅방 이름을 입력하세요:', '');
+            if (roomName) {
+                setNewRoomName(roomName);
+                createRoom();
+            }
+        }
+    }, [selectedDesignerId]);
 
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
-    
-     //                    render                    //
+    //                    render                    //
     return (
-        <div className="chat-container">
-            <div className="messages">
-            {messages.map((msg, index) => (
-                <div key={index} className="message">
-                <span className="message-sender">{msg.sender}: </span>
-                <span className="message-content">{msg.message}</span>
-                <span className="message-timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
-                </div>
-            ))}
-            </div>
-            <div className="input-box">
-            <input
-                type="text"
-                value={message}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-                placeholder="메세지 입력..."
-            />
-            <button onClick={sendMessage} disabled={!message.trim()}>
-                Send
-            </button>
+        <div className='chat-room'>
+            <div className='chat-room-list'>
+                <h2>채팅방 목록</h2>
+                <ul>
+                    {rooms.map(room => (
+                        <li key={room.chatRoomId}>{room.chatName}</li>
+                    ))}
+                </ul>
+                {/* <h2>채팅방 생성</h2>
+                <input type='text' value={newRoomName} onChange={(event: ChangeEvent<HTMLInputElement>) => setNewRoomName(event.target.value)} placeholder='채팅방 이름' />
+                <button onClick={createRoom}>채팅방 생성</button> */}
             </div>
         </div>
     );
-};
-    
-export default Chat;
+}
+
+export default ChatRoom;
+
+// import React from 'react';
+// import express from "express";
+
+// export default function index() {
+//     return (
+//         <div>index</div>
+//     );
+// }
+
