@@ -3,13 +3,13 @@ import "./style.css";
 import SelectBox from 'src/components/Selectbox';
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
-import { CustomerInfoResponseDto, DesignerInfoResponseDto, SignInResponseDto } from 'src/apis/auth/dto/response';
-import { getSignInUserRequest, updateCustomerInfoRequest, updateDesignerInfoRequest } from 'src/apis/user';
+import { CustomerInfoResponseDto } from 'src/apis/auth/dto/response';
+import { getSignInUserRequest, updateCustomerInfoRequest } from 'src/apis/user';
 
 //                     component                       //
 export default function InfoCustomer() {
