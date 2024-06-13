@@ -18,7 +18,7 @@ export default function TrendDetail() {
 	const {loginUserId, loginUserRole} = useUserStore();
 	const {trendBoardNumber} = useParams();
 	const [cookies] = useCookies();
-	const [viewList, setViewList] = useState<TrendBoardCommentListItem[]>([]);
+	const [viewList, setViewList] = useState<TrendBoardCommentListItem[]>([]);;
 	const [trendBoardTitle, setTrendBoardTitle]  = useState<string>('');
 	const [trendBoardWriterId, setTrendBoardWriterId] =  useState<string>('');
 	const [trendBoardWriteDatetime, setTrendBoardWriteDatetime] = useState<string>('');
@@ -71,13 +71,12 @@ export default function TrendDetail() {
 
 		const {
 			trendBoardTitle,
-			trendBoardWriterId,
 			trendBoardContents,
+			trendBoardWriterId,
 			trendBoardWriteDatetime,
 			trendBoardLikeCount,
 			trendBoardComment,
 		} = result as GetTrendBoardResponseDto;
-
 		setTrendBoardTitle(trendBoardTitle);
 		setTrendBoardWriterId(trendBoardWriterId);
 		setTrendBoardWriteDatetime(trendBoardWriteDatetime);
@@ -139,6 +138,10 @@ export default function TrendDetail() {
 		deleteTrendBoardRequest(trendBoardNumber, cookies.accessToken)
 		.then(deleteTrendBoardResponse);
 	}
+	console.log(trendBoardTitle);
+	console.log(trendBoardWriterId);
+	console.log(trendBoardContents);
+	console.log(trendBoardLikeCount);
 	return (
 		<div className="trend-detail">
 		<div className="trend-detail-title">{trendBoardTitle}</div>
