@@ -10,60 +10,60 @@ import ResponseDto from 'src/apis/response.dto';
 import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
 import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
 
-//              component                   //
-function VisitorCount() {
-  //                   state                 //
-  const [totalVisitors, setTotalVisitors] = useState<number>(0);
-  const [visitorsToday, setVisitorsToday] = useState<number>(0);
+// //              component                   //
+// function VisitorCount() {
+//   //                   state                 //
+//   const [totalVisitors, setTotalVisitors] = useState<number>(0);
+//   const [visitorsToday, setVisitorsToday] = useState<number>(0);
 
-  //                   function                  //
-  const navigator = useNavigate();
+//   //                   function                  //
+//   const navigator = useNavigate();
 
-  const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
-    const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+//   const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
+//     const message = 
+//     !result ? '서버에 문제가 있습니다.' :
+//     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        if (result?.code === 'AF') {
-            navigator(MAIN_PATH);
-            return;
-        }
-    }
+//     if (!result || result.code !== 'SU') {
+//         alert(message);
+//         if (result?.code === 'AF') {
+//             navigator(MAIN_PATH);
+//             return;
+//         }
+//     }
 
-    const { totalVisitors } = result as getTotalVisitorsResponseDto;
-    setTotalVisitors(totalVisitors);
-  }
+//     const { totalVisitors } = result as getTotalVisitorsResponseDto;
+//     setTotalVisitors(totalVisitors);
+//   }
   
-  const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {
-    const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+//   const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {
+//     const message = 
+//     !result ? '서버에 문제가 있습니다.' :
+//     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        if (result?.code === 'AF') {
-            navigator(MAIN_PATH);
-            return;
-        }
-    }
-    const { visitorsToday } = result as getVisitorsTodayResponseDto;
-    setVisitorsToday(visitorsToday);
-  }
-  //                   effect                     //
-  useEffect(() => {
-    getTotalVisitorsRequest().then(getTotalVisitorsResponse);
-    getVisitorsTodayRequest().then(getVisitorsTodayResponse);
-  }, []);
-  //                    render                    //
-  return (
-    <>
-      <div>총 방문자 수: {totalVisitors}</div>
-      <div>오늘 방문자 수: {visitorsToday}</div>
-    </>
-  );
-}
+//     if (!result || result.code !== 'SU') {
+//         alert(message);
+//         if (result?.code === 'AF') {
+//             navigator(MAIN_PATH);
+//             return;
+//         }
+//     }
+//     const { visitorsToday } = result as getVisitorsTodayResponseDto;
+//     setVisitorsToday(visitorsToday);
+//   }
+//   //                   effect                     //
+//   useEffect(() => {
+//     getTotalVisitorsRequest().then(getTotalVisitorsResponse);
+//     getVisitorsTodayRequest().then(getVisitorsTodayResponse);
+//   }, []);
+//   //                    render                    //
+//   return (
+//     <>
+//       <div>총 방문자 수: {totalVisitors}</div>
+//       <div>오늘 방문자 수: {visitorsToday}</div>
+//     </>
+//   );
+// }
 
   
 
@@ -238,7 +238,7 @@ export default function ServiceContainer() {
         </div>
         <div className='right-bar'>
           <div className='footer-total-user-box'>
-            <VisitorCount />
+            {/* <VisitorCount /> */}
           </div>
           <div className='customer-chat'>
             {/* <Chat /> */}

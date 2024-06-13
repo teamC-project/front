@@ -66,12 +66,16 @@
   border-top: 1px solid #ccc;
 }
 
+.customer-board-comment-list {
+  border-top: 1px solid #ccc;
+}
+
 .customer-board-comment-container {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ccc;
   padding: 20px;
-  background-color: #fff;
+  /* background-color: rgba(255, 255, 255, 1); */
 }
 
 .customer-board-comment-header {
@@ -137,7 +141,9 @@
   margin-right: 10px;
 }
 
-
+customer-board-comment-list > customer-board-comment {
+  background-color: rgba(255, 255, 255, 1);
+}
 
 .customer-board-comment-update {
   margin-top: 10px;
@@ -145,17 +151,19 @@
 
 .customer-board-comment-update-contents-textarea {
   width: 100%;
-  height: auto;
+  height: 100px; /* 높이 조정 */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  resize: none;
+  resize: vertical; /* 세로 크기 조정 가능하도록 변경 */
 }
 
 .customer-board-comment-reply-container {
-  margin-left: 40px;
+  
+  background-color: rgba(64, 64, 64, 0.05);
+  /* margin-left: 40px;
   border-left: 1px solid #ccc;
-  padding-left: 20px;
+  padding-left: 20px; */
 }
 
 .customer-board-comment-reply {

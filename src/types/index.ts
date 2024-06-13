@@ -42,7 +42,7 @@ export interface CustomerBoardListItem {
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;
 	customerBoardCommentWriterId : string;
-	customerBoardCommentDatetime : string;
+	customerBoardCommentWriteDatetime : string;
 	customerBoardCommentContents : string;
 	customerBoardParentCommentNumber?: number;
 };
