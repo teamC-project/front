@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { DesignerBoardListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { CHAT_ROOM_CREATE_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { GetDesignerBoardListResponseDto, GetSearchDesignerBoardListResponseDto } from 'src/apis/designerBoard/dto/response';
@@ -52,6 +52,7 @@ export default function DesignerList() {
   const [currentSection, setCurrentSection] = useState<number>(1);
   const [searchWord, setSearchWord] = useState<string>('');
   const [isSearched, setIsSearched] = useState<boolean>(false);
+  const { designerId } = useParams<string>();
 
   //                    function                    //
   const navigator = useNavigate();
