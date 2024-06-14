@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { useUserStore } from 'src/stores';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_PATH} from 'src/constant';
-import { userInfoDeleteRequest } from 'src/apis/user';
+import { AUTH_ABSOLUTE_PATH, MAIN_PATH} from 'src/constant';
+import { getSignInUserRequest, userInfoDeleteRequest } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 
 //            component           //
 export default function InfoDeleteUser() {
   //                  state                     //
+  const { pathname } = useLocation();
   const { loginUserId, loginUserRole } = useUserStore();
+  const { setLoginUserId, setLoginUserRole } = useUserStore();
   const [userId, setUserId] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [cookies] = useCookies();
+
+  //                function                //
   const navigator = useNavigate();
-//                function                //
+
   const deleteUserInfoResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -31,8 +36,29 @@ export default function InfoDeleteUser() {
     navigator(MAIN_PATH);
   };
 
+  const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        navigator(AUTH_ABSOLUTE_PATH);
+        return;
+    }
+    const { userId, userRole } = result as GetSignInUserResponseDto;
+    setLoginUserId(userId);
+    setLoginUserRole(userRole);
+};
+
   //                event handler               //
   const onUserDeleteClickHandler = () => {
+    if (!isChecked || !cookies.accessToken) return; 
+    const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
+    if (!isConfirm) return;
+
     if (isChecked) {
       try {
         userInfoDeleteRequest(cookies.accessToken, loginUserId);
@@ -45,9 +71,6 @@ export default function InfoDeleteUser() {
     } else {
       alert('회원 탈퇴를 위해서는 안내 사항에 동의해야 합니다.');
     }
-    if (!isChecked || !cookies.accessToken) return; 
-    const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
-    if (!isConfirm) return;
     
     userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
 };
@@ -55,6 +78,15 @@ export default function InfoDeleteUser() {
 const onCheckboxChange = () => {
   setIsChecked(!isChecked);
 };
+
+//              effect              //
+useEffect(() => {
+  if (!cookies.accessToken) {
+      navigator(AUTH_ABSOLUTE_PATH);
+      return;
+  }
+  getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+}, [cookies.accessToken]);
 
 
   //          render          //

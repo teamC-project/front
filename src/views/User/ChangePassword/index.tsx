@@ -1,295 +1,208 @@
 import React, { ChangeEvent, useState } from 'react'
-import "./style.css"; 
+import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
 import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto,
+  SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
 import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, idCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
 import AuthTopBar from 'src/components/authTopBar';
+import { ChangePasswordRequestDto, PasswordChangeRequestDto } from 'src/apis/user/dto/request';
+import { changePasswordRequest, setUpChangePasswordRequest } from 'src/apis/user';
 
-let globalId = '';
+let globalPassword = '';
 
 export function ChangePassword() {
-//                      state                     //
+  //                      state                     //
 
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
-  const [isPasswordPattern,setIsPasswordPattern] = useState<boolean>(false);
-  const [isEqaulPassword,setIsEqaulPassword] = useState<boolean>(false);
+  const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
+  const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
 
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
 
-//                     function                     //
+  //                     function                     //
   const navigator = useNavigate();
 
   const passwordSetupResponse = (result: ResponseDto | null) => {
-    const message = 
+    const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
+        result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
     const isSuccess = result && result.code === 'SU'
     if (!isSuccess) {
       alert(message);
       return;
-    } 
-    if(password !== passwordCheck) {
-      alert('비밀번호가 일치하지 않습니다.')
-    return;
     }
+    if (password !== passwordCheck) {
+      alert('비밀번호가 일치하지 않습니다.')
+      return;
+    }
+    globalPassword = password;
     navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
   };
 
-//                    event handler                  //
+  //                    event handler                  //
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setPassword(value)
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/;
     const isPassworPattern = passwordPattern.test(value);
     setIsPasswordPattern(isPassworPattern);
     const passwordMessage =
-      isPassworPattern ? '':
-      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
+      isPassworPattern ? '' :
+        value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
 
     const isEqaulPassword = passwordCheck === value
-    const passwordCheckMessage = isEqaulPassword ? '': 
+    const passwordCheckMessage = isEqaulPassword ? '' :
       passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   };
 
   const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setPasswordCheck(value);
     const isEqaulPassword = password === value
-    const passwordCheckMessage = isEqaulPassword ? '': 
-    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    const passwordCheckMessage = isEqaulPassword ? '' :
+      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   };
 
-  
+
   const onSetUpPasswordButtonClickHandler = () => {
-    if(!password || !passwordCheck) {
+    if (!password || !passwordCheck) {
       alert('모든 내용을 입력해주세요.')
 
       return;
     };
 
-    const requestBody: SetUpPasswordRequestDto = {
-      userId: globalId,
-      userPassword: password
+    const requestBody: ChangePasswordRequestDto = {
+      userPassword: globalPassword
     };
-    setUpPasswordRequest(requestBody).then(passwordSetupResponse);
+    changePasswordRequest(requestBody).then(passwordSetupResponse);
   };
 
 
-//                   render                        //
+  //                   render                        //
   return (
     <div id='auth-wrapper'>
 
-    <div className='auth-under-bar'>
-      <div className='auth-left-null'></div>
+      <div className='auth-under-bar'>
+        <div className='auth-left-null'></div>
 
-      <div  className='auth-center-value'>
-        <div className='auth-sign-up-box'>
-          <div className='auth-sign-up-title'>비밀번호 재설정</div>
+        <div className='auth-center-value'>
+          <div className='auth-sign-up-box'>
+            <div className='auth-sign-up-title'>비밀번호 재설정</div>
 
-          <div className='auth-sign-up-box-text'>
+            <div className='auth-sign-up-box-text'>
               <div className='auth-sign-up-text'>비밀번호</div>
-                <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+              <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
             </div>
 
             <div className='auth-sign-up-box-text'>
               <div className='auth-sign-up-text'>비밀번호 확인</div>
-                <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+              <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
             </div>
 
-          <div className='auth-submit-box'>
-            <div className='auth-submit-box auth-primary-button' onClick={onSetUpPasswordButtonClickHandler}>비밀번호 변경</div>
+            <div className='auth-submit-box'>
+              <div className='auth-submit-box auth-primary-button' onClick={onSetUpPasswordButtonClickHandler}>비밀번호 변경</div>
+            </div>
           </div>
         </div>
+
+        <div className='auth-right-null'></div>
+      </div>
+
     </div>
-  
-    <div className='auth-right-null'></div>
-  </div>
-  
-  </div>
-    )
+  )
 }
 
 //                component               //
 export default function PasswordChangePage() {
-//                  state                //
-const [success, setSuccess] = useState<boolean>(false);
-const [id, setId] = useState<string>('');
-const [email, setEmail] = useState<string>('');
-const [authNumber, setAuthNumber] = useState<string>('');
+  //                  state                //
 
-const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
-const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>('');
+  const [passwordMessage, setPasswordMessage] = useState<string>('');
 
-const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
+  const [passwordButtonStatus, setPasswordButtonStatus] = useState<boolean>(false);
+  const [isPasswordCheck, setIsPasswordCheck] = useState<boolean>(false);
+  const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
 
-const [isIdCheck, setIsIdCheck] = useState<boolean>(false);
-const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
-const [isAuthNumberCheck,setIsAuthNumberCheck] = useState<boolean>(false);
-
-const [idMessage, setIdMessage] = useState<string>('');
-const [emailMessage, setEmailMessage] = useState<string>('');
-const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-const [isIdError, setIsIdError] = useState<boolean>(false);
-const [isEmailError, setIsEmailError] = useState<boolean>(false);
-const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
-//                  function                 //
+  //                  function                 //
   const navigator = useNavigate();
 
-  const idCheckResponse = (result: ResponseDto | null) => {
-    const idMessage = 
-      !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
-      result.code === 'NI' ? '존재 하지 않는 아이디 입니다.' :
-      result.code === 'NE' ? '존재 하지 않는 이메일 입니다.' :
-      result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
-      result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
-    const idError = !(result && result.code === 'SU');
-    const idCheck = !idError;
-  
-    setIdMessage(idMessage);
-    setIsIdError(idError);
-    setIsIdCheck(idCheck);
-  };
-  
-  const emailAuthResponse = (result: ResponseDto | null) => {
-    const emailMessage = 
-      !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'VF' ? '이메일 형식이 아닙니다.' :
-      result.code === 'NE' ? '존재하지 않는 이메일입니다.' :
-      result.code === 'MF' ? '인증번호 전송에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-      result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
-    const emailCheck = result !== null && result.code === 'SU';
-    const emailError = !emailCheck;
-  
-    setEmailMessage(emailMessage);
-    setIsEmailCheck(emailCheck);
-    setIsEmailError(emailError);
-  };
-  
-  const emailAuthCheckResponse = (result: ResponseDto | null) => {
-    const authNumberMessage =
-      !result ? '서버에 문제가 있습니다.':
-      result.code === 'VF' ? '인증번호를 입력해주세요.' :
-      result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.':
-      result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
-    const authNumberCheck = result !== null && result.code === 'SU';
-    const authNumberError = !authNumberCheck;
-  
-    setAuthNumberMessage(authNumberMessage);
-    setIsAuthNumberCheck(authNumberCheck);
-    setIsAuthNumberError(authNumberError);
-  };
-  
-  const passwordFoundResponse = (result: ResponseDto | null) => {
-    const message = 
+  const passwordCheckResponse = (result: ResponseDto | null) => {
+    const passwordMessage =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
-      result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
-    const isSuccess = result && result.code === 'SU'
+        result.code === 'VF' ? '비밀번호는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
+          result.code === 'NP' ? '존재하지 않는 비밀번호 입니다.' :
+            result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
+              result.code === 'SU' ? '사용 가능한 비밀번호입니다.' : '';
+
+    const passwordError = !(result && result.code === 'SU')
+    const passwordCheck = !passwordError;
+
+    setPasswordMessage(passwordMessage);
+    setIsPasswordError(passwordError);
+    setIsPasswordCheck(passwordCheck);
+  };
+
+  const passwordChangeResponse = (result: ResponseDto | null) => {
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBEE' ? '서버에 문제가 있습니다.' : '' ;
+
+    const isSuccess =result && result.code === 'SU'
     if (!isSuccess) {
       alert(message);
       return;
     }
-    globalId = id;
+    globalPassword = password;
     navigator(AUTH_PASSOWORD_RESET_ABSOLUTE_PATH);
-  };
-//                event handler               //
-
-const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-  const {value} = event.target;
-  setId(value);
-  setIdButtonStatus(value !=='');
-  setIsIdCheck(false);
-  setIdMessage('');
-}
-
-  const onIdButtonClickHandler = () => {
-    if(!idButtonStatus) return;
-
-    const requsetBody: IdCheckRequestDto = { userId: id };
-    idCheckRequest(requsetBody).then(idCheckResponse);
-  };  
-
-  const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
-    setEmail(value);
-    setEmailButtonStatus(value !=='');
-    setIsEmailCheck(false);
-    setIsAuthNumberCheck(false); 
-    setEmailMessage('');
   }
 
-  const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  //                event handler               //
+
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
-    setAuthNumber(value);
-    setAuthNumberButtonStatus(value !=='');
-    setIsAuthNumberCheck(false);  
-    setAuthNumberMessage('');
-  };
+    setPassword(value);
+    setPasswordButtonStatus(value !=='');
+    setIsPasswordCheck(false);
+    setPasswordMessage('');
+  }
 
-  const onEmailButtonClickHandler = () => {
-    if(!emailButtonStatus) return;
-
-    const emailPattern = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
-    const isEmailPattern = emailPattern.test(email);
-    if(!isEmailPattern) {
-      setEmailMessage('이메일 형식이 아닙니다.');
-      setIsEmailError(true);
-      setIsEmailCheck(false);
-      return;
-    }
-    const requestBody: EmailAuthRequestDto = { userEmail : email};
-    foundPasswordEmailAuthRequest(requestBody).then(emailAuthResponse);
-  };
-
-  const onAuthNumberButtonClickHandler = () => {
-    if(!authNumberButtonStatus) return;
-    if(!authNumber) return;
-
-    const requsetBody: EmailAuthCheckRequestDto = { 
-      userEmail: email,
-      authNumber
-    };
-    emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
+  const onPasswordButtonClickHandler = () => {
+    if(!passwordButtonStatus) return;
   };  
 
-  const onFoundPasswordButtonClickHandler = () => {
-    if(!id || !email || !authNumber) {
-      alert('모든 내용을 입력해주세요.')
+  const onChangePasswordButtonClickHandler = () => {
+    if(!password) {
+      alert('비밀번호를 입력해주세요.')
       return;
     };
 
-    const requestBody: PasswordResetRequestDto = {
-      userId: id,
-      userEmail: email,
-      authNumber
-    };
-    foundPasswordUserCheckRequest(requestBody).then(passwordFoundResponse);
+    const requestBody: PasswordChangeRequestDto = {
+      userPassword: password
+      };
+    changePasswordRequest(requestBody).then(passwordChangeResponse);
   };
 
+
   //                      render                     //
-  return(
+  return (
     <div id='auth-wrapper'>
-  
-  <div className='auth-under-bar'>
+<div className='auth-under-bar'>
     <div className='auth-left-null'></div>
   
     <div  className='auth-center-value'>
@@ -298,22 +211,12 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
   
       <div className='auth-sign-up-box-text'>
 
-            <div className='auth-sign-up-text'>아이디</div>
-              <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='아이디 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
-          </div>
-
-          <div className='auth-sign-up-box-text'>
-            <div className='auth-sign-up-text'>이메일</div>
-              <InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='보내기' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  />
-          </div>
-
-          <div className='auth-sign-up-box-text'>
-            <div className='auth-sign-up-text'>이메일인증</div>
-              <InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
+            <div className='auth-sign-up-text'>비밀번호</div>
+              <InputBox type={'text'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} buttonTitle='비밀번호 확인' buttonStatus={passwordButtonStatus} onButtonClickHandler={onPasswordButtonClickHandler} message={passwordMessage} error={isPasswordError} />
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box auth-primary-button' onClick={onFoundPasswordButtonClickHandler}>확인</div>
+            <div className='auth-submit-box auth-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
         </div>
     </div>
