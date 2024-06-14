@@ -97,7 +97,6 @@ export default function TrendBoardComment() {
 
     //                   event handler                    //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') return;
         const comment = event.target.value;
         setComment(comment);
 
@@ -107,7 +106,7 @@ export default function TrendBoardComment() {
 
     const onPostButtonClickHandler = () => {
         if (!comment.trim()) return;
-        if (!trendBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
+        if (!trendBoardNumber ||  !cookies.accessToken) return;
 
         const requestBody: PostTrendBoardCommentRequestDto = { trendBoardCommentContents: comment };
 
