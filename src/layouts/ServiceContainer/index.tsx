@@ -253,10 +253,10 @@ export default function ServiceContainer() {
                 </div>
                 <div className='right-bar'>
                     <div className='footer-total-user-box'>
-                        {/* <VisitorCount /> */}
+                        <VisitorCount />
                     </div>
                     <div className='customer-chat'>
-                        <ChatRoom selectedDesignerId={selectedDesignerId} />
+                        {/* <ChatRoom selectedDesignerId={selectedDesignerId} /> */}
                     </div>
                 </div>
             </div>
