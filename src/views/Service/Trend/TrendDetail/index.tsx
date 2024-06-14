@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import '../../../../App.css'
 import TrendBoardComment from '../TrendBoardComment'
@@ -8,9 +8,9 @@ import { useCookies } from 'react-cookie'
 import { TrendBoardCommentListItem } from 'src/types'
 import ResponseDto from 'src/apis/response.dto'
 import { MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
-import { deleteTrendBoardRequest, getTrendBoardRequest } from 'src/apis/TrendBoard'
+import { deleteTrendBoardRequest, getTrendBoardRequest, increaseViewCountRequest } from 'src/apis/TrendBoard'
 import { GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
-import { Viewer } from '@toast-ui/react-editor'
+
 
 //															component															//
 export default function TrendDetail() {
@@ -52,12 +52,13 @@ export default function TrendDetail() {
 	}
 
 	const getTrendBoardResponse = (result : GetTrendBoardResponseDto | ResponseDto | null) => {
+		console.log(result);
 		const message = 
-		!result  ?' 서버에 문제가 있습니다.' :
+		!result  ? '서버에 문제가 있습니다.' :
 		result.code === 'VF' ? '잘못된 게시물 입니다.':
 		result.code === 'AF' ? '인증에 실패 했습니다.' :
 		result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-		result.code = 'DBE' ? '서버에 문제가 있습니다' : '';
+		result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
 
 		if(!result || result.code !== 'SU') {
 			alert(message);
@@ -73,12 +74,12 @@ export default function TrendDetail() {
 			trendBoardTitle,
 			trendBoardContents,
 			trendBoardWriterId,
-			trendBoardWriteDatetime,
+			trendBoardWriteDateTime,
 			trendBoardLikeCount,
 		} = result as GetTrendBoardResponseDto;
 		setTrendBoardTitle(trendBoardTitle);
 		setTrendBoardWriterId(trendBoardWriterId);
-		setTrendBoardWriteDatetime(trendBoardWriteDatetime);
+		setTrendBoardWriteDatetime(trendBoardWriteDateTime);
 		setTrendBoardLikeCount(trendBoardLikeCount);
 		setContents(trendBoardContents);
 	}
@@ -136,10 +137,14 @@ export default function TrendDetail() {
 		deleteTrendBoardRequest(trendBoardNumber, cookies.accessToken)
 		.then(deleteTrendBoardResponse);
 	}
-	console.log(trendBoardTitle);
-	console.log(trendBoardWriterId);
-	console.log(trendBoardContents);
-	console.log(trendBoardLikeCount);
+
+	useEffect(() => {
+		if(!trendBoardNumber) return;
+		getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
+		.then(getTrendBoardResponse);
+	}, [])
+	
+
 	return (
 		<div className="trend-detail">
 		<div className="trend-detail-title">{trendBoardTitle}</div>
@@ -150,16 +155,19 @@ export default function TrendDetail() {
 						<div className="trend-detail-information3">좋아요: {trendBoardLikeCount}</div>
 						{loginUserId === trendBoardWriterId && (
 						<>
-								<div className="trend-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-								<div className="trend-detail-information5" onClick={onUpdateClickHandler}>
+						<div className="trend-detail-information4" onClick={onDeleteButtonClickHandler}>삭제
+						</div>
+						<div 			
+							className= "trend-detail-information5" onClick=	{onUpdateClickHandler}>
 								수정
-								</div>
+							</div>
 						</>
 						)}
 				</div>
 		</div>
 		<div className="trend-detail-view">
-				<Viewer initialValue= {trendBoardContents} />
+			<div dangerouslySetInnerHTML={{ __html: trendBoardContents }} />
+				{/* <Viewer initialValue= {trendBoardContents} /> */}
 		</div>
 		<TrendBoardComment />
 		<div className="trend-detail-go-to-trendList" onClick={handleGoToList}>

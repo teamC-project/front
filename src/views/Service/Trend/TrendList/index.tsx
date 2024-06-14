@@ -3,7 +3,7 @@ import'./style.css'
 import '../../../../App.css'
 import { TrendBoardListItem } from 'src/types'
 import { useNavigate } from 'react-router'
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, TREND_BOARD_DETAIL_ABSOLUTE_PATH, TREND_BOARD_WRITE_ABSOLUTE_PATH,  } from 'src/constant'
+import { TREND_BOARD_COUNT_PER_PAGE, TREND_BOARD_COUNT_PER_SECTION, MAIN_PATH, TREND_BOARD_DETAIL_ABSOLUTE_PATH, TREND_BOARD_WRITE_ABSOLUTE_PATH,  } from 'src/constant'
 import { useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie'
 import { GetSearchTrendBoardListResponseDto, GetTrendBoardListResponseDto } from 'src/apis/TrendBoard/dto/response'
@@ -48,7 +48,7 @@ export default function TrendList() {
 	// 												state  												//
 
 	const {loginUserRole} = useUserStore();
-	const [cookies] = useCookies();
+	const [cookies] = useCookies();	
 	const [trendBoardList, setTrendBoardList] = useState<TrendBoardListItem[]>([])
 	const [viewList, setViewList] = useState<TrendBoardListItem[]>([]);
 	const [totalLength, setTotalLength ] = useState<number>(0);
@@ -65,18 +65,17 @@ export default function TrendList() {
 	const navigator = useNavigate();
 
 	const changePage = (trendBoardList: TrendBoardListItem[], totalLength : number) => {
-		if (!currentPage) return ;
-		const startIndex = (currentPage -1 ) * COUNT_PER_PAGE;
-		let endIndex = currentPage * COUNT_PER_PAGE;
-		if(endIndex < totalLength - 1) endIndex = totalLength;
+		const startIndex = (currentPage -1 ) * TREND_BOARD_COUNT_PER_PAGE;
+		let endIndex = currentPage * TREND_BOARD_COUNT_PER_PAGE;
+		if(endIndex > totalLength - 1) endIndex = totalLength;
 		const viewList = trendBoardList.slice(startIndex, endIndex);
 		setViewList(viewList);
 	} 
 
 	const changeSection = (totalPage : number) => {
 		if (!currentSection) return;
-		const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION -1);
-		let endPage = currentSection * COUNT_PER_SECTION;
+		const startPage = (currentSection * TREND_BOARD_COUNT_PER_SECTION) - (TREND_BOARD_COUNT_PER_SECTION -1);
+		let endPage = currentSection * TREND_BOARD_COUNT_PER_SECTION;
 		if (endPage > totalPage) endPage = totalPage;
 		const pageList : number[] = [];
 		for (let page = startPage; page <= endPage; page++) pageList.push(page);
@@ -84,13 +83,15 @@ export default function TrendList() {
 	}
 
 	const changeTrendBoardList = (trendBoardList : TrendBoardListItem[]) => {
+
+		setTrendBoardList(trendBoardList);
 		const totalLength = trendBoardList.length;
 		setTotalLength(totalLength)
 
-		const totalPage = (Math.floor(totalLength - 1) / COUNT_PER_PAGE) + 1;
+		const totalPage = (Math.floor(totalLength - 1) / TREND_BOARD_COUNT_PER_PAGE) + 1;
 		setTotalPage(totalPage);
 
-		const totalSection = Math.floor((totalPage -1) / COUNT_PER_SECTION + 1)
+		const totalSection = Math.floor((totalPage -1) / TREND_BOARD_COUNT_PER_SECTION + 1)
 		setTotalSection(totalSection);
 
 		changePage(trendBoardList, totalLength);
@@ -163,13 +164,13 @@ export default function TrendList() {
 	const onPreSectionClickHandler = () => {
 		if (currentSection <= 1) return;
 		setCurrentSection(currentSection -1 );
-		setCurrentPage((currentSection - 1)* COUNT_PER_SECTION);
+		setCurrentPage((currentSection - 1)* TREND_BOARD_COUNT_PER_SECTION);
 	}
 
 	const onNextSectionClickHandler = () => {
 		if (currentSection === totalSection) return;
 		setCurrentSection(currentSection + 1);
-		setCurrentPage(currentSection * COUNT_PER_SECTION + 1); 
+		setCurrentPage(currentSection * TREND_BOARD_COUNT_PER_SECTION + 1); 
 	}
 
 	const onSearchWordChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
@@ -227,6 +228,8 @@ useEffect(() => {
 	return (
 		<div id='trend-board-wrapper'>
 			<div className="trend-board-list-top-bar">
+				<div className='trend-board-search-box'>
+				<div className='trend-board-search-keyword'>검색 키워드</div>
 				<input 
 				className='trend-board-search-input' 
 				placeholder='제목을 입력하세요.'
@@ -234,28 +237,32 @@ useEffect(() => {
 				onChange={onSearchWordChangeHandler}
 				/>
 				<div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+				</div>
+	
 			</div>
 			<div className="trend-board-list-container">
 				<div className='trend-board-list'>
 			{viewList.map(item => <CardItem key = {item.trendBoardNumber} {...item} />)}
 				</div>
 			</div>
-			<div className='trend-board-list-bottom'>
+      <div className='trend-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
         <div className='trend-board-list-pagenation'>
-          {/* <div className='trend-board-list-page-left' 
-					onClick={onPreSectionClickHandler}></div> */}
-          {/* <div className='trend-board-list-page-box'>
+          <div className='trend-board-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='trend-board-list-page-box'>
+            {pageList.map(page => 
               page === currentPage ? 
-              <div className='trend-board-list-page-active'>{page}</div> :
-              <div className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+              <div key={page} className='trend-board-list-page-active'>{page}</div> :
+              <div key={page} className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
-            </div> */}
-						<div className='trend-board-list-page-right' onClick={onNextSectionClickHandler}></div>
+          </div>
+          <div className='trend-board-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-				{loginUserRole === 'ROLE_ADMIN' &&(
-					<div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div>
-				)}
+        {loginUserRole === 'ROLE_ADMIN' && (
+          <div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}>
+            글쓰기
+          </div>
+        )}
       </div>
 		</div>
 	)
