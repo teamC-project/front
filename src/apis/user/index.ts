@@ -29,21 +29,9 @@ export const updateDesignerInfoRequest = async (accessToken: string, designerInf
 };
 
 // function: 사용자 회원 탈퇴
-export const userInfoDeleteRequest = async (accessToken: string, userId: string) => {
-  try {
-    // 요청 헤더 설정
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` } // Bearer 토큰을 포함하는 인증 헤더
-    };
-
-    // axios.delete 요청 실행 및 결과 처리
-    const result = await axios.delete<ResponseDto>(`${USER_DELETE_URL}/${userId}`, config)
-      .then(requestHandler) // 요청 성공 시 결과를 처리하는 함수 호출
-      .catch(requestErrorHandler); // 요청 실패 시 에러를 처리하는 함수 호출
-
-    return result; // 결과 반환
-  } catch (error) {
-    console.error('Error in userInfoDeleteRequest:', error); // 에러 로그 출력
-    throw error; // 에러를 상위로 던져 추가적인 에러 처리가 가능하도록 합니다.
-  }
-};
+export const userInfoDeleteRequest = async (userId: string, accessToken: string) => {
+    const result = await axios.delete<ResponseDto>((USER_DELETE_URL),bearerAuthorization(accessToken))
+      .then(requestHandler)
+      .catch(requestErrorHandler);
+    return result;
+  };

@@ -225,7 +225,6 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
   setIdMessage('');
 }
 
-
   const onIdButtonClickHandler = () => {
     if(!idButtonStatus) return;
 
