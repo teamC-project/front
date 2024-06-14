@@ -81,6 +81,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
         
         postChatRoomRequest(requestBody, cookies.accessToken)
             .then(() => {
+                console.log('Room created successfully');
                 getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
             });
         setNewRoomName('');
@@ -147,6 +148,12 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
                 setNewRoomName(roomName);
                 createRoom();
             }
+        }
+    }, [selectedDesignerId]);
+
+    useEffect(() => {
+        if (selectedDesignerId) {
+            createRoom();
         }
     }, [selectedDesignerId]);
 

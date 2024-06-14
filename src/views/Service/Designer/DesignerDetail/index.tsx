@@ -210,9 +210,11 @@ export default function DesignerDetail() {
 
     const designerIdClickHandler = () => {
         const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
-        console.log('Designer ID clicked:', writerId);
-        const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
-        window.dispatchEvent(event);
+        if (confirmCreateRoom) {
+            console.log('Designer ID clicked:', writerId);
+            const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
+            window.dispatchEvent(event);
+        }
     }
 
     //                   effect                        //
