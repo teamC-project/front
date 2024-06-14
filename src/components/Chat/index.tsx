@@ -33,6 +33,8 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
     //                  function                    //
     const navigator = useNavigate();
 
+    
+
     const getChatroomListResponse = (result: GetChatroomListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -65,29 +67,47 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
         setMessages(messages);
     };
 
-    const createRoom = () => {
+    const createRoom = (roomName: string) => {
         if (loginUserRole !== 'ROLE_CUSTOMER') {
             alert('채팅방 생성은 고객만 가능합니다.');
             return;
+        }
+
+        if (!roomName.trim()) {
+            return;
+        }
+
+        const requestBody: PostChatroomRequestDto = {
+            roomId:0,
+            customerId: loginUserId,
+            designerId: selectedDesignerId,
+            roomName: roomName
         };
 
-        if (!newRoomName.trim()) return;
-
-        const requestBody : PostChatroomRequestDto = {
-            chatRoomName: newRoomName,
-            chatCustomerId: loginUserId,
-            chatDesignerId: selectedDesignerId
-        };
-        
         postChatRoomRequest(requestBody, cookies.accessToken)
-            .then(() => {
-                console.log('Room created successfully');
-                getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
+            .then((response) => {
+                postChatroomResponse(response);
+            })
+            .catch(error => {
             });
         setNewRoomName('');
-        // setSelectedDesignerId(''); // 상태 초기화 -> 다음번 새로운 디자이너 Id 선택할 수 있게 함
     };
 
+    const postChatroomResponse = (result: ResponseDto | null) => {
+        const message =
+        !result ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
+
+        if (!roomId || !cookies.accessToken)
+            return;
+        getChatroomListRequest( cookies.accessToken).then(getChatroomListResponse);
+    };
 
     //              event handler              //
     const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -141,19 +161,19 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
         // }
     }, [cookies.accessToken, roomId]);
 
+    // useEffect(() => {
+    //     if (!cookies.accessToken) return;
+    //     getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
+    // }, [cookies.accessToken]);
+
     useEffect(() => {
         if (selectedDesignerId) {
             const roomName = prompt('채팅방 이름을 입력하세요:', '');
             if (roomName) {
                 setNewRoomName(roomName);
-                createRoom();
+                createRoom(roomName);
+            } else {
             }
-        }
-    }, [selectedDesignerId]);
-
-    useEffect(() => {
-        if (selectedDesignerId) {
-            createRoom();
         }
     }, [selectedDesignerId]);
 
@@ -164,7 +184,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
                 <h2>채팅방 목록</h2>
                 <ul>
                     {rooms.map(room => (
-                        <li key={room.chatRoomId}>{room.chatName}</li>
+                        <li key={room.roomId}>{room.roomName}</li>
                     ))}
                 </ul>
                 {/* <h2>채팅방 생성</h2>

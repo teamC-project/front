@@ -69,8 +69,10 @@ export interface AnnouncementBoardListItem {
 }
 
 export interface ChatroomList {
-	chatRoomId: number;
-	chatName: string;
+	roomId: number;
+	customerId: string;
+	designerId: string;
+	roomName: string;
 }
 
 export interface ChatMessageList {

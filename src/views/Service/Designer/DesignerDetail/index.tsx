@@ -175,14 +175,16 @@ export default function DesignerDetail() {
         
         if (!newRoomName.trim()) return;
 
-        const requestBody : PostChatroomRequestDto = {
-            chatRoomName: newRoomName,
-            chatCustomerId: loginUserId,
-            chatDesignerId: selectedDesignerId
+        const requestBody: PostChatroomRequestDto = {
+            roomId: 0,
+            customerId: loginUserId,
+            designerId: selectedDesignerId,
+            roomName: newRoomName
         };
         
         postChatRoomRequest(requestBody, cookies.accessToken)
             .then(() => {
+                console.log('Room created successfully');
                 getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
             });
         setNewRoomName('');
@@ -212,6 +214,7 @@ export default function DesignerDetail() {
         const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
         if (confirmCreateRoom) {
             console.log('Designer ID clicked:', writerId);
+            setSelectedDesignerId(writerId); // 디자이너 ID 설정
             const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
             window.dispatchEvent(event);
         }
