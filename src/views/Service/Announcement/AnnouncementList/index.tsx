@@ -57,7 +57,6 @@ export default function AnnouncementBoardList() {
   const navigator = useNavigate();
 
   const changePage = (announcementBoardList: AnnouncementBoardListItem[], totalLength: number) => {
-    if (!currentPage) return;
     const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
@@ -76,6 +75,7 @@ export default function AnnouncementBoardList() {
   };
 
   const changeAnnouncementBoardList = (announcementBoardList: AnnouncementBoardListItem[]) => {
+		setAnnouncementBoardList(announcementBoardList)
     const totalLength = announcementBoardList.length;
     setTotalLength(totalLength);
 
