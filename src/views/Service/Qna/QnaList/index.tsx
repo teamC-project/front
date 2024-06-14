@@ -74,6 +74,8 @@ export default function QnaBoardList() {
   };
 
   const changeQnaBoardList = (qnaBoardList: QnaBoardListItem[]) => {
+		
+		setQnaBoardList(qnaBoardList);
     const totalLength = qnaBoardList.length;
     setTotalLength(totalLength);
 

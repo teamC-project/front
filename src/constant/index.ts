@@ -202,7 +202,7 @@ export const GET_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}`;
 export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODULE_URL}search`;
 export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
-export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}/${trendBoardNumber}`;
+export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const PATCH_TREND_BOARD_LIKE_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_count`;
 export const POST_TREND_BOARD_COMMENT_WRITE_URL =(trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const GET_TREND_BOARD_COMMENT_LIST_URL =  (trendBoardCommentNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment/list`
@@ -257,3 +257,8 @@ export const GET_DESIGNER_BOARD_COMMENT_URL = (designerBoardCommentNumber: numbe
 // description: 게시물 상수
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
+
+
+// description: 트렌드 게시판 게시물 상수
+export const TREND_BOARD_COUNT_PER_PAGE = 5;
+export const TREND_BOARD_COUNT_PER_SECTION = 10;

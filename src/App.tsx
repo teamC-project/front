@@ -48,6 +48,7 @@ import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 import { ChangePassword } from "./views/User/ChangePassword";
+import TrendUpdate from "./views/Service/Trend/TrendUpdate";
 
 
 
@@ -119,7 +120,7 @@ function App() {
         <Route index element={<TrendList />} />
         <Route path={TREND_BOARD_WRITE_PATH} element={<TrendWrite />} />
         <Route path={TREND_BOARD_DETAIL_PATH} element={<TrendDetail />} />
-        {/* <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendBoardUpdate />} /> */}
+        <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendUpdate />} />
       </Route>
 
       <Route path={QNA_BOARD_PATH} >
