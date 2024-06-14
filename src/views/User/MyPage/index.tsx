@@ -1,7 +1,7 @@
 import React from 'react'
 import "./style.css";
 import { Path, useNavigate } from 'react-router';
-import { DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH, UPDATE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { CHANGE_PASSWORD_ABSOLUTE_PATH, DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH,  } from 'src/constant';
 import { useStore } from 'zustand';
 import { useUserStore } from 'src/stores';
 
@@ -28,7 +28,7 @@ export default function MyPage() {
   };
 
   const onUpdatePasswordClickHandler = () => {
-    navigator(UPDATE_PASSWORD_ABSOLUTE_PATH);
+    navigator(CHANGE_PASSWORD_ABSOLUTE_PATH);
   }
 
   const onUserDeleteInfoClickHandler = () => {

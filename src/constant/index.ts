@@ -22,6 +22,7 @@ export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
 export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
 export const UPDATE_PASSWORD_PATH = "update-user-password"
 export const DELETE_INFO_PATH = "delete-user-info";
+export const CHANGE_PASSWORD_PATH = "change-user-password";
 
 export const ANNOUNCEMENT_BOARD_PATH = "announcement_board";
 export const ANNOUNCEMENT_BOARD_WRITE_PATH  = "write";
@@ -59,6 +60,7 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoard
 export const CHAT_PATH = "chat";
 export const CHAT_ROOM_PATH = "room";
 export const CHAT_ROOM_MESSAGE_PATH = "room/:roomId/message";
+export const POST_CHATROOM_WRITE_URL = 'http://localhost:9092/api/v1/chat/room'
 
 // description : Auth 절대 URL PATH
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
@@ -74,8 +76,9 @@ export const AUTH_PASSOWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_RESE
 export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
 export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
 export const UPDATE_DESIGNER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_DESIGNER_INFO_PATH}`;
-export const UPDATE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_PASSWORD_PATH}`;
+export const CHANGE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${CHANGE_PASSWORD_PATH}`;
 export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
+
 
 // description : 공지사항 절대 URL PATH
 export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}`;
@@ -130,12 +133,13 @@ export const CHAT_ROOM_ABSOLUTE_PATH = `${CHAT_ABSOLUTE_PATH}/${CHAT_ROOM_PATH}`
 export const CHAT_ROOM_DETAIL_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}`;
 export const CHAT_ROOM_MESSAGES_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}/messages`;
 export const CHAT_ROOM_MESSAGE_DETAIL_ABSOLUTE_PATH = (roomId: number | string, messageId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}/message/${messageId}`;
-export const POST_CHATROOM_WRITE_URL = `${CHAT_ABSOLUTE_PATH}${CHAT_ROOM_PATH}`;
+
 export const POST_CHAT_MESSAGE_URL = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}/message`;
 export const GET_CHATROOM_LIST_URL = `${CHAT_ABSOLUTE_PATH}/rooms`;
 export const GET_CHATROOM_DETAIL_URL = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}`;
 export const DELETE_CHATROOM_URL = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}`;
 export const DELETE_CHAT_MESSAGE_URL = (roomId: number | string, messageId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}/message/${messageId}`;
+export const CHAT_ROOM_CREATE_ABSOLUTE_PATH = (designerId: string) => `${SERVICE_PATH}/chat/create-room/${designerId}`;
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = "http://localhost:4200";
