@@ -38,12 +38,10 @@ export const userInfoDeleteRequest = async (userId: string, accessToken: string)
   return result;
 };
 
-
 // function: 비밀변경 변경 API 함수
 export const changePasswordRequest = async (requestBody: ChangePasswordRequestDto, accessToken: string) => {
-  const result = await axios.post(PASSWORD_CHANGE_URL, requestBody)
+  const result = await axios.post(PASSWORD_CHANGE_URL, requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
 }
-
