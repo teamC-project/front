@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
-import { useNavigate } from 'react-router';
-import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { useNavigate, useParams } from 'react-router';
+import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH, CHANGE_PASSWORD_PATH, MAIN_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
 
 import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
@@ -24,6 +24,7 @@ export default function PasswordChangePage() {
 
   const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
   const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
+  const { userPassword } = useParams();
   const [cookies ] = useCookies();
 
   //                  function                 //
@@ -50,7 +51,7 @@ export default function PasswordChangePage() {
 
   //                event handler               //
 
-  //! 현재 비밀번호 체인지 핸들러 만들어야 함
+  //! 현재 비밀번호
   const onPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPassword(value);
@@ -58,40 +59,38 @@ export default function PasswordChangePage() {
 
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const {value} = event.target;
     setPasswordChange(value)
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/;
+    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
     const isPassworPattern = passwordPattern.test(value);
     setIsPasswordPattern(isPassworPattern);
     const passwordMessage =
-      isPassworPattern ? '' :
-        value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
+      isPassworPattern ? '':
+      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
 
     const isEqaulPassword = passwordCheck === value
-    const passwordCheckMessage = isEqaulPassword ? '' :
+    const passwordCheckMessage = isEqaulPassword ? '': 
       passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
-  };
+  }
 
   const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const {value} = event.target;
     setPasswordCheck(value);
     const isEqaulPassword = password === value
-    const passwordCheckMessage = isEqaulPassword ? '' :
-      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    const passwordCheckMessage = isEqaulPassword ? '': 
+    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
-  };
-
-
+  }
 
   const onChangePasswordButtonClickHandler = () => {
     if (!cookies.accessToken) return;
     if (!passwordChange || !passwordCheck) {
       alert('모든 내용을 입력해주세요.')
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(CHANGE_PASSWORD_ABSOLUTE_PATH);
       return;
     };
 

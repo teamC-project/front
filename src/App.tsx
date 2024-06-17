@@ -51,12 +51,6 @@ import InfoDeleteUser from "./views/User/InfoDeleteUser";
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
 import PasswordChangePage from "./views/User/ChangePassword";
 
-
-
-
-
-
-
 //  component: root 경로 컴포넌트 //
 function Index() {
 
