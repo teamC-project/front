@@ -5,7 +5,7 @@ import { AnnouncementBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetAnnouncementBoardListResponseDto, GetAnnouncementBoardResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
+import { GetAnnouncementBoardListResponseDto,GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
 
@@ -204,7 +204,6 @@ export default function AnnouncementBoardList() {
 
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
-	console.log(announcementBoardList)
   return (
     <div className='announcement-board-list-wrapper'>
       <div className='announcement-board-list-search-box'>
