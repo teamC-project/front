@@ -19,7 +19,7 @@ export default function TrendWrite() {
 	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
 	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<{base64: string; url: string}[]>([]);
-	const [trendBoardThumbnailImage, settrendBoardThumbnailImage] = useState<string>('');
+	const [trendBoardThumbnailImage, setTrendBoardThumbnailImage] = useState<string>('');
 
 	
   //                    function                    //
@@ -76,7 +76,7 @@ export default function TrendWrite() {
   };
 
 	const onThumbnailSelectHandler = (url: string) => {
-		settrendBoardThumbnailImage(url);
+		setTrendBoardThumbnailImage(url);
 	}
 
 	  //                    effect                    //

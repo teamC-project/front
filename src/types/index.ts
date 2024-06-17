@@ -68,3 +68,16 @@ export interface AnnouncementBoardListItem {
 	announcementBoardWriteDatetime: string;
 	announcementBoardViewCount: number;
 }
+
+export interface ChatroomList {
+	roomId: number;
+	customerId: string;
+	designerId: string;
+	roomName: string;
+}
+
+export interface ChatMessageList {
+	chatSenderId: string;
+	chatReceiverId: string;
+	chatMessages: string;
+}

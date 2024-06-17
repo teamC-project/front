@@ -1,8 +1,6 @@
 export interface PostChatroomRequestDto {
+    roomId : number;
+    customerId: string;
     designerId: string;
-}
-
-export interface PostChatmessageRequestDto {
-    roomId: number;
-    message: string;
-}
+    roomName: string;
+}	
