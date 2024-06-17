@@ -37,6 +37,7 @@ export interface CustomerBoardListItem {
 	customerBoardWriterId : string;
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
+  // customerBoardCommentCount : number;
 	secret: boolean;
 }	
 export interface CustomerBoardCommentListItem {
@@ -69,8 +70,10 @@ export interface AnnouncementBoardListItem {
 }
 
 export interface ChatroomList {
-	chatRoomId: number;
-	chatName: string;
+	roomId: number;
+	customerId: string;
+	designerId: string;
+	roomName: string;
 }
 
 export interface ChatMessageList {

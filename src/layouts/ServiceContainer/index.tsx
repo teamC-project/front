@@ -213,13 +213,13 @@ export default function ServiceContainer() {
 
     useEffect(() => {
         if (!cookies.accessToken) {
-            navigator(AUTH_ABSOLUTE_PATH);
+            navigator(MAIN_PATH);
             return;
         }
 
         getSignInUserRequest(cookies.accessToken).then(result => {
             if (!result || result.code !== 'SU') {
-                navigator('/auth');
+                navigator(MAIN_PATH);
                 return;
             }
 
