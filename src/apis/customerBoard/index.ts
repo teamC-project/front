@@ -1,4 +1,4 @@
-import { PUT_CUSTOMER_BOARD_COMMENT_PUT_URL } from './../../constant/index';
+import { PUT_CUSTOMER_BOARD_COMMENT_PUT_URL, DELETE_CUSTOMER_BOARD_DELETE_URL } from './../../constant/index';
 import { DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL, GET_CUSTOMER_BOARD_COMMENT_LIST_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL } from "src/constant";
 import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardCommentRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
 import axios from "axios";
@@ -69,6 +69,14 @@ export const putCustomerBoardCommentRequest = async (customerBoardCommentNumber:
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
+};
+
+// function: CustomerBoard 게시물 삭제 API 함수 
+export const deleteCustomerBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
+  const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), bearerAuthorization(accessToken))
+      .then(requestHandler<ResponseDto>)
+      .catch(requestErrorHandler);
+  return result;
 };
 
 // function: CustomerBoard 답글 삭제 API 함수 
