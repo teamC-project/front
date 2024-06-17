@@ -10,6 +10,7 @@ import { getCustomerBoardRequest, postCustomerBoardCommentRequest, increaseViewC
 import { useUserStore } from 'src/stores';
 import { PostCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
 import CustomerBoardComment from '../CustomerComment';
+import { deleteCustomerBoardRequest } from 'src/apis/customerBoard'; // 삭제 API 함수 import
 
 
 interface Props {
@@ -99,6 +100,23 @@ export default function CustomerDetail() {
         setIsSecret(secret);
     };
 
+    const deleteCustomerBoardResponse = (result: ResponseDto | null) => {
+      const message =
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '잘못된 접수번호입니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  
+      if (!result || result.code !== 'SU') {
+        alert(message);
+        return;
+      }
+  
+      alert('삭제되었습니다.');
+      navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
+    };
+
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
 
         const message =
@@ -129,6 +147,17 @@ export default function CustomerDetail() {
         navigator(CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH(customerBoardNumber));
     };
 
+    const onDeleteButtonClickHandler = () => {
+      if (!customerBoardNumber || loginUserId !== writerId) {
+        alert('작성자만 삭제할 수 있습니다.');
+        return;
+      }
+      const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+      if (!isConfirm) return;
+      deleteCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
+        .then(deleteCustomerBoardResponse);
+    };
+
 
     //                   effect                        //
     useEffect(() => {
@@ -152,7 +181,7 @@ export default function CustomerDetail() {
           {/* 작성자와 로그인한 사용자가 같은 경우에만 수정/삭제 버튼 표시 */}
         {loginUserId === writerId && (
           <>
-            <div className="customer-detail-information4">삭제</div>
+            <div className="customer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
             <div className="customer-detail-information5" onClick={onUpdateClickHandler}>
               수정
             </div>
