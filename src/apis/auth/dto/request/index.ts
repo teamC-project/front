@@ -9,6 +9,10 @@ export interface IdCheckRequestDto {
   userId : string;
 }
 
+export interface FoundPasswordIdCheckRequestDto {
+  userId : string;
+}
+
 // description: 이메일 인증 Requset Body DTO
 export interface EmailAuthRequestDto {
   userEmail : string;

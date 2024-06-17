@@ -1,0 +1,166 @@
+/* 회원가입 선택 공통 */
+#change-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+  
+  .change-primary-button {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    padding: 8px 24px;
+  
+    background-color: rgba(255, 190, 152, 1);
+    border-radius: 6px;
+  
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+  
+    color: rgba(255, 255, 255, 1);
+  }
+  
+
+  
+  .change-choose-type-text {
+    display: flex;
+    justify-content: center;
+  
+    padding: 20px;
+  
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  
+  .change-type-text {
+    display: flex;
+    gap: 270px;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  .change-type-text-customer {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  .change-type-text-designer {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  .change-sign-up-sns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+  
+    gap: 20px;
+  }
+  
+  .change-sign-up-naver:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  .change-sign-up-kakao:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  /* 회원가입 공통 */
+  .change-sign-up-title {
+    display: flex;
+    justify-content: start;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  
+    font-size: 22px;
+    font-weight: 600;
+  
+    min-width: 800px;
+  }
+  
+  .change-sign-up-text {
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+  
+    color: rgba(42, 38, 38, 1);
+  }
+  
+  .change-sign-up-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .change-center-value {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+  }
+  
+
+  .change-sign-up-box-text {
+    display: flex;
+    width: 800px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .change-submit-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .change-radio-box {
+    display: flex;
+    text-align: center
+  }
+  
+  .change-sign-up-radio-box {
+    font-size: 24px;
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  .change-sign-in-button-size {
+    width: 120px;
+  }
+
+  .change-under-bar {
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+  }
+  
+  .change-left-null {
+    display: flex;
+    justify-content: start;
+    width: 600px;
+    height: 600px;
+  }
+
+  .change-center-value {
+    width: 100%;
+    flex: 1;
+  }
+  
+  .change-right-null {
+    display: flex;
+    justify-content: end;
+    width: 600px;
+    height: 600px;
+  
+  }
