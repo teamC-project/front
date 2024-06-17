@@ -154,8 +154,8 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
   const navigator = useNavigate();
 
   const idCheckResponse = (result: ResponseDto | null) => {
-    const idMessage = 
-      !result ? '서버에 문제가 있습니다.' : 
+    const idMessage =
+      !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
       result.code === 'NI' ? '존재 하지 않는 아이디 입니다.' :
       result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
@@ -229,14 +229,14 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 
     const requsetBody: FoundPasswordIdCheckRequestDto = { userId: id };
     foundPosswordIdCheckRequest(requsetBody).then(idCheckResponse);
-  };  
+  };
 
   const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setEmail(value);
     setEmailButtonStatus(value !=='');
     setIsEmailCheck(false);
-    setIsAuthNumberCheck(false); 
+    setIsAuthNumberCheck(false);
     setEmailMessage('');
   }
 
@@ -244,7 +244,7 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setAuthNumber(value);
     setAuthNumberButtonStatus(value !=='');
-    setIsAuthNumberCheck(false);  
+    setIsAuthNumberCheck(false);
     setAuthNumberMessage('');
   };
 
