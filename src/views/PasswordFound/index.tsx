@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, idCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
+import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, foundPosswordIdCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundPasswordIdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox';
 import AuthTopBar from 'src/components/authTopBar';
@@ -154,11 +154,10 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
   const navigator = useNavigate();
 
   const idCheckResponse = (result: ResponseDto | null) => {
-    const idMessage = 
-      !result ? '서버에 문제가 있습니다.' : 
+    const idMessage =
+      !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '아이디는 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
       result.code === 'NI' ? '존재 하지 않는 아이디 입니다.' :
-      result.code === 'NE' ? '존재 하지 않는 이메일 입니다.' :
       result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
       result.code === 'SU' ? '존재하는 아이디 입니다.' : '';
     const idError = !(result && result.code === 'SU');
@@ -228,16 +227,16 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
   const onIdButtonClickHandler = () => {
     if(!idButtonStatus) return;
 
-    const requsetBody: IdCheckRequestDto = { userId: id };
-    idCheckRequest(requsetBody).then(idCheckResponse);
-  };  
+    const requsetBody: FoundPasswordIdCheckRequestDto = { userId: id };
+    foundPosswordIdCheckRequest(requsetBody).then(idCheckResponse);
+  };
 
   const onEmailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setEmail(value);
     setEmailButtonStatus(value !=='');
     setIsEmailCheck(false);
-    setIsAuthNumberCheck(false); 
+    setIsAuthNumberCheck(false);
     setEmailMessage('');
   }
 
@@ -245,7 +244,7 @@ const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setAuthNumber(value);
     setAuthNumberButtonStatus(value !=='');
-    setIsAuthNumberCheck(false);  
+    setIsAuthNumberCheck(false);
     setAuthNumberMessage('');
   };
 
