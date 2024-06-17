@@ -99,6 +99,7 @@ export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | str
 export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
 
+
 // description : QNA 절대 URL PATH
 export const QNA_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}`
 export const QNA_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}/${QNA_BOARD_WRITE_PATH}`;
@@ -199,12 +200,13 @@ export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODU
 export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
-export const PATCH_TREND_BOARD_LIKE_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_count`;
 export const POST_TREND_BOARD_COMMENT_WRITE_URL =(trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const GET_TREND_BOARD_COMMENT_LIST_URL =  (trendBoardCommentNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment/list`
 export const PUT_TREND_BOARD_COMMENT_PUT_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const DELETE_TREND_BOARD_COMMENT_DELETE_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const GET_TREND_BOARD_COMMENT_URL = (trendBoardCommentNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment`;
+export const PUT_TREND_BOARD_LIKE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like`
+export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/increase_view_count`
 
 
 // description : Q&A API URL PATH
