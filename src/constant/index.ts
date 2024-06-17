@@ -185,6 +185,7 @@ export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
 export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
 export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-update`;
 export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
+export const USER_PASSWORD_CHECK_URL =  `${SERVER_USER_MODULE_URL}/password-check`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/service/announcement_board`;
