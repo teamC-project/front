@@ -49,14 +49,7 @@ import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBo
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
 import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
-
-import { ChangePassword } from "./views/User/ChangePassword";
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
-
-
-
-
-
 
 //  component: root 경로 컴포넌트 //
 function Index() {

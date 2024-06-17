@@ -1,6 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
+import '../../App.css';
 import './style.css';
-import '../../App.css'
 
 export interface InputBoxProps {
   label?: string;

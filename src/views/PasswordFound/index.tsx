@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useState } from 'react'
-import "./style.css"; 
-import InputBox from 'src/components/Inputbox';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import ResponseDto from 'src/apis/response.dto';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
 import { emailAuthCheckRequest, foundPasswordEmailAuthRequest, foundPasswordUserCheckRequest, idCheckRequest, setUpPasswordRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from 'src/apis/auth/dto/request';
+import ResponseDto from 'src/apis/response.dto';
+import InputBox from 'src/components/Inputbox';
 import AuthTopBar from 'src/components/authTopBar';
+import { AUTH_PASSOWORD_RESET_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import "./style.css";
 
 let globalId = '';
 
@@ -160,7 +160,7 @@ const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
       result.code === 'NI' ? '존재 하지 않는 아이디 입니다.' :
       result.code === 'NE' ? '존재 하지 않는 이메일 입니다.' :
       result.code === 'DBE' ? '서버에 접근할 수 없습니다.' :
-      result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
+      result.code === 'SU' ? '존재하는 아이디 입니다.' : '';
     const idError = !(result && result.code === 'SU');
     const idCheck = !idError;
   
