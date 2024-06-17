@@ -2,7 +2,7 @@
     flex-grow: 1;
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 10px;
-    padding: 8px 16px;
+    padding: 4px 14px;
 
     background-color: rgba(255, 255, 255, 1);
 
@@ -23,17 +23,17 @@ input[type="radio"] {margin-right: 250px;}
 
 .input-box {
   width: 200px;
-  text-align: center;
 }
 
 .input-label {
-    color: rgba(138, 146, 166, 1);
+    color: rgba(0, 0, 0, 1);
+    margin-right: 100px
 }
 
 .input-content-box{
     display: flex;
     gap: 10px;
-    width: 450px;
+    width: 350px;
 
     margin-top: 8px;
     margin-bottom: 4px;
@@ -42,12 +42,12 @@ input[type="radio"] {margin-right: 250px;}
 .input-primary-button {
     box-sizing: border-box;
     width: 100px;
-    padding: 8px 0px;
+    padding: 4px 0px;
     border-radius: 6px;
 
     background-color: rgba(255,190,152,1);
 
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 175%;
@@ -64,12 +64,12 @@ input[type="radio"] {margin-right: 250px;}
 .input-disable-button {
   box-sizing: border-box;
   width: 100px;
-  padding: 8px 0px;
+  padding: 4px 0px;
   border-radius: 6px;
 
   background-color: rgba(238, 238, 238, 1);
 
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 175%;

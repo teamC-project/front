@@ -1,50 +1,50 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 
 import { useCookies } from "react-cookie";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_DETAIL_PATH, ANNOUNCEMENT_BOARD_PATH, ANNOUNCEMENT_BOARD_UPDATE_PATH, ANNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CUSTOMER_BOARD_DETAIL_PATH,  CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, CUSTOMER_PATH, DELETE_INFO_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH,  DESIGNER_BOARD_WRITE_PATH, DESIGNER_PATH, ID_FOUND_PATH, MAIN_PATH,MY_PAGE_PATH,PASSOWORD_RESET_PATH,PASSWORD_FOUND_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_PATH, UPDATE_PASSWORD_PATH, TEARMS_AND_CONDTIONS_PATH, PERSONAL_INFO_PROCESSING_POLICY_PATH, SITE_DESCRIPTION_PATH, YOUTH_PROTECTION_POLICY_PATH, ADVERTISEMENT_PATH, MAILCONTECT_PATH, CHANGE_PASSWORD_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH, } from "./constant";
+import { ADVERTISEMENT_PATH, ANNOUNCEMENT_BOARD_DETAIL_PATH, ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_PATH, ANNOUNCEMENT_BOARD_UPDATE_PATH, ANNOUNCEMENT_BOARD_WRITE_PATH, AUTH_PATH, CHANGE_PASSWORD_PATH, CUSTOMER_BOARD_DETAIL_PATH, CUSTOMER_BOARD_PATH, CUSTOMER_BOARD_UPDATE_PATH, CUSTOMER_BOARD_WRITE_PATH, CUSTOMER_PATH, DELETE_INFO_PATH, DESIGNER_BOARD_DETAIL_PATH, DESIGNER_BOARD_PATH, DESIGNER_BOARD_UPDATE_PATH, DESIGNER_BOARD_WRITE_PATH, DESIGNER_PATH, ID_FOUND_PATH, MAILCONTECT_PATH, MAIN_PATH, MY_PAGE_PATH, PASSOWORD_RESET_PATH, PASSWORD_FOUND_PATH, PERSONAL_INFO_PROCESSING_POLICY_PATH, QNA_BOARD_DETAIL_PATH, QNA_BOARD_PATH, QNA_BOARD_UPDATE_PATH, QNA_BOARD_WRITE_PATH, SERVICE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SITE_DESCRIPTION_PATH, SNS_PATH, TEARMS_AND_CONDTIONS_PATH, TREND_BOARD_DETAIL_PATH, TREND_BOARD_PATH, TREND_BOARD_UPDATE_PATH, TREND_BOARD_WRITE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_PATH, YOUTH_PROTECTION_POLICY_PATH } from "./constant";
 import ServiceContainer from "./layouts/ServiceContainer";
 
 import { ChooseSingUp, CustomerSignUp, DesignerSignUp, Main, SignIn, Sns } from "./views/Authentication";
 
-import MyPage from "./views/User/MyPage";
 import IdFound from "./views/IdFound";
-import PasswordFoundPage, {SettingPassword} from "./views/PasswordFound";
+import PasswordFoundPage, { SettingPassword } from "./views/PasswordFound";
+import MyPage from "./views/User/MyPage";
 
+import TrendDetail from "./views/Service/Trend/TrendDetail";
 import TrendList from "./views/Service/Trend/TrendList";
 import TrendWrite from "./views/Service/Trend/TrendWrite";
-import TrendDetail from "./views/Service/Trend/TrendDetail";
 
-import DesignerWrite from "./views/Service/Designer/DesignerWrite";
-import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
 import DesignerDetail from "./views/Service/Designer/DesignerDetail";
 import DesignerList from "./views/Service/Designer/DesignerList";
+import DesignerUpdate from "./views/Service/Designer/DesignerUpdate";
+import DesignerWrite from "./views/Service/Designer/DesignerWrite";
 
-import CustomerList from "./views/Service/Customer/CustomerList";
-import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 import CustomerDetail from "./views/Service/Customer/CustomerDetail";
+import CustomerList from "./views/Service/Customer/CustomerList";
 import CustomerUpdate from "./views/Service/Customer/CustomerUpdate";
+import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 
+import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
 import AnnouncementBoardList from "./views/Service/Announcement/AnnouncementList";
 import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
-import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
 
-import QnaBoardList from "./views/Service/Qna/QnaList";
-import QnaBoardWrite from "./views/Service/Qna/QnaWrite";
-import QnaBoardDetail from "./views/Service/Qna/QnaDetail";
-import QnaBoardUpdate from "./views/Service/Qna/QnaUpdate";
-import InfoCustomer from "./views/User/InfoCustomer";
-import InfoDesigner from "./views/User/InfoDesigner";
 import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
+import QnaBoardDetail from "./views/Service/Qna/QnaDetail";
+import QnaBoardList from "./views/Service/Qna/QnaList";
+import QnaBoardUpdate from "./views/Service/Qna/QnaUpdate";
+import QnaBoardWrite from "./views/Service/Qna/QnaWrite";
+import InfoCustomer from "./views/User/InfoCustomer";
+import InfoDesigner from "./views/User/InfoDesigner";
 
+import Advertisement from "./layouts/Advertisement";
 import MailContect from "./views/FooterContents/MailContect";
-import TermsAndConditions from "./views/FooterContents/TermsAndConditions";
 import PersonalInfoProcessingPolicy from "./views/FooterContents/PersonalInfoProcesssingPolicy";
 import SiteDescription from "./views/FooterContents/SiteDescription";
+import TermsAndConditions from "./views/FooterContents/TermsAndConditions";
 import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy";
-import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
