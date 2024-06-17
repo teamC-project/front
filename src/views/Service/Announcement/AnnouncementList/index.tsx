@@ -204,6 +204,7 @@ export default function AnnouncementBoardList() {
 
   //                    render                    //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+	console.log(announcementBoardList)
   return (
     <div className='announcement-board-list-wrapper'>
       <div className='announcement-board-list-search-box'>
@@ -223,7 +224,7 @@ export default function AnnouncementBoardList() {
       </div>
       <div className='announcement-board-list-table'>
         <div className='announcement-board-table-th'>
-          <div className='announcement-board-list-table-reception-number'>접수번호</div>
+          <div className='announcement-board-list-table-number'>접수번호</div>
           <div className='announcement-board-list-table-title'>제목</div>
           <div className='announcement-board-list-table-writer-id'>작성자</div>
           <div className='announcement-board-list-table-write-date'>작성일</div>
