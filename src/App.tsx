@@ -49,7 +49,13 @@ import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBo
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
-import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
+import PasswordChangePage from "./views/User/ChangePassword";
+
+
+
+
+
+
 
 //  component: root 경로 컴포넌트 //
 function Index() {
@@ -103,7 +109,6 @@ function App() {
       <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={DELETE_INFO_PATH} element={<InfoDeleteUser />} />
       <Route path={CHANGE_PASSWORD_PATH} element={<PasswordChangePage />} />
-      <Route path={PASSOWORD_RESET_PATH} element={<ChangePassword />} />
       </Route>
       
       <Route path={ANNOUNCEMENT_BOARD_PATH} >

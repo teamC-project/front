@@ -187,9 +187,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
                         <li key={room.roomId}>{room.roomName}</li>
                     ))}
                 </ul>
-                {/* <h2>채팅방 생성</h2>
-                <input type='text' value={newRoomName} onChange={(event: ChangeEvent<HTMLInputElement>) => setNewRoomName(event.target.value)} placeholder='채팅방 이름' />
-                <button onClick={createRoom}>채팅방 생성</button> */}
             </div>
         </div>
     );
