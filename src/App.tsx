@@ -48,9 +48,8 @@ import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
-import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
 
-import { ChangePassword } from "./views/User/ChangePassword";
+import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
 
 

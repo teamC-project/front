@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
 import { useNavigate } from 'react-router';
-import { CustomerBoardListItem } from 'src/types';
+import { CustomerBoardListItem, CustomerBoardCommentListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH, CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
@@ -17,6 +17,7 @@ function ListItem ({
   customerBoardWriterId,
   customerBoardWriteDatetime,
   customerBoardViewCount,
+  // customerBoardCommentCount,
   secret
 }: CustomerBoardListItem) {
 
@@ -43,7 +44,12 @@ function ListItem ({
   return (
     <div className='customerboard-list-table-tr' onClick={onClickHandler}>
       <div className='customerboard-list-table-board-number'>{customerBoardNumber}</div>
-      <div className='customerboard-list-table-title'>{title}</div>
+      <div className='customerboard-list-table-title'>
+        {title}
+        {/* {customerBoardCommentCount > 0 && (
+          <span className='customerboard-list-comment-count'>[{customerBoardCommentCount}]</span>
+        )} */}
+      </div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
       <div className='customerboard-list-table-write-date'>{customerBoardWriteDatetime}</div>
       <div className='customerboard-list-table-viewcount'>{customerBoardViewCount}</div>
@@ -68,6 +74,7 @@ export default function CustomerList() {
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
   const [isSearched, setIsSearched] = useState<boolean>(false);
+  const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
 
   //                    function                    //
   const navigator = useNavigate();
