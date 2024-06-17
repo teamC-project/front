@@ -70,7 +70,7 @@ export interface AnnouncementBoardListItem {
 }
 
 export interface ChatroomList {
-	roomId: number;
+	chatroomId: number;
 	customerId: string;
 	designerId: string;
 	roomName: string;

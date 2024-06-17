@@ -10,8 +10,8 @@ export interface GetChatMessageListResponseDto extends ResponseDto {
 }
 
 export interface GetChatroomResponseDto extends ResponseDto {
-    chatRoomNumber: number;
-    chatSenderId: string;
-    chatReceiverId: string;
-    chatMessages: string;
+    chatroomId: number;
+    customerId: string;
+    designerId: string;
+    roomName: string;
 }
