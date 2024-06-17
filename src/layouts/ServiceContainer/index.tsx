@@ -213,13 +213,13 @@ export default function ServiceContainer() {
 
     useEffect(() => {
         if (!cookies.accessToken) {
-            navigator(AUTH_ABSOLUTE_PATH);
+            navigator(MAIN_PATH);
             return;
         }
 
         getSignInUserRequest(cookies.accessToken).then(result => {
             if (!result || result.code !== 'SU') {
-                navigator('/auth');
+                navigator(MAIN_PATH);
                 return;
             }
 
@@ -253,10 +253,10 @@ export default function ServiceContainer() {
                 </div>
                 <div className='right-bar'>
                     <div className='footer-total-user-box'>
-                        {/* <VisitorCount /> */}
+                        <VisitorCount />
                     </div>
                     <div className='customer-chat'>
-                        <ChatRoom selectedDesignerId={selectedDesignerId} />
+                        {/* <ChatRoom selectedDesignerId={selectedDesignerId} /> */}
                     </div>
                 </div>
             </div>

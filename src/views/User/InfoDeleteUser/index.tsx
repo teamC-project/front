@@ -1,39 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { useUserStore } from 'src/stores';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_PATH, USER_DELETE_URL } from 'src/constant';
-import { userInfoDeleteRequest } from 'src/apis/user';
+import { AUTH_ABSOLUTE_PATH, MAIN_PATH} from 'src/constant';
+import { getSignInUserRequest, userInfoDeleteRequest } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import { requestErrorHandler, requestHandler } from 'src/apis';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 
+//            component           //
 export default function InfoDeleteUser() {
-  const { loginUserId } = useUserStore();
+  //                  state                     //
+  const { pathname } = useLocation();
+  const { loginUserId, loginUserRole } = useUserStore();
+  const { setLoginUserId, setLoginUserRole } = useUserStore();
+  const [userId, setUserId] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [cookies] = useCookies();
+
+  //                function                //
   const navigator = useNavigate();
 
   const deleteUserInfoResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '권한이 없습니다.' :
-      result.code === 'VF' ? '올바르지 않는 권한입니다.' :
-      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+      result.code === 'VF' ? '올바르지 않는 유저입니다.' :
+      result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
       return;
     }
+    navigator(MAIN_PATH);
   };
 
+  const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'AF' ? '인증에 실패했습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        navigator(AUTH_ABSOLUTE_PATH);
+        return;
+    }
+    const { userId, userRole } = result as GetSignInUserResponseDto;
+    setLoginUserId(userId);
+    setLoginUserRole(userRole);
+};
+
   //                event handler               //
-  const onUserInfoDeleteClickHandler = async () => {
+  const onUserDeleteClickHandler = () => {
+    if (!isChecked || !cookies.accessToken) return; 
+    const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
+    if (!isConfirm) return;
+
     if (isChecked) {
       try {
-        await userInfoDeleteRequest(cookies.accessToken, loginUserId); // 수정된 부분
+        userInfoDeleteRequest(cookies.accessToken, loginUserId);
         alert('회원탈퇴가 완료되었습니다.');
         navigator(MAIN_PATH);
       } catch (error) {
@@ -43,12 +71,24 @@ export default function InfoDeleteUser() {
     } else {
       alert('회원 탈퇴를 위해서는 안내 사항에 동의해야 합니다.');
     }
-  };
+    
+    userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
+};
 
-  const onCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-  
+const onCheckboxChange = () => {
+  setIsChecked(!isChecked);
+};
+
+//              effect              //
+useEffect(() => {
+  if (!cookies.accessToken) {
+      navigator(AUTH_ABSOLUTE_PATH);
+      return;
+  }
+  getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+}, [cookies.accessToken]);
+
+
   //          render          //
   return (
     <div id='info-delete-wrapper'>
@@ -84,7 +124,7 @@ export default function InfoDeleteUser() {
             <div className='detail-agree'>안내 사항을 모두 확인하였으며, 이에 동의합니다.</div>
           </div>
 
-          <div className='delete-complete-contents' onClick={onUserInfoDeleteClickHandler}>
+          <div className='delete-complete-contents' onClick={onUserDeleteClickHandler}>
             <div className='delete-complete'>회원탈퇴</div>
           </div>
 

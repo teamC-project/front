@@ -47,8 +47,12 @@ import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy"
 import Advertisement from "./layouts/Advertisement";
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
+
+import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
+
 import { ChangePassword } from "./views/User/ChangePassword";
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
+
 
 
 
@@ -105,8 +109,8 @@ function App() {
       <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
       <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
       <Route path={DELETE_INFO_PATH} element={<InfoDeleteUser />} />
-      <Route path={CHANGE_PASSWORD_PATH} element={<ChangePassword />} />
-      <Route path={PASSOWORD_RESET_PATH} element={<SettingPassword />} />
+      <Route path={CHANGE_PASSWORD_PATH} element={<PasswordChangePage />} />
+      <Route path={PASSOWORD_RESET_PATH} element={<ChangePassword />} />
       </Route>
       
       <Route path={ANNOUNCEMENT_BOARD_PATH} >

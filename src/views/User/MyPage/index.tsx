@@ -1,7 +1,7 @@
 import React from 'react'
 import "./style.css";
 import { Path, useNavigate } from 'react-router';
-import { CHANGE_PASSWORD_ABSOLUTE_PATH, DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH,  } from 'src/constant';
+import { CHANGE_PASSOWORD_CHANGE_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH, CHANGE_PASSWORD_PATH, DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH,  } from 'src/constant';
 import { useStore } from 'zustand';
 import { useUserStore } from 'src/stores';
 
