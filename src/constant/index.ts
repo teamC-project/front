@@ -157,6 +157,7 @@ export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`
 
 export const FOUND_ID_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/id-found-email-auth`;
 export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
+export const FOUND_PASSWORD_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-found-id-check`;
 export const FOUND_PASSWORD_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/password-found-email-auth`;
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
 export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;

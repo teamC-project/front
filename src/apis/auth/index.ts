@@ -1,9 +1,9 @@
 import axios from "axios";
-import { CustomerDeleterequestDto, DesignerDeleteRequestDto, EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
-import { CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, FOUND_ID_EMAIL_AUTH_URL, FOUND_ID_URL, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, ID_CHECK_REQUEST_URL, RESET_PASSOWORD_PATH, SIGN_IN_REQUEST_URL } from "src/constant";
-import { IdFoundResponseDto, SignInResponseDto } from "./dto/response";
-import ResponseDto from "../response.dto";
+import { CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, FOUND_ID_EMAIL_AUTH_URL, FOUND_ID_URL, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_ID_CHECK_REQUEST_URL, FOUND_PASSWORD_PATH, ID_CHECK_REQUEST_URL, RESET_PASSOWORD_PATH, SIGN_IN_REQUEST_URL } from "src/constant";
 import { requestErrorHandler, requestHandler } from "..";
+import ResponseDto from "../response.dto";
+import { CustomerDeleterequestDto, DesignerDeleteRequestDto, EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, FoundPasswordIdCheckRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
+import { IdFoundResponseDto, SignInResponseDto } from "./dto/response";
 
 // function: 로그인 API 함수
 export const signInRequest = async (requestBody: SignInRequestDto) => {
@@ -75,6 +75,14 @@ export const foundIdRequest = async (requestBody: FoundIdCheckRequestDto) => {
     .then(requestHandler<IdFoundResponseDto>)
     .catch(requestErrorHandler);
     return result;
+}
+
+// function: 비밀번호 찾기 아이디 확인 API 함수
+export const foundPosswordIdCheckRequest = async (requsetBody: FoundPasswordIdCheckRequestDto) => {
+  const result = await axios.post(FOUND_PASSWORD_ID_CHECK_REQUEST_URL, requsetBody)
+  .then(requestHandler<ResponseDto>)
+  .catch(requestErrorHandler);
+  return result;
 }
 
 // function: 비밀번호 찾기 사용자 확인 API 함수
