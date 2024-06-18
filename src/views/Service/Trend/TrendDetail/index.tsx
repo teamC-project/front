@@ -70,8 +70,8 @@ const putTrendBoardLikeResponse = (result : ResponseDto | null) => {
 	}
 	if (!cookies.accessToken || !trendBoardNumber) return;
 
-	setIsLike(isLike);
 } 
+
 
 
 	const getTrendBoardResponse = (result : GetTrendBoardResponseDto | ResponseDto | null) => {
@@ -186,7 +186,6 @@ const putTrendBoardLikeResponse = (result : ResponseDto | null) => {
 				getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
 				.then(getTrendBoardResponse);
 }, [cookies.accessToken, trendBoardNumber]);
-
 
 
 	return (
