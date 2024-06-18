@@ -65,8 +65,8 @@ import ChatRoom from 'src/components/Chat';
   //                    render                    //
     return (
         <>
-        <div>총 방문자 수: {totalVisitors}</div>
-        <div>오늘 방문자 수: {visitorsToday}</div>
+        <div className='count-font'>총 방문자 수: {totalVisitors}</div>
+        <div className='count-font'>오늘 방문자 수: {visitorsToday}</div>
         </>
     );
 }

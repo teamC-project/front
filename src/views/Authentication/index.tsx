@@ -1,17 +1,17 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
-import "./style.css";
-import InputBox from 'src/components/Inputbox';
-import SelectBox from 'src/components/Selectbox';
-import { useNavigate, useParams } from 'react-router';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import { customerSignUpRequest, designerSignUpRequest, emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest } from 'src/apis/auth';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
-import { customerSignUpRequest, designerSignUpRequest, emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest } from 'src/apis/auth';
+import InputBox from 'src/components/Inputbox';
+import SelectBox from 'src/components/Selectbox';
 import AuthTopBar from 'src/components/authTopBar';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { useSnsStore } from 'src/stores';
-import { useSearchParams } from 'react-router-dom';
+import "./style.css";
 
 export function Main() {
   return (
@@ -23,12 +23,9 @@ export function Main() {
             <div className='main-page-image'></div>
           </div>
       </div>
-
     </div>
-
   )
 }
-
 
 //           component           //
 export function Sns() {
@@ -51,18 +48,15 @@ export function Sns() {
 
 //                    component                    //
 export function SignIn() {
-
   //                    state                    //
   const [cookies, setCookie] = useCookies();
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-
   //                    function                    //
   const navigator = useNavigate();
 
   const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
-
     const message =
       !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
@@ -77,10 +71,8 @@ export function SignIn() {
     const expiration = new Date(Date.now() + (expires * 1000));
     setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-    
     navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
-
 
   //                    event handler                    //
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -116,29 +108,26 @@ export function SignIn() {
 
   const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
   const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
-
   //                    render                    //
   return (
     <div id='auth-wrapper'>
       <AuthTopBar />
-
       <div className='sign-in-main-box'>
         <div className='image-box'></div>
         <div className='login-box'>
-
           <div className='login-container'>
             <div className='login-page h1'>로그인 페이지</div>
-
             <div className='sign-in-contents'>
+
               <div className='auth-sign-up-box-text'>
                 <div className='auth-sign-up-text'>아이디</div>
-                <div className='auth-sign-up-next-box'><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler}  />
+                <div><InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler}  />
                 </div>
               </div>
 
               <div className='auth-sign-up-box-text'>
                 <div className='auth-sign-up-text'>비밀번호</div>
-                <div className='auth-sign-up-next-box'><InputBox label='' type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
+                <div><InputBox label='' type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
                 </div>
               </div>
 
@@ -814,12 +803,12 @@ return (
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>업체명</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>
+            <div><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>
           </div>
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>면허증사진</div>
-            <div className='auth-sign-up-next-box'><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
+            <div><InputBox type={'file'} value={image} placeholder={''} onChangeHandler={onImageChangeHandler} message={imageMessage} error={isImageError} /></div>
           </div>
 
           <div className='auth-submit-box'>
@@ -837,10 +826,9 @@ return (
 
 //                component                  //
 export default function Authentication() {
-
   //                   render                //
   return (
-    <div>
-    </div>
+    <>
+    </>
   )
 }
