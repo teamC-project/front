@@ -16,6 +16,7 @@ function  CardItem ({
 		trendBoardWriterId,
 		trendBoardWriteDatetime,
 		trendBoardLikeCount,
+		trendBoardViewCount,
 		trendBoardThumbnailImage
 } : TrendBoardListItem) {
 	// 										function 										//
@@ -35,8 +36,9 @@ function  CardItem ({
 						</div>
 						<div className='trend-board-card-bottom-bar'>
 						<div className='trend-board-card-writerid'>{trendBoardWriterId}</div>
-							<div className = 'trend-board-card-datetime'>{trendBoardWriteDatetime}</div>
-							<div className='trend-board-comment-count'>{trendBoardLikeCount}</div>
+							<div className ='trend-board-card-datetime'>{trendBoardWriteDatetime}</div>
+							<div className='trend-board-card-like-count'>{trendBoardLikeCount}</div>
+							<div className='trend-board-card-view-count'>{trendBoardViewCount}</div>
 						</div>
 					</div>
 	)

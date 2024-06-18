@@ -96,7 +96,7 @@ export const deleteTrendBoardCommentRequest = async (trendBoardCommentNumber: nu
 
 // function  : 트렌드 게시물 좋아요 API 함수
 export const putTrendBoardLikeRequest = async (trendBoardNumber : number | string, accessToken : string) => {
-	const result = await axios.put(PUT_TREND_BOARD_LIKE_URL(trendBoardNumber), bearerAuthorization(accessToken))
+	const result = await axios.put(PUT_TREND_BOARD_LIKE_URL(trendBoardNumber), {} , bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
 	.catch(requestErrorHandler);
 
@@ -108,7 +108,6 @@ export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber :
 	const result = await axios.patch(PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL(trendBoardNumber), {}, bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
 	.catch(requestErrorHandler);
-	
 	return result;
 }
 

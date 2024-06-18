@@ -20,6 +20,7 @@ export interface TrendBoardListItem {
 	trendBoardWriterId : string;
 	trendBoardWriteDatetime : string;
 	trendBoardLikeCount : number;
+	trendBoardViewCount : number;
 	trendBoardThumbnailImage : string;
 }
 

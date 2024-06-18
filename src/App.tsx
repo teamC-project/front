@@ -48,11 +48,6 @@ import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy"
 import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
-<<<<<<< HEAD
-import PasswordChangePage, { ChangePassword } from "./views/User/ChangePassword";
-
-=======
->>>>>>> af39af97bc33ef7df118077a7d03bebc5b97647a
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
 import PasswordChangePage from "./views/User/ChangePassword";
 
