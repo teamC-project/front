@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+=======
+ import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import "./style.css";
+import InputBox from 'src/components/Inputbox';
+import SelectBox from 'src/components/Selectbox';
+import { useNavigate, useParams } from 'react-router';
+>>>>>>> 6688ee3f71a08de2549368ccdaaa0ba2fe799c1c
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';

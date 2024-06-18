@@ -207,7 +207,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     useEffect(() => {
         if(!cookies.accessToken) return;
         getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
-        console.log('Selected Designer ID:', selectedDesignerId);
 
         function onConnect() {
             console.log(socket);
@@ -222,38 +221,17 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
             console.log('message');
             console.log(args);
         }
-    
+        if (isConnected) return;
         socket.on('connect', onConnect);
         socket.on('disconnect', onDisconnect);
-        socket.on('message',onMessage );
     
         return () => {
             socket.off('connect', onConnect);
             socket.off('disconnect', onDisconnect);
+            socket.off('message', onMessage);
         };
 
-        
-
-
-        // if (roomId) {
-        //     getChatMessagesRequest(roomId, cookies.accessToken).then(getChatMessagesResponse)
-        //     socket.connect();
-        //     socket.emit('joinRoom', roomId);
-        //     socket.on('message', (newMessage: ChatMessageList) => {  //  prevMessages = 현재 메시지 목록의 이전 상태
-        //         setMessages(prevMessages => [...prevMessages, newMessage]);  // prevMessages 배열에 모든 기준 요소를 새로운 배열로 복사 후, newMessage 추가     즉 현재 메시지 목록의 이전 상태에 newMessage 를 넣은후 새로운 배열상태인 setMessages 를 추가 함.
-        //     });
-
-        //     return () => {  // 컴포넌트가 언마운트되거나 roomId가 변경될 때 실행
-        //         socket.emit('leaveRoom', roomId);
-        //         socket.disconnect();
-        //     };
-        // }
-    }, [cookies.accessToken, roomId]);
-
-    // useEffect(() => {
-    //     if (!cookies.accessToken) return;
-    //     getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
-    // }, [cookies.accessToken]);
+    }, [cookies.accessToken]);
 
     useEffect(() => {
         if (selectedDesignerId) {
@@ -280,8 +258,8 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         <div className='chat-room'>
             <div className='chat-room-list'>
                 <h2>채팅방 목록</h2>
-                <div className='chat-room-list-table-room-number'>번호</div>
-                    <div className='chat-room-list-table-title'>제목</div>
+                <div className='chat-room-list-table-room-number'>제목</div>
+                <div className='chat-room-list-table-title'>번호</div>
                     {viewList.map(item => (
                         <ListItem key={item.chatroomId} {...item} />
                         ))}
@@ -304,12 +282,3 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
 }
 
 export default ChatRoom;
-
-// import React from 'react';
-// import express from "express";
-
-// export default function index() {
-//     return (
-//         <div>index</div>
-//     );
-// }
