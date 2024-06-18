@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import { CHAT_ROOM_DETAIL_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { getChatroomRequest } from 'src/apis/chat';
-import { useChatStore } from 'src/stores';
+import { useChatStore, useUserStore } from 'src/stores';
 import socket from 'src/utils/socket';
 import { io } from 'socket.io-client';
 
@@ -17,10 +17,9 @@ export default function ChatroomDetail() {
   const navigator = useNavigate();
   const [cookies] = useCookies();
   const { roomId, resetRoomId } = useChatStore();
+  const { loginUserId } = useUserStore();
   const [roomname, setRoomName] = useState<string>('');
-  const [customerId, setCustomerId] = useState<string>('');
-  const [designerId, setDesignerId] = useState<string>('');
-  const [messages, setMessages] = useState<{ senderId: string, message: string }[]>([]);
+  const [messages, setMessages] = useState<{ roomId: String, senderId: string, message: string }[]>([]);
   const [newMessage, setNewMessage] = useState<string>('');
 
 
@@ -44,8 +43,6 @@ export default function ChatroomDetail() {
     } = result as GetChatroomResponseDto;
 
     setRoomName(roomName);
-    setCustomerId(customerId);
-    setDesignerId(designerId);
   };
 
   //                    event handler                    //
@@ -53,16 +50,22 @@ export default function ChatroomDetail() {
 
   const onMessageSendHandler = () => {
     if (newMessage.trim() !== '') {
-      const newMessageContainer = { senderId: customerId, message: newMessage };
-      socket.emit('senderMessage', newMessageContainer)
+      const newMessageContainer = { roomId: Number(roomId), senderId: loginUserId, message: newMessage };
+      socket.emit('senderMessage', newMessageContainer);
+      setNewMessage('');
     }
   };
+
+  let flag = false;
+
   //                    effect                    //
   useEffect(() => {
+    if (flag) return;
+    flag = true;
     if (roomId) {
-      socket.emit('joinRoom', { roomId });
+      socket.emit('joinRoom', roomId);
 
-      socket.on('receiveMessage', (message: { senderId: string, message: string }) => {
+      socket.on('receiveMessage', (message: { roomId: string, senderId: string, message: string }) => {
         setMessages(beforMessages => [...beforMessages, message]);
       });
 
@@ -82,7 +85,7 @@ export default function ChatroomDetail() {
       </div>
       <div className="cha-troom-messages">
         {messages.map((item, index) => (
-          <div key={index} className={item.senderId === customerId ? 'message-sent' : 'message-received'}>
+          <div key={index} className={item.senderId === loginUserId ? 'message-sent' : 'message-received'}>
             <div className="message-content">{item.message}</div>
           </div>
         ))}
