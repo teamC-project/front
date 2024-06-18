@@ -8,7 +8,7 @@ import { CUSTOMER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostCustomerBoardRequestDto } from 'src/apis/customerBoard/dto/request';
 import { postCustomerBoardRequest } from 'src/apis/customerBoard';
 import ToastEditor from 'src/components/ToastEditor';
-import Editor from '@toast-ui/editor';
+import { Editor } from '@toast-ui/react-editor';
 
 //              component               //
 export default function CustomerWrite() {
@@ -22,6 +22,7 @@ export default function CustomerWrite() {
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
     const editorRef = useRef<Editor|null>(null);
+    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
     //              function               //
@@ -64,15 +65,9 @@ export default function CustomerWrite() {
         setTitle(title);
     };
 
-    const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const contents = event.target.value;
-        if (contents.length > 1000) return;
-        setContents(contents);
-
-        if (!contentsRef.current) return;
-        contentsRef.current.style.height = 'auto';
-        contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
-    };
+    const onContentsChangeHandler = (contents: string ) => {
+			setContents(contents);
+		}
 
 	const handleImageUpload = () => {
         if (fileInputRef.current) {
@@ -103,6 +98,10 @@ export default function CustomerWrite() {
         setIsSecret(event.target.checked);
     };
     
+    const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
+			setUrlList(imageList);
+		}
+
     const onPostButtonClickHandler = () => {
         if (!title.trim() || !contents.trim()) return;
         if (!cookies.accessToken) return;
@@ -119,7 +118,8 @@ export default function CustomerWrite() {
 
     //             effect               //
     useEffect(() => {
-        if (loginUserRole === 'ROLE_ADMIN') {
+        if (!loginUserRole) return;
+        if (loginUserRole === 'ROLE_DESIGNER') {
             navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
@@ -128,39 +128,32 @@ export default function CustomerWrite() {
     //                    render                    //
     return (
         <div id='customer-write-wrapper'>
-            <div className='customer-write-top'>
-                <div className='customer-write-title-box'>
-                    <div className='customer-write-title'>제목</div>
-                    <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
-                </div>
-                <div className='customer-write-secret'>
-                    <label>
-                        <input type='checkbox' checked={isSecret} onChange={onSecretChangeHandler} />
-                        비밀글
-                    </label>
-                </div>
+          <div className='customer-write-top'>
+            <div className='customer-write-title-box'>
+                <div className='customer-write-title'>제목</div>
+                <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
             </div>
-
-
-            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
-
-            <div className='customer-write-contents-box'>
-                <textarea
-                    className='customer-write-contents-textarea'
-                    placeholder='내용을 입력해주세요.'
-                    value={contents}
-                    onChange={onContentsChangeHandler}
-                ></textarea>
+            <div className='customer-write-secret'>
+                <label>
+                    <input type='checkbox' checked={isSecret} onChange={onSecretChangeHandler} />
+                    비밀글
+                </label>
             </div>
-            <div className='customer-write-upload-file'>첨부 파일 {/* 추가: 첨부 파일 기능 */}
-                <div className='customer-write-upload-file-button' onClick={handleImageUpload}>파일 첨부하기</div> {/* 추가: 파일 첨부 버튼 */}
-                <input type='file' ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileInputChange} /> {/* 추가: 파일 입력 필드 */}
-            </div>
-            <div className='customer-write-button'>
-                <button className='customer-write-click-button' onClick={onPostButtonClickHandler}> {/* 변경: 버튼 클래스 이름 변경 */}
-                    올리기
-                </button>
-            </div>
+          </div>
+          <div className='customer-write-contents-box'>
+            <ToastEditor
+              ref={editorRef}
+              body={contents}
+              setBody={onContentsChangeHandler}
+              imageList={urlList}
+              setImageList={onImageChangeHandler}
+            />
+          </div>
+          <div className='customer-write-button'>
+            <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
+                올리기
+            </button>
+          </div>
         </div>
     );
 }

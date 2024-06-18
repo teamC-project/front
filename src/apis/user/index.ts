@@ -32,8 +32,8 @@ export const updateDesignerInfoRequest = async (accessToken: string, designerInf
 
 // function: 사용자 회원 탈퇴
 export const userInfoDeleteRequest = async (userId: string, accessToken: string) => {
-  const result = await axios.delete<ResponseDto>(USER_DELETE_URL,bearerAuthorization(accessToken))
-    .then(requestHandler)
+  const result = await axios.delete(USER_DELETE_URL,bearerAuthorization(accessToken))
+    .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
   return result;
 };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+  import { useEffect } from "react";
 import "./App.css";
 
 import { useCookies } from "react-cookie";
@@ -139,6 +139,11 @@ function App() {
         <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
         <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
         </Route>
+
+      {/* <Route path={CHAT_PATH} >
+        <Route path={CHAT_ROOM_DETAIL_PATH} element={<ChatroomDetail />} />
+      </Route> */}
+
       </Route>
       <Route path="*" element={<NotFound />} />
       <Route path = {MAILCONTECT_PATH}  element={<MailContect/>}/>{/* 메일 문의 */}
