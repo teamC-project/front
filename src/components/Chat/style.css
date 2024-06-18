@@ -1,0 +1,105 @@
+
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  width: 250px; 
+  height: 100vh; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chat-room-list {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+.chat-room-list h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.chat-room-list-table-room-number,
+.chat-room-list-table-title {
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+}
+
+.chatroom-list-table-tr {
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.chatroom-list-table-tr:hover {
+  background-color: #f9f9f9;
+}
+
+.chat-room-list-table-room-number {
+  flex: 1;
+  text-align: center;
+}
+
+.chat-room-list-table-title {
+  flex: 4;
+  text-align: left;
+}
+
+.chat-room-list-bottom {
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+}
+
+.chat-room-list-pagenation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-room-list-page-box {
+  display: flex;
+  gap: 5px;
+}
+
+.chat-room-list-page,
+.chat-room-list-page-active {
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-room-list-page {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.chat-room-list-page:hover {
+  background-color: #f9f9f9;
+}
+
+.chat-room-list-page-active {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+}
+
+.chat-room-list-page-left,
+.chat-room-list-page-right {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-room-list-page-left:hover,
+.chat-room-list-page-right:hover {
+  background-color: #f9f9f9;
+}
