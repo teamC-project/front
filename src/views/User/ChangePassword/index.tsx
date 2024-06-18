@@ -1,16 +1,13 @@
-import React, { ChangeEvent, useState } from 'react'
+import  { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
-import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH, CHANGE_PASSWORD_PATH, MAIN_PATH } from 'src/constant';
+import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
 
 import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
 import { changePasswordRequest,  } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
-
-let globalPassword = '';
-
 
 //                component               //
 export default function PasswordChangePage() {
@@ -50,13 +47,10 @@ export default function PasswordChangePage() {
   };
 
   //                event handler               //
-
-  //! 현재 비밀번호
   const onPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPassword(value);
   };
-
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
@@ -101,9 +95,6 @@ export default function PasswordChangePage() {
     changePasswordRequest(requestBody, cookies. accessToken).then(passwordChangeResponse);
   };
 
-
-  
-
   //                      render                     //
   return (
     <div id='change-wrapper'>
@@ -115,7 +106,7 @@ export default function PasswordChangePage() {
           <div className='change-sign-up-box-text'>
 
             <div className='change-sign-up-text'>현재 비밀번호</div>
-            <InputBox type={'text'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordHandler} />
+            <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordHandler} />
 
             <div className='change-sign-up-text'>새 비밀번호</div>
             <InputBox type={'password'} value={passwordChange} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
