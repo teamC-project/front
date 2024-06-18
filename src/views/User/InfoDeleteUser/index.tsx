@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./style.css";
 import { useUserStore } from 'src/stores';
 import { useLocation, useNavigate } from 'react-router';
@@ -11,7 +11,6 @@ import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 //            component           //
 export default function InfoDeleteUser() {
   //                  state                     //
-  const { pathname } = useLocation();
   const { loginUserId, loginUserRole } = useUserStore();
   const { setLoginUserId, setLoginUserRole } = useUserStore();
   const [userId, setUserId] = useState<string>('');
@@ -72,7 +71,6 @@ export default function InfoDeleteUser() {
         return;
       } 
     }
-
     userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
   };
 
@@ -88,7 +86,6 @@ export default function InfoDeleteUser() {
     }
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, [cookies.accessToken]);
-
 
   //          render          //
   return (
