@@ -1,5 +1,9 @@
 import axios from "axios";
+<<<<<<< HEAD
+import { CHANGE_PASSWORD_PATH, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, GET_SIGN_IN_USER_REQUEST_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_FOUND_PATH, RESET_PASSOWORD_PATH, USER_DELETE_URL, USER_PASSWORD_CHECK_URL } from "src/constant";
+=======
 import { CHANGE_PASSWORD_PATH, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, GET_SIGN_IN_USER_REQUEST_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_CHANGE_URL, PASSWORD_FOUND_PATH, RESET_PASSOWORD_PATH, USER_DELETE_URL } from "src/constant";
+>>>>>>> af39af97bc33ef7df118077a7d03bebc5b97647a
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import { GetSignInUserResponseDto, GetUserInfoResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
@@ -38,6 +42,17 @@ export const userInfoDeleteRequest = async (userId: string, accessToken: string)
   return result;
 };
 
+<<<<<<< HEAD
+// function: 비밀번호 변경 사용자 확인 API 함수
+export const changePasswordRequest = async (requestBody: PasswordChangeRequestDto) => {
+  const result = await axios.post(USER_PASSWORD_CHECK_URL, requestBody)
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+}
+
+=======
+>>>>>>> af39af97bc33ef7df118077a7d03bebc5b97647a
 // function: 비밀변경 변경 API 함수
 export const changePasswordRequest = async (requestBody: ChangePasswordRequestDto, accessToken: string) => {
   const result = await axios.post(PASSWORD_CHANGE_URL, requestBody, bearerAuthorization(accessToken))
