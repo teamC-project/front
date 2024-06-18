@@ -21,5 +21,5 @@ export interface GetCustomerBoardResponseDto extends ResponseDto {
 	customerBoardContents : string;
 	customerBoardViewCount : number;
 	customerBoardComment : string | null;
-	secret: boolean;
+	isSecret: boolean;
 }

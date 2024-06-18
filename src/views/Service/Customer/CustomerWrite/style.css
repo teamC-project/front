@@ -2,22 +2,24 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #F5F5F5;  padding: 20px;
+  background-color: #F5F5F5;  
+  padding: 20px;
 }
 
 .customer-write-top {
   display: flex;
   align-items: center;
   gap: 12px;
-  background-color: #F5F5F5; /* 다른 스타일과 통일 */
-  padding: 10px; /* 패딩 추가 */
+  background-color: #F5F5F5; 
+  padding: 10px; 
 }
 
 .customer-write-title {
   display: flex;
   width: 8%;
   font-family: Inter;
-  font-size: 20px;  font-weight: 700;
+  font-size: 20px;  
+  font-weight: 700;
 }
 
 .customer-write-title-box {
@@ -53,23 +55,10 @@
   margin-bottom: 20px;
 }
 
-.customer-write-contents-textarea {
-  border: none;
-  outline: none;
-  background: none;
-  resize: none;
-  width: 100%;
-  min-height: 200px;
-  line-height: 175%;
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(64, 64, 64, 1);
-}
-
 .customer-write-secret {
   display: flex;
   align-items: center;
+  cursor: pointer;
   margin-left: 20px;
   white-space: nowrap;
 }
@@ -78,42 +67,15 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 14px; /* 폰트 크기 조정 */
-  color: #333333; /* 폰트 색상 조정 */
+  font-size: 14px;
+  color: #333333;
 }
 
 .customer-write-secret input[type='checkbox'] {
   margin-right: 5px;
 }
 
-.customer-write-upload-file { /* 추가: 첨부 파일 스타일 */
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: 20px;
-}
-
-.customer-write-upload-file-button { /* 추가: 첨부 파일 버튼 스타일 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  align-items: center;
-  padding: 8px 24px;
-  background-color: rgba(58, 87, 232, 0.2);
-  border-radius: 6px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 175%;
-  color: rgba(45, 66, 178, 1);
-}
-
-.customer-write-upload-file-button:hover {
-  cursor: pointer;
-}
-
-.customer-write-button { /* 변경: 버튼 컨테이너 스타일 */
+.customer-write-button { 
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
