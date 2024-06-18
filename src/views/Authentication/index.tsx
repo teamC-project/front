@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+ import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
