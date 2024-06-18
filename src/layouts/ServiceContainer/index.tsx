@@ -10,6 +10,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
 import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
 import ChatRoom from 'src/components/Chat';
+import ChatroomDetail from 'src/views/Service/Chat';
+import { useChatStore } from 'src/stores';
 
     //              component                   //
     function VisitorCount() {
@@ -176,6 +178,7 @@ export default function ServiceContainer() {
     //                    state                    //
     const { pathname } = useLocation();
     const { setLoginUserId, setLoginUserRole } = useUserStore();
+    const { roomId } = useChatStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
     const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
@@ -256,7 +259,10 @@ export default function ServiceContainer() {
                         <VisitorCount />
                     </div>
                     <div className='customer-chat'>
-                        {/* <ChatRoom selectedDesignerId={selectedDesignerId} /> */}
+                        {roomId ? 
+                        <ChatroomDetail /> : 
+                        <ChatRoom selectedDesignerId={selectedDesignerId} />
+                        }
                     </div>
                 </div>
             </div>

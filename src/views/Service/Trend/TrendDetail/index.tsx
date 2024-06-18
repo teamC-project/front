@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie'
 import { TrendBoardCommentListItem } from 'src/types'
 import ResponseDto from 'src/apis/response.dto'
 import { MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
-import { deleteTrendBoardRequest, getTrendBoardRequest, increaseViewCountRequest } from 'src/apis/TrendBoard'
+import { deleteTrendBoardRequest, getTrendBoardRequest, patchTrendBoardIncreaseViewCountRequest,  } from 'src/apis/TrendBoard'
 import { GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
 
 
@@ -22,34 +22,36 @@ export default function TrendDetail() {
 	const [trendBoardTitle, setTrendBoardTitle]  = useState<string>('');
 	const [trendBoardWriterId, setTrendBoardWriterId] =  useState<string>('');
 	const [trendBoardWriteDatetime, setTrendBoardWriteDatetime] = useState<string>('');
-	const [trendBoardLikeCount, setTrendBoardLikeCount] = useState<string>('');
+	const [trendBoardLikeCount, setTrendBoardLikeCount] = useState<number>(0);
+	const [trendBoardViewCount, setTrendBoardViewCount] = useState<number>(0);
 	const [trendBoardContents, setContents] = useState<string>('');
 	const [comment, setComment] = useState<string | null>(null);
 
 	//										function										//
 	const navigator = useNavigate();
-	const increaseLikeCountResponse = (result : ResponseDto | null) => {
-		const message = 
-		!result ? '서버에 문제가 있습니다.' :
-		result.code === 'VF' ? '잘못된 게시물 입니다.' :
-		result.code === 'AF' ? '인증에 실패했습니다.':
-		result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+	const increaseTrendBoardViewCountResponse = (result: ResponseDto | null) => {
+		const message =
+				!result ? '서버에 문제가 있습니다.' :
+				result.code === 'VF' ? '잘못된 게시물입니다.' : 
+				result.code === 'AF' ? '인증에 실패했습니다.' :
+				result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+				result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-		if (!result || result.code !=='SU') {
-			alert(message);
-			if(result?.code ==='AF') {
-				navigator(MAIN_PATH);
-				return
-			}
-			navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
-			return;
+		if (!result || result.code !== 'SU') {
+				alert(message);
+				if (result?.code === 'AF') {
+						navigator(MAIN_PATH);
+						return;
+				}
+				navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
+				return;
 		}
 
-		if(!cookies.accessToken || !trendBoardNumber) return;
+		if (!cookies.accessToken || !trendBoardNumber) return;
 		getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
-		.then(getTrendBoardResponse);
-	}
+				.then(getTrendBoardResponse);
+};
+
 
 	const getTrendBoardResponse = (result : GetTrendBoardResponseDto | ResponseDto | null) => {
 		console.log(result);
@@ -76,12 +78,14 @@ export default function TrendDetail() {
 			trendBoardWriterId,
 			trendBoardWriteDateTime,
 			trendBoardLikeCount,
+			trendBoardViewCount
 		} = result as GetTrendBoardResponseDto;
 		setTrendBoardTitle(trendBoardTitle);
 		setTrendBoardWriterId(trendBoardWriterId);
 		setTrendBoardWriteDatetime(trendBoardWriteDateTime);
 		setTrendBoardLikeCount(trendBoardLikeCount);
 		setContents(trendBoardContents);
+		setTrendBoardViewCount(trendBoardViewCount)
 	}
 
 	const postTrendBoardCommentResponse = (result : ResponseDto | null) => {
@@ -143,7 +147,15 @@ export default function TrendDetail() {
 		getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
 		.then(getTrendBoardResponse);
 	}, [])
-	
+
+	// 										effect 										//
+	useEffect(() => {
+		if (!cookies.accessToken || !trendBoardNumber) return;
+		patchTrendBoardIncreaseViewCountRequest (trendBoardNumber, cookies.accessToken)
+				.then(increaseTrendBoardViewCountResponse);
+				getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
+				.then(getTrendBoardResponse);
+}, [cookies.accessToken, trendBoardNumber]);
 
 	return (
 		<div className="trend-detail">
@@ -153,6 +165,7 @@ export default function TrendDetail() {
 						<div className="trend-detail-information1">작성자: {trendBoardWriterId}</div>
 						<div className="trend-detail-information2">작성일: {trendBoardWriteDatetime}</div>
 						<div className="trend-detail-information3">좋아요: {trendBoardLikeCount}</div>
+						<div className='trend-detail-information4'> 조회수 : {trendBoardViewCount}</div>
 						{loginUserId === trendBoardWriterId && (
 						<>
 						<div className="trend-detail-information4" onClick={onDeleteButtonClickHandler}>삭제
@@ -167,7 +180,6 @@ export default function TrendDetail() {
 		</div>
 		<div className="trend-detail-view">
 			<div dangerouslySetInnerHTML={{ __html: trendBoardContents }} />
-				{/* <Viewer initialValue= {trendBoardContents} /> */}
 		</div>
 		<TrendBoardComment />
 		<div className="trend-detail-go-to-trendList" onClick={handleGoToList}>

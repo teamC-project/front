@@ -5,7 +5,7 @@ import { AnnouncementBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetAnnouncementBoardListResponseDto, GetAnnouncementBoardResponseDto, GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
+import { GetAnnouncementBoardListResponseDto,GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
 
@@ -223,7 +223,7 @@ export default function AnnouncementBoardList() {
       </div>
       <div className='announcement-board-list-table'>
         <div className='announcement-board-table-th'>
-          <div className='announcement-board-list-table-reception-number'>접수번호</div>
+          <div className='announcement-board-list-table-number'>접수번호</div>
           <div className='announcement-board-list-table-title'>제목</div>
           <div className='announcement-board-list-table-writer-id'>작성자</div>
           <div className='announcement-board-list-table-write-date'>작성일</div>

@@ -4,10 +4,10 @@ import { useCookies } from 'react-cookie';
 import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { CHAT_ROOM_DETAIL_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { getChatMessagesRequest, getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
+import { CHAT_ROOM_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, GET_CHATROOM_DETAIL_URL, MAIN_PATH } from 'src/constant';
+import { getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
 import socket from 'src/utils/socket';
-import { useUserStore } from 'src/stores';
+import { useChatStore, useUserStore } from 'src/stores';
 import { ChatMessageList, ChatroomList } from 'src/types';
 import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
 
@@ -16,7 +16,33 @@ interface ChatRoomProps {
 }
 
 //                    component                    //
-const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
+function ListItem ({ 
+    chatroomId,
+    roomName
+}: ChatroomList) {
+
+    //                    state                    //
+    const {setRoomId} = useChatStore();
+
+    //                    function                    //
+    const navigator = useNavigate();
+
+    console.log(chatroomId);
+
+    //                    event handler                    //
+    const onClickHandler = () => setRoomId(chatroomId);
+
+    //                    render                    //
+    return (
+        <div className='chatroom-list-table-tr' onClick={onClickHandler}>
+            <div className='chat-room-list-table-room-number'>{chatroomId}</div>
+            <div className='chat-room-list-table-title' style={{ textAlign: 'left' }}>{roomName}</div>
+        </div>
+    );
+}
+
+//                    component                    //
+const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
 
     //                    state                    //
     const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -30,10 +56,53 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
     const { loginUserRole, loginUserId } = useUserStore();
     // const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
 
+    const [chatroomList, setChatroomList] = useState<ChatroomList[]>([]);
+    const [viewList, setViewList] = useState<ChatroomList[]>([]);
+    const [totalLenght, setTotalLength] = useState<number>(0);
+    const [totalPage, setTotalPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [pageList, setPageList] = useState<number[]>([1]);
+    const [totalSection, setTotalSection] = useState<number>(1);
+    const [currentSection, setCurrentSection] = useState<number>(1);
+
     //                  function                    //
     const navigator = useNavigate();
 
+    const changePage = (chatroomList: ChatroomList[], totalLenght: number) => {
+        if (!currentPage) return;
+        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
+        let endIndex = currentPage * COUNT_PER_PAGE;
+        if (endIndex > totalLenght - 1) endIndex = totalLenght;
+        const viewList = chatroomList.slice(startIndex, endIndex);
+        setViewList(viewList);
+    };
+
+    const changeSection = (totalPage: number) => {
+        if (!currentSection) return;
+        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
+        let endPage = currentSection * COUNT_PER_SECTION;
+        if (endPage > totalPage) endPage = totalPage;
+        const pageList: number[] = [];
+        for (let page = startPage; page <= endPage; page++) pageList.push(page);
+        setPageList(pageList);
+    };
     
+    const changeBoardList = (chatroomList: ChatroomList[]) => {
+        setChatroomList(chatroomList);
+
+        const totalLenght = chatroomList.length;
+        setTotalLength(totalLenght);
+
+        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
+        setTotalPage(totalPage);
+
+        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
+        setTotalSection(totalSection);
+
+        changePage(chatroomList, totalLenght);
+
+        changeSection(totalPage);
+    };
 
     const getChatroomListResponse = (result: GetChatroomListResponseDto | ResponseDto | null) => {
         const message =
@@ -49,6 +118,10 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
 
         const { chatRoomList } = result as GetChatroomListResponseDto;
         setRooms(chatRoomList);
+        changeBoardList(chatRoomList);
+
+        setCurrentPage(!chatRoomList.length ? 0 : 1);
+        setCurrentSection(!chatRoomList.length ? 0 : 1);
     };
 
     const getChatMessagesResponse = (result: any) => {
@@ -86,7 +159,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
 
         postChatRoomRequest(requestBody, cookies.accessToken)
             .then((response) => {
-                postChatroomResponse(response);
+                getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
             })
             .catch(error => {
             });
@@ -112,6 +185,22 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
     //              event handler              //
     const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setNewRoomName(event.target.value);
+    };
+
+    const onPreSectionClickHandler = () => {
+        if (currentSection <= 1) return;
+        setCurrentSection(currentSection - 1);
+        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+    };
+
+    const onPageClickHandler = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const onNextSectionClickHandler = () => {
+        if (currentSection === totalSection) return;
+        setCurrentSection(currentSection + 1);
+        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
     //                   effect                    //
@@ -172,25 +261,44 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ selectedDesignerId }) => {
             if (roomName) {
                 setNewRoomName(roomName);
                 createRoom(roomName);
-            } else {
             }
         }
     }, [selectedDesignerId]);
+
+    useEffect(() => {
+        if (!chatroomList.length) return;
+        changePage(chatroomList, totalLenght);
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!chatroomList.length) return;
+        changeSection(totalPage);
+    }, [currentSection]);
 
     //                    render                    //
     return (
         <div className='chat-room'>
             <div className='chat-room-list'>
                 <h2>채팅방 목록</h2>
-                <ul>
-                    {rooms.map(room => (
-                        <li key={room.roomId}>{room.roomName}</li>
-                    ))}
-                </ul>
-                {/* <h2>채팅방 생성</h2>
-                <input type='text' value={newRoomName} onChange={(event: ChangeEvent<HTMLInputElement>) => setNewRoomName(event.target.value)} placeholder='채팅방 이름' />
-                <button onClick={createRoom}>채팅방 생성</button> */}
+                <div className='chat-room-list-table-room-number'>번호</div>
+                    <div className='chat-room-list-table-title'>제목</div>
+                    {viewList.map(item => (
+                        <ListItem key={item.chatroomId} {...item} />
+                        ))}
             </div>
+            <div className='chat-room-list-bottom'>
+            <div className='chat-room-list-pagenation'>
+                <div className='chat-room-list-page-left' onClick={onPreSectionClickHandler}></div>
+                <div className='chat-room-list-page-box'>
+                    {pageList.map(page => 
+                        page === currentPage ? 
+                        <div key={page} className='chat-room-list-page-active'>{page}</div> :
+                        <div key={page} className='chat-room-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+                    )}
+                </div>
+                <div className='chat-room-list-page-right' onClick={onNextSectionClickHandler}></div>
+            </div>
+        </div>
         </div>
     );
 }
@@ -205,4 +313,3 @@ export default ChatRoom;
 //         <div>index</div>
 //     );
 // }
-

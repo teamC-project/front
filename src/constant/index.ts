@@ -59,6 +59,7 @@ export const DESIGNER_BOARD_COMMENT_UPDATE_PATH = "comment/update/:designerBoard
 
 export const CHAT_PATH = "chat";
 export const CHAT_ROOM_PATH = "room";
+export const CHAT_ROOM_DETAIL_PATH = "roomId";
 export const CHAT_ROOM_MESSAGE_PATH = "room/:roomId/message";
 
 
@@ -77,7 +78,6 @@ export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
 export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
 export const UPDATE_DESIGNER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_DESIGNER_INFO_PATH}`;
 export const CHANGE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${CHANGE_PASSWORD_PATH}`;
-export const CHANGE_PASSOWORD_CHANGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${PASSOWORD_RESET_PATH}`;
 export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
 
 
@@ -99,6 +99,7 @@ export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | str
 	`${SERVICE_PATH}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
+
 
 // description : QNA 절대 URL PATH
 export const QNA_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}`
@@ -129,10 +130,10 @@ export const DESIGNER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (designerBoardNumber:
 export const DESIGNER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (designerBoardNumber: number | string) => `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}/comment/update/${designerBoardNumber}`;
 
 // description : 채팅 절대 URL PATH
-export const CHAT_ABSOLUTE_PATH = `${SERVICE_PATH}/${CHAT_PATH}`;
+export const CHAT_ABSOLUTE_PATH = `${CHAT_PATH}`;
 export const CHAT_ROOM_ABSOLUTE_PATH = `${CHAT_ABSOLUTE_PATH}/${CHAT_ROOM_PATH}`;
-export const CHAT_ROOM_DETAIL_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}`;
-export const CHAT_ROOM_MESSAGES_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/room/${roomId}/messages`;
+export const CHAT_ROOM_DETAIL_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/${roomId}`;
+export const CHAT_ROOM_MESSAGES_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/${roomId}/messages`;
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = "http://localhost:4200";
@@ -157,6 +158,7 @@ export const DESIGNER_SIGN_UP_URL = `${SERVER_AUTH_MODULE_URL}/sign-up/designer`
 
 export const FOUND_ID_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/id-found-email-auth`;
 export const FOUND_ID_URL = `${SERVER_AUTH_MODULE_URL}/id-found`;
+export const FOUND_PASSWORD_ID_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-found-id-check`;
 export const FOUND_PASSWORD_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/password-found-email-auth`;
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
 export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
@@ -179,6 +181,7 @@ export const UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/update`;
 export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
 export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-update`;
 export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
+export const PASSWORD_CHANGE_URL = `${SERVER_USER_MODULE_URL}/change-user-password`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/service/announcement_board`;
@@ -198,12 +201,13 @@ export const GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL = `${SERVER_TREND_BOARD_MODU
 export const GET_TREND_BOARD_DETAIL_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const PUT_TREND_BOARD_PUT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
 export const DELETE_TREND_BOARD_DELETE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}`;
-export const PATCH_TREND_BOARD_LIKE_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_count`;
 export const POST_TREND_BOARD_COMMENT_WRITE_URL =(trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const GET_TREND_BOARD_COMMENT_LIST_URL =  (trendBoardCommentNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment/list`
 export const PUT_TREND_BOARD_COMMENT_PUT_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const DELETE_TREND_BOARD_COMMENT_DELETE_URL = (trendBoardNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/comment`;
 export const GET_TREND_BOARD_COMMENT_URL = (trendBoardCommentNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment`;
+export const PUT_TREND_BOARD_LIKE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like`
+export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/increase_view_count`
 
 
 // description : Q&A API URL PATH
@@ -253,9 +257,9 @@ export const GET_DESIGNER_BOARD_COMMENT_URL = (designerBoardCommentNumber: numbe
 export const SERVER_CHAT_MODULE_URL = `${CHAT_DOMAIN_URL}/api/v1/chat`;
 export const POST_CHATROOM_URL = `${SERVER_CHAT_MODULE_URL}/room`;
 export const GET_CHATROOM_LIST_URL = `${SERVER_CHAT_MODULE_URL}/rooms`;
-export const GET_CHATROOM_DETAIL_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/room/${roomId}`;
-export const GET_CHAT_MESSAGE_LIST_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/room/${roomId}/messages`;
-export const DELETE_CHATROOM_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/room/${roomId}`;
+export const GET_CHATROOM_DETAIL_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/${roomId}`;
+export const GET_CHAT_MESSAGE_LIST_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/${roomId}/messages`;
+export const DELETE_CHATROOM_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/${roomId}`;
 
 // description: 게시물 상수
 export const COUNT_PER_PAGE = 10;

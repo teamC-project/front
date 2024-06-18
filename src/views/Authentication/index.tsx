@@ -354,7 +354,7 @@ const signUpResponse = (result: ResponseDto | null) => {
     setPasswordMessage(passwordMessage);
 
     const isEqaulPassword = passwordCheck === value
-    const passwordCheckMessage = isEqaulPassword ? '': 
+    const passwordCheckMessage = isEqaulPassword ? '':
       passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
@@ -364,7 +364,7 @@ const signUpResponse = (result: ResponseDto | null) => {
     const {value} = event.target;
     setPasswordCheck(value);
     const isEqaulPassword = password === value
-    const passwordCheckMessage = isEqaulPassword ? '': 
+    const passwordCheckMessage = isEqaulPassword ? '':
     passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
