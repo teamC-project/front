@@ -11,30 +11,31 @@ import { GetSignInUserResponseDto, GetUserInfoResponseDto } from 'src/apis/user/
 import { getSignInUserRequest, updateDesignerInfoRequest } from 'src/apis/user';
 import { DesignerInfoResponseDto } from 'src/apis/auth/dto/response';
 import axios from 'axios';
-
+//              component               //
 export default function InfoDesigner() {
-
-  const [age, setAge] = useState<string>('');
-  const [gender, setGender] = useState<string>('');
-  const [ageMessage, setAgeMessage] = useState<string>('');
-  const [genderMessage, setGenderMessage] = useState<string>('');
-  const [image, setImage] = useState<File | null>(null);
-  const [companyName, setCompanyName] = useState<string>('');
-  const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-  const [imageMessage, setImageMessage] = useState<string>('');
+  //                state                 //
   const { loginUserRole, loginUserId } = useUserStore();
   const [cookies] = useCookies();
 
+  const [age, setAge] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [image, setImage] = useState<File | null>(null);
+  const [companyName, setCompanyName] = useState<string>('');
+
+  const [ageMessage, setAgeMessage] = useState<string>('');
+  const [genderMessage, setGenderMessage] = useState<string>('');
+  const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
+  
   const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
   const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
-  const [isCompanyNameError, setIsCompanyNameError] = useState<boolean>(false);
-  const [isImageError, setIsImageError] = useState<boolean>(false);
+  const [imageMessage, setImageMessage] = useState<string>('');
+
 
   //                    function                    //
   const navigator = useNavigate();
 
-  const getInfoDesignerResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+  const getInfoDesignerResponse = (result: DesignerInfoResponseDto | ResponseDto | null) => {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -48,19 +49,19 @@ export default function InfoDesigner() {
       navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-
+    
     console.log(result);
-
-    const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
-    if (userId !== loginUserId) {
-      alert('권한이 없습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-      return;
-    }
-    setGender(userGender);
-    setAge(userAge);
-    setCompanyName(userCompanyName);
-  };
+    
+        const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
+        if (userId !== loginUserId) {
+          alert('권한이 없습니다.');
+          navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+          return;
+        }
+        setGender(userGender);
+        setAge(userAge);
+        setCompanyName(userCompanyName);
+      };
 
 
   const getImageResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
@@ -82,33 +83,32 @@ export default function InfoDesigner() {
 
   //                    event handler                    //
   const onInfoDesignerUpdateClickHandler = async () => {
-
     if (!image) return;
-    const data = new FormData();
-    data.append('file', image);
 
-    const userImage = await axios.post('http://localhost:4200/api/v1/designer_board/upload', data, { headers: { "Content-Type": 'multipart/form-data', Authorization: `Bearer ${cookies.accessToken}` } })
-      .then(response => response.data).catch(error => '');
+    const reader = new FileReader();
+    reader.onload = async function () {
+        const imageDataUrl = reader.result;
 
-    try {
-      const designerInfoUpdate = {
-        userCompanyName: companyName,
-        userGender: gender,
-        
-        userAge: age,
-        userImage: image
-      };
-      console.log(designerInfoUpdate);
-      updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
-      alert('개인정보가 업데이트되었습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+        try {
+            const designerInfoUpdate = {
+                userCompanyName: companyName,
+                userGender: gender,
+                userAge: age,
+                userImage: imageDataUrl
+            };
 
-    } catch (error) {
-      console.error('Error updating user info:', error);
-      alert('개인정보 업데이트에 실패했습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }
-  };
+            updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
+        } catch (error) {
+            console.error('Error updating user info:', error);
+            alert('개인정보 업데이트에 실패했습니다.');
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+        }
+    };
+    reader.readAsDataURL(image); // 이미지를 Base64 형식으로 인코딩하여 문자열로 변환
+
+    alert('개인정보가 업데이트되었습니다.');
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+};
 
   const onAgeChangeHandler = (value: string) => {
     setAge(value);
@@ -121,7 +121,6 @@ export default function InfoDesigner() {
     const { value } = event.target;
     setGender(value);
     setIsGenderCheck(true);
-    // const genderMessage = isGenderCheck ? '' : (value ? '성별을 선택해주세요.' : '');
     setGenderMessage(genderMessage);
   };
 
@@ -139,7 +138,6 @@ export default function InfoDesigner() {
 
     const file = files[0];
     setImage(file);
-
   };
 
   const formData = new FormData();
@@ -196,7 +194,7 @@ export default function InfoDesigner() {
           </div>
           <div className='info-designer-update-box-text'>
             <div className='info-designer-update-text'>업체명</div>
-            <div className='info-designer-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler= {onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>
+            <div className='info-designer-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler= {onCompanyNameChangeHandler} message={companyNameMessage} /></div>
           </div>
 
           <div className='info-designer-update-box-text'>

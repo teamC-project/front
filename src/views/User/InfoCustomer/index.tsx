@@ -56,7 +56,7 @@ export default function InfoCustomer() {
   //                     event handler                     //
   const onInfoCustomerUpdateClickHandler = async () => {
     try {
-      const customerInfoUpdate = {
+      const customerInfoUpdate = { 
         userGender: gender,
         userAge: age,
       };
