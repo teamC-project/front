@@ -7,7 +7,7 @@ import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { getSearchCustomerBoardListRequest, getCustomerBoardListRequest } from 'src/apis/customerBoard';
+import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
 
 //                    component                    //
 function ListItem ({
@@ -126,7 +126,6 @@ export default function CustomerList() {
       }
 
       const { customerBoardList } = result as GetCustomerBoardListResponseDto;
-
       changeCustomerBoardList(customerBoardList);
 
       setCurrentPage(!customerBoardList.length ? 0 : 1);
@@ -147,7 +146,6 @@ export default function CustomerList() {
     }
   
     const { customerBoardList } = result as GetSearchCustomerBoardListResponseDto;
-    
     const updatedCustomerBoardList = customerBoardList.map(item => ({
       ...item,
       customerBoardViewCount: item.customerBoardViewCount || 0, // 조회수가 없으면 0으로 설정
@@ -159,12 +157,6 @@ export default function CustomerList() {
     setCurrentSection(!updatedCustomerBoardList.length ? 0 : 1);
     setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
   };
-
-  const fetchTrendBoardList = () => {
-		getSearchCustomerBoardListRequest('', cookies.accessToken)
-		.then(result => getCustomerBoardResponse(result as GetCustomerBoardListResponseDto | ResponseDto | null))
-	}
-
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
     navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
@@ -190,15 +182,10 @@ export default function CustomerList() {
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
-    if (!searchWord) {
-			setIsSearched(false);
-			getCustomerBoardListRequest(cookies.accessToken).then(getCustomerBoardResponse);
-		}
   };
 
   const onSearchButtonClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     handleSearch();
-    
   };
   
   const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -227,11 +214,6 @@ export default function CustomerList() {
 }, [isSearched, searchWord, cookies.accessToken]);
 
   //                    effect                    //
-  useEffect(() => {
-		if(!cookies.accessToken) return;
-		fetchTrendBoardList();
-	}, [cookies.accessToken])
-  
   useEffect(() => {
     if (!cookies.accessToken) return;
     getSearchCustomerBoardListRequest('', cookies.accessToken)

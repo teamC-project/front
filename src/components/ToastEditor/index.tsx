@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { ForwardedRef, forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -56,6 +56,11 @@ const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, imageList, set
 		bodyRef.current = data;
 		// Body에 담기
   };
+
+  useEffect(() => {
+    if (!editorRef.current || !body) return;
+    editorRef.current.getInstance().setHTML(body);
+  }, [body, editorRef])
 
 
   return (

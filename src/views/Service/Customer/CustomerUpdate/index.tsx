@@ -48,8 +48,8 @@ export default function CustomerUpdate() {
       setTitle(title);
     }
 
-    const onContentsChangeHandler = (trendBoardContents: string ) => {
-      setContents(contents);
+    const onContentsChangeHandler = (customerBoardContents: string ) => {
+      setContents(customerBoardContents);
     }
 
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
@@ -62,7 +62,7 @@ export default function CustomerUpdate() {
 
     const onUpdateButtonClickHandler = () => {
       if (!cookies.accessToken || !customerBoardNumber) return;
-  
+        
       const requestBody: PutCustomerBoardRequestDto = {
           customerBoardTitle: title,
           customerBoardContents: contents,

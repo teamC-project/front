@@ -188,9 +188,8 @@ export default function CustomerDetail() {
         )}
         </div>
       </div>
-      <div className="customer-detail-view">
+      <div dangerouslySetInnerHTML={{ __html: contents }} className="customer-detail-view">
         {/* 내용 표시 */}
-        {contents}
       </div>
       <CustomerBoardComment />
       <div className="customer-detail-go-to-customerList" onClick={handleGoToList}>
