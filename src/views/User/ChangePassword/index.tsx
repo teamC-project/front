@@ -79,7 +79,7 @@ export default function PasswordChangePage() {
   const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPasswordCheck(value);
-    const isEqaulPassword = password === value
+    const isEqaulPassword = passwordChange=== value
     const passwordCheckMessage = isEqaulPassword ? '': 
     passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
