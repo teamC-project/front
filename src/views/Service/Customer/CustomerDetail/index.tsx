@@ -1,16 +1,16 @@
 import React, { useEffect, ChangeEvent, useState } from 'react';
 import './style.css';
+import { useUserStore } from 'src/stores';
 import { useNavigate, useParams } from 'react-router';
+import { useCookies } from 'react-cookie';
 import { CustomerBoardCommentListItem } from 'src/types';
 import { GetCustomerBoardResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useCookies } from 'react-cookie';
-import { getCustomerBoardRequest, postCustomerBoardCommentRequest, increaseViewCountRequest } from 'src/apis/customerBoard';
-import { useUserStore } from 'src/stores';
+import { getCustomerBoardRequest, postCustomerBoardCommentRequest, increaseViewCountRequest, deleteCustomerBoardRequest } from 'src/apis/customerBoard';
 import { PostCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
 import CustomerBoardComment from '../CustomerComment';
-import { deleteCustomerBoardRequest } from 'src/apis/customerBoard'; // 삭제 API 함수 import
+
 
 
 interface Props {
@@ -38,8 +38,7 @@ export default function CustomerDetail() {
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
     //                  function                    //
-    const navigator = useNavigate();
-
+    const navigator = useNavigate();  
     const increaseViewCountResponse = (result: ResponseDto | null) => {
       const message =
           !result ? '서버에 문제가 있습니다.' :
@@ -83,9 +82,9 @@ export default function CustomerDetail() {
           customerBoardViewCount,
           customerBoardContents,
           customerBoardComment,
-          secret } = result as GetCustomerBoardResponseDto;
+          isSecret } = result as GetCustomerBoardResponseDto;
 
-        if (secret && loginUserRole === 'ROLE_CUSTOMER' && (customerBoardWriterId !== loginUserId)) {
+        if (isSecret && loginUserRole === 'ROLE_CUSTOMER' && (customerBoardWriterId !== loginUserId)) {
           alert('권한이 없습니다.');
           navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
           return;
@@ -97,7 +96,7 @@ export default function CustomerDetail() {
         setViewCount(customerBoardViewCount);
         setContents(customerBoardContents);
         setComment(customerBoardComment);
-        setIsSecret(secret);
+        setIsSecret(isSecret);
     };
 
     const deleteCustomerBoardResponse = (result: ResponseDto | null) => {
