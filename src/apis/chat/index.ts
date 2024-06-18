@@ -7,6 +7,7 @@ import { GetChatroomListResponseDto, GetChatroomResponseDto, GetChatMessageListR
 
 // function: 채팅방 생성 API 함수
 export const postChatRoomRequest = async (requestBody: PostChatroomRequestDto, accessToken: string) => {
+    console.log('Sending POST request with token:', accessToken);
     const result = await axios.post(POST_CHATROOM_URL, requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
