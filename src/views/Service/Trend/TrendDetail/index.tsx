@@ -50,32 +50,32 @@ export default function TrendDetail() {
 				.then(getTrendBoardResponse);
 };
 
-const putTrendBoardLikeResponse = (result : ResponseDto | null) => {
-	const message = 
-	!result ? '서버에 문제가 있습니다.' :
-	result.code === 'VF' ? '잘못된 게시물 입니다.' :
-	result.code === 'AF' ? '인증에 실패했습니다. ' :
-	result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
-	result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-	result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+const putTrendBoardLikeResponse = (result: ResponseDto | null) => {
+	const message =
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'VF' ? '잘못된 게시물 입니다.' :
+			result.code === 'AF' ? '인증에 실패했습니다. ' :
+			result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 	if (!result || result.code !== 'SU') {
-		alert(message);
-		if(result?.code ==='AF') {
-			navigator(MAIN_PATH);
+			alert(message);
+			if (result?.code === 'AF') {
+					navigator(MAIN_PATH);
+					return;
+			}
+			navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
 			return;
-		}
-		navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
-		return;	
 	}
-	if (!cookies.accessToken || !trendBoardNumber) return;
+	setIsLike((prevIsLike) => !prevIsLike);
+	setTrendBoardLikeCount((prevCount) => prevCount + (isLike ? -1 : 1));
+};
 
-} 
 
 
 
 	const getTrendBoardResponse = (result : GetTrendBoardResponseDto | ResponseDto | null) => {
-		console.log(result);
 		const message = 
 		!result  ? '서버에 문제가 있습니다.' :
 		result.code === 'VF' ? '잘못된 게시물 입니다.':
@@ -109,7 +109,8 @@ const putTrendBoardLikeResponse = (result : ResponseDto | null) => {
 		setTrendBoardLikeCount(trendBoardLikeCount);
 		setTrendBoardViewCount(trendBoardViewCount)
 
-			console.log(trendBoardViewCount)
+
+		
 	}
 
 	const postTrendBoardCommentResponse = (result : ResponseDto | null) => {
@@ -167,14 +168,15 @@ const putTrendBoardLikeResponse = (result : ResponseDto | null) => {
 	}
 
 	const onLikeButtonClickHandler = () => {
-		if(!cookies.accessToken) {
-			alert('로그인시 이용 가능합니다.');
-			return;
-		}
-		if(!trendBoardNumber) return;
+    if (!cookies.accessToken) {
+        alert('로그인시 이용 가능합니다.');
+        return;
+    }
+    if (!trendBoardNumber) return;
 
-		putTrendBoardLikeRequest(trendBoardNumber, cookies.accessToken).then(putTrendBoardLikeResponse);
-	}
+    putTrendBoardLikeRequest(trendBoardNumber, cookies.accessToken)
+        .then(putTrendBoardLikeResponse);
+};
 
 
 

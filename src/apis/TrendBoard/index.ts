@@ -1,6 +1,6 @@
 import axios from "axios";
 import { PostTrendBoardCommentRequestDto, PostTrendBoardRequestDto, PutTrendBoardCommentRequestDto, PutTrendBoardRequestDto } from "./dto/request";
-import { DELETE_TREND_BOARD_COMMENT_DELETE_URL, DELETE_TREND_BOARD_DELETE_URL, GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL, GET_TREND_BOARD_COMMENT_LIST_URL, GET_TREND_BOARD_DETAIL_URL, GET_TREND_BOARD_LIST_URL, PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL, POST_TREND_BOARD_COMMENT_WRITE_URL, POST_TREND_BOARD_WRITE_URL, PUT_TREND_BOARD_COMMENT_PUT_URL, PUT_TREND_BOARD_LIKE_URL, PUT_TREND_BOARD_PUT_URL } from "src/constant";
+import { DELETE_TREND_BOARD_COMMENT_DELETE_URL, DELETE_TREND_BOARD_DELETE_URL, GET_SEARCH_SEARCH_TREND_BOARD_LIST_URL, GET_TREND_BOARD_COMMENT_LIST_URL, GET_TREND_BOARD_DETAIL_URL, GET_TREND_BOARD_LIKE_LIST_URL, GET_TREND_BOARD_LIST_URL, PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL, POST_TREND_BOARD_COMMENT_WRITE_URL, POST_TREND_BOARD_WRITE_URL, PUT_TREND_BOARD_COMMENT_PUT_URL, PUT_TREND_BOARD_LIKE_URL, PUT_TREND_BOARD_PUT_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetSearchTrendBoardListResponseDto, GetTrendBoardCommentListResponseDto, GetTrendBoardListResponseDto, GetTrendBoardResponseDto } from "./dto/response";
@@ -106,6 +106,14 @@ export const putTrendBoardLikeRequest = async (trendBoardNumber : number | strin
 //function : 트렌드 게시물 조회수 증가 API 함수
 export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber : number | string , accessToken : string) => {
 	const result = await axios.patch(PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL(trendBoardNumber), {}, bearerAuthorization(accessToken))
+	.then(requestHandler<ResponseDto>)
+	.catch(requestErrorHandler);
+	return result;
+}
+
+//function  : 트렌드 좋아요 누른 유저 리스트 조회 API 함수
+export const getTrendBoardLikeRequest = async(trendBoardNumber : number | string, accessToken :string) =>{
+	const result = await axios.get(GET_TREND_BOARD_LIKE_LIST_URL(trendBoardNumber), bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
 	.catch(requestErrorHandler);
 	return result;

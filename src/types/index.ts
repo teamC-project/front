@@ -31,6 +31,10 @@ export interface TrendBoardCommentListItem {
 	trendBoardCommentDatetime : string;
 }
 
+export interface TrendBoardLikeListItem {
+	userId : string;
+}
+
 export interface CustomerBoardListItem {
 	customerBoardNumber : number;
 	customerBoardStatus : boolean;

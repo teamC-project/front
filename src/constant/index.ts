@@ -208,6 +208,7 @@ export const DELETE_TREND_BOARD_COMMENT_DELETE_URL = (trendBoardNumber: number |
 export const GET_TREND_BOARD_COMMENT_URL = (trendBoardCommentNumber: number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardCommentNumber}/comment`;
 export const PUT_TREND_BOARD_LIKE_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like`
 export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/increase_view_count`
+export const GET_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
 
 
 // description : Q&A API URL PATH
