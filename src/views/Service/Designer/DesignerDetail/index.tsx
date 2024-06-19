@@ -160,11 +160,11 @@ export default function DesignerDetail() {
         const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
         if (confirmCreateRoom) {
             console.log('Designer ID clicked:', writerId);
-            setSelectedDesignerId(writerId); // 디자이너 ID 설정
+            setSelectedDesignerId(writerId); 
             const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
             window.dispatchEvent(event);
         }
-    }
+    };
 
     //                   effect                        //
     useEffect(() => {
@@ -184,7 +184,6 @@ export default function DesignerDetail() {
                     <div className="designer-detail-information1" >작성자: <span onClick={designerIdClickHandler}>{writerId}</span></div>
                     <div className="designer-detail-information2">작성일: {writeDate}</div>
                     <div className="designer-detail-information3">조회수: {viewCount}</div>
-                    {/* 작성자와 로그인한 사용자가 같은 경우에만 수정/삭제 버튼 표시 */}
                     {loginUserId === writerId && (
                     <>
                         <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>

@@ -8,6 +8,7 @@ import { useUserStore } from 'src/stores';
 import { CustomerBoardCommentListItem } from 'src/types';
 import './style.css';
 import { GetCustomerBoardCommentListResponseDto } from 'src/apis/customerBoard/dto/response';
+import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
 //          component          //
 export default function CustomerBoardComment() {
@@ -23,6 +24,7 @@ export default function CustomerBoardComment() {
   const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
   const [showReplyInput, setShowReplyInput] = useState<boolean>(false);
   const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
+  const { designerIdClickHandler } = useCreateChatRoom();
 
 
   //          function          //
@@ -202,7 +204,7 @@ export default function CustomerBoardComment() {
       <div className='customer-board-comment'>
         <div key={customerBoardCommentNumber} className='customer-board-comment-container'>
           <div className='customer-board-comment-header'>
-            <div className='customer-board-comment-author'>작성자: {customerBoardCommentWriterId}</div>
+            <div className='customer-board-comment-author' onClick={() => designerIdClickHandler(customerBoardCommentWriterId)}>작성자: {customerBoardCommentWriterId}</div>
             {customerBoardCommentWriterId === loginUserId && (
               <div className='customer-board-comment-actions'>
                 <button onClick={onCommentUpdateOpenHandler}>수정</button>

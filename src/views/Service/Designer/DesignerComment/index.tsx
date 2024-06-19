@@ -7,8 +7,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { useUserStore } from 'src/stores';
 import { DesignerBoardCommentListItem } from 'src/types';
 import './style.css';
+import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
-// Define the interface to include the originalDesignerBoardCommentWriterId
 interface DesignerBoardCommentListItemWithOriginal extends DesignerBoardCommentListItem {
     originalDesignerBoardCommentWriterId: string;
     designerBoardCommentDatetime: string;
@@ -27,6 +27,9 @@ export default function DesignerBoardComment() {
     const { loginUserRole, loginUserId } = useUserStore();
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
+
+    const { designerIdClickHandler } = useCreateChatRoom();
+
 
     //                  function                    //
     const navigator = useNavigate();
@@ -169,6 +172,7 @@ export default function DesignerBoardComment() {
             });
     };
 
+
     //                   effect                    //
     useEffect(() => {
         if (!cookies.accessToken || designerBoardNumber === undefined) return;
@@ -206,7 +210,7 @@ export default function DesignerBoardComment() {
                         {designerBoardCommentList.map((item) => (
                             <div key={item.designerBoardCommentNumber} className='designer-comment-table-tr'>
                                 <div className='designer-comment-number hidden'>{item.designerBoardCommentNumber}</div>
-                                <div className='designer-comment-author'>작성자: {item.designerBoardCommentWriterId}</div>
+                                <div className='designer-comment-author' onClick={() => designerIdClickHandler(item.designerBoardCommentWriterId)} >작성자: {item.designerBoardCommentWriterId}</div>
                                 <div className='designer-comment-contents'>{item.designerBoardCommentContents}</div>
                                 <div className='designer-comment-date'>작성일: {item.designerBoardCommentDatetime}</div>
                                 {item.originalDesignerBoardCommentWriterId === loginUserId && (
