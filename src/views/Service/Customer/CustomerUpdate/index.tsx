@@ -37,6 +37,7 @@ export default function CustomerUpdate() {
     const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
         if (result && result.code === 'SU') {
             const { customerBoardTitle, customerBoardContents, isSecret } = result as GetCustomerBoardResponseDto;
+
             setTitle(customerBoardTitle);
             setContents(customerBoardContents);
             setIsSecret(isSecret);
@@ -64,10 +65,28 @@ export default function CustomerUpdate() {
       if (!cookies.accessToken || !customerBoardNumber) return;
         
       const requestBody: PutCustomerBoardRequestDto = {
-          customerBoardTitle: title,
-          customerBoardContents: contents,
-          secret: isSecret
+        customerBoardTitle: title.trim(), // 제목에서 공백 제거
+        customerBoardContents: contents.trim(), // 내용에서 공백 제거
+        secret: isSecret
       };
+
+      const isBlank = requestBody.customerBoardContents.replaceAll('<p><br></p>', '');
+
+      // 제목과 내용이 모두 비어있는 경우 처리
+      if (!requestBody.customerBoardTitle && !requestBody.customerBoardContents && !isBlank) {
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+      }
+      // 제목만 비어있는 경우 처리
+      else if (!requestBody.customerBoardTitle) {
+          alert("제목을 입력해주세요.");
+          return;
+      }
+      // 내용만 비어있는 경우 처리
+      else if (!requestBody.customerBoardContents || !isBlank) {
+          alert("내용을 입력해주세요.");
+          return;
+      }
   
       putCustomerBoardRequest(customerBoardNumber, requestBody, cookies.accessToken)
           .then(putCustomerBoardResponse);
