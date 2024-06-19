@@ -1,17 +1,19 @@
 export interface PostDesignerBoardRequestDto {
-    designerBoardTitle : string;
-    designerBoardContents : string;
+  designerBoardTitle : string;
+  designerBoardContents : string;
 }
 
 export interface PostDesignerBoardCommentRequestDto {
-    designerBoardCommentContents : string;
+  designerBoardCommentContents : string;
+  designerBoardParentCommentNumber?: number;
 }
 
 export interface PutDesignerBoardRequestDto {
-    designerBoardTitle : string;
-    designerBoardContents : string;
+  designerBoardTitle : string;
+  designerBoardContents : string;
 }
 
 export interface PutDesignerBoardCommentRequestDto {
-    designerBoardCommentContents : string;
+  designerBoardCommentContents : string;
+  designerBoardCommentNumber: number;
 }
