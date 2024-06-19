@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
-=======
- import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
-import "./style.css";
-import InputBox from 'src/components/Inputbox';
-import SelectBox from 'src/components/Selectbox';
-import { useNavigate, useParams } from 'react-router';
->>>>>>> 6688ee3f71a08de2549368ccdaaa0ba2fe799c1c
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
@@ -208,8 +200,8 @@ useEffect(() => {
       </div>
 
       <div className='auth-type-text'>
-        <div className='auth-type-text-customer' onClick={onClickCustomerSignUpHandler}>고객</div>
-        <div className='auth-type-text-designer' onClick={onClickDesignerSignUpHandler}>디자이너</div>
+        <div onClick={onClickCustomerSignUpHandler}>고객</div>
+        <div onClick={onClickDesignerSignUpHandler}>디자이너</div>
       </div>
 
       {!snsId && !joinPath && (
@@ -299,7 +291,7 @@ const emailAuthResponse = (result: ResponseDto | null) => {
 const emailAuthCheckResponse = (result: ResponseDto | null) => {
   const authNumberMessage =
     !result ? '서버에 문제가 있습니다.':
-    result.code === 'VF' ? '인증번호를 입력해주세요.' :
+    result.code === 'VF' ? '발송된 인증번호를 입력해주세요.' :
     result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.':
     result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
