@@ -123,7 +123,7 @@ export default function InfoDeleteUser() {
           </div>
 
           <div className='delete-complete-contents' onClick={onUserDeleteClickHandler}>
-            <div className='delete-complete'>회원탈퇴</div>
+            <div className='user-primary-button'>회원탈퇴</div>
           </div>
 
         </div>

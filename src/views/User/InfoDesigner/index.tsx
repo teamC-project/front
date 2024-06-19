@@ -207,7 +207,7 @@ export default function InfoDesigner() {
           </div>
           
           <div className='submit-box'>
-            <div className='complete-text primary-button btn btn-primary' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
+            <div className='complete-text user-primary-button btn btn-primary' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
           </div>
           
         </div>

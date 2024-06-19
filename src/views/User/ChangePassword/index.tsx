@@ -105,7 +105,7 @@ export default function PasswordChangePage() {
           </div>
 
           <div className='change-submit-box'>
-            <div className='change-submit-box change-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
+            <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
           
         </div>

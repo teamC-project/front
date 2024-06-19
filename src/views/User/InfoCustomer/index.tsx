@@ -125,12 +125,12 @@ export default function InfoCustomer() {
           </div>
 
           <div className='info-customer-box-text'>
-            <div className='info-customer-text'>연령대</div>
+            <div className='info-customer-text'>연`령대</div>
             <SelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
 
           <div className='submit-box' >
-            <div className='complete-text primary-button' onClick={onInfoCustomerUpdateClickHandler}> 완료</div>
+            <div className='complete-text user-primary-button' onClick={onInfoCustomerUpdateClickHandler}> 완료</div>
           </div>
 
         </div>
