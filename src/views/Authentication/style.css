@@ -13,6 +13,7 @@ body{
 
 .main-page-image-box {
   width: 100%;
+  border: 5px solid rgba(233, 199, 199, 0.911);
 }
 
 .main-page-title-image {
@@ -26,13 +27,14 @@ body{
 .main-page-image {
   display: flex;
   justify-self: center;
-  align-items: c;
-  height: 740px;
 
+  height: 740px;
+  border-top: solid rgba(233, 199, 199, 0.911);
   background-image: url('../../assets/image/main-page-image.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
+
 
 /* 회원가입 선택 공통 */
 #auth-wrapper {
@@ -43,24 +45,10 @@ body{
   margin-bottom: 100px;
 }
 
-.auth-primary-button {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 4px 16px;
-
-  background-color: rgba(255, 190, 152, 1);
-  border-radius: 6px;
-
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 175%;
-
-  color: rgba(255, 255, 255, 1);
+.auth-under-value {
+  border: 3px solid rgba(233, 199, 199, 0.911);
 }
+
 
 /* 회원가입 선택 */
 .auth-welcome-image-box {
@@ -289,8 +277,6 @@ body{
 
 
 /* 로그인 UI */
-
-
 .login-box {
   display: flex;
   flex-direction: column;

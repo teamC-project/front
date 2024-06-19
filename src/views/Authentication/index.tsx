@@ -112,6 +112,8 @@ export function SignIn() {
   return (
     <div id='auth-wrapper'>
       <AuthTopBar />
+      <div className='auth-under-value'>
+
       <div className='sign-in-main-box'>
         <div className='image-box'></div>
         <div className='login-box'>
@@ -151,6 +153,7 @@ export function SignIn() {
         </div>
         <div className='under-right-bar'></div>
       </div>
+    </div>
     </div>
   )
 }
