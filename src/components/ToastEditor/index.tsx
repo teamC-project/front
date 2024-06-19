@@ -20,8 +20,9 @@ const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, imageList, set
 	const bodyRef = useRef<string>('');
 	const imageCountRef = useRef<number>(0);
 
-  useImperativeHandle(ref, () => editorRef.current as Editor);
 
+  useImperativeHandle(ref, () => editorRef.current as Editor);
+  
   const onChangeGetHTML = async () => {
     if (!editorRef.current) return;
 		let data = editorRef.current.getInstance().getHTML();

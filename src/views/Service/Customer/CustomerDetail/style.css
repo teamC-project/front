@@ -61,6 +61,12 @@
   margin-bottom: 20px;
   min-height: 300px;
   background-color: #F5F5F5;
+  overflow: auto;
+}
+
+.customer-detail-view img { 
+  max-width: 100%;
+  height: auto;
 }
 
 .customer-detail-go-to-customerList {
