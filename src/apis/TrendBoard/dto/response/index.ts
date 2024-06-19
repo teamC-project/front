@@ -23,3 +23,7 @@ import { TrendBoardCommentListItem, TrendBoardListItem } from 'src/types';
 		trendBoardViewCount : number;
 	}
 
+	export interface GetTrendBoardLikeResponseDto extends ResponseDto {
+		userId : string;
+	}
+
