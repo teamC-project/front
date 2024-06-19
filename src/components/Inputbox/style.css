@@ -86,3 +86,7 @@ input[type="radio"] {margin-right: 250px;}
   font-weight: 400;
   line-height: normal;
 }
+
+.error{
+  color: red;
+}
