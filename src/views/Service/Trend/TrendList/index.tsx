@@ -11,7 +11,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
 
 
-function CardItem ({
+function CardItem (
+	{
 	trendBoardNumber,
 	trendBoardTitle,
 	trendBoardWriterId,
@@ -22,6 +23,9 @@ function CardItem ({
 } : TrendBoardListItem) {
 // 										function 										//
 const navigator =  useNavigate();
+
+//										state										//
+
 
 // 										event handler										// 
 
@@ -59,7 +63,7 @@ export default function TrendList() {
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
-
+  
   const navigator = useNavigate();
 
   const changePage = (trendBoardList: TrendBoardListItem[], totalLength: number) => {

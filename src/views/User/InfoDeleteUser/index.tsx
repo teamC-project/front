@@ -23,10 +23,10 @@ export default function InfoDeleteUser() {
   const deleteUserInfoResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'VF' ? '올바르지 않는 유저입니다.' :
-            result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'VF' ? '올바르지 않는 유저입니다.' :
+      result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -39,8 +39,8 @@ export default function InfoDeleteUser() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -123,7 +123,7 @@ export default function InfoDeleteUser() {
           </div>
 
           <div className='delete-complete-contents' onClick={onUserDeleteClickHandler}>
-            <div className='delete-complete'>회원탈퇴</div>
+            <div className='user-primary-button'>회원탈퇴</div>
           </div>
 
         </div>
