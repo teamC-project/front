@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import "./style.css";
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
-import { getSignInUserRequest } from 'src/apis/user';
-import useUserStore from "src/stores/use.store";
-import ResponseDto from 'src/apis/response.dto';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
 import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
+import ResponseDto from 'src/apis/response.dto';
+import { getSignInUserRequest } from 'src/apis/user';
+import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import ChatRoom from 'src/components/Chat';
-import ChatroomDetail from 'src/views/Service/Chat';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useChatStore } from 'src/stores';
+import useUserStore from "src/stores/use.store";
+import ChatroomDetail from 'src/views/Service/Chat';
+import "./style.css";
 
     //              component                   //
     function VisitorCount() {
@@ -67,8 +67,8 @@ import { useChatStore } from 'src/stores';
   //                    render                    //
     return (
         <>
-        <div>총 방문자 수: {totalVisitors}</div>
-        <div>오늘 방문자 수: {visitorsToday}</div>
+        <div className='count-font'>총 방문자 수: {totalVisitors}</div>
+        <div className='count-font'>오늘 방문자 수: {visitorsToday}</div>
         </>
     );
 }

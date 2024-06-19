@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useState } from 'react'
-import "./style.css";
-import InputBox from 'src/components/Inputbox';
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
+import { ChangeEvent, useState } from 'react';
 import { emailAuthCheckRequest, foundIdEmailAuthRequest, foundIdRequest } from 'src/apis/auth';
-import ResponseDto from 'src/apis/response.dto';
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto } from 'src/apis/auth/dto/request';
 import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
+import ResponseDto from 'src/apis/response.dto';
+import InputBox from 'src/components/Inputbox';
 import AuthTopBar from 'src/components/authTopBar';
+import "./style.css";
 
 //                    component                    //
 export default function IdFound() {
@@ -142,7 +142,6 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
     foundIdRequest(requestBody).then(foundIdResponse);
   };
 
-
 //                      render                      //
   return (
 <div id='auth-wrapper'>
@@ -155,23 +154,20 @@ const foundIdResponse = (result: IdFoundResponseDto | ResponseDto | null) => {
       <div className='auth-sign-up-title'>아이디 찾기</div>
 
       <div className='auth-sign-up-box-text'>
-      <div className='auth-sign-up-text'>이메일</div>
-      <div className='auth-sign-up-next-box' ><InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='이메일 인증' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  /> 
+        <div className='auth-sign-up-text'>이메일</div>
+        <InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='이메일 인증' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError}  /> 
       </div>
-    </div>
 
-
-    <div className='auth-sign-up-box-text'>
-      <div className='auth-sign-up-text'>이메일인증</div>
-      <div className='auth-sign-up-next-box'><InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='인증 확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
+      <div className='auth-sign-up-box-text'>
+        <div className='auth-sign-up-text'>이메일인증</div>
+        <InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='인증 확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
       </div>
-    </div>
 
-    <div className='auth-submit-box'>
-      <div className='auth-submit-box auth-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
-    </div>
-      {success && <div className='is-user-id'>아이디는 {id} 입니다.</div>}
-    </div>
+      <div className='auth-submit-box'>
+        <div className='auth-submit-box auth-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
+      </div>
+        {success && <div className='is-user-id'>아이디는 {id} 입니다.</div>}
+      </div>
   </div>
 
   <div className='auth-right-null'></div>

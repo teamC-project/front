@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 /* 윗부분 CSS */
@@ -124,7 +125,7 @@
   flex-direction: column;
   margin-right: 50px;
 
-  background-color: rgba(102, 128, 245, 0.91);
+  background-color: #f1f1f1;
 
   width: 250px;
   padding: 16px 12px;
@@ -134,7 +135,13 @@
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-  background-color: tomato;
+  background-color: black;
+  border-radius: 14px;
 
-  padding: 16px 12px;
+  padding: 12px;
+}
+
+.count-font {
+  font-size: 14px;
+  color: white;
 }

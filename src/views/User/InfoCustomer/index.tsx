@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import "./style.css";
 import SelectBox from 'src/components/Selectbox';
 import InputBox from 'src/components/Inputbox';
@@ -21,8 +21,6 @@ export default function InfoCustomer() {
   const [gender, setGender] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
-  const [companyName, setCompanyName] = useState<string>('');
-  const [userimage, setImage] = useState<string>('');
   const [ageMessage, setAgeMessage] = useState<string>('');
 
   const [cookies] = useCookies();
@@ -45,23 +43,20 @@ export default function InfoCustomer() {
       return;
     }
 
-
     const { userId, userGender, userAge } = result as CustomerInfoResponseDto;
     if (userId !== loginUserId) {
       alert('권한이 없습니다.');
       navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-
     setGender(userGender);
     setAge(userAge);
   };
 
   //                     event handler                     //
   const onInfoCustomerUpdateClickHandler = async () => {
-
     try {
-      const customerInfoUpdate = {
+      const customerInfoUpdate = { 
         userGender: gender,
         userAge: age,
       };
@@ -91,7 +86,6 @@ export default function InfoCustomer() {
     setGenderMessage(genderMessage);
   };
 
-
   //                     effect                     //
   useEffect(() => {
     if (!cookies.accessToken || !loginUserRole) return;
@@ -108,6 +102,7 @@ export default function InfoCustomer() {
   //                     render                     //
   return (
     <div id='info-customer-wrapper'>
+
       <div className='white-space'></div>
       <div className='white-space1'>
         <div className='white-space2'></div>
@@ -134,8 +129,8 @@ export default function InfoCustomer() {
             <div className='info-customer-text'>연령대</div>
             <SelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
-          <div className='submit-box' onClick={onInfoCustomerUpdateClickHandler}>
-            <div className='complete-text primary-button'>완료</div>
+          <div className='submit-box' >
+            <div className='complete-text primary-button' onClick={onInfoCustomerUpdateClickHandler}> 완료</div>
           </div>
         </div>
         <div className='white-space2'></div>
