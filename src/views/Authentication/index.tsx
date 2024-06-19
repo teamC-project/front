@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, AUTH_SIGN_UP_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
 import { customerSignUpRequest, designerSignUpRequest, emailAuthCheckRequest, emailAuthRequest, idCheckRequest, signInRequest } from 'src/apis/auth';
 import AuthTopBar from 'src/components/authTopBar';
@@ -28,7 +28,6 @@ export function Main() {
 
   )
 }
-
 
 //           component           //
 export function Sns() {
@@ -175,6 +174,7 @@ export function ChooseSingUp() {
 
   //                  function                 //
   const navigator = useNavigate();
+
   //                event handler               //
   const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
@@ -222,7 +222,6 @@ useEffect(() => {
       </div>
       )}
       
-
     </div>
   )
 }
@@ -333,7 +332,6 @@ const signUpResponse = (result: ResponseDto | null) => {
 
 
 //                  event handler                  //
-
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
@@ -390,8 +388,6 @@ const signUpResponse = (result: ResponseDto | null) => {
   const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setGender(event.target.value);
   };
-
-
   
   const onAgeChangeHandler = (age: string) => {
     setAge(age);
@@ -467,7 +463,6 @@ const signUpResponse = (result: ResponseDto | null) => {
               <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='중복 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
           </div>
 
-
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
               <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
@@ -497,7 +492,6 @@ const signUpResponse = (result: ResponseDto | null) => {
                 <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
             </div>
           </div>
-
 
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
@@ -627,7 +621,6 @@ export function DesignerSignUp() {
   };
 
 //                  event handler                  //
-
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);

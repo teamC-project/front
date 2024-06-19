@@ -108,6 +108,7 @@ export default function InfoCustomer() {
         <div className='white-space2'></div>
 
         <div className='info-customer-container'>
+
           <div className='customer-id-contents'>
             <div className='customer-id'>아이디</div>
             <div className='customer-id-container'>
@@ -116,6 +117,7 @@ export default function InfoCustomer() {
               </div>
             </div>
           </div>
+
           <div className='info-customer-box-text'>
             <div className='info-customer-text'>성별</div>
             <div className='info-customer-next-box'>
@@ -125,14 +127,18 @@ export default function InfoCustomer() {
                 <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
             </div>
           </div>
+
           <div className='info-customer-box-text'>
             <div className='info-customer-text'>연령대</div>
             <SelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
+
           <div className='submit-box' >
             <div className='complete-text primary-button' onClick={onInfoCustomerUpdateClickHandler}> 완료</div>
           </div>
+
         </div>
+        
         <div className='white-space2'></div>
       </div>
       <div className='white-space4'></div>
