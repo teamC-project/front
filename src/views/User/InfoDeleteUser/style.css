@@ -72,18 +72,3 @@
   display: flex;
   justify-content: center;
 }
-
-.delete-complete {
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 100px;
-  border: 1px solid rgba(144, 144, 144, 1);
-  border-radius: 6px;
-  padding: 10px 10px;
-  background-color: rgba(255, 190, 152, 1);
-  
-  font-size: 16px;
-  line-height: 15px;
-  cursor: pointer;
-}
