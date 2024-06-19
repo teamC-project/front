@@ -86,7 +86,7 @@ export default function PasswordChangePage() {
   };
 
    //                      render                     //
-   return (
+  return (
     <div id='change-wrapper'>
       <div className='change-center-value'>
         <div className='change-sign-up-box'>

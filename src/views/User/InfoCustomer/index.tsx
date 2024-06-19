@@ -125,7 +125,7 @@ export default function InfoCustomer() {
           </div>
 
           <div className='info-customer-box-text'>
-            <div className='info-customer-text'>연`령대</div>
+            <div className='info-customer-text'>연령대</div>
             <SelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
 
