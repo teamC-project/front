@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
-import { useLocation, useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { AUTH_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { getSignInUserRequest, userInfoDeleteRequest } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router';
+import ResponseDto from 'src/apis/response.dto';
+import { getSignInUserRequest, userInfoDeleteRequest } from 'src/apis/user';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
+import { AUTH_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import "./style.css";
 
 //            component           //
 export default function InfoDeleteUser() {
@@ -23,10 +23,10 @@ export default function InfoDeleteUser() {
   const deleteUserInfoResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'VF' ? '올바르지 않는 유저입니다.' :
-            result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'VF' ? '올바르지 않는 유저입니다.' :
+      result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -39,8 +39,8 @@ export default function InfoDeleteUser() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -98,7 +98,7 @@ export default function InfoDeleteUser() {
           </div>
 
           <div className='delete-account-contents'>
-            <div className='delete-account'><em>사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가</em> 불가하오니 신중하게 선택하시기 바랍니다.</div>
+            <div className='delete-account'><em>사용하고 계신 아이디(이메일)는 탈퇴할 경우 재사용 및 복구가</em> 불가하오니 신중하게 선택하시기 바랍니다.</div>
             <div className='delete-account'>탈퇴한 아이디는 본인과 타인 모두 재사용 불가하오니 신중하게 선택하시기 바랍니다.</div>
           </div>
 
@@ -123,7 +123,7 @@ export default function InfoDeleteUser() {
           </div>
 
           <div className='delete-complete-contents' onClick={onUserDeleteClickHandler}>
-            <div className='delete-complete'>회원탈퇴</div>
+            <div className='user-primary-button'>회원탈퇴</div>
           </div>
 
         </div>

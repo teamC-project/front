@@ -114,6 +114,15 @@
 	font-size: 12px;
 	font-weight: 300;
 }
+.trend-board-card-like-count {
+	font-size: 12px;
+	font-weight: 300;
+}
+.trend-board-card-view-count {
+	font-size: 12px;
+	font-weight: 300;
+}
+
 
 .pagination-wrapper {
   display: flex;

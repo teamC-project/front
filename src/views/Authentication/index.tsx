@@ -132,7 +132,7 @@ export function SignIn() {
               </div>
 
               <div className='auth-submit-box'>
-                <div className='auth-submit-box auth-primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
+                <div className='auth-submit-box user-primary-button' onClick={onSignInButtonClickHandler}>로그인</div>
               </div>
 
               <div className='socal-login'>
@@ -143,8 +143,8 @@ export function SignIn() {
               <div className="short-divider"></div>
 
               <div className='user-found'>
-                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
-                <div className='auth-sign-up-text text-cusor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
+                <div className='auth-sign-up-text cursor-pointer' onClick={onClickIdFoundHandler}>아이디 찾기</div>
+                <div className='auth-sign-up-text cursor-pointer' onClick={onClickPasswordFoundHandler}>비밀번호 찾기</div>
               </div>
             </div>
           </div>
@@ -164,6 +164,7 @@ export function ChooseSingUp() {
 
   //                  function                 //
   const navigator = useNavigate();
+
   //                event handler               //
   const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
@@ -211,7 +212,6 @@ useEffect(() => {
       </div>
       )}
       
-
     </div>
   )
 }
@@ -322,7 +322,6 @@ const signUpResponse = (result: ResponseDto | null) => {
 
 
 //                  event handler                  //
-
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
@@ -379,8 +378,6 @@ const signUpResponse = (result: ResponseDto | null) => {
   const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setGender(event.target.value);
   };
-
-
   
   const onAgeChangeHandler = (age: string) => {
     setAge(age);
@@ -456,7 +453,6 @@ const signUpResponse = (result: ResponseDto | null) => {
               <InputBox type={'text'} value={id} placeholder={'아이디를 입력해주세요'} onChangeHandler={onIdChangeHandler} buttonTitle='중복 확인' buttonStatus={idButtonStatus} onButtonClickHandler={onIdButtonClickHandler} message={idMessage} error={isIdError} />
           </div>
 
-
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>비밀번호</div>
               <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
@@ -487,7 +483,6 @@ const signUpResponse = (result: ResponseDto | null) => {
             </div>
           </div>
 
-
           <div className='auth-sign-up-box-text'>
             <div className='auth-sign-up-text'>연령대</div>
             <div>
@@ -496,7 +491,7 @@ const signUpResponse = (result: ResponseDto | null) => {
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box auth-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box user-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
       </div>
@@ -616,7 +611,6 @@ export function DesignerSignUp() {
   };
 
 //                  event handler                  //
-
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setId(value);
@@ -812,7 +806,7 @@ return (
           </div>
 
           <div className='auth-submit-box'>
-            <div className='auth-submit-box auth-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+            <div className='auth-submit-box user-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
           </div>
         </div>
       </div>

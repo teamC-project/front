@@ -1,18 +1,19 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH} from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { GetSignInUserResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest, updateDesignerInfoRequest } from 'src/apis/user';
 import { DesignerInfoResponseDto } from 'src/apis/auth/dto/response';
-import axios from 'axios';
+
 //              component               //
 export default function InfoDesigner() {
+
   //                state                 //
   const { loginUserRole, loginUserId } = useUserStore();
   const [cookies] = useCookies();
@@ -25,12 +26,11 @@ export default function InfoDesigner() {
   const [ageMessage, setAgeMessage] = useState<string>('');
   const [genderMessage, setGenderMessage] = useState<string>('');
   const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-  
+
   const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
   const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
   const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
   const [imageMessage, setImageMessage] = useState<string>('');
-
 
   //                    function                    //
   const navigator = useNavigate();
@@ -39,30 +39,29 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
       navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-    
-    console.log(result);
-    
-        const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
-        if (userId !== loginUserId) {
-          alert('권한이 없습니다.');
-          navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-          return;
-        }
-        setGender(userGender);
-        setAge(userAge);
-        setCompanyName(userCompanyName);
-      };
 
+    console.log(result);
+
+    const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
+    if (userId !== loginUserId) {
+      alert('권한이 없습니다.');
+      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+      return;
+    }
+    setGender(userGender);
+    setAge(userAge);
+    setCompanyName(userCompanyName);
+  };
 
   const getImageResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
@@ -87,28 +86,28 @@ export default function InfoDesigner() {
 
     const reader = new FileReader();
     reader.onload = async function () {
-        const imageDataUrl = reader.result;
+      const imageDataUrl = reader.result;
 
-        try {
-            const designerInfoUpdate = {
-                userCompanyName: companyName,
-                userGender: gender,
-                userAge: age,
-                userImage: imageDataUrl
-            };
+      try {
+        const designerInfoUpdate = {
+          userCompanyName: companyName,
+          userGender: gender,
+          userAge: age,
+          userImage: imageDataUrl
+        };
 
-            updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
-        } catch (error) {
-            console.error('Error updating user info:', error);
-            alert('개인정보 업데이트에 실패했습니다.');
-            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        }
+        updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
+      } catch (error) {
+        console.error('Error updating user info:', error);
+        alert('개인정보 업데이트에 실패했습니다.');
+        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+      }
     };
-    reader.readAsDataURL(image); // 이미지를 Base64 형식으로 인코딩하여 문자열로 변환
+    reader.readAsDataURL(image);
 
     alert('개인정보가 업데이트되었습니다.');
     navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-};
+  };
 
   const onAgeChangeHandler = (value: string) => {
     setAge(value);
@@ -168,7 +167,9 @@ export default function InfoDesigner() {
       <div className='white-space'></div>
       <div className='white-space1'>
         <div className='white-space2'></div>
+
         <div className='info-designer-container'>
+          
           <div className='designer-id-contents'>
             <div className='designer-id'>아이디</div>
             <div className='designer-id-container'>
@@ -177,6 +178,7 @@ export default function InfoDesigner() {
               </div>
             </div>
           </div>
+
           <div className='info-designer-box-text'>
             <div className='info-designer-text'>성별</div>
             <div className='info-designer-next-box'>
@@ -184,7 +186,6 @@ export default function InfoDesigner() {
                 <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
               <div className='info-designer-radio-box'>
                 <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
-
             </div>
           </div>
 
@@ -192,9 +193,10 @@ export default function InfoDesigner() {
             <div className='info-designer-text'>연령대</div>
             <SelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
+
           <div className='info-designer-update-box-text'>
             <div className='info-designer-update-text'>업체명</div>
-            <div className='info-designer-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler= {onCompanyNameChangeHandler} message={companyNameMessage} /></div>
+            <div className='info-designer-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} /></div>
           </div>
 
           <div className='info-designer-update-box-text'>
@@ -203,9 +205,11 @@ export default function InfoDesigner() {
               <input type='file' onChange={onImageChangeHandler} />
             </div>
           </div>
+          
           <div className='submit-box'>
-            <div className='complete-text primary-button btn btn-primary' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
+            <div className='complete-text user-primary-button btn btn-primary' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
           </div>
+          
         </div>
 
         <div className='white-space2'></div>

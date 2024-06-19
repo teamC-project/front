@@ -112,7 +112,7 @@ export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber :
 }
 
 //function  : 트렌드 좋아요 누른 유저 리스트 조회 API 함수
-export const getTrendBoardLikeRequest = async(trendBoardNumber : number | string, accessToken :string) =>{
+export const getTrendBoardLikeListRequest = async(trendBoardNumber : number | string, accessToken :string) =>{
 	const result = await axios.get(GET_TREND_BOARD_LIKE_LIST_URL(trendBoardNumber), bearerAuthorization(accessToken))
 	.then(requestHandler<ResponseDto>)
 	.catch(requestErrorHandler);
