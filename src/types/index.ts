@@ -77,7 +77,9 @@ export interface ChatroomList {
 }
 
 export interface ChatMessageList {
-	chatSenderId: string;
-	chatReceiverId: string;
-	chatMessages: string;
+	messageId: number;
+	chatroomId: number;
+	senderId: string;
+	message: string;
+	sendDatetime: string;
 }
