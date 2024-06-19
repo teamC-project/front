@@ -17,9 +17,11 @@
 }
 
 .delete-title {
-  font-size: 25px;
-  line-height: 22px;
+  line-height: 120px;
   color: #333;
+
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .delete-account {
@@ -66,6 +68,11 @@
 .delete-account-main-detail {
   font-size: 15px;
   line-height: 25px;
+}
+
+.delete-agree {
+  display: flex;
+  gap: 10px;
 }
 
 .delete-complete-contents {
