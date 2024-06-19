@@ -43,7 +43,6 @@ export default function PasswordChangePage() {
       return;
     }
 
-    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                event handler               //
@@ -62,14 +61,12 @@ export default function PasswordChangePage() {
       isPassworPattern ? '':
       value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
-
     const isEqaulPassword = passwordCheck === value
     const passwordCheckMessage = isEqaulPassword ? '': 
       passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   }
-
   const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
     setPasswordCheck(value);
@@ -79,7 +76,6 @@ export default function PasswordChangePage() {
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   }
-
   const onChangePasswordButtonClickHandler = () => {
     if (!cookies.accessToken) return;
     if (!passwordChange || !passwordCheck) {
@@ -87,22 +83,18 @@ export default function PasswordChangePage() {
       navigator(CHANGE_PASSWORD_ABSOLUTE_PATH);
       return;
     };
-
     const requestBody: ChangePasswordRequestDto = {
       userPassword: passwordChange
     };
-
     changePasswordRequest(requestBody, cookies. accessToken).then(passwordChangeResponse);
   };
 
-  //                      render                     //
-  return (
+   //                      render                     //
+   return (
     <div id='change-wrapper'>
-
       <div className='change-center-value'>
         <div className='change-sign-up-box'>
           <div className='change-sign-up-title'>비밀번호 재설정</div>
-
           <div className='change-sign-up-box-text'>
 
             <div className='change-sign-up-text'>현재 비밀번호</div>
@@ -113,11 +105,13 @@ export default function PasswordChangePage() {
 
             <div className='change-sign-up-text'>새 비밀번호 확인</div>
             <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+
           </div>
 
           <div className='change-submit-box'>
-            <div className='change-submit-box change-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
+            <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
+          
         </div>
       </div>
     </div>

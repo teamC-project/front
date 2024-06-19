@@ -16,7 +16,7 @@ export default function TrendWrite() {
 	const editorRef = useRef<Editor|null>(null);
 	const {loginUserRole} = useUserStore();
 	const [cookies] = useCookies();
-	const  [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
+	const [trendBoardTitle, setTrendBoardTitle] = useState<string>('');
 	const [trendBoardContents, setTrendBoardContents] = useState<string>(''); 
 	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<{base64: string; url: string}[]>([]);
 	const [trendBoardThumbnailImage, setTrendBoardThumbnailImage] = useState<string>('');

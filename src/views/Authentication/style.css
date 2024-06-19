@@ -6,12 +6,41 @@ body{
   display: none;
 }
 
+#main-page-wrapper {
+  min-width: none;
+  width: 100%;
+}
+
+.main-page-image-box {
+  width: 100%;
+}
+
+.main-page-title-image {
+  height: 155px;
+
+  background-image: url('../../assets/image/main-page-title-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.main-page-image {
+  display: flex;
+  justify-self: center;
+  align-items: c;
+  height: 740px;
+
+  background-image: url('../../assets/image/main-page-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
 /* 회원가입 선택 공통 */
 #auth-wrapper {
   display: flex;
   flex-direction: column;
   height: auto;
   width: 100%;
+  margin-bottom: 100px;
 }
 
 .auth-primary-button {
@@ -54,15 +83,15 @@ body{
   display: flex;
   justify-content: center;
 
-  padding: 20px;
+  padding: 40px;
 
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .auth-type-image {
   display: flex;
-  gap: 40px;
+  gap: 150px;
   justify-content: center;
 }
 
@@ -108,18 +137,11 @@ body{
 
 .auth-type-text {
   display: flex;
-  gap: 270px;
+  gap: 370px;
   padding: 10px;
   justify-content: center;
-}
 
-.auth-type-text-customer {
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.auth-type-text-designer {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
 }
 
@@ -176,36 +198,38 @@ body{
 
   font-size: 22px;
   font-weight: 600;
-
-  min-width: 800px;
 }
 
 .auth-sign-up-text {
-  padding: 5px;
+  padding: 3px;
   font-size: 20px;
-  font-weight: 400;
-  width: 200px;
+  width: 150px;
   height: 50px;
   line-height: 50px;
 
-  color: rgba(42, 38, 38, 1);
-}
+  color: rgba(66, 66, 66, 1);
+}auto
 
 .auth-sign-up-box {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: 0 auto;
+  padding: 20px;
+
 }
 
 .auth-under-bar {
+  max-width: 1920px;
+  margin: 0 auto;
   display: flex;
+
+  
 }
 
 .auth-left-null {
   display: flex;
-  justify-content: start;
-  width: 600px;
-  height: 400px;
+  flex-grow: 1;
 
 }
 
@@ -213,14 +237,13 @@ body{
   display: flex;
   justify-content: center;
   width: 100%;
-  flex: 1;
+  flex-grow: 1;
 }
 
 .auth-right-null {
   display: flex;
   justify-content: end;
-  width: 600px;
-  height: 400px;
+  flex-grow: 1;
 }
 
 
@@ -228,7 +251,6 @@ body{
 /* 회원가입 세부 */
 .auth-sign-up-box-text {
   display: flex;
-  width: 800px;
 }
 
 .auth-submit-box {
@@ -259,7 +281,6 @@ body{
 
 /* 이미지 */
 .image-box {
-  min-width: 900px;
   width: 100%;
   background-image: url("../../assets/image/sign-in-page-image.png");
   background-repeat: no-repeat;
@@ -274,16 +295,13 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
-  min-width: 610px;
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 100px;
-  width: 380px;
+  gap: 200px;
 }
 
 .sign-up-next-box {
@@ -304,8 +322,8 @@ body{
 
 .socal-login {
   display: flex;
-  gap: 40px;
-  margin-top: 100px;
+  gap: 250px;
+  margin-top: 80px;
 }
 
 .kakao-login {
@@ -333,73 +351,13 @@ body{
 
 .user-found {
   display: flex;
-  gap: 40px;
-}
-
-.text-cusor-pointer {
-  cursor: pointer;
+  justify-content: center;
+  gap: 140px;
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 .under-right-bar {
   width: 600px;
 }
 
-#main-page-wrapper {
-  min-width: none;
-  width: 100%;
-}
-
-
-
-.main-page-image-box {
-  width: 100%;
-}
-
-.main-page-title-image {
-  height: 155px;
-
-  background-image: url('../../assets/image/main-page-title-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.main-page-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 740px;
-
-  background-image: url('../../assets/image/main-page-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-
-
-.auth-under-bar {
-  max-width: 1920px;
-  margin: 0 auto;
-  display: flex;
-}
-
-.auth-left-null {
-  display: flex;
-  justify-content: start;
-  width: 600px;
-  height: 600px;
-
-}
-
-
-.auth-center-value {
-  width: 100%;
-  flex: 1;
-}
-
-.auth-right-null {
-  display: flex;
-  justify-content: end;
-  width: 600px;
-  height: 600px;
-
-}

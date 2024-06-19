@@ -4,15 +4,12 @@
   
   text-align: center;
   margin-top: 360px;
-
 }
 
 .not-found-head-text {
   font-size: 29px;
   font-weight: 700;
   margin-bottom: 20px;
-
-
 }
 
 .not-found-small-text {
@@ -33,6 +30,7 @@
   justify-content: center;
 
   margin-top: 40px;
+  margin-bottom: 200px;
 }
 
 .before-page {
@@ -48,6 +46,4 @@
 
   font-size: 13px;
   color: rgba(64, 64, 64, 0.8);
-
-
 }

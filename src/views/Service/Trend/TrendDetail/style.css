@@ -54,6 +54,11 @@
 	cursor: pointer;
 }
 
+.trend-detail-information6 {
+	flex: 0.5; /* 크기 조정 가능 */
+	cursor: pointer;
+}
+
 .trend-detail-view {
 	padding: 20px;
 	border: 1px solid #ccc;
@@ -167,4 +172,12 @@ padding: 12px 16px;
 min-height: 248px;
 
 background-color: rgba(255, 255, 255, 1);
+}
+
+.trend-detail-bottom-bar {
+	height : 100%;
+	width:100%;
+}
+.trend-detail-button-box {
+	
 }
