@@ -1,6 +1,6 @@
 import axios from "axios";
 import { PostChatroomRequestDto } from "./dto/request";
-import { CHAT_ROOM_MESSAGES_ABSOLUTE_PATH, DELETE_CHATROOM_URL,  GET_CHATROOM_DETAIL_URL, GET_CHATROOM_LIST_URL, POST_CHATROOM_URL} from "src/constant";
+import { CHAT_ROOM_MESSAGES_ABSOLUTE_PATH, DELETE_CHATROOM_URL,  GET_CHATROOM_DETAIL_URL, GET_CHATROOM_LIST_URL, GET_CHAT_MESSAGE_LIST_URL, POST_CHATROOM_URL} from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetChatroomListResponseDto, GetChatroomResponseDto, GetChatMessageListResponseDto } from "./dto/response";
@@ -16,7 +16,7 @@ export const postChatRoomRequest = async (requestBody: PostChatroomRequestDto, a
 
 // function: 채팅 메시지 목록 불러오기 API 함수
 export const getChatMessagesRequest = async (roomId: number | string, accessToken: string) => {
-    const result = await axios.get(CHAT_ROOM_MESSAGES_ABSOLUTE_PATH(roomId), bearerAuthorization(accessToken))
+    const result = await axios.get(GET_CHAT_MESSAGE_LIST_URL(roomId), bearerAuthorization(accessToken))
         .then(requestHandler<GetChatMessageListResponseDto>)
         .catch(requestErrorHandler);
     return result;
