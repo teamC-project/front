@@ -1,22 +1,22 @@
 .select-box {
   display: flex;
   align-items: center;
-
-  position: relative;
+  position: absolute;
+  top: 594px;
 
   border: 1px solid rgba(238, 238, 238, 1);
-  border-radius: 6px;
-  padding: 8px 16px;
-  width: 168px;
-
+  border-radius: 10px;
+  padding: 4px 14px;
+  width: 320px;
   background-color: rgba(255, 255, 255, 1);
+  color: rgba(35, 45, 66, 1);
 }
 
 .select-item {
   flex-grow: 1;
 
   font-family: Inter;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 175%;
 
@@ -27,7 +27,7 @@
   flex-grow: 1;
 
   font-family: Inter;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 175%;
 
@@ -57,7 +57,7 @@
 .select-list {
   position: absolute;
   left: -1px;
-  top: 44px;
+  top: 30px;
 
   max-height: 144px;
   overflow-y: scroll;
@@ -75,10 +75,11 @@
   display: flex;
 
   border: 1px solid rgba(238, 238, 238, 1);
-  padding: 8px 16px;
-  width: 168px;
-
+  border-radius: 10px;
+  padding: 4px 14px;
+  width: 320px;
   background-color: rgba(255, 255, 255, 1);
+
 }
 
 .select-list-item-box:hover {
