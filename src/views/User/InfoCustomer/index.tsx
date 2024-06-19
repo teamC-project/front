@@ -103,10 +103,6 @@ export default function InfoCustomer() {
   return (
     <div id='info-customer-wrapper'>
 
-      <div className='white-space'></div>
-      <div className='white-space1'>
-        <div className='white-space2'></div>
-
         <div className='info-customer-container'>
 
           <div className='customer-id-contents'>
@@ -138,10 +134,6 @@ export default function InfoCustomer() {
           </div>
 
         </div>
-        
-        <div className='white-space2'></div>
-      </div>
-      <div className='white-space4'></div>
     </div>
   )
 }
