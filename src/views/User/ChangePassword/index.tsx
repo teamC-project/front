@@ -1,218 +1,115 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import  { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
-import SelectBox from 'src/components/Selectbox';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH} from 'src/constant';
-import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
+import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
-import { GetSignInUserResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { getSignInUserRequest, updateDesignerInfoRequest } from 'src/apis/user';
-import { DesignerInfoResponseDto } from 'src/apis/auth/dto/response';
-import axios from 'axios';
+import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
+import { changePasswordRequest,  } from 'src/apis/user';
+import { useCookies } from 'react-cookie';
 
-export default function InfoDesigner() {
+//                  component                 //
+export default function PasswordChangePage() {
 
-  const [age, setAge] = useState<string>('');
-  const [gender, setGender] = useState<string>('');
-  const [ageMessage, setAgeMessage] = useState<string>('');
-  const [genderMessage, setGenderMessage] = useState<string>('');
-  const [image, setImage] = useState<File | null>(null);
-  const [companyName, setCompanyName] = useState<string>('');
-  const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-  const [imageMessage, setImageMessage] = useState<string>('');
-  const { loginUserRole, loginUserId } = useUserStore();
-  const [cookies] = useCookies();
+  //                  state                 //
+  const [password, setPassword] = useState<string>('');
+  const [passwordChange, setPasswordChange] = useState<string>('');
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const [passwordMessage, setPasswordMessage] = useState<string>('');
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+  const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
+  const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
+  const { userPassword } = useParams();
+  const [cookies ] = useCookies();
 
-  const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
-  const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
-  const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
-  const [isCompanyNameError, setIsCompanyNameError] = useState<boolean>(false);
-  const [isImageError, setIsImageError] = useState<boolean>(false);
-
-  //                    function                    //
+  //                  function                 //
   const navigator = useNavigate();
-
-  const getInfoDesignerResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
+  const passwordChangeResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
+        result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const isSuccess = result && result.code === 'SU'
+    if (!isSuccess) {
       alert(message);
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-
-    console.log(result);
-
-    const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
-    if (userId !== loginUserId) {
-      alert('권한이 없습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    if (passwordChange!== passwordCheck) {
+      alert('비밀번호가 일치하지 않습니다.')
       return;
     }
-    setGender(userGender);
-    setAge(userAge);
-    setCompanyName(userCompanyName);
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
 
+  //                event handler               //
+  const onPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPassword(value);
+  };
 
-  const getImageResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-
-    const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
-      alert(message);
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-      return;
-    }
-    setImage(image);
+  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPasswordChange(value)
+    const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
+    const isPassworPattern = passwordPattern.test(value);
+    setIsPasswordPattern(isPassworPattern);
+    const passwordMessage =
+      isPassworPattern ? '':
+      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
+    setPasswordMessage(passwordMessage);
+    const isEqaulPassword = passwordCheck === value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
   }
-
-  //                    event handler                    //
-  const onInfoDesignerUpdateClickHandler = async () => {
-
-    if (!image) return;
-    const data = new FormData();
-    data.append('file', image);
-
-    const userImage = await axios.post('http://localhost:4200/api/v1/designer_board/upload', data, { headers: { "Content-Type": 'multipart/form-data', Authorization: `Bearer ${cookies.accessToken}` } })
-      .then(response => response.data).catch(error => '');
-
-    try {
-      const designerInfoUpdate = {
-        userCompanyName: companyName,
-        userGender: gender,
-        
-        userAge: age,
-        userImage: image
-      };
-      console.log(designerInfoUpdate);
-      updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
-      alert('개인정보가 업데이트되었습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-
-    } catch (error) {
-      console.error('Error updating user info:', error);
-      alert('개인정보 업데이트에 실패했습니다.');
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }
-  };
-
-  const onAgeChangeHandler = (value: string) => {
-    setAge(value);
-    setIsAgeCheck(false);
-    const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
-    setAgeMessage(ageMessage);
-  };
-
-  const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setGender(value);
-    setIsGenderCheck(true);
-    // const genderMessage = isGenderCheck ? '' : (value ? '성별을 선택해주세요.' : '');
-    setGenderMessage(genderMessage);
-  };
-
-  const onCompanyNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setCompanyName(value);
-    setIsCompanyNameCheck(false);
-    setCompanyNameMessage('');
-    setImageMessage('');
-  };
-
-  const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files || !files.length) return;
-
-    const file = files[0];
-    setImage(file);
-
-  };
-
-  const formData = new FormData();
-  formData.append('companyName', companyName);
-  formData.append('gender', gender);
-  formData.append('age', age);
-  if (image) {
-    formData.append('image', image);
+  const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target;
+    setPasswordCheck(value);
+    const isEqaulPassword = passwordChange=== value
+    const passwordCheckMessage = isEqaulPassword ? '': 
+    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    setIsEqaulPassword(isEqaulPassword);
+    setPasswordCheckMessage(passwordCheckMessage);
   }
-
-  //                    effect                    //
-  useEffect(() => {
-    if (!cookies.accessToken || !loginUserRole) return;
-
-    if (loginUserRole !== 'ROLE_DESIGNER') {
-      alert('잘못된 접근입니다.')
-      navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+  const onChangePasswordButtonClickHandler = () => {
+    if (!cookies.accessToken) return;
+    if (!passwordChange || !passwordCheck) {
+      alert('모든 내용을 입력해주세요.')
+      navigator(CHANGE_PASSWORD_ABSOLUTE_PATH);
       return;
-    }
+    };
+    const requestBody: ChangePasswordRequestDto = {
+      userPassword: passwordChange
+    };
+    changePasswordRequest(requestBody, cookies. accessToken).then(passwordChangeResponse);
+  };
 
-    getSignInUserRequest(cookies.accessToken)
-      .then(getInfoDesignerResponse);
-  }, [loginUserRole, cookies.accessToken]);
+   //                      render                     //
+   return (
+    <div id='change-wrapper'>
+      <div className='change-center-value'>
+        <div className='change-sign-up-box'>
+          <div className='change-sign-up-title'>비밀번호 재설정</div>
+          <div className='change-sign-up-box-text'>
 
-  //                    render                    //
-  return (
-    <div id='info-designer-wrapper'>
-      <div className='white-space'></div>
-      <div className='white-space1'>
-        <div className='white-space2'></div>
-        <div className='info-designer-container'>
-          <div className='designer-id-contents'>
-            <div className='designer-id'>아이디</div>
-            <div className='designer-id-container'>
-              <div className='id-input-box'>
-                <div className='designer-id-info'>{loginUserId}</div>
-              </div>
-            </div>
-          </div>
-          <div className='info-designer-box-text'>
-            <div className='info-designer-text'>성별</div>
-            <div className='info-designer-next-box'>
-              <div className='info-designer-radio-box'>
-                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
-              <div className='info-designer-radio-box'>
-                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+            <div className='change-sign-up-text'>현재 비밀번호</div>
+            <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordHandler} />
 
-            </div>
+            <div className='change-sign-up-text'>새 비밀번호</div>
+            <InputBox type={'password'} value={passwordChange} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+
+            <div className='change-sign-up-text'>새 비밀번호 확인</div>
+            <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+
           </div>
 
-          <div className='info-designer-box-text'>
-            <div className='info-designer-text'>연령대</div>
-            <SelectBox value={age} onChange={onAgeChangeHandler} />
+          <div className='change-submit-box'>
+            <div className='change-submit-box change-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
-          <div className='info-designer-update-box-text'>
-            <div className='info-designer-update-text'>업체명</div>
-            <div className='info-designer-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler= {onCompanyNameChangeHandler} message={companyNameMessage} error={isCompanyNameError} /></div>
-          </div>
-
-          <div className='info-designer-update-box-text'>
-            <div className='info-designer-update-text'>면허증사진</div>
-            <div className='info-designer-update-next-box'>
-              <input type='file' onChange={onImageChangeHandler} />
-            </div>
-          </div>
-          <div className='submit-box'>
-            <div className='complete-text primary-button btn btn-primary' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
-          </div>
+          
         </div>
-
-        <div className='white-space2'></div>
       </div>
-      <div className='white-space4'></div>
     </div>
-  );
+    )
 }
