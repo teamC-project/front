@@ -3,7 +3,7 @@ import './style.css';
 import { useUserStore } from 'src/stores';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { DesignerBoardCommentListItem } from 'src/types';
+import { ChatMessageList, ChatroomList, DesignerBoardCommentListItem } from 'src/types';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
@@ -11,7 +11,13 @@ import { getDesignerBoardRequest, postDesignerBoardCommentRequest, increaseViewC
 import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
 import DesignerBoardComment from '../DesignerComment';
 
+import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
+import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
+import { GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
 
+interface ChatRoomProps {
+  selectedDesignerId: string;
+}
 
 interface Props {
     contents: string;
@@ -36,8 +42,16 @@ export default function DesignerDetail() {
     const [commentList, setCommentList] = useState<DesignerBoardCommentListItem[]>([]);
     const [commentRows, setCommentRows] = useState<number>(1);
 
+    const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
+    const [rooms, setRooms] = useState<ChatroomList[]>([]);
+    const [newRoomName, setNewRoomName] = useState<string>('');
+    const [messages, setMessages] = useState<ChatMessageList[]>([]);
+
+    const { roomId } = useParams<string>();
+
     //                  function                    //
     const navigator = useNavigate();  
+
     const increaseViewCountResponse = (result: ResponseDto | null) => {
       const message =
           !result ? '서버에 문제가 있습니다.' :
@@ -152,10 +166,19 @@ export default function DesignerDetail() {
       }
       const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
       if (!isConfirm) return;
+
       deleteDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
         .then(deleteDesignerBoardResponse);
     };
 
+    const designerIdClickHandler = () => {
+      const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
+      if (confirmCreateRoom) {
+          setSelectedDesignerId(writerId);
+          const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
+          window.dispatchEvent(event);
+      }
+  };
 
     //                   effect                        //
     useEffect(() => {
@@ -173,11 +196,10 @@ export default function DesignerDetail() {
       <div className="designer-detail-title">{title}</div>
       <div className="designer-detail-container">
         <div className="designer-detail-information">
-          <div className="designer-detail-information1">작성자: {writerId}</div>
+          <div className="designer-detail-information1">작성자: <span onClick={designerIdClickHandler}>{writerId}</span></div>
           <div className="designer-detail-information2">작성일: {writeDate}</div>
-          <div className="designer-detail-information3">조회수: {viewCount}</div>
-          {/* 작성자와 로그인한 사용자가 같거나 로그인한 사용자의 역할이 ROLE_ADMIN인 경우에만 수정/삭제 버튼 표시 */}
-        {(loginUserId === writerId || loginUserRole === 'ROLE_ADMIN') && (
+          <div className="designer-detail-information3">조회수: {viewCount}</div> 
+        {loginUserId === writerId && (
           <>
             <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
             {loginUserId === writerId && (
