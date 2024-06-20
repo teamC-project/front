@@ -118,7 +118,7 @@ export function SignIn() {
         <div className='image-box'></div>
         <div className='login-box'>
           <div className='login-container'>
-            <div className='login-page h1'>로그인 페이지</div>
+            <div className='login-page-title h1'>로그인 페이지</div>
             <div className='sign-in-contents'>
 
               <div className='auth-sign-up-box-text'>

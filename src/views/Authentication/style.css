@@ -13,7 +13,7 @@ body{
 
 .main-page-image-box {
   width: 100%;
-  border: 5px solid rgba(233, 199, 199, 0.911);
+  border: 5px solid rgba(255,190,152,0.7);
 }
 
 .main-page-title-image {
@@ -29,7 +29,7 @@ body{
   justify-self: center;
 
   height: 740px;
-  border-top: solid rgba(233, 199, 199, 0.911);
+  border-top: solid rgba(255,190,152,0.7);
   background-image: url('../../assets/image/main-page-image.png');
   background-repeat: no-repeat;
   background-size: auto;
@@ -46,7 +46,7 @@ body{
 }
 
 .auth-under-value {
-  border: 3px solid rgba(233, 199, 199, 0.911);
+  border: 3px solid rgba(255,190,152,0.7);
 }
 
 
@@ -172,6 +172,10 @@ body{
   border-radius: 10px;
 }
 
+.login-page-title{
+  
+}
+
 .auth-sign-up-kakao:hover {
   cursor: pointer;
   opacity: 0.9;
@@ -226,6 +230,7 @@ body{
   justify-content: center;
   width: 100%;
   flex-grow: 1;
+  border: 3px solid rgba(255,190,152,0.7);
 }
 
 .auth-right-null {
@@ -244,7 +249,8 @@ body{
 .auth-submit-box {
   display: flex;
   justify-content: center;
-  margin-top: 15px;
+  padding: 15px;
+  padding-left: 10px;
 }
 
 .auth-radio-box {
