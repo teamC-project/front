@@ -32,10 +32,10 @@ export default function InfoCustomer() {
   const getInfoUpdate = (result: GetSignInUserResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -56,7 +56,7 @@ export default function InfoCustomer() {
   //                     event handler                     //
   const onInfoCustomerUpdateClickHandler = async () => {
     try {
-      const customerInfoUpdate = { 
+      const customerInfoUpdate = {
         userGender: gender,
         userAge: age,
       };
@@ -101,39 +101,39 @@ export default function InfoCustomer() {
 
   //                     render                     //
   return (
-    <div id='info-customer-wrapper'>
+    <div id='info-wrapper'>
 
-        <div className='info-customer-container'>
+      <div className='info-sub-title'>개인정보 수정</div>
+      <div className='info-container'>
 
-          <div className='customer-id-contents'>
-            <div className='customer-id'>아이디</div>
-            <div className='customer-id-container'>
-              <div className='id-input-box'>
-                <div className='customer-id-info'>{loginUserId}</div>
-              </div>
+        <div className='id-contents'>
+          <div className='info-id'>아이디</div>
+          <div className='id-container'>
+            <div className='id-input-box'>
+              <div className='id-info-text'>{loginUserId}</div>
             </div>
           </div>
-
-          <div className='info-customer-box-text'>
-            <div className='info-customer-text'>성별</div>
-            <div className='info-customer-next-box'>
-              <div className='info-customer-radio-box'>
-                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
-              <div className='info-customer-radio-box'>
-                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
-            </div>
-          </div>
-
-          <div className='info-customer-box-text'>
-            <div className='info-customer-text'>연령대</div>
-            <SelectBox value={age} onChange={onAgeChangeHandler} />
-          </div>
-
-          <div className='submit-box' >
-            <div className='complete-text primary-button' onClick={onInfoCustomerUpdateClickHandler}> 완료</div>
-          </div>
-
         </div>
+
+        <div className='info-box-text'>
+          <div className='info-text'>성별</div>
+          <div className='info-next-box'>
+            <div className='info-radio-box'>
+              <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
+            <div className='info-radio-box'>
+              <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+          </div>
+        </div>
+
+        <div className='info-box-text'>
+          <div className='info-text'>연령대</div>
+          <SelectBox value={age} onChange={onAgeChangeHandler} />
+        </div>
+
+        <div className='submit-box'>
+          <div className='user-primary-button' onClick={onInfoCustomerUpdateClickHandler}>완료</div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

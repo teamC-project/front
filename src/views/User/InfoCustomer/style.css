@@ -11,7 +11,6 @@
   margin: 0 auto;
   padding: 20px;
   margin-top: 100px;
-
 }
 
 .customer-id-contents {
@@ -46,7 +45,6 @@
   padding: 8px 16px;
   background-color: rgba(255, 255, 255, 1);
   
-
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -54,6 +52,7 @@
   line-height: 250%;
   color: rgb(90, 94, 104);
 }
+
 .info-customer-box-text {
   display: flex;
   justify-content: start;
@@ -75,7 +74,6 @@
 
 .info-customer-update-box-text {
   display: flex;
-
 }
 
 .info-customer-update-text {
@@ -90,7 +88,8 @@
 
 .submit-box {
   display: flex;
-  margin-top: 25px;
+  margin: 0 auto;
+  margin-top: 10px;
   justify-content: center;
 }
 

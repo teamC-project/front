@@ -10,8 +10,8 @@ export interface PostCustomerBoardCommentRequestDto {
 }
 
 export interface PutCustomerBoardRequestDto {
-	customerBoardTitle : string ;
-	customerBoardContents : string;
+	customerBoardTitle: string;
+	customerBoardContents: string;
   secret: boolean;
 }
 

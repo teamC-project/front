@@ -2,21 +2,23 @@ import  { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
-import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
+
 import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
 import { changePasswordRequest,  } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
 
-//                  component                 //
+//                component               //
 export default function PasswordChangePage() {
-
-  //                  state                 //
+  //                  state                //
   const [password, setPassword] = useState<string>('');
   const [passwordChange, setPasswordChange] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
+
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+
   const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
   const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
   const { userPassword } = useParams();
@@ -24,11 +26,13 @@ export default function PasswordChangePage() {
 
   //                  function                 //
   const navigator = useNavigate();
+
   const passwordChangeResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
           result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
     const isSuccess = result && result.code === 'SU'
     if (!isSuccess) {
       alert(message);
@@ -38,7 +42,7 @@ export default function PasswordChangePage() {
       alert('비밀번호가 일치하지 않습니다.')
       return;
     }
-    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+
   };
 
   //                event handler               //
@@ -86,7 +90,7 @@ export default function PasswordChangePage() {
   };
 
    //                      render                     //
-   return (
+  return (
     <div id='change-wrapper'>
       <div className='change-center-value'>
         <div className='change-sign-up-box'>
@@ -105,7 +109,7 @@ export default function PasswordChangePage() {
           </div>
 
           <div className='change-submit-box'>
-            <div className='change-submit-box change-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
+            <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
           
         </div>

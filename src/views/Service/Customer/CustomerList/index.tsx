@@ -17,7 +17,6 @@ function ListItem ({
   customerBoardWriterId,
   customerBoardWriteDatetime,
   customerBoardViewCount,
-  // customerBoardCommentCount,
   secret
 }: CustomerBoardListItem) {
 
@@ -46,9 +45,6 @@ function ListItem ({
       <div className='customerboard-list-table-board-number'>{customerBoardNumber}</div>
       <div className='customerboard-list-table-title'>
         {title}
-        {/* {customerBoardCommentCount > 0 && (
-          <span className='customerboard-list-comment-count'>[{customerBoardCommentCount}]</span>
-        )} */}
       </div>
       <div className='customerboard-list-table-writer-id'>{customerBoardWriterId}</div>
       <div className='customerboard-list-table-write-date'>{customerBoardWriteDatetime}</div>

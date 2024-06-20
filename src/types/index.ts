@@ -42,7 +42,6 @@ export interface CustomerBoardListItem {
 	customerBoardWriterId : string;
 	customerBoardWriteDatetime : string ;
 	customerBoardViewCount : number;
-  // customerBoardCommentCount : number;
 	secret: boolean;
 }	
 export interface CustomerBoardCommentListItem {
@@ -64,7 +63,8 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentNumber : number;
 	designerBoardCommentWriterId : string;
 	designerBoardCommentContents : string;
-	designerBoardCommentDatetime : string;
+	designerBoardCommentWriteDatetime : string;
+  designerBoardParentCommentNumber?: number;
 };
 export interface AnnouncementBoardListItem {
 	announcementBoardNumber: number;
@@ -82,7 +82,9 @@ export interface ChatroomList {
 }
 
 export interface ChatMessageList {
-	chatSenderId: string;
-	chatReceiverId: string;
-	chatMessages: string;
+	messageId: number;
+	chatroomId: number;
+	senderId: string;
+	message: string;
+	sendDatetime: string;
 }

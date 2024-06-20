@@ -8,7 +8,7 @@ import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PostDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
 import { postDesignerBoardRequest } from 'src/apis/designerBoard';
 import ToastEditor from 'src/components/ToastEditor';
-import Editor from '@toast-ui/editor';
+import { Editor } from '@toast-ui/react-editor';
 
 //              component               //
 export default function DesignerWrite() {
@@ -22,6 +22,8 @@ export default function DesignerWrite() {
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
     const editorRef = useRef<Editor|null>(null);
+    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
+    
 
     //              function               //
     const navigator = useNavigate();
@@ -63,15 +65,9 @@ export default function DesignerWrite() {
         setTitle(title);
     };
 
-    const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const contents = event.target.value;
-        if (contents.length > 1000) return;
-        setContents(contents);
-
-        if (!contentsRef.current) return;
-        contentsRef.current.style.height = 'auto';
-        contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
-    };
+    const onContentsChangeHandler = (contents: string ) => {
+			setContents(contents);
+		}
 
 	const handleImageUpload = () => {
         if (fileInputRef.current) {
@@ -97,35 +93,46 @@ export default function DesignerWrite() {
             reader.readAsDataURL(file);
         }
     };
+    
+    const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
+			setUrlList(imageList);
+		}
 
     const onPostButtonClickHandler = () => {
-        if (!title.trim() || !contents.trim()) {
-            alert('제목과 내용을 모두 입력해주세요.');
-            return;
-        }
         if (!cookies.accessToken) return;
-
-        // 서버가 기대하는 필드 이름으로 수정합니다.
-        const requestBody = {
-            designerBoardTitle: title,
-            designerBoardContents: contents
+    
+        const requestBody: PostDesignerBoardRequestDto = { 
+            designerBoardTitle: title.trim(), // 제목에서 공백 제거
+            designerBoardContents: contents.trim(), // 내용에서 공백 제거
+            
         };
 
-        // 요청 본문 로그
-        console.log('Request Body:', requestBody);
+        const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
+
+        // 제목과 내용이 모두 비어있는 경우 처리
+        if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
+          alert("제목과 내용을 모두 입력해주세요.");
+          return;
+        }
+      // 제목만 비어있는 경우 처리
+      else if (!requestBody.designerBoardTitle) {
+          alert("제목을 입력해주세요.");
+          return;
+      }
+      // 내용만 비어있는 경우 처리
+      else if (!requestBody.designerBoardContents || !isBlank) {
+          alert("내용을 입력해주세요.");
+          return;
+      }
 
         postDesignerBoardRequest(requestBody, cookies.accessToken)
-            .then(postDesignerBoardResponse)
-            .catch((error) => {
-                // 에러 메시지 로그
-                console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
-                alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
-            });
+            .then(postDesignerBoardResponse);
     };
 
     //             effect               //
     useEffect(() => {
-        if (loginUserRole === 'ROLE_ADMIN') {
+        if (!loginUserRole) return;
+        if (loginUserRole === 'ROLE_DESIGNER') {
             navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
@@ -134,26 +141,26 @@ export default function DesignerWrite() {
     //                    render                    //
     return (
         <div id='designer-write-wrapper'>
-            <div className='designer-write-top'>
-                <div className='designer-write-title-box'>
-                    <div className='designer-write-title'>제목</div>
-                    <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
-                </div>
+          <div className='designer-write-top'>
+            <div className='designer-write-title-box'>
+                <div className='designer-write-title'>제목</div>
+                <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
             </div>
-
-
-            {/* <ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} /> */}
-
-            <div className='customer-write-contents-box'>
-                <textarea
-                    className='customer-write-contents-textarea'
-                    placeholder='내용을 입력해주세요.'
-                    value={contents}
-                    onChange={onContentsChangeHandler}
-                ></textarea>
-            </div>
-
-            <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
+          </div>
+          <div className='designer-write-contents-box'>
+            <ToastEditor
+              ref={editorRef}
+              body={contents}
+              setBody={onContentsChangeHandler}
+              imageList={urlList}
+              setImageList={onImageChangeHandler}
+            />
+          </div>
+          <div className='designer-write-button'>
+            <button className='designer-write-click-button' onClick={onPostButtonClickHandler}>
+                올리기
+            </button>
+          </div>
         </div>
     );
 }

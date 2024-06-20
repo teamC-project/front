@@ -6,6 +6,36 @@ body{
   display: none;
 }
 
+#main-page-wrapper {
+  min-width: none;
+  width: 100%;
+}
+
+.main-page-image-box {
+  width: 100%;
+  border: 5px solid rgba(233, 199, 199, 0.911);
+}
+
+.main-page-title-image {
+  height: 155px;
+
+  background-image: url('../../assets/image/main-page-title-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.main-page-image {
+  display: flex;
+  justify-self: center;
+
+  height: 740px;
+  border-top: solid rgba(233, 199, 199, 0.911);
+  background-image: url('../../assets/image/main-page-image.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+
 /* 회원가입 선택 공통 */
 #auth-wrapper {
   display: flex;
@@ -15,24 +45,10 @@ body{
   margin-bottom: 100px;
 }
 
-.auth-primary-button {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 4px 16px;
-
-  background-color: rgba(255, 190, 152, 1);
-  border-radius: 6px;
-
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 175%;
-
-  color: rgba(255, 255, 255, 1);
+.auth-under-value {
+  border: 3px solid rgba(233, 199, 199, 0.911);
 }
+
 
 /* 회원가입 선택 */
 .auth-welcome-image-box {
@@ -180,7 +196,7 @@ body{
   line-height: 50px;
 
   color: rgba(66, 66, 66, 1);
-}
+}auto
 
 .auth-sign-up-box {
   display: flex;
@@ -192,7 +208,11 @@ body{
 }
 
 .auth-under-bar {
+  max-width: 1920px;
+  margin: 0 auto;
   display: flex;
+
+  
 }
 
 .auth-left-null {
@@ -257,8 +277,6 @@ body{
 
 
 /* 로그인 UI */
-
-
 .login-box {
   display: flex;
   flex-direction: column;
@@ -325,40 +343,7 @@ body{
   margin-bottom: 100px;
 }
 
-.text-cusor-pointer {
-  cursor: pointer;
-}
-
 .under-right-bar {
   width: 600px;
 }
 
-#main-page-wrapper {
-  min-width: none;
-  width: 100%;
-}
-
-
-
-.main-page-image-box {
-  width: 100%;
-}
-
-.main-page-title-image {
-  height: 155px;
-
-  background-image: url('../../assets/image/main-page-title-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.main-page-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 740px;
-
-  background-image: url('../../assets/image/main-page-image.png');
-  background-repeat: no-repeat;
-  background-size: auto;
-}
