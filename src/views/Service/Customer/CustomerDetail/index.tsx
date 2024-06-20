@@ -147,8 +147,8 @@ export default function CustomerDetail() {
     };
 
     const onDeleteButtonClickHandler = () => {
-      if (!customerBoardNumber || loginUserId !== writerId) {
-        alert('작성자만 삭제할 수 있습니다.');
+      if (!customerBoardNumber || (loginUserId !== writerId && loginUserRole !== 'ROLE_ADMIN')) {
+        alert('작성자 또는 관리자만 삭제할 수 있습니다.');
         return;
       }
       const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -177,13 +177,15 @@ export default function CustomerDetail() {
           <div className="customer-detail-information1">작성자: {writerId}</div>
           <div className="customer-detail-information2">작성일: {writeDate}</div>
           <div className="customer-detail-information3">조회수: {viewCount}</div>
-          {/* 작성자와 로그인한 사용자가 같은 경우에만 수정/삭제 버튼 표시 */}
-        {loginUserId === writerId && (
+          {/* 작성자와 로그인한 사용자가 같으면 수정/삭제, 로그인한 사용자의 역할이 ROLE_ADMIN인 경우에만 수정/삭제 버튼 표시 */}
+        {(loginUserId === writerId || loginUserRole === 'ROLE_ADMIN') && (
           <>
             <div className="customer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-            <div className="customer-detail-information5" onClick={onUpdateClickHandler}>
-              수정
-            </div>
+            {loginUserId === writerId && (
+              <div className="customer-detail-information5" onClick={onUpdateClickHandler}>
+                수정
+              </div>
+            )}
           </>
         )}
         </div>

@@ -71,7 +71,7 @@ export default function CustomerBoardComment() {
 
   //           event handler          //
   const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') return;
+    if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_ADMIN') return;
     const comment = event.target.value;
     setComment(comment);
 
@@ -81,7 +81,7 @@ export default function CustomerBoardComment() {
 
   const onPostButtonClickHandler = () => {
     if (!comment.trim()) return;
-    if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
+    if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_ADMIN') || !cookies.accessToken) return;
 
     const requestBody: PostCustomerBoardCommentRequestDto = {
       customerBoardCommentContents: comment,
@@ -110,15 +110,13 @@ export default function CustomerBoardComment() {
           result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
               result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '삭제되었습니다.';
   
-      if (!result || result.code !== 'SU') {
-        alert(message);
-        return;
+      alert(message);
+
+      if (result?.code === 'SU' && customerBoardNumber) {
+        getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardCommentsByBoardNumberResponse);
       }
-  
-      if (!customerBoardNumber) return;
-      getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardCommentsByBoardNumberResponse);
     };
   
     const putCustomerBoardCommentResponse = (result: ResponseDto | null) => {
@@ -159,8 +157,8 @@ export default function CustomerBoardComment() {
   
     const onDeleteButtonClickHandler = () => {
       if (!customerBoardCommentNumber || !cookies.accessToken) return;
-      if (customerBoardCommentWriterId !== loginUserId) {
-        alert('작성자만 삭제할 수 있습니다.');
+      if (customerBoardCommentWriterId !== loginUserId && loginUserRole !== 'ROLE_ADMIN') {
+        alert('작성자 또는 관리자만 삭제할 수 있습니다.');
         return;
       }
       const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -186,7 +184,7 @@ export default function CustomerBoardComment() {
 
     const onReplyPostButtonClickHandler = () => {
       if (!replyCommentContent.trim()) return;
-      if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER') || !cookies.accessToken) return;
+      if (!customerBoardNumber || (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_ADMIN') || !cookies.accessToken) return;
   
       const requestBody: PostCustomerBoardCommentRequestDto = {
         customerBoardCommentContents: replyCommentContent,
@@ -203,9 +201,9 @@ export default function CustomerBoardComment() {
         <div key={customerBoardCommentNumber} className='customer-board-comment-container'>
           <div className='customer-board-comment-header'>
             <div className='customer-board-comment-author'>작성자: {customerBoardCommentWriterId}</div>
-            {customerBoardCommentWriterId === loginUserId && (
+            {(customerBoardCommentWriterId === loginUserId || loginUserRole === 'ROLE_ADMIN') && (
               <div className='customer-board-comment-actions'>
-                <button onClick={onCommentUpdateOpenHandler}>수정</button>
+                {customerBoardCommentWriterId === loginUserId && <button onClick={onCommentUpdateOpenHandler}>수정</button>}
                 <button onClick={onDeleteButtonClickHandler}>삭제</button>
               </div>
             )}
