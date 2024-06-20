@@ -5,7 +5,7 @@ import { deleteCustomerBoardCommentRequest, getCustomerBoardCommentsByBoardNumbe
 import { PostCustomerBoardCommentRequestDto, PutCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { useUserStore } from 'src/stores';
-import { CustomerBoardCommentListItem } from 'src/types';
+import { ChatroomList, CustomerBoardCommentListItem } from 'src/types';
 import './style.css';
 import { GetCustomerBoardCommentListResponseDto } from 'src/apis/customerBoard/dto/response';
 import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
@@ -29,6 +29,7 @@ export default function CustomerBoardComment() {
   const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
   const { designerIdClickHandler } = useCreateChatRoom();
 
+  const [rooms, setRooms] = useState<ChatroomList[]>([]);
   const { roomId } = useParams<string>();
 
 
@@ -283,6 +284,8 @@ export default function CustomerBoardComment() {
     //   document.removeEventListener('mousedown', handleClickOutside);
     // };
   }, []);
+
+  
 
   //        render        //
   return (

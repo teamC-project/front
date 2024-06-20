@@ -65,7 +65,6 @@ export default function ChatroomDetail() {
     }
 
     const { chatMessageList } = result as GetChatMessageListResponseDto;
-    console.log(chatMessageList);
     setMessages(chatMessageList);
 
   };

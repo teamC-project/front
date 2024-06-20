@@ -235,7 +235,6 @@ export default function ServiceContainer() {
 
         const designerIdSelectedHandler = (event: Event) => {
             const customEvent = event as CustomEvent<string>;
-            console.log('Event received:', customEvent.detail);
             setSelectedDesignerId(customEvent.detail);
         };
 
