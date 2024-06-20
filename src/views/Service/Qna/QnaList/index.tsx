@@ -24,7 +24,6 @@ function ListItem({
   return (
     <div className='qna-board-list-table-tr' onClick={onClickHandler}>
       <div className='qna-board-list-table-number'>{qnaBoardNumber}</div>
-      <div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
 			<div className='qna-board-list-table-status'>
 			{qnaBoardStatus ? (
           <div className="disable-bedge">완료</div>
@@ -32,6 +31,7 @@ function ListItem({
           <div className="primary-bedge">접수</div>
         )}
 			</div>
+      <div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
       <div className='qna-board-list-table-writer-id'>{qnaBoardWriterId}</div>
       <div className='qna-board-list-table-write-date'>{qnaBoardWriteDatetime}</div>
       <div className='qna-board-list-table-viewcount'>{qnaBoardViewCount}</div>
@@ -225,8 +225,8 @@ export default function QnaBoardList() {
       </div>
       <div className='qna-board-list-table'>
         <div className='qna-board-table-th'>
-          <div className='qna-board-list-table-reception-number'>접수번호</div>
-					<div className='qna-board-list-table-statis'>접수 상태</div>
+          <div className='qna-board-list-table-number'>접수번호</div>
+					<div className='qna-board-list-table-status'>접수 상태</div>
           <div className='qna-board-list-table-title'>제목</div>
           <div className='qna-board-list-table-writer-id'>작성자</div>
           <div className='qna-board-list-table-write-date'>작성일</div>
