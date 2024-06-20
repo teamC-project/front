@@ -82,13 +82,21 @@ const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
 
 const onUpdateButtonClickHandler = () => {
 	if(!cookies.accessToken || !trendBoardNumber) return;
-	if(!trendBoardTitle.trim() || !trendBoardContents.trim()) return;
+	if(!trendBoardTitle.trim() || !trendBoardContents.trim()) {
+		alert('제목과 내용 모두 입력해주세요');
+		return;
+	}
 
 	const requestBody : PutTrendBoardRequestDto = {
-		trendBoardTitle :  trendBoardTitle, trendBoardContents: trendBoardContents,
-		trendBoardThumbnailImage : trendBoardThumbnailImage
+		 trendBoardTitle,
+		trendBoardContents,
+		 trendBoardThumbnailImage
 	};
-	putTrendBoardRequest(trendBoardNumber, requestBody ,cookies.accessToken).then(putTrendBoardResponse);
+	putTrendBoardRequest(trendBoardNumber, requestBody ,cookies.accessToken).then(putTrendBoardResponse)
+	.catch((error) => {
+		console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
+		alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
+});
 }
 
 const onThumbnailSelectHandler = (url: string) => {

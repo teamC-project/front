@@ -58,8 +58,11 @@ export default function TrendWrite() {
 			setTrendBoardUrlList(imageList);
 		}
 
-    const onTrendPostClickHandler = async () => {
-      if (!trendBoardTitle.trim() || !trendBoardContents.trim()) return;
+    const onTrendPostClickHandler =  () => {
+      if (!trendBoardTitle.trim() || !trendBoardContents.trim()) {
+				alert('제목과 내용 모두 입력해주세요')
+				return;
+			}
       if (!cookies.accessToken) return;
   
       const requestBody: PostTrendBoardRequestDto = {
@@ -67,12 +70,12 @@ export default function TrendWrite() {
 				trendBoardContents,
 				trendBoardThumbnailImage
 			}
-      try {
-          const token = await Promise.resolve(cookies.accessToken); 
-          const response = await postTrendBoardRequest(requestBody, token).then(postTrendBoardResponse)
-          navigator(TREND_BOARD_LIST_ABSOLUTE_PATH); 
-      } catch (error) {
-			}
+			postTrendBoardRequest(requestBody, cookies.accessToken)
+			.then(postTrendBoardResponse)
+			.catch((error) => {
+					console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
+					alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
+			});
   };
 
 	const onThumbnailSelectHandler = (url: string) => {
