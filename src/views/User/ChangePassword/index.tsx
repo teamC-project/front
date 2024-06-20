@@ -2,7 +2,7 @@ import  { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
-import {  ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
 
 import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
@@ -90,7 +90,7 @@ export default function PasswordChangePage() {
   };
 
    //                      render                     //
-   return (
+  return (
     <div id='change-wrapper'>
       <div className='change-center-value'>
         <div className='change-sign-up-box'>
