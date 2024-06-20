@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, ChangeEvent, useState } from 'react';
 import './style.css';
+import { useUserStore } from 'src/stores';
 import { useNavigate, useParams } from 'react-router';
-import { ChatMessageList, ChatroomList, DesignerBoardCommentListItem, DesignerBoardListItem } from 'src/types';
+import { useCookies } from 'react-cookie';
+import { ChatMessageList, ChatroomList, DesignerBoardCommentListItem } from 'src/types';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useCookies } from 'react-cookie';
-import { getDesignerBoardRequest, postDesignerBoardCommentRequest, increaseViewCountRequest, deleteDesignerBoardRequest, getDesignerBoardListRequest } from 'src/apis/designerBoard';
-import { useUserStore } from 'src/stores';
+import { getDesignerBoardRequest, postDesignerBoardCommentRequest, increaseViewCountRequest, deleteDesignerBoardRequest } from 'src/apis/designerBoard';
+import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
 import DesignerBoardComment from '../DesignerComment';
 
 import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
 import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
 import { GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+
 interface ChatRoomProps {
-    selectedDesignerId: string;
+  selectedDesignerId: string;
 }
+
+interface Props {
+    contents: string;
+}
+
 
 //                    component                    //
 export default function DesignerDetail() {
@@ -25,7 +32,6 @@ export default function DesignerDetail() {
     const { designerBoardNumber } = useParams();
     const [cookies] = useCookies();
     const [viewList, setViewList] = useState<DesignerBoardCommentListItem[]>([]);
-    const [designerBoardList, setDesignerBoardList] = useState<DesignerBoardListItem[]>([]);
 
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
@@ -44,56 +50,58 @@ export default function DesignerDetail() {
     const { roomId } = useParams<string>();
 
     //                  function                    //
-    const navigator = useNavigate();
+    const navigator = useNavigate();  
+
     const increaseViewCountResponse = (result: ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '잘못된 접수번호입니다.' : 
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      const message =
+          !result ? '서버에 문제가 있습니다.' :
+          result.code === 'VF' ? '잘못된 접수번호입니다.' : 
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+          result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
+          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            if (result?.code === 'AF') {
-                navigator(MAIN_PATH);
-                return;
-            }
-            navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
+      if (!result || result.code !== 'SU') {
+          alert(message);
+          if (result?.code === 'AF') {
+              navigator(MAIN_PATH);
+              return;
+          }
+          navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+          return;
+      }
 
-        if (!cookies.accessToken || !designerBoardNumber) return;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
-            .then(getDesignerBoardResponse);
-    };
-
+      if (!cookies.accessToken || !designerBoardNumber) return;
+      getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
+          .then(getDesignerBoardResponse);
+  };
+  
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
         const message = 
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패 했습니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
         result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
-            if (result?.code === 'AF') {
-                navigator(MAIN_PATH);
-                return;
-            }
             navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
-        const {
-            designerBoardTitle,
-            designerBoardWriterId,
-            designerBoardWriteDatetime,
-            designerBoardViewCount,
-            designerBoardContents,
-            designerBoardComment,
-        } = result as GetDesignerBoardResponseDto;
+        const { designerBoardTitle,
+          designerBoardWriterId,
+          designerBoardWriteDatetime,
+          designerBoardViewCount,
+          designerBoardContents,
+          designerBoardComment
+          } = result as GetDesignerBoardResponseDto;
+
+        if (loginUserRole === 'ROLE_DESIGNER' && (designerBoardWriterId !== loginUserId)) {
+          alert('권한이 없습니다.');
+          navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+          return;
+        }
 
         setTitle(designerBoardTitle);
         setWriterId(designerBoardWriterId);
@@ -101,9 +109,28 @@ export default function DesignerDetail() {
         setViewCount(designerBoardViewCount);
         setContents(designerBoardContents);
         setComment(designerBoardComment);
+        
+    };
+
+    const deleteDesignerBoardResponse = (result: ResponseDto | null) => {
+      const message =
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '잘못된 접수번호입니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+  
+      if (!result || result.code !== 'SU') {
+        alert(message);
+        return;
+      }
+  
+      alert('삭제되었습니다.');
+      navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const postDesignerBoardCommentResponse = (result: ResponseDto | null) => {
+
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
@@ -119,22 +146,7 @@ export default function DesignerDetail() {
         if (!designerBoardNumber || !cookies.accessToken) return;
         getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
             .then(getDesignerBoardResponse);
-    };
-
-    const deleteDesignerBoardResponse = (result: ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            return;
-        }
-
-        navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
+            
     };
 
     //                   event handler                    //
@@ -148,60 +160,63 @@ export default function DesignerDetail() {
     };
 
     const onDeleteButtonClickHandler = () => {
-        if (!designerBoardNumber || loginUserId !== writerId || !cookies.accessToken) return;
-        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
-        if (!isConfirm) return;
+      if (!designerBoardNumber || loginUserId !== writerId) {
+        alert('작성자만 삭제할 수 있습니다.');
+        return;
+      }
+      const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+      if (!isConfirm) return;
 
-        deleteDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
-            .then(deleteDesignerBoardResponse)
+      deleteDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
+        .then(deleteDesignerBoardResponse);
     };
 
     const designerIdClickHandler = () => {
-        const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
-        if (confirmCreateRoom) {
-            console.log('Designer ID clicked:', writerId);
-            setSelectedDesignerId(writerId); 
-            const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
-            window.dispatchEvent(event);
-        }
-    };
+      const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
+      if (confirmCreateRoom) {
+          console.log('Designer ID clicked:', writerId);
+          setSelectedDesignerId(writerId);
+          const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
+          window.dispatchEvent(event);
+      }
+  };
 
     //                   effect                        //
     useEffect(() => {
-        if (!cookies.accessToken || !designerBoardNumber) return;
-        increaseViewCountRequest(designerBoardNumber, cookies.accessToken)
-            .then(increaseViewCountResponse);
-            getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
-            .then(getDesignerBoardResponse);
+      if (!cookies.accessToken || !designerBoardNumber) return;
+      increaseViewCountRequest(designerBoardNumber, cookies.accessToken)
+        .then(increaseViewCountResponse);
+      getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
+        .then(getDesignerBoardResponse);
     }, [cookies.accessToken, designerBoardNumber]);
+
 
     //              render              //
     return (
-        <div className="designer-detail">
-            <div className="designer-detail-title">{title}</div>
-            <div className="designer-detail-container">
-                <div className="designer-detail-information">
-                    <div className="designer-detail-information1" >작성자: <span onClick={designerIdClickHandler}>{writerId}</span></div>
-                    <div className="designer-detail-information2">작성일: {writeDate}</div>
-                    <div className="designer-detail-information3">조회수: {viewCount}</div>
-                    {loginUserId === writerId && (
-                    <>
-                        <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-                        <div className="designer-detail-information5" onClick={onUpdateClickHandler}>
-                        수정
-                        </div>
-                    </>
-                    )}
-                </div>
+    <div className="designer-detail">
+      <div className="designer-detail-title">{title}</div>
+      <div className="designer-detail-container">
+        <div className="designer-detail-information">
+          <div className="designer-detail-information1">작성자: <span onClick={designerIdClickHandler}>{writerId}</span></div>
+          <div className="designer-detail-information2">작성일: {writeDate}</div>
+          <div className="designer-detail-information3">조회수: {viewCount}</div> 
+        {loginUserId === writerId && (
+          <>
+            <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
+            <div className="designer-detail-information5" onClick={onUpdateClickHandler}>
+              수정
             </div>
-            <div className="designer-detail-view">
-                {/* 내용 표시 */}
-                {contents}
-            </div>
-            <DesignerBoardComment />
-            <div className="designer-detail-go-to-designerList" onClick={handleGoToList}>
-                목록으로
-            </div>
+          </>
+        )}
         </div>
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: contents }} className="designer-detail-view">
+        {/* 내용 표시 */}
+      </div>
+      <DesignerBoardComment />
+      <div className="designer-detail-go-to-designerList" onClick={handleGoToList}>
+        목록으로
+      </div>
+    </div>
     );
 }

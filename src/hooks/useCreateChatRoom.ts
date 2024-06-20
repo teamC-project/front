@@ -16,12 +16,14 @@ export function useCreateChatRoom() {
   const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
   const [cookies] = useCookies();
   const { loginUserId, loginUserRole } = useUserStore();
-  const navigator = useNavigate();
+  
   const [newRoomName, setNewRoomName] = useState<string>('');
   const [rooms, setRooms] = useState<ChatroomList[]>([]);
   const { roomId } = useParams<string>();
 
   //                  function                    //
+  const navigator = useNavigate();
+
   const getChatroomListResponse = (result: GetChatroomListResponseDto | ResponseDto | null) => {
     const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -38,7 +40,7 @@ export function useCreateChatRoom() {
     setRooms(chatRoomList);
 };
 
-  const createRoom = (roomName: string) => {
+  const createRoom = (roomName: string, designerId? : string) => {
     if (loginUserRole !== 'ROLE_CUSTOMER') {
         alert('채팅방 생성은 고객만 가능합니다.');
         return;
@@ -51,7 +53,7 @@ export function useCreateChatRoom() {
     const requestBody: PostChatroomRequestDto = {
         roomId:0,
         customerId: loginUserId,
-        designerId: selectedDesignerId,
+        designerId: designerId ? designerId : selectedDesignerId,
         roomName: roomName
     };
 
@@ -85,8 +87,7 @@ const postChatroomResponse = (result: ResponseDto | null) => {
     if (confirmCreateRoom) {
       const roomName = prompt('채팅방 이름을 입력하세요:', '');
       if (roomName) {
-        setSelectedDesignerId(designerId);
-        createRoom(roomName);
+        createRoom(roomName, designerId);
       }
     }
   };

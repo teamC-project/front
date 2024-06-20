@@ -8,6 +8,9 @@ import { useUserStore } from 'src/stores';
 import { CustomerBoardCommentListItem } from 'src/types';
 import './style.css';
 import { GetCustomerBoardCommentListResponseDto } from 'src/apis/customerBoard/dto/response';
+import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
+import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
+import { GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
 import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
 //          component          //
@@ -25,6 +28,8 @@ export default function CustomerBoardComment() {
   const [showReplyInput, setShowReplyInput] = useState<boolean>(false);
   const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
   const { designerIdClickHandler } = useCreateChatRoom();
+
+  const { roomId } = useParams<string>();
 
 
   //          function          //
@@ -104,6 +109,7 @@ export default function CustomerBoardComment() {
     const [updateOpen, setUpdateOpen] = useState<boolean>(false);
     const [replyCommentContent, setReplyCommentContent] = useState<string>('');
     const [replyOpen, setReplyOpen] = useState<boolean>(false);
+    const { designerIdClickHandler } = useCreateChatRoom();
   
     //          function          //
     const deleteCustomerBoardCommentResponse = (result: ResponseDto | null) => {
