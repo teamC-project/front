@@ -160,8 +160,8 @@ export default function DesignerDetail() {
     };
 
     const onDeleteButtonClickHandler = () => {
-      if (!designerBoardNumber || loginUserId !== writerId) {
-        alert('작성자만 삭제할 수 있습니다.');
+      if (!designerBoardNumber || (loginUserId !== writerId && loginUserRole !== 'ROLE_ADMIN')) {
+        alert('작성자 또는 관리자만 삭제할 수 있습니다.');
         return;
       }
       const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
@@ -202,9 +202,11 @@ export default function DesignerDetail() {
         {loginUserId === writerId && (
           <>
             <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-            <div className="designer-detail-information5" onClick={onUpdateClickHandler}>
-              수정
-            </div>
+            {loginUserId === writerId && (
+              <div className="designer-detail-information5" onClick={onUpdateClickHandler}>
+                수정
+              </div>
+            )}
           </>
         )}
         </div>

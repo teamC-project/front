@@ -229,8 +229,8 @@ export default function ServiceContainer() {
             }
 
             const { userId, userRole } = result as GetSignInUserResponseDto;
-                setLoginUserId(userId);
-                setLoginUserRole(userRole);
+              setLoginUserId(userId);
+              setLoginUserRole(userRole);
             });
 
         const designerIdSelectedHandler = (event: Event) => {
@@ -244,7 +244,7 @@ export default function ServiceContainer() {
             window.removeEventListener('designerIdSelected', designerIdSelectedHandler);
         }
 
-    }, [cookies.accessToken, navigator, setLoginUserId, setLoginUserRole]);
+    }, [cookies.accessToken]);
 
     useEffect(() => {
         resetRoomId();
