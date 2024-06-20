@@ -5,9 +5,13 @@ import { deleteCustomerBoardCommentRequest, getCustomerBoardCommentsByBoardNumbe
 import { PostCustomerBoardCommentRequestDto, PutCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { useUserStore } from 'src/stores';
-import { CustomerBoardCommentListItem } from 'src/types';
+import { ChatroomList, CustomerBoardCommentListItem } from 'src/types';
 import './style.css';
 import { GetCustomerBoardCommentListResponseDto } from 'src/apis/customerBoard/dto/response';
+import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
+import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
+import { GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
 //          component          //
 export default function CustomerBoardComment() {
@@ -23,6 +27,10 @@ export default function CustomerBoardComment() {
   const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
   const [showReplyInput, setShowReplyInput] = useState<boolean>(false);
   const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
+  const { designerIdClickHandler } = useCreateChatRoom();
+
+  const [rooms, setRooms] = useState<ChatroomList[]>([]);
+  const { roomId } = useParams<string>();
 
 
   //          function          //
@@ -102,6 +110,7 @@ export default function CustomerBoardComment() {
     const [updateOpen, setUpdateOpen] = useState<boolean>(false);
     const [replyCommentContent, setReplyCommentContent] = useState<string>('');
     const [replyOpen, setReplyOpen] = useState<boolean>(false);
+    const { designerIdClickHandler } = useCreateChatRoom();
   
     //          function          //
     const deleteCustomerBoardCommentResponse = (result: ResponseDto | null) => {
@@ -200,8 +209,8 @@ export default function CustomerBoardComment() {
       <div className='customer-board-comment'>
         <div key={customerBoardCommentNumber} className='customer-board-comment-container'>
           <div className='customer-board-comment-header'>
-            <div className='customer-board-comment-author'>작성자: {customerBoardCommentWriterId}</div>
-            {(customerBoardCommentWriterId === loginUserId || loginUserRole === 'ROLE_ADMIN') && (
+            <div className='customer-board-comment-author' onClick={() => designerIdClickHandler(customerBoardCommentWriterId)}>작성자: {customerBoardCommentWriterId}</div>
+            {customerBoardCommentWriterId === loginUserId && (
               <div className='customer-board-comment-actions'>
                 {customerBoardCommentWriterId === loginUserId && <button onClick={onCommentUpdateOpenHandler}>수정</button>}
                 <button onClick={onDeleteButtonClickHandler}>삭제</button>
@@ -273,6 +282,8 @@ export default function CustomerBoardComment() {
     //   document.removeEventListener('mousedown', handleClickOutside);
     // };
   }, []);
+
+  
 
   //        render        //
   return (

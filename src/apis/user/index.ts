@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CHANGE_PASSWORD_PATH, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, GET_SIGN_IN_USER_REQUEST_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_CHANGE_URL, PASSWORD_FOUND_PATH, RESET_PASSOWORD_PATH, USER_DELETE_URL } from "src/constant";
+import { CHANGE_PASSWORD_PATH, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, GET_SIGN_IN_USER_REQUEST_URL, GET_USER_ROLE_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_CHANGE_URL, PASSWORD_FOUND_PATH, RESET_PASSOWORD_PATH, USER_DELETE_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import { GetSignInUserResponseDto, GetUserInfoResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
@@ -44,4 +44,12 @@ export const changePasswordRequest = async (requestBody: ChangePasswordRequestDt
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
+};
+
+// function: 유저 ROLE 불러오기 함수
+export const getUserRoleRequest = async (userId: string, accessToken: string) => {
+  const result = await axios.get(GET_USER_ROLE_URL(userId), bearerAuthorization(accessToken))
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler);
+    return result;
+};

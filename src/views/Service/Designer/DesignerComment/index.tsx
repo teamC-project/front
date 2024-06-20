@@ -248,18 +248,6 @@ export default function DesignerBoardComment() {
       )
   }
 
-
-  // // 대댓글 입력창 밖을 클릭했을 때 입력창 닫기
-  // const handleClickOutside = (event: MouseEvent) => {
-  //   if (
-  //     commentRef.current &&
-  //     !commentRef.current.contains(event.target as Node)
-  //   ) {
-  //     onCloseReplyInputHandler();
-  //   }
-  // };
-
-
   //           effect          //
   useEffect(() => {
     if (!cookies.accessToken || designerBoardNumber === undefined) return;

@@ -46,7 +46,6 @@ const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, imageList, set
 
 				const newBody = body + data.replace(base64, url);
 				setBody(newBody);
-				console.log(newBody);
 
 				imageCountRef.current = imageCountRef.current + 1;
 

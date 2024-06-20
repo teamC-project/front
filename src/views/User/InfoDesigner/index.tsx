@@ -50,8 +50,6 @@ export default function InfoDesigner() {
       return;
     }
 
-    console.log(result);
-
     const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
     if (userId !== loginUserId) {
       alert('권한이 없습니다.');

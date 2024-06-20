@@ -182,6 +182,7 @@ export const USER_DELETE_URL = `${SERVER_USER_MODULE_URL}/user-delete`;
 export const INFO_CUSTOMER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/customer-update`;
 export const INFO_DESIGNER_UPDATE_URL = `${SERVER_USER_MODULE_URL}/designer-update`;
 export const PASSWORD_CHANGE_URL = `${SERVER_USER_MODULE_URL}/change-user-password`;
+export const GET_USER_ROLE_URL = (userId : string) => `${SERVER_USER_MODULE_URL}/role/${userId}`;
 
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/service/announcement_board`;
