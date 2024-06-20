@@ -92,10 +92,27 @@
   margin-right: 20px; 
 }
 
-.qna-board-list-page-left,
+
 .qna-board-list-page-right {
   cursor: pointer;
   margin: 0 5px;
+
+	width : 20px;
+	height: 20px;
+
+	background-image: url(../../../../assets/image/page-right.png);
+	background-size: 100% 100%;
+}
+
+.qna-board-list-page-left {
+	cursor: pointer;
+  margin: 0 5px;
+
+	width : 20px;
+	height: 20px;
+
+	background-image: url(../../../../assets/image/page-left.png);
+	background-size: 100% 100%;
 }
 
 .qna-board-list-page-box {
