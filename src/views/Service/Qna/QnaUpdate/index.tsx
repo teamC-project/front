@@ -65,22 +65,6 @@ export default function QnaBoardUpdate() {
 
     };
 
-    const restoreSelection = () => {
-        const sel = window.getSelection();
-        sel?.removeAllRanges();
-        if (selection) {
-            sel?.addRange(selection);
-        }
-
-    };
-
-    const saveSelection = () => {
-        const sel = window.getSelection();
-        if (sel && sel.rangeCount > 0) {
-            setSelection(sel.getRangeAt(0));
-        }
-
-    };
 
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -100,37 +84,17 @@ export default function QnaBoardUpdate() {
 
     const onUpdateButtonClickHandler = () => {
         if (!cookies.accessToken || !qnaBoardNumber) return;
-        if (!title.trim() || !contents.trim()) return;
+        if (!title.trim() || !contents.trim())  {
+					alert("제목과 내용 모두 입력해주세요.");
+					return;
+				}
 
         const requestBody: PutQnaBoardRequestDto = { qnaBoardTitle: title, qnaBoardContents: contents };
         putQnaBoardRequest(parseInt(qnaBoardNumber), requestBody, cookies.accessToken)
             .then(result => putQnaBoardResponse(result as ResponseDto));
     };
 
-    const handleImageUpload = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const img = document.createElement('img');
-                img.src = event.target?.result as string;
-                
-                restoreSelection();
-                if (selection) {
-                    selection.deleteContents();
-                    selection.insertNode(img);
-                }
-                saveSelection();
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    
 
     //             effect               //
     let effectFlag = false;
@@ -159,16 +123,6 @@ export default function QnaBoardUpdate() {
             </div>
             <div className='qna-write-contents-box'>
                 <textarea ref={contentsRef} className='qna-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
-            </div>
-            <div className='upload-file'>첨부 파일
-            <button onClick={handleImageUpload}>파일 선택</button>
-        <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={handleFileInputChange}
-        />
             </div>
             <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>

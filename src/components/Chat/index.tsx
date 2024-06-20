@@ -27,8 +27,6 @@ function ListItem ({
     //                    function                    //
     const navigator = useNavigate();
 
-    console.log(chatroomId);
-
     //                    event handler                    //
     const onClickHandler = () => setRoomId(chatroomId);
 
@@ -48,7 +46,7 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 
     const [cookies] = useCookies();
-    const [rooms, setRooms] = useState<ChatroomList[]>([]);
+    const {rooms, setRooms} = useChatStore();
     const [newRoomName, setNewRoomName] = useState<string>('');
     const { roomId } = useParams<string>();
     const [message, setMessage] = useState<string>('');
@@ -56,7 +54,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     const { loginUserRole, loginUserId } = useUserStore();
     // const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
 
-    const [chatroomList, setChatroomList] = useState<ChatroomList[]>([]);
     const [viewList, setViewList] = useState<ChatroomList[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
     const [totalPage, setTotalPage] = useState<number>(1);
@@ -88,7 +85,7 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     };
     
     const changeBoardList = (chatroomList: ChatroomList[]) => {
-        setChatroomList(chatroomList);
+        setRooms(chatroomList);
 
         const totalLenght = chatroomList.length;
         setTotalLength(totalLenght);
@@ -209,7 +206,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         getChatroomListRequest(cookies.accessToken).then(getChatroomListResponse);
 
         function onConnect() {
-            console.log(socket);
             setIsConnected(true);
         }
 
@@ -218,8 +214,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         }
 
         function onMessage(args: any) {
-            console.log('message');
-            console.log(args);
         }
         if (isConnected) return;
         socket.on('connect', onConnect);
@@ -244,14 +238,18 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     }, [selectedDesignerId]);
 
     useEffect(() => {
-        if (!chatroomList.length) return;
-        changePage(chatroomList, totalLenght);
+        if (!rooms.length) return;
+        changePage(rooms, totalLenght);
     }, [currentPage]);
 
     useEffect(() => {
-        if (!chatroomList.length) return;
+        if (!rooms.length) return;
         changeSection(totalPage);
     }, [currentSection]);
+
+    useEffect(() => {
+        changeBoardList(rooms);
+    }, [rooms]);
 
     //                    render                    //
     return (

@@ -97,47 +97,47 @@ function App() {
 
       <Route path={SERVICE_PATH} element={<ServiceContainer />} >
 
-      <Route path={MY_PAGE_PATH} >
-      <Route index element={<MyPage />} />
-      <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
-      <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
-      <Route path={DELETE_INFO_PATH} element={<InfoDeleteUser />} />
-      <Route path={CHANGE_PASSWORD_PATH} element={<PasswordChangePage />} />
-      </Route>
+        <Route path={MY_PAGE_PATH} >
+          <Route index element={<MyPage />} />
+          <Route path={UPDATE_CUSTOMER_INFO_PATH} element={<InfoCustomer />} />
+          <Route path={UPDATE_DESIGNER_INFO_PATH} element={<InfoDesigner />} />
+          <Route path={DELETE_INFO_PATH} element={<InfoDeleteUser />} />
+          <Route path={CHANGE_PASSWORD_PATH} element={<PasswordChangePage />} />
+        </Route>
       
-      <Route path={ANNOUNCEMENT_BOARD_PATH} >
-      <Route index element={<AnnouncementBoardList />} />
-      <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
-      <Route path={ANNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} />
-			<Route path={ANNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} />
-      </Route>
+        <Route path={ANNOUNCEMENT_BOARD_PATH} >
+          <Route index element={<AnnouncementBoardList />} />
+          <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
+          <Route path={ANNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} />
+          <Route path={ANNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} />
+        </Route>
 
-      <Route path={TREND_BOARD_PATH} >
-        <Route index element={<TrendList />} />
-        <Route path={TREND_BOARD_WRITE_PATH} element={<TrendWrite />} />
-        <Route path={TREND_BOARD_DETAIL_PATH} element={<TrendDetail />} />
-        <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendUpdate />} />
-      </Route>
+        <Route path={TREND_BOARD_PATH} >
+          <Route index element={<TrendList />} />
+          <Route path={TREND_BOARD_WRITE_PATH} element={<TrendWrite />} />
+          <Route path={TREND_BOARD_DETAIL_PATH} element={<TrendDetail />} />
+          <Route path={TREND_BOARD_UPDATE_PATH} element={<TrendUpdate />} />
+        </Route>
 
-      <Route path={QNA_BOARD_PATH} >
-        <Route index element={<QnaBoardList  />} />
-        <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} />
-        <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} />
-        <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} />
-      </Route>
+        <Route path={QNA_BOARD_PATH} >
+          <Route index element={<QnaBoardList  />} />
+          <Route path={QNA_BOARD_WRITE_PATH} element={<QnaBoardWrite />} />
+          <Route path={QNA_BOARD_DETAIL_PATH} element={<QnaBoardDetail />} />
+          <Route path={QNA_BOARD_UPDATE_PATH} element={<QnaBoardUpdate />} />
+        </Route>
 
-      <Route path={CUSTOMER_BOARD_PATH} >
-        <Route index element={<CustomerList />} />
-        <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} />
-        <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
-        <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} />
-      </Route>
+        <Route path={CUSTOMER_BOARD_PATH} >
+          <Route index element={<CustomerList />} />
+          <Route path={CUSTOMER_BOARD_WRITE_PATH} element={<CustomerWrite />} />
+          <Route path={CUSTOMER_BOARD_DETAIL_PATH} element={<CustomerDetail />} />
+          <Route path={CUSTOMER_BOARD_UPDATE_PATH} element={<CustomerUpdate />} />
+        </Route>
 
-      <Route path={DESIGNER_BOARD_PATH} >
-        <Route index element={<DesignerList />} />
-        <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerWrite />} />
-        <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
-        <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
+        <Route path={DESIGNER_BOARD_PATH} >
+          <Route index element={<DesignerList />} />
+          <Route path={DESIGNER_BOARD_WRITE_PATH} element={<DesignerWrite />} />
+          <Route path={DESIGNER_BOARD_DETAIL_PATH} element={<DesignerDetail />} />
+          <Route path={DESIGNER_BOARD_UPDATE_PATH} element={<DesignerUpdate />} />
         </Route>
 
       {/* <Route path={CHAT_PATH} >

@@ -57,7 +57,11 @@ export default function AnnouncementBoardWrite() {
     };
 
     const onPostButtonClickHandler = () => {
-        if (!announcementBoardTitle.trim() || !announcementBoardContents.trim()) return;
+        if (!announcementBoardTitle.trim() || !announcementBoardContents.trim()) {
+					alert("제목과 내용 모두 입력해주세요.");
+					return;
+				}
+
         if (!cookies.accessToken) return;
 
         const requestBody: PostAnnouncementBoardRequestDto = { announcementBoardTitle, announcementBoardContents };

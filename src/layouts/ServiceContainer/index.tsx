@@ -86,6 +86,7 @@ function Top({ path }: Props) {
     //                    state                    //
     const { loginUserRole, loginUserId } = useUserStore();
     const [cookies, setCookie, removeCookie] = useCookies();
+    const { roomId, resetRoomId } = useChatStore();
 
     //                    function                    //
     const navigator = useNavigate();
@@ -101,6 +102,7 @@ function Top({ path }: Props) {
 
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
+        resetRoomId();
         navigator(MAIN_PATH);
     };
 
@@ -178,7 +180,7 @@ export default function ServiceContainer() {
     //                    state                    //
     const { pathname } = useLocation();
     const { setLoginUserId, setLoginUserRole } = useUserStore();
-    const { roomId } = useChatStore();
+    const { roomId, resetRoomId } = useChatStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
     const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
@@ -227,13 +229,12 @@ export default function ServiceContainer() {
             }
 
             const { userId, userRole } = result as GetSignInUserResponseDto;
-                setLoginUserId(userId);
-                setLoginUserRole(userRole);
+              setLoginUserId(userId);
+              setLoginUserRole(userRole);
             });
 
         const designerIdSelectedHandler = (event: Event) => {
             const customEvent = event as CustomEvent<string>;
-            console.log('Event received:', customEvent.detail);
             setSelectedDesignerId(customEvent.detail);
         };
 
@@ -243,7 +244,11 @@ export default function ServiceContainer() {
             window.removeEventListener('designerIdSelected', designerIdSelectedHandler);
         }
 
-    }, [cookies.accessToken, navigator, setLoginUserId, setLoginUserRole]);
+    }, [cookies.accessToken]);
+
+    useEffect(() => {
+        resetRoomId();
+    }, [pathname]);
 
   //                    render                       //
     return (
