@@ -6,9 +6,10 @@ import { useUserStore } from 'src/stores'
 import { useNavigate, useParams } from 'react-router'
 import { useCookies } from 'react-cookie'
 import ResponseDto from 'src/apis/response.dto'
-import { MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
-import { deleteTrendBoardRequest, getTrendBoardLikeListRequest, getTrendBoardRequest, patchTrendBoardIncreaseViewCountRequest, putTrendBoardLikeRequest, } from 'src/apis/TrendBoard'
+import { AUTH_ABSOLUTE_PATH, MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
+import { deleteTrendBoardLikeListRequest, deleteTrendBoardRequest, getTrendBoardLikeListRequest, getTrendBoardRequest, patchTrendBoardIncreaseViewCountRequest, putTrendBoardLikeRequest, } from 'src/apis/TrendBoard'
 import { GetTrendBoardLikeListResponseDto, GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
+import { requestErrorHandler } from 'src/apis'
 
 //														component														//
 export default function TrendDetail() {
@@ -181,15 +182,19 @@ export default function TrendDetail() {
 			return;
 		const isConfirm = window.confirm('정말로 삭제 하시겠습니까?');
 		if (!isConfirm) return;
-
-		deleteTrendBoardRequest(trendBoardNumber, cookies.accessToken)
-			.then(deleteTrendBoardResponse);
+	
+		deleteTrendBoardLikeListRequest(trendBoardNumber, cookies.accessToken)
+			.then(() => {
+				deleteTrendBoardRequest(trendBoardNumber, cookies.accessToken)
+					.then(deleteTrendBoardResponse)
+					.catch(requestErrorHandler);
+			})
+			.catch(requestErrorHandler);
 	};
-
   const onLikeButtonClickHandler = () => {
     if (!cookies.accessToken) {
       alert('로그인시 이용 가능합니다.');
-      return;
+      navigator(AUTH_ABSOLUTE_PATH);
     }
     if (!trendBoardNumber) return;
 

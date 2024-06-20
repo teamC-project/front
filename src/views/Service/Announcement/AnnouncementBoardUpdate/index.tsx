@@ -91,7 +91,10 @@ export default function AnnouncementBoardUpdate() {
 
     const onUpdateButtonClickHandler = () => {
         if (!cookies.accessToken || !announcementBoardNumber) return;
-        if (!title.trim() || !contents.trim()) return;
+        if (!title.trim() || !contents.trim())  {
+					alert("제목과 내용 모두 입력해주세요.");
+					return;
+				}
 
         const requestBody: PutAnnouncementBoardRequestDto = { announcementBoardTitle: title, announcementBoardContents: contents };
         putAnnouncementBoardRequest(announcementBoardNumber, requestBody, cookies.accessToken).then(putAnnouncementBoardResponse);
