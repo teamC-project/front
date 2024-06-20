@@ -131,7 +131,7 @@ export default function TrendList() {
     const updatedTrendBoardList = trendBoardList.map(item => ({
       ...item,
       trendBoardLikeCount: item.trendBoardLikeCount || 0,
-      isLiked: false  // 새로 추가된 필드
+      isLiked: false  
     }));
     changeTrendBoardList(updatedTrendBoardList);
     setTrendBoardList(updatedTrendBoardList);

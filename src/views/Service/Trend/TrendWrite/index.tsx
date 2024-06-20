@@ -59,7 +59,7 @@ export default function TrendWrite() {
 		}
 
     const onTrendPostClickHandler =  () => {
-      if (!trendBoardTitle.trim() || !trendBoardContents.trim()) {
+      if (!trendBoardTitle.trim() || !trendBoardContents.trim() || !trendBoardThumbnailImage) {
 				alert('제목과 내용 모두 입력해주세요')
 				return;
 			}

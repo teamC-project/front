@@ -42,7 +42,8 @@ export default function TrendUpdate() {
 	}
 
 	const { trendBoardWriterId,
-			trendBoardTitle, trendBoardContents 
+			trendBoardTitle,
+			trendBoardContents 
 	} = result as GetTrendBoardResponseDto;
 	setTrendBoardTitle(trendBoardTitle);
 	setTrendBoardContents(trendBoardContents);
@@ -81,23 +82,29 @@ const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
 }
 
 const onUpdateButtonClickHandler = () => {
-	if(!cookies.accessToken || !trendBoardNumber) return;
-	if(!trendBoardTitle.trim() || !trendBoardContents.trim()) {
-		alert('제목과 내용 모두 입력해주세요');
-		return;
-	}
+  const emptyCheck = trendBoardContents.replaceAll('<p>', '').replaceAll('<br>', '').replaceAll('</p>', '');
+		if(!trendBoardTitle.trim() || !trendBoardContents.trim() ||!emptyCheck.trim()) {
+			alert("제목과 내용 모두 입력해주세요.")
+			return;
+		}
+	console.log(trendBoardTitle);
+	console.log(trendBoardContents);
+  if (!cookies.accessToken || !trendBoardNumber) return;
 
-	const requestBody : PutTrendBoardRequestDto = {
-		 trendBoardTitle,
-		trendBoardContents,
-		 trendBoardThumbnailImage
-	};
-	putTrendBoardRequest(trendBoardNumber, requestBody ,cookies.accessToken).then(putTrendBoardResponse)
-	.catch((error) => {
-		console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
-		alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
-});
-}
+  const requestBody: PutTrendBoardRequestDto = {
+    trendBoardTitle: trendBoardTitle.trim(),
+    trendBoardContents: trendBoardContents.trim(),
+    trendBoardThumbnailImage: trendBoardThumbnailImage
+  };
+
+  putTrendBoardRequest(trendBoardNumber, requestBody, cookies.accessToken)
+    .then(putTrendBoardResponse)
+    .catch((error) => {
+      console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
+      alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
+    });
+};
+
 
 const onThumbnailSelectHandler = (url: string) => {
 	setTrendBoardThumbnailImage(url);

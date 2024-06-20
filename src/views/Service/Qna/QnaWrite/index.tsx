@@ -59,7 +59,10 @@ export default function QnaBoardWrite() {
 
 
     const onPostButtonClickHandler = () => {
-        if (!qnaBoardTitle.trim() || !qnaBoardContents.trim()) return;
+        if (!qnaBoardTitle.trim() || !qnaBoardContents.trim()) {
+					alert("제목과 내용 모두 입력해주세요.");
+					return;
+				}
         if (!cookies.accessToken) return;
 
         const requestBody: PostQnaBoardRequestDto = { qnaBoardTitle ,qnaBoardContents };

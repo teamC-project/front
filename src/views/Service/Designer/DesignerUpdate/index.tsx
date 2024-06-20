@@ -32,18 +32,10 @@ export default function DesignerUpdate() {
             .then(getDesignerBoardResponse);
     }, [cookies.accessToken, designerBoardNumber]);
 
-<<<<<<< HEAD
-   //              event handler               //
-    const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const title = event.target.value;
-        setTitle(title);
-    };
-=======
     //              event handler               //
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
         if (result && result.code === 'SU') {
             const { designerBoardTitle, designerBoardContents} = result as GetDesignerBoardResponseDto;
->>>>>>> 2f14c96a79b4bc419e4ed93ef8e2d73b4f37e794
 
             setTitle(designerBoardTitle);
             setContents(designerBoardContents);
