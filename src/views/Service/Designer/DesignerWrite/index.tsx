@@ -132,7 +132,7 @@ export default function DesignerWrite() {
     //             effect               //
     useEffect(() => {
         if (!loginUserRole) return;
-        if (loginUserRole === 'ROLE_DESIGNER') {
+        if (loginUserRole !== 'ROLE_DESIGNER') {
             navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }

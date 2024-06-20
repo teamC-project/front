@@ -72,7 +72,10 @@ export const putDesignerBoardCommentRequest = async (designerBoardCommentNumber:
 
 // function: DesignerBoard 게시물 삭제 API 함수 
 export const deleteDesignerBoardRequest = async (designerBoardNumber: number | string, accessToken: string) => {
-    const result = await axios.delete(DELETE_DESIGNER_BOARD_DELETE_URL(designerBoardNumber), bearerAuthorization(accessToken))
+    const result = await axios.delete(DELETE_DESIGNER_BOARD_DELETE_URL(designerBoardNumber), {
+      ...bearerAuthorization(accessToken),
+      data: { userRole: 'ROLE_ADMIN' } // 추가: 사용자 역할 정보 전달
+    })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
@@ -80,7 +83,10 @@ export const deleteDesignerBoardRequest = async (designerBoardNumber: number | s
 
 // function: DesignerBoard 답글 삭제 API 함수 
 export const deleteDesignerBoardCommentRequest = async (designerBoardCommentNumber: number | string, accessToken: string) => {
-    const result = await axios.delete(DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL(designerBoardCommentNumber), bearerAuthorization(accessToken))
+    const result = await axios.delete(DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL(designerBoardCommentNumber), {
+      ...bearerAuthorization(accessToken),
+      data: { userRole: 'ROLE_ADMIN' } // 추가: 사용자 역할 정보 전달
+    })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;

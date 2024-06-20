@@ -13,7 +13,7 @@ body{
 
 .main-page-image-box {
   width: 100%;
-  border: 5px solid rgba(233, 199, 199, 0.911);
+  border: 5px solid rgba(255,190,152,0.7);
 }
 
 .main-page-title-image {
@@ -29,7 +29,7 @@ body{
   justify-self: center;
 
   height: 740px;
-  border-top: solid rgba(233, 199, 199, 0.911);
+  border-top: solid rgba(255,190,152,0.7);
   background-image: url('../../assets/image/main-page-image.png');
   background-repeat: no-repeat;
   background-size: auto;
@@ -46,7 +46,7 @@ body{
 }
 
 .auth-under-value {
-  border: 3px solid rgba(233, 199, 199, 0.911);
+  
 }
 
 
@@ -172,6 +172,7 @@ body{
   border-radius: 10px;
 }
 
+
 .auth-sign-up-kakao:hover {
   cursor: pointer;
   opacity: 0.9;
@@ -181,11 +182,13 @@ body{
 .auth-sign-up-title {
   display: flex;
   justify-content: start;
-  margin-top: 50px;
+  padding: 20px;
   margin-bottom: 50px;
 
   font-size: 22px;
   font-weight: 600;
+
+  border-bottom: 3px solid rgba(255,190,152,0.7);
 }
 
 .auth-sign-up-text {
@@ -194,9 +197,9 @@ body{
   width: 150px;
   height: 50px;
   line-height: 50px;
-
   color: rgba(66, 66, 66, 1);
-}auto
+}
+
 
 .auth-sign-up-box {
   display: flex;
@@ -204,21 +207,26 @@ body{
   gap: 10px;
   margin: 0 auto;
   padding: 20px;
+}
 
+.auth-found-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 500px;
 }
 
 .auth-under-bar {
   max-width: 1920px;
   margin: 0 auto;
   display: flex;
-
-  
 }
 
 .auth-left-null {
   display: flex;
   flex-grow: 1;
-
 }
 
 .auth-center-value {
@@ -226,6 +234,7 @@ body{
   justify-content: center;
   width: 100%;
   flex-grow: 1;
+  border: 3px solid rgba(255,190,152,0.7);
 }
 
 .auth-right-null {
@@ -234,17 +243,17 @@ body{
   flex-grow: 1;
 }
 
-
-
 /* 회원가입 세부 */
 .auth-sign-up-box-text {
   display: flex;
 }
 
+.sign-up-submit-box {
+  margin-top: 40px;
+}
+
 .auth-submit-box {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  margin-top: 40px;
 }
 
 .auth-radio-box {
@@ -258,36 +267,43 @@ body{
   line-height: 50px;
 }
 
-.auth-sign-in-button-size {
-  width: 120px;
-}
 
-.sign-in-main-box {
-  display: flex;
-  height: 100%;
-}
 
 /* 이미지 */
-.image-box {
-  width: 100%;
+.login-image-box {
   background-image: url("../../assets/image/sign-in-page-image.png");
   background-repeat: no-repeat;
   background-size: auto;
+  flex-grow: 2;
 }
 
-
 /* 로그인 UI */
+
+.sign-in-main-box {
+  display: flex;
+}
+
 .login-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 0;
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 200px;
+  gap: 100px;
+  width: 700px;
+  border: 3px solid rgba(255,190,152,0.7);
+}
+
+.login-page-title{
+  margin-top: 30px;
+  font-size: 32px;
+  font-weight: 700;
+  border-bottom: 3px solid rgba(255,190,152,0.7);;
 }
 
 .sign-up-next-box {
@@ -345,5 +361,9 @@ body{
 
 .under-right-bar {
   width: 600px;
+}
+
+.login-under-right-bar {
+  flex-grow: 1;
 }
 

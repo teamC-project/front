@@ -13,6 +13,7 @@ let globalId = '';
 export function SettingPassword() {
   //                      state                     //
 
+  
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
@@ -95,7 +96,7 @@ export function SettingPassword() {
         <div className='auth-left-null'></div>
 
         <div className='auth-center-value'>
-          <div className='auth-sign-up-box'>
+          <div className='auth-found-box'>
             <div className='auth-sign-up-title'>비밀번호 재설정</div>
 
             <div className='auth-sign-up-box-text'>
@@ -109,7 +110,7 @@ export function SettingPassword() {
             </div>
 
             <div className='auth-submit-box'>
-              <div className='auth-submit-box auth-primary-button' onClick={onSetUpPasswordButtonClickHandler}>비밀번호 변경</div>
+              <div className='auth-submit-box user-primary-button' onClick={onSetUpPasswordButtonClickHandler}>비밀번호 변경</div>
             </div>
           </div>
         </div>
@@ -293,7 +294,7 @@ export default function PasswordFoundPage() {
         <div className='auth-left-null'></div>
 
         <div className='auth-center-value'>
-          <div className='auth-sign-up-box'>
+          <div className='auth-found-box'>
             <div className='auth-sign-up-title'>비밀번호 찾기</div>
 
             <div className='auth-sign-up-box-text'>
@@ -313,7 +314,7 @@ export default function PasswordFoundPage() {
             </div>
 
             <div className='auth-submit-box'>
-              <div className='auth-submit-box auth-primary-button' onClick={onFoundPasswordButtonClickHandler}>확인</div>
+              <div className='auth-submit-box user-primary-button' onClick={onFoundPasswordButtonClickHandler}>확인</div>
             </div>
           </div>
         </div>

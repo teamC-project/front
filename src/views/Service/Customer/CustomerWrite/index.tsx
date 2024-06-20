@@ -136,7 +136,7 @@ export default function CustomerWrite() {
     //             effect               //
     useEffect(() => {
         if (!loginUserRole) return;
-        if (loginUserRole === 'ROLE_DESIGNER') {
+        if (loginUserRole !== 'ROLE_CUSTOMER') {
             navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }

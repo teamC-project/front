@@ -73,7 +73,10 @@ export const putCustomerBoardCommentRequest = async (customerBoardCommentNumber:
 
 // function: CustomerBoard 게시물 삭제 API 함수 
 export const deleteCustomerBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
-  const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), bearerAuthorization(accessToken))
+  const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), {
+    ...bearerAuthorization(accessToken),
+    data: { userRole: 'ROLE_ADMIN' } // 추가: 사용자 역할 정보 전달
+  })
       .then(requestHandler<ResponseDto>)
       .catch(requestErrorHandler);
   return result;
@@ -81,7 +84,10 @@ export const deleteCustomerBoardRequest = async (customerBoardNumber: number | s
 
 // function: CustomerBoard 답글 삭제 API 함수 
 export const deleteCustomerBoardCommentRequest = async (customerBoardCommentNumber: number | string, accessToken: string) => {
-    const result = await axios.delete(DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL(customerBoardCommentNumber), bearerAuthorization(accessToken))
+    const result = await axios.delete(DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL(customerBoardCommentNumber), {
+      ...bearerAuthorization(accessToken),
+      data: { userRole: 'ROLE_ADMIN' } // 추가: 사용자 역할 정보 전달
+    })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
