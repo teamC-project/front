@@ -5,6 +5,7 @@ import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox';
 import AuthTopBar from 'src/components/authTopBar';
+import { useAuthSignUp } from 'src/hooks/AuthSignUpHook';
 import "./style.css";
 
 //                    component                    //
@@ -12,20 +13,33 @@ export default function IdFound() {
 
   //                     state                        //
   const [success, setSuccess] = useState<boolean>(false);
-  const [id, setId] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [authNumber, setAuthNumber] = useState<string>('');
+  const {
+    id,
+    email,
+    authNumber,
+  
+    emailMessage,
+    authNumberMessage,
+  
+    emailButtonStatus,
+    authNumberButtonStatus,
+    
+    isEmailError,
+    isAuthNumberError,
+  
+    setId,
+    setEmailMessage,
+    setIsEmailCheck,
+    setIsEmailError,
+    setAuthNumberMessage,
+    setIsAuthNumberCheck,
+    setIsAuthNumberError,
+    setEmail,
+    setEmailButtonStatus,
+    setAuthNumber,
+    setAuthNumberButtonStatus,
+  } = useAuthSignUp();
 
-  const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
-  const [authNumberButtonStatus, setauthNumberButtonStatus] = useState<boolean>(false);
-
-  const [isEmailCheck, setIsEmailCheck] = useState<boolean>(false);
-  const [isAuthNumberCheck, setIsAuthNumberCheck] = useState<boolean>(false);
-
-  const [emailMessage, setEmailMessage] = useState<string>('');
-  const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
-  const [isEmailError, setIsEmailError] = useState<boolean>(false);
-  const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
 
   //                   function                       //
   const emailAuthResponse = (result: ResponseDto | null) => {
@@ -94,7 +108,7 @@ export default function IdFound() {
   const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setAuthNumber(value);
-    setauthNumberButtonStatus(value !== '');
+    setAuthNumberButtonStatus(value !== '');
     setIsAuthNumberCheck(false);
     setAuthNumberMessage('');
   };
@@ -147,7 +161,7 @@ export default function IdFound() {
         <div className='auth-left-null'></div>
 
         <div className='auth-center-value'>
-          <div className='auth-sign-up-box'>
+          <div className='auth-found-box'>
             <div className='auth-sign-up-title'>아이디 찾기</div>
 
             <div className='auth-sign-up-box-text'>
@@ -161,7 +175,7 @@ export default function IdFound() {
             </div>
 
             <div className='auth-submit-box'>
-              <div className='auth-submit-box auth-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
+              <div className='auth-submit-box user-primary-button' onClick={onFoundIdButtonClickHandler}>확인</div>
             </div>
             {success && <div className='is-user-id'>아이디는 {id} 입니다.</div>}
           </div>
