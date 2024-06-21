@@ -265,8 +265,8 @@ export const GET_CHAT_MESSAGE_LIST_URL = (roomId: number | string) => `${SERVER_
 export const DELETE_CHATROOM_URL = (roomId: number | string) => `${SERVER_CHAT_MODULE_URL}/${roomId}`;
 
 // description: 게시물 상수
-export const COUNT_PER_PAGE = 10;
-export const COUNT_PER_SECTION = 10;
+export const COUNT_PER_PAGE = 2;
+export const COUNT_PER_SECTION = 2;
 
 
 // description: 트렌드 게시판 게시물 상수

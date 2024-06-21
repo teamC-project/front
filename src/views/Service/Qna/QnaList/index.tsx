@@ -47,15 +47,13 @@ export default function QnaBoardList() {
   const [isSearched, setIsSearched] = useState<boolean>(false);
 
 	const {
-		setQnaBoardList,
+		setBoardList,
 		viewList,
 		pageList,
-		totalPage,
 		currentPage,
-		totalLength,
 		setCurrentPage,
 		setCurrentSection,
-		changeQnaBoardList,
+		changeBoardList,
 		changePage,
 		onPageClickHandler,
 		onPreSectionClickHandler,
@@ -80,7 +78,7 @@ export default function QnaBoardList() {
 		}
 	
 		const { qnaBoardList } = result as GetQnaBoardListResponseDto;
-		changeQnaBoardList(qnaBoardList);
+		changeBoardList(qnaBoardList);
 	
 		setCurrentPage(!qnaBoardList.length ? 0 : 1);
 		setCurrentSection(!qnaBoardList.length ? 0 : 1);
@@ -105,8 +103,8 @@ export default function QnaBoardList() {
 			...item,
 			qnaBoardViewCount: item.qnaBoardViewCount || 0,
 		}));
-		setQnaBoardList(updatedQnaBoardList);
-		changeQnaBoardList(updatedQnaBoardList);
+		setBoardList(updatedQnaBoardList);
+		changeBoardList(updatedQnaBoardList);
 		changePage(updatedQnaBoardList, updatedQnaBoardList.length);
 		setCurrentPage(!updatedQnaBoardList.length ? 0 : 1);
 		setCurrentSection(!updatedQnaBoardList.length ? 0 : 1);
