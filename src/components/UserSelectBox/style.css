@@ -1,0 +1,90 @@
+.user-select-box {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 390px;
+  left: 860px;
+
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 10px;
+  padding: 4px 14px;
+  width: 320px;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(138, 146, 166, 1);
+}
+
+.user-select-item {
+  flex-grow: 1;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 175%;
+
+  color: rgba(138, 146, 166, 1);
+}
+
+
+.user-select-none {
+  flex-grow: 1;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 175%;
+
+  color: rgba(138, 146, 166, 1);
+}
+
+.select-close-button {
+  width: 24px;
+  height: 24px;
+
+  background-image: url('../../assets/image/arrow-drop-up-icon.png');
+  background-size: 100% 100%;
+
+  cursor: pointer;
+}
+
+.select-open-button {
+  width: 24px;
+  height: 24px;
+
+  background-image: url('../../assets/image/arrow-drop-down-icon.png');
+  background-size: 100% 100%;
+
+  cursor: pointer;
+}
+
+.user-select-list {
+  position: absolute;
+  left: -1px;
+  top: 33px;
+
+  max-height: 144px;
+  overflow-y: scroll;
+
+  background-color: rgba(255, 255, 255, 1);
+
+  -ms-overflow-style: none;
+}
+
+.user-select-list::-webkit-scrollbar {
+  display: none;
+}
+
+.user-select-list-item-box {
+  display: flex;
+
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 10px;
+  padding: 4px 14px;
+  width: 320px;
+  background-color: rgba(255, 255, 255, 1);
+
+}
+
+.user-select-list-item-box:hover {
+  background-color: rgba(238, 238, 238, 0.2);
+  cursor: pointer;
+} 

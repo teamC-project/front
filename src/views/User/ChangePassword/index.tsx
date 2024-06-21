@@ -94,7 +94,7 @@ export default function PasswordChangePage() {
     <div id='change-wrapper'>
       <div className='change-center-value'>
         <div className='change-sign-up-box'>
-          <div className='change-sign-up-title'>비밀번호 재설정</div>
+          <div className='info-sub-title'>비밀번호 재설정</div>
           <div className='change-sign-up-box-text'>
 
             <div className='change-sign-up-text'>현재 비밀번호</div>
@@ -108,7 +108,7 @@ export default function PasswordChangePage() {
 
           </div>
 
-          <div className='change-submit-box'>
+          <div className='submit-box'>
             <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
           

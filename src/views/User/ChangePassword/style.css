@@ -2,8 +2,9 @@
 #change-wrapper {
     display: flex;
     flex-direction: column;
-    height: auto;
-    width: 100%;
+    background-color: white;
+    border: 5px solid rgb(94, 92, 92);
+    border-radius: 25px;
   }
   
   .user-primary-button {
@@ -148,8 +149,7 @@
   }
 
   .change-center-value {
-    width: 100%;
-    flex: 1;
+    justify-content: center;
   }
   
   .change-right-null {
@@ -157,5 +157,4 @@
     justify-content: end;
     width: 600px;
     height: 600px;
-  
   }
