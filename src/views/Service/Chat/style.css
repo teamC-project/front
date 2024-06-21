@@ -2,16 +2,20 @@
   display: flex;
   flex-direction: column;
   width: 250px; 
-  height: 100vh; 
+  height: auto; 
+  max-height: 100vh;
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  /* margin: 12% auto; */
 }
 
 .chat-room-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  /* align-items: center; */
   padding: 10px;
   background-color: #f1f1f1;
   border-bottom: 1px solid #ddd;
@@ -20,6 +24,20 @@
 .chat-room-header h2 {
   margin: 0;
   font-size: 1.2em;
+}
+
+.chat-room-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+.button-wrap {
+  display: flex;
+  gap: 10px;
 }
 
 .out-button {
@@ -35,10 +53,10 @@
   overflow: hidden;
   transition-duration: .3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: rgb(255, 65, 65);
+  background-color: black;
 }
 
-/* plus sign */
+
 .sign {
   width: 100%;
   transition-duration: .3s;
@@ -54,7 +72,7 @@
 .sign svg path {
   fill: white;
 }
-/* text */
+
 .text {
   position: absolute;
   right: 0%;
@@ -65,7 +83,8 @@
   font-weight: 600;
   transition-duration: .3s;
 }
-/* hover effect on button width */
+
+
 .out-button:hover {
   width: 125px;
   border-radius: 40px;
@@ -77,36 +96,26 @@
   transition-duration: .3s;
   padding-left: 20px;
 }
-/* hover effect button's text */
+
 .out-button:hover .text {
   opacity: 1;
   width: 70%;
   transition-duration: .3s;
   padding-right: 10px;
 }
-/* button click effect*/
+
 .out-button:active {
   transform: translate(2px ,2px);
 }
 
-/* .chat-room-header button {
-  background-color: #ff4b4b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.chat-room-header button:hover {
-  background-color: #e04a4a;
-} */
-
 .chat-room-messages {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 10px;
   overflow-y: auto;
   background-color: #fafafa;
+  font-size: 1em;
 }
 
 .message-sent,
@@ -114,23 +123,31 @@
   margin-bottom: 10px;
   padding: 8px 12px;
   border-radius: 20px;
-  max-width: 70%;
-  font-size: 1em;
+  word-wrap: break-word; 
+  word-break: break-word; 
+  width: 70%;
 }
 
 .message-sent {
-  background-color: #dcf8c6;
+  background-color: #79C7C5;
   align-self: flex-end;
 }
 
 .message-received {
-  background-color: #fff;
+  background-color: #777777;
   border: 1px solid #ddd;
   align-self: flex-start;
 }
 
 .message-content {
-  word-wrap: break-word;
+    /* position: relative;
+    display: inline-block; */
+    /* margin-bottom: 5px; */
+    color: white;
+    padding: 10px 10px 10px 12px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .chat-room-footer {
@@ -150,22 +167,9 @@
   margin-right: 4px;
 }
 
-/* .chat-room-footer button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-.chat-room-footer button:hover {
-  background-color: #45a049;
-} */
-
 .send-button {
-  height: 2em;
-  width: 5em;
+  height: 45px;
+  width: 45px;
   border-radius: 1em;
   border: 0.1rem solid transparent;
   background-color: rgb(64, 146, 239);
@@ -203,9 +207,11 @@
   }
 }
 
+
+
 .delete-button {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
   border: none;
@@ -250,7 +256,7 @@
 
 .delete-button::before {
   display: none;
-  content: "Delete";
+  content: "삭제";
   color: white;
   transition-duration: 0.3s;
   font-size: 2px;
@@ -263,4 +269,11 @@
   opacity: 1;
   transform: translateY(0px);
   transition-duration: 0.3s;
+}
+
+.opponent-id {
+  display: flex;
+  color: #777777;
+  font-size: 20px;
+  /* justify-content: space-between; */
 }

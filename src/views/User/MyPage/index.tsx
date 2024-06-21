@@ -31,7 +31,7 @@ export default function MyPage() {
   //                    render                    //
   return (
     <div id='mypage-wrapper'>
-      <div className='john'></div>
+      <div className='info-sub-title'>마이 페이지</div>
       
       <div className='mypage'>
 

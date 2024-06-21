@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+  border: 5px solid rgb(94, 92, 92);
+  border-radius: 25px;
 }
 
 .delete-container {
@@ -17,16 +20,18 @@
 }
 
 .delete-title {
-  line-height: 120px;
-  color: #333;
-
+  padding: 25px 0px 25px 25px;
+  
   font-size: 30px;
   font-weight: 600;
+
+  color: rgba(51, 51, 51, 1);
+  border-bottom: solid rgba(51, 51, 51, 1);
 }
 
 .delete-account {
   line-height: 19px;
-  color: #666;
+  color: rgba(102, 102, 102, 1);
 }
 
 .delete-account-contents {
@@ -36,7 +41,8 @@
 }
 
 .delete-account em {
-  color: tomato;
+  color: rgba(255, 99, 71, 1);
+  font-weight: 600;
 }
 
 .delete-account-detatils-contents {
@@ -47,13 +53,13 @@
 
 .delete-account-detail {
   font-size: 15px;
-  color: #333;
+  color: rgba(51, 51, 51, 1);
 }
 
 .delete-account-detail1 {
   font-size: 15px;
   line-height: 19px;
-  color: #666;
+  color: rgba(102, 102, 102, 1);
 }
 
 .delete-account-main-container {

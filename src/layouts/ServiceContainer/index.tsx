@@ -247,7 +247,7 @@ export default function ServiceContainer() {
     }, [cookies.accessToken]);
 
     useEffect(() => {
-        resetRoomId();
+        // resetRoomId();
     }, [pathname]);
 
   //                    render                       //
