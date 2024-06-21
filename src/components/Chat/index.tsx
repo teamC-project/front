@@ -33,8 +33,8 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='chatroom-list-table-tr' onClick={onClickHandler}>
-            <div className='chat-room-list-table-room-number'>{chatroomId}</div>
-            <div className='chat-room-list-table-title' style={{ textAlign: 'left' }}>{roomName}</div>
+            {/* <div className='chat-room-list-table-room-number'>{chatroomId}</div> */}
+            <div className='chat-room-list-table-title' style={{ textAlign: 'center' }}>{roomName}</div>
         </div>
     );
 }
@@ -46,9 +46,8 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 
     const [cookies] = useCookies();
-    const {rooms, setRooms} = useChatStore();
+    const {roomId, setRoomId, rooms, setRooms} = useChatStore();
     const [newRoomName, setNewRoomName] = useState<string>('');
-    const { roomId } = useParams<string>();
     const [message, setMessage] = useState<string>('');
     const [messages, setMessages] = useState<ChatMessageList[]>([]);
     const { loginUserRole, loginUserId } = useUserStore();
@@ -179,6 +178,7 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         getChatroomListRequest( cookies.accessToken).then(getChatroomListResponse);
     };
 
+
     //              event handler              //
     const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setNewRoomName(event.target.value);
@@ -199,6 +199,7 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         setCurrentSection(currentSection + 1);
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
+
 
     //                   effect                    //
     useEffect(() => {
@@ -227,15 +228,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
 
     }, [cookies.accessToken]);
 
-    useEffect(() => {
-        if (selectedDesignerId) {
-            const roomName = prompt('채팅방 이름을 입력하세요:', '');
-            if (roomName) {
-                setNewRoomName(roomName);
-                createRoom(roomName);
-            }
-        }
-    }, [selectedDesignerId]);
 
     useEffect(() => {
         if (!rooms.length) return;
@@ -256,8 +248,8 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         <div className='chat-room'>
             <div className='chat-room-list'>
                 <h2>채팅방 목록</h2>
-                <div className='chat-room-list-table-room-number'>제목</div>
-                <div className='chat-room-list-table-title'>번호</div>
+                {/* <div className='chat-room-list-table-room-number'>제목</div> */}
+                {/* <div className='chat-room-list-table-title'>번호</div> */}
                     {viewList.map(item => (
                         <ListItem key={item.chatroomId} {...item} />
                         ))}

@@ -10,6 +10,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getSearchQnaBoardListRequest } from 'src/apis/QnaBoard';
 import { usePagination } from 'src/hooks/pagination';
 
+//                    component                    //
 function ListItem({
   qnaBoardNumber,
   qnaBoardTitle,
@@ -18,14 +19,15 @@ function ListItem({
   qnaBoardWriteDatetime,
   qnaBoardViewCount
 }: QnaBoardListItem) {
+	  //                    function                    //
   const navigator = useNavigate();
 
   const onClickHandler = () => navigator(QNA_BOARD_DETAIL_ABSOLUTE_PATH(qnaBoardNumber));
-
+	
+  //                    render                    //
   return (
     <div className='qna-board-list-table-tr' onClick={onClickHandler}>
       <div className='qna-board-list-table-number'>{qnaBoardNumber}</div>
-      <div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
 			<div className='qna-board-list-table-status'>
 			{qnaBoardStatus ? (
           <div className="disable-bedge">완료</div>
@@ -33,36 +35,36 @@ function ListItem({
           <div className="primary-bedge">접수</div>
         )}
 			</div>
+			<div className='qna-board-list-table-title'>{qnaBoardTitle}</div>
       <div className='qna-board-list-table-writer-id'>{qnaBoardWriterId}</div>
       <div className='qna-board-list-table-write-date'>{qnaBoardWriteDatetime}</div>
       <div className='qna-board-list-table-viewcount'>{qnaBoardViewCount}</div>
     </div>
   );
 }
-
+//                    component                    //
 export default function QnaBoardList() {
   const { loginUserRole } = useUserStore();
   const [cookies] = useCookies();
-	const [searchWord, setSearchWord] = useState<string>('');
-  const [isSearched, setIsSearched] = useState<boolean>(false);
 
+  //                    state                    //
 	const {
-		setQnaBoardList,
+		setBoardList,
 		viewList,
 		pageList,
-		totalPage,
 		currentPage,
-		totalLength,
 		setCurrentPage,
 		setCurrentSection,
-		changeQnaBoardList,
+		changeBoardList,
 		changePage,
 		onPageClickHandler,
 		onPreSectionClickHandler,
 		onNextSectionClickHandler
 	}  = usePagination<QnaBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION)
 
-	console.log(onNextSectionClickHandler);
+	const [searchWord, setSearchWord] = useState<string>('');
+  const [isSearched, setIsSearched] = useState<boolean>(false);
+  //                    function                    //
   const navigator = useNavigate();
 
   
@@ -80,7 +82,7 @@ export default function QnaBoardList() {
 		}
 	
 		const { qnaBoardList } = result as GetQnaBoardListResponseDto;
-		changeQnaBoardList(qnaBoardList);
+		changeBoardList(qnaBoardList);
 	
 		setCurrentPage(!qnaBoardList.length ? 0 : 1);
 		setCurrentSection(!qnaBoardList.length ? 0 : 1);
@@ -105,8 +107,8 @@ export default function QnaBoardList() {
 			...item,
 			qnaBoardViewCount: item.qnaBoardViewCount || 0,
 		}));
-		setQnaBoardList(updatedQnaBoardList);
-		changeQnaBoardList(updatedQnaBoardList);
+		setBoardList(updatedQnaBoardList);
+		changeBoardList(updatedQnaBoardList);
 		changePage(updatedQnaBoardList, updatedQnaBoardList.length);
 		setCurrentPage(!updatedQnaBoardList.length ? 0 : 1);
 		setCurrentSection(!updatedQnaBoardList.length ? 0 : 1);
@@ -177,8 +179,8 @@ export default function QnaBoardList() {
       </div>
       <div className='qna-board-list-table'>
         <div className='qna-board-table-th'>
-          <div className='qna-board-list-table-reception-number'>접수번호</div>
-					<div className='qna-board-list-table-statis'>접수 상태</div>
+          <div className='qna-board-list-table-number'>접수번호</div>
+					<div className='qna-board-list-table-status'>접수 상태</div>
           <div className='qna-board-list-table-title'>제목</div>
           <div className='qna-board-list-table-writer-id'>작성자</div>
           <div className='qna-board-list-table-write-date'>작성일</div>
@@ -189,7 +191,7 @@ export default function QnaBoardList() {
       <div className='qna-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
         <div className='qna-board-list-pagenation'>
-          <div className='qna-board-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='qna-board-list-page-box'>
             {pageList.map(page => 
               page === currentPage ? 
@@ -197,7 +199,7 @@ export default function QnaBoardList() {
               <div key={page} className='qna-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='qna-board-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {loginUserRole !== 'ROLE_USER' && (
           <div className='qna-board-list-write-button' onClick={onWriteButtonClickHandler}>

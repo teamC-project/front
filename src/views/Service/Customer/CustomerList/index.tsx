@@ -8,11 +8,11 @@ import { useCookies } from 'react-cookie';
 import { GetCustomerBoardListResponseDto, GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
+import { usePagination } from 'src/hooks/pagination';
 
 //                    component                    //
 function ListItem ({
   customerBoardNumber,
-  customerBoardStatus,
   customerBoardTitle,
   customerBoardWriterId,
   customerBoardWriteDatetime,
@@ -59,14 +59,19 @@ export default function CustomerList() {
   //                    state                    //
   const { loginUserRole, loginUserId } = useUserStore();
   const [cookies] = useCookies();
-  const [customerBoardList, setCustomerBoardList] = useState<CustomerBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<CustomerBoardListItem[]>([]);
-  const [totalLength, setTotalLength] = useState<number>(0);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageList, setPageList] = useState<number[]>([1]);
-  const [totalSection, setTotalSection] = useState<number>(1);
-  const [currentSection, setCurrentSection] = useState<number>(1);
+	const {
+		setBoardList,
+		viewList,
+		pageList,
+		currentPage,
+		setCurrentPage,
+		setCurrentSection,
+		changeBoardList,
+		changePage,
+		onPageClickHandler,
+		onPreSectionClickHandler,
+		onNextSectionClickHandler
+	}  = usePagination<CustomerBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION)
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
   const [isSearched, setIsSearched] = useState<boolean>(false);
@@ -75,39 +80,7 @@ export default function CustomerList() {
   //                    function                    //
   const navigator = useNavigate();
 
-  const changePage = (customerBoardList: CustomerBoardListItem[], totalLength: number) => {
-    if (!currentPage) return;
-    const startIndex = (currentPage -1) * COUNT_PER_PAGE;
-    let endIndex = currentPage * COUNT_PER_PAGE;
-    if (endIndex > totalLength - 1) endIndex = totalLength;
-    const viewList = customerBoardList.slice(startIndex, endIndex);
-    setViewList(viewList);
-  };
-
-  const changeSection = (totalPage: number) => {
-    if (!currentSection) return;
-    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION -1);
-    let endPage = currentSection * COUNT_PER_SECTION;
-    if (endPage > totalPage) endPage = totalPage;
-    const pageList: number[] = [];
-    for (let page = startPage; page <= endPage; page++) pageList.push(page);
-    setPageList(pageList);
-  };
-
-  const changeCustomerBoardList = (customerBoardList: CustomerBoardListItem[]) => {
-    const totalLength = customerBoardList.length;
-    setTotalLength(totalLength);
-
-    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-    setTotalPage(totalPage);
-
-    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-    setTotalSection(totalSection);
-
-    changePage(customerBoardList, totalLength);
-
-    changeSection(totalPage);
-  };
+  
 
   const getCustomerBoardResponse = (result: GetCustomerBoardListResponseDto | ResponseDto | null) => {
     const message =
@@ -122,7 +95,7 @@ export default function CustomerList() {
       }
 
       const { customerBoardList } = result as GetCustomerBoardListResponseDto;
-      changeCustomerBoardList(customerBoardList);
+      changeBoardList(customerBoardList);
 
       setCurrentPage(!customerBoardList.length ? 0 : 1);
       setCurrentSection(!customerBoardList.length ? 0 : 1);
@@ -146,8 +119,8 @@ export default function CustomerList() {
       ...item,
       customerBoardViewCount: item.customerBoardViewCount || 0, // 조회수가 없으면 0으로 설정
     }));
-    setCustomerBoardList(updatedCustomerBoardList);
-    changeCustomerBoardList(updatedCustomerBoardList);
+    setBoardList(updatedCustomerBoardList);
+    changeBoardList(updatedCustomerBoardList);
     changePage(updatedCustomerBoardList, updatedCustomerBoardList.length);
     setCurrentPage(!updatedCustomerBoardList.length ? 0 : 1);
     setCurrentSection(!updatedCustomerBoardList.length ? 0 : 1);
@@ -158,22 +131,6 @@ export default function CustomerList() {
     navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
-  const  onPageClickHandler = (page: number) => {
-    setCurrentPage(page);
-    changePage(customerBoardList, totalLength);
-  };
-
-  const onPreSectionClickHandler = () => {
-    if (currentSection <= 1) return;
-    setCurrentSection(currentSection -1);
-    setCurrentPage((currentSection -1) * COUNT_PER_SECTION);
-  };
-
-  const onNextSectionClickHandler = () => {
-    if (currentSection === totalSection) return;
-    setCurrentSection(currentSection + 1);
-    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-  };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -216,15 +173,7 @@ export default function CustomerList() {
       .then(getSearchCustomerBoardListResponse);
   }, [cookies.accessToken]);
   
-  useEffect(() => {
-    if (!customerBoardList.length) return;
-    changePage(customerBoardList, totalLength);
-  }, [currentPage]);
 
-  useEffect(() => {
-    if (!customerBoardList.length) return;
-    changeSection(totalPage);
-  }, [currentSection]);
 
   //                    render                    //
   
@@ -257,7 +206,7 @@ export default function CustomerList() {
       </div>
       <div className='customerboard-list-bottom'>
         <div className='customerboard-list-pagenation'>
-          <div className='customerboard-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='customerboard-list-page-box'>
             {pageList.map(page => 
               page === currentPage ? 
@@ -265,7 +214,7 @@ export default function CustomerList() {
               <div className='customerboard-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='customerboard-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='customerboard-list-write-button-container'>
           {loginUserRole === 'ROLE_CUSTOMER' && (

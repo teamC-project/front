@@ -11,13 +11,7 @@ import { getDesignerBoardRequest, postDesignerBoardCommentRequest, increaseViewC
 import { PostDesignerBoardCommentRequestDto } from 'src/apis/designerBoard/dto/request';
 import DesignerBoardComment from '../DesignerComment';
 
-import { getChatroomListRequest, postChatRoomRequest } from 'src/apis/chat';
-import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
-import { GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
-
-interface ChatRoomProps {
-  selectedDesignerId: string;
-}
+import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
 interface Props {
     contents: string;
@@ -42,12 +36,7 @@ export default function DesignerDetail() {
     const [commentList, setCommentList] = useState<DesignerBoardCommentListItem[]>([]);
     const [commentRows, setCommentRows] = useState<number>(1);
 
-    const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
-    const [rooms, setRooms] = useState<ChatroomList[]>([]);
-    const [newRoomName, setNewRoomName] = useState<string>('');
-    const [messages, setMessages] = useState<ChatMessageList[]>([]);
-
-    const { roomId } = useParams<string>();
+    const { designerIdClickHandler } = useCreateChatRoom();
 
     //                  function                    //
     const navigator = useNavigate();  
@@ -171,14 +160,6 @@ export default function DesignerDetail() {
         .then(deleteDesignerBoardResponse);
     };
 
-    const designerIdClickHandler = () => {
-      const confirmCreateRoom = window.confirm('채팅방을 생성하시겠습니까?');
-      if (confirmCreateRoom) {
-          setSelectedDesignerId(writerId);
-          const event = new CustomEvent<string>('designerIdSelected', { detail: writerId });
-          window.dispatchEvent(event);
-      }
-  };
 
     //                   effect                        //
     useEffect(() => {
@@ -196,7 +177,7 @@ export default function DesignerDetail() {
       <div className="designer-detail-title">{title}</div>
       <div className="designer-detail-container">
         <div className="designer-detail-information">
-          <div className="designer-detail-information1">작성자: <span onClick={designerIdClickHandler}>{writerId}</span></div>
+          <div className="designer-detail-information1">작성자: <span  onClick={() => designerIdClickHandler(writerId)}>{writerId}</span></div>
           <div className="designer-detail-information2">작성일: {writeDate}</div>
           <div className="designer-detail-information3">조회수: {viewCount}</div> 
         {loginUserId === writerId && (

@@ -3,7 +3,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION } from "src/constant";
 
 
 const usePagination = <T>(countPerPage : number , countPerSection : number) => {
-  const [qnaBoardList, setQnaBoardList] = useState<T[]>([]);
+  const [boardList, setBoardList] = useState<T[]>([]);
   const [viewList, setViewList] = useState<T[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -12,12 +12,12 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
-	const changePage = (qnaBoardList: T[], totalLength: number) => {
+	const changePage = (boardList: T[], totalLength: number) => {
     if (!currentPage) return;
     const startIndex = (currentPage - 1) * countPerPage;
     let endIndex = currentPage * countPerPage;
     if (endIndex > totalLength - 1) endIndex = totalLength;
-    const viewList = qnaBoardList.slice(startIndex, endIndex);
+    const viewList = boardList.slice(startIndex, endIndex);
     setViewList(viewList);
   };
 
@@ -31,10 +31,11 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     setPageList(pageList);
   };
 
-  const changeQnaBoardList = (qnaBoardList: T[]) => {
+  const changeBoardList = (boardList: T[]) => {
 		
-		setQnaBoardList(qnaBoardList);
-    const totalLength = qnaBoardList.length;
+		setBoardList(boardList);
+
+    const totalLength = boardList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -43,14 +44,14 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
     setTotalSection(totalSection);
 
-    changePage(qnaBoardList, totalLength);
+    changePage(boardList, totalLength);
 
     changeSection(totalPage);
   };
 
 	const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-    changePage(qnaBoardList, totalLength);
+    changePage(boardList, totalLength);
   };
 
   const onPreSectionClickHandler = () => {
@@ -67,28 +68,26 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
 
 	
   useEffect(() => {
-    if (!qnaBoardList.length) return;
-    changePage(qnaBoardList, totalLength);
+    if (!boardList.length) return;
+    changePage(boardList, totalLength);
   }, [currentPage]);
 
   useEffect(() => {
-    if (!qnaBoardList.length) return;
+    if (!boardList.length) return;
     changeSection(totalPage);
   }, [currentSection]);
 
 	return {
 		viewList,
 		pageList,
-		totalPage,
 		currentPage,
-		totalLength,
-		qnaBoardList,
-
-		setQnaBoardList,
+		boardList,
+		setBoardList,
 		setCurrentPage,
 		setCurrentSection,
 
-		changeQnaBoardList,
+		changeBoardList,
+		
 		changePage,
 		onPageClickHandler,
 		onPreSectionClickHandler,
