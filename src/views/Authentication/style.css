@@ -45,11 +45,6 @@ body{
   margin-bottom: 100px;
 }
 
-.auth-under-value {
-  
-}
-
-
 /* 회원가입 선택 */
 .auth-welcome-image-box {
   display: flex;
