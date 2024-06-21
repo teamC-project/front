@@ -90,7 +90,6 @@ export default function InfoDeleteUser() {
   //          render          //
   return (
     <div id='info-delete-wrapper'>
-      <div className='white-space1'>
         <div className='delete-container'>
           <div className='delete-title-contents'>
             <div className='delete-title'>탈퇴 안내</div>
@@ -128,6 +127,5 @@ export default function InfoDeleteUser() {
 
         </div>
       </div>
-    </div>
   )
 }

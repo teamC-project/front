@@ -1,11 +1,16 @@
 #mypage-wrapper {
   display: flex;
   flex-direction: column;
+  background-color: white;
+    border: 5px solid rgb(94, 92, 92);
+    border-radius: 25px;
 }
 
 .john {
   min-width: 200px;
   height:150px;
+
+  padding: 25px 0px 25px 25px;
 }
 
 .john1 {
