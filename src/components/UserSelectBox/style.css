@@ -1,9 +1,9 @@
 .user-select-box {
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 390px;
-  left: 860px;
+  position: relative;
+  top:-40px;
+  left: 155px;
 
   border: 1px solid rgba(238, 238, 238, 1);
   border-radius: 10px;
@@ -24,7 +24,6 @@
   color: rgba(138, 146, 166, 1);
 }
 
-
 .user-select-none {
   flex-grow: 1;
 
@@ -36,21 +35,21 @@
   color: rgba(138, 146, 166, 1);
 }
 
-.select-close-button {
-  width: 24px;
-  height: 24px;
-
-  background-image: url('../../assets/image/arrow-drop-up-icon.png');
-  background-size: 100% 100%;
-
-  cursor: pointer;
-}
-
 .select-open-button {
   width: 24px;
   height: 24px;
 
   background-image: url('../../assets/image/arrow-drop-down-icon.png');
+  background-size: 100% 100%;
+
+  cursor: pointer;
+}
+
+.select-close-button {
+  width: 24px;
+  height: 24px;
+
+  background-image: url('../../assets/image/arrow-drop-up-icon.png');
   background-size: 100% 100%;
 
   cursor: pointer;
