@@ -31,8 +31,11 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     setPageList(pageList);
   };
 
-  const changeBoardList = (boardList: T[]) => {
-		
+  const changeBoardList = (boardList: T[], isToggleOn?: boolean) => {
+		if (isToggleOn) boardList = boardList.filter((board: any) => {
+			if ('status' in board) return !board.status;
+			return false;
+	});
 		setBoardList(boardList);
 
     const totalLength = boardList.length;
@@ -76,6 +79,8 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     if (!boardList.length) return;
     changeSection(totalPage);
   }, [currentSection]);
+
+	
 
 	return {
 		viewList,
