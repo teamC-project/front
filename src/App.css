@@ -173,3 +173,55 @@ body {
 	background-size: 100% 100%;
 }
 
+.toggle {
+  width: 35px;
+  height: 20px;
+  background-image: url("./assets/image/toggle.png");
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+
+.toggle-active {
+  width: 35px;
+  height: 20px;
+  background-image: url("./assets/image/toggle-active.png");
+  background-size: 100% 100%;
+
+  cursor: pointer;
+}
+
+.primary-bedge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(255, 190, 152, 1);
+
+  border-radius: 10px;
+  width: 45px;
+  height: 20px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.disable-bedge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(238, 238, 238, 1);
+
+  border-radius: 10px;
+  width: 45px;
+  height: 20px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  color: rgba(138, 146, 166, 1);
+}

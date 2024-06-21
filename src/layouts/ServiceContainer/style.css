@@ -120,10 +120,14 @@
   flex-direction: column;
   margin-right: 50px;
 
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
 
   width: 250px;
   padding: 16px 12px;
+}
+
+.customer-chat {
+  padding-top: 50px;
 }
 
 .footer-total-user-box {

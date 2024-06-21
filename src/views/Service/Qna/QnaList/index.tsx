@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css';
+import '../../../../App.css'
 import { QnaBoardListItem } from 'src/types';
 import { useNavigate } from 'react-router';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
@@ -23,7 +24,7 @@ function ListItem({
   const navigator = useNavigate();
 
   const onClickHandler = () => navigator(QNA_BOARD_DETAIL_ABSOLUTE_PATH(qnaBoardNumber));
-	
+
   //                    render                    //
   return (
     <div className='qna-board-list-table-tr' onClick={onClickHandler}>
@@ -63,6 +64,7 @@ export default function QnaBoardList() {
 	}  = usePagination<QnaBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION)
 
 	const [searchWord, setSearchWord] = useState<string>('');
+	const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   //                    function                    //
   const navigator = useNavigate();
@@ -126,6 +128,12 @@ export default function QnaBoardList() {
     navigator(QNA_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
+	const onToggleClickHandler = () => {
+		if(loginUserRole !== 'ROLE_ADMIN') return;
+		setToggleOn(!isToggleOn);
+	}
+
+	console.log(isToggleOn);
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -157,8 +165,14 @@ export default function QnaBoardList() {
     fetchQnaBoardList();
   }, [cookies.accessToken]);
 
+useEffect(() => {
+  if (!cookies.accessToken) return;
+  getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
+}, [isToggleOn]);
+
 
 	//                    render                    //
+	const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div className='qna-board-list-wrapper'>
@@ -176,6 +190,7 @@ export default function QnaBoardList() {
         <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>
           검색
         </div>
+
       </div>
       <div className='qna-board-list-table'>
         <div className='qna-board-table-th'>
@@ -201,11 +216,22 @@ export default function QnaBoardList() {
           </div>
           <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        {loginUserRole !== 'ROLE_USER' && (
-          <div className='qna-board-list-write-button' onClick={onWriteButtonClickHandler}>
-            글쓰기
-          </div>
-        )}
+				<div>
+				<div className='qna-board-list-bottom-right'>
+                    {loginUserRole !== 'ROLE_ADMIN' ? 
+                    <div className='qna-board-list-write-button' onClick={onWriteButtonClickHandler}>글쓰기</div> : ''
+                    }
+										{loginUserRole ==='ROLE_ADMIN' ?
+										<>
+										<div className={toggleClass} 
+										onClick={onToggleClickHandler}>
+										</div>
+										<div className='qna-board-list-admin-text'>미완료 보기
+										</div>
+										</> : ''
+										}
+                </div>
+                </div>
       </div>
     </div>
   );
