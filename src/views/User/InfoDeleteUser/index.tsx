@@ -62,16 +62,15 @@ export default function InfoDeleteUser() {
     
     if (isChecked) {
       try {
-        userInfoDeleteRequest(cookies.accessToken, loginUserId);
+        userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
         alert('회원탈퇴가 완료되었습니다.');
-        navigator(MAIN_PATH);
+        navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
       } catch (error) {
         console.error(error);
         alert('회원 탈퇴 중 오류가 발생했습니다.');
         return;
       } 
     }
-    userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
   };
 
   const onCheckboxChange = () => {
