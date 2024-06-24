@@ -65,7 +65,6 @@ export default function DesignerList() {
 		onNextSectionClickHandler
 	}  = usePagination<DesignerBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION)
 
-  const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [designerBoardCommentList, setDesignerBoardCommentList] = useState<DesignerBoardCommentListItem[]>([]);
@@ -108,15 +107,18 @@ export default function DesignerList() {
     const { designerBoardList } = result as GetSearchDesignerBoardListResponseDto;
     const updatedDesignerBoardList = designerBoardList.map(item => ({
       ...item,
-      designerBoardViewCount: item.designerBoardViewCount || 0, // 조회수가 없으면 0으로 설정
     }));
     setBoardList(updatedDesignerBoardList);
     changeBoardList(updatedDesignerBoardList);
     changePage(updatedDesignerBoardList, updatedDesignerBoardList.length);
     setCurrentPage(!updatedDesignerBoardList.length ? 0 : 1);
     setCurrentSection(!updatedDesignerBoardList.length ? 0 : 1);
-    setIsSearched(false); // 검색 완료 후 isSearched 상태 초기화
   };
+
+  const fetchDesignerBoardList = () => {
+    getSearchDesignerBoardListRequest('', cookies.accessToken).then(getDesignerBoardResponse);
+  };
+
   //                    event handler                    //
   const onWriteButtonClickHandler = () => {
     navigator(DESIGNER_BOARD_WRITE_ABSOLUTE_PATH);
@@ -125,6 +127,10 @@ export default function DesignerList() {
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
+    if (!searchWord) {
+      setIsSearched(false);
+      fetchDesignerBoardList();
+    }
   };
 
   const onSearchButtonClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -149,12 +155,6 @@ export default function DesignerList() {
     getSearchDesignerBoardListRequest(searchWord, cookies.accessToken)
       .then(getSearchDesignerBoardListResponse);
   };
-  useEffect(() => {
-  if (!isSearched || !cookies.accessToken) return;
-
-  getSearchDesignerBoardListRequest(searchWord, cookies.accessToken)
-    .then(getSearchDesignerBoardListResponse);
-}, [isSearched, searchWord, cookies.accessToken]);
 
   //                    effect                    //
   useEffect(() => {
@@ -162,8 +162,14 @@ export default function DesignerList() {
     getSearchDesignerBoardListRequest('', cookies.accessToken)
       .then(getSearchDesignerBoardListResponse);
   }, [cookies.accessToken]);
-  
 
+  useEffect(() => {
+    if (!isSearched || !cookies.accessToken) return;
+  
+    getSearchDesignerBoardListRequest(searchWord, cookies.accessToken)
+      .then(getSearchDesignerBoardListResponse);
+  }, [isSearched, searchWord, cookies.accessToken]);
+  
   //                    render                    //
   
   return (
