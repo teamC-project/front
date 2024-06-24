@@ -215,13 +215,13 @@ export const DELETE_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | str
 
 // description : Q&A API URL PATH
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`;
-export const POST_QNA_BOARD_WRITE_URL = `${SERVER_QNA_BOARD_MODULE_URL}/`;
-export const GET_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/list`;
-export const GET_SEARCH_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/list/search`;
+export const POST_QNA_BOARD_WRITE_URL = `${SERVER_QNA_BOARD_MODULE_URL}/write`;
+export const GET_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/`;
+export const GET_SEARCH_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/search`;
 export const GET_QNA_BOARD_DETAIL_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
 export const PUT_QNA_BOARD_PUT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
 export const DELETE_QNA_BOARD_DELETE_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
-export const PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/increase-view-count`;
+export const PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/increase_view_count`;
 export const POST_QNA_BOARD_COMMENT_WRITE_URL =(qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 export const PUT_QNA_BOARD_COMMENT_PUT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 export const DELETE_QNA_BOARD_COMMENT_DELETE_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
