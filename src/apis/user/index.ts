@@ -16,7 +16,7 @@ export const getSignInUserRequest = async (accessToken: string) => {
 
 // function: 고객 정보 업데이트
 export const updateCustomerInfoRequest = async(accessToken: string, customerInfoUpdate: any) => {
-  const result = await axios.post(INFO_CUSTOMER_UPDATE_URL, customerInfoUpdate, bearerAuthorization(accessToken))
+  const result = await axios.put(INFO_CUSTOMER_UPDATE_URL, customerInfoUpdate, bearerAuthorization(accessToken))
     .then(requestHandler<GetUserInfoResponseDto> )
     .catch(requestErrorHandler);
   return result;
@@ -24,7 +24,7 @@ export const updateCustomerInfoRequest = async(accessToken: string, customerInfo
 
 // function: 디자이너 정보 업데이트
 export const updateDesignerInfoRequest = async (accessToken: string, designerInfoUpdate: any) => {
-  const result = await axios.post(INFO_DESIGNER_UPDATE_URL, designerInfoUpdate, bearerAuthorization(accessToken))
+  const result = await axios.put(INFO_DESIGNER_UPDATE_URL, designerInfoUpdate, bearerAuthorization(accessToken))
     .then(requestHandler<GetUserInfoResponseDto>)
     .catch(requestErrorHandler);
   return result;
@@ -32,7 +32,7 @@ export const updateDesignerInfoRequest = async (accessToken: string, designerInf
 
 // function: 사용자 회원 탈퇴
 export const userInfoDeleteRequest = async (userId: string, accessToken: string) => {
-  const result = await axios.delete(USER_DELETE_URL,bearerAuthorization(accessToken))
+  const result = await axios.delete(USER_DELETE_URL, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
   return result;
@@ -40,7 +40,7 @@ export const userInfoDeleteRequest = async (userId: string, accessToken: string)
 
 // function: 비밀변경 변경 API 함수
 export const changePasswordRequest = async (requestBody: ChangePasswordRequestDto, accessToken: string) => {
-  const result = await axios.post(PASSWORD_CHANGE_URL, requestBody, bearerAuthorization(accessToken))
+  const result = await axios.put(PASSWORD_CHANGE_URL, requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;

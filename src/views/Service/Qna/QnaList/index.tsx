@@ -104,11 +104,14 @@ export default function QnaBoardList() {
 		}
 	
 		const { qnaBoardList } = result as GetSearchQnaBoardListResponseDto;
-		
-		const updatedQnaBoardList = qnaBoardList.map(item => ({
+	
+		let updatedQnaBoardList = qnaBoardList.map(item => ({
 			...item,
 			qnaBoardViewCount: item.qnaBoardViewCount || 0,
 		}));
+
+		if (isToggleOn) updatedQnaBoardList = updatedQnaBoardList.filter(item => !item.qnaBoardStatus);
+
 		setBoardList(updatedQnaBoardList);
 		changeBoardList(updatedQnaBoardList);
 		changePage(updatedQnaBoardList, updatedQnaBoardList.length);
@@ -133,7 +136,7 @@ export default function QnaBoardList() {
 		setToggleOn(!isToggleOn);
 	}
 
-	console.log(isToggleOn);
+
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -159,6 +162,8 @@ export default function QnaBoardList() {
   const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') onSearchButtonClickHandler();
   };
+
+
 		//										effect										// 
   useEffect(() => {
     if (!cookies.accessToken) return;
@@ -170,7 +175,7 @@ useEffect(() => {
   getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
 }, [isToggleOn]);
 
-
+console.log(isToggleOn);
 	//                    render                    //
 	const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
