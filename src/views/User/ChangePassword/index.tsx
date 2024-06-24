@@ -1,16 +1,16 @@
-import  { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate, useParams } from 'react-router';
-import { CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
 import ResponseDto from 'src/apis/response.dto';
-
-import { ChangePasswordRequestDto,  } from 'src/apis/user/dto/request';
-import { changePasswordRequest,  } from 'src/apis/user';
+import { ChangePasswordRequestDto, } from 'src/apis/user/dto/request';
+import { changePasswordRequest, } from 'src/apis/user';
 import { useCookies } from 'react-cookie';
 
 //                component               //
 export default function PasswordChangePage() {
+
   //                  state                //
   const [password, setPassword] = useState<string>('');
   const [passwordChange, setPasswordChange] = useState<string>('');
@@ -22,7 +22,7 @@ export default function PasswordChangePage() {
   const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
   const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
   const { userPassword } = useParams();
-  const [cookies ] = useCookies();
+  const [cookies] = useCookies();
 
   //                  function                 //
   const navigator = useNavigate();
@@ -30,15 +30,15 @@ export default function PasswordChangePage() {
   const passwordChangeResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     const isSuccess = result && result.code === 'SU'
     if (!isSuccess) {
       alert(message);
       return;
     }
-    if (passwordChange!== passwordCheck) {
+    if (passwordChange !== passwordCheck) {
       alert('비밀번호가 일치하지 않습니다.')
       return;
     }
@@ -47,32 +47,32 @@ export default function PasswordChangePage() {
 
   //                event handler               //
   const onPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setPassword(value);
   };
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setPasswordChange(value)
     const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
     const isPassworPattern = passwordPattern.test(value);
     setIsPasswordPattern(isPassworPattern);
     const passwordMessage =
-      isPassworPattern ? '':
-      value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
+      isPassworPattern ? '' :
+        value ? '영문, 숫자를 혼용하여 8 ~ 15자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
     const isEqaulPassword = passwordCheck === value
-    const passwordCheckMessage = isEqaulPassword ? '': 
+    const passwordCheckMessage = isEqaulPassword ? '' :
       passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   }
   const onPasswordCheckChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setPasswordCheck(value);
-    const isEqaulPassword = passwordChange=== value
-    const passwordCheckMessage = isEqaulPassword ? '': 
-    passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
+    const isEqaulPassword = passwordChange === value
+    const passwordCheckMessage = isEqaulPassword ? '' :
+      passwordCheck ? '비밀번호가 일치하지 않습니다.' : '';
     setIsEqaulPassword(isEqaulPassword);
     setPasswordCheckMessage(passwordCheckMessage);
   }
@@ -86,10 +86,12 @@ export default function PasswordChangePage() {
     const requestBody: ChangePasswordRequestDto = {
       userPassword: passwordChange
     };
-    changePasswordRequest(requestBody, cookies. accessToken).then(passwordChangeResponse);
+    changePasswordRequest(requestBody, cookies.accessToken).then(passwordChangeResponse);
+    alert('비밀번호가 변경되었습니다.')
+    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
   };
 
-   //                      render                     //
+  //                      render                     //
   return (
     <div id='change-wrapper'>
       <div className='change-center-value'>
@@ -111,9 +113,9 @@ export default function PasswordChangePage() {
           <div className='submit-box'>
             <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
           </div>
-          
+
         </div>
       </div>
     </div>
-    )
+  )
 }

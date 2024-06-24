@@ -80,7 +80,8 @@
 
 .designerboard-list-table-title {
   flex: 6;
-  text-align: center;
+  text-align: left;
+  word-break: break-all;
 }
 
 .designerboard-list-table-title-top {
