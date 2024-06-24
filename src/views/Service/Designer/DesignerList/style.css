@@ -80,7 +80,10 @@
 
 .designerboard-list-table-title {
   flex: 6;
-  text-align: center;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .designerboard-list-table-title-top {
