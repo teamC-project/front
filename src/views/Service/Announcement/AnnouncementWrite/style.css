@@ -1,33 +1,34 @@
-#announcement-write-wrapper {
+#announcement-board-write-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #F5F5F5;  padding: 20px;
+  background-color: #F5F5F5;  
+	padding: 20px;
 }
 
-.announcement-write-top {
+.announcement-board-write-top {
   display: flex;
   align-items: center;
   gap: 12px;
-  background-color: #F5F5F5; /* 다른 스타일과 통일 */
-  padding: 10px; /* 패딩 추가 */
+  background-color: #F5F5F5; 
+  padding: 10px; 
 }
 
-.announcement-write-title {
+.announcement-board-write-title {
   display: flex;
   width: 8%;
   font-family: Inter;
   font-size: 20px;  font-weight: 700;
 }
 
-.announcement-write-title-box {
+.announcement-board-write-title-box {
   display: flex;
   align-items: center;
   flex-grow: 1;
   padding: 8px 16px;
 }
 
-.announcement-write-title-input {
+.announcement-board-write-title-input {
   border: none;
   outline: none;
   background: none;
@@ -44,7 +45,7 @@
   padding: 8px;
 }
 
-.announcement-write-contents-box {
+.announcement-board-write-contents-box {
   border: 1px solid rgba(238, 238, 238, 1);
   border-radius: 6px;
   padding: 12px 16px;
@@ -53,7 +54,7 @@
   margin-bottom: 20px;
 }
 
-.announcement-write-contents-textarea {
+.announcement-board-board-write-contents-textarea {
   border: none;
   outline: none;
   background: none;
@@ -67,31 +68,5 @@
   color: rgba(64, 64, 64, 1);
 }
 
-.upload-file {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: 20px;
-}
-
-.upload-file-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 8px 24px;
-  background-color: rgba(58, 87, 232, 0.2);
-  border-radius: 6px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 175%;
-  color: rgba(45, 66, 178, 1);
-  cursor: pointer;
-}
-
-.upload-file-button:hover {
-  cursor: pointer;
-}
 
 

@@ -1,4 +1,3 @@
-/* 추가: 검색 박스 스타일 */
 .qna-board-list-search-box {
   display: flex;
   align-items: center;
@@ -90,8 +89,6 @@
   align-items: center;
   margin-right: 20px; 
 }
-
-
 
 .qna-board-list-page-box {
   display: flex;
