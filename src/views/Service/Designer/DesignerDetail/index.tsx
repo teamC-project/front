@@ -86,12 +86,6 @@ export default function DesignerDetail() {
           designerBoardComment
           } = result as GetDesignerBoardResponseDto;
 
-        if (loginUserRole === 'ROLE_DESIGNER' && (designerBoardWriterId !== loginUserId)) {
-          alert('권한이 없습니다.');
-          navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
-          return;
-        }
-
         setTitle(designerBoardTitle);
         setWriterId(designerBoardWriterId);
         setWriteDate(designerBoardWriteDatetime);

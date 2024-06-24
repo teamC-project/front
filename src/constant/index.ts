@@ -187,8 +187,8 @@ export const GET_USER_ROLE_URL = (userId : string) => `${SERVER_USER_MODULE_URL}
 // description: ANNOUNCEMENT API URL PATH
 export const SERVER_ANNOUNCEMENT_BOARD_MODULE_URL = `${SERVER_API_URL}/service/announcement_board`;
 export const POST_ANNOUNCEMENT_BOARD_WRITE_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${ANNOUNCEMENT_BOARD_WRITE_PATH}`;
-export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list`;
-export const GET_SEARCH_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/list/search`;
+export const GET_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/`;
+export const GET_SEARCH_ANNOUNCEMENT_BOARD_LIST_URL = `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/search`;
 export const GET_ANNOUNCEMENT_BOARD_DETAIL_URL = (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
@@ -215,13 +215,13 @@ export const DELETE_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | str
 
 // description : Q&A API URL PATH
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`;
-export const POST_QNA_BOARD_WRITE_URL = `${SERVER_QNA_BOARD_MODULE_URL}/`;
-export const GET_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/list`;
-export const GET_SEARCH_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/list/search`;
+export const POST_QNA_BOARD_WRITE_URL = `${SERVER_QNA_BOARD_MODULE_URL}/write`;
+export const GET_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/`;
+export const GET_SEARCH_QNA_BOARD_LIST_URL = `${SERVER_QNA_BOARD_MODULE_URL}/search`;
 export const GET_QNA_BOARD_DETAIL_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
 export const PUT_QNA_BOARD_PUT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
 export const DELETE_QNA_BOARD_DELETE_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}`;
-export const PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/increase-view-count`;
+export const PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/increase_view_count`;
 export const POST_QNA_BOARD_COMMENT_WRITE_URL =(qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 export const PUT_QNA_BOARD_COMMENT_PUT_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;
 export const DELETE_QNA_BOARD_COMMENT_DELETE_URL = (qnaBoardNumber: number | string) => `${SERVER_QNA_BOARD_MODULE_URL}/${qnaBoardNumber}/comment`;

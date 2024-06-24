@@ -10,6 +10,7 @@ import socket from 'src/utils/socket';
 import { useChatStore, useUserStore } from 'src/stores';
 import { ChatMessageList, ChatroomList } from 'src/types';
 import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
+import { usePagination } from 'src/hooks/pagination';
 
 interface ChatRoomProps {
     selectedDesignerId: string;
@@ -53,52 +54,30 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     const { loginUserRole, loginUserId } = useUserStore();
     // const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
 
-    const [viewList, setViewList] = useState<ChatroomList[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
+    // const [viewList, setViewList] = useState<ChatroomList[]>([]);
+    // const [totalLenght, setTotalLength] = useState<number>(0);
+    // const [totalPage, setTotalPage] = useState<number>(1);
+    // const [currentPage, setCurrentPage] = useState<number>(1);
+    // const [pageList, setPageList] = useState<number[]>([1]);
+    // const [totalSection, setTotalSection] = useState<number>(1);
+    // const [currentSection, setCurrentSection] = useState<number>(1);
+
+    const {
+        setBoardList,
+		viewList,
+		pageList,
+		currentPage,
+		setCurrentPage,
+		setCurrentSection,
+		changeBoardList,
+		changePage,
+		onPageClickHandler,
+		onPreSectionClickHandler,
+		onNextSectionClickHandler
+	}  = usePagination<ChatroomList>(COUNT_PER_PAGE, COUNT_PER_SECTION)
 
     //                  function                    //
     const navigator = useNavigate();
-
-    const changePage = (chatroomList: ChatroomList[], totalLenght: number) => {
-        if (!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = chatroomList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if (!currentSection) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-    
-    const changeBoardList = (chatroomList: ChatroomList[]) => {
-        setRooms(chatroomList);
-
-        const totalLenght = chatroomList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(chatroomList, totalLenght);
-
-        changeSection(totalPage);
-    };
 
     const getChatroomListResponse = (result: GetChatroomListResponseDto | ResponseDto | null) => {
         const message =
@@ -184,21 +163,7 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         setNewRoomName(event.target.value);
     };
 
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
 
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-    };
 
 
     //                   effect                    //
@@ -229,15 +194,15 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     }, [cookies.accessToken]);
 
 
-    useEffect(() => {
-        if (!rooms.length) return;
-        changePage(rooms, totalLenght);
-    }, [currentPage]);
+    // useEffect(() => {
+    //     if (!rooms.length) return;
+    //     changePage(rooms, totalLenght);
+    // }, [currentPage]);
 
-    useEffect(() => {
-        if (!rooms.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
+    // useEffect(() => {
+    //     if (!rooms.length) return;
+    //     changeSection(totalPage);
+    // }, [currentSection]);
 
     useEffect(() => {
         changeBoardList(rooms);
