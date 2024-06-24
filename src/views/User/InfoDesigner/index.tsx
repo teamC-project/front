@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import "./style.css";
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import SelectBox from 'src/components/Selectbox';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
@@ -40,10 +39,10 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+          result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -166,51 +165,58 @@ export default function InfoDesigner() {
 
       <div className='info-sub-title'>개인정보 수정</div>
 
-      <div className='info-confonent'>
-      <div className='info-container'>
+      <div className='info-under-value'>
+        <div className='user-left-null'></div>
+        <div className='info-center-value'>
+          <div className='info-container'>
 
-          <div className='info-box-text'>
-            <div className='info-text'>아이디</div>
-            <div className='id-input-box'>
-              <div className='id-info-text'>{loginUserId}</div>
+            <div className='info-box-text'>
+              <div className='info-text'>아이디</div>
+
+              <div className='id-info-text-container'>
+                <div className='id-white-value'></div>
+                <div className='id-info-text'>{loginUserId}
+                <div className='id-white-value'></div>
+              </div>
+              </div>
+
             </div>
-          </div>
 
-          <div className='info-box-text'>
-            <div className='info-text'>성별</div>
-            <div className='info-next-box'>
-              <div className='info-radio-box'>
-                <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
-              <div className='info-radio-box'>
-                <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+            <div className='info-box-text'>
+              <div className='info-text'>성별</div>
+              <div className='info-next-box'>
+                <div className='info-radio-box'>
+                  <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
+                <div className='info-radio-box'>
+                  <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+              </div>
             </div>
+
+            <div className='info-box-text'>
+              <div className='info-text'>연령대
+                <UserSelectBox value={age} onChange={onAgeChangeHandler} />
+              </div>
+            </div>
+
+            <div className='info-box-text'>
+              <div className='info-text'>업체명</div>
+              <div className='info-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} /></div>
+            </div>
+
+            <div className='info-box-text'>
+              <div className='info-text'>면허증사진</div>
+              <div className='info-update-next-box'>
+                <input type='file' onChange={onImageChangeHandler} />
+              </div>
+            </div>
+
           </div>
 
-        <div className='info-box-text'>
-          <div className='info-text'>연령대</div>
-          <div>
-            <UserSelectBox value={age} onChange={onAgeChangeHandler} />
+          <div className='submit-box'>
+            <div className='user-primary-button' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
           </div>
+          <div className='user-right-null'></div>
         </div>
-
-        <div className='info-box-text'>
-          <div className='info-text'>업체명</div>
-          <div className='info-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} /></div>
-        </div>
-
-        <div className='info-box-text'>
-          <div className='info-text'>면허증사진</div>
-          <div className='info-update-next-box'>
-            <input type='file' onChange={onImageChangeHandler} />
-          </div>
-        </div>
-
-        </div>
-
-        <div className='submit-box'>
-          <div className='user-primary-button' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
-        </div>
-
       </div>
     </div>
   );

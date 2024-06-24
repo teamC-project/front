@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import "./style.css";
-import SelectBox from 'src/components/Selectbox';
 import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
@@ -113,9 +112,7 @@ export default function InfoCustomer() {
 
           <div className='info-box-text'>
             <div className='info-text'>아이디</div>
-              <div className='id-input-box'>
                 <div className='id-info-text'>{loginUserId}</div>
-              </div>
           </div>
 
           <div className='info-box-text'>
@@ -132,7 +129,6 @@ export default function InfoCustomer() {
           <div className='info-text'>연령대
           <UserSelectBox value={age} onChange={onAgeChangeHandler} />
           </div>
-
         </div>
 
         </div>

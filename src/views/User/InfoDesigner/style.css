@@ -1,20 +1,18 @@
 #info-wrapper {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border: 5px solid rgb(94, 92, 92);
+    border: 5px solid rgba(255,190,152,0.7);
     border-radius: 25px;
 }
 
 .info-sub-title {
-    display: flex;
     justify-content: start;
     padding: 25px 0px 25px 25px;
 
     font-size: 30px;
     font-weight: 600;
 
-    border-bottom: solid rgba(94, 92, 92);
+    border-bottom: solid rgba(255,190,152,0.7);
 }
 
 .info-under-value {
@@ -27,8 +25,6 @@
     margin: 0 auto;
     justify-content: center;
     width: 100%;
-
-    background-color: yellow;
 }
 
 .info-container {
@@ -38,42 +34,42 @@
     gap: 25px;
     
     padding: 20px;
-    background-color: aqua;
 }
 
-.id-input-box {
-    width: 350px;
-    padding: 5px 0;
+.id-info-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.id-white-value {
+    height: 8px;
 }
 
 .id-info-text {
-    flex-grow: 1;
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 10px;
     padding: 4px 14px;
     background-color: rgba(255, 255, 255, 1);
+    width: 325px;
 
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 175%;
+    line-height: 120%;
     color: rgba(35, 45, 66, 1);
 }
 
 .info-box-text {
     display: flex;
-    align-items: center;
-    background-color: bisque;
+    padding: 10px;
 }
 
 .info-text {
-    font-size: 24px;
-    font-weight: 400;
-    width: 200px;
+    font-size: 20px;
+    width: 150px;
     height: 50px;
     line-height: 50px;
-    flex: 0 0 200px;
 }
 
 .info-next-box {
@@ -89,10 +85,8 @@
 
 .user-left-null {
     flex-grow: 1;
-    background-color: violet;
 }
 
 .user-right-null {
     flex-grow: 1;
-    background-color: tomato;
 }

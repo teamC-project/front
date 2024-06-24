@@ -51,8 +51,6 @@ export default function MyPage() {
           </div>
 
         </div>
-
-      <div className='john1'></div>
     </div>
   );
 }

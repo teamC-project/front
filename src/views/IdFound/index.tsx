@@ -155,7 +155,7 @@ export default function IdFound() {
 
   //                      render                      //
   return (
-    <div id='auth-wrapper'>
+    <div id='auth-wrapper' className='found-wrapper'>
       <AuthTopBar />
       <div className='auth-under-bar'>
         <div className='auth-left-null'></div>
