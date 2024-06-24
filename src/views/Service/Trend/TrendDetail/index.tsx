@@ -133,24 +133,6 @@ export default function TrendDetail() {
 		setTrendBoardViewCount(trendBoardViewCount);
 	};
 
-	const postTrendBoardCommentResponse = (result: ResponseDto | null) => {
-		const message =
-			!result ? '서버에 문제가 있습니다.' :
-				result.code === 'AF' ? '권한이 없습니다.' :
-					result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-						result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-							result.code === 'DBE' ? '서버에 문제가 있습니다' : '';
-
-		if (!result || result.code !== 'SU') {
-			alert(message);
-			return;
-		}
-
-		if (!trendBoardNumber || !cookies.accessToken) return;
-		getTrendBoardRequest(trendBoardNumber, cookies.accessToken)
-			.then(getTrendBoardResponse);
-	};
-
 	const deleteTrendBoardResponse = (result: ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다.' :
