@@ -79,7 +79,8 @@
 .customerboard-list-table-title {
   flex: 6;
   text-align: left;
-  padding-left: 20px; /* 제목 왼쪽 패딩 추가 */
+  
+  word-break: break-all;
 }
 
 .customerboard-list-table-title-top {
