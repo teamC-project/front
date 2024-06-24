@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getSignInUserRequest, userInfoDeleteRequest } from 'src/apis/user';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
-import { AUTH_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { AUTH_SIGN_IN_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import "./style.css";
 
@@ -44,7 +44,7 @@ export default function InfoDeleteUser() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(AUTH_ABSOLUTE_PATH);
+      navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
       return;
     }
     const { userId, userRole } = result as GetSignInUserResponseDto;
@@ -81,7 +81,7 @@ export default function InfoDeleteUser() {
   //              effect              //
   useEffect(() => {
     if (!cookies.accessToken) {
-      navigator(AUTH_ABSOLUTE_PATH);
+      navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
       return;
     }
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);

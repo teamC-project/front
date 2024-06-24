@@ -39,10 +39,10 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -65,10 +65,10 @@ export default function InfoDesigner() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
