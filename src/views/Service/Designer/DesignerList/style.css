@@ -81,7 +81,9 @@
 .designerboard-list-table-title {
   flex: 6;
   text-align: left;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .designerboard-list-table-title-top {
