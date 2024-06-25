@@ -1,8 +1,8 @@
 import axios from "axios";
-import { CUSTOMER_SIGN_UP_URL, DELETE_INFO_PATH, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, FOUND_ID_EMAIL_AUTH_URL, FOUND_ID_URL, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_ID_CHECK_REQUEST_URL, FOUND_PASSWORD_PATH, ID_CHECK_REQUEST_URL, RESET_PASSOWORD_PATH, SIGN_IN_REQUEST_URL } from "src/constant";
+import { CUSTOMER_SIGN_UP_URL, DESIGNER_SIGN_UP_URL, EMAIL_AUTH_CHECK_REQUEST_URL, EMAIL_AUTH_REQUEST_URL, FOUND_ID_EMAIL_AUTH_URL, FOUND_ID_URL, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_ID_CHECK_REQUEST_URL, FOUND_PASSWORD_PATH, ID_CHECK_REQUEST_URL, RESET_PASSOWORD_PATH, SIGN_IN_REQUEST_URL } from "src/constant";
 import { requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
-import { CustomerDeleterequestDto, DesignerDeleteRequestDto, EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, FoundPasswordIdCheckRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
+import { EmailAuthCheckRequestDto, EmailAuthRequestDto, FoundIdCheckRequestDto, FoundPasswordIdCheckRequestDto, IdCheckRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto, SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from "./dto/request";
 import { IdFoundResponseDto, SignInResponseDto } from "./dto/response";
 
 // function: 로그인 API 함수
@@ -96,22 +96,6 @@ export const foundPasswordUserCheckRequest = async (requestBody: PasswordResetRe
 // function: 비밀번호 변경 API 함수
 export const setUpPasswordRequest = async (requestBody: SetUpPasswordRequestDto) => {
   const result = await axios.post(RESET_PASSOWORD_PATH, requestBody)
-    .then(requestHandler<ResponseDto>)
-    .catch(requestErrorHandler);
-    return result;
-}
-
-// function: 고객 회원탈퇴 API 함수
-export const CustomerDeleteRequest = async (requestBody:  CustomerDeleterequestDto) => {
-  const result = await axios.post(DELETE_INFO_PATH, requestBody)
-  .then(requestHandler<ResponseDto>)
-  .catch(requestErrorHandler);
-  return result;
-}
-
-// function: 디자이너 회원탈퇴 API 함수
-  export const DesignerDeleteRequest = async (requestBody: DesignerDeleteRequestDto) => {
-    const result = await axios.post(DELETE_INFO_PATH, requestBody)
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;

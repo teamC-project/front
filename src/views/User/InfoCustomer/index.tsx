@@ -6,8 +6,7 @@ import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
-import { CustomerInfoResponseDto } from 'src/apis/auth/dto/response';
+import { CustomerInfoResponseDto, GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest, updateCustomerInfoRequest } from 'src/apis/user';
 import UserSelectBox from 'src/components/UserSelectBox';
 

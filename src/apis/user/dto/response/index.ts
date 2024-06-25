@@ -18,3 +18,18 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userImage: string;
   userRole: string;
 }
+
+
+export interface CustomerInfoResponseDto extends ResponseDto {
+  userId: string;
+  userGender: string;
+  userAge: string;
+}
+
+export interface DesignerInfoResponseDto extends ResponseDto {
+  userId: string;
+  userGender: string;
+  userAge: string;
+  userCompanyName: string;
+  userImage: string;
+}

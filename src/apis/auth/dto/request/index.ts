@@ -67,27 +67,3 @@ export interface SetUpPasswordRequestDto {
   userId: string;
   userPassword : string;
 }
-
-// description: 고객 회원탈퇴 Request Body DTO
-export interface CustomerDeleterequestDto {
-  userId : string;
-  userPassword : string;
-  userEmail : string;
-  authNumber : string;
-  userGender : string;
-  userAge : string;
-  joinPath: string;
-}
-
-// description: 디자이너 회원탈퇴 Request Body DTO
-export interface DesignerDeleteRequestDto {
-  userId : string;
-  userPassword : string;
-  userEmail : string;
-  authNumber : string;
-  userGender : string;
-  userAge : string;
-  userCompanyName : string;
-  userImage : string;
-  joinPath: string;
-}
