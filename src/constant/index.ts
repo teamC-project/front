@@ -20,7 +20,7 @@ export const LOGIN_LOG_PATH = "/login-log";
 export const MY_PAGE_PATH = "my-page";
 export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
 export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
-export const UPDATE_PASSWORD_PATH = "update-user-password";
+export const UPDATE_PASSWORD_PATH = "update-user-password"
 export const DELETE_INFO_PATH = "delete-user-info";
 export const CHANGE_PASSWORD_PATH = "change-user-password";
 
@@ -266,7 +266,7 @@ export const DELETE_CHATROOM_URL = (roomId: number | string) => `${SERVER_CHAT_M
 
 // description: 게시물 상수
 export const COUNT_PER_PAGE = 10;
-export const COUNT_PER_SECTION = 5;
+export const COUNT_PER_SECTION = 10;
 
 
 // description: 트렌드 게시판 게시물 상수

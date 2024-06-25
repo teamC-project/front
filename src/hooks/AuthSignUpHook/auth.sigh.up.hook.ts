@@ -29,8 +29,6 @@ const useAuthSignUp = () => {
   const [isEqaulPassword,setIsEqaulPassword] = useState<boolean>(false);
   const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
   const [isAuthNumberCheck,setIsAuthNumberCheck] = useState<boolean>(false);
-  const [isGenderCheck,setIsGenderCheck] = useState<boolean>(false);
-  const [isAgeCheck,setIsAgeCheck] = useState<boolean>(false);
   const [isCompanyNameCheck,setIsCompanyNameCheck] = useState<boolean>(false);
   const [isImageCheck,setIsImageCheck] = useState<boolean>(false);
 
@@ -95,15 +93,34 @@ const useAuthSignUp = () => {
     setIsAuthNumberError(authNumberError);
   };
 
-
   // event handeler
   const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
+    const { value } = event.target;
+  
+    const idPattern = /^[a-zA-Z0-9]*$/;
+    const minLength = 8;
+    const maxLength = 15;
+  
     setId(value);
-    setIdButtonStatus(value !=='');
-    setIsIdCheck(false);
-    setIdMessage('');
-  }
+  
+    if (value.length === 0) {
+      setIdMessage('');
+      setIdButtonStatus(false);
+      return;
+    }
+  
+    if (!idPattern.test(value)) {
+      setIdMessage('아이디는 영문자와 숫자만 사용할 수 있습니다. 공백 및 특수문자는 사용할 수 없습니다.');
+      setIdButtonStatus(false);
+    } else if (value.length < minLength || value.length > maxLength) {
+      setIdMessage(`아이디는 ${minLength}자에서 ${maxLength}자 사이여야 합니다.`);
+      setIdButtonStatus(false);
+    } else {
+      setIdMessage('');
+      setIdButtonStatus(true);
+    }
+  };
+  
 
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
