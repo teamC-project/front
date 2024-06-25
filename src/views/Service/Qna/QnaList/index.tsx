@@ -178,7 +178,7 @@ useEffect(() => {
 console.log(isToggleOn);
 	//                    render                    //
 	const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
-  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+
   return (
     <div className='qna-board-list-wrapper'>
       <div className='qna-board-list-search-box'>
@@ -192,7 +192,7 @@ console.log(isToggleOn);
             onKeyDown={onSearchInputKeyDown}
           />
         </div>
-        <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>
+        <div className='qna-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
           검색
         </div>
 

@@ -81,17 +81,18 @@ export default function AnnouncementBoardWrite() {
 
     //                    render                    //
     return (
-        <div id='announcement-write-wrapper'>
-            <div className='announcement-write-top'>
-                <div className='announcement-write-title-box'>
-                    <div className='announcement-write-title'>제목</div>
-                    <input className='announcement-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
+        <div id='announcement-board-write-wrapper'>
+            <div className='announcement-board-write-top'>
+                <div className='announcement-board-write-title-box'>
+                    <div className='announcement-board-write-title'>제목</div>
+                    <input className='announcement-board-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
 						<textarea
 						ref={contentsRef} 
 						onChange={onContentsChangeHandler}
 						name=""
+						className='announcement-board-write-contents-textarea'
 						id=""
 						placeholder='내용을 입력해주세요.'
 						/>

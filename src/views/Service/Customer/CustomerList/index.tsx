@@ -20,6 +20,17 @@ function ListItem ({
   secret
 }: CustomerBoardListItem) {
 
+  const measureText = (text: string, fontSize: number, fontFamily: string): number => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    if (!context) {
+      return 0;
+    }
+    context.font = `${fontSize}px ${fontFamily}`;
+    const metrics = context.measureText(text);
+    return metrics.width;
+  };
+
   //              function              //
   const navigator = useNavigate();
   const { loginUserRole, loginUserId } = useUserStore();
@@ -37,7 +48,25 @@ function ListItem ({
     navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
   };
 
-  const title = isSecretPost ? '비밀글입니다' : customerBoardTitle;
+  const MAX_TITLE_WIDTH = 720; // 최대 제목 너비 (픽셀 단위)
+  const FONT_SIZE = 16; // 폰트 크기
+  const FONT_FAMILY = 'Arial, sans-serif'; // 폰트 패밀리
+
+  let truncatedTitle = customerBoardTitle;
+  let titleWidth = measureText(truncatedTitle, FONT_SIZE, FONT_FAMILY);
+
+  while (titleWidth > MAX_TITLE_WIDTH && truncatedTitle.length > 0) {
+    truncatedTitle = truncatedTitle.slice(0, -1);
+    titleWidth = measureText(truncatedTitle + '...', FONT_SIZE, FONT_FAMILY);
+  }
+
+  if (truncatedTitle.length < customerBoardTitle.length) {
+    truncatedTitle += '...';
+  }
+
+  const title = isSecretPost ? '비밀글입니다' : truncatedTitle;
+
+  
 
   //              render              //
   return (

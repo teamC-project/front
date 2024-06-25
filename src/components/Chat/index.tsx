@@ -34,7 +34,6 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='chatroom-list-table-tr' onClick={onClickHandler}>
-            {/* <div className='chat-room-list-table-room-number'>{chatroomId}</div> */}
             <div className='chat-room-list-table-title' style={{ textAlign: 'center' }}>{roomName}</div>
         </div>
     );
@@ -213,8 +212,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
         <div className='chat-room'>
             <div className='chat-room-list'>
                 <h2>채팅방 목록</h2>
-                {/* <div className='chat-room-list-table-room-number'>제목</div> */}
-                {/* <div className='chat-room-list-table-title'>번호</div> */}
                     {viewList.map(item => (
                         <ListItem key={item.chatroomId} {...item} />
                         ))}
