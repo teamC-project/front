@@ -166,17 +166,21 @@ export default function TrendList() {
 
   return (
     <div id='trend-board-wrapper'>
-        <div className='trend-board-list-search-box'>
-          <div className='trend-board-list-search-keyword'>검색 키워드</div>
-          <input 
-            className='trend-board-list-search-input' 
-            placeholder='제목을 입력하세요.'
-            value={searchWord} 
+			      <div className='trend-board-list-search-box'>
+        <div className='trend-board-list-search-keyword'>검색 키워드</div>
+        <div className='trend-board-list-search-input-box'>
+          <input
+            className='trend-board-list-search-input'
+            placeholder='검색어를 입력하세요.'
+            value={searchWord}
             onChange={onSearchWordChangeHandler}
             onKeyDown={onSearchInputKeyDown}
           />
-          <div className='trend-board-list-search-input-button' onClick={onSearchButtonClickHandler}>검색</div>
         </div>
+        <div className='trend-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
+          검색
+        </div>
+      </div>
       <div className="trend-board-list-container">
         <div className='trend-board-list'>
           {viewList.map(item => <CardItem key={item.trendBoardNumber} {...item} />)}
