@@ -16,7 +16,6 @@
 
 .designerboard-list-search-input-box {
   flex: 1;
-  
 }
 
 .designerboard-list-search-input {
@@ -80,6 +79,7 @@
   flex: 6;
   text-align: left;
   word-break: break-all;
+  white-space: nowrap;
 }
 
 .designerboard-list-table-title-top {
