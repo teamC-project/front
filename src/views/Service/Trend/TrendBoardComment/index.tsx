@@ -194,7 +194,7 @@ export default function TrendBoardComment() {
                                 onChange={onCommentChangeHandler}
                                 placeholder="댓글을 입력하세요"
                             />
-                            <button className='primary-button' onClick={onPostButtonClickHandler}>작성</button>
+                            <button className='primary-button' onClick={onPostButtonClickHandler}>댓글 달기</button>
                         </div>
                     </div>
                 </div>
