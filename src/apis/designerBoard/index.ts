@@ -40,10 +40,10 @@ export const getSearchDesignerBoardListRequest = async (word: string, accessToke
 
 // function: DesignerBoard 게시물의 Comment 전체 리스트 불러오기 API 함수 
 export const getDesignerBoardCommentsByBoardNumberRequest = async (designerBoardNumber: number | string, accessToken: string) => {
-  const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
-      .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
-      .catch(requestErrorHandler);
-  return result;
+    const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
 }  
 
 // function: DesignerBoard 게시물 불러오기 API 함수 

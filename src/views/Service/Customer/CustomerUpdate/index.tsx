@@ -132,11 +132,9 @@ export default function CustomerUpdate() {
           <ToastEditor 
 			    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
           </div>
-          <div className='customer-update-button'>
-            <button className='customer-write-click-button' onClick={onUpdateButtonClickHandler}>
+            <button className='primary-button' onClick={onUpdateButtonClickHandler}>
               수정
             </button>
-          </div>
         </div>
     );
 }
