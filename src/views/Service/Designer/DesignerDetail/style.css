@@ -34,24 +34,24 @@
 }
 
 .designer-detail-information1 {
-  flex: 2; /* 크기 조정 가능 */
+  flex: 2; 
 }
 
 .designer-detail-information2 {
-  flex: 6; /* 크기 조정 가능 */
+  flex: 6; 
 }
 
 .designer-detail-information3 {
-  flex: 1; /* 크기 조정 가능 */
+  flex: 1; 
 }
 
 .designer-detail-information4 {
-  flex: 0.5; /* 크기 조정 가능 */
+  flex: 0.5; 
   cursor: pointer;
 }
 
 .designer-detail-information5 {
-  flex: 0.5; /* 크기 조정 가능 */
+  flex: 0.5; 
   cursor: pointer;
 }
 

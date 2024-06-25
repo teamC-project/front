@@ -102,28 +102,27 @@ export default function DesignerWrite() {
         if (!cookies.accessToken) return;
     
         const requestBody: PostDesignerBoardRequestDto = { 
-            designerBoardTitle: title.trim(), // 제목에서 공백 제거
-            designerBoardContents: contents.trim(), // 내용에서 공백 제거
+            designerBoardTitle: title.trim(), 
+            designerBoardContents: contents.trim(), 
             
         };
 
         const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
 
-        // 제목과 내용이 모두 비어있는 경우 처리
         if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
-          alert("제목과 내용을 모두 입력해주세요.");
-          return;
+            alert("제목과 내용을 모두 입력해주세요.");
+            return;
         }
-      // 제목만 비어있는 경우 처리
-      else if (!requestBody.designerBoardTitle) {
-          alert("제목을 입력해주세요.");
-          return;
-      }
-      // 내용만 비어있는 경우 처리
-      else if (!requestBody.designerBoardContents || !isBlank) {
-          alert("내용을 입력해주세요.");
-          return;
-      }
+
+        else if (!requestBody.designerBoardTitle) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        else if (!requestBody.designerBoardContents || !isBlank) {
+            alert("내용을 입력해주세요.");
+            return;
+        }
 
         postDesignerBoardRequest(requestBody, cookies.accessToken)
             .then(postDesignerBoardResponse);
@@ -141,26 +140,22 @@ export default function DesignerWrite() {
     //                    render                    //
     return (
         <div id='designer-write-wrapper'>
-          <div className='designer-write-top'>
-            <div className='designer-write-title-box'>
-                <div className='designer-write-title'>제목</div>
-                <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+            <div className='designer-write-top'>
+                <div className='designer-write-title-box'>
+                    <div className='designer-write-title'>제목</div>
+                    <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+                </div>
             </div>
-          </div>
-          <div className='designer-write-contents-box'>
+            <div className='designer-write-contents-box'>
             <ToastEditor
-              ref={editorRef}
-              body={contents}
-              setBody={onContentsChangeHandler}
-              imageList={urlList}
-              setImageList={onImageChangeHandler}
+                ref={editorRef}
+                body={contents}
+                setBody={onContentsChangeHandler}
+                imageList={urlList}
+                setImageList={onImageChangeHandler}
             />
-          </div>
-          <div className='designer-write-button'>
-            <button className='designer-write-click-button' onClick={onPostButtonClickHandler}>
-                올리기
-            </button>
-          </div>
+            </div>
+            <button className='primary-button' onClick={onPostButtonClickHandler}>올리기</button>
         </div>
     );
 }

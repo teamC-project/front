@@ -60,23 +60,22 @@ export default function DesignerUpdate() {
       if (!cookies.accessToken || !designerBoardNumber) return;
         
       const requestBody: PutDesignerBoardRequestDto = {
-        designerBoardTitle: title.trim(), // 제목에서 공백 제거
-        designerBoardContents: contents.trim(), // 내용에서 공백 제거
+        designerBoardTitle: title.trim(), 
+        designerBoardContents: contents.trim(), 
       };
 
       const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
 
-      // 제목과 내용이 모두 비어있는 경우 처리
       if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
         alert("제목과 내용을 모두 입력해주세요.");
         return;
       }
-      // 제목만 비어있는 경우 처리
+
       else if (!requestBody.designerBoardTitle) {
           alert("제목을 입력해주세요.");
           return;
       }
-      // 내용만 비어있는 경우 처리
+
       else if (!requestBody.designerBoardContents || !isBlank) {
           alert("내용을 입력해주세요.");
           return;
@@ -88,15 +87,10 @@ export default function DesignerUpdate() {
     };
     
     const putDesignerBoardResponse = (result: ResponseDto | null) => {
-        // ... (응답 처리 로직) ...
         if (result && result.code === 'SU') {
             navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber!));
         }
     };
-    
-
-
-    
     
     //                    render                    //
     return (
@@ -116,11 +110,7 @@ export default function DesignerUpdate() {
           <ToastEditor 
 			    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
           </div>
-          <div className='designer-update-button'>
-            <button className='designer-write-click-button' onClick={onUpdateButtonClickHandler}>
-              수정
-            </button>
-          </div>
+          <button className='primary-button' onClick={onUpdateButtonClickHandler}>수정</button>
         </div>
     );
 }

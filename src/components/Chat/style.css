@@ -116,7 +116,6 @@
   background-color: #f9f9f9;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 600px) {
   .chat-room {
     width: 100%;
