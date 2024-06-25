@@ -156,11 +156,9 @@ export default function DesignerWrite() {
               setImageList={onImageChangeHandler}
             />
           </div>
-          <div className='designer-write-button'>
-            <button className='designer-write-click-button' onClick={onPostButtonClickHandler}>
+        <button className='primary-button' onClick={onPostButtonClickHandler}>
                 올리기
-            </button>
-          </div>
+        </button>
         </div>
     );
 }
