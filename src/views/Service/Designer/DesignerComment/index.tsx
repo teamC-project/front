@@ -258,10 +258,6 @@ export default function DesignerBoardComment() {
   }, [designerBoardNumber, cookies.accessToken]);
 
   useEffect(() => {
-    // document.addEventListener('mousedown', handleClickOutside);
-    // return () => {
-    //   document.removeEventListener('mousedown', handleClickOutside);
-    // };
   }, []);
 
   //        render        //

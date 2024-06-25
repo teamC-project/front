@@ -1,10 +1,9 @@
 import axios from "axios";
-import { CHANGE_PASSWORD_PATH, FOUND_PASSWORD_EMAIL_AUTH_URL, FOUND_PASSWORD_PATH, GET_SIGN_IN_USER_REQUEST_URL, GET_USER_ROLE_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_CHANGE_URL, PASSWORD_FOUND_PATH, RESET_PASSOWORD_PATH, USER_DELETE_URL } from "src/constant";
+import { GET_SIGN_IN_USER_REQUEST_URL, GET_USER_ROLE_URL, INFO_CUSTOMER_UPDATE_URL, INFO_DESIGNER_UPDATE_URL, PASSWORD_CHANGE_URL, USER_DELETE_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
-import { GetSignInUserResponseDto, GetUserInfoResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
-import { EmailAuthRequestDto, PasswordResetRequestDto, SetUpPasswordRequestDto } from "../auth/dto/request";
 import { ChangePasswordRequestDto } from "./dto/request";
+import { GetSignInUserResponseDto, GetUserInfoResponseDto } from "./dto/response";
 
 //  function: 로그인 유저 정보 불러오기 API 함수  //
 export const getSignInUserRequest = async (accessToken: string) => {
