@@ -178,23 +178,23 @@ export default function QnaBoardDetail() {
 
     //              render              //
     return (
-        <div className="qna-detail">
-            <div className="qna-detail-title">{title}</div>
-            <div className="qna-detail-container">
-                <div className="qna-detail-information">
-                    <div className="qna-detail-information1">작성자 {writerId}</div>
-                    <div className="qna-detail-information3">작성일 {writeDatetime}</div>
-                    <div className="qna-detail-information4">조회수 {viewCount}</div>
+        <div className="qna-board-detail">
+            <div className="qna-board-detail-title">{title}</div>
+            <div className="qna-board-detail-container">
+                <div className="qna-board-detail-information">
+                    <div className="qna-board-detail-information1">작성자 {writerId}</div>
+                    <div className="qna-board-detail-information3">작성일 {writeDatetime}</div>
+                    <div className="qna-board-detail-information4">조회수 {viewCount}</div>
                 </div>
             </div>
-            <div className="qna-detail-view">
+            <div className="qna-board-detail-view">
                 {contents}
             </div>
 						{loginUserRole === "ROLE_ADMIN" && !status && (
-						<div className='qna-detail-comment-write-box'>
-							<div className='qna-detail-comment-textarea-box'>
+						<div className='qna-board-detail-comment-write-box'>
+							<div className='qna-board-detail-comment-textarea-box'>
 								<textarea 
-									className='qna-detail-comment-textarea'
+									className='qna-board-detail-comment-textarea'
 									placeholder='답글을 작성 해주세요.'
 									value = {qnaBoardComment === null ? "" : qnaBoardComment}
 								onChange={onCommentChangeHandler}
@@ -204,13 +204,13 @@ export default function QnaBoardDetail() {
 						</div>
 					)}
 				{status && (
-        <div className="qna-detail-comment-box">
+        <div className="qna-board-detail-comment-box">
           <div className="primary-bedge">답변</div>
-          <div className="qna-detail-comment">{qnaBoardComment}</div>
+          <div className="qna-board-detail-comment">{qnaBoardComment}</div>
         </div>
       )}
 			{loginUserId === writerId && (
-				<div className='qna-detail-owner-button-box'>
+				<div className='qna-board-detail-owner-button-box'>
 				{!status && (
 					<div className='second-button' onClick={onUpdateClickHandler}>수정</div>
 				)}
