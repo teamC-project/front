@@ -116,11 +116,7 @@ export default function DesignerUpdate() {
           <ToastEditor 
 			    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
           </div>
-          <div className='designer-update-button'>
-            <button className='designer-write-click-button' onClick={onUpdateButtonClickHandler}>
-              수정
-            </button>
-          </div>
+          <button className='primary-button' onClick={onUpdateButtonClickHandler}>수정</button>
         </div>
     );
 }
