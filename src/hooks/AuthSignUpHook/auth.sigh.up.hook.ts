@@ -29,8 +29,6 @@ const useAuthSignUp = () => {
   const [isEqaulPassword,setIsEqaulPassword] = useState<boolean>(false);
   const [isEmailCheck,setIsEmailCheck] = useState<boolean>(false);
   const [isAuthNumberCheck,setIsAuthNumberCheck] = useState<boolean>(false);
-  const [isGenderCheck,setIsGenderCheck] = useState<boolean>(false);
-  const [isAgeCheck,setIsAgeCheck] = useState<boolean>(false);
   const [isCompanyNameCheck,setIsCompanyNameCheck] = useState<boolean>(false);
   const [isImageCheck,setIsImageCheck] = useState<boolean>(false);
 
