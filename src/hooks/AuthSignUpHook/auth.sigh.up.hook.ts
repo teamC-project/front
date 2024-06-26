@@ -175,9 +175,9 @@ const useAuthSignUp = () => {
     const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setGender(event.target.value);
     };
-
+  
     const onAgeChangeHandler = (age: string) => {
-        setAge(age);
+    setAge(age);
     };
 
     const onCompanyNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -210,11 +210,10 @@ const useAuthSignUp = () => {
             setEmailMessage('이메일 형식이 아닙니다.');
             setIsEmailError(true);
             setIsEmailCheck(false);
-        return;
-        };
-
-        const requestBody: EmailAuthRequestDto = { userEmail : email};
-        emailAuthRequest(requestBody).then(emailAuthResponse);
+            return;
+    }
+    const requestBody: EmailAuthRequestDto = { userEmail : email};
+    emailAuthRequest(requestBody).then(emailAuthResponse);
     };
 
     const onAuthNumberButtonClickHandler = () => {
@@ -225,7 +224,7 @@ const useAuthSignUp = () => {
             userEmail: email,
             authNumber
         };
-    emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
+        emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
     };  
 
     return{
@@ -264,6 +263,27 @@ const useAuthSignUp = () => {
         setEmailButtonStatus,
         setAuthNumberButtonStatus,
         
+        setIsIdCheck,
+        setIsEmailCheck,
+        setIsAuthNumberCheck,
+
+        isIdError,
+        isEmailError,
+        isAuthNumberError,
+
+        setIsIdError,
+        setIsEmailError,
+        setIsAuthNumberError,
+
+        onIdChangeHandler,
+        onPasswordChangeHandler,
+        onPasswordCheckChangeHandler,
+        onEmailChangeHandler,
+        onAuthNumberChangeHandler,
+        onGenderChangeHandler,
+        onAgeChangeHandler,
+        onCompanyNameChangeHandler,
+        onImageChangeHandler,
         
         onIdButtonClickHandler,
         onEmailButtonClickHandler,

@@ -55,58 +55,31 @@ export default function DesignerUpdate() {
     const onUpdateButtonClickHandler = () => {
 		if (!cookies.accessToken || !designerBoardNumber) return;
         
-<<<<<<< HEAD
-		const requestBody: PutDesignerBoardRequestDto = {
-        designerBoardTitle: title.trim(), 
-        designerBoardContents: contents.trim(), 
-		};
-=======
-      const requestBody: PutDesignerBoardRequestDto = {
-        designerBoardTitle: title.trim(), 
-        designerBoardContents: contents.trim(), 
-      };
->>>>>>> aff6534144249353720ee354fca2b746b02530af
+        const requestBody: PutDesignerBoardRequestDto = {
+            designerBoardTitle: title.trim(), 
+            designerBoardContents: contents.trim(), 
+        };
 
 		const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
 
-<<<<<<< HEAD
-		if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
-        alert("제목과 내용을 모두 입력해주세요.");
-        return;
-		}
+        if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
+            alert("제목과 내용을 모두 입력해주세요.");
+            return;
+        }
 
-		else if (!requestBody.designerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.designerBoardTitle) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
 
-		else if (!requestBody.designerBoardContents || !isBlank) {
-			alert("내용을 입력해주세요.");
-			return;
-		}
-
-		putDesignerBoardRequest(designerBoardNumber, requestBody, cookies.accessToken)
-			.then(putDesignerBoardResponse);
-=======
-      if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
-        alert("제목과 내용을 모두 입력해주세요.");
-        return;
-      }
-
-      else if (!requestBody.designerBoardTitle) {
-          alert("제목을 입력해주세요.");
-          return;
-      }
-
-      else if (!requestBody.designerBoardContents || !isBlank) {
-          alert("내용을 입력해주세요.");
-          return;
-      }
+        else if (!requestBody.designerBoardContents || !isBlank) {
+            alert("내용을 입력해주세요.");
+            return;
+        }
   
-      putDesignerBoardRequest(designerBoardNumber, requestBody, cookies.accessToken)
-          .then(putDesignerBoardResponse);
->>>>>>> aff6534144249353720ee354fca2b746b02530af
-            
+        putDesignerBoardRequest(designerBoardNumber, requestBody, cookies.accessToken)
+            .then(putDesignerBoardResponse);
+                
     };
     
     const putDesignerBoardResponse = (result: ResponseDto | null) => {
@@ -114,53 +87,26 @@ export default function DesignerUpdate() {
             navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber!));
         }
     };
-<<<<<<< HEAD
-
-    //                    render                    //
-    return (
-        <div id='designer-update-wrapper'>
-			<div className='designer-update-top'>
-				<div className='designer-update-title-box'>
-					<div className='designer-update-title'>제목</div>
-					<input
-						className='designer-update-title-input'
-						placeholder='제목을 입력해주세요.'
-						value={title}
-						onChange={onTitleChangeHandler}
-					/>
-				</div>
-			</div>
-			<div className='designer-update-contents-box'>
-			<ToastEditor 
-				ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
-			</div>
-			<div className='designer-update-button'>
-            <button className='designer-write-click-button' onClick={onUpdateButtonClickHandler}>
-				수정
-            </button>
-			</div>
-=======
     
     //                    render                    //
     return (
         <div id='designer-update-wrapper'>
-          <div className='designer-update-top'>
-              <div className='designer-update-title-box'>
-                  <div className='designer-update-title'>제목</div>
-                  <input
-                      className='designer-update-title-input'
-                      placeholder='제목을 입력해주세요.'
-                      value={title}
-                      onChange={onTitleChangeHandler}
-                  />
-              </div>
-          </div>
-          <div className='designer-update-contents-box'>
-          <ToastEditor 
-			    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
-          </div>
-          <button className='primary-button' onClick={onUpdateButtonClickHandler}>수정</button>
->>>>>>> aff6534144249353720ee354fca2b746b02530af
+            <div className='designer-update-top'>
+                <div className='designer-update-title-box'>
+                    <div className='designer-update-title'>제목</div>
+                    <input
+                        className='designer-update-title-input'
+                        placeholder='제목을 입력해주세요.'
+                        value={title}
+                        onChange={onTitleChangeHandler}
+                    />
+                </div>
+            </div>
+            <div className='designer-update-contents-box'>
+            <ToastEditor 
+                    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
+            </div>
+            <button className='primary-button' onClick={onUpdateButtonClickHandler}>수정</button>
         </div>
     );
 }
