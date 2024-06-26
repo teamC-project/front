@@ -13,7 +13,7 @@ import { Editor } from '@toast-ui/react-editor';
 //              component               //
 export default function CustomerWrite() {
 
-    //              state               //
+//              state               //
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
@@ -22,7 +22,7 @@ export default function CustomerWrite() {
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
-    //              function               //
+//              function               //
     const navigator = useNavigate();
 
     const postCustomerBoardResponse =(result: ResponseDto | null) => {
@@ -41,7 +41,7 @@ export default function CustomerWrite() {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //              event handler               //
+//              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -89,7 +89,7 @@ export default function CustomerWrite() {
             .then(postCustomerBoardResponse);
     };
 
-    //             effect               //
+//             effect               //
     useEffect(() => {
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_CUSTOMER') {
@@ -98,7 +98,7 @@ export default function CustomerWrite() {
         }
     }, [loginUserRole]);
 
-    //                    render                    //
+//                    render                    //
     return (
         <div id='customer-write-wrapper'>
 			<div className='customer-write-top'>
@@ -121,19 +121,10 @@ export default function CustomerWrite() {
 				imageList={urlList}
 				setImageList={onImageChangeHandler}
             />
-<<<<<<< HEAD
-			</div>
-			<div className='customer-write-button'>
-            <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
-                올리기
-            </button>
-			</div>
-=======
-          </div>
+            </div>
             <button className='primary-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
->>>>>>> aff6534144249353720ee354fca2b746b02530af
         </div>
     );
 }
