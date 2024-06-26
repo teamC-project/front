@@ -35,7 +35,6 @@ body{
   background-size: auto;
 }
 
-
 /* 회원가입 선택 공통 */
 #auth-wrapper {
   display: flex;
@@ -167,7 +166,6 @@ body{
   border-radius: 10px;
 }
 
-
 .auth-sign-up-kakao:hover {
   cursor: pointer;
   opacity: 0.9;
@@ -194,7 +192,6 @@ body{
   line-height: 50px;
   color: rgba(66, 66, 66, 1);
 }
-
 
 .auth-sign-up-box {
   display: flex;
@@ -262,8 +259,6 @@ body{
   line-height: 50px;
 }
 
-
-
 /* 이미지 */
 .login-image-box {
   background-image: url("../../assets/image/sign-in-page-image.png");
@@ -273,7 +268,6 @@ body{
 }
 
 /* 로그인 UI */
-
 .sign-in-main-box {
   display: flex;
 }
@@ -361,4 +355,3 @@ body{
 .login-under-right-bar {
   flex-grow: 1;
 }
-

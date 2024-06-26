@@ -129,7 +129,6 @@ export default function DesignerDetail() {
         .then(deleteDesignerBoardResponse);
     };
 
-
     //                   effect                        //
     useEffect(() => {
       if (!cookies.accessToken || !designerBoardNumber) return;
@@ -138,7 +137,6 @@ export default function DesignerDetail() {
       getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
         .then(getDesignerBoardResponse);
     }, [cookies.accessToken, designerBoardNumber]);
-
 
     //              render              //
     return (

@@ -22,12 +22,11 @@ export default function TrendBoardComment() {
     const [editingComment, setEditingComment] = useState<string>('');
     const [editingCommentNumber, setEditingCommentNumber] = useState<number | null>(null);
     const [cookies] = useCookies();
-    const { loginUserRole, loginUserId } = useUserStore();
+    const { loginUserId } = useUserStore();
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
 
     //                  function                    //
-    const navigator = useNavigate();
 
     const postTrendBoardCommentResponse = (result: ResponseDto | null) => {
         const message =
@@ -44,29 +43,6 @@ export default function TrendBoardComment() {
 
         if (!trendBoardNumber || !cookies.accessToken) return;
         setComment('');
-        getTrendBoardCommentByBoardNumberListRequest(trendBoardNumber, cookies.accessToken).then((result) => {
-            if (result && 'trendBoardCommentList' in result) {
-                setTrendBoardCommentList(result.trendBoardCommentList as TrendBoardCommentListItemWithOriginal[]);
-            }
-        });
-    };
-
-    const putTrendBoardCommentResponse = (result: ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '모든 값을 입력해 주세요.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            return;
-        }
-
-        if (!trendBoardNumber) return;
-        setEditingComment('');
-        setEditingCommentNumber(null);
         getTrendBoardCommentByBoardNumberListRequest(trendBoardNumber, cookies.accessToken).then((result) => {
             if (result && 'trendBoardCommentList' in result) {
                 setTrendBoardCommentList(result.trendBoardCommentList as TrendBoardCommentListItemWithOriginal[]);
