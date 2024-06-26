@@ -61,34 +61,13 @@ export default function DesignerWrite() {
         if (!cookies.accessToken) return;
     
         const requestBody: PostDesignerBoardRequestDto = { 
-<<<<<<< HEAD
-            designerBoardTitle: title.trim(),
-=======
             designerBoardTitle: title.trim(), 
->>>>>>> aff6534144249353720ee354fca2b746b02530af
             designerBoardContents: contents.trim(), 
             
         };
 
         const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
 
-<<<<<<< HEAD
-
-        if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
-			alert("제목과 내용을 모두 입력해주세요.");
-			return;
-        }
-
-		else if (!requestBody.designerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
-
-		else if (!requestBody.designerBoardContents || !isBlank) {
-			alert("내용을 입력해주세요.");
-			return;
-		}
-=======
         if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
             alert("제목과 내용을 모두 입력해주세요.");
             return;
@@ -103,7 +82,6 @@ export default function DesignerWrite() {
             alert("내용을 입력해주세요.");
             return;
         }
->>>>>>> aff6534144249353720ee354fca2b746b02530af
 
         postDesignerBoardRequest(requestBody, cookies.accessToken)
             .then(postDesignerBoardResponse);
@@ -121,28 +99,6 @@ export default function DesignerWrite() {
     //                    render                    //
     return (
         <div id='designer-write-wrapper'>
-<<<<<<< HEAD
-			<div className='designer-write-top'>
-            <div className='designer-write-title-box'>
-                <div className='designer-write-title'>제목</div>
-                <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
-            </div>
-			</div>
-			<div className='designer-write-contents-box'>
-            <ToastEditor
-				ref={editorRef}
-				body={contents}
-				setBody={onContentsChangeHandler}
-				imageList={urlList}
-				setImageList={onImageChangeHandler}
-            />
-			</div>
-			<div className='designer-write-button'>
-            <button className='designer-write-click-button' onClick={onPostButtonClickHandler}>
-                올리기
-            </button>
-			</div>
-=======
             <div className='designer-write-top'>
                 <div className='designer-write-title-box'>
                     <div className='designer-write-title'>제목</div>
@@ -159,7 +115,6 @@ export default function DesignerWrite() {
             />
             </div>
             <button className='primary-button' onClick={onPostButtonClickHandler}>올리기</button>
->>>>>>> aff6534144249353720ee354fca2b746b02530af
         </div>
     );
 }
