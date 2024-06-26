@@ -1,12 +1,17 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
+
+import { useUserStore } from 'src/stores';
+
 import ResponseDto from 'src/apis/response.dto';
 import {  QNA_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
 import { postQnaBoardRequest } from 'src/apis/QnaBoard';
 import { PostQnaBoardRequestDto } from 'src/apis/QnaBoard/dto/request';
+
+import './style.css';
+import '../../../../App.css'
 
 //              component               //
 export default function QnaBoardWrite() {
@@ -37,7 +42,6 @@ export default function QnaBoardWrite() {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const qnaBoardTitle = event.target.value;
@@ -54,18 +58,13 @@ export default function QnaBoardWrite() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-
-
-
     const onPostButtonClickHandler = () => {
         if (!qnaBoardTitle.trim() || !qnaBoardContents.trim()) {
 					alert("제목과 내용 모두 입력해주세요.");
 					return;
 				}
         if (!cookies.accessToken) return;
-
         const requestBody: PostQnaBoardRequestDto = { qnaBoardTitle ,qnaBoardContents };
-
         postQnaBoardRequest(requestBody, cookies.accessToken).then(postQnaBoardResponse);
     };
 

@@ -1,11 +1,14 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
+
+import { useUserStore } from 'src/stores';
+import { TrendBoardCommentListItem } from 'src/types';
+
 import { deleteTrendBoardCommentRequest, getTrendBoardCommentByBoardNumberListRequest, postTrendBoardCommentRequest, putTrendBoardCommentRequest } from 'src/apis/TrendBoard';
 import { PostTrendBoardCommentRequestDto ,PutTrendBoardCommentRequestDto } from 'src/apis/TrendBoard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { useUserStore } from 'src/stores';
-import { TrendBoardCommentListItem } from 'src/types';
+
 import './style.css';
 
 interface TrendBoardCommentListItemWithOriginal extends TrendBoardCommentListItem {

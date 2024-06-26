@@ -1,35 +1,43 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import "./style.css";
-import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import ResponseDto from 'src/apis/response.dto';
+
+import InputBox from 'src/components/Inputbox';
+import UserSelectBox from 'src/components/UserSelectBox';
+
 import { DesignerInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest, updateDesignerInfoRequest } from 'src/apis/user';
-import UserSelectBox from 'src/components/UserSelectBox';
+
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
+import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+
+import "./style.css";
 
 //              component               //
 export default function InfoDesigner() {
 
     //                state                 //
     const { loginUserRole, loginUserId } = useUserStore();
-    const [cookies] = useCookies();
-
+    
     const [age, setAge] = useState<string>('');
     const [gender, setGender] = useState<string>('');
+    
     const [image, setImage] = useState<File | null>(null);
-    const [companyName, setCompanyName] = useState<string>('');
-
+    
+    const [cookies] = useCookies();
+    
     const [ageMessage, setAgeMessage] = useState<string>('');
+    const [companyName, setCompanyName] = useState<string>('');
     const [genderMessage, setGenderMessage] = useState<string>('');
     const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
+    const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
+    const [imageMessage, setImageMessage] = useState<string>('');
 
     const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
     const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
-    const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
-    const [imageMessage, setImageMessage] = useState<string>('');
 
     //                    function                    //
     const navigator = useNavigate();
@@ -95,33 +103,31 @@ export default function InfoDesigner() {
 
         updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
         } catch (error) {
-        console.error('Error updating user info:', error);
         alert('개인정보 업데이트에 실패했습니다.');
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         }
     };
-    reader.readAsDataURL(image);
-
-    alert('개인정보가 업데이트되었습니다.');
-    navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+        reader.readAsDataURL(image);
+        alert('개인정보가 업데이트되었습니다.');
+        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
         setIsAgeCheck(false);
     const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
-    setAgeMessage(ageMessage);
+        setAgeMessage(ageMessage);
     };
 
     const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
+    const { value } = event.target;
         setGender(value);
         setIsGenderCheck(true);
         setGenderMessage(genderMessage);
     };
 
     const onCompanyNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
+    const { value } = event.target;
         setCompanyName(value);
         setIsCompanyNameCheck(false);
         setCompanyNameMessage('');
@@ -133,15 +139,15 @@ export default function InfoDesigner() {
         if (!files || !files.length) return;
 
     const file = files[0];
-    setImage(file);
+        setImage(file);
     };
 
     const formData = new FormData();
-    formData.append('companyName', companyName);
-    formData.append('gender', gender);
-    formData.append('age', age);
+        formData.append('companyName', companyName);
+        formData.append('gender', gender);
+        formData.append('age', age);
     if (image) {
-    formData.append('image', image);
+        formData.append('image', image);
     }
 
     //                    effect                    //

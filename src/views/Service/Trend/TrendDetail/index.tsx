@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import './style.css'
-import '../../../../App.css'
-import TrendBoardComment from '../TrendBoardComment'
-import { useUserStore } from 'src/stores'
 import { useNavigate, useParams } from 'react-router'
 import { useCookies } from 'react-cookie'
+
+
+import { useUserStore } from 'src/stores'
+
 import ResponseDto from 'src/apis/response.dto'
+
+import { requestErrorHandler } from 'src/apis'
 import { AUTH_ABSOLUTE_PATH, MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
 import { deleteTrendBoardLikeListRequest, deleteTrendBoardRequest, getTrendBoardLikeListRequest, getTrendBoardRequest, patchTrendBoardIncreaseViewCountRequest, putTrendBoardLikeRequest, } from 'src/apis/TrendBoard'
+
 import { GetTrendBoardLikeListResponseDto, GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
-import { requestErrorHandler } from 'src/apis'
+
+import TrendBoardComment from '../TrendBoardComment'
+import './style.css'
+import '../../../../App.css'
 
 //														component														//
 export default function TrendDetail() {
@@ -24,7 +30,6 @@ export default function TrendDetail() {
 	const [trendBoardViewCount, setTrendBoardViewCount] = useState<number>(0);
 	const [trendBoardContents, setContents] = useState<string>('');
 	const [isLike, setIsLike] = useState<boolean>(false);
-	const [likeList, setLikeList] = useState<string[]>([]);
 
 	// 										function												//
 	const navigator = useNavigate();
@@ -93,7 +98,6 @@ export default function TrendDetail() {
 		}
 
 		const { likeList } = result as GetTrendBoardLikeListResponseDto;
-		setLikeList(likeList);
 		const isLiked = likeList.includes(loginUserId);
 		setIsLike(isLiked);
 	};
