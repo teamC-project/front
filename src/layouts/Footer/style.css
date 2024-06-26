@@ -1,37 +1,31 @@
 .footer-size-check {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-  width: 100%;
-
-  /* position: fixed; 
-  bottom: 0; */
-
-  font-size: 16px;
-  font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .footer-top-bar {
-  display: flex;
-  gap: 20px;
-
-  padding: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
 }
 
 .footer-under-bar {
-  display: flex;
-  gap: 20px;
-
-  padding: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
 }
 
 .footer-total-user-box {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .footer-head-light {
-  font-weight: 700;
+    font-weight: 700;
 }

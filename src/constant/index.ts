@@ -73,6 +73,7 @@ export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
 export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_PASSOWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_RESET_PATH}`;
 
+
 // description : MYPAGE 절대 URL PATH
 export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
 export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
@@ -85,18 +86,18 @@ export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELE
 export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}`;
 export const ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${ANNOUNCEMENT_BOARD_WRITE_PATH}`;
 export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber : number | string) => 
-	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
+`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
-	`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
+`${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
 
 
 // description : 트렌드 절대 URL PATH
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
 export const TREND_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}/${TREND_BOARD_WRITE_PATH}`;
 export const TREND_BOARD_DETAIL_ABSOLUTE_PATH =(trendBoardNumber : number | string) => 
-	`${SERVICE_PATH}/${TREND_BOARD_PATH}/${trendBoardNumber}`;
+`${SERVICE_PATH}/${TREND_BOARD_PATH}/${trendBoardNumber}`;
 export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | string) =>
-	`${SERVICE_PATH}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`;
+`${SERVICE_PATH}/${TREND_BOARD_PATH}/update/${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
 
@@ -107,7 +108,7 @@ export const QNA_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}/
 export const QNA_BOARD_DETAIL_ABSOLUTE_PATH =(qnaBoardNumber : number | string) => 
 `${SERVICE_PATH}/${QNA_BOARD_PATH}/${qnaBoardNumber}`;
 export const QNA_BOARD_UPDATE_ABSOLUTE_PATH = (qnaBoardNumber : number | string) =>
-	`${SERVICE_PATH}/${QNA_BOARD_PATH}/update/${qnaBoardNumber}`;
+`${SERVICE_PATH}/${QNA_BOARD_PATH}/update/${qnaBoardNumber}`;
 export const QNA_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment${qnaBoardNumber}`;
 export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment/update${qnaBoardNumber}`;
 

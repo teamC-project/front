@@ -64,8 +64,9 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentWriterId : string;
 	designerBoardCommentContents : string;
 	designerBoardCommentWriteDatetime : string;
-  designerBoardParentCommentNumber?: number;
+    designerBoardParentCommentNumber?: number;
 };
+
 export interface AnnouncementBoardListItem {
 	announcementBoardNumber: number;
 	announcementBoardTitle: string;

@@ -1,79 +1,79 @@
-.designer-detail {
-  padding: 20px;
-}
+	.designer-detail {
+	padding: 20px;
+	}
 
-.designer-detail-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding-left: 20px;
-  background-color: #F5F5F5;
-}
+	.designer-detail-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding-left: 20px;
+	background-color: #F5F5F5;
+	}
 
-.designer-detail-container {
-  margin: 20px auto;
-  max-width: 100%;
-  padding: 0;
-}
+	.designer-detail-container {
+	margin: 20px auto;
+	max-width: 100%;
+	padding: 0;
+	}
 
-.designer-detail-information {
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-  background-color: #E0E0E0;
-}
+	.designer-detail-information {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	background-color: #E0E0E0;
+	}
 
-.designer-detail-information > div {
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+	.designer-detail-information > div {
+	padding: 10px;
+	border: 1px solid #ccc;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	}
 
-.designer-detail-information1 {
-  flex: 2; 
-}
+	.designer-detail-information1 {
+	flex: 2; 
+	}
 
-.designer-detail-information2 {
-  flex: 6; 
-}
+	.designer-detail-information2 {
+	flex: 6; 
+	}
 
-.designer-detail-information3 {
-  flex: 1; 
-}
+	.designer-detail-information3 {
+	flex: 1; 
+	}
 
-.designer-detail-information4 {
-  flex: 0.5; 
-  cursor: pointer;
-}
+	.designer-detail-information4 {
+	flex: 0.5; 
+	cursor: pointer;
+	}
 
-.designer-detail-information5 {
-  flex: 0.5; 
-  cursor: pointer;
-}
+	.designer-detail-information5 {
+	flex: 0.5; 
+	cursor: pointer;
+	}
 
-.designer-detail-view {
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  min-height: 300px;
-  background-color: #F5F5F5;
-  overflow: auto;
-}
+	.designer-detail-view {
+	padding: 20px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	min-height: 300px;
+	background-color: #F5F5F5;
+	overflow: auto;
+	}
 
-.designer-detail-view img { 
-  max-width: 100%;
-  height: auto;
-}
+	.designer-detail-view img { 
+	max-width: 100%;
+	height: auto;
+	}
 
-.designer-detail-go-to-designerList {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #E0E0E0;
-  border: 1px solid #ccc;
-  text-align: center;
-  cursor: pointer;
-}
+	.designer-detail-go-to-designerList {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #E0E0E0;
+	border: 1px solid #ccc;
+	text-align: center;
+	cursor: pointer;
+	}

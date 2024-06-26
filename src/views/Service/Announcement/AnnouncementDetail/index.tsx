@@ -12,7 +12,7 @@ import { useUserStore } from 'src/stores';
 export default function AnnouncementBoardDetail() {
 
     //              state               //
-    const { loginUserId, loginUserRole } = useUserStore();
+    const { loginUserId } = useUserStore();
     const { announcementBoardNumber } = useParams();
     const [cookies] = useCookies();
 
@@ -48,7 +48,7 @@ export default function AnnouncementBoardDetail() {
         getAnnouncementBoardRequest(announcementBoardNumber, cookies.accessToken)
             .then(getAnnouncementBoardResponse);
     };
-  
+
     const getAnnouncementBoardResponse = (result: GetAnnouncementBoardResponseDto | ResponseDto | null) => {
         const message = 
         !result ? '서버에 문제가 있습니다.' :

@@ -14,9 +14,7 @@ export default function QnaBoardUpdate() {
 
     //              state               //
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [selection, setSelection] = useState<Range | null>(null);
-    const { loginUserId, loginUserRole } = useUserStore();
+    const { loginUserRole } = useUserStore();
     const { qnaBoardNumber } = useParams<{ qnaBoardNumber: string }>();
     const [cookies] = useCookies();
     const [writerId, setWriterId] = useState<string>('');
