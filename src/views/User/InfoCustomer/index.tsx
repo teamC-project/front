@@ -1,14 +1,20 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import "./style.css";
-import InputBox from 'src/components/Inputbox';
 import { useNavigate } from 'react-router';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import ResponseDto from 'src/apis/response.dto';
+
+
+import UserSelectBox from 'src/components/UserSelectBox';   
+import InputBox from 'src/components/Inputbox';
+
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
+import { useUserStore } from 'src/stores';
+
 import { CustomerInfoResponseDto, GetSignInUserResponseDto } from 'src/apis/user/dto/response';
 import { getSignInUserRequest, updateCustomerInfoRequest } from 'src/apis/user';
-import UserSelectBox from 'src/components/UserSelectBox';
+import ResponseDto from 'src/apis/response.dto';
+
+import "./style.css";
 
 //                     component                       //
 export default function InfoCustomer() {
@@ -18,23 +24,25 @@ export default function InfoCustomer() {
 
     const [age, setAge] = useState<string>('');
     const [gender, setGender] = useState<string>('');
-    const [genderMessage, setGenderMessage] = useState<string>('');
-    const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
     const [ageMessage, setAgeMessage] = useState<string>('');
+    const [genderMessage, setGenderMessage] = useState<string>('');
+
+    const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
+    const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
 
     const [cookies] = useCookies();
-    const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
 
     //                     function                       //
     const navigator = useNavigate();
 
     const getInfoUpdate = (result: GetSignInUserResponseDto | ResponseDto | null) => {
+
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
         alert(message);
@@ -43,9 +51,9 @@ export default function InfoCustomer() {
     }
 
     const { userId, userGender, userAge } = result as CustomerInfoResponseDto;
-    if (userId !== loginUserId) {
-        alert('권한이 없습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+        if (userId !== loginUserId) {
+            alert('권한이 없습니다.');
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
     setGender(userGender);
@@ -55,9 +63,9 @@ export default function InfoCustomer() {
     //                     event handler                     //
     const onInfoCustomerUpdateClickHandler = async () => {
         try {
-        const customerInfoUpdate = {
-        userGender: gender,
-        userAge: age,
+            const customerInfoUpdate = {
+            userGender: gender,
+            userAge: age,
         };
 
         updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate).then();
@@ -65,25 +73,26 @@ export default function InfoCustomer() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
 
     } catch (error) {
-        console.error('Error updating user info:', error);
         alert('개인정보 업데이트에 실패했습니다.');
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     }
+
     };
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
         setIsAgeCheck(false);
+    
     const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
         setAgeMessage(ageMessage);
     };
 
     const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-        setGender(value);
-        setIsGenderCheck(true);
-        setGenderMessage(genderMessage);
-    };
+            setGender(value);
+            setIsGenderCheck(true);
+            setGenderMessage(genderMessage);
+        };
 
     //                     effect                     //
     useEffect(() => {
