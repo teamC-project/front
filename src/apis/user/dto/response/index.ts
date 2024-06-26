@@ -18,7 +18,6 @@ export interface GetUserInfoResponseDto extends ResponseDto {
     userRole: string;
 }
 
-
 export interface CustomerInfoResponseDto extends ResponseDto {
     userId: string;
     userGender: string;
