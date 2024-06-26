@@ -100,6 +100,7 @@ export default function CustomerWrite() {
 
     //                    render                    //
     return (
+		<div>
         <div id='customer-write-wrapper'>
         <div className='customer-write-top'>
             <div className='customer-write-title-box'>
@@ -121,21 +122,18 @@ export default function CustomerWrite() {
             imageList={urlList}
             setImageList={onImageChangeHandler}
             />
-<<<<<<< HEAD
 			</div>
 			<div className='customer-write-button'>
             <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
 			</div>
-=======
         </div>
         <div className='customer-write-button'>
             <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
         </div>
->>>>>>> b47faff2b8da2ae31b9ddd52c38843039dd19d03
         </div>
     );
 }

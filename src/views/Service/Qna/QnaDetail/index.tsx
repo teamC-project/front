@@ -1,13 +1,17 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest } from 'src/apis/QnaBoard';
+
 import { useUserStore } from 'src/stores';
+import ResponseDto from 'src/apis/response.dto';
 import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
+import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest } from 'src/apis/QnaBoard';
+
+import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
+import { QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+
+import './style.css';
+import'../../../../App.css'
 
 //                    component                    //
 export default function QnaBoardDetail() {
@@ -23,7 +27,6 @@ export default function QnaBoardDetail() {
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
     const [qnaBoardComment, setComment] = useState<string | null>(null);
-    const [commentRows, setCommentRows] = useState<number>(1);
 
     //                  function                    //
     const navigator = useNavigate();
@@ -128,8 +131,6 @@ export default function QnaBoardDetail() {
 			const qnaBoardComment = event.target.value;
 			setComment(qnaBoardComment);
 	
-			const commentRows = qnaBoardComment.split("\n").length;
-			setCommentRows(commentRows);
 		};
     const handleGoToList = () => {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);

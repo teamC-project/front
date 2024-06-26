@@ -45,7 +45,7 @@ import PersonalInfoProcessingPolicy from "./views/FooterContents/PersonalInfoPro
 import SiteDescription from "./views/FooterContents/SiteDescription";
 import TermsAndConditions from "./views/FooterContents/TermsAndConditions";
 import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy";
-import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementUpdate";
+import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";

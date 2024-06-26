@@ -87,8 +87,6 @@ const onUpdateButtonClickHandler = () => {
 			alert("제목과 내용 모두 입력해주세요.")
 			return;
 		}
-	console.log(trendBoardTitle);
-	console.log(trendBoardContents);
 	if (!cookies.accessToken || !trendBoardNumber) return;
 
 	const requestBody: PutTrendBoardRequestDto = {
