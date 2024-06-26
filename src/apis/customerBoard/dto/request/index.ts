@@ -1,21 +1,21 @@
 export interface PostCustomerBoardRequestDto {
-  customerBoardTitle: string;
-  customerBoardContents: string;
-  secret: boolean;
+    customerBoardTitle: string;
+    customerBoardContents: string;
+    secret: boolean;
 }
 
 export interface PostCustomerBoardCommentRequestDto {
 	customerBoardCommentContents : string;
-  customerBoardParentCommentNumber?: number;
+    customerBoardParentCommentNumber?: number;
 }
 
 export interface PutCustomerBoardRequestDto {
 	customerBoardTitle: string;
 	customerBoardContents: string;
-  secret: boolean;
+    secret: boolean;
 }
 
 export interface PutCustomerBoardCommentRequestDto {
-  customerBoardCommentContents : string;
-  customerBoardCommentNumber: number;
+    customerBoardCommentContents : string;
+    customerBoardCommentNumber: number;
 }
