@@ -13,15 +13,15 @@ import useUserStore from "src/stores/use.store";
 import ChatroomDetail from 'src/views/Service/Chat';
 import "./style.css";
 
-    //              component                   //
+//              component                   //
     function VisitorCount() {
-      //                   state                 //
+//                   state                 //
         const [totalVisitors, setTotalVisitors] = useState<number>(0);
         const [visitorsToday, setVisitorsToday] = useState<number>(0);
 
         const [cookie] = useCookies();
 
-  //                   function                  //
+//                   function                  //
     const navigator = useNavigate();
 
     const getTotalVisitorsResponse = (result: getTotalVisitorsResponseDto | ResponseDto | null) => {
@@ -57,14 +57,14 @@ import "./style.css";
     const { visitorsToday } = result as getVisitorsTodayResponseDto;
     setVisitorsToday(visitorsToday);
     }
-  //                   effect                     //
+//                   effect                     //
     useEffect(() => {
         const accessToken = cookie.accessToken;
         if (!accessToken) return;
         getTotalVisitorsRequest(accessToken).then(getTotalVisitorsResponse);
         getVisitorsTodayRequest(accessToken).then(getVisitorsTodayResponse);
     }, []);
-  //                    render                    //
+//                    render                    //
     return (
         <>
         <div className='count-font'>총 방문자 수: {totalVisitors}</div>
@@ -83,15 +83,15 @@ interface Props {
 //                    component                    //
 function Top({ path }: Props) {
 
-    //                    state                    //
-    const { loginUserRole, loginUserId } = useUserStore();
+//                    state                    //
+    const {  loginUserId } = useUserStore();
     const [cookies, setCookie, removeCookie] = useCookies();
-    const { roomId, resetRoomId } = useChatStore();
+    const { resetRoomId } = useChatStore();
 
-    //                    function                    //
+//                    function                    //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+//                    event handler                    //
     const onMyPageClickHandler = () => {
         navigator(MY_PAGE_ABSOLUTE_PATH);
     };
@@ -106,7 +106,7 @@ function Top({ path }: Props) {
         navigator(MAIN_PATH);
     };
 
-  //                    render                       //
+//                    render                       //
     return (
         <div className='top-group'>
             <div className='top-logo' onClick={onMainPageClickHandler}></div>
@@ -130,13 +130,13 @@ function LeftBar({ path }: Props) {
     const qnaClass =  `left-bar-title${path === 'Q&A 게시판' ? ' active' : ''}`;
 
 
-    //                    state                    //
+//                    state                    //
     const { pathname } = useLocation();
 
-    //                    function                    //
+//                    function                    //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+//                    event handler                    //
     const onAnnouncementClickHandler = () => navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     const onTrendClickHandler = () => navigator(TREND_BOARD_LIST_ABSOLUTE_PATH);
     const onCustomerClickHandler = () => {
@@ -152,7 +152,7 @@ function LeftBar({ path }: Props) {
         else navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                    render                    //
+//                    render                    //
     return (
         <div className='left-bar-container'>
             <button className={announcementClass} onClick={onAnnouncementClickHandler} >
@@ -177,35 +177,18 @@ function LeftBar({ path }: Props) {
 //                    component                    //
 export default function ServiceContainer() {
 
-    //                    state                    //
+//                    state                    //
     const { pathname } = useLocation();
     const { setLoginUserId, setLoginUserRole } = useUserStore();
-    const { roomId, resetRoomId } = useChatStore();
+    const { roomId } = useChatStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
     const [selectedDesignerId, setSelectedDesignerId] = useState<string>('');
-  
-    //                    function                    //
+
+//                    function                    //
     const navigator = useNavigate();
 
-    const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
-        const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            navigator(AUTH_ABSOLUTE_PATH);
-            return;
-        }
-        const { userId, userRole } = result as GetSignInUserResponseDto;
-        setLoginUserId(userId);
-        setLoginUserRole(userRole);
-    };
-
-    //                    effect                    //
+//                    effect                    //
     useEffect(() => {
         const path = 
             pathname === ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH ? '공지사항' :
@@ -229,8 +212,8 @@ export default function ServiceContainer() {
             }
 
             const { userId, userRole } = result as GetSignInUserResponseDto;
-              setLoginUserId(userId);
-              setLoginUserRole(userRole);
+                setLoginUserId(userId);
+                setLoginUserRole(userRole);
             });
 
         const designerIdSelectedHandler = (event: Event) => {
@@ -249,7 +232,7 @@ export default function ServiceContainer() {
     useEffect(() => {
     }, [pathname]);
 
-  //                    render                       //
+//                    render                       //
     return (
         <div id='full'>
             <Top path={path} />
