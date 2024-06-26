@@ -1,9 +1,15 @@
 import axios from "axios";
 import { PostChatroomRequestDto } from "./dto/request";
-import { CHAT_ROOM_MESSAGES_ABSOLUTE_PATH, DELETE_CHATROOM_URL,  GET_CHATROOM_DETAIL_URL, GET_CHATROOM_LIST_URL, GET_CHAT_MESSAGE_LIST_URL, POST_CHATROOM_URL} from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetChatroomListResponseDto, GetChatroomResponseDto, GetChatMessageListResponseDto } from "./dto/response";
+import {  
+    DELETE_CHATROOM_URL,  
+    GET_CHATROOM_DETAIL_URL, 
+    GET_CHATROOM_LIST_URL, 
+    GET_CHAT_MESSAGE_LIST_URL, 
+    POST_CHATROOM_URL
+    } from "src/constant";
 
 // function: 채팅방 생성 API 함수
 export const postChatRoomRequest = async (requestBody: PostChatroomRequestDto, accessToken: string) => {

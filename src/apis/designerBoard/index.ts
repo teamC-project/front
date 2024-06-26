@@ -1,9 +1,21 @@
-import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, DELETE_DESIGNER_BOARD_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_COMMENT_PUT_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
-import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import axios from "axios";
+import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetDesignerBoardCommentListResponseDto, GetDesignerBoardListResponseDto, GetDesignerBoardResponseDto, GetSearchDesignerBoardListResponseDto } from "./dto/response";
+import { 
+    DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, 
+    DELETE_DESIGNER_BOARD_DELETE_URL, 
+    GET_DESIGNER_BOARD_COMMENT_LIST_URL, 
+    GET_DESIGNER_BOARD_DETAIL_URL, 
+    GET_DESIGNER_BOARD_LIST_URL, 
+    GET_SEARCH_DESIGNER_BOARD_LIST_URL, 
+    PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL, 
+    POST_DESIGNER_BOARD_COMMENT_WRITE_URL, 
+    POST_DESIGNER_BOARD_WRITE_URL, 
+    PUT_DESIGNER_BOARD_COMMENT_PUT_URL, 
+    PUT_DESIGNER_BOARD_PUT_URL 
+} from "src/constant";
 
 // function: DesignerBoard 작성 API 함수 
 export const postDesignerBoardRequest = async (requestBody: PostDesignerBoardRequestDto, accessToken: string) => {
@@ -40,10 +52,10 @@ export const getSearchDesignerBoardListRequest = async (word: string, accessToke
 
 // function: DesignerBoard 게시물의 Comment 전체 리스트 불러오기 API 함수 
 export const getDesignerBoardCommentsByBoardNumberRequest = async (designerBoardNumber: number | string, accessToken: string) => {
-  const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
-      .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
-      .catch(requestErrorHandler);
-  return result;
+    const result = await axios.get(GET_DESIGNER_BOARD_COMMENT_LIST_URL(designerBoardNumber), bearerAuthorization(accessToken))
+        .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
 }  
 
 // function: DesignerBoard 게시물 불러오기 API 함수 
@@ -73,8 +85,7 @@ export const putDesignerBoardCommentRequest = async (designerBoardCommentNumber:
 // function: DesignerBoard 게시물 삭제 API 함수 
 export const deleteDesignerBoardRequest = async (designerBoardNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_DESIGNER_BOARD_DELETE_URL(designerBoardNumber), {
-        ...bearerAuthorization(accessToken),
-      data: { userRole: 'ROLE_ADMIN' } // 추가: 사용자 역할 정보 전달
+        ...bearerAuthorization(accessToken), data: { userRole: 'ROLE_ADMIN' } 
     })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
