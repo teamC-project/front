@@ -19,20 +19,10 @@ export default function CustomerBoardComment() {
     const [comment, setComment] = useState<string>('');
     const [cookies] = useCookies();
     const { loginUserRole, loginUserId } = useUserStore();
-    const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
-    const [replyCommentParentNumber, setReplyCommentParentNumber] = useState<number | null>(null);
-    const [showReplyInput, setShowReplyInput] = useState<boolean>(false);
-    const [replyInputParentNumber, setReplyInputParentNumber] = useState<number | null>(null);
-    const { designerIdClickHandler } = useCreateChatRoom();
-
-    const [rooms, setRooms] = useState<ChatroomList[]>([]);
-    const { roomId } = useParams<string>();
-
-
+    const [replyCommentParentNumber] = useState<number | null>(null);
+    
 //          function          //
-    const navigator = useNavigate();
-
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
         const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -70,8 +60,6 @@ export default function CustomerBoardComment() {
 
         const { customerBoardCommentList } = result as GetCustomerBoardCommentListResponseDto;
         setCustomerBoardCommentList(customerBoardCommentList);
-
-
     }
 
 //           event handler          //
