@@ -13,7 +13,7 @@ import { Editor } from '@toast-ui/react-editor';
 //              component               //
 export default function CustomerWrite() {
 
-//              state               //
+    //              state               //
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
@@ -22,7 +22,7 @@ export default function CustomerWrite() {
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
-//              function               //
+    //              function               //
     const navigator = useNavigate();
 
     const postCustomerBoardResponse =(result: ResponseDto | null) => {
@@ -41,23 +41,23 @@ export default function CustomerWrite() {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-//              event handler               //
+    //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
     };
 
     const onContentsChangeHandler = (contents: string ) => {
-			setContents(contents);
-		}
+        setContents(contents);
+      }
 
     const onSecretChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSecret(event.target.checked);
     };
     
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
-			setUrlList(imageList);
-		}
+        setUrlList(imageList);
+    }
 
     const onPostButtonClickHandler = () => {
         if (!cookies.accessToken) return;
@@ -71,25 +71,25 @@ export default function CustomerWrite() {
         const isBlank = requestBody.customerBoardContents.replaceAll('<p><br></p>', '');
 
         if (!requestBody.customerBoardTitle && !requestBody.customerBoardContents && !isBlank) {
-			alert("제목과 내용을 모두 입력해주세요.");
-			return;
-			}
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+        }
 
-		else if (!requestBody.customerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardTitle) {
+        alert("제목을 입력해주세요.");
+        return;
+        }
 
-		else if (!requestBody.customerBoardContents || !isBlank) {
-			alert("내용을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardContents || !isBlank) {
+        alert("내용을 입력해주세요.");
+        return;
+        }
 
         postCustomerBoardRequest(requestBody, cookies.accessToken)
             .then(postCustomerBoardResponse);
     };
 
-//             effect               //
+    //             effect               //
     useEffect(() => {
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_CUSTOMER') {
@@ -98,10 +98,10 @@ export default function CustomerWrite() {
         }
     }, [loginUserRole]);
 
-//                    render                    //
+    //                    render                    //
     return (
         <div id='customer-write-wrapper'>
-			<div className='customer-write-top'>
+        <div className='customer-write-top'>
             <div className='customer-write-title-box'>
                 <div className='customer-write-title'>제목</div>
                 <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
@@ -112,19 +112,21 @@ export default function CustomerWrite() {
                     비밀글
                 </label>
             </div>
-			</div>
-			<div className='customer-write-contents-box'>
+        </div>
+        <div className='customer-write-contents-box'>
             <ToastEditor
-				ref={editorRef}
-				body={contents}
-				setBody={onContentsChangeHandler}
-				imageList={urlList}
-				setImageList={onImageChangeHandler}
+            ref={editorRef}
+            body={contents}
+            setBody={onContentsChangeHandler}
+            imageList={urlList}
+            setImageList={onImageChangeHandler}
             />
-            </div>
-            <button className='primary-button' onClick={onPostButtonClickHandler}>
+        </div>
+        <div className='customer-write-button'>
+            <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
+        </div>
         </div>
     );
 }
