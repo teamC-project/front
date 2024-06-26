@@ -1,15 +1,8 @@
 import ResponseDto from 'src/apis/response.dto';
-<<<<<<< HEAD
 import { TrendBoardCommentListItem, TrendBoardListItem } from 'src/types';
 	export interface GetTrendBoardListResponseDto extends ResponseDto {
 		trendBoardList : TrendBoardListItem[];
 	}
-=======
-import { TrendBoardCommentListItem, TrendBoardLikeListItem, TrendBoardListItem } from 'src/types';
-export interface GetTrendBoardListResponseDto extends ResponseDto {
-	trendBoardList : TrendBoardListItem[];
-}
->>>>>>> caa6f4de0237e06e237d74566d08f45eb7ed1bc7
 
 export interface GetSearchTrendBoardListResponseDto extends ResponseDto {
 	trendBoardList : TrendBoardListItem[];

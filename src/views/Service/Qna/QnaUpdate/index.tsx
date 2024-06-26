@@ -1,14 +1,20 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { useNavigate, useParams } from 'react-router';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
+import { useNavigate, useParams } from 'react-router';
+
+
+
+import { useUserStore } from 'src/stores';
+
 import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
+
 import { QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { PutQnaBoardRequestDto } from 'src/apis/QnaBoard/dto/request';
 import { getQnaBoardRequest, putQnaBoardRequest } from 'src/apis/QnaBoard';
 
+import './style.css';
+import'../../../../App.css';
 //                  component                   //
 export default function QnaBoardUpdate() {
 
@@ -17,7 +23,6 @@ export default function QnaBoardUpdate() {
     const { loginUserRole } = useUserStore();
     const { qnaBoardNumber } = useParams<{ qnaBoardNumber: string }>();
     const [cookies] = useCookies();
-    const [writerId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
 
@@ -38,10 +43,9 @@ export default function QnaBoardUpdate() {
             return;
         }
     
-        const { qnaBoardWriterId, qnaBoardTitle, qnaBoardContents } = result as GetQnaBoardResponseDto;
+        const { qnaBoardTitle, qnaBoardContents } = result as GetQnaBoardResponseDto;
         setTitle(qnaBoardTitle);
         setContents(qnaBoardContents);
-        setWriterId(qnaBoardWriterId);
     };
 
     const putQnaBoardResponse = (result: ResponseDto | null) => {
@@ -97,8 +101,7 @@ export default function QnaBoardUpdate() {
     //             effect               //
     let effectFlag = false;
     useEffect(() => {
-        if (!qnaBoardNumber || !cookies.accessToken || !loginUserRole) return;
-        if (effectFlag) return;
+        if (!qnaBoardNumber || !cookies.accessToken || !loginUserRole || effectFlag) return;
         effectFlag = true;
         getQnaBoardRequest(parseInt(qnaBoardNumber), cookies.accessToken).then(result => {
             if (loginUserRole === 'ROLE_ADMIN') {

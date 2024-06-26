@@ -1,5 +1,5 @@
 import ResponseDto from "src/apis/response.dto";
-import { QnaBoardCommentListItem, QnaBoardListItem } from "src/types";
+import { QnaBoardListItem } from "src/types";
 
 export interface GetSearchQnaBoardListResponseDto extends ResponseDto {
 	qnaBoardList : QnaBoardListItem[];

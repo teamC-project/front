@@ -195,6 +195,7 @@ export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| 
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =   (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_view_count`;
 
+
 // description : TREND API URL PATH 
 export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/trend_board/`;
 export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}write`;
@@ -212,6 +213,7 @@ export const PUT_TREND_BOARD_LIKE_URL = (trendBoardNumber : number | string) => 
 export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/increase_view_count`
 export const GET_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
 export const DELETE_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
+export const POST_TREND_BOARD_IMAGE_UPLOAD_URL = 'http://localhost:4200/upload'
 
 
 // description : Q&A API URL PATH
