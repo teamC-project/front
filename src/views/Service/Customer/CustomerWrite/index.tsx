@@ -14,9 +14,6 @@ import { Editor } from '@toast-ui/react-editor';
 export default function CustomerWrite() {
 
     //              state               //
-    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [selection, setSelection] = useState<Range | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
@@ -44,21 +41,6 @@ export default function CustomerWrite() {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    const restoreSelection = () => {
-        const sel = window.getSelection();
-        sel?.removeAllRanges();
-        if (selection) {
-            sel?.addRange(selection);
-        }
-    };
-
-    const saveSelection = () => {
-        const sel = window.getSelection();
-        if (sel && sel.rangeCount > 0) {
-            setSelection(sel.getRangeAt(0));
-        }
-    };
-
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
@@ -68,31 +50,6 @@ export default function CustomerWrite() {
     const onContentsChangeHandler = (contents: string ) => {
 			setContents(contents);
 		}
-
-	const handleImageUpload = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-            const img = document.createElement('img');
-            img.src = event.target?.result as string;
-            
-            restoreSelection();
-            if (selection) {
-                selection.deleteContents();
-                selection.insertNode(img);
-            }
-            saveSelection();
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     const onSecretChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSecret(event.target.checked);
@@ -106,28 +63,27 @@ export default function CustomerWrite() {
         if (!cookies.accessToken) return;
     
         const requestBody: PostCustomerBoardRequestDto = { 
-            customerBoardTitle: title.trim(), // 제목에서 공백 제거
-            customerBoardContents: contents.trim(), // 내용에서 공백 제거
+            customerBoardTitle: title.trim(), 
+            customerBoardContents: contents.trim(), 
             secret: isSecret
         };
 
         const isBlank = requestBody.customerBoardContents.replaceAll('<p><br></p>', '');
 
-        // 제목과 내용이 모두 비어있는 경우 처리
         if (!requestBody.customerBoardTitle && !requestBody.customerBoardContents && !isBlank) {
-          alert("제목과 내용을 모두 입력해주세요.");
-          return;
-        }
-      // 제목만 비어있는 경우 처리
-      else if (!requestBody.customerBoardTitle) {
-          alert("제목을 입력해주세요.");
-          return;
-      }
-      // 내용만 비어있는 경우 처리
-      else if (!requestBody.customerBoardContents || !isBlank) {
-          alert("내용을 입력해주세요.");
-          return;
-      }
+			alert("제목과 내용을 모두 입력해주세요.");
+			return;
+			}
+
+		else if (!requestBody.customerBoardTitle) {
+			alert("제목을 입력해주세요.");
+			return;
+		}
+
+		else if (!requestBody.customerBoardContents || !isBlank) {
+			alert("내용을 입력해주세요.");
+			return;
+		}
 
         postCustomerBoardRequest(requestBody, cookies.accessToken)
             .then(postCustomerBoardResponse);
@@ -145,7 +101,7 @@ export default function CustomerWrite() {
     //                    render                    //
     return (
         <div id='customer-write-wrapper'>
-          <div className='customer-write-top'>
+			<div className='customer-write-top'>
             <div className='customer-write-title-box'>
                 <div className='customer-write-title'>제목</div>
                 <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
@@ -156,21 +112,21 @@ export default function CustomerWrite() {
                     비밀글
                 </label>
             </div>
-          </div>
-          <div className='customer-write-contents-box'>
+			</div>
+			<div className='customer-write-contents-box'>
             <ToastEditor
-              ref={editorRef}
-              body={contents}
-              setBody={onContentsChangeHandler}
-              imageList={urlList}
-              setImageList={onImageChangeHandler}
+				ref={editorRef}
+				body={contents}
+				setBody={onContentsChangeHandler}
+				imageList={urlList}
+				setImageList={onImageChangeHandler}
             />
-          </div>
-          <div className='customer-write-button'>
+			</div>
+			<div className='customer-write-button'>
             <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
-          </div>
+			</div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import ResponseDto from 'src/apis/response.dto';
-import { TrendBoardCommentListItem, TrendBoardLikeListItem, TrendBoardListItem } from 'src/types';
+import { TrendBoardCommentListItem, TrendBoardListItem } from 'src/types';
 	export interface GetTrendBoardListResponseDto extends ResponseDto {
 		trendBoardList : TrendBoardListItem[];
 	}

@@ -14,7 +14,6 @@ import { Editor } from '@toast-ui/react-editor';
 export default function DesignerWrite() {
 
     //              state               //
-    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [selection, setSelection] = useState<Range | null>(null);
     const { loginUserRole } = useUserStore();
@@ -23,7 +22,6 @@ export default function DesignerWrite() {
     const [contents, setContents] = useState<string>('');
     const editorRef = useRef<Editor|null>(null);
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
-    
 
     //              function               //
     const navigator = useNavigate();
@@ -44,21 +42,6 @@ export default function DesignerWrite() {
         navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    const restoreSelection = () => {
-        const sel = window.getSelection();
-        sel?.removeAllRanges();
-        if (selection) {
-            sel?.addRange(selection);
-        }
-    };
-
-    const saveSelection = () => {
-        const sel = window.getSelection();
-        if (sel && sel.rangeCount > 0) {
-            setSelection(sel.getRangeAt(0));
-        }
-    };
-
     //              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
@@ -69,30 +52,6 @@ export default function DesignerWrite() {
 			setContents(contents);
 		}
 
-	const handleImageUpload = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
-    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-            const img = document.createElement('img');
-            img.src = event.target?.result as string;
-            
-            restoreSelection();
-            if (selection) {
-                selection.deleteContents();
-                selection.insertNode(img);
-            }
-            saveSelection();
-            };
-            reader.readAsDataURL(file);
-        }
-    };
     
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
 			setUrlList(imageList);
@@ -102,28 +61,28 @@ export default function DesignerWrite() {
         if (!cookies.accessToken) return;
     
         const requestBody: PostDesignerBoardRequestDto = { 
-            designerBoardTitle: title.trim(), // 제목에서 공백 제거
-            designerBoardContents: contents.trim(), // 내용에서 공백 제거
+            designerBoardTitle: title.trim(),
+            designerBoardContents: contents.trim(), 
             
         };
 
         const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
 
-        // 제목과 내용이 모두 비어있는 경우 처리
+
         if (!requestBody.designerBoardTitle && !requestBody.designerBoardContents && !isBlank) {
-          alert("제목과 내용을 모두 입력해주세요.");
-          return;
+			alert("제목과 내용을 모두 입력해주세요.");
+			return;
         }
-      // 제목만 비어있는 경우 처리
-      else if (!requestBody.designerBoardTitle) {
-          alert("제목을 입력해주세요.");
-          return;
-      }
-      // 내용만 비어있는 경우 처리
-      else if (!requestBody.designerBoardContents || !isBlank) {
-          alert("내용을 입력해주세요.");
-          return;
-      }
+
+		else if (!requestBody.designerBoardTitle) {
+			alert("제목을 입력해주세요.");
+			return;
+		}
+
+		else if (!requestBody.designerBoardContents || !isBlank) {
+			alert("내용을 입력해주세요.");
+			return;
+		}
 
         postDesignerBoardRequest(requestBody, cookies.accessToken)
             .then(postDesignerBoardResponse);
@@ -141,26 +100,26 @@ export default function DesignerWrite() {
     //                    render                    //
     return (
         <div id='designer-write-wrapper'>
-          <div className='designer-write-top'>
+			<div className='designer-write-top'>
             <div className='designer-write-title-box'>
                 <div className='designer-write-title'>제목</div>
                 <input className='designer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
             </div>
-          </div>
-          <div className='designer-write-contents-box'>
+			</div>
+			<div className='designer-write-contents-box'>
             <ToastEditor
-              ref={editorRef}
-              body={contents}
-              setBody={onContentsChangeHandler}
-              imageList={urlList}
-              setImageList={onImageChangeHandler}
+				ref={editorRef}
+				body={contents}
+				setBody={onContentsChangeHandler}
+				imageList={urlList}
+				setImageList={onImageChangeHandler}
             />
-          </div>
-          <div className='designer-write-button'>
+			</div>
+			<div className='designer-write-button'>
             <button className='designer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
-          </div>
+			</div>
         </div>
     );
 }
