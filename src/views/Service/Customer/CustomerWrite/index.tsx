@@ -48,16 +48,16 @@ export default function CustomerWrite() {
     };
 
     const onContentsChangeHandler = (contents: string ) => {
-			setContents(contents);
-		}
+        setContents(contents);
+      }
 
     const onSecretChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSecret(event.target.checked);
     };
     
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
-			setUrlList(imageList);
-		}
+        setUrlList(imageList);
+    }
 
     const onPostButtonClickHandler = () => {
         if (!cookies.accessToken) return;
@@ -71,19 +71,19 @@ export default function CustomerWrite() {
         const isBlank = requestBody.customerBoardContents.replaceAll('<p><br></p>', '');
 
         if (!requestBody.customerBoardTitle && !requestBody.customerBoardContents && !isBlank) {
-			alert("제목과 내용을 모두 입력해주세요.");
-			return;
-			}
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+        }
 
-		else if (!requestBody.customerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardTitle) {
+        alert("제목을 입력해주세요.");
+        return;
+        }
 
-		else if (!requestBody.customerBoardContents || !isBlank) {
-			alert("내용을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardContents || !isBlank) {
+        alert("내용을 입력해주세요.");
+        return;
+        }
 
         postCustomerBoardRequest(requestBody, cookies.accessToken)
             .then(postCustomerBoardResponse);
@@ -101,7 +101,7 @@ export default function CustomerWrite() {
     //                    render                    //
     return (
         <div id='customer-write-wrapper'>
-			<div className='customer-write-top'>
+        <div className='customer-write-top'>
             <div className='customer-write-title-box'>
                 <div className='customer-write-title'>제목</div>
                 <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
@@ -112,21 +112,30 @@ export default function CustomerWrite() {
                     비밀글
                 </label>
             </div>
-			</div>
-			<div className='customer-write-contents-box'>
+        </div>
+        <div className='customer-write-contents-box'>
             <ToastEditor
-				ref={editorRef}
-				body={contents}
-				setBody={onContentsChangeHandler}
-				imageList={urlList}
-				setImageList={onImageChangeHandler}
+            ref={editorRef}
+            body={contents}
+            setBody={onContentsChangeHandler}
+            imageList={urlList}
+            setImageList={onImageChangeHandler}
             />
+<<<<<<< HEAD
 			</div>
 			<div className='customer-write-button'>
             <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
 			</div>
+=======
+        </div>
+        <div className='customer-write-button'>
+            <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
+                올리기
+            </button>
+        </div>
+>>>>>>> b47faff2b8da2ae31b9ddd52c38843039dd19d03
         </div>
     );
 }

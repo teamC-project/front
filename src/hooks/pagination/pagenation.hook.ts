@@ -12,7 +12,7 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
 
-        const changePage = (boardList: T[], totalLength: number) => {
+    const changePage = (boardList: T[], totalLength: number) => {
         if (!currentPage) return;
         const startIndex = (currentPage - 1) * countPerPage;
         let endIndex = currentPage * countPerPage;
@@ -32,11 +32,12 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     };
 
     const changeBoardList = (boardList: T[], isToggleOn?: boolean) => {
-            if (isToggleOn) boardList = boardList.filter((board: any) => {
-                if ('status' in board) return !board.status;
-                return false;
+        if (isToggleOn) boardList = boardList.filter((board: any) => {
+            if ('status' in board) return !board.status;
+            return false;
         });
-            setBoardList(boardList);
+
+        setBoardList(boardList);
 
         const totalLength = boardList.length;
         setTotalLength(totalLength);
@@ -82,21 +83,21 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
 
         
 
-        return {
-            viewList,
-            pageList,
-            currentPage,
-            boardList,
-            setBoardList,
-            setCurrentPage,
-            setCurrentSection,
+    return {
+        viewList,
+        pageList,
+        currentPage,
+        boardList,
+        setBoardList,
+        setCurrentPage,
+        setCurrentSection,
 
-            changeBoardList,
+        changeBoardList,
             
-            changePage,
-            onPageClickHandler,
-            onPreSectionClickHandler,
-            onNextSectionClickHandler
-        }
+        changePage,
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    }
 }
 export default usePagination

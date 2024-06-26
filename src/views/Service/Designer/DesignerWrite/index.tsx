@@ -61,7 +61,11 @@ export default function DesignerWrite() {
         if (!cookies.accessToken) return;
     
         const requestBody: PostDesignerBoardRequestDto = { 
+<<<<<<< HEAD
             designerBoardTitle: title.trim(),
+=======
+            designerBoardTitle: title.trim(), 
+>>>>>>> b47faff2b8da2ae31b9ddd52c38843039dd19d03
             designerBoardContents: contents.trim(), 
             
         };

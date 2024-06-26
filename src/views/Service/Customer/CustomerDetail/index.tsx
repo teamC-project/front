@@ -22,7 +22,6 @@ export default function CustomerDetail() {
     const [writeDate, setWriteDate] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
-    const [comment, setComment] = useState<string | null>(null);
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
     //                  function                    //
@@ -69,7 +68,6 @@ export default function CustomerDetail() {
 			customerBoardWriteDatetime,
 			customerBoardViewCount,
 			customerBoardContents,
-			customerBoardComment,
 			isSecret } = result as GetCustomerBoardResponseDto;
 
 			if (isSecret && loginUserRole === 'ROLE_CUSTOMER' && (customerBoardWriterId !== loginUserId)) {
@@ -83,7 +81,6 @@ export default function CustomerDetail() {
         setWriteDate(customerBoardWriteDatetime);
         setViewCount(customerBoardViewCount);
         setContents(customerBoardContents);
-        setComment(customerBoardComment);
         setIsSecret(isSecret);
     };
 
@@ -133,7 +130,7 @@ export default function CustomerDetail() {
         .then(increaseViewCountResponse);
 		getCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
         .then(getCustomerBoardResponse);
-    }, [cookies.accessToken, customerBoardNumber]);
+    });
 
 
     //              render              //

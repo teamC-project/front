@@ -1,5 +1,6 @@
 import React, { ChangeEvent,useEffect,useRef, useState } from 'react';
-import "./style.css";
+import'./style.css'
+import"../../../../App.css"
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
@@ -88,6 +89,7 @@ export default function AnnouncementBoardWrite() {
                     <input className='announcement-board-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
+			<div className='announcement-board-write-contents-box'>
 						<textarea
 						ref={contentsRef} 
 						onChange={onContentsChangeHandler}
@@ -96,7 +98,7 @@ export default function AnnouncementBoardWrite() {
 						id=""
 						placeholder='내용을 입력해주세요.'
 						/>
-
+						</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );

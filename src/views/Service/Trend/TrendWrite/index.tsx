@@ -119,8 +119,8 @@ export default function TrendWrite() {
 		</div>
 		<div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>
-			<div className='search-button' onClick={onTrendPostClickHandler}>올리기</div>
-			<div className='search-button'>취소</div>
+			<div className='primary-button' onClick={onTrendPostClickHandler}>올리기</div>
+			<div className='primary-button'>취소</div>
         </div>
 		</div>
     </div>
