@@ -80,6 +80,7 @@
   text-align: left;
   word-break: break-all;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .designerboard-list-table-title-top {
