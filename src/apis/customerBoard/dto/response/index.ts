@@ -8,6 +8,7 @@ export interface GetSearchCustomerBoardListResponseDto extends ResponseDto {
 export interface GetCustomerBoardCommentListResponseDto extends ResponseDto {
 	customerBoardCommentList: CustomerBoardCommentListItem[];
 }
+
 export interface GetCustomerBoardListResponseDto extends ResponseDto {
 	customerBoardList : CustomerBoardListItem[];
 }
