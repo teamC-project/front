@@ -12,7 +12,7 @@ import { PutCustomerBoardRequestDto } from 'src/apis/customerBoard/dto/request';
 
 export default function CustomerUpdate() {
 
-    //              state               //
+//              state               //
     const editorRef= useRef<Editor | null> (null);
     const [isSecret, setIsSecret] = useState<boolean>(false);
     const navigator = useNavigate();
@@ -22,7 +22,7 @@ export default function CustomerUpdate() {
     const [cookies] = useCookies();
     const [urlList, setUrlList] = useState<{base64: string; url : string}[]>([]);
 
-    //              event handler               //
+//              event handler               //
     const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
         if (result && result.code === 'SU') {
             const { customerBoardTitle, customerBoardContents, isSecret } = result as GetCustomerBoardResponseDto;
@@ -84,77 +84,44 @@ export default function CustomerUpdate() {
     };
     
 
-	// 					effect 					//
+// 					effect 					//
     useEffect(() => {
         if (!cookies.accessToken || !customerBoardNumber) return;
         getCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
             .then(getCustomerBoardResponse);
     }, [cookies.accessToken, customerBoardNumber]);
 
-    //                    render                    //
+//                    render                    //
     return (
         <div id='customer-update-wrapper'>
-<<<<<<< HEAD
-			<div className='customer-update-top'>
-				<div className='customer-update-title-box'>
-					<div className='customer-update-title'>제목</div>
-					<input
-						className='customer-update-title-input'
-						placeholder='제목을 입력해주세요.'
-						value={title}
-						onChange={onTitleChangeHandler}
-					/>
-					<div className='customer-update-secret'>
-						<label>
-							<input
-								type='checkbox'
-								checked={isSecret}
-								onChange={handleSecretChange}
-							/>
-							<span className='customer-update-secret-text'>비밀글</span>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div className='customer-update-contents-box'>
-			<ToastEditor 
-					ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
-			</div>
-			<div className='customer-update-button'>
-				<button className='customer-write-click-button' onClick={onUpdateButtonClickHandler}>
-				수정
-				</button>
-			</div>
-=======
-            <div className='customer-update-top'>
-                <div className='customer-update-title-box'>
-                    <div className='customer-update-title'>제목</div>
-                    <input
-                        className='customer-update-title-input'
-                        placeholder='제목을 입력해주세요.'
-                        value={title}
-                        onChange={onTitleChangeHandler}
-                    />
-                    <div className='customer-update-secret'>
-                        <label>
-                            <input
-                                type='checkbox'
-                                checked={isSecret}
-                                onChange={handleSecretChange}
-                            />
-                            <span className='customer-update-secret-text'>비밀글</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div className='customer-update-contents-box'>
-            <ToastEditor 
+          <div className='customer-update-top'>
+              <div className='customer-update-title-box'>
+                  <div className='customer-update-title'>제목</div>
+                  <input
+                      className='customer-update-title-input'
+                      placeholder='제목을 입력해주세요.'
+                      value={title}
+                      onChange={onTitleChangeHandler}
+                  />
+                  <div className='customer-update-secret'>
+                      <label>
+                          <input
+                              type='checkbox'
+                              checked={isSecret}
+                              onChange={handleSecretChange}
+                          />
+                          <span className='customer-update-secret-text'>비밀글</span>
+                      </label>
+                  </div>
+              </div>
+          </div>
+          <div className='customer-update-contents-box'>
+          <ToastEditor 
 			    ref={editorRef} body={contents} setBody={onContentsChangeHandler} imageList={urlList} setImageList={onImageChangeHandler} />
-            </div>
+          </div>
             <button className='primary-button' onClick={onUpdateButtonClickHandler}>
-                수정
+              수정
             </button>
->>>>>>> caa6f4de0237e06e237d74566d08f45eb7ed1bc7
         </div>
     );
 }
