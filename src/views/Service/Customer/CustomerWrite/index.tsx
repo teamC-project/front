@@ -121,12 +121,19 @@ export default function CustomerWrite() {
 				imageList={urlList}
 				setImageList={onImageChangeHandler}
             />
+<<<<<<< HEAD
 			</div>
 			<div className='customer-write-button'>
             <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
                 올리기
             </button>
 			</div>
+=======
+            </div>
+            <button className='primary-button' onClick={onPostButtonClickHandler}>
+                올리기
+            </button>
+>>>>>>> caa6f4de0237e06e237d74566d08f45eb7ed1bc7
         </div>
     );
 }

@@ -67,10 +67,10 @@ export default function DesignerUpdate() {
         return;
 		}
 
-		else if (!requestBody.designerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.designerBoardTitle) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
 
 		else if (!requestBody.designerBoardContents || !isBlank) {
 			alert("내용을 입력해주세요.");
