@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import { useSnsStore } from "src/stores";
+import ResponseDto from "src/apis/response.dto";
 import { emailAuthCheckRequest, emailAuthRequest, idCheckRequest } from "src/apis/auth";
 import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto } from "src/apis/auth/dto/request";
-import ResponseDto from "src/apis/response.dto";
-import { useSnsStore } from "src/stores";
 
 const useAuthSignUp = () => {
 
@@ -229,66 +229,45 @@ const useAuthSignUp = () => {
     };  
 
     return{
-    id,
-    password,
-    passwordCheck,
-    email,
-    authNumber,
-    gender,
-    age,
-    companyName,
-    image,
-    joinPath,
-    snsId,
+        id,
+        password,
+        passwordCheck,
+        email,
+        authNumber,
+        gender,
+        age,
+        companyName,
+        image,
+        joinPath,
+        snsId,
 
-    setId,
-    setEmail,
-    setAuthNumber,
+        setId,
+        setEmail,
+        setAuthNumber,
 
-    idMessage,
-    passwordMessage,
-    passwordCheckMessage,
-    emailMessage,
-    authNumberMessage,
-    companyNameMessage,
-    imageMessage,
+        idMessage,
+        passwordMessage,
+        passwordCheckMessage,
+        emailMessage,
+        authNumberMessage,
+        companyNameMessage,
+        imageMessage,
 
-    setIdMessage,
-    setEmailMessage,
-    setAuthNumberMessage,
+        setIdMessage,
+        setEmailMessage,
+        setAuthNumberMessage,
 
-    idButtonStatus,
-    emailButtonStatus,
-    authNumberButtonStatus,
+        idButtonStatus,
+        emailButtonStatus,
+        authNumberButtonStatus,
 
-    setEmailButtonStatus,
-    setAuthNumberButtonStatus,
-    
-    setIsIdCheck,
-    setIsEmailCheck,
-    setIsAuthNumberCheck,
-
-    isIdError,
-    isEmailError,
-    isAuthNumberError,
-
-    setIsIdError,
-    setIsEmailError,
-    setIsAuthNumberError,
-
-    onIdChangeHandler,
-    onPasswordChangeHandler,
-    onPasswordCheckChangeHandler,
-    onEmailChangeHandler,
-    onAuthNumberChangeHandler,
-    onGenderChangeHandler,
-    onAgeChangeHandler,
-    onCompanyNameChangeHandler,
-    onImageChangeHandler,
-    
-    onIdButtonClickHandler,
-    onEmailButtonClickHandler,
-    onAuthNumberButtonClickHandler,
+        setEmailButtonStatus,
+        setAuthNumberButtonStatus,
+        
+        
+        onIdButtonClickHandler,
+        onEmailButtonClickHandler,
+        onAuthNumberButtonClickHandler,
     };
 }
 export default useAuthSignUp;
