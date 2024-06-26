@@ -124,9 +124,6 @@ export default function CustomerUpdate() {
 				수정
 				</button>
 			</div>
-<<<<<<< HEAD
-=======
-=======
           <div className='customer-update-top'>
               <div className='customer-update-title-box'>
                   <div className='customer-update-title'>제목</div>
@@ -155,8 +152,6 @@ export default function CustomerUpdate() {
             <button className='primary-button' onClick={onUpdateButtonClickHandler}>
               수정
             </button>
->>>>>>> b47faff2b8da2ae31b9ddd52c38843039dd19d03
->>>>>>> 21c815e1cf3ca05329fc7282f8adf435db3c2d47
         </div>
     );
 }
