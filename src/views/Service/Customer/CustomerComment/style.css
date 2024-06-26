@@ -1,193 +1,188 @@
-#customer-board-comment-wrapper {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #F5F5F5;
-}
+	#customer-board-comment-wrapper {
+	margin-top: 20px;
+	padding: 20px;
+	background-color: #F5F5F5;
+	}
 
-.customer-board-comment-inner {
-  max-width: 100%;
-  margin: 0 auto;
-}
+	.customer-board-comment-inner {
+	max-width: 100%;
+	margin: 0 auto;
+	}
 
-.customer-board-comment-head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
+	.customer-board-comment-head {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	}
 
-.customer-board-comment-head h5 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-right: 10px;
-}
+	.customer-board-comment-head h5 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 10px;
+	}
 
-.customer-board-comment-count {
-  font-size: 14px;
-  color: #888;
-}
+	.customer-board-comment-count {
+	font-size: 14px;
+	color: #888;
+	}
 
-.customer-board-comment-write-box {
-  margin-bottom: 20px;
-}
+	.customer-board-comment-write-box {
+	margin-bottom: 20px;
+	}
 
-.customer-board-comment-write-contents-box {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  background-color: #ffffff;
-}
+	.customer-board-comment-write-contents-box {
+	display: flex;
+	align-items: center;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px;
+	background-color: #ffffff;
+	}
 
-.customer-board-comment-write-contents-textarea {
-  flex: 1;
-  height: auto;
-  padding: 10px;
-  border: none;
-  resize: none;
-}
+	.customer-board-comment-write-contents-textarea {
+	flex: 1;
+	height: auto;
+	padding: 10px;
+	border: none;
+	resize: none;
+	}
 
-.customer-board-comment-primary-button {
-  padding: 8px 16px;
-  background-color: #3a57e8;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 10px;
-}
+	.customer-board-comment-primary-button {
+	padding: 8px 16px;
+	background-color: #3a57e8;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	margin-left: 10px;
+	}
 
-.customer-board-comment-section {
-  margin-top: 20px;
-}
+	.customer-board-comment-section {
+	margin-top: 20px;
+	}
 
-.customer-board-comment-list {
-  border-top: 1px solid #ccc;
-}
+	.customer-board-comment-list {
+	border-top: 1px solid #ccc;
+	}
 
-.customer-board-comment-list {
-  border-top: 1px solid #ccc;
-}
+	.customer-board-comment-list {
+	border-top: 1px solid #ccc;
+	}
 
-.customer-board-comment-container {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #ccc;
-  padding: 20px;
-  /* background-color: rgba(255, 255, 255, 1); */
-}
+	.customer-board-comment-container {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #ccc;
+	padding: 20px;
+	}
 
-.customer-board-comment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-  }
+	.customer-board-comment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+	}
 
-.customer-board-comment-author {
-  font-size: 14px;
-  font-weight: bold;
-}
+	.customer-board-comment-author {
+	font-size: 14px;
+	font-weight: bold;
+	}
 
-.customer-board-comment-contents {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
+	.customer-board-comment-contents {
+	font-size: 14px;
+	margin-bottom: 10px;
+	}
 
-.customer-board-comment-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+	.customer-board-comment-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	}
 
-.customer-board-comment-date {
-  font-size: 12px;
-  color: #888;
-} 
+	.customer-board-comment-date {
+	font-size: 12px;
+	color: #888;
+	} 
 
-.customer-board-comment-reply-button {
-  padding: 4px 8px;
-  background-color: #eee;
-  color: #333;
-  border: none;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  }
+	.customer-board-comment-reply-button {
+	padding: 4px 8px;
+	background-color: #eee;
+	color: #333;
+	border: none;
+	border-radius: 4px;
+	font-size: 12px;
+	cursor: pointer;
+	}
 
-.customer-board-comment-actions {
-  margin-top: 10px;
-}
+	.customer-board-comment-actions {
+	margin-top: 10px;
+	}
 
-.customer-board-comment-actions button {
-  padding: 4px 8px;
-  background-color: #eee;
-  color: #333;
-  border: none;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  margin-left: 5px;
-}
+	.customer-board-comment-actions button {
+	padding: 4px 8px;
+	background-color: #eee;
+	color: #333;
+	border: none;
+	border-radius: 4px;
+	font-size: 12px;
+	cursor: pointer;
+	margin-left: 5px;
+	}
 
-.customer-board-comment-actions-right {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
+	.customer-board-comment-actions-right {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+	}
 
-.customer-board-comment-actions-right > * {
-  margin-right: 10px;
-}
+	.customer-board-comment-actions-right > * {
+	margin-right: 10px;
+	}
 
-customer-board-comment-list > customer-board-comment {
-  background-color: rgba(255, 255, 255, 1);
-}
+	customer-board-comment-list > customer-board-comment {
+	background-color: rgba(255, 255, 255, 1);
+	}
 
-.customer-board-comment-update {
-  margin-top: 10px;
-}
+	.customer-board-comment-update {
+	margin-top: 10px;
+	}
 
-.customer-board-comment-update-contents-textarea {
-  width: 100%;
-  height: 100px; /* 높이 조정 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical; /* 세로 크기 조정 가능하도록 변경 */
-}
+	.customer-board-comment-update-contents-textarea {
+	width: 100%;
+	height: 100px; 
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical; 
+	}
 
-.customer-board-comment-reply-container {
-  
-  background-color: rgba(64, 64, 64, 0.05);
-  /* margin-left: 40px;
-  border-left: 1px solid #ccc;
-  padding-left: 20px; */
-}
+	.customer-board-comment-reply-container {
+	background-color: rgba(64, 64, 64, 0.05);
+	}
 
-.customer-board-comment-reply {
-  border: 1px solid #ccc; /* 대댓글 테두리 추가 */
-  padding: 20px; /* 대댓글 내부 여백 추가 */
-  background-color: #f5f5f5; /* 대댓글 배경색 변경 */
-}
+	.customer-board-comment-reply {
+	border: 1px solid #ccc; 
+	padding: 20px; 
+	background-color: #f5f5f5; 
+	}
 
-.customer-board-comment-reply-write {
-  margin-top: 10px;
-}
+	.customer-board-comment-reply-write {
+	margin-top: 10px;
+	}
 
 
-.customer-board-comment-reply-textarea {
-  width: 100%;
-  height: auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: none;
-}
+	.customer-board-comment-reply-textarea {
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: none;
+	}
 
-.customer-board-comment-reply-indicator {
-  margin-top: 5px;
-  font-size: 12px;
-  color: #888;
-}
+	.customer-board-comment-reply-indicator {
+	margin-top: 5px;
+	font-size: 12px;
+	color: #888;
+	}

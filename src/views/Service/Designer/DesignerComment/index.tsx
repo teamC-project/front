@@ -244,14 +244,7 @@ export default function DesignerBoardComment() {
 useEffect(() => {
     if (!cookies.accessToken || designerBoardNumber === undefined) return;
     getDesignerBoardCommentsByBoardNumberRequest(designerBoardNumber, cookies.accessToken).then(getDesignerBoardCommentsByBoardNumberResponse);
-<<<<<<< HEAD
 }, [designerBoardNumber, cookies.accessToken]);
-=======
-  }, [designerBoardNumber, cookies.accessToken]);
-
-  useEffect(() => {
-  }, []);
->>>>>>> aff6534144249353720ee354fca2b746b02530af
 
   //        render        //
 return (
