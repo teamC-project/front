@@ -1,4 +1,4 @@
-	#announcement-board-write-wrapper {
+#announcement-board-update-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -6,7 +6,7 @@
 		padding: 20px;
 	}
 
-	.announcement-board-write-top {
+	.announcement-board-update-top {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -14,21 +14,21 @@
 	padding: 10px; 
 	}
 
-	.announcement-board-write-title {
+	.announcement-board-update-title {
 	display: flex;
 	width: 8%;
 	font-family: Inter;
 	font-size: 20px;  font-weight: 700;
 	}
 
-	.announcement-board-write-title-box {
+	.announcement-board-update-title-box {
 	display: flex;
 	align-items: center;
 	flex-grow: 1;
 	padding: 8px 16px;
 	}
 
-	.announcement-board-write-title-input {
+	.announcement-board-update-title-input {
 	border: none;
 	outline: none;
 	background: none;
@@ -45,7 +45,7 @@
 	padding: 8px;
 	}
 
-	.announcement-board-write-contents-box {
+	.announcement-board-update-contents-box {
 	border: 1px solid rgba(238, 238, 238, 1);
 	border-radius: 6px;
 	padding: 12px 16px;
@@ -54,19 +54,20 @@
 	margin-bottom: 20px;
 	}
 
-	.announcement-board-write-contents-textarea {
-	border: none;
-	outline: none;
-	background: none;
-	resize: none;
-	width: 100%;
-	min-height: 200px;
-	line-height: 175%;
-	font-family: Inter;
-	font-size: 16px;
-	font-weight: 400;
-	color: rgba(64, 64, 64, 1);
-	}
+	.announcement-board-update-contents-textarea {
+		border: none;
+		outline: none;
+		background: none;
+		resize: none;
+		width: 100%;
+		min-height: 200px;
+		line-height: 175%;
+		font-family: Inter;
+		font-size: 16px;
+		font-weight: 400;
+		color: rgba(64, 64, 64, 1);
+		}
+	
 
 
 
