@@ -28,7 +28,7 @@ import CustomerWrite from "./views/Service/Customer/CustomerWrite";
 
 import AnnouncementBoardDetail from "./views/Service/Announcement/AnnouncementDetail";
 import AnnouncementBoardList from "./views/Service/Announcement/AnnouncementList";
-import AnnouncementWrite from "./views/Service/Announcement/AnnouncementWrite";
+import AnnouncementBoardWrite from "./views/Service/Announcement/AnnouncementWrite";
 
 import Footer from "./layouts/Footer";
 import NotFound from "./views/NotFound";
@@ -45,11 +45,12 @@ import PersonalInfoProcessingPolicy from "./views/FooterContents/PersonalInfoPro
 import SiteDescription from "./views/FooterContents/SiteDescription";
 import TermsAndConditions from "./views/FooterContents/TermsAndConditions";
 import YouthProtectionPolicy from "./views/FooterContents/YouthProtectionPolicy";
-import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementBoardUpdate";
+import AnnouncementBoardUpdate from "./views/Service/Announcement/AnnouncementUpdate";
 import InfoDeleteUser from "./views/User/InfoDeleteUser";
 
 import TrendUpdate from "./views/Service/Trend/TrendUpdate";
 import PasswordChangePage from "./views/User/ChangePassword";
+
 
 //  component: root 경로 컴포넌트 //
 function Index() {
@@ -107,7 +108,7 @@ function App() {
       
         <Route path={ANNOUNCEMENT_BOARD_PATH} >
           <Route index element={<AnnouncementBoardList />} />
-          <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementWrite />} />
+          <Route path={ANNOUNCEMENT_BOARD_WRITE_PATH} element={<AnnouncementBoardWrite />} />
           <Route path={ANNOUNCEMENT_BOARD_DETAIL_PATH} element={<AnnouncementBoardDetail />} />
           <Route path={ANNOUNCEMENT_BOARD_UPDATE_PATH} element={<AnnouncementBoardUpdate />} />
         </Route>

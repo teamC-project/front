@@ -17,7 +17,7 @@ export default function AnnouncementBoardUpdate() {
     const { loginUserId, loginUserRole } = useUserStore();
     const { announcementBoardNumber } = useParams();
     const [cookies] = useCookies();
-    const [writerId, setWriterId] = useState<string>('');
+    const [updaterId, setWriterId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
 
@@ -118,15 +118,15 @@ export default function AnnouncementBoardUpdate() {
 
     //                    render                    //
     return (
-        <div id='announcementBoard-write-wrapper'>
-            <div className='announcementBoard-write-top'>
-                <div className='announcementBoard-write-title-box'>
-                    <div className='announcementBoard-write-title'>제목</div>
-                    <input className='announcementBoard-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+        <div id='announcement-board-update-wrapper'>
+            <div className='announcement-board-update-top'>
+                <div className='announcement-board-update-title-box'>
+                    <div className='announcement-board-update-title'>제목</div>
+                    <input className='announcement-board-update-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
-            <div className='announcementBoard-write-contents-box'>
-                <textarea ref={contentsRef} className='announcementBoard-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
+            <div className='announcement-board-update-contents-box'>
+                <textarea ref={contentsRef} className='announcement-board-update-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
             </div>
             <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>

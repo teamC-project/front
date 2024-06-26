@@ -54,7 +54,6 @@ const ToastEditor = forwardRef<Editor, ToastEditorProps>(({ body, imageList, set
 			setBody(data);
 		}
 		bodyRef.current = data;
-		// Body에 담기
   };
 
   useEffect(() => {

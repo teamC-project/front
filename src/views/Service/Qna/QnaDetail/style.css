@@ -38,19 +38,25 @@
 	}
 
 	.qna-board-detail-information2 {
-	flex: 6; /* 크기 조정 가능 */
+	flex: 6; 
 	}
 
 	.qna-board-detail-information3 {
-	flex: 1; /* 크기 조정 가능 */
+	flex: 1; 
 	}
 
 	.qna-board-detail-information4 {
-	flex: 0.5; /* 크기 조정 가능 */
+	flex: 0.5; 
 	}
 
 	.qna-board-detail-information5 {
-	flex: 0.5; /* 크기 조정 가능 */
+	flex: 0.5; 
+	cursor: pointer;
+	}
+
+	.qna-board-detail-information6 {
+	flex: 0.5; 
+	cursor: pointer;
 	}
 
 	.qna-board-detail-view {
