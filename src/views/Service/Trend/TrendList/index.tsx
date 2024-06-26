@@ -11,7 +11,6 @@ import ResponseDto from 'src/apis/response.dto';
 import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
 import { usePagination } from 'src/hooks/pagination';
 
-
 function CardItem (
 	{
 	trendBoardNumber,
@@ -48,8 +47,8 @@ return (
 }
 
 export default function TrendList() {
-  const { loginUserRole } = useUserStore();
-  const [cookies] = useCookies();  
+	const { loginUserRole } = useUserStore();
+	const [cookies] = useCookies();  
 	const {
 		setBoardList,
 		viewList,
@@ -63,49 +62,49 @@ export default function TrendList() {
 		onPreSectionClickHandler,
 		onNextSectionClickHandler
 	}  = usePagination<TrendBoardListItem>(TREND_BOARD_COUNT_PER_PAGE , TREND_BOARD_COUNT_PER_SECTION)
-  const [isSearched, setIsSearched] = useState<boolean>(false);
-  const [searchWord, setSearchWord] = useState<string>('');
-  
-  const navigator = useNavigate();
+	const [isSearched, setIsSearched] = useState<boolean>(false);
+	const [searchWord, setSearchWord] = useState<string>('');
+	
+	const navigator = useNavigate();
 
 
 
-  const getTrendBoardResponse = (result: GetTrendBoardListResponseDto | ResponseDto | null) => {
+	const getTrendBoardResponse = (result: GetTrendBoardListResponseDto | ResponseDto | null) => {
     const message = 
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+		!result ? '서버에 문제가 있습니다.' :
+		result.code === 'AF' ? '인증에 실패했습니다.' :
+		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(MAIN_PATH);
-      return;
+		alert(message);
+		if (result?.code === 'AF') navigator(MAIN_PATH);
+		return;
     }
 
     const { trendBoardList } = result as GetTrendBoardListResponseDto;
     changeBoardList(trendBoardList);
     setCurrentPage(!trendBoardList.length ? 0 : 1);
     setCurrentSection(!trendBoardList.length ? 0 : 1);
-  }
+	}
 
-  const getSearchTrendBoardListResponse = (result: GetSearchTrendBoardListResponseDto | ResponseDto | null) => {
+	const getSearchTrendBoardListResponse = (result: GetSearchTrendBoardListResponseDto | ResponseDto | null) => {
     const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+		!result ? '서버에 문제가 있습니다.' :
+		result.code === 'VF' ? '검색어를 입력하세요.' :
+		result.code === 'AF' ? '인증에 실패했습니다.' :
+		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(MAIN_PATH);
-      return;
+		alert(message);
+		if (result?.code === 'AF') navigator(MAIN_PATH);
+		return;
     }
 
     const { trendBoardList } = result as GetSearchTrendBoardListResponseDto;
     const updatedTrendBoardList = trendBoardList.map(item => ({
-      ...item,
-      trendBoardLikeCount: item.trendBoardLikeCount || 0,
-      isLiked: false  
+		...item,
+		trendBoardLikeCount: item.trendBoardLikeCount || 0,
+		isLiked: false  
     }));
     changeBoardList(updatedTrendBoardList);
     setBoardList(updatedTrendBoardList);
@@ -113,98 +112,98 @@ export default function TrendList() {
     setCurrentPage(!trendBoardList.length ? 0 : 1);
     setCurrentSection(!trendBoardList.length ? 0 : 1);
     setIsSearched(false);
-  }
+	}
 
-  const fetchTrendBoardList = () => {
+	const fetchTrendBoardList = () => {
     getSearchTrendBoardListRequest('', cookies.accessToken)
-      .then(result => getTrendBoardResponse(result as GetTrendBoardListResponseDto | ResponseDto | null));
-  }
+		.then(result => getTrendBoardResponse(result as GetTrendBoardListResponseDto | ResponseDto | null));
+	}
 
-  const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_ADMIN') return;
-    navigator(TREND_BOARD_WRITE_ABSOLUTE_PATH);
-  };
+	const onWriteButtonClickHandler = () => {
+		if (loginUserRole !== 'ROLE_ADMIN') return;
+		navigator(TREND_BOARD_WRITE_ABSOLUTE_PATH);
+	};
 
 
 
-  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
+	const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		const searchWord = event.target.value;
     setSearchWord(searchWord);
     if (!searchWord) {
-      setIsSearched(false);
-      getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
-    }
-  }
+		setIsSearched(false);
+		getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
+		}
+	}
 
-  const onSearchButtonClickHandler = () => {
+	const onSearchButtonClickHandler = () => {
     if (!searchWord) {
-      setIsSearched(false);
-      getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
-      return;
+		setIsSearched(false);
+		getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
+		return;
     }
     if (!cookies.accessToken) return;
     setIsSearched(true);
     getSearchTrendBoardListRequest(searchWord, cookies.accessToken)
-      .then(getSearchTrendBoardListResponse);
-  }
+		.then(getSearchTrendBoardListResponse);
+	}
 
-  const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	const onSearchInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') onSearchButtonClickHandler();
-  }
+	}
 
-  useEffect(() => {
+	useEffect(() => {
     if (!cookies.accessToken) return;
     fetchTrendBoardList();
-  }, [cookies.accessToken]);
+	}, [cookies.accessToken]);
 
 
-  useEffect(() => {
+	useEffect(() => {
     if (!cookies.accessToken) return;
     getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
-  }, []);
+	}, []);
 
 
-  return (
+	return (
     <div id='trend-board-wrapper'>
-			      <div className='trend-board-list-search-box'>
+		<div className='trend-board-list-search-box'>
         <div className='trend-board-list-search-keyword'>검색 키워드</div>
         <div className='trend-board-list-search-input-box'>
-          <input
+			<input
             className='trend-board-list-search-input'
             placeholder='검색어를 입력하세요.'
             value={searchWord}
             onChange={onSearchWordChangeHandler}
             onKeyDown={onSearchInputKeyDown}
-          />
+			/>
         </div>
         <div className='trend-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
-          검색
+			검색
         </div>
-      </div>
-      <div className="trend-board-list-container">
+		</div>
+		<div className="trend-board-list-container">
         <div className='trend-board-list'>
-          {viewList.map(item => <CardItem key={item.trendBoardNumber} {...item} />)}
+			{viewList.map(item => <CardItem key={item.trendBoardNumber} {...item} />)}
         </div>
-      </div>
-      <div className='trend-board-list-bottom'>
+		</div>
+		<div className='trend-board-list-bottom'>
         <div style={{ width: '299px' }}></div>
         <div className='trend-board-list-pagenation'>
-          <div className='page-left' onClick={onPreSectionClickHandler}></div>
-          <div className='trend-board-list-page-box'>
+			<div className='page-left' onClick={onPreSectionClickHandler}></div>
+			<div className='trend-board-list-page-box'>
             {pageList.map(page => 
-              page === currentPage ? 
-              <div key={page} className='trend-board-list-page-active'>{page}</div> :
-              <div key={page} className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+			page === currentPage ? 
+			<div key={page} className='trend-board-list-page-active'>{page}</div> :
+            <div key={page} className='trend-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
-          </div>
-          <div className='page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {loginUserRole === 'ROLE_ADMIN' && (
-          <div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}>
+        <div className='trend-board-list-write-button' onClick={onWriteButtonClickHandler}>
             글쓰기
-          </div>
+        </div>
         )}
-      </div>
     </div>
-  );
+    </div>
+	);
 }

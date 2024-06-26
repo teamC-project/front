@@ -1,145 +1,145 @@
-#qna-board-detail-wrapper {
-  padding: 20px;
-}
+	#qna-board-detail-wrapper {
+	padding: 20px;
+	}
 
-.qna-board-detail-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding-left: 20px;
-  background-color: rgba(218, 218, 218, 1);
-}
+	.qna-board-detail-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding-left: 20px;
+	background-color: rgba(218, 218, 218, 1);
+	}
 
-.qna-board-detail-container{
-  margin: 20px auto;
-  max-width: 100%; /* customer-detail-main-view의 너비에 맞춤 */
-  padding: 0;
-}
+	.qna-board-detail-container{
+	margin: 20px auto;
+	max-width: 100%;
+	padding: 0;
+	}
 
-.qna-board-detail-information {
-  display: flex;
-  justify-content: space-between;
-  padding: 0; /* 여백 제거 */
-  background-color: #f2f2f2;
-}
-
-.qna-board-detail-information > div {
-  padding: 10px;
-  border: 1px solid #000000;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.qna-board-detail-information1 {
-  flex: 0.5; 
-}
-
-.qna-board-detail-information2 {
-  flex: 6; /* 크기 조정 가능 */
-}
-
-.qna-board-detail-information3 {
-  flex: 1; /* 크기 조정 가능 */
-}
-
-.qna-board-detail-information4 {
-  flex: 0.5; /* 크기 조정 가능 */
-}
-
-.qna-board-detail-information5 {
-  flex: 0.5; /* 크기 조정 가능 */
-}
-
-.qna-board-detail-view {
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  min-height: 300px;
-  background-color: rgba(218, 218, 218, 1);
-}
-
-.qna-board-detail-comment-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  border: 1px solid rgba(238, 238, 238, 1);
-  border-radius: 8px;
-  padding: 24px;
-
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.qna-board-detail-comment {
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
-
-  color: rgba(64, 64, 64, 1);
-  white-space: pre-wrap;
-}
-
-.qna-board-detail-comment-write-box {
-  display: flex;
-  align-items: start;
-  gap: 12px;
-}
-
-.qna-board-detail-comment-textarea-box {
-  flex-grow: 1;
-
-  border: 1px solid rgba(238, 238, 238, 1);
-
-  border-radius: 6px;
-  padding: 8px 16px;
-
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.qna-board-detail-comment-textarea {
-  border: none;
-  outline: none;
-  background: none;
-  resize: none;
-
-  width: 100%;
-  height: 28px;
-
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 175%;
-
-  color: rgba(64, 64, 64, 1);
-}
-
-.qna-board-detail-comment-button-box {
+	.qna-board-detail-information {
 	display: flex;
 	justify-content: space-between;
-	height : 50px;
-	margin  :12px;
-}
+	padding: 0; /* 여백 제거 */
+	background-color: #f2f2f2;
+	}
 
-.qna-board-detail-comment-button {
-	background-color: white;
-	border-radius: 12px;
+	.qna-board-detail-information > div {
+	padding: 10px;
+	border: 1px solid #000000;
+	background-color: #ffffff;
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	padding: 12px;
-}
+	text-align: center;
+	}
 
-.qna-board-detail-comment :hover {
+	.qna-board-detail-information1 {
+	flex: 0.5; 
+	}
+
+	.qna-board-detail-information2 {
+	flex: 6; /* 크기 조정 가능 */
+	}
+
+	.qna-board-detail-information3 {
+	flex: 1; /* 크기 조정 가능 */
+	}
+
+	.qna-board-detail-information4 {
+	flex: 0.5; /* 크기 조정 가능 */
+	}
+
+	.qna-board-detail-information5 {
+	flex: 0.5; /* 크기 조정 가능 */
+	}
+
+	.qna-board-detail-view {
+	padding: 20px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	min-height: 300px;
+	background-color: rgba(218, 218, 218, 1);
+	}
+
+	.qna-board-detail-comment-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	border: 1px solid rgba(238, 238, 238, 1);
+	border-radius: 8px;
+	padding: 24px;
+
+	background-color: rgba(255, 255, 255, 1);
+	}
+
+	.qna-board-detail-comment {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+
+	color: rgba(64, 64, 64, 1);
+	white-space: pre-wrap;
+	}
+
+	.qna-board-detail-comment-write-box {
+	display: flex;
+	align-items: start;
+	gap: 12px;
+	}
+
+	.qna-board-detail-comment-textarea-box {
+	flex-grow: 1;
+
+	border: 1px solid rgba(238, 238, 238, 1);
+
+	border-radius: 6px;
+	padding: 8px 16px;
+
+	background-color: rgba(255, 255, 255, 1);
+	}
+
+	.qna-board-detail-comment-textarea {
+	border: none;
+	outline: none;
+	background: none;
+	resize: none;
+
+	width: 100%;
+	height: 28px;
+
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 175%;
+
+	color: rgba(64, 64, 64, 1);
+	}
+
+	.qna-board-detail-comment-button-box {
+		display: flex;
+		justify-content: space-between;
+		height : 50px;
+		margin  :12px;
+	}
+
+	.qna-board-detail-comment-button {
+		background-color: white;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		padding: 12px;
+	}
+
+	.qna-board-detail-comment :hover {
+		cursor: pointer;
+	} 
+
+
+	.qna-board-detail-go-to-qna-boardList {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	text-align: center;
 	cursor: pointer;
-} 
-
-
-.qna-board-detail-go-to-qna-boardList {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  text-align: center;
-  cursor: pointer;
-}
+	}

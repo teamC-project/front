@@ -18,7 +18,6 @@ export default function QnaBoardWrite() {
     const [qnaBoardTitle, setQnaBoardTitle] = useState<string>('');
     const [qnaBoardContents, setQnaBoardContents] = useState<string>('');
 
-
     //              function               //
     const navigator = useNavigate();
 
@@ -87,7 +86,7 @@ export default function QnaBoardWrite() {
                     <input className='qna-write-title-input' placeholder='제목을 입력해주세요.' value={qnaBoardTitle} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
-						<textarea
+			<textarea
         ref={contentsRef}
         className="qna-write-contents-textarea"
         placeholder="내용을 입력해주세요. / 1000자" 

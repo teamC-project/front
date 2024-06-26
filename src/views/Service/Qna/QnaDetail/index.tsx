@@ -17,7 +17,7 @@ export default function QnaBoardDetail() {
     const { qnaBoardNumber } = useParams();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
-		const [status, setStatus] = useState<boolean>(false);
+	const [status, setStatus] = useState<boolean>(false);
     const [writerId, setWriterId] = useState<string>('');
     const [writeDatetime, setWriteDatetime] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
@@ -50,7 +50,7 @@ export default function QnaBoardDetail() {
         getQnaBoardRequest(qnaBoardNumber, cookies.accessToken)
             .then(getQnaBoardResponse);
     };
-  
+
     const getQnaBoardResponse = (result: GetQnaBoardResponseDto | ResponseDto | null) => {
         const message = 
         !result ? '서버에 문제가 있습니다.' :
@@ -205,10 +205,10 @@ export default function QnaBoardDetail() {
 					)}
 				{status && (
         <div className="qna-board-detail-comment-box">
-          <div className="primary-bedge">답변</div>
-          <div className="qna-board-detail-comment">{qnaBoardComment}</div>
+			<div className="primary-bedge">답변</div>
+			<div className="qna-board-detail-comment">{qnaBoardComment}</div>
         </div>
-      )}
+		)}
 			{loginUserId === writerId && (
 				<div className='qna-board-detail-owner-button-box'>
 				{!status && (

@@ -59,13 +59,13 @@ export default function TrendWrite() {
 		}
 
     const onTrendPostClickHandler =  () => {
-      if (!trendBoardTitle.trim() || !trendBoardContents.trim() || !trendBoardThumbnailImage) {
+		if (!trendBoardTitle.trim() || !trendBoardContents.trim() || !trendBoardThumbnailImage) {
 				alert('제목과 내용 모두 입력해주세요')
 				return;
 			}
-      if (!cookies.accessToken) return;
-  
-      const requestBody: PostTrendBoardRequestDto = {
+		if (!cookies.accessToken) return;
+
+		const requestBody: PostTrendBoardRequestDto = {
 				trendBoardTitle,
 				trendBoardContents,
 				trendBoardThumbnailImage
@@ -76,7 +76,7 @@ export default function TrendWrite() {
 					console.error('게시물 작성 중 오류가 발생했습니다:', error.response.data);
 					alert(`게시물 작성 중 오류가 발생했습니다: ${error.response.data.message || error.message}`);
 			});
-  };
+	};
 
 	const onThumbnailSelectHandler = (url: string) => {
 		setTrendBoardThumbnailImage(url);
@@ -91,9 +91,9 @@ export default function TrendWrite() {
 			}
 		}, [loginUserRole])
 
-  return (
+	return (
     <div id='trend-board-write-wrapper'>
-      <div className='trend-board-write-top-bar'>
+		<div className='trend-board-write-top-bar'>
         <input 
 				className='trend-board-write-title'
 				placeholder='제목을 입력해주세요' 
@@ -113,16 +113,16 @@ export default function TrendWrite() {
 						margin: '5px'
 						}} onClick={() => onThumbnailSelectHandler(item.url)} ></div>)}
 				</div>
-      </div>
-      <div className='trend-board-textarea-container'>
+		</div>
+		<div className='trend-board-textarea-container'>
 			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} imageList={trendBoardUrlList} setImageList={onImageChangeHandler} />
-      </div>
-      <div className='trend-board-write-footer' >
+		</div>
+		<div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>
-          <div className='search-button' onClick={onTrendPostClickHandler}>올리기</div>
-          <div className='search-button'>취소</div>
+			<div className='search-button' onClick={onTrendPostClickHandler}>올리기</div>
+			<div className='search-button'>취소</div>
         </div>
-      </div>
+		</div>
     </div>
-  );
+	);
 }
