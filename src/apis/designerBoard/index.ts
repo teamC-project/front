@@ -1,9 +1,21 @@
-import { DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, DELETE_DESIGNER_BOARD_DELETE_URL, GET_DESIGNER_BOARD_COMMENT_LIST_URL, GET_DESIGNER_BOARD_DETAIL_URL, GET_DESIGNER_BOARD_LIST_URL, GET_SEARCH_DESIGNER_BOARD_LIST_URL, PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL, POST_DESIGNER_BOARD_COMMENT_WRITE_URL, POST_DESIGNER_BOARD_WRITE_URL, PUT_DESIGNER_BOARD_COMMENT_PUT_URL, PUT_DESIGNER_BOARD_PUT_URL } from "src/constant";
-import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import axios from "axios";
+import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetDesignerBoardCommentListResponseDto, GetDesignerBoardListResponseDto, GetDesignerBoardResponseDto, GetSearchDesignerBoardListResponseDto } from "./dto/response";
+import { 
+    DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, 
+    DELETE_DESIGNER_BOARD_DELETE_URL, 
+    GET_DESIGNER_BOARD_COMMENT_LIST_URL, 
+    GET_DESIGNER_BOARD_DETAIL_URL, 
+    GET_DESIGNER_BOARD_LIST_URL, 
+    GET_SEARCH_DESIGNER_BOARD_LIST_URL, 
+    PATCH_DESIGNER_BOARD_INCREASE_VIEW_COUNT_URL, 
+    POST_DESIGNER_BOARD_COMMENT_WRITE_URL, 
+    POST_DESIGNER_BOARD_WRITE_URL, 
+    PUT_DESIGNER_BOARD_COMMENT_PUT_URL, 
+    PUT_DESIGNER_BOARD_PUT_URL 
+} from "src/constant";
 
 // function: DesignerBoard 작성 API 함수 
 export const postDesignerBoardRequest = async (requestBody: PostDesignerBoardRequestDto, accessToken: string) => {
@@ -73,8 +85,7 @@ export const putDesignerBoardCommentRequest = async (designerBoardCommentNumber:
 // function: DesignerBoard 게시물 삭제 API 함수 
 export const deleteDesignerBoardRequest = async (designerBoardNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_DESIGNER_BOARD_DELETE_URL(designerBoardNumber), {
-        ...bearerAuthorization(accessToken),
-        data: { userRole: 'ROLE_ADMIN' } 
+        ...bearerAuthorization(accessToken), data: { userRole: 'ROLE_ADMIN' } 
     })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
@@ -84,8 +95,7 @@ export const deleteDesignerBoardRequest = async (designerBoardNumber: number | s
 // function: DesignerBoard 답글 삭제 API 함수 
 export const deleteDesignerBoardCommentRequest = async (designerBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL(designerBoardCommentNumber), {
-        ...bearerAuthorization(accessToken),
-        data: { userRole: 'ROLE_ADMIN' }
+        ...bearerAuthorization(accessToken), data: { userRole: 'ROLE_ADMIN' } 
     })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);

@@ -9,7 +9,6 @@ export interface GetQnaBoardListResponseDto extends ResponseDto {
 	qnaBoardList : QnaBoardListItem[];
 }
 
-
 export interface GetQnaBoardResponseDto extends ResponseDto {
 	qnaBoardNumber  : number;
 	qnaBoardStatus  : boolean;

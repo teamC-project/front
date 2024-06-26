@@ -1,10 +1,20 @@
 import { PUT_CUSTOMER_BOARD_COMMENT_PUT_URL, DELETE_CUSTOMER_BOARD_DELETE_URL } from './../../constant/index';
-import { DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL, GET_CUSTOMER_BOARD_COMMENT_LIST_URL, GET_CUSTOMER_BOARD_DETAIL_URL, GET_CUSTOMER_BOARD_LIST_URL, GET_SEARCH_CUSTOMER_BOARD_LIST_URL, POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, POST_CUSTOMER_BOARD_WRITE_URL, PUT_CUSTOMER_BOARD_PUT_URL, PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL } from "src/constant";
 import { PostCustomerBoardCommentRequestDto, PostCustomerBoardRequestDto, PutCustomerBoardCommentRequestDto, PutCustomerBoardRequestDto } from "./dto/request";
 import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { GetCustomerBoardCommentListResponseDto, GetCustomerBoardListResponseDto, GetCustomerBoardResponseDto, GetSearchCustomerBoardListResponseDto } from "./dto/response";
+import { 
+    DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL, 
+    GET_CUSTOMER_BOARD_COMMENT_LIST_URL, 
+    GET_CUSTOMER_BOARD_DETAIL_URL, 
+    GET_CUSTOMER_BOARD_LIST_URL, 
+    GET_SEARCH_CUSTOMER_BOARD_LIST_URL, 
+    POST_CUSTOMER_BOARD_COMMENT_WRITE_URL, 
+    POST_CUSTOMER_BOARD_WRITE_URL, 
+    PUT_CUSTOMER_BOARD_PUT_URL, 
+    PATCH_CUSTOMER_BOARD_INCREASE_VIEW_COUNT_URL 
+} from "src/constant";
 
 // function: CustomerBoard 작성 API 함수 
 export const postCustomerBoardRequest = async (requestBody: PostCustomerBoardRequestDto, accessToken: string) => {
@@ -74,8 +84,7 @@ export const putCustomerBoardCommentRequest = async (customerBoardCommentNumber:
 // function: CustomerBoard 게시물 삭제 API 함수 
 export const deleteCustomerBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_CUSTOMER_BOARD_DELETE_URL(customerBoardNumber), {
-    ...bearerAuthorization(accessToken),
-    data: { userRole: 'ROLE_ADMIN' } 
+        ...bearerAuthorization(accessToken), data: { userRole: 'ROLE_ADMIN' } 
     })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
@@ -85,8 +94,7 @@ export const deleteCustomerBoardRequest = async (customerBoardNumber: number | s
 // function: CustomerBoard 답글 삭제 API 함수 
 export const deleteCustomerBoardCommentRequest = async (customerBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL(customerBoardCommentNumber), {
-        ...bearerAuthorization(accessToken),
-        data: { userRole: 'ROLE_ADMIN' } 
+        ...bearerAuthorization(accessToken), data: { userRole: 'ROLE_ADMIN' } 
     })
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
