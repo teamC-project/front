@@ -10,7 +10,7 @@ import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
 import AuthTopBar from 'src/components/authTopBar';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
-import { useAuthSignUp } from 'src/hooks/AuthSignUpHook';
+import useAuthSignUp from "../../hooks/auth.sign.up.hook";
 import { useSnsStore } from 'src/stores';
 import "./style.css";
 

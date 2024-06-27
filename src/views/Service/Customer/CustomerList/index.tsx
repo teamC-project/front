@@ -8,7 +8,7 @@ import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
 import { GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks';
 import {
     COUNT_PER_PAGE,
     COUNT_PER_SECTION,

@@ -19,6 +19,5 @@ export interface GetChatroomResponseDto extends ResponseDto {
 export interface GetChatMessageResponseDto extends ResponseDto {
     chatroomId: number;
     senderId: string;
-	sendDatetime: string;
 	messages: string;
 }

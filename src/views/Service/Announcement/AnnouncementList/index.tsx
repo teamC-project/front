@@ -14,7 +14,7 @@ import{
 	ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH,
 	MAIN_PATH } 
 from 'src/constant';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks';
 
 import { GetAnnouncementBoardListResponseDto,GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response'
 import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';

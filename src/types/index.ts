@@ -5,14 +5,14 @@ export interface QnaBoardListItem {
 	qnaBoardWriterId: string;
 	qnaBoardWriteDatetime: string;
 	qnaBoardViewCount: number;
-};
+}
 
 export interface QnaBoardCommentListItem {
 	qnaBoardCommentNumber : number;
 	qnaBoardCommentWriterId : string;
 	qnaBoardCommentContents : string;
 	qnaBoardCommentDatetime : string;
-};
+}
 
 export interface TrendBoardListItem {
 	trendBoardNumber : number ;
@@ -44,20 +44,22 @@ export interface CustomerBoardListItem {
 	customerBoardViewCount : number;
 	secret: boolean;
 }	
+
 export interface CustomerBoardCommentListItem {
 	customerBoardCommentNumber : number;
 	customerBoardCommentWriterId : string;
 	customerBoardCommentWriteDatetime : string;
 	customerBoardCommentContents : string;
 	customerBoardParentCommentNumber?: number;
-};
+}
+
 export interface DesignerBoardListItem {
 	designerBoardNumber : number;
 	designerBoardTitle : string;
 	designerBoardWriterId : string;
 	designerBoardWriteDatetime : string ;
 	designerBoardViewCount : number;
-};
+}
 
 export interface DesignerBoardCommentListItem {
 	designerBoardCommentNumber : number;
@@ -65,7 +67,7 @@ export interface DesignerBoardCommentListItem {
 	designerBoardCommentContents : string;
 	designerBoardCommentWriteDatetime : string;
     designerBoardParentCommentNumber?: number;
-};
+}
 
 export interface AnnouncementBoardListItem {
 	announcementBoardNumber: number;
@@ -87,5 +89,4 @@ export interface ChatMessageList {
 	chatroomId: number;
 	senderId: string;
 	message: string;
-	sendDatetime: string;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { COUNT_PER_PAGE, COUNT_PER_SECTION } from "src/constant";
 
+import { COUNT_PER_PAGE, COUNT_PER_SECTION } from "src/constant";
 
 const usePagination = <T>(countPerPage : number , countPerSection : number) => {
     const [boardList, setBoardList] = useState<T[]>([]);
