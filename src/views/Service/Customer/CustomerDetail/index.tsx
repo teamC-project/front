@@ -20,14 +20,13 @@ import CustomerBoardComment from '../CustomerComment';
 
 import './style.css';
 
-//                    component                    //
+//                          component                           //
 export default function CustomerDetail() {
 
-    //              state               //
+//                          state                           //
     const { loginUserId, loginUserRole } = useUserStore();
     const { customerBoardNumber } = useParams();
     const [cookies] = useCookies();
-
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
     const [writeDate, setWriteDate] = useState<string>('');
@@ -35,15 +34,15 @@ export default function CustomerDetail() {
     const [contents, setContents] = useState<string>('');
     const [isSecret, setIsSecret] = useState<boolean>(false);
 
-    //                  function                    //
+//                          function                            //
     const navigator = useNavigate();
     const increaseViewCountResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 접수번호입니다.' :
-                    result.code === 'AF' ? '인증에 실패했습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 접수번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -63,10 +62,10 @@ export default function CustomerDetail() {
     const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 접수 번호입니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -98,10 +97,10 @@ export default function CustomerDetail() {
     const deleteCustomerBoardResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 접수번호입니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 접수번호입니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -112,7 +111,7 @@ export default function CustomerDetail() {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                   event handler                    //
+//                          event handler                           //
     const handleGoToList = () => {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
@@ -133,8 +132,7 @@ export default function CustomerDetail() {
             .then(deleteCustomerBoardResponse);
     };
 
-
-    //                   effect                        //
+//                          effect                          //
     useEffect(() => {
         if (!cookies.accessToken || !customerBoardNumber) return;
         increaseViewCountRequest(customerBoardNumber, cookies.accessToken)
@@ -143,8 +141,7 @@ export default function CustomerDetail() {
             .then(getCustomerBoardResponse);
     }, [cookies.accessToken, customerBoardNumber]);
 
-
-    //              render              //
+//                          render                          //
     return (
         <div className="customer-detail">
             <div className="customer-detail-title">{title}</div>
