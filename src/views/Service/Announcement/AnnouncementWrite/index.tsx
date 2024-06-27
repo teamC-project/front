@@ -94,13 +94,13 @@ export default function AnnouncementBoardWrite() {
                 </div>
             </div>
 			<div className='announcement-board-write-contents-box'>
-						<textarea
-						ref={contentsRef} 
-						onChange={onContentsChangeHandler}
-						name=""
-						className='announcement-board-write-contents-textarea'
-						id=""
-						placeholder='내용을 입력해주세요.'
+				<textarea
+				ref={contentsRef} 
+				onChange={onContentsChangeHandler}
+				name=""
+				className='announcement-board-write-contents-textarea'
+				id=""
+				placeholder='내용을 입력해주세요.'
 						/>
 						</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>

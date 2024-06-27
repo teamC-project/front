@@ -83,7 +83,7 @@ export default function QnaBoardDetail() {
 
         const {
             qnaBoardTitle,
-						qnaBoardStatus,
+			qnaBoardStatus,
             qnaBoardWriterId,
             qnaBoardWriteDatetime,
             qnaBoardViewCount,

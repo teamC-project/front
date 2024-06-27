@@ -119,10 +119,10 @@ export default function TrendDetail() {
 	const getTrendBoardResponse = (result: GetTrendBoardResponseDto | ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다.' :
-				result.code === 'VF' ? '잘못된 게시물 입니다.' :
-					result.code === 'AF' ? '인증에 실패 했습니다.' :
-						result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-							result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			result.code === 'VF' ? '잘못된 게시물 입니다.' :
+			result.code === 'AF' ? '인증에 실패 했습니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 		if (!result || result.code !== 'SU') {
 			alert(message);
@@ -191,16 +191,17 @@ export default function TrendDetail() {
 			})
 			.catch(requestErrorHandler);
 	};
-  const onLikeButtonClickHandler = () => {
+
+	const onLikeButtonClickHandler = () => {
     if (!cookies.accessToken) {
-      alert('로그인시 이용 가능합니다.');
-      navigator(AUTH_ABSOLUTE_PATH);
+		alert('로그인시 이용 가능합니다.');
+		navigator(AUTH_ABSOLUTE_PATH);
     }
     if (!trendBoardNumber) return;
 
     putTrendBoardLikeRequest(trendBoardNumber, cookies.accessToken)
-      .then(putTrendBoardLikeResponse);
-  };
+		.then(putTrendBoardLikeResponse);
+	};
 
 	// 										effect										//
 	useEffect(() => {
