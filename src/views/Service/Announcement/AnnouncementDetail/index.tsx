@@ -5,7 +5,11 @@ import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from 'src/stores';
 
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { getAnnouncementBoardRequest, increaseAnnouncementBoardViewCountRequest, deleteAnnouncementBoardRequest,  } from 'src/apis/announcement';
+import { 
+	getAnnouncementBoardRequest, 
+	increaseAnnouncementBoardViewCountRequest, 
+	deleteAnnouncementBoardRequest,  
+} from 'src/apis/announcement';
 
 import { GetAnnouncementBoardResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
