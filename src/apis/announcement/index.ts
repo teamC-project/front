@@ -2,7 +2,11 @@ import axios from "axios";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { PostAnnouncementBoardRequestDto, PutAnnouncementBoardRequestDto } from "./dto/request";
-import { GetAnnouncementBoardListResponseDto, GetAnnouncementBoardResponseDto, GetSearchAnnouncementBoardListResponseDto } from "./dto/response";
+import { 
+	GetAnnouncementBoardListResponseDto, 
+	GetAnnouncementBoardResponseDto, 
+	GetSearchAnnouncementBoardListResponseDto 
+} from "./dto/response";
 import { 
 	DELETE_ANNOUCEMENT_BOARD_DELETE_URL, 
 	GET_ANNOUNCEMENT_BOARD_DETAIL_URL, 
@@ -18,15 +22,14 @@ export const postAnnouncementBoardRequest = async (requestBody: PostAnnouncement
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
-export const putAnnouncementBoardRequest = async(announcementBoardNumber : number | string, requestBody : PutAnnouncementBoardRequestDto, accessToken : string 
-) => {
+export const putAnnouncementBoardRequest = async(announcementBoardNumber : number | string, requestBody : PutAnnouncementBoardRequestDto, accessToken : string ) => {
 	const result  = await axios.put(PUT_ANNOUNCEMENT_BOARD_PUT_URL(announcementBoardNumber) , requestBody, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getAnnouncementBoardListRequest = async (accessToken: string) => {
     const result = await axios.get(GET_ANNOUNCEMENT_BOARD_LIST_URL, bearerAuthorization(accessToken))
@@ -49,19 +52,19 @@ export const getAnnouncementBoardRequest = async (announcementBoardNumber : numb
 		.then(requestHandler<GetAnnouncementBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const increaseAnnouncementBoardViewCountRequest = async(announcementBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.patch(PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL(announcementBoardNumber), {}, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const deleteAnnouncementBoardRequest = async(announcementBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.delete(DELETE_ANNOUCEMENT_BOARD_DELETE_URL(announcementBoardNumber), bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 

@@ -1,20 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
-import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
+
+import { useChatStore } from 'src/stores';
+import useUserStore from "src/stores/use.store";
+
 import ResponseDto from 'src/apis/response.dto';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetSignInUserResponseDto } from 'src/apis/user/dto/response';
+import { getTotalVisitorsRequest, getVisitorsTodayRequest } from 'src/apis/loginLog';
+import { getTotalVisitorsResponseDto, getVisitorsTodayResponseDto } from 'src/apis/loginLog/dto/response';
+
 import ChatRoom from 'src/components/Chat';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_ABSOLUTE_PATH, CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_LIST_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_ABSOLUTE_PATH, QNA_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useChatStore } from 'src/stores';
-import useUserStore from "src/stores/use.store";
 import ChatroomDetail from 'src/views/Service/Chat';
+
+import { 
+    ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH,  
+    CUSTOMER_BOARD_LIST_ABSOLUTE_PATH, 
+    DESIGNER_BOARD_LIST_ABSOLUTE_PATH, 
+    MAIN_PATH, 
+    MY_PAGE_ABSOLUTE_PATH, 
+    QNA_BOARD_LIST_ABSOLUTE_PATH, 
+    TREND_BOARD_LIST_ABSOLUTE_PATH 
+} from 'src/constant';
+
 import "./style.css";
 
 //              component                   //
     function VisitorCount() {
+
 //                   state                 //
         const [totalVisitors, setTotalVisitors] = useState<number>(0);
         const [visitorsToday, setVisitorsToday] = useState<number>(0);
@@ -39,7 +53,7 @@ import "./style.css";
         }
     const { totalVisitors } = result as getTotalVisitorsResponseDto;
     setTotalVisitors(totalVisitors);
-    }
+    };
     
     const getVisitorsTodayResponse = (result: getVisitorsTodayResponseDto | ResponseDto | null) => {  
         const message = 
@@ -56,7 +70,8 @@ import "./style.css";
     }
     const { visitorsToday } = result as getVisitorsTodayResponseDto;
     setVisitorsToday(visitorsToday);
-    }
+    };
+
 //                   effect                     //
     useEffect(() => {
         const accessToken = cookie.accessToken;
@@ -64,6 +79,7 @@ import "./style.css";
         getTotalVisitorsRequest(accessToken).then(getTotalVisitorsResponse);
         getVisitorsTodayRequest(accessToken).then(getVisitorsTodayResponse);
     }, []);
+
 //                    render                    //
     return (
         <>

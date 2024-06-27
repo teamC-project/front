@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 import { GetDesignerBoardListResponseDto, GetSearchDesignerBoardListResponseDto } from 'src/apis/designerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchDesignerBoardListRequest } from 'src/apis/designerBoard';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks'
 
 //                    component                    //
 function ListItem ({

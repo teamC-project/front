@@ -23,7 +23,7 @@ export const postQnaBoardRequest = async (requestBody: PostQnaBoardRequestDto, a
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getQnaBoardListRequest  = async (accessToken : string) => {
 	const result = await axios
@@ -31,7 +31,7 @@ export const getQnaBoardListRequest  = async (accessToken : string) => {
 		.then(requestHandler<GetQnaBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getSearchQnaBoardListRequest = async (word: string, accessToken: string): Promise<GetSearchQnaBoardListResponseDto> => {
 	const config = { headers: { Authorization: `Bearer ${accessToken}` }, params: { word } };
@@ -49,14 +49,14 @@ export const getQnaBoardRequest =  async(qnaBoardNumber : number | string, acces
 		.then(requestHandler<GetQnaBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const putQnaBoardRequest = async(qnaBoardNumber : number | string, requestBody : PutQnaBoardRequestDto, accessToken : string) => {
 	const result = await axios.put(PUT_QNA_BOARD_PUT_URL(qnaBoardNumber), requestBody, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestHandler);
 	return result;
-}
+};
 
 export const postQnaBoardCommentRequest = async (qnaBoardNumber: number | string, requestBody: PostQnaBoardCommentRequestDto, accessToken: string) => {
     const result = await axios.post(POST_QNA_BOARD_COMMENT_WRITE_URL(qnaBoardNumber), requestBody, bearerAuthorization(accessToken))
@@ -77,7 +77,7 @@ export const deleteQnaBoardRequest = async (qnaBoardNumber : number | string, ac
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const deleteQnaBoardCommentRequest = async (qnaBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_QNA_BOARD_COMMENT_DELETE_URL(qnaBoardCommentNumber), bearerAuthorization(accessToken))
@@ -91,4 +91,4 @@ export const increaseViewCountRequest = async (qnaBoardNumber : number | string,
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
