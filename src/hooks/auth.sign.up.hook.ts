@@ -3,43 +3,52 @@ import { ChangeEvent, useState } from "react";
 import { useSnsStore } from "src/stores";
 
 import ResponseDto from "src/apis/response.dto";
-import { emailAuthCheckRequest, emailAuthRequest, idCheckRequest } from "src/apis/auth";
-import { EmailAuthCheckRequestDto, EmailAuthRequestDto, IdCheckRequestDto } from "src/apis/auth/dto/request";
+import { 
+    idCheckRequest, 
+    emailAuthRequest, 
+    emailAuthCheckRequest, 
+} from "src/apis/auth";
+
+import { 
+    IdCheckRequestDto, 
+    EmailAuthRequestDto, 
+    EmailAuthCheckRequestDto, 
+} from "src/apis/auth/dto/request";
+import { EMAILPATTERN, PASSWORDPATTERN } from "src/constant";
 
 const useAuthSignUp = () => {
 
-    //                  state                   //
-    const { snsId, joinPath, setValue } = useSnsStore();
+//                          state                           //
+    const { snsId, joinPath} = useSnsStore();
 
     const [id, setId] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
+    const [passwordCheck, setPasswordCheck] = useState<string>('');
 
-    const [gender, setGender] = useState<string>('');
     const [age, setAge] = useState<string>('');
-    const [companyName, setCompanyName] = useState<string>('');
     const [image, setImage] = useState<string>('');
+    const [gender, setGender] = useState<string>('');
+    const [companyName, setCompanyName] = useState<string>('');
 
     const [idButtonStatus, setIdButtonStatus] = useState<boolean>(false);
     const [emailButtonStatus, setEmailButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
     const [idMessage, setIdMessage] = useState<string>('');
-    const [passwordMessage, setPasswordMessage] = useState<string>('');
-    const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
     const [emailMessage, setEmailMessage] = useState<string>('');
+    const [imageMessage, setImageMessage] = useState<string>('');
+    const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
     const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-    const [imageMessage, setImageMessage] = useState<string>('');
+    const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
 
     const [isIdError, setIsIdError] = useState<boolean>(false);
     const [isEmailError, setIsEmailError] = useState<boolean>(false);
     const [isAuthNumberError, setIsAuthNumberError] = useState<boolean>(false);
 
-    //                  function                    //
-
+//                          function                            //
     const idCheckResponse = (result: ResponseDto | null) => {
         const idMessage = 
             !result ? '서버에 문제가 있습니다.' : 
@@ -49,12 +58,10 @@ const useAuthSignUp = () => {
             result.code === 'SU' ? '사용 가능한 아이디입니다.' : '';
 
         const idError = !(result && result.code === 'SU');
-        const idCheck = !idError;
 
         setIdMessage(idMessage);
         setIsIdError(idError);
     };
-
 
     const emailAuthResponse = (result: ResponseDto | null) => {
         const emailMessage = 
@@ -87,7 +94,7 @@ const useAuthSignUp = () => {
         setIsAuthNumberError(authNumberError);
     };
 
-  //                    event handler                  //
+//                    event handler                  //
     const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
 
@@ -115,11 +122,10 @@ const useAuthSignUp = () => {
         }
     };
 
-
     const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const {value} = event.target;
         setPassword(value)
-        const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
+        const passwordPattern = PASSWORDPATTERN;
         const isPassworPattern = passwordPattern.test(value);
         const passwordMessage =
             isPassworPattern ? '':
@@ -162,7 +168,7 @@ const useAuthSignUp = () => {
     };
 
     const onAgeChangeHandler = (age: string) => {
-    setAge(age);
+        setAge(age);
     };
 
     const onCompanyNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -187,15 +193,15 @@ const useAuthSignUp = () => {
     const onEmailButtonClickHandler = () => {
         if(!emailButtonStatus) return;
 
-        const emailPattern = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+        const emailPattern = EMAILPATTERN;
         const isEmailPattern = emailPattern.test(email);
         if(!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
             setIsEmailError(true);
             return;
-    }
-    const requestBody: EmailAuthRequestDto = { userEmail : email};
-    emailAuthRequest(requestBody).then(emailAuthResponse);
+        }
+        const requestBody: EmailAuthRequestDto = { userEmail : email};
+        emailAuthRequest(requestBody).then(emailAuthResponse);
     };
 
     const onAuthNumberButtonClickHandler = () => {
@@ -208,31 +214,31 @@ const useAuthSignUp = () => {
         };
         emailAuthCheckRequest(requsetBody).then(emailAuthCheckResponse);
     };  
-
+//                          render                           //
     return{
         id,
-        password,
-        passwordCheck,
-        email,
-        authNumber,
-        gender,
         age,
-        companyName,
         image,
-        joinPath,
+        email,
         snsId,
-
+        gender,
+        password,
+        joinPath,
+        authNumber,
+        companyName,
+        passwordCheck,
+        
         setId,
         setEmail,
         setAuthNumber,
 
         idMessage,
-        passwordMessage,
-        passwordCheckMessage,
         emailMessage,
+        imageMessage,
+        passwordMessage,
         authNumberMessage,
         companyNameMessage,
-        imageMessage,
+        passwordCheckMessage,
 
         setIdMessage,
         setEmailMessage,
@@ -254,14 +260,14 @@ const useAuthSignUp = () => {
         setIsAuthNumberError,
 
         onIdChangeHandler,
-        onPasswordChangeHandler,
-        onPasswordCheckChangeHandler,
-        onEmailChangeHandler,
-        onAuthNumberChangeHandler,
-        onGenderChangeHandler,
         onAgeChangeHandler,
-        onCompanyNameChangeHandler,
+        onEmailChangeHandler,
         onImageChangeHandler,
+        onGenderChangeHandler,
+        onPasswordChangeHandler,
+        onAuthNumberChangeHandler,
+        onCompanyNameChangeHandler,
+        onPasswordCheckChangeHandler,
         
         onIdButtonClickHandler,
         onEmailButtonClickHandler,
