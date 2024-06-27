@@ -8,10 +8,7 @@ import {
     postCustomerBoardCommentRequest,
     putCustomerBoardCommentRequest
 } from 'src/apis/customerBoard';
-import {
-    PostCustomerBoardCommentRequestDto,
-    PutCustomerBoardCommentRequestDto
-} from 'src/apis/customerBoard/dto/request';
+import { PostCustomerBoardCommentRequestDto, PutCustomerBoardCommentRequestDto } from 'src/apis/customerBoard/dto/request';
 import { GetCustomerBoardCommentListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 
@@ -21,10 +18,10 @@ import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
 import './style.css';
 
-//          component          //
+//                          component                           //
 export default function CustomerBoardComment() {
 
-    //          state          //
+//                          state                           //
     const { customerBoardNumber } = useParams();
     const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
     const [comment, setComment] = useState<string>('');
@@ -33,15 +30,14 @@ export default function CustomerBoardComment() {
     const [commentRows, setCommentRows] = useState<number>(1);
     const [replyCommentParentNumber] = useState<number | null>(null);
 
-    //          function          //
-
+//                          function                            //
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -60,10 +56,10 @@ export default function CustomerBoardComment() {
     const getCustomerBoardCommentsByBoardNumberResponse = (result: ResponseDto | GetCustomerBoardCommentListResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '입력 데이터가 올바르지 않습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -74,7 +70,7 @@ export default function CustomerBoardComment() {
         setCustomerBoardCommentList(customerBoardCommentList);
     }
 
-    //           event handler          //
+//                          event handler                           //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if (loginUserRole !== 'ROLE_CUSTOMER' && loginUserRole !== 'ROLE_DESIGNER' && loginUserRole !== 'ROLE_ADMIN') return;
         const comment = event.target.value;
@@ -97,11 +93,16 @@ export default function CustomerBoardComment() {
             .then(postCustomerBoardCommentResponse);
     };
 
-    //          component          //
+//                          component                           //
     function CommentItem(props: CustomerBoardCommentListItem) {
 
-        //          state          //
-        const { customerBoardCommentNumber, customerBoardCommentWriterId, customerBoardCommentContents, customerBoardCommentWriteDatetime } = props;
+//                          state                           //
+        const { 
+            customerBoardCommentNumber, 
+            customerBoardCommentWriterId, 
+            customerBoardCommentContents, 
+            customerBoardCommentWriteDatetime 
+        } = props;
 
         const [updateCommentContent, setUpdateCommentContent] = useState<string>('');
         const [updateOpen, setUpdateOpen] = useState<boolean>(false);
@@ -109,14 +110,14 @@ export default function CustomerBoardComment() {
         const [replyOpen, setReplyOpen] = useState<boolean>(false);
         const { designerIdClickHandler } = useCreateChatRoom();
 
-        //          function          //
+//                          function                            //
         const deleteCustomerBoardCommentResponse = (result: ResponseDto | null) => {
             const message =
                 !result ? '서버에 문제가 있습니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-                            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '삭제되었습니다.';
+                result.code === 'AF' ? '권한이 없습니다.' :
+                result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+                result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '삭제되었습니다.';
 
             alert(message);
 
@@ -128,10 +129,10 @@ export default function CustomerBoardComment() {
         const putCustomerBoardCommentResponse = (result: ResponseDto | null) => {
             const message =
                 !result ? '서버에 문제가 있습니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'VF' ? '모든 값을 입력해 주세요.' :
-                            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'AF' ? '권한이 없습니다.' :
+                result.code === 'VF' ? '모든 값을 입력해 주세요.' :
+                result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
             if (!result || result.code !== 'SU') {
                 alert(message);
@@ -144,7 +145,7 @@ export default function CustomerBoardComment() {
             getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardCommentsByBoardNumberResponse);
         };
 
-        //           event handler          //
+//                          event handler                           //
         const onCommentUpdateOpenHandler = () => {
             setUpdateOpen(!updateOpen);
             setUpdateCommentContent(customerBoardCommentContents);
@@ -200,7 +201,7 @@ export default function CustomerBoardComment() {
                 .then(postCustomerBoardCommentResponse);
         };
 
-        //          render          //
+//                          render                          //
         return (
             <div className='customer-board-comment'>
                 <div key={customerBoardCommentNumber} className='customer-board-comment-container'>
@@ -213,13 +214,13 @@ export default function CustomerBoardComment() {
                             </div>
                         )}
                     </div>
-
                     {updateOpen ? (
                         <div className='customer-board-comment-update'>
                             <textarea
                                 className='customer-board-comment-update-contents-textarea'
                                 value={updateCommentContent}
                                 onChange={onUpdateCommentChangeHandler}
+                                placeholder="댓글을 입력하세요"
                             />
                             <button onClick={onUpdateButtonClickHandler}>수정 완료</button>
                         </div>
@@ -228,7 +229,6 @@ export default function CustomerBoardComment() {
                             {customerBoardCommentContents}
                         </div>
                     }
-
                     <div className='customer-board-comment-footer'>
                         <div className='customer-board-comment-date'>{customerBoardCommentWriteDatetime}</div>
                         <button className='customer-board-comment-reply-button' onClick={onCommentReplyOpenHandler}>대댓글</button>
@@ -253,13 +253,13 @@ export default function CustomerBoardComment() {
         )
     }
 
-    //           effect          //
+//                          effect                          //
     useEffect(() => {
         if (!cookies.accessToken || customerBoardNumber === undefined) return;
         getCustomerBoardCommentsByBoardNumberRequest(customerBoardNumber, cookies.accessToken).then(getCustomerBoardCommentsByBoardNumberResponse);
     }, [customerBoardNumber, cookies.accessToken]);
 
-    //        render        //
+//                          render                          //
     return (
         <div id='customer-board-comment-wrapper'>
             <div className='customer-board-comment-inner'>
