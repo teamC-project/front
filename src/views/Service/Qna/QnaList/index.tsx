@@ -3,7 +3,13 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 
 import { QnaBoardListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { 
+	COUNT_PER_PAGE,
+	COUNT_PER_SECTION,
+	MAIN_PATH,
+	QNA_BOARD_DETAIL_ABSOLUTE_PATH, 
+	QNA_BOARD_WRITE_ABSOLUTE_PATH } 
+from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/QnaBoard/dto/response';
 
@@ -14,7 +20,7 @@ import { usePagination } from '../../../../hooks'
 import './style.css';
 import '../../../../App.css'
 
-//                    component                    //
+//							component							//
 function ListItem({
 	qnaBoardNumber,
 	qnaBoardTitle,
@@ -23,11 +29,11 @@ function ListItem({
 	qnaBoardWriteDatetime,
 	qnaBoardViewCount
 }: QnaBoardListItem) {
-	  //                    function                    //
+//							function							//
 	const navigator = useNavigate();
 	const onClickHandler = () => navigator(QNA_BOARD_DETAIL_ABSOLUTE_PATH(qnaBoardNumber));
 
-  //                    render                    //
+//							render							//
 	return (
     <div className='qna-board-list-table-tr' onClick={onClickHandler}>
 		<div className='qna-board-list-table-number'>{qnaBoardNumber}</div>
@@ -45,21 +51,25 @@ function ListItem({
     </div>
 	);
 }
-//                    component                    //
+
+//							component							//
 export default function QnaBoardList() {
 	const { loginUserRole } = useUserStore();
 	const [cookies] = useCookies();
 
-  //                    state                    //
+//							state							//
 	const {
-		setBoardList,
 		viewList,
 		pageList,
 		currentPage,
+
+		setBoardList,
 		setCurrentPage,
 		setCurrentSection,
+
 		changeBoardList,
 		changePage,
+		
 		onPageClickHandler,
 		onPreSectionClickHandler,
 		onNextSectionClickHandler
@@ -67,7 +77,8 @@ export default function QnaBoardList() {
 
 	const [searchWord, setSearchWord] = useState<string>('');
 	const [isToggleOn, setToggleOn] = useState<boolean>(false);
-	//                    function                    //
+
+//							function							//
 	const navigator = useNavigate();
 	const getQnaBoardListResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
 		const message =
@@ -122,10 +133,10 @@ export default function QnaBoardList() {
 			.then(result => getQnaBoardListResponse(result as GetQnaBoardListResponseDto | ResponseDto | null));
 	};
 
-  //                    event handler                    // 
+//							event handler							//
 	const onWriteButtonClickHandler = () => {
-    if (loginUserRole === 'ROLE_ADMIN') return;
-    navigator(QNA_BOARD_WRITE_ABSOLUTE_PATH);
+		if (loginUserRole === 'ROLE_ADMIN') return;
+		navigator(QNA_BOARD_WRITE_ABSOLUTE_PATH);
 	}	
 
 	const onToggleClickHandler = () => {
@@ -134,11 +145,11 @@ export default function QnaBoardList() {
 	}
 
 	const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
-    setSearchWord(searchWord);
-    if (!searchWord) {
-		fetchQnaBoardList();
-    }
+		const searchWord = event.target.value;
+		setSearchWord(searchWord);
+		if (!searchWord) {
+			fetchQnaBoardList();
+		}
 	};
 
 	const onSearchButtonClickHandler = () => {
@@ -155,16 +166,15 @@ export default function QnaBoardList() {
     if (event.key === 'Enter') onSearchButtonClickHandler();
 	};
 
-
-		//										effect										// 
+//							effect							//
 	useEffect(() => {
-    if (!cookies.accessToken) return;
-    fetchQnaBoardList();
+		if (!cookies.accessToken) return;
+		fetchQnaBoardList();
 	}, [cookies.accessToken]);
 
 useEffect(() => {
-	if (!cookies.accessToken) return;
-	getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
+		if (!cookies.accessToken) return;
+		getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
 }, [isToggleOn]);
 
 	//                    render                    //
