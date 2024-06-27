@@ -13,10 +13,10 @@ import ToastEditor from 'src/components/ToastEditor';
 
 import "./style.css";
 
-//              component               //
+//                          component                           //
 export default function CustomerWrite() {
 
-    //              state               //
+//                          state                           //
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
@@ -25,16 +25,16 @@ export default function CustomerWrite() {
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
     const editorRef = useRef<Editor | null>(null);
 
-    //              function               //
+//                          function                            //
     const navigator = useNavigate();
 
     const postCustomerBoardResponse = (result: ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -44,7 +44,7 @@ export default function CustomerWrite() {
         navigator(CUSTOMER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //              event handler               //
+//                          event handler                           //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -92,7 +92,7 @@ export default function CustomerWrite() {
             .then(postCustomerBoardResponse);
     };
 
-    //             effect               //
+//                          effect                          //
     useEffect(() => {
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_CUSTOMER') {
@@ -101,7 +101,7 @@ export default function CustomerWrite() {
         }
     }, [loginUserRole]);
 
-    //                    render                    //
+//                          render                          //
     return (
         <div id='customer-write-wrapper'>
             <div className='customer-write-top'>

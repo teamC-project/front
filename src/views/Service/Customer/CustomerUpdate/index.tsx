@@ -15,7 +15,7 @@ import "./style.css";
 
 export default function CustomerUpdate() {
 
-    //              state               //
+//                          state                           //
     const editorRef = useRef<Editor | null>(null);
     const [isSecret, setIsSecret] = useState<boolean>(false);
     const [title, setTitle] = useState('');
@@ -24,10 +24,10 @@ export default function CustomerUpdate() {
     const [cookies] = useCookies();
     const { customerBoardNumber } = useParams();
 
-    //              function                    //
+//                          function                            //
     const navigator = useNavigate();
 
-    //              event handler               //
+//                          event handler                           //
     const getCustomerBoardResponse = (result: GetCustomerBoardResponseDto | ResponseDto | null) => {
         if (result && result.code === 'SU') {
             const { customerBoardTitle, customerBoardContents, isSecret } = result as GetCustomerBoardResponseDto;
@@ -87,15 +87,14 @@ export default function CustomerUpdate() {
         }
     };
 
-
-    //                effect                //
+//                          effect                          //
     useEffect(() => {
         if (!cookies.accessToken || !customerBoardNumber) return;
         getCustomerBoardRequest(customerBoardNumber, cookies.accessToken)
             .then(getCustomerBoardResponse);
     }, [cookies.accessToken, customerBoardNumber]);
 
-    //                    render                    //
+//                          render                          //
     return (
         <div id='customer-update-wrapper'>
             <div className='customer-update-top'>
