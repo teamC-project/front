@@ -16,10 +16,10 @@ import "./style.css";
 export default function InfoDeleteUser() {
 
     //                  state                     //
+    const [userId, setUserId] = useState<string>('');
+
     const { loginUserId, loginUserRole } = useUserStore();
     const { setLoginUserId, setLoginUserRole } = useUserStore();
-
-    const [userId, setUserId] = useState<string>('');
 
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -29,7 +29,6 @@ export default function InfoDeleteUser() {
     const navigator = useNavigate();
 
     const deleteUserInfoResponse = (result: ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '권한이 없습니다.' :
@@ -37,25 +36,24 @@ export default function InfoDeleteUser() {
             result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        return;
-    }
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
         navigator(MAIN_PATH);
     };
 
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'AF' ? '인증에 실패했습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-        return;
-    }
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+            return;
+        }
 
     const { userId, userRole } = result as GetSignInUserResponseDto;
         setLoginUserId(userId);
@@ -68,14 +66,14 @@ export default function InfoDeleteUser() {
             alert('회원 탈퇴를 위해서는 안내 사항에 동의해야 합니다.')
         if (!isChecked || !cookies.accessToken)  return;
     
-    const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
-    if (!isConfirm) return;
+        const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
+            if (!isConfirm) return;
     
-    if (isChecked) {
-        try {
-            userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
-            alert('회원탈퇴가 완료되었습니다.');
-            navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+        if (isChecked) {
+            try {
+                userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
+                alert('회원탈퇴가 완료되었습니다.');
+                navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
         } catch (error) {
             alert('회원 탈퇴 중 오류가 발생했습니다.');
         return;

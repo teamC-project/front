@@ -1,18 +1,31 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { QNA_BOARD_LIST_ABSOLUTE_PATH, QNA_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
-import { getQnaBoardRequest, postQnaBoardCommentRequest, increaseViewCountRequest, deleteQnaBoardRequest } from 'src/apis/QnaBoard';
-import { useUserStore } from 'src/stores';
-import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
 
-//                    component                    //
+import { useUserStore } from 'src/stores';
+import ResponseDto from 'src/apis/response.dto';
+import { PostQnaBoardCommentRequestDto } from 'src/apis/QnaBoard/dto/request';
+import { 
+	getQnaBoardRequest, 
+	postQnaBoardCommentRequest, 
+	increaseViewCountRequest, 
+	deleteQnaBoardRequest } 
+from 'src/apis/QnaBoard';
+
+import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
+import { 
+	QNA_BOARD_LIST_ABSOLUTE_PATH, 
+	QNA_BOARD_UPDATE_ABSOLUTE_PATH, 
+	MAIN_PATH } 
+from 'src/constant';
+
+import './style.css';
+import'../../../../App.css'
+
+//							component							//
 export default function QnaBoardDetail() {
 
-    //              state               //
+//							state							//
     const { loginUserId, loginUserRole } = useUserStore();
     const { qnaBoardNumber } = useParams();
     const [cookies] = useCookies();
@@ -23,9 +36,8 @@ export default function QnaBoardDetail() {
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
     const [qnaBoardComment, setComment] = useState<string | null>(null);
-    const [commentRows, setCommentRows] = useState<number>(1);
 
-    //                  function                    //
+//							function							//
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
@@ -71,7 +83,7 @@ export default function QnaBoardDetail() {
 
         const {
             qnaBoardTitle,
-						qnaBoardStatus,
+			qnaBoardStatus,
             qnaBoardWriterId,
             qnaBoardWriteDatetime,
             qnaBoardViewCount,
@@ -122,14 +134,12 @@ export default function QnaBoardDetail() {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                   event handler                    //
+//                   event handler                    //
 		const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
 			if (status || loginUserRole !== "ROLE_ADMIN") return;
 			const qnaBoardComment = event.target.value;
 			setComment(qnaBoardComment);
 	
-			const commentRows = qnaBoardComment.split("\n").length;
-			setCommentRows(commentRows);
 		};
     const handleGoToList = () => {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
@@ -167,7 +177,7 @@ export default function QnaBoardDetail() {
             });
     };
 
-    //                   effect                        //
+//							effect							//
     useEffect(() => {
         if (!cookies.accessToken || !qnaBoardNumber) return;
         increaseViewCountRequest(qnaBoardNumber, cookies.accessToken)
@@ -176,7 +186,7 @@ export default function QnaBoardDetail() {
             .then(getQnaBoardResponse);
     }, [cookies.accessToken, qnaBoardNumber]);
 
-    //              render              //
+//							render							//
     return (
         <div className="qna-board-detail">
             <div className="qna-board-detail-title">{title}</div>
@@ -205,7 +215,7 @@ export default function QnaBoardDetail() {
 									className='qna-board-detail-comment-textarea'
 									placeholder='답글을 작성 해주세요.'
 									value = {qnaBoardComment === null ? "" : qnaBoardComment}
-								onChange={onCommentChangeHandler}
+									onChange={onCommentChangeHandler}
 								/>
 							</div>
 							<div className='primary-button' onClick = {onCommentSubmitClickHandler}>답글달기</div>

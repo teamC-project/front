@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import './style.css'
-import '../../../../App.css'
-import TrendBoardComment from '../TrendBoardComment'
-import { useUserStore } from 'src/stores'
 import { useNavigate, useParams } from 'react-router'
 import { useCookies } from 'react-cookie'
+
+
+import { useUserStore } from 'src/stores'
+
 import ResponseDto from 'src/apis/response.dto'
-import { AUTH_ABSOLUTE_PATH, MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, TREND_BOARD_UPDATE_ABSOLUTE_PATH } from 'src/constant'
-import { deleteTrendBoardLikeListRequest, deleteTrendBoardRequest, getTrendBoardLikeListRequest, getTrendBoardRequest, patchTrendBoardIncreaseViewCountRequest, putTrendBoardLikeRequest, } from 'src/apis/TrendBoard'
-import { GetTrendBoardLikeListResponseDto, GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
+
 import { requestErrorHandler } from 'src/apis'
 
-//														component														//
+import { 
+	AUTH_ABSOLUTE_PATH, 
+	MAIN_PATH, TREND_BOARD_LIST_ABSOLUTE_PATH, 
+	TREND_BOARD_UPDATE_ABSOLUTE_PATH } 
+from 'src/constant'
+
+import { 
+	deleteTrendBoardLikeListRequest, 
+	deleteTrendBoardRequest, 
+	getTrendBoardLikeListRequest, 
+	getTrendBoardRequest, 
+	patchTrendBoardIncreaseViewCountRequest,
+	putTrendBoardLikeRequest, } 
+from 'src/apis/TrendBoard'
+
+import { GetTrendBoardLikeListResponseDto, GetTrendBoardResponseDto } from 'src/apis/TrendBoard/dto/response'
+
+import TrendBoardComment from '../TrendBoardComment'
+import './style.css'
+import '../../../../App.css'
+
+//							component							//
 export default function TrendDetail() {
-	//										state										//
+
+//							state							//
 	const { loginUserId } = useUserStore();
 	const { trendBoardNumber } = useParams();
 	const [cookies] = useCookies();
@@ -24,18 +44,17 @@ export default function TrendDetail() {
 	const [trendBoardViewCount, setTrendBoardViewCount] = useState<number>(0);
 	const [trendBoardContents, setContents] = useState<string>('');
 	const [isLike, setIsLike] = useState<boolean>(false);
-	const [likeList, setLikeList] = useState<string[]>([]);
 
-	// 										function												//
+//							function							//
 	const navigator = useNavigate();
 
 	const increaseTrendBoardViewCountResponse = (result: ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다.' :
-				result.code === 'VF' ? '잘못된 게시물입니다.' :
-					result.code === 'AF' ? '인증에 실패했습니다.' :
-						result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-							result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			result.code === 'VF' ? '잘못된 게시물입니다.' :
+			result.code === 'AF' ? '인증에 실패했습니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 		if (!result || result.code !== 'SU') {
 			alert(message);
@@ -55,11 +74,11 @@ export default function TrendDetail() {
 	const putTrendBoardLikeResponse = (result: ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다.' :
-				result.code === 'VF' ? '잘못된 게시물 입니다.' :
-					result.code === 'AF' ? '인증에 실패했습니다. ' :
-						result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
-							result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-								result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			result.code === 'VF' ? '잘못된 게시물 입니다.' :
+			result.code === 'AF' ? '인증에 실패했습니다. ' :
+			result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 		if (!result || result.code !== 'SU') {
 			alert(message);
@@ -77,10 +96,10 @@ export default function TrendDetail() {
 	const getTrendBoardLikeListResponse = (result: GetTrendBoardLikeListResponseDto | ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다' :
-				result.code === 'VF' ? '잘못된 게시물 입니다.' :
-					result.code === 'AF' ? '인증에 실패 했습니다.' :
-						result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-							result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			result.code === 'VF' ? '잘못된 게시물 입니다.' :
+			result.code === 'AF' ? '인증에 실패 했습니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 		if (!result || result.code !== 'SU') {
 			alert(message);
@@ -93,7 +112,6 @@ export default function TrendDetail() {
 		}
 
 		const { likeList } = result as GetTrendBoardLikeListResponseDto;
-		setLikeList(likeList);
 		const isLiked = likeList.includes(loginUserId);
 		setIsLike(isLiked);
 	};
@@ -101,10 +119,10 @@ export default function TrendDetail() {
 	const getTrendBoardResponse = (result: GetTrendBoardResponseDto | ResponseDto | null) => {
 		const message =
 			!result ? '서버에 문제가 있습니다.' :
-				result.code === 'VF' ? '잘못된 게시물 입니다.' :
-					result.code === 'AF' ? '인증에 실패 했습니다.' :
-						result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-							result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			result.code === 'VF' ? '잘못된 게시물 입니다.' :
+			result.code === 'AF' ? '인증에 실패 했습니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
 		if (!result || result.code !== 'SU') {
 			alert(message);
@@ -173,16 +191,17 @@ export default function TrendDetail() {
 			})
 			.catch(requestErrorHandler);
 	};
-  const onLikeButtonClickHandler = () => {
+
+	const onLikeButtonClickHandler = () => {
     if (!cookies.accessToken) {
-      alert('로그인시 이용 가능합니다.');
-      navigator(AUTH_ABSOLUTE_PATH);
+		alert('로그인시 이용 가능합니다.');
+		navigator(AUTH_ABSOLUTE_PATH);
     }
     if (!trendBoardNumber) return;
 
     putTrendBoardLikeRequest(trendBoardNumber, cookies.accessToken)
-      .then(putTrendBoardLikeResponse);
-  };
+		.then(putTrendBoardLikeResponse);
+	};
 
 	// 										effect										//
 	useEffect(() => {

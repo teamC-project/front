@@ -1,14 +1,20 @@
 import React, { ChangeEvent, useEffect, useRef, useState }  from 'react';
-import './style.css';
+import { useCookies } from 'react-cookie';
+
+import { useNavigate } from 'react-router';
+
 import ToastEditor from 'src/components/ToastEditor';
 import { Editor } from '@toast-ui/react-editor';
+
 import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
+import ResponseDto from 'src/apis/response.dto';
+
 import { PostTrendBoardRequestDto } from 'src/apis/TrendBoard/dto/request';
 import { postTrendBoardRequest } from 'src/apis/TrendBoard';
-import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
+
 import { TREND_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css';
 
 //                    component                    //
 export default function TrendWrite() {
@@ -21,7 +27,6 @@ export default function TrendWrite() {
 	const [trendBoardUrlList ,setTrendBoardUrlList] = useState<{base64: string; url: string}[]>([]);
 	const [trendBoardThumbnailImage, setTrendBoardThumbnailImage] = useState<string>('');
 
-	
   //                    function                    //
 	const navigator = useNavigate();
 
@@ -115,7 +120,13 @@ export default function TrendWrite() {
 				</div>
 		</div>
 		<div className='trend-board-textarea-container'>
-			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} imageList={trendBoardUrlList} setImageList={onImageChangeHandler} />
+			<ToastEditor 
+			ref={editorRef} 
+			body={trendBoardContents} 
+			setBody={onTrendBoardContentsChangeHandler} 
+			imageList={trendBoardUrlList} 
+			setImageList={onImageChangeHandler} 
+			/>
 		</div>
 		<div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>

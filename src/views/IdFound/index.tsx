@@ -5,7 +5,7 @@ import { IdFoundResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/Inputbox';
 import AuthTopBar from 'src/components/authTopBar';
-import { useAuthSignUp } from 'src/hooks/AuthSignUpHook';
+import {  useAuthSignUp  } from '../../hooks';
 import "./style.css";
 
 //                    component                    //
@@ -29,10 +29,8 @@ export default function IdFound() {
 
         setId,
         setEmailMessage,
-        setIsEmailCheck,
         setIsEmailError,
         setAuthNumberMessage,
-        setIsAuthNumberCheck,
         setIsAuthNumberError,
         setEmail,
         setEmailButtonStatus,
@@ -54,7 +52,6 @@ export default function IdFound() {
         const emailError = !emailCheck;
 
         setEmailMessage(emailMessage);
-        setIsEmailCheck(emailCheck);
         setIsEmailError(emailError);
     };
 
@@ -70,7 +67,6 @@ export default function IdFound() {
         const authNumberError = !authNumberCheck;
 
         setAuthNumberMessage(authNumberMessage);
-        setIsAuthNumberCheck(authNumberCheck);
         setIsAuthNumberError(authNumberError);
     };
 
@@ -100,8 +96,6 @@ export default function IdFound() {
         const { value } = event.target;
         setEmail(value);
         setEmailButtonStatus(value !== '');
-        setIsEmailCheck(false);
-        setIsAuthNumberCheck(false);
         setEmailMessage('');
     }
 
@@ -109,7 +103,6 @@ export default function IdFound() {
         const { value } = event.target;
         setAuthNumber(value);
         setAuthNumberButtonStatus(value !== '');
-        setIsAuthNumberCheck(false);
         setAuthNumberMessage('');
     };
 
@@ -121,7 +114,6 @@ export default function IdFound() {
         if (!isEmailPattern) {
         setEmailMessage('이메일 형식이 아닙니다.');
         setIsEmailError(true);
-        setIsEmailCheck(false);
         return;
     }
 

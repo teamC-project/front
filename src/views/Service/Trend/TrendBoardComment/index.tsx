@@ -1,21 +1,28 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
-import { deleteTrendBoardCommentRequest, getTrendBoardCommentByBoardNumberListRequest, postTrendBoardCommentRequest, putTrendBoardCommentRequest } from 'src/apis/TrendBoard';
-import { PostTrendBoardCommentRequestDto ,PutTrendBoardCommentRequestDto } from 'src/apis/TrendBoard/dto/request';
-import ResponseDto from 'src/apis/response.dto';
+import { useParams } from 'react-router';
+
 import { useUserStore } from 'src/stores';
 import { TrendBoardCommentListItem } from 'src/types';
+
+import { 
+	deleteTrendBoardCommentRequest, 
+	getTrendBoardCommentByBoardNumberListRequest, 
+	postTrendBoardCommentRequest, putTrendBoardCommentRequest } 
+from 'src/apis/TrendBoard';
+import { PostTrendBoardCommentRequestDto ,PutTrendBoardCommentRequestDto } from 'src/apis/TrendBoard/dto/request';
+import ResponseDto from 'src/apis/response.dto';
+
 import './style.css';
 
 interface TrendBoardCommentListItemWithOriginal extends TrendBoardCommentListItem {
     originalTrendBoardCommentWriterId: string;
 }
 
-//                    component                    //
+//							component							//
 export default function TrendBoardComment() {
 
-    //                    state                    //
+//							state							//
     const { trendBoardNumber } = useParams();
     const [trendBoardCommentList, setTrendBoardCommentList] = useState<TrendBoardCommentListItemWithOriginal[]>([]);
     const [comment, setComment] = useState<string>('');
@@ -26,7 +33,7 @@ export default function TrendBoardComment() {
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
 
-    //                  function                    //
+//							function							//
 
     const postTrendBoardCommentResponse = (result: ResponseDto | null) => {
         const message =
@@ -71,7 +78,7 @@ export default function TrendBoardComment() {
         });
     };
 
-    //                   event handler                    //
+//							event handler							//
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const comment = event.target.value;
         setComment(comment);
@@ -142,7 +149,7 @@ export default function TrendBoardComment() {
             });
     };
 
-    //                   effect                    //
+//							effect							//
     useEffect(() => {
         if (!cookies.accessToken || trendBoardNumber === undefined) return;
         getTrendBoardCommentByBoardNumberListRequest(trendBoardNumber, cookies.accessToken).then((result) => {
@@ -152,7 +159,7 @@ export default function TrendBoardComment() {
         });
     }, [trendBoardNumber, cookies.accessToken]);
 
-    //              render              //
+//							render							//
     return (
         <div id='trend-board-comment-wrapper'>
             <div className='comment-inner'>

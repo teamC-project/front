@@ -62,27 +62,25 @@ export default function InfoCustomer() {
 
     //                     event handler                     //
     const onInfoCustomerUpdateClickHandler = async () => {
-        try {
-            const customerInfoUpdate = {
+        const customerInfoUpdate = {
             userGender: gender,
             userAge: age,
         };
 
-        updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate).then();
-        alert('개인정보가 업데이트되었습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+    const updateResult = await updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate);
+        if (updateResult) {
+            alert('개인정보가 업데이트되었습니다.');
+        } else {
+            alert('개인정보 업데이트에 실패했습니다.');
+        }
 
-    } catch (error) {
-        alert('개인정보 업데이트에 실패했습니다.');
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }
-
     };
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
         setIsAgeCheck(false);
-    
+
     const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
         setAgeMessage(ageMessage);
     };

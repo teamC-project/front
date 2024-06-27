@@ -1,16 +1,29 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
-import '../../../../App.css';
-import { TrendBoardListItem } from 'src/types';
-import { useNavigate } from 'react-router';
-import { TREND_BOARD_COUNT_PER_PAGE, TREND_BOARD_COUNT_PER_SECTION, MAIN_PATH, TREND_BOARD_DETAIL_ABSOLUTE_PATH, TREND_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router';
+
+import { TrendBoardListItem } from 'src/types';
+
+import { 
+	TREND_BOARD_COUNT_PER_PAGE, 
+	TREND_BOARD_COUNT_PER_SECTION, 
+	MAIN_PATH, 
+	TREND_BOARD_DETAIL_ABSOLUTE_PATH, 
+	TREND_BOARD_WRITE_ABSOLUTE_PATH } 
+from 'src/constant';
+
+import { useUserStore } from 'src/stores';
+
 import { GetSearchTrendBoardListResponseDto, GetTrendBoardListResponseDto } from 'src/apis/TrendBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
-import { usePagination } from 'src/hooks/pagination';
 
+import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
+import { usePagination } from '../../../../hooks'
+
+import './style.css';
+import '../../../../App.css';
+
+//							component							//
 function CardItem (
 	{
 	trendBoardNumber,
@@ -21,14 +34,14 @@ function CardItem (
 	trendBoardViewCount,
 	trendBoardThumbnailImage
 } : TrendBoardListItem) {
-// 										function 										//
+
+//							function							//
 const navigator =  useNavigate();
 
-// 										event handler										// 
-
+//							event handler							//
 const onClickHandler =  () => navigator(TREND_BOARD_DETAIL_ABSOLUTE_PATH(trendBoardNumber));
 
-//										render										/./
+//							render							//
 return (
 	<div className='trend-board-card' onClick={onClickHandler}>
 					<div className='trend-board-image' style={{backgroundImage : `url(${trendBoardThumbnailImage})` }}>
@@ -43,37 +56,40 @@ return (
 						<div className='trend-board-card-view-count'>{trendBoardViewCount}</div>
 					</div>
 				</div>
-)
-}
+)}
 
+//							component							//
 export default function TrendList() {
+
+//							state							//
 	const { loginUserRole } = useUserStore();
 	const [cookies] = useCookies();  
 	const {
-		setBoardList,
 		viewList,
 		pageList,
 		currentPage,
+
+		setBoardList,
 		setCurrentPage,
 		setCurrentSection,
+
 		changeBoardList,
 		changePage,
+
 		onPageClickHandler,
 		onPreSectionClickHandler,
 		onNextSectionClickHandler
 	}  = usePagination<TrendBoardListItem>(TREND_BOARD_COUNT_PER_PAGE , TREND_BOARD_COUNT_PER_SECTION)
-	const [isSearched, setIsSearched] = useState<boolean>(false);
 	const [searchWord, setSearchWord] = useState<string>('');
-	
+
+//							function							//
 	const navigator = useNavigate();
-
-
 
 	const getTrendBoardResponse = (result: GetTrendBoardListResponseDto | ResponseDto | null) => {
     const message = 
-		!result ? '서버에 문제가 있습니다.' :
-		result.code === 'AF' ? '인증에 실패했습니다.' :
-		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'AF' ? '인증에 실패했습니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
 		alert(message);
@@ -111,7 +127,6 @@ export default function TrendList() {
     changePage(updatedTrendBoardList, updatedTrendBoardList.length);
     setCurrentPage(!trendBoardList.length ? 0 : 1);
     setCurrentSection(!trendBoardList.length ? 0 : 1);
-    setIsSearched(false);
 	}
 
 	const fetchTrendBoardList = () => {
@@ -119,30 +134,26 @@ export default function TrendList() {
 		.then(result => getTrendBoardResponse(result as GetTrendBoardListResponseDto | ResponseDto | null));
 	}
 
+//							event handler							//
 	const onWriteButtonClickHandler = () => {
 		if (loginUserRole !== 'ROLE_ADMIN') return;
 		navigator(TREND_BOARD_WRITE_ABSOLUTE_PATH);
 	};
 
-
-
 	const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		const searchWord = event.target.value;
     setSearchWord(searchWord);
     if (!searchWord) {
-		setIsSearched(false);
 		getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
 		}
 	}
 
 	const onSearchButtonClickHandler = () => {
     if (!searchWord) {
-		setIsSearched(false);
 		getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
 		return;
     }
     if (!cookies.accessToken) return;
-    setIsSearched(true);
     getSearchTrendBoardListRequest(searchWord, cookies.accessToken)
 		.then(getSearchTrendBoardListResponse);
 	}
@@ -156,37 +167,36 @@ export default function TrendList() {
     fetchTrendBoardList();
 	}, [cookies.accessToken]);
 
-
 	useEffect(() => {
     if (!cookies.accessToken) return;
     getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
 	}, []);
 
-
+//							render							//
 	return (
     <div id='trend-board-wrapper'>
 		<div className='trend-board-list-search-box'>
-        <div className='trend-board-list-search-keyword'>검색 키워드</div>
-        <div className='trend-board-list-search-input-box'>
-			<input
-            className='trend-board-list-search-input'
-            placeholder='검색어를 입력하세요.'
-            value={searchWord}
-            onChange={onSearchWordChangeHandler}
-            onKeyDown={onSearchInputKeyDown}
-			/>
+			<div className='trend-board-list-search-keyword'>검색 키워드</div>
+			<div className='trend-board-list-search-input-box'>
+				<input
+				className='trend-board-list-search-input'
+				placeholder='검색어를 입력하세요.'
+				value={searchWord}
+				onChange={onSearchWordChangeHandler}
+				onKeyDown={onSearchInputKeyDown}
+				/>
         </div>
-        <div className='trend-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
-			검색
-        </div>
+			<div className='trend-board-list-search-input-button' onClick={onSearchButtonClickHandler}>
+				검색
+			</div>
 		</div>
 		<div className="trend-board-list-container">
-        <div className='trend-board-list'>
-			{viewList.map(item => <CardItem key={item.trendBoardNumber} {...item} />)}
-        </div>
+			<div className='trend-board-list'>
+				{viewList.map(item => <CardItem key={item.trendBoardNumber} {...item} />)}
+			</div>
 		</div>
 		<div className='trend-board-list-bottom'>
-        <div style={{ width: '299px' }}></div>
+			<div style={{ width: '299px' }}></div>
         <div className='trend-board-list-pagenation'>
 			<div className='page-left' onClick={onPreSectionClickHandler}></div>
 			<div className='trend-board-list-page-box'>

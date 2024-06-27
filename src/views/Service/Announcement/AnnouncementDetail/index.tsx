@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import './style.css';
-import { useNavigate, useParams } from 'react-router';
-import { GetAnnouncementBoardResponseDto } from 'src/apis/announcement/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import  { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { getAnnouncementBoardRequest, increaseAnnouncementBoardViewCountRequest, deleteAnnouncementBoardRequest,  } from 'src/apis/announcement';
+import { useNavigate, useParams } from 'react-router';
+
 import { useUserStore } from 'src/stores';
 
-//                    component                    //
+import { 
+	ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH,
+	ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH, 
+	MAIN_PATH } 
+from 'src/constant';
+import { 
+	getAnnouncementBoardRequest, 
+	increaseAnnouncementBoardViewCountRequest, 
+	deleteAnnouncementBoardRequest,  
+} from 'src/apis/announcement';
+
+import { GetAnnouncementBoardResponseDto } from 'src/apis/announcement/dto/response';
+import ResponseDto from 'src/apis/response.dto';
+
+import './style.css';
+import '../../../../App.css'
+
+//							component							//
 export default function AnnouncementBoardDetail() {
 
-    //              state               //
+//							state							//
     const { loginUserId } = useUserStore();
     const { announcementBoardNumber } = useParams();
     const [cookies] = useCookies();
-
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
     const [writeDate, setWriteDate] = useState<string>('');
@@ -23,7 +35,7 @@ export default function AnnouncementBoardDetail() {
     const [contents, setContents] = useState<string>('');
 
 
-    //                  function                    //
+ //							function							//
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
@@ -82,8 +94,6 @@ export default function AnnouncementBoardDetail() {
         setContents(announcementBoardContents);
     };
 
-
-
     const deleteAnnouncementBoardResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -100,7 +110,7 @@ export default function AnnouncementBoardDetail() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                   event handler                    //
+//							event handler							//
     const handleGoToList = () => {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
@@ -122,7 +132,7 @@ export default function AnnouncementBoardDetail() {
             });
     };
 
-    //                   effect                        //
+//							effect							//
     useEffect(() => {
         if (!cookies.accessToken || !announcementBoardNumber) return;
         increaseAnnouncementBoardViewCountRequest(announcementBoardNumber, cookies.accessToken)
@@ -131,7 +141,7 @@ export default function AnnouncementBoardDetail() {
             .then(getAnnouncementBoardResponse);
     }, [cookies.accessToken, announcementBoardNumber]);
 
-    //              render              //
+//							render							//
     return (
         <div className="announcement-board-detail">
             <div className="announcement-board-detail-title">{title}</div>

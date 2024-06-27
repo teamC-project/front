@@ -1,24 +1,29 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
+
+import { useUserStore } from 'src/stores';
+
 import ResponseDto from 'src/apis/response.dto';
 import {  QNA_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
 import { postQnaBoardRequest } from 'src/apis/QnaBoard';
 import { PostQnaBoardRequestDto } from 'src/apis/QnaBoard/dto/request';
 
-//              component               //
+import './style.css';
+import '../../../../App.css'
+
+//							component							//
 export default function QnaBoardWrite() {
 
-    //              state               //
+//							state							//
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [qnaBoardTitle, setQnaBoardTitle] = useState<string>('');
     const [qnaBoardContents, setQnaBoardContents] = useState<string>('');
 
-    //              function               //
+//							function							//
     const navigator = useNavigate();
 
     const postQnaBoardResponse =(result: ResponseDto | null) => {
@@ -37,8 +42,7 @@ export default function QnaBoardWrite() {
         navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-
-    //              event handler               //
+//							event handler							//
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const qnaBoardTitle = event.target.value;
         setQnaBoardTitle(qnaBoardTitle);
@@ -54,22 +58,17 @@ export default function QnaBoardWrite() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     };
 
-
-
-
     const onPostButtonClickHandler = () => {
         if (!qnaBoardTitle.trim() || !qnaBoardContents.trim()) {
-					alert("제목과 내용 모두 입력해주세요.");
-					return;
-				}
+				alert("제목과 내용 모두 입력해주세요.");
+				return;
+		}
         if (!cookies.accessToken) return;
-
         const requestBody: PostQnaBoardRequestDto = { qnaBoardTitle ,qnaBoardContents };
-
         postQnaBoardRequest(requestBody, cookies.accessToken).then(postQnaBoardResponse);
     };
 
-    //             effect               //
+//							effect							//
     useEffect(() => {
         if (loginUserRole === 'ROLE_ADMIN') {
             navigator(QNA_BOARD_LIST_ABSOLUTE_PATH);
@@ -77,23 +76,27 @@ export default function QnaBoardWrite() {
         }
     }, [loginUserRole]);
 
-    //                    render                    //
+//							render							//
     return (
         <div id='qna-write-wrapper'>
             <div className='qna-write-top'>
                 <div className='qna-write-title-box'>
                     <div className='qna-write-title'>제목</div>
-                    <input className='qna-write-title-input' placeholder='제목을 입력해주세요.' value={qnaBoardTitle} onChange={onTitleChangeHandler}></input>
+                    <input 
+					className='qna-write-title-input' 
+					placeholder='제목을 입력해주세요.' 
+					value={qnaBoardTitle} 
+					onChange={onTitleChangeHandler}/>
                 </div>
             </div>
 			<textarea
-        ref={contentsRef}
-        className="qna-write-contents-textarea"
-        placeholder="내용을 입력해주세요. / 1000자" 
-        maxLength={1000}
-        value={qnaBoardContents}
-        onChange={onContentsChangeHandler}
-        />
+				ref={contentsRef}
+				className="qna-write-contents-textarea"
+				placeholder="내용을 입력해주세요. / 1000자" 
+				maxLength={1000}
+				value={qnaBoardContents}
+				onChange={onContentsChangeHandler}
+			/>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );

@@ -12,8 +12,6 @@ import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
 import AuthTopBar from 'src/components/authTopBar';
 
-import { useAuthSignUp } from 'src/hooks/AuthSignUpHook';
-
 import { useSnsStore } from 'src/stores';
 
 import { 
@@ -27,6 +25,7 @@ import {
     from 'src/constant';
 
 import "./style.css";
+import { useAuthSignUp } from 'src/hooks';
 
 export function Main() {
     return (
@@ -186,7 +185,7 @@ export function ChooseSingUp() {
 
     //                          state                          //
     const { snsId, joinPath, setValue } = useSnsStore();
-    
+
     const [ params ] = useSearchParams();
 
     //                          function                          //

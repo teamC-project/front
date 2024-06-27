@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, CHANGE_PASSWORD_ABSOLUTE_PATH } from 'src/constant';
+
 import InputBox from 'src/components/Inputbox';
 
 import { ChangePasswordRequestDto, } from 'src/apis/user/dto/request';
@@ -16,8 +17,8 @@ export default function PasswordChangePage() {
 
     //                  state                //
     const [password, setPassword] = useState<string>('');
-    const [passwordChange, setPasswordChange] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
+    const [passwordChange, setPasswordChange] = useState<string>('');
     const [passwordMessage, setPasswordMessage] = useState<string>('');
     const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
 
@@ -38,15 +39,15 @@ export default function PasswordChangePage() {
             result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    const isSuccess = result && result.code === 'SU'
+        const isSuccess = result && result.code === 'SU'
         if (!isSuccess) {
             alert(message);
             return;
-    }
+        }
         if (passwordChange !== passwordCheck) {
             alert('비밀번호가 일치하지 않습니다.')
             return;
-    }
+        }
 
     };
 
