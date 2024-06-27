@@ -14,6 +14,7 @@ import {
     EmailAuthRequestDto, 
     EmailAuthCheckRequestDto, 
 } from "src/apis/auth/dto/request";
+import { EMAILPATTERN, PASSWORDPATTERN } from "src/constant";
 
 const useAuthSignUp = () => {
 
@@ -124,7 +125,7 @@ const useAuthSignUp = () => {
     const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const {value} = event.target;
         setPassword(value)
-        const passwordPattern = /^(?=.*[a-zA-Z0-9])(?=.*[0-9]).{8,15}$/;
+        const passwordPattern = PASSWORDPATTERN;
         const isPassworPattern = passwordPattern.test(value);
         const passwordMessage =
             isPassworPattern ? '':
@@ -192,7 +193,7 @@ const useAuthSignUp = () => {
     const onEmailButtonClickHandler = () => {
         if(!emailButtonStatus) return;
 
-        const emailPattern = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+        const emailPattern = EMAILPATTERN;
         const isEmailPattern = emailPattern.test(email);
         if(!isEmailPattern) {
             setEmailMessage('이메일 형식이 아닙니다.');
