@@ -13,10 +13,10 @@ import { ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_LIST_ABSOLU
 
 import "./style.css";
 
-//                  component                   //
+//							component							//
 export default function AnnouncementBoardUpdate() {
 
-    //              state               //
+//							state							//
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserId, loginUserRole } = useUserStore();
     const { announcementBoardNumber } = useParams();
@@ -24,7 +24,7 @@ export default function AnnouncementBoardUpdate() {
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
 
-    //              function               //
+//							function							//
     const navigator = useNavigate();
 
     const getAnnouncementBoardResponse = (result: GetAnnouncementBoardResponseDto | ResponseDto | null) => {
@@ -50,8 +50,7 @@ export default function AnnouncementBoardUpdate() {
         
         setTitle(announcementBoardTitle);
         setContents(announcementBoardContents);
-
-    };
+	};
 
     const putAnnouncementBoardResponse = (result: ResponseDto | null) => {
         const message = 
@@ -69,7 +68,7 @@ export default function AnnouncementBoardUpdate() {
         navigator(ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH(announcementBoardNumber));
     };
 
-    //              event handler               //
+//              event handler               //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -90,12 +89,12 @@ export default function AnnouncementBoardUpdate() {
         if (!title.trim() || !contents.trim())  {
 			alert("제목과 내용 모두 입력해주세요.");
 			return;
-				}
+		}
         const requestBody: PutAnnouncementBoardRequestDto = { announcementBoardTitle: title, announcementBoardContents: contents };
         putAnnouncementBoardRequest(announcementBoardNumber, requestBody, cookies.accessToken).then(putAnnouncementBoardResponse);
     };
 
-    //             effect               //
+//							effect							//
     let effectFlag = false;
     useEffect(() => {
         if (!announcementBoardNumber || !cookies.accessToken || !loginUserRole || effectFlag) return;
@@ -108,17 +107,29 @@ export default function AnnouncementBoardUpdate() {
         getAnnouncementBoardRequest(announcementBoardNumber, cookies.accessToken).then(getAnnouncementBoardResponse);
     }, [loginUserRole]);
 
-    //                    render                    //
+//							render							//
     return (
         <div id='announcement-board-update-wrapper'>
             <div className='announcement-board-update-top'>
                 <div className='announcement-board-update-title-box'>
                     <div className='announcement-board-update-title'>제목</div>
-                    <input className='announcement-board-update-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}/>
+                    <input 
+					className='announcement-board-update-title-input' 
+					placeholder='제목을 입력해주세요.' 
+					value={title} 
+					onChange={onTitleChangeHandler}
+					/>
                 </div>
             </div>
             <div className='announcement-board-update-contents-box'>
-                <textarea ref={contentsRef} className='announcement-board-update-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
+                <textarea 
+				ref={contentsRef} 
+				className='announcement-board-update-contents-textarea' 
+				placeholder='내용을 입력해주세요. / 1000자' 
+				maxLength={1000}
+				value={contents} 
+				onChange={onContentsChangeHandler} 
+				/>
             </div>
             <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>

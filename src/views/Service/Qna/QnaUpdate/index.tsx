@@ -1,9 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-
-
-
 import { useUserStore } from 'src/stores';
 
 import { GetQnaBoardResponseDto } from 'src/apis/QnaBoard/dto/response';
@@ -15,10 +12,10 @@ import { getQnaBoardRequest, putQnaBoardRequest } from 'src/apis/QnaBoard';
 
 import './style.css';
 import'../../../../App.css';
-//                  component                   //
+//							component							//
 export default function QnaBoardUpdate() {
 
-    //              state               //
+//							state							//
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const { qnaBoardNumber } = useParams<{ qnaBoardNumber: string }>();
@@ -26,7 +23,7 @@ export default function QnaBoardUpdate() {
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
 
-    //              function               //
+//							function							//
     const navigator = useNavigate();
 
     const getQnaBoardResponse = (result: GetQnaBoardResponseDto | ResponseDto | null) => {
@@ -67,8 +64,7 @@ export default function QnaBoardUpdate() {
 
     };
 
-
-    //              event handler               //
+//							event handler							//
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -96,9 +92,7 @@ export default function QnaBoardUpdate() {
             .then(result => putQnaBoardResponse(result as ResponseDto));
     };
 
-    
-
-    //             effect               //
+//							effect							//
     let effectFlag = false;
     useEffect(() => {
         if (!qnaBoardNumber || !cookies.accessToken || !loginUserRole || effectFlag) return;
@@ -113,7 +107,7 @@ export default function QnaBoardUpdate() {
         });
     }, [qnaBoardNumber, cookies.accessToken, loginUserRole]);
 
-    //                    render                    //
+//							render							//
     return (
         <div id='qna-write-wrapper'>
             <div className='qna-write-top'>
@@ -123,7 +117,14 @@ export default function QnaBoardUpdate() {
                 </div>
             </div>
             <div className='qna-write-contents-box'>
-                <textarea ref={contentsRef} className='qna-write-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
+                <textarea 
+				ref={contentsRef}
+				className='qna-write-contents-textarea' 
+				placeholder='내용을 입력해주세요. / 1000자' 
+				maxLength={1000} 
+				value={contents} 
+				onChange={onContentsChangeHandler}
+				/>
             </div>
             <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>

@@ -120,7 +120,13 @@ export default function TrendWrite() {
 				</div>
 		</div>
 		<div className='trend-board-textarea-container'>
-			<ToastEditor ref={editorRef} body={trendBoardContents} setBody={onTrendBoardContentsChangeHandler} imageList={trendBoardUrlList} setImageList={onImageChangeHandler} />
+			<ToastEditor 
+			ref={editorRef} 
+			body={trendBoardContents} 
+			setBody={onTrendBoardContentsChangeHandler} 
+			imageList={trendBoardUrlList} 
+			setImageList={onImageChangeHandler} 
+			/>
 		</div>
 		<div className='trend-board-write-footer' >
         <div className='trend-board-button-container'>

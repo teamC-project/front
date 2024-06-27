@@ -54,6 +54,7 @@ export interface PasswordResetRequestDto {
     userEmail : string;
     authNumber : string;
 }
+
 export interface SetUpPasswordRequestDto {
     userId: string;
     userPassword : string;

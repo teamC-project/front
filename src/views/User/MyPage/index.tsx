@@ -2,7 +2,13 @@ import { useNavigate } from 'react-router';
 
 import { useUserStore } from 'src/stores';
 
-import { CHANGE_PASSWORD_ABSOLUTE_PATH, DELETE_INFO_ABSOLUTE_PATH, UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, UPDATE_DESIGNER_INFO_ABSOLUTE_PATH,  } from 'src/constant';
+import { 
+    CHANGE_PASSWORD_ABSOLUTE_PATH, 
+    DELETE_INFO_ABSOLUTE_PATH, 
+    UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH, 
+    UPDATE_DESIGNER_INFO_ABSOLUTE_PATH,  
+    } 
+    from 'src/constant';
 
 import "./style.css";
 

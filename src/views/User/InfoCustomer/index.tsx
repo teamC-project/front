@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 
-
 import UserSelectBox from 'src/components/UserSelectBox';   
 import InputBox from 'src/components/Inputbox';
 
@@ -36,7 +35,6 @@ export default function InfoCustomer() {
     const navigator = useNavigate();
 
     const getInfoUpdate = (result: GetSignInUserResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '올바르지 않은 권한입니다.' :
@@ -44,55 +42,53 @@ export default function InfoCustomer() {
             result.code === 'NB' ? '존재하지 않는 권한입니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-    }
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+        }
 
-    const { userId, userGender, userAge } = result as CustomerInfoResponseDto;
+        const { userId, userGender, userAge } = result as CustomerInfoResponseDto;
         if (userId !== loginUserId) {
             alert('권한이 없습니다.');
             navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-    }
-    setGender(userGender);
-    setAge(userAge);
+            return;
+        }
+        setGender(userGender);
+        setAge(userAge);
     };
 
     //                     event handler                     //
     const onInfoCustomerUpdateClickHandler = async () => {
-        try {
-            const customerInfoUpdate = {
+        const customerInfoUpdate = {
             userGender: gender,
             userAge: age,
         };
 
-        updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate).then();
-        alert('개인정보가 업데이트되었습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-
-    } catch (error) {
+        const updateResult = await updateCustomerInfoRequest(cookies.accessToken, customerInfoUpdate);
+        if (updateResult) {
+            alert('개인정보가 업데이트되었습니다.');
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+        }
         alert('개인정보 업데이트에 실패했습니다.');
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-    }
-
     };
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
         setIsAgeCheck(false);
-    
-    const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
-        setAgeMessage(ageMessage);
+
+        const ageMessage = isAgeCheck ? '' : value ? '연령대를 선택해주세요.' : '';
+            setAgeMessage(ageMessage);
     };
 
     const onGenderChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-            setGender(value);
-            setIsGenderCheck(true);
-            setGenderMessage(genderMessage);
-        };
+        setGender(value);
+        setIsGenderCheck(true);
+        setGenderMessage(genderMessage);
+    };
 
     //                     effect                     //
     useEffect(() => {

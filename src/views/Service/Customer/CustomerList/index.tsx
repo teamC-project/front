@@ -19,7 +19,7 @@ import {
 
 import './style.css';
 
-//                    component                    //
+//                          component                           //
 function ListItem({
     customerBoardNumber,
     customerBoardTitle,
@@ -40,11 +40,11 @@ function ListItem({
         return metrics.width;
     };
 
-    //              function              //
+//                          function                            //
     const navigator = useNavigate();
     const { loginUserRole, loginUserId } = useUserStore();
 
-    //              event handler              //
+//                          event handler                           //
     const isCustomer = loginUserRole === 'ROLE_CUSTOMER';
     const isNotAuthor = isCustomer && (loginUserId !== customerBoardWriterId);
     const isSecretPost = secret && isNotAuthor;
@@ -74,7 +74,7 @@ function ListItem({
 
     const title = isSecretPost ? '비밀글입니다' : truncatedTitle;
 
-    //              render              //
+//                          render                          //
     return (
         <div className='customerboard-list-table-tr' onClick={onClickHandler}>
             <div className='customerboard-list-table-board-number'>{customerBoardNumber}</div>
@@ -88,10 +88,10 @@ function ListItem({
     );
 }
 
-//                    component                    //
+//                          component                           //
 export default function CustomerList() {
 
-    //                    state                    //
+//                          state                           //
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
@@ -110,16 +110,15 @@ export default function CustomerList() {
         onNextSectionClickHandler
     } = usePagination<CustomerBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION)
 
-
-    //                    function                    //
+//                          function                            //
     const navigator = useNavigate();
 
     const getSearchCustomerBoardListResponse = (result: GetSearchCustomerBoardListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '검색어를 입력하세요.' :
-                    result.code === 'AF' ? '인증에 실패했습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '검색어를 입력하세요.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -139,11 +138,11 @@ export default function CustomerList() {
         setCurrentSection(!updatedCustomerBoardList.length ? 0 : 1);
         setIsSearched(false);
     };
-    //                    event handler                    //
+
+//                          event handler                           //
     const onWriteButtonClickHandler = () => {
         navigator(CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH);
     };
-
 
     const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const searchWord = event.target.value;
@@ -179,16 +178,14 @@ export default function CustomerList() {
             .then(getSearchCustomerBoardListResponse);
     }, [isSearched, searchWord, cookies.accessToken]);
 
-    //                    effect                    //
+//                          effect                          //
     useEffect(() => {
         if (!cookies.accessToken) return;
         getSearchCustomerBoardListRequest('', cookies.accessToken)
             .then(getSearchCustomerBoardListResponse);
     }, [cookies.accessToken]);
 
-
-
-    //                    render                    //
+//                          render                          //
     return (
         <div className='customerboard-list-wrapper'>
             <div className='customerboard-list-search-box'>
