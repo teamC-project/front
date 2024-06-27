@@ -1,18 +1,22 @@
 import axios from "axios";
-import ResponseDto from "../response.dto";
+
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
+import ResponseDto from "../response.dto";
+
 import {
     PostCustomerBoardCommentRequestDto,
     PostCustomerBoardRequestDto,
     PutCustomerBoardCommentRequestDto,
     PutCustomerBoardRequestDto
 } from "./dto/request";
+
 import {
     GetCustomerBoardCommentListResponseDto,
     GetCustomerBoardListResponseDto,
     GetCustomerBoardResponseDto,
     GetSearchCustomerBoardListResponseDto
 } from "./dto/response";
+
 import {
     DELETE_CUSTOMER_BOARD_COMMENT_DELETE_URL,
     DELETE_CUSTOMER_BOARD_DELETE_URL,
