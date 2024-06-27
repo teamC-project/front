@@ -22,7 +22,7 @@ import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
 import './style.css';
 import '../../../../App.css'
 
-//                    component                    //
+//							component							//
 function ListItem ({
 	announcementBoardNumber,
 	announcementBoardTitle,
@@ -31,10 +31,10 @@ function ListItem ({
 	announcementBoardViewCount
 }: AnnouncementBoardListItem) {
 
-  //              function              //
+	//							function							//
 	const navigator = useNavigate();
 
-  //              event handler              //
+	//							event handler							//
 	const onClickHandler = () => navigator(ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH(announcementBoardNumber));
 
   //              render              //
@@ -49,40 +49,43 @@ function ListItem ({
 	);
 }
 
-//                    component                    //
+//							component							//
 export default function AnnouncementBoardList() {
 
-  //                    state                    //
+//							state							//
 	const { loginUserRole } = useUserStore();
 	const [cookies] = useCookies();
 	const {
-		setBoardList,
 		viewList,
 		pageList,
 		currentPage,
+
 		setCurrentPage,
 		setCurrentSection,
+		setBoardList,
+
 		changeBoardList,
 		changePage,
+
 		onPageClickHandler,
 		onPreSectionClickHandler,
 		onNextSectionClickHandler
 	}  = usePagination<AnnouncementBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 	const [searchWord, setSearchWord] = useState<string>('');
 
-  //                    function                    //
+//							function							//
 	const navigator = useNavigate();
 
 	const getAnnouncementBoardResponse = (result: GetAnnouncementBoardListResponseDto | ResponseDto | null) => {
     const message =
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'AF' ? '인증에 실패했습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+		!result ? '서버에 문제가 있습니다.' :
+		result.code === 'AF' ? '인증에 실패했습니다.' :
+		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-    alert(message);
-    if (result?.code === 'AF') navigator(MAIN_PATH);
-    return;
+		alert(message);
+		if (result?.code === 'AF') navigator(MAIN_PATH);
+		return;
     }
 
     const { announcementBoardList } = result as GetAnnouncementBoardListResponseDto;
@@ -100,9 +103,9 @@ export default function AnnouncementBoardList() {
 		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-    alert(message);
-    if (result?.code === 'AF') navigator(MAIN_PATH);
-    return;
+		alert(message);
+		if (result?.code === 'AF') navigator(MAIN_PATH);
+		return;
     }
 
     const { announcementBoardList } = result as GetSearchAnnouncementBoardListResponseDto;
@@ -116,27 +119,25 @@ export default function AnnouncementBoardList() {
 	};
 
 	const fetchAnnouncementBoardList = () => {
-    getSearchAnnouncementBoardListRequest('', cookies.accessToken).then(getAnnouncementBoardResponse);
+		getSearchAnnouncementBoardListRequest('', cookies.accessToken).then(getAnnouncementBoardResponse);
 	};
 
-  //                    event handler                    //
+	//							event handler							//
 	const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_ADMIN') return;
-    navigator(ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH);
+		if (loginUserRole !== 'ROLE_ADMIN') return;
+		navigator(ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH);
 	};
 
 	const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
-    if (!searchWord) {
-    fetchAnnouncementBoardList(); 
-    }
+    if (!searchWord) fetchAnnouncementBoardList(); 
 	};
 
 	const onSearchButtonClickHandler = () => {
-    if (!searchWord) {
-    fetchAnnouncementBoardList();
-    return; 
+    if (!searchWord) {	
+		fetchAnnouncementBoardList();
+		return; 
     }
     if (!cookies.accessToken) return;
     getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
@@ -146,10 +147,10 @@ export default function AnnouncementBoardList() {
     if (event.key === 'Enter') onSearchButtonClickHandler();
 	};
 
-  //                    effect                    //
+//							effect							//
 	useEffect(() => {
-    if (!cookies.accessToken) return;
-    fetchAnnouncementBoardList();
+		if (!cookies.accessToken) return;
+		fetchAnnouncementBoardList();
 	}, [cookies.accessToken]);
 
   //                    render                    //

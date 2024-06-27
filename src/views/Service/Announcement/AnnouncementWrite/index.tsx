@@ -1,4 +1,4 @@
-import  { ChangeEvent,useEffect,useRef, useState } from 'react';
+import React,  { ChangeEvent,useEffect,useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 
@@ -13,18 +13,17 @@ import { postAnnouncementBoardRequest } from 'src/apis/announcement';
 import'./style.css'
 import"../../../../App.css"
 
-//              component               //
+//							component							//
 export default function AnnouncementBoardWrite() {
 
-    //              state               //
+//							state							//
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
     const [announcementBoardTitle, setAnnouncementBoardTitle] = useState<string>('');
     const [announcementBoardContents, setAnnouncementBoardContents] = useState<string>('');
 
-
-    //              function               //
+//							function							//
     const navigator = useNavigate();
 
     const postAnnouncementBoardResponse =(result: ResponseDto | null) => {
@@ -43,8 +42,7 @@ export default function AnnouncementBoardWrite() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-
-    //              event handler               //
+//							event handler							//
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setAnnouncementBoardTitle(title);
@@ -62,18 +60,17 @@ export default function AnnouncementBoardWrite() {
 
     const onPostButtonClickHandler = () => {
         if (!announcementBoardTitle.trim() || !announcementBoardContents.trim()) {
-					alert("제목과 내용 모두 입력해주세요.");
-					return;
-				}
+				alert("제목과 내용 모두 입력해주세요.");
+				return;
+		}
 
         if (!cookies.accessToken) return;
 
         const requestBody: PostAnnouncementBoardRequestDto = { announcementBoardTitle, announcementBoardContents };
-
         postAnnouncementBoardRequest(requestBody, cookies.accessToken).then(postAnnouncementBoardResponse);
     };
 
-    //             effect               //
+//							effect							//
 		useEffect(() => {
 			if (!loginUserRole) return;
 			if (loginUserRole !=="ROLE_ADMIN" ) {
@@ -82,24 +79,28 @@ export default function AnnouncementBoardWrite() {
 			}
 		}, [loginUserRole])
 
-
-    //                    render                    //
+//							render							//
     return (
         <div id='announcement-board-write-wrapper'>
             <div className='announcement-board-write-top'>
                 <div className='announcement-board-write-title-box'>
                     <div className='announcement-board-write-title'>제목</div>
-                    <input className='announcement-board-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
+                    <input 
+					className='announcement-board-write-title-input' 
+					placeholder='제목을 입력해주세요.'
+					value={announcementBoardTitle} 
+					onChange={onTitleChangeHandler}
+					/>
                 </div>
             </div>
 			<div className='announcement-board-write-contents-box'>
-						<textarea
-						ref={contentsRef} 
-						onChange={onContentsChangeHandler}
-						name=""
-						className='announcement-board-write-contents-textarea'
-						id=""
-						placeholder='내용을 입력해주세요.'
+				<textarea
+				ref={contentsRef} 
+				onChange={onContentsChangeHandler}
+				name=""
+				className='announcement-board-write-contents-textarea'
+				id=""
+				placeholder='내용을 입력해주세요.'
 						/>
 						</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
