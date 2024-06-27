@@ -16,7 +16,6 @@ export const SERVICE_PATH = "/service";
 
 export const LOGIN_LOG_PATH = "/login-log";
 
-
 export const MY_PAGE_PATH = "my-page";
 export const UPDATE_CUSTOMER_INFO_PATH = "info-customer";
 export const UPDATE_DESIGNER_INFO_PATH = "info-designer";
@@ -62,7 +61,6 @@ export const CHAT_ROOM_PATH = "room";
 export const CHAT_ROOM_DETAIL_PATH = "roomId";
 export const CHAT_ROOM_MESSAGE_PATH = "room/:roomId/message";
 
-
 // description : Auth 절대 URL PATH
 export const AUTH_ABSOLUTE_PATH = `${AUTH_PATH}`;
 export const AUTH_SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
@@ -73,14 +71,12 @@ export const ID_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${ID_FOUND_PATH}`;
 export const PASSWORD_FOUND_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_FOUND_PATH}`;
 export const AUTH_PASSOWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSOWORD_RESET_PATH}`;
 
-
 // description : MYPAGE 절대 URL PATH
 export const MY_PAGE_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}`;
 export const UPDATE_CUSTOMER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_CUSTOMER_INFO_PATH}`;
 export const UPDATE_DESIGNER_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${UPDATE_DESIGNER_INFO_PATH}`;
 export const CHANGE_PASSWORD_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${CHANGE_PASSWORD_PATH}`;
 export const DELETE_INFO_ABSOLUTE_PATH = `${SERVICE_PATH}/${MY_PAGE_PATH}/${DELETE_INFO_PATH}`;
-
 
 // description : 공지사항 절대 URL PATH
 export const ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}`;
@@ -89,7 +85,6 @@ export const ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH =(announcementBoardNumber :
 `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/${announcementBoardNumber}`;
 export const ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH = (announcementBoardNumber : number | string) =>
 `${SERVICE_PATH}/${ANNOUNCEMENT_BOARD_PATH}/update/${announcementBoardNumber}`;
-
 
 // description : 트렌드 절대 URL PATH
 export const TREND_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${TREND_BOARD_PATH}`
@@ -101,7 +96,6 @@ export const TREND_BOARD_UPDATE_ABSOLUTE_PATH = (trendBoardNumber : number | str
 export const TREND_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment${trendBoardNumber}`;
 export const TREND_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (trendBoardNumber: number | string) => `${SERVICE_PATH}/${TREND_BOARD_PATH}/comment/update${trendBoardNumber}`;
 
-
 // description : QNA 절대 URL PATH
 export const QNA_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}`
 export const QNA_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${QNA_BOARD_PATH}/${QNA_BOARD_WRITE_PATH}`;
@@ -112,7 +106,6 @@ export const QNA_BOARD_UPDATE_ABSOLUTE_PATH = (qnaBoardNumber : number | string)
 export const QNA_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment${qnaBoardNumber}`;
 export const QNA_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (qnaBoardNumber: number | string) => `${SERVICE_PATH}/${QNA_BOARD_PATH}/comment/update${qnaBoardNumber}`;
 
-
 // description : 소통 플랫폼 절대 URL PATH
 export const CUSTOMER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}`;
 export const CUSTOMER_BOARD_WRITE_ABSOLUTE_PATH = `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/${CUSTOMER_BOARD_WRITE_PATH}`;
@@ -120,7 +113,6 @@ export const CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH =  (customerBoardNumber: number
 export const CUSTOMER_BOARD_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/update/${customerBoardNumber}`;
 export const CUSTOMER_BOARD_COMMENT_WRITE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/${customerBoardNumber}`;
 export const CUSTOMER_BOARD_COMMENT_UPDATE_ABSOLUTE_PATH =  (customerBoardNumber: number | string) => `${SERVICE_PATH}/${CUSTOMER_BOARD_PATH}/comment/update/${customerBoardNumber}`;
-
 
 // description : 디자이너 절대 URL PATH
 export const DESIGNER_BOARD_LIST_ABSOLUTE_PATH = `${SERVICE_PATH}/${DESIGNER_BOARD_PATH}`;
@@ -141,12 +133,10 @@ export const SERVER_DOMAIN_URL = "http://localhost:4200";
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 export const CHAT_DOMAIN_URL = "http://localhost:4200";
 
-
 // description: LOGIN_LOG API URL PATH
 export const LOGIN_LOG_URL = `${SERVER_API_URL}/login-log`;
 export const TOTAL_VISITORS_URL = `${LOGIN_LOG_URL}/total-visitors`;
 export const VISITORS_TODAY_URL = `${LOGIN_LOG_URL}/visitors-today`;
-
 
 // description : AUTH API URL PATH 
 export const SERVER_AUTH_MODULE_URL = `${SERVER_API_URL}/auth`;
@@ -164,7 +154,6 @@ export const FOUND_PASSWORD_EMAIL_AUTH_URL = `${SERVER_AUTH_MODULE_URL}/password
 export const FOUND_PASSWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-found`;
 export const RESET_PASSOWORD_PATH = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 
-
 // description : Footer  PATH
 export const ADVERTISEMENT_PATH ="/advertisement"
 export const MAILCONTECT_PATH = "/mailcontect"
@@ -172,7 +161,6 @@ export const PERSONAL_INFO_PROCESSING_POLICY_PATH = "/personal-info-policy"
 export const SITE_DESCRIPTION_PATH = "/site-description"
 export const TEARMS_AND_CONDTIONS_PATH ="/terms-and-conditions"
 export const YOUTH_PROTECTION_POLICY_PATH = "/youth-protection-policy"
-
 
 // description : USER API URL PATH 
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
@@ -195,7 +183,6 @@ export const PUT_ANNOUNCEMENT_BOARD_PUT_URL = (announcementBoardNumber: number| 
 export const DELETE_ANNOUCEMENT_BOARD_DELETE_URL = (announcementBoardNumber: number| string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}`;
 export const PATCH_ANNOUNCEMENT_BOARD_INCREASE_VIEW_COUNT_URL =   (announcementBoardNumber: number | string) => `${SERVER_ANNOUNCEMENT_BOARD_MODULE_URL}/${announcementBoardNumber}/increase_view_count`;
 
-
 // description : TREND API URL PATH 
 export const SERVER_TREND_BOARD_MODULE_URL = `${SERVER_API_URL}${SERVICE_PATH}/trend_board/`;
 export const POST_TREND_BOARD_WRITE_URL = `${SERVER_TREND_BOARD_MODULE_URL}write`;
@@ -214,7 +201,6 @@ export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : num
 export const GET_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
 export const DELETE_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
 export const POST_TREND_BOARD_IMAGE_UPLOAD_URL = 'http://localhost:4200/upload'
-
 
 // description : Q&A API URL PATH
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`;
@@ -270,7 +256,6 @@ export const DELETE_CHATROOM_URL = (roomId: number | string) => `${SERVER_CHAT_M
 // description: 게시물 상수
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
-
 
 // description: 트렌드 게시판 게시물 상수
 export const TREND_BOARD_COUNT_PER_PAGE = 5;
