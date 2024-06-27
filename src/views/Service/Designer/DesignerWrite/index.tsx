@@ -1,38 +1,48 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
+import { 
+    ChangeEvent, 
+    useEffect, 
+    useRef, 
+    useState 
+} from 'react';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PostDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
-import { postDesignerBoardRequest } from 'src/apis/designerBoard';
-import ToastEditor from 'src/components/ToastEditor';
+import { useCookies } from 'react-cookie';
 import { Editor } from '@toast-ui/react-editor';
 
-//              component               //
+import ToastEditor from 'src/components/ToastEditor';
+
+import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { PostDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
+import { postDesignerBoardRequest } from 'src/apis/designerBoard';
+
+import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
+import "./style.css";
+
+//                          component                           //
 export default function DesignerWrite() {
 
-    //              state               //
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [selection, setSelection] = useState<Range | null>(null);
+//                          state                           //
     const { loginUserRole } = useUserStore();
+
+    const editorRef = useRef<Editor|null>(null);
+
     const [cookies] = useCookies();
+
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const editorRef = useRef<Editor|null>(null);
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
 
-    //              function               //
+//                          function                            //
     const navigator = useNavigate();
 
     const postDesignerBoardResponse =(result: ResponseDto | null) => {
-
         const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -42,7 +52,7 @@ export default function DesignerWrite() {
         navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //              event handler               //
+//                          event handler                           //
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const title = event.target.value;
         setTitle(title);
@@ -50,20 +60,18 @@ export default function DesignerWrite() {
 
     const onContentsChangeHandler = (contents: string ) => {
 			setContents(contents);
-		}
+	};
 
-    
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
 			setUrlList(imageList);
-		}
+	};
 
     const onPostButtonClickHandler = () => {
         if (!cookies.accessToken) return;
     
         const requestBody: PostDesignerBoardRequestDto = { 
             designerBoardTitle: title.trim(), 
-            designerBoardContents: contents.trim(), 
-            
+            designerBoardContents: contents.trim() 
         };
 
         const isBlank = requestBody.designerBoardContents.replaceAll('<p><br></p>', '');
@@ -87,7 +95,7 @@ export default function DesignerWrite() {
             .then(postDesignerBoardResponse);
     };
 
-    //             effect               //
+//                          effect                          //
     useEffect(() => {
         if (!loginUserRole) return;
         if (loginUserRole !== 'ROLE_DESIGNER') {
@@ -96,7 +104,7 @@ export default function DesignerWrite() {
         }
     }, [loginUserRole]);
 
-    //                    render                    //
+//                          render                          //
     return (
         <div id='designer-write-wrapper'>
             <div className='designer-write-top'>
