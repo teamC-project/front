@@ -1,17 +1,31 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+import ResponseDto from 'src/apis/response.dto';
+import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import { customerSignUpRequest, designerSignUpRequest, signInRequest } from 'src/apis/auth';
 import { SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
-import { SignInResponseDto } from 'src/apis/auth/dto/response';
-import ResponseDto from 'src/apis/response.dto';
+
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
 import AuthTopBar from 'src/components/authTopBar';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH, AUTH_SIGN_IN_ABSOLUTE_PATH, ID_FOUND_ABSOLUTE_PATH, PASSWORD_FOUND_ABSOLUTE_PATH } from 'src/constant';
+
 import { useAuthSignUp } from 'src/hooks/AuthSignUpHook';
+
 import { useSnsStore } from 'src/stores';
+
+import { 
+    ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, 
+    AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, 
+    AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH,
+    AUTH_SIGN_IN_ABSOLUTE_PATH, 
+    ID_FOUND_ABSOLUTE_PATH, 
+    PASSWORD_FOUND_ABSOLUTE_PATH 
+    } 
+    from 'src/constant';
+
 import "./style.css";
 
 export function Main() {
@@ -28,17 +42,17 @@ export function Main() {
     )
 }
 
-//           component           //
+//                          component                          //
 export function Sns() {
 
-    //           state          //
+    //                          state                          //
     const { accessToken, expires } = useParams();
     const [cookies, setCookie] = useCookies();
 
-    //           function          //
+    //                          function                          //
     const navigator = useNavigate();
 
-    //           effect          //
+    //                          effect                          //
     useEffect(() => {
         if (!accessToken || !expires) return;
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
@@ -46,20 +60,22 @@ export function Sns() {
 
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         }, []);
-    //          render           //
+
+    //                          render                          //
     return <></>;
 }
 
-//                    component                    //
+//                          component                          //
 export function SignIn() {
 
-    //                    state                    //
-    const [cookies, setCookie] = useCookies();
+    //                          state                          //
     const [id, setId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>('');
+    
+    const [cookies, setCookie] = useCookies();
 
-  //                    function                    //
+  //                          function                          //
     const navigator = useNavigate();
 
     const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
@@ -80,7 +96,7 @@ export function SignIn() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-  //                    event handler                    //
+  //                          event handler                          //
     const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setId(event.target.value);
         setMessage('');
@@ -115,7 +131,7 @@ export function SignIn() {
     const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
     const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
-  //                    render                    //
+  //                          render                          //
     return (
         <div id='auth-wrapper'>
             <AuthTopBar />
@@ -162,20 +178,21 @@ export function SignIn() {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
-//                 component                 //
+//                          component                          //
 export function ChooseSingUp() {
 
-    //                    state                  //
+    //                          state                          //
     const { snsId, joinPath, setValue } = useSnsStore();
+    
     const [ params ] = useSearchParams();
 
-    //                  function                 //
+    //                          function                          //
     const navigator = useNavigate();
 
-    //                event handler               //
+    //                          event handler                          //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
     window.location.href = 'http://localhost:4200/api/v1/auth/oauth2/' + type;
     };
@@ -193,7 +210,7 @@ export function ChooseSingUp() {
     setValue(snsId, joinPath);
 }, [params])
 
-    //                   render                  //
+    //                          render                          //
     return (
         <div id='auth-wrapper'>
             <AuthTopBar />
@@ -225,10 +242,10 @@ export function ChooseSingUp() {
 }
 
 
-//                    component                   //
+//                          component                          //
 export function CustomerSignUp() {
 
-//                      state                     //
+//                          state                          //
 const {
     id,
     password,
@@ -267,7 +284,7 @@ const {
     onAuthNumberButtonClickHandler,
 } = useAuthSignUp();
 
-//                     function                    //
+//                          function                          //
 const navigator = useNavigate();
 
 const signUpResponse = (result: ResponseDto | null) => {
@@ -287,7 +304,7 @@ const signUpResponse = (result: ResponseDto | null) => {
     navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
 };
 
-//                  event handler                  //
+//                          event handler                          //
     const onSignUpButtonClickHandler = () => {
         if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
         alert('모든 내용을 입력해주세요.')
@@ -307,7 +324,7 @@ const signUpResponse = (result: ResponseDto | null) => {
     customerSignUpRequest(requestBody).then(signUpResponse);
     };
 
-//                      render                      //
+//                          render                          //
     return (
         <div id='auth-wrapper'>
 
@@ -373,10 +390,10 @@ const signUpResponse = (result: ResponseDto | null) => {
     )
 }
 
-//                     component                      //
+//                          component                          //
 export function DesignerSignUp() {
 
-//                      state                     //
+//                          state                          //
 const {
     id,
     password,
@@ -421,7 +438,7 @@ const {
     onAuthNumberButtonClickHandler,
 } = useAuthSignUp();
 
-//                     function                    //
+//                          function                          //
     const navigator = useNavigate();
 
     const signUpResponse = (result: ResponseDto | null) => {
@@ -441,7 +458,7 @@ const {
     navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     };
 
-//                  event handler                  //
+//                          event handler                          //
     const onSignUpButtonClickHandler = () => {
         if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
         alert('모든 내용을 입력해주세요.')
@@ -464,7 +481,7 @@ const {
     designerSignUpRequest(requestBody).then(signUpResponse);
     };
 
-//                      render                      //
+//                          render                          //
     return (
         <div id='auth-wrapper'>
             <AuthTopBar />
@@ -542,9 +559,10 @@ const {
     )
 }
 
-//                component                  //
+//                          component                          //
 export default function Authentication() {
-    //                   render                //
+
+    //                          render                          //
     return (
     <>
     </>
