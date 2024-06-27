@@ -1,13 +1,17 @@
-import React, { ChangeEvent,useEffect,useRef, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
+import  { ChangeEvent,useEffect,useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
+
+import { useUserStore } from 'src/stores';
 import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH,  } from 'src/constant';
+
+import ResponseDto from 'src/apis/response.dto';
+
 import { PostAnnouncementBoardRequestDto } from 'src/apis/announcement/dto/request';
 import { postAnnouncementBoardRequest } from 'src/apis/announcement';
 
+import'./style.css'
+import"../../../../App.css"
 
 //              component               //
 export default function AnnouncementBoardWrite() {
@@ -88,6 +92,7 @@ export default function AnnouncementBoardWrite() {
                     <input className='announcement-board-write-title-input' placeholder='제목을 입력해주세요.' value={announcementBoardTitle} onChange={onTitleChangeHandler}></input>
                 </div>
             </div>
+			<div className='announcement-board-write-contents-box'>
 						<textarea
 						ref={contentsRef} 
 						onChange={onContentsChangeHandler}
@@ -96,7 +101,7 @@ export default function AnnouncementBoardWrite() {
 						id=""
 						placeholder='내용을 입력해주세요.'
 						/>
-
+						</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );

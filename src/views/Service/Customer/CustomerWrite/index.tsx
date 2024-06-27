@@ -1,14 +1,17 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { CUSTOMER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { PostCustomerBoardRequestDto } from 'src/apis/customerBoard/dto/request';
-import { postCustomerBoardRequest } from 'src/apis/customerBoard';
-import ToastEditor from 'src/components/ToastEditor';
+import { useCookies } from 'react-cookie';
 import { Editor } from '@toast-ui/react-editor';
+
+import { useUserStore } from 'src/stores';
+import { postCustomerBoardRequest } from 'src/apis/customerBoard';
+import { PostCustomerBoardRequestDto } from 'src/apis/customerBoard/dto/request';
+import ResponseDto from 'src/apis/response.dto';
+
+import { CUSTOMER_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import ToastEditor from 'src/components/ToastEditor';
+
+import "./style.css";
 
 //              component               //
 export default function CustomerWrite() {
@@ -18,20 +21,20 @@ export default function CustomerWrite() {
     const [cookies] = useCookies();
     const [title, setTitle] = useState<string>('');
     const [contents, setContents] = useState<string>('');
-    const editorRef = useRef<Editor|null>(null);
-    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
     const [isSecret, setIsSecret] = useState<boolean>(false);
+    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
+    const editorRef = useRef<Editor | null>(null);
 
     //              function               //
     const navigator = useNavigate();
 
-    const postCustomerBoardResponse =(result: ResponseDto | null) => {
+    const postCustomerBoardResponse = (result: ResponseDto | null) => {
 
-        const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+                    result.code === 'AF' ? '권한이 없습니다.' :
+                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -47,43 +50,43 @@ export default function CustomerWrite() {
         setTitle(title);
     };
 
-    const onContentsChangeHandler = (contents: string ) => {
-			setContents(contents);
-		}
+    const onContentsChangeHandler = (contents: string) => {
+        setContents(contents);
+    }
 
     const onSecretChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSecret(event.target.checked);
     };
-    
-    const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
-			setUrlList(imageList);
-		}
+
+    const onImageChangeHandler = (imageList: { base64: string; url: string }[]) => {
+        setUrlList(imageList);
+    }
 
     const onPostButtonClickHandler = () => {
         if (!cookies.accessToken) return;
-    
-        const requestBody: PostCustomerBoardRequestDto = { 
-            customerBoardTitle: title.trim(), 
-            customerBoardContents: contents.trim(), 
+
+        const requestBody: PostCustomerBoardRequestDto = {
+            customerBoardTitle: title.trim(),
+            customerBoardContents: contents.trim(),
             secret: isSecret
         };
 
         const isBlank = requestBody.customerBoardContents.replaceAll('<p><br></p>', '');
 
         if (!requestBody.customerBoardTitle && !requestBody.customerBoardContents && !isBlank) {
-			alert("제목과 내용을 모두 입력해주세요.");
-			return;
-			}
+            alert("제목과 내용을 모두 입력해주세요.");
+            return;
+        }
 
-		else if (!requestBody.customerBoardTitle) {
-			alert("제목을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardTitle) {
+            alert("제목을 입력해주세요.");
+            return;
+        }
 
-		else if (!requestBody.customerBoardContents || !isBlank) {
-			alert("내용을 입력해주세요.");
-			return;
-		}
+        else if (!requestBody.customerBoardContents || !isBlank) {
+            alert("내용을 입력해주세요.");
+            return;
+        }
 
         postCustomerBoardRequest(requestBody, cookies.accessToken)
             .then(postCustomerBoardResponse);
@@ -101,30 +104,32 @@ export default function CustomerWrite() {
     //                    render                    //
     return (
         <div id='customer-write-wrapper'>
-			<div className='customer-write-top'>
-            <div className='customer-write-title-box'>
-                <div className='customer-write-title'>제목</div>
-                <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+            <div className='customer-write-top'>
+                <div className='customer-write-title-box'>
+                    <div className='customer-write-title'>제목</div>
+                    <input className='customer-write-title-input' placeholder='제목을 입력해주세요.' value={title} onChange={onTitleChangeHandler}></input>
+                </div>
+                <div className='customer-write-secret'>
+                    <label>
+                        <input type='checkbox' checked={isSecret} onChange={onSecretChangeHandler} />
+                        비밀글
+                    </label>
+                </div>
             </div>
-            <div className='customer-write-secret'>
-                <label>
-                    <input type='checkbox' checked={isSecret} onChange={onSecretChangeHandler} />
-                    비밀글
-                </label>
+            <div className='customer-write-contents-box'>
+                <ToastEditor
+                    ref={editorRef}
+                    body={contents}
+                    setBody={onContentsChangeHandler}
+                    imageList={urlList}
+                    setImageList={onImageChangeHandler}
+                />
             </div>
-			</div>
-			<div className='customer-write-contents-box'>
-            <ToastEditor
-				ref={editorRef}
-				body={contents}
-				setBody={onContentsChangeHandler}
-				imageList={urlList}
-				setImageList={onImageChangeHandler}
-            />
+            <div className='customer-write-button'>
+                <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
+                    올리기
+                </button>
             </div>
-            <button className='primary-button' onClick={onPostButtonClickHandler}>
-                올리기
-            </button>
         </div>
     );
 }

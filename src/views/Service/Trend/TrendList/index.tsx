@@ -1,15 +1,19 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
-import '../../../../App.css';
-import { TrendBoardListItem } from 'src/types';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
+
+import { TrendBoardListItem } from 'src/types';
 import { TREND_BOARD_COUNT_PER_PAGE, TREND_BOARD_COUNT_PER_SECTION, MAIN_PATH, TREND_BOARD_DETAIL_ABSOLUTE_PATH, TREND_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
+
 import { GetSearchTrendBoardListResponseDto, GetTrendBoardListResponseDto } from 'src/apis/TrendBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
+
 import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
 import { usePagination } from '../../../../hooks'
+
+import './style.css';
+import '../../../../App.css';
 
 function CardItem (
 	{
@@ -25,7 +29,6 @@ function CardItem (
 const navigator =  useNavigate();
 
 // 										event handler										// 
-
 const onClickHandler =  () => navigator(TREND_BOARD_DETAIL_ABSOLUTE_PATH(trendBoardNumber));
 
 //										render										/./
@@ -66,8 +69,6 @@ export default function TrendList() {
 	const [searchWord, setSearchWord] = useState<string>('');
 	
 	const navigator = useNavigate();
-
-
 
 	const getTrendBoardResponse = (result: GetTrendBoardListResponseDto | ResponseDto | null) => {
     const message = 
@@ -124,8 +125,6 @@ export default function TrendList() {
 		navigator(TREND_BOARD_WRITE_ABSOLUTE_PATH);
 	};
 
-
-
 	const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		const searchWord = event.target.value;
     setSearchWord(searchWord);
@@ -156,12 +155,10 @@ export default function TrendList() {
     fetchTrendBoardList();
 	}, [cookies.accessToken]);
 
-
 	useEffect(() => {
     if (!cookies.accessToken) return;
     getTrendBoardListRequest(cookies.accessToken).then(getTrendBoardResponse);
 	}, []);
-
 
 	return (
     <div id='trend-board-wrapper'>

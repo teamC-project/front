@@ -1,14 +1,26 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
-import { useNavigate } from 'react-router';
-import { AnnouncementBoardListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { GetAnnouncementBoardListResponseDto,GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response';
+import { useNavigate } from 'react-router';
+
+import { AnnouncementBoardListItem } from 'src/types';
 import ResponseDto from 'src/apis/response.dto';
+
+import { useUserStore } from 'src/stores';
+
+import{ 
+	COUNT_PER_PAGE, 
+	COUNT_PER_SECTION, 
+	ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, 
+	ANNOUNCEMENT_BOARD_WRITE_ABSOLUTE_PATH,
+	MAIN_PATH } 
+from 'src/constant';
+import { usePagination } from '../../../../hooks';
+
+import { GetAnnouncementBoardListResponseDto,GetSearchAnnouncementBoardListResponseDto } from 'src/apis/announcement/dto/response'
 import { getSearchAnnouncementBoardListRequest } from 'src/apis/announcement';
-import { usePagination } from 'src/hooks'; 
+
+import './style.css';
+import '../../../../App.css'
 
 //                    component                    //
 function ListItem ({
@@ -28,11 +40,11 @@ function ListItem ({
   //              render              //
 	return (
     <div className='announcement-board-list-table-tr' onClick={onClickHandler}>
-    <div className='announcement-board-list-table-number'>{announcementBoardNumber}</div>
-    <div className='announcement-board-list-table-title'>{announcementBoardTitle}</div>
-    <div className='announcement-board-list-table-writer-id'>{announcementBoardWriterId}</div>
-    <div className='announcement-board-list-table-write-date'>{announcementBoardWriteDatetime}</div>
-    <div className='announcement-board-list-table-viewcount'>{announcementBoardViewCount}</div>
+		<div className='announcement-board-list-table-number'>{announcementBoardNumber}</div>
+		<div className='announcement-board-list-table-title'>{announcementBoardTitle}</div>
+		<div className='announcement-board-list-table-writer-id'>{announcementBoardWriterId}</div>
+		<div className='announcement-board-list-table-write-date'>{announcementBoardWriteDatetime}</div>
+		<div className='announcement-board-list-table-viewcount'>{announcementBoardViewCount}</div>
     </div>
 	);
 }
@@ -57,7 +69,6 @@ export default function AnnouncementBoardList() {
 		onNextSectionClickHandler
 	}  = usePagination<AnnouncementBoardListItem>(COUNT_PER_PAGE, COUNT_PER_SECTION);
 	const [searchWord, setSearchWord] = useState<string>('');
-	const [isSearched, setIsSearched] = useState<boolean>(false);
 
   //                    function                    //
 	const navigator = useNavigate();
@@ -75,18 +86,18 @@ export default function AnnouncementBoardList() {
     }
 
     const { announcementBoardList } = result as GetAnnouncementBoardListResponseDto;
-    changeBoardList(announcementBoardList);
 
+    changeBoardList(announcementBoardList);
     setCurrentPage(!announcementBoardList.length ? 0 : 1);
     setCurrentSection(!announcementBoardList.length ? 0 : 1);
 	};
 
 	const getSearchAnnouncementBoardListResponse = (result: GetSearchAnnouncementBoardListResponseDto | ResponseDto | null) => {
     const message =
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '검색어를 입력하세요.' :
-    result.code === 'AF' ? '인증에 실패했습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+		!result ? '서버에 문제가 있습니다.' :
+		result.code === 'VF' ? '검색어를 입력하세요.' :
+		result.code === 'AF' ? '인증에 실패했습니다.' :
+		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
     alert(message);
@@ -95,16 +106,13 @@ export default function AnnouncementBoardList() {
     }
 
     const { announcementBoardList } = result as GetSearchAnnouncementBoardListResponseDto;
-    const updatedAnnouncementBoardList = announcementBoardList.map(item => ({
-    ...item,
-    announcementBoardViewCount: item.announcementBoardViewCount || 0,
-    }));
+    const updatedAnnouncementBoardList = announcementBoardList.map(item => ({...item, announcementBoardViewCount: item.announcementBoardViewCount || 0,}));
+
     setBoardList(updatedAnnouncementBoardList);
     changeBoardList(updatedAnnouncementBoardList);
     changePage(updatedAnnouncementBoardList, updatedAnnouncementBoardList.length);
     setCurrentPage(!updatedAnnouncementBoardList.length ? 0 : 1);
     setCurrentSection(!updatedAnnouncementBoardList.length ? 0 : 1);
-    setIsSearched(false);
 	};
 
 	const fetchAnnouncementBoardList = () => {
@@ -121,19 +129,16 @@ export default function AnnouncementBoardList() {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
     if (!searchWord) {
-    setIsSearched(false);
     fetchAnnouncementBoardList(); 
     }
 	};
 
 	const onSearchButtonClickHandler = () => {
     if (!searchWord) {
-    setIsSearched(false); 
     fetchAnnouncementBoardList();
     return; 
     }
     if (!cookies.accessToken) return;
-    setIsSearched(true);
     getSearchAnnouncementBoardListRequest(searchWord, cookies.accessToken).then(getSearchAnnouncementBoardListResponse);
 	};
 
@@ -167,27 +172,27 @@ export default function AnnouncementBoardList() {
 		</div>
 		<div className='announcement-board-list-table'>
 			<div className='announcement-board-table-th'>
-			<div className='announcement-board-list-table-number'>게시물 번호</div>
-			<div className='announcement-board-list-table-title'>제목</div>
-			<div className='announcement-board-list-table-writer-id'>작성자</div>
-			<div className='announcement-board-list-table-write-date'>작성일</div>
-			<div className='announcement-board-list-table-viewcount'>조회수</div>
+				<div className='announcement-board-list-table-number'>게시물 번호</div>
+				<div className='announcement-board-list-table-title'>제목</div>
+				<div className='announcement-board-list-table-writer-id'>작성자</div>
+				<div className='announcement-board-list-table-write-date'>작성일</div>
+				<div className='announcement-board-list-table-viewcount'>조회수</div>
 			</div>
 			{viewList.map(item => <ListItem key={item.announcementBoardNumber} {...item} />)}
 		</div>
 		<div className='announcement-board-list-bottom'>
 			<div style={{ width: '299px' }}></div>
-			<div className='announcement-board-list-pagenation'>
-			<div className='page-left' onClick={onPreSectionClickHandler}></div>
-			<div className='announcement-board-list-page-box'>
-				{pageList.map(page => 
-				page === currentPage ? 
-				<div key={page} className='announcement-board-list-page-active'>{page}</div> :
-				<div key={page} className='announcement-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
-				)}
-			</div>
-			<div className='page-right' onClick={onNextSectionClickHandler}></div>
-			</div>
+				<div className='announcement-board-list-pagenation'>
+				<div className='page-left' onClick={onPreSectionClickHandler}></div>
+					<div className='announcement-board-list-page-box'>
+					{pageList.map(page => 
+					page === currentPage ? 
+					<div key={page} className='announcement-board-list-page-active'>{page}</div> :
+					<div key={page} className='announcement-board-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+					)}
+				</div>
+				<div className='page-right' onClick={onNextSectionClickHandler}></div>
+				</div>
 			{loginUserRole === 'ROLE_ADMIN' && (
 			<div className='announcement-board-list-write-button' onClick={onWriteButtonClickHandler}>
 				글쓰기

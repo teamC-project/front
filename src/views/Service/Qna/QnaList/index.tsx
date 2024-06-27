@@ -1,15 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
-import '../../../../App.css'
-import { QnaBoardListItem } from 'src/types';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
+
+import { QnaBoardListItem } from 'src/types';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH, QNA_BOARD_DETAIL_ABSOLUTE_PATH, QNA_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/QnaBoard/dto/response';
+
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchQnaBoardListRequest } from 'src/apis/QnaBoard';
 import { usePagination } from '../../../../hooks'
+
+import './style.css';
+import '../../../../App.css'
 
 //                    component                    //
 function ListItem({
@@ -64,7 +67,6 @@ export default function QnaBoardList() {
 
 	const [searchWord, setSearchWord] = useState<string>('');
 	const [isToggleOn, setToggleOn] = useState<boolean>(false);
-	const [isSearched, setIsSearched] = useState<boolean>(false);
 	//                    function                    //
 	const navigator = useNavigate();
 	const getQnaBoardListResponse = (result: GetQnaBoardListResponseDto | ResponseDto | null) => {
@@ -113,7 +115,6 @@ export default function QnaBoardList() {
 		changePage(updatedQnaBoardList, updatedQnaBoardList.length);
 		setCurrentPage(!updatedQnaBoardList.length ? 0 : 1);
 		setCurrentSection(!updatedQnaBoardList.length ? 0 : 1);
-		setIsSearched(false);
 	};
 	
 	const fetchQnaBoardList = () => {
@@ -136,19 +137,16 @@ export default function QnaBoardList() {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
     if (!searchWord) {
-		setIsSearched(false);
 		fetchQnaBoardList();
     }
 	};
 
 	const onSearchButtonClickHandler = () => {
 		if (!searchWord) {
-			setIsSearched(false); 
 			fetchQnaBoardList();
 			return;  
 		}
 		if (!cookies.accessToken) return;
-		setIsSearched(true);
 		getSearchQnaBoardListRequest(searchWord, cookies.accessToken)
 			.then(result => getSearchQnaBoardListResponse(result as GetSearchQnaBoardListResponseDto | ResponseDto | null));
 	};
@@ -169,7 +167,6 @@ useEffect(() => {
 	getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
 }, [isToggleOn]);
 
-console.log(isToggleOn);
 	//                    render                    //
 	const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
 

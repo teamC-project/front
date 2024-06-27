@@ -1,18 +1,23 @@
 import  { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
-import './style.css';
+import { useNavigate } from 'react-router';
 
-import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+import { useChatStore, useUserStore } from 'src/stores';
 
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
-import { getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
-import socket from 'src/utils/socket';
-import { useChatStore, useUserStore } from 'src/stores';
-import { ChatMessageList, ChatroomList } from 'src/types';
 import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
+import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+import { getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
+
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
+
+import socket from 'src/utils/socket';
+
+import { ChatMessageList, ChatroomList } from 'src/types';
+
 import { usePagination } from 'src/hooks'; 
+
+import './style.css';
 
 interface ChatRoomProps {
     selectedDesignerId: string;

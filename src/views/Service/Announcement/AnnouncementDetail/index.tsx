@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import './style.css';
+import  { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
+
+import { useUserStore } from 'src/stores';
+
+import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { getAnnouncementBoardRequest, increaseAnnouncementBoardViewCountRequest, deleteAnnouncementBoardRequest,  } from 'src/apis/announcement';
+
 import { GetAnnouncementBoardResponseDto } from 'src/apis/announcement/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useCookies } from 'react-cookie';
-import { getAnnouncementBoardRequest, increaseAnnouncementBoardViewCountRequest, deleteAnnouncementBoardRequest,  } from 'src/apis/announcement';
-import { useUserStore } from 'src/stores';
+
+import './style.css';
+import '../../../../App.css'
 
 //                    component                    //
 export default function AnnouncementBoardDetail() {
@@ -15,7 +20,6 @@ export default function AnnouncementBoardDetail() {
     const { loginUserId } = useUserStore();
     const { announcementBoardNumber } = useParams();
     const [cookies] = useCookies();
-
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
     const [writeDate, setWriteDate] = useState<string>('');
