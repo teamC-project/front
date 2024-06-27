@@ -11,7 +11,6 @@ import ResponseDto from 'src/apis/response.dto';
 
 import { ANNOUNCEMENT_BOARD_DETAIL_ABSOLUTE_PATH, ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 
-
 import "./style.css";
 
 //                  component                   //
@@ -119,7 +118,7 @@ export default function AnnouncementBoardUpdate() {
                 </div>
             </div>
             <div className='announcement-board-update-contents-box'>
-                <textarea ref={contentsRef} className='announcement-board-update-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler}></textarea>
+                <textarea ref={contentsRef} className='announcement-board-update-contents-textarea' placeholder='내용을 입력해주세요. / 1000자' maxLength={1000} value={contents} onChange={onContentsChangeHandler} />
             </div>
             <div className='primary-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>
