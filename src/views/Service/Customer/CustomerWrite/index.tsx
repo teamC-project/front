@@ -130,6 +130,24 @@ export default function CustomerWrite() {
                     올리기
                 </button>
             </div>
+<<<<<<< HEAD
+        </div>
+        <div className='customer-write-contents-box'>
+            <ToastEditor
+            ref={editorRef}
+            body={contents}
+            setBody={onContentsChangeHandler}
+            imageList={urlList}
+            setImageList={onImageChangeHandler}
+            />
+        </div>
+        <div className='customer-write-button'>
+            <button className='customer-write-click-button' onClick={onPostButtonClickHandler}>
+                올리기
+            </button>
+        </div>
+=======
+>>>>>>> 97b3344d07d71e9455115104dbf84e9a51f8e063
         </div>
     );
 }

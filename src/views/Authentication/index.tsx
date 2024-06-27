@@ -1,4 +1,14 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+<<<<<<< HEAD
+import { useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+import ResponseDto from 'src/apis/response.dto';
+import { SignInResponseDto } from 'src/apis/auth/dto/response';
+import { customerSignUpRequest, designerSignUpRequest, signInRequest } from 'src/apis/auth';
+import { SignInRequestDto, SignUpCustomerRequestDto, SignUpDesignerRequestDto } from 'src/apis/auth/dto/request';
+=======
 
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
@@ -6,11 +16,25 @@ import { useNavigate, useParams } from 'react-router';
 
 import { useSnsStore } from 'src/stores';
 import useAuthSignUp from "../../hooks/auth.sign.up.hook";
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
 
 import InputBox from 'src/components/Inputbox';
 import SelectBox from 'src/components/Selectbox';
 import AuthTopBar from 'src/components/authTopBar';
 
+<<<<<<< HEAD
+import { useSnsStore } from 'src/stores';
+
+import { 
+    ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH, 
+    AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, 
+    AUTH_DESIGNER_SIGN_UP_ABSOLUTE_PATH,
+    AUTH_SIGN_IN_ABSOLUTE_PATH, 
+    ID_FOUND_ABSOLUTE_PATH, 
+    PASSWORD_FOUND_ABSOLUTE_PATH 
+    } 
+    from 'src/constant';
+=======
 import { 
     signInRequest, 
     customerSignUpRequest, 
@@ -33,8 +57,10 @@ import {
     AUTH_CUSTOMER_SIGN_UP_ABSOLUTE_PATH, 
     ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH,
 } from 'src/constant';
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
 
 import "./style.css";
+import { useAuthSignUp } from 'src/hooks';
 
 export function Main() {
     return (
@@ -50,17 +76,32 @@ export function Main() {
     )
 }
 
+<<<<<<< HEAD
+//                          component                          //
+export function Sns() {
+
+    //                          state                          //
+    const { accessToken, expires } = useParams();
+=======
 //                          component                           //
 export function Sns() {
 
 //                          state                           //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const [cookies, setCookie] = useCookies();
     const { accessToken, expires } = useParams();
 
+<<<<<<< HEAD
+    //                          function                          //
+    const navigator = useNavigate();
+
+    //                          effect                          //
+=======
 //                          function                            //
     const navigator = useNavigate();
 
 //                          effect                          //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     useEffect(() => {
         if (!accessToken || !expires) return;
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
@@ -68,6 +109,24 @@ export function Sns() {
 
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         }, []);
+<<<<<<< HEAD
+
+    //                          render                          //
+    return <></>;
+}
+
+//                          component                          //
+export function SignIn() {
+
+    //                          state                          //
+    const [id, setId] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    
+    const [cookies, setCookie] = useCookies();
+
+  //                          function                          //
+=======
 //                          render                          //
     return <></>;
 }
@@ -83,6 +142,7 @@ export function SignIn() {
     const [password, setPassword] = useState<string>('');
 
 //                          function                            //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const navigator = useNavigate();
 
     const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
@@ -103,7 +163,11 @@ export function SignIn() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
+<<<<<<< HEAD
+  //                          event handler                          //
+=======
 //                          event handler                           //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const onIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setId(event.target.value);
         setMessage('');
@@ -138,7 +202,11 @@ export function SignIn() {
     const onClickIdFoundHandler = () => navigator(ID_FOUND_ABSOLUTE_PATH);
     const onClickPasswordFoundHandler = () => navigator(PASSWORD_FOUND_ABSOLUTE_PATH);
 
+<<<<<<< HEAD
+  //                          render                          //
+=======
 //                          render                          //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     return (
         <div id='auth-wrapper'>
             <AuthTopBar />
@@ -191,6 +259,20 @@ export function SignIn() {
     )
 }
 
+<<<<<<< HEAD
+//                          component                          //
+export function ChooseSingUp() {
+
+    //                          state                          //
+    const { snsId, joinPath, setValue } = useSnsStore();
+
+    const [ params ] = useSearchParams();
+
+    //                          function                          //
+    const navigator = useNavigate();
+
+    //                          event handler                          //
+=======
 //                          component                           //
 export function ChooseSingUp() {
 
@@ -202,6 +284,7 @@ const [ params ] = useSearchParams();
     const navigator = useNavigate();
 
 //                          event handler                           //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
         window.location.href = LOCALHOST + type;
     };
@@ -220,7 +303,11 @@ const [ params ] = useSearchParams();
         setValue(snsId, joinPath);
     }, [params])
 
+<<<<<<< HEAD
+    //                          render                          //
+=======
 //                          render                          //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     return (
         <div id='auth-wrapper'>
             <AuthTopBar />
@@ -246,6 +333,82 @@ const [ params ] = useSearchParams();
     )
 }
 
+<<<<<<< HEAD
+
+//                          component                          //
+export function CustomerSignUp() {
+
+//                          state                          //
+const {
+    id,
+    password,
+    passwordCheck,
+    email,
+    authNumber,
+    gender,
+    age,
+    joinPath,
+    snsId,
+
+    idMessage,
+    passwordMessage,
+    passwordCheckMessage,
+    emailMessage,
+    authNumberMessage,
+
+    idButtonStatus,
+    emailButtonStatus,
+    authNumberButtonStatus,
+
+    isIdError,
+    isEmailError,
+    isAuthNumberError,
+
+    onIdChangeHandler,
+    onPasswordChangeHandler,
+    onPasswordCheckChangeHandler,
+    onEmailChangeHandler,
+    onAuthNumberChangeHandler,
+    onGenderChangeHandler,
+    onAgeChangeHandler,
+
+    onIdButtonClickHandler,
+    onEmailButtonClickHandler,
+    onAuthNumberButtonClickHandler,
+} = useAuthSignUp();
+
+//                          function                          //
+const navigator = useNavigate();
+
+const signUpResponse = (result: ResponseDto | null) => {
+    const message = 
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '입력형식이 맞지 않습니다.' :
+    result.code === 'DI' ? '이미 사용중인 아이디입니다.' :
+    result.code === 'DE' ? '중복된 이메일입니다.' :
+    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    const isSuccess = result && result.code === 'SU'
+    if (!isSuccess) {
+    alert(message);
+    return;
+    } 
+    navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
+};
+
+//                          event handler                          //
+    const onSignUpButtonClickHandler = () => {
+        if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
+        alert('모든 내용을 입력해주세요.')
+        return;
+    };
+
+    const requestBody: SignUpCustomerRequestDto = {
+        userId: id,
+        userPassword: password,
+        userEmail: email,
+=======
 //                          component                           //
 export function CustomerSignUp() {
 
@@ -258,14 +421,21 @@ export function CustomerSignUp() {
         gender,
         joinPath,
         password,
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
         authNumber,
         passwordCheck,
 
+<<<<<<< HEAD
+//                          render                          //
+    return (
+        <div id='auth-wrapper'>
+=======
         idMessage,
         emailMessage,
         passwordMessage,
         authNumberMessage,
         passwordCheckMessage,
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
 
         idButtonStatus,
         emailButtonStatus,
@@ -288,7 +458,107 @@ export function CustomerSignUp() {
         onAuthNumberButtonClickHandler,
     } = useAuthSignUp();
 
+<<<<<<< HEAD
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>비밀번호</div>
+                            <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+                        </div>
+
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>비밀번호 확인</div>
+                            <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+                        </div>
+
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>이메일</div>
+                            <InputBox type={'text'} value={email} placeholder={'이메일 주소를 입력해주세요'} onChangeHandler={onEmailChangeHandler} buttonTitle='보내기' buttonStatus={emailButtonStatus} onButtonClickHandler={onEmailButtonClickHandler} message={emailMessage} error={isEmailError} />
+                        </div>
+
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>이메일인증</div>
+                            <InputBox type={'text'} value={authNumber} placeholder={'인증번호 4자리를 입력해주세요'} onChangeHandler={onAuthNumberChangeHandler} buttonTitle='확인' buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />
+                        </div>
+
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>성별</div>
+                            <div className='auth-radio-box'>
+                                <div className='auth-sign-up-radio-box'>
+                                    <InputBox label={'MALE'} type={'radio'} value={'MALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'MALE'} /></div>
+                                <div className='auth-sign-up-radio-box'>
+                                    <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
+                            </div>
+                        </div>
+
+                        <div className='auth-sign-up-box-text'>
+                            <div className='auth-sign-up-text'>연령대</div>
+                            <div>
+                                <SelectBox value={age} onChange={onAgeChangeHandler} />
+                            </div>
+                        </div>
+
+                        <div className='sign-up-submit-box'>
+                            <div className='user-primary-button' onClick={onSignUpButtonClickHandler}>가입하기</div>
+                        </div>
+                    </div>
+                </div>
+                <div className='auth-right-null'></div>
+            </div>
+        </div>
+    )
+}
+
+//                          component                          //
+export function DesignerSignUp() {
+
+//                          state                          //
+const {
+    id,
+    password,
+    passwordCheck,
+    email,
+    authNumber,
+    gender,
+    age,
+    companyName,
+    image,
+    joinPath,
+    snsId,
+
+    idMessage,
+    passwordMessage,
+    passwordCheckMessage,
+    emailMessage,
+    authNumberMessage,
+    companyNameMessage,
+    imageMessage,
+
+    idButtonStatus,
+    emailButtonStatus,
+    authNumberButtonStatus,
+
+    isIdError,
+    isEmailError,
+    isAuthNumberError,
+
+    onIdChangeHandler,
+    onPasswordChangeHandler,
+    onPasswordCheckChangeHandler,
+    onEmailChangeHandler,
+    onAuthNumberChangeHandler,
+    onGenderChangeHandler,
+    onAgeChangeHandler,
+    onCompanyNameChangeHandler,
+    onImageChangeHandler,
+
+    onIdButtonClickHandler,
+    onEmailButtonClickHandler,
+    onAuthNumberButtonClickHandler,
+} = useAuthSignUp();
+
+//                          function                          //
+=======
 //                          function                            //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const navigator = useNavigate();
 
     const signUpResponse = (result: ResponseDto | null) => {
@@ -308,7 +578,11 @@ export function CustomerSignUp() {
         navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
     };
 
+<<<<<<< HEAD
+//                          event handler                          //
+=======
 //                          event handler                           //
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
     const onSignUpButtonClickHandler = () => {
         if(!id || !password || !passwordCheck || !email || !authNumber || !gender || !age) {
             alert('모든 내용을 입력해주세요.')
@@ -328,6 +602,25 @@ export function CustomerSignUp() {
         customerSignUpRequest(requestBody).then(signUpResponse);
     };
 
+<<<<<<< HEAD
+    const requestBody: SignUpDesignerRequestDto = {
+        userId: id,
+        userPassword: password,
+        userEmail: email,
+        authNumber,
+        userAge: age,
+        userGender: gender,
+        userCompanyName : companyName,
+        userImage : image,
+        joinPath: joinPath ? joinPath : 'HOME',
+        snsId: snsId ? snsId : undefined
+    };
+    
+    designerSignUpRequest(requestBody).then(signUpResponse);
+    };
+
+=======
+>>>>>>> 8e6c7bacbb303206f301162a05ea8f0d2ce15f0f
 //                          render                          //
     return (
         <div id='auth-wrapper'>
@@ -651,9 +944,10 @@ export function DesignerSignUp() {
     )
 }
 
-//                component                  //
+//                          component                          //
 export default function Authentication() {
-    //                   render                //
+
+    //                          render                          //
     return (
     <>
     </>

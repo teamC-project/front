@@ -32,85 +32,84 @@ export default function InfoDesigner() {
     const [ageMessage, setAgeMessage] = useState<string>('');
     const [companyName, setCompanyName] = useState<string>('');
     const [genderMessage, setGenderMessage] = useState<string>('');
-    const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
-    const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
     const [imageMessage, setImageMessage] = useState<string>('');
-
+    const [companyNameMessage, setCompanyNameMessage] = useState<string>('');
+    
     const [isAgeCheck, setIsAgeCheck] = useState<boolean>(false);
     const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
+    const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
 
     //                    function                    //
     const navigator = useNavigate();
 
     const getInfoDesignerResponse = (result: DesignerInfoResponseDto | ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '올바르지 않은 권한입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 권한입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 권한입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 권한입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-    }
-
-    const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
-    if (userId !== loginUserId) {
-        alert('권한이 없습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-    }
-    setGender(userGender);
-    setAge(userAge);
-    setCompanyName(userCompanyName);
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+        }
+        
+        const { userId, userGender, userAge, userCompanyName } = result as DesignerInfoResponseDto;
+        if (userId !== loginUserId) {
+            alert('권한이 없습니다.');
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+        }
+        setGender(userGender);
+        setAge(userAge);
+        setCompanyName(userCompanyName);
     };
 
     const getImageResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-    }
-    setImage(image);
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+            return;
+        }
+        setImage(image);
     }
 
     //                    event handler                    //
     const onInfoDesignerUpdateClickHandler = async () => {
-    if (!image) return;
+        if (!image) return;
 
-    const reader = new FileReader();
-    reader.onload = async function () {
-    const imageDataUrl = reader.result;
+        const reader = new FileReader();
+        reader.onload = async function () {
+            const imageDataUrl = reader.result;
 
-    try {
-        const designerInfoUpdate = {
-            userCompanyName: companyName,
-            userGender: gender,
-            userAge: age,
-            userImage: imageDataUrl
+            const designerInfoUpdate = {
+                userCompanyName: companyName,
+                userGender: gender,
+                userAge: age,
+                userImage: imageDataUrl
+            };
+
+            const updateResult = await updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate);
+            if (updateResult) {
+                alert('개인정보가 업데이트되었습니다.');
+                navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
+                return;
+            }
+            alert('개인정보 업데이트에 실패했습니다.');
+            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         };
-
-        updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate).then(getImageResponse);
-        } catch (error) {
-        alert('개인정보 업데이트에 실패했습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-        }
-    };
         reader.readAsDataURL(image);
-        alert('개인정보가 업데이트되었습니다.');
-        navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
+
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
@@ -138,17 +137,15 @@ export default function InfoDesigner() {
         const files = event.target.files;
         if (!files || !files.length) return;
 
-    const file = files[0];
-        setImage(file);
+        const file = files[0];
+            setImage(file);
     };
 
     const formData = new FormData();
         formData.append('companyName', companyName);
         formData.append('gender', gender);
         formData.append('age', age);
-    if (image) {
-        formData.append('image', image);
-    }
+        image && formData.append('image', image);
 
     //                    effect                    //
     useEffect(() => {
@@ -159,7 +156,6 @@ export default function InfoDesigner() {
         navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
-
     getSignInUserRequest(cookies.accessToken)
     .then(getInfoDesignerResponse);
     }, [loginUserRole, cookies.accessToken]);
