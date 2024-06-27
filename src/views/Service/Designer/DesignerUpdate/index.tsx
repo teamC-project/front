@@ -1,34 +1,37 @@
-import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
-import "./style.css";
+import { ChangeEvent, useRef, useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import  { Editor } from '@toast-ui/react-editor';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCookies } from 'react-cookie';
+import ToastEditor from 'src/components/ToastEditor';
+
 import ResponseDto from 'src/apis/response.dto';
 import { DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, } from 'src/constant';
-import ToastEditor from 'src/components/ToastEditor';
+
 import { getDesignerBoardRequest, putDesignerBoardRequest } from 'src/apis/designerBoard';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 import { PutDesignerBoardRequestDto } from 'src/apis/designerBoard/dto/request';
 
+import "./style.css";
+
+//                          component                           //
 export default function DesignerUpdate() {
 
-    //              state               //
+//                          state                           //
+const { designerBoardNumber } = useParams();
+
+    const [cookies] = useCookies();
+
     const editorRef= useRef<Editor | null> (null);
-    const navigator = useNavigate();
-    const { designerBoardNumber } = useParams();
+
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
-    const [cookies] = useCookies();
     const [urlList, setUrlList] = useState<{base64: string; url : string}[]>([]);
 
-    useEffect(() => {
-        if (!cookies.accessToken || !designerBoardNumber) return;
-        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
-            .then(getDesignerBoardResponse);
-    }, [cookies.accessToken, designerBoardNumber]);
+//                          function                            //
+    const navigator = useNavigate();
 
-    //              event handler               //
+//                          event handler                           //
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
         if (result && result.code === 'SU') {
             const { designerBoardTitle, designerBoardContents} = result as GetDesignerBoardResponseDto;
@@ -88,7 +91,14 @@ export default function DesignerUpdate() {
         }
     };
 
-    //                    render                    //
+//                          effect                          //
+    useEffect(() => {
+        if (!cookies.accessToken || !designerBoardNumber) return;
+        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
+            .then(getDesignerBoardResponse);
+    }, [cookies.accessToken, designerBoardNumber]);
+
+//                          render                          //
     return (
         <div id='designer-update-wrapper'>
 			<div className='designer-update-top'>
