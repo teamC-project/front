@@ -1,4 +1,5 @@
 // description : Navigation URL PATH
+export const LOCALHOST = "http://localhost:4200/api/v1/auth/oauth2/"
 export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
 export const FOOTER_PATH = "footer";
@@ -260,3 +261,6 @@ export const COUNT_PER_SECTION = 10;
 // description: 트렌드 게시판 게시물 상수
 export const TREND_BOARD_COUNT_PER_PAGE = 5;
 export const TREND_BOARD_COUNT_PER_SECTION = 10;
+
+export const EMAILPATTERN = /^([-.]?[a-zA-Z0-9])*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+export const PASSWORDPATTERN = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/

@@ -55,32 +55,32 @@ export default function InfoDeleteUser() {
             return;
         }
 
-    const { userId, userRole } = result as GetSignInUserResponseDto;
-        setLoginUserId(userId);
-        setLoginUserRole(userRole);
+        const { userId, userRole } = result as GetSignInUserResponseDto;
+            setLoginUserId(userId);
+            setLoginUserRole(userRole);
     };
 
     //                event handler               //
-    const onUserDeleteClickHandler = () => {
-        if (!isChecked || !cookies.accessToken)
-            alert('회원 탈퇴를 위해서는 안내 사항에 동의해야 합니다.')
-        if (!isChecked || !cookies.accessToken)  return;
+    const onUserDeleteClickHandler = async () => {
+        if (!isChecked || !cookies.accessToken) {
+            alert('회원 탈퇴를 위해서는 안내 사항에 동의해야 합니다.');
+            return;
+        }
     
-        const isConfirm = window.confirm(`정말로 삭제하시겠습니까?`);
-            if (!isConfirm) return;
+        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+        if (!isConfirm) return;
     
         if (isChecked) {
-            try {
-                userInfoDeleteRequest(userId, cookies.accessToken).then(deleteUserInfoResponse);
+        const deleteResponse = await userInfoDeleteRequest(userId, cookies.accessToken);
+            if (deleteResponse) {
                 alert('회원탈퇴가 완료되었습니다.');
                 navigator(AUTH_SIGN_IN_ABSOLUTE_PATH);
-        } catch (error) {
+                return;
+                }
             alert('회원 탈퇴 중 오류가 발생했습니다.');
-        return;
-        } 
-    }
+        }
     };
-    
+
     const onCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
