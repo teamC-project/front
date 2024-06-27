@@ -1,16 +1,18 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css';
+import  { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
 import { useNavigate, useParams } from 'react-router';
+import './style.css';
+
+import {  GetChatroomListResponseDto } from 'src/apis/chat/dto/response';
+
 import ResponseDto from 'src/apis/response.dto';
-import { CHAT_ROOM_DETAIL_ABSOLUTE_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, GET_CHATROOM_DETAIL_URL, MAIN_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_PATH } from 'src/constant';
 import { getChatroomListRequest,  postChatRoomRequest } from 'src/apis/chat';
 import socket from 'src/utils/socket';
 import { useChatStore, useUserStore } from 'src/stores';
 import { ChatMessageList, ChatroomList } from 'src/types';
 import { PostChatroomRequestDto } from 'src/apis/chat/dto/request';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from 'src/hooks'; 
 
 interface ChatRoomProps {
     selectedDesignerId: string;
@@ -24,9 +26,6 @@ function ListItem ({
 
     //                    state                    //
     const {setRoomId} = useChatStore();
-
-    //                    function                    //
-    const navigator = useNavigate();
 
     //                    event handler                    //
     const onClickHandler = () => setRoomId(chatroomId);
@@ -53,7 +52,6 @@ const ChatRoom = ({ selectedDesignerId }: ChatRoomProps) => {
     const { loginUserRole, loginUserId } = useUserStore();
 
     const {
-        setBoardList,
 		viewList,
 		pageList,
 		currentPage,

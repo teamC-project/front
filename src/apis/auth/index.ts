@@ -32,7 +32,7 @@ export const idCheckRequest = async (requestBody: IdCheckRequestDto) => {
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 이메일 인증 API 함수
 export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
@@ -40,7 +40,7 @@ export const emailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 아이디 찾기 이메일 인증 API 함수
 export const foundIdEmailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
@@ -48,7 +48,7 @@ export const foundIdEmailAuthRequest = async (requestBody: EmailAuthRequestDto) 
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 변경 이메일 인증 API 함수
 export const foundPasswordEmailAuthRequest = async (requestBody: EmailAuthRequestDto) => {
@@ -56,7 +56,7 @@ export const foundPasswordEmailAuthRequest = async (requestBody: EmailAuthReques
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 이메일 인증 확인 API 함수
 export const emailAuthCheckRequest = async (requestBody: EmailAuthCheckRequestDto) => {
@@ -64,7 +64,7 @@ export const emailAuthCheckRequest = async (requestBody: EmailAuthCheckRequestDt
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 고객 회원가입 API 함수
 export const customerSignUpRequest = async (requestBody: SignUpCustomerRequestDto) => {
@@ -72,7 +72,7 @@ export const customerSignUpRequest = async (requestBody: SignUpCustomerRequestDt
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 디자이너 회원가입 API 함수
 export const designerSignUpRequest = async (requestBody: SignUpDesignerRequestDto) => {
@@ -80,7 +80,7 @@ export const designerSignUpRequest = async (requestBody: SignUpDesignerRequestDt
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 아이디 찾기 API 함수
 export const foundIdRequest = async (requestBody: FoundIdCheckRequestDto) => {
@@ -88,7 +88,7 @@ export const foundIdRequest = async (requestBody: FoundIdCheckRequestDto) => {
         .then(requestHandler<IdFoundResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 찾기 아이디 확인 API 함수
 export const foundPosswordIdCheckRequest = async (requsetBody: FoundPasswordIdCheckRequestDto) => {
@@ -96,7 +96,7 @@ export const foundPosswordIdCheckRequest = async (requsetBody: FoundPasswordIdCh
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 찾기 사용자 확인 API 함수
 export const foundPasswordUserCheckRequest = async (requestBody: PasswordResetRequestDto) => {
@@ -104,7 +104,7 @@ export const foundPasswordUserCheckRequest = async (requestBody: PasswordResetRe
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: 비밀번호 변경 API 함수
 export const setUpPasswordRequest = async (requestBody: SetUpPasswordRequestDto) => {
@@ -112,4 +112,4 @@ export const setUpPasswordRequest = async (requestBody: SetUpPasswordRequestDto)
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};

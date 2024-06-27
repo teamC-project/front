@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 import {  GetSearchCustomerBoardListResponseDto } from 'src/apis/customerBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchCustomerBoardListRequest } from 'src/apis/customerBoard';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks'
 
 //                    component                    //
 function ListItem ({

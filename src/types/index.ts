@@ -87,5 +87,4 @@ export interface ChatMessageList {
 	chatroomId: number;
 	senderId: string;
 	message: string;
-	sendDatetime: string;
 }

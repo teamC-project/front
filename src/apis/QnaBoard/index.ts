@@ -22,7 +22,7 @@ export const postQnaBoardRequest = async (requestBody: PostQnaBoardRequestDto, a
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function :  Q&A 전체 리스트 불러오기 API 함수
 export const getQnaBoardListRequest  = async (accessToken : string) => {
@@ -31,7 +31,7 @@ export const getQnaBoardListRequest  = async (accessToken : string) => {
 		.then(requestHandler<GetQnaBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : Q&A 검색 리스트 불러오기 API 함수
 export const getSearchQnaBoardListRequest = async (word: string, accessToken: string): Promise<GetSearchQnaBoardListResponseDto> => {
@@ -51,7 +51,7 @@ export const getQnaBoardRequest =  async(qnaBoardNumber : number | string, acces
 		.then(requestHandler<GetQnaBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : Q&A 게시물 수정 API 함수
 export const putQnaBoardRequest = async(qnaBoardNumber : number | string, requestBody : PutQnaBoardRequestDto, accessToken : string) => {
@@ -59,7 +59,7 @@ export const putQnaBoardRequest = async(qnaBoardNumber : number | string, reques
 		.then(requestHandler<ResponseDto>)
 		.catch(requestHandler);
 	return result;
-}
+};
 
 
 // function: Q&A  답글 작성 API 함수 
@@ -85,7 +85,8 @@ export const deleteQnaBoardRequest = async (qnaBoardNumber : number | string, ac
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
+
 // function : Q&A 댓글 삭제 API 함수
 export const deleteQnaBoardCommentRequest = async (qnaBoardCommentNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_QNA_BOARD_COMMENT_DELETE_URL(qnaBoardCommentNumber), bearerAuthorization(accessToken))
@@ -93,10 +94,11 @@ export const deleteQnaBoardCommentRequest = async (qnaBoardCommentNumber: number
         .catch(requestErrorHandler);
     return result;
 };
+
 // function : Q&A 조회수 증가 API 함수
 export const increaseViewCountRequest = async (qnaBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.patch(PATCH_QNA_BOARD_INCREASE_VIEW_COUNT_URL(qnaBoardNumber), {}, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};

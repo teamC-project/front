@@ -28,7 +28,7 @@ export const postTrendBoardRequest = async (
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : 트렌드 게시물 답글 작성 API 함수
 export const postTrendBoardCommentRequest = async (
@@ -37,7 +37,7 @@ trendBoardNumber : number | string, requestBody : PostTrendBoardCommentRequestDt
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : 트렌드 전체 게시물 리스트 불러오기 API 함수
 export const getTrendBoardListRequest = async(accessToken  : string) => {
@@ -45,7 +45,7 @@ export const getTrendBoardListRequest = async(accessToken  : string) => {
 		.then(requestHandler<GetTrendBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : 트렌드 게시물의 답글 전체 리스트 불러오기 API 함수
 export const getTrendBoardCommentByBoardNumberListRequest = async ( trendBoardNumber : number | string, accessToken : string) => {
@@ -53,7 +53,7 @@ export const getTrendBoardCommentByBoardNumberListRequest = async ( trendBoardNu
 		.then(requestHandler<GetTrendBoardCommentListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : 트렌드 검색 리스트 불러오기 API 함수
 export const getSearchTrendBoardListRequest =  async (word : string, accessToken : string) => {
@@ -62,7 +62,7 @@ export const getSearchTrendBoardListRequest =  async (word : string, accessToken
 		.then(requestHandler<GetSearchTrendBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function  : 트렌드 게시물 불러오기 API 함수 
 export const getTrendBoardRequest = async (trendBoardNumber  : number | string , accessToken : string) => {
@@ -70,7 +70,7 @@ export const getTrendBoardRequest = async (trendBoardNumber  : number | string ,
 		.then(requestHandler<GetTrendBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function: 트렌드 게시물 수정 API 함수 
 export const putTrendBoardRequest = async (trendBoardNumber: number | string, requestBody: PutTrendBoardRequestDto, accessToken: string) => {
@@ -110,7 +110,7 @@ export const putTrendBoardLikeRequest = async (trendBoardNumber : number | strin
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 //function : 트렌드 게시물 조회수 증가 API 함수
 export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber : number | string , accessToken : string) => {
@@ -118,7 +118,7 @@ export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber :
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 //function  : 트렌드 좋아요 누른 유저 리스트 조회 API 함수
 export const getTrendBoardLikeListRequest = async(trendBoardNumber : number | string, accessToken :string) =>{
@@ -126,7 +126,7 @@ export const getTrendBoardLikeListRequest = async(trendBoardNumber : number | st
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 //function : 트렌드 게시물 좋아요 누른 유저 리스트 삭제 API 함수
 export const deleteTrendBoardLikeListRequest = async(trendBoardNumber : number | string , accessToken : string ) => {
@@ -134,5 +134,5 @@ export const deleteTrendBoardLikeListRequest = async(trendBoardNumber : number |
 		.then(requestHandler<ResponseDto>)
 		.catch(requestHandler);
 	return result;
-}
+};
 

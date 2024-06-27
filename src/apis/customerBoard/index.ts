@@ -55,7 +55,7 @@ export const getCustomerBoardCommentsByBoardNumberRequest = async (customerBoard
         .then(requestHandler<GetCustomerBoardCommentListResponseDto>)
         .catch(requestErrorHandler);
     return result;
-} 
+} ;
 
 // function: CustomerBoard 게시물 불러오기 API 함수 
 export const getCustomerBoardRequest = async (customerBoardNumber: number | string, accessToken: string) => {
@@ -99,7 +99,7 @@ export const deleteCustomerBoardCommentRequest = async (customerBoardCommentNumb
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 // function: CustomerBoard 게시물 조회수 증가 API 함수 
 export const increaseViewCountRequest = async (customerBoardNumber: number | string, accessToken: string) => {

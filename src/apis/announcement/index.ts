@@ -19,16 +19,15 @@ export const postAnnouncementBoardRequest = async (requestBody: PostAnnouncement
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 //function: 공지사항 게시물 수정 API 함수
-export const putAnnouncementBoardRequest = async(announcementBoardNumber : number | string, requestBody : PutAnnouncementBoardRequestDto, accessToken : string 
-) => {
+export const putAnnouncementBoardRequest = async(announcementBoardNumber : number | string, requestBody : PutAnnouncementBoardRequestDto, accessToken : string ) => {
 	const result  = await axios.put(PUT_ANNOUNCEMENT_BOARD_PUT_URL(announcementBoardNumber) , requestBody, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function: 공지사항 전체 리스트 불러오기 API 함수 
 export const getAnnouncementBoardListRequest = async (accessToken: string) => {
@@ -37,6 +36,7 @@ export const getAnnouncementBoardListRequest = async (accessToken: string) => {
         .catch(requestErrorHandler);
     return result;
 };
+
 // function : 공지사항 검색 리스트 불러오기 API 함수
 export const getSearchAnnouncementBoardListRequest = async (word: string, accessToken: string) => {
     const config = { ...bearerAuthorization(accessToken), params: { word } };
@@ -52,7 +52,7 @@ export const getAnnouncementBoardRequest = async (announcementBoardNumber : numb
 		.then(requestHandler<GetAnnouncementBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function  : 공지사항 조회수 증가 API 함수
 export const increaseAnnouncementBoardViewCountRequest = async(announcementBoardNumber : number | string, accessToken : string) => {
@@ -60,7 +60,7 @@ export const increaseAnnouncementBoardViewCountRequest = async(announcementBoard
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 // function : 공지사항 게시물 삭제 API 함수 
 export const deleteAnnouncementBoardRequest = async(announcementBoardNumber : number | string, accessToken : string) => {
@@ -68,5 +68,5 @@ export const deleteAnnouncementBoardRequest = async(announcementBoardNumber : nu
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 

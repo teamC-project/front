@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'src/apis/QnaBoard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchQnaBoardListRequest } from 'src/apis/QnaBoard';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks'
 
 //                    component                    //
 function ListItem({

@@ -56,7 +56,7 @@ export const getDesignerBoardCommentsByBoardNumberRequest = async (designerBoard
         .then(requestHandler<GetDesignerBoardCommentListResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}  
+} ;
 
 // function: DesignerBoard 게시물 불러오기 API 함수 
 export const getDesignerBoardRequest = async (designerBoardNumber: number | string, accessToken: string) => {
