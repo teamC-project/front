@@ -172,10 +172,10 @@ export default function QnaBoardList() {
 		fetchQnaBoardList();
 	}, [cookies.accessToken]);
 
-useEffect(() => {
+	useEffect(() => {
 		if (!cookies.accessToken) return;
 		getSearchQnaBoardListRequest(searchWord, cookies.accessToken).then(getSearchQnaBoardListResponse);
-}, [isToggleOn]);
+	}, [isToggleOn]);
 
 	//                    render                    //
 	const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';

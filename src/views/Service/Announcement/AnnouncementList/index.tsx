@@ -149,8 +149,8 @@ export default function AnnouncementBoardList() {
 
 //							effect							//
 	useEffect(() => {
-    if (!cookies.accessToken) return;
-	fetchAnnouncementBoardList();
+		if (!cookies.accessToken) return;
+		fetchAnnouncementBoardList();
 	}, [cookies.accessToken]);
 
   //                    render                    //
