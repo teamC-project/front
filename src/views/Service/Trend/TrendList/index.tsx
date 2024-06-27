@@ -10,7 +10,7 @@ import { GetSearchTrendBoardListResponseDto, GetTrendBoardListResponseDto } from
 import ResponseDto from 'src/apis/response.dto';
 
 import { getSearchTrendBoardListRequest, getTrendBoardListRequest } from 'src/apis/TrendBoard';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks'
 
 import './style.css';
 import '../../../../App.css';

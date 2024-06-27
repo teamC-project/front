@@ -9,7 +9,7 @@ import { GetQnaBoardListResponseDto, GetSearchQnaBoardListResponseDto } from 'sr
 
 import ResponseDto from 'src/apis/response.dto';
 import { getSearchQnaBoardListRequest } from 'src/apis/QnaBoard';
-import { usePagination } from 'src/hooks/pagination';
+import { usePagination } from '../../../../hooks'
 
 import './style.css';
 import '../../../../App.css'

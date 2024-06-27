@@ -7,7 +7,7 @@ interface ChatStore {
     setRoomId: (roomId: number) => void;
     setRooms: (rooms: ChatroomList[]) => void;
     resetRoomId: () => void;
-}
+};
 
 export const useChatStore = create<ChatStore>((set) => ({
     roomId: null,

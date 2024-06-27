@@ -32,7 +32,7 @@ export const postTrendBoardRequest = async (
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const postTrendBoardCommentRequest = async (
 trendBoardNumber : number | string, requestBody : PostTrendBoardCommentRequestDto, accessToken: string ) => {
@@ -40,21 +40,21 @@ trendBoardNumber : number | string, requestBody : PostTrendBoardCommentRequestDt
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getTrendBoardListRequest = async(accessToken  : string) => {
 	const result = await axios.get(GET_TREND_BOARD_LIST_URL, bearerAuthorization(accessToken))
 		.then(requestHandler<GetTrendBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getTrendBoardCommentByBoardNumberListRequest = async ( trendBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.get(GET_TREND_BOARD_COMMENT_LIST_URL(trendBoardNumber), bearerAuthorization(accessToken))
 		.then(requestHandler<GetTrendBoardCommentListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getSearchTrendBoardListRequest =  async (word : string, accessToken : string) => {
 	const config = {...bearerAuthorization(accessToken), params :  { word }};
@@ -62,14 +62,14 @@ export const getSearchTrendBoardListRequest =  async (word : string, accessToken
 		.then(requestHandler<GetSearchTrendBoardListResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getTrendBoardRequest = async (trendBoardNumber  : number | string , accessToken : string) => {
 	const result = await axios.get(GET_TREND_BOARD_DETAIL_URL(trendBoardNumber), bearerAuthorization(accessToken))
 		.then(requestHandler<GetTrendBoardResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const putTrendBoardRequest = async (trendBoardNumber: number | string, requestBody: PutTrendBoardRequestDto, accessToken: string) => {
 	const result = await axios.put(PUT_TREND_BOARD_PUT_URL(trendBoardNumber), requestBody, bearerAuthorization(accessToken))
@@ -104,28 +104,28 @@ export const putTrendBoardLikeRequest = async (trendBoardNumber : number | strin
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const patchTrendBoardIncreaseViewCountRequest = async (trendBoardNumber : number | string , accessToken : string) => {
 	const result = await axios.patch(PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL(trendBoardNumber), {}, bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const getTrendBoardLikeListRequest = async(trendBoardNumber : number | string, accessToken :string) =>{
 	const result = await axios.get(GET_TREND_BOARD_LIKE_LIST_URL(trendBoardNumber), bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const deleteTrendBoardLikeListRequest = async(trendBoardNumber : number | string , accessToken : string ) => {
 	const result = await axios.delete(DELETE_TREND_BOARD_LIKE_LIST_URL(trendBoardNumber) ,bearerAuthorization(accessToken))
 		.then(requestHandler<ResponseDto>)
 		.catch(requestErrorHandler);
 	return result;
-}
+};
 
 export const postTrendBoardImageUploadRequest = async(formdata  : FormData ) => {
 	const result =  await axios.post(POST_TREND_BOARD_IMAGE_UPLOAD_URL, formdata, { headers: { 'Content-Type' : 'multipart/form-data' } } )
@@ -134,4 +134,4 @@ export const postTrendBoardImageUploadRequest = async(formdata  : FormData ) => 
 		})
 		.catch(() => '')
 		return result;
-}
+};
