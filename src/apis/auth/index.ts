@@ -39,7 +39,7 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
         .then(requestHandler<SignInResponseDto>)
         .catch(requestErrorHandler);
     return result;
-}
+};
 
 export const idCheckRequest = async (requestBody: IdCheckRequestDto) => {
     const result = await axios.post(ID_CHECK_REQUEST_URL, requestBody)
