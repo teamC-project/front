@@ -29,10 +29,10 @@ export default function AnnouncementBoardWrite() {
     const postAnnouncementBoardResponse =(result: ResponseDto | null) => {
 
         const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+			result.code === 'AF' ? '권한이 없습니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -60,8 +60,8 @@ export default function AnnouncementBoardWrite() {
 
     const onPostButtonClickHandler = () => {
         if (!announcementBoardTitle.trim() || !announcementBoardContents.trim()) {
-				alert("제목과 내용 모두 입력해주세요.");
-				return;
+			alert("제목과 내용 모두 입력해주세요.");
+			return;
 		}
 
         if (!cookies.accessToken) return;

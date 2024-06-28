@@ -24,15 +24,15 @@ import './style.css';
 export default function CustomerDetail() {
 
 //                          state                           //
-    const { loginUserId, loginUserRole } = useUserStore();
-    const { customerBoardNumber } = useParams();
-    const [cookies] = useCookies();
-    const [title, setTitle] = useState<string>('');
-    const [writerId, setWriterId] = useState<string>('');
+    const [isSecret, setIsSecret] = useState<boolean>(false);
     const [writeDate, setWriteDate] = useState<string>('');
+    const { loginUserId, loginUserRole } = useUserStore();
     const [viewCount, setViewCount] = useState<number>(0);
     const [contents, setContents] = useState<string>('');
-    const [isSecret, setIsSecret] = useState<boolean>(false);
+    const [writerId, setWriterId] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const { customerBoardNumber } = useParams();
+    const [cookies] = useCookies();
 
 //                          function                            //
     const navigator = useNavigate();

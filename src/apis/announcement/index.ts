@@ -46,7 +46,6 @@ export const getSearchAnnouncementBoardListRequest = async (word: string, access
     return result;
 };
 
-
 export const getAnnouncementBoardRequest = async (announcementBoardNumber : number | string, accessToken : string) => {
 	const result = await axios.get(GET_ANNOUNCEMENT_BOARD_DETAIL_URL(announcementBoardNumber), bearerAuthorization(accessToken))
 		.then(requestHandler<GetAnnouncementBoardResponseDto>)

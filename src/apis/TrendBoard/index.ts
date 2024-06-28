@@ -2,10 +2,19 @@ import axios from "axios";
 
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 
-
-import { PostTrendBoardCommentRequestDto, PostTrendBoardRequestDto, PutTrendBoardCommentRequestDto, PutTrendBoardRequestDto } from "./dto/request";
-import { GetSearchTrendBoardListResponseDto, GetTrendBoardCommentListResponseDto, GetTrendBoardListResponseDto, GetTrendBoardResponseDto } from "./dto/response";
-import ResponseDto from "../response.dto";
+import {
+	PostTrendBoardCommentRequestDto,
+	PostTrendBoardRequestDto, 
+	PutTrendBoardCommentRequestDto, 
+	PutTrendBoardRequestDto } 
+from "./dto/request";
+import { 
+	GetSearchTrendBoardListResponseDto, 
+	GetTrendBoardCommentListResponseDto,
+	GetTrendBoardListResponseDto, 
+	GetTrendBoardResponseDto } 
+from "./dto/response";
+import ResponseDto from "../response.dto"
 
 import { 
 	DELETE_TREND_BOARD_COMMENT_DELETE_URL, 

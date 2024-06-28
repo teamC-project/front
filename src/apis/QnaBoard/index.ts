@@ -1,8 +1,17 @@
 import axios from "axios"
 import { bearerAuthorization, requestErrorHandler, requestHandler } from ".."
 
-import { GetQnaBoardListResponseDto, GetQnaBoardResponseDto, GetSearchQnaBoardListResponseDto } from "./dto/response"
-import { PostQnaBoardCommentRequestDto, PostQnaBoardRequestDto, PutQnaBoardCommentRequestDto, PutQnaBoardRequestDto } from "./dto/request"
+import { 
+	GetQnaBoardListResponseDto, 
+	GetQnaBoardResponseDto, 
+	GetSearchQnaBoardListResponseDto } 
+	from "./dto/response"
+import {
+	PostQnaBoardCommentRequestDto,
+	PostQnaBoardRequestDto, 
+	PutQnaBoardCommentRequestDto, 
+	PutQnaBoardRequestDto } 
+from "./dto/request"
 import ResponseDto from "../response.dto"
 
 import { 
