@@ -57,9 +57,10 @@ function ListItem({
         navigator(CUSTOMER_BOARD_DETAIL_ABSOLUTE_PATH(customerBoardNumber));
     };
 
-    const MAX_TITLE_WIDTH = 720;
-    const FONT_SIZE = 16;
     const FONT_FAMILY = 'Arial, sans-serif';
+    const FONT_SIZE = 16;
+    const MAX_TITLE_WIDTH = 720;
+
     let truncatedTitle = customerBoardTitle;
     let titleWidth = measureText(truncatedTitle, FONT_SIZE, FONT_FAMILY);
 
@@ -92,10 +93,10 @@ function ListItem({
 export default function CustomerList() {
 
 //                          state                           //
+const [isSearched, setIsSearched] = useState<boolean>(false);
+const [searchWord, setSearchWord] = useState<string>('');
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
-    const [searchWord, setSearchWord] = useState<string>('');
-    const [isSearched, setIsSearched] = useState<boolean>(false);
     const {
         setBoardList,
         viewList,

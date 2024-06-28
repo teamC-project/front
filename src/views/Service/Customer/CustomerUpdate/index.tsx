@@ -16,13 +16,13 @@ import "./style.css";
 export default function CustomerUpdate() {
 
 //                          state                           //
-    const editorRef = useRef<Editor | null>(null);
-    const [isSecret, setIsSecret] = useState<boolean>(false);
-    const [title, setTitle] = useState('');
-    const [contents, setContents] = useState('');
     const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
-    const [cookies] = useCookies();
+    const [isSecret, setIsSecret] = useState<boolean>(false);
+    const editorRef = useRef<Editor | null>(null);
+    const [contents, setContents] = useState('');
     const { customerBoardNumber } = useParams();
+    const [title, setTitle] = useState('');
+    const [cookies] = useCookies();
 
 //                          function                            //
     const navigator = useNavigate();
