@@ -15,7 +15,7 @@ import "./style.css";
 //                component               //
 export default function PasswordChangePage() {
 
-    //                  state                //
+//                  state                //
     const [password, setPassword] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [passwordChange, setPasswordChange] = useState<string>('');
@@ -24,8 +24,6 @@ export default function PasswordChangePage() {
 
     const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
     const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
-
-    const { userPassword } = useParams();
     
     const [cookies] = useCookies();
 

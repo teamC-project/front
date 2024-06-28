@@ -16,10 +16,10 @@ import ResponseDto from 'src/apis/response.dto';
 
 import "./style.css";
 
-//              component               //
+//                          component                          //
 export default function InfoDesigner() {
 
-    //                state                 //
+//                          state                          //
     const { loginUserRole, loginUserId } = useUserStore();
     
     const [age, setAge] = useState<string>('');
@@ -39,7 +39,7 @@ export default function InfoDesigner() {
     const [isGenderCheck, setIsGenderCheck] = useState<boolean>(false);
     const [isCompanyNameCheck, setIsCompanyNameCheck] = useState<boolean>(false);
 
-    //                    function                    //
+//                          function                          //
     const navigator = useNavigate();
 
     const getInfoDesignerResponse = (result: DesignerInfoResponseDto | ResponseDto | null) => {
@@ -83,7 +83,7 @@ export default function InfoDesigner() {
         setImage(image);
     }
 
-    //                    event handler                    //
+//                          event handler                          //
     const onInfoDesignerUpdateClickHandler = async () => {
         if (!image) return;
 
@@ -109,7 +109,6 @@ export default function InfoDesigner() {
         };
         reader.readAsDataURL(image);
     };
-
 
     const onAgeChangeHandler = (value: string) => {
         setAge(value);
@@ -147,7 +146,7 @@ export default function InfoDesigner() {
         formData.append('age', age);
         image && formData.append('image', image);
 
-    //                    effect                    //
+//                          effect                          //
     useEffect(() => {
     if (!cookies.accessToken || !loginUserRole) return;
 
@@ -160,29 +159,23 @@ export default function InfoDesigner() {
     .then(getInfoDesignerResponse);
     }, [loginUserRole, cookies.accessToken]);
 
-    //                    render                    //
+//                          render                          //
     return (
         <div id='info-wrapper'>
-
             <div className='info-sub-title'>개인정보 수정</div>
-
             <div className='info-under-value'>
                 <div className='user-left-null'></div>
                 <div className='info-center-value'>
                     <div className='info-container'>
-
                         <div className='info-box-text'>
                             <div className='info-text'>아이디</div>
-
                             <div className='id-info-text-container'>
                                 <div className='id-white-value'></div>
                                 <div className='id-info-text'>{loginUserId}
                                     <div className='id-white-value'></div>
                                 </div>
                             </div>
-
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>성별</div>
                             <div className='info-next-box'>
@@ -192,27 +185,22 @@ export default function InfoDesigner() {
                                     <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
                             </div>
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>연령대
                                 <UserSelectBox value={age} onChange={onAgeChangeHandler} />
                             </div>
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>업체명</div>
                             <div className='info-update-next-box'><InputBox type={'text'} value={companyName} placeholder={'업체명을 입력해주세요.'} onChangeHandler={onCompanyNameChangeHandler} message={companyNameMessage} /></div>
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>면허증사진</div>
                             <div className='info-update-next-box'>
                                 <input type='file' onChange={onImageChangeHandler} />
                             </div>
                         </div>
-
                     </div>
-
                     <div className='submit-box'>
                         <div className='user-primary-button' onClick={onInfoDesignerUpdateClickHandler}>완료</div>
                     </div>
