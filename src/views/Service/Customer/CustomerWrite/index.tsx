@@ -17,13 +17,13 @@ import "./style.css";
 export default function CustomerWrite() {
 
 //                          state                           //
+    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
+    const [isSecret, setIsSecret] = useState<boolean>(false);
+    const [contents, setContents] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const editorRef = useRef<Editor | null>(null);
     const { loginUserRole } = useUserStore();
     const [cookies] = useCookies();
-    const [title, setTitle] = useState<string>('');
-    const [contents, setContents] = useState<string>('');
-    const [isSecret, setIsSecret] = useState<boolean>(false);
-    const [urlList, setUrlList] = useState<{ base64: string; url: string }[]>([]);
-    const editorRef = useRef<Editor | null>(null);
 
 //                          function                            //
     const navigator = useNavigate();

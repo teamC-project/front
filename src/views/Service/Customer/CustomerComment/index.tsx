@@ -22,13 +22,13 @@ import './style.css';
 export default function CustomerBoardComment() {
 
 //                          state                           //
-    const { customerBoardNumber } = useParams();
     const [customerBoardCommentList, setCustomerBoardCommentList] = useState<CustomerBoardCommentListItem[]>([]);
-    const [comment, setComment] = useState<string>('');
-    const [cookies] = useCookies();
-    const { loginUserRole, loginUserId } = useUserStore();
-    const [commentRows, setCommentRows] = useState<number>(1);
     const [replyCommentParentNumber] = useState<number | null>(null);
+    const [commentRows, setCommentRows] = useState<number>(1);
+    const { loginUserRole, loginUserId } = useUserStore();
+    const [comment, setComment] = useState<string>('');
+    const { customerBoardNumber } = useParams();
+    const [cookies] = useCookies();
 
 //                          function                            //
     const postCustomerBoardCommentResponse = (result: ResponseDto | null) => {
