@@ -1,4 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { 
+    ChangeEvent, 
+    useEffect, 
+    useState 
+}
+from 'react';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 
@@ -15,10 +20,10 @@ import ResponseDto from 'src/apis/response.dto';
 
 import "./style.css";
 
-//                     component                       //
+//                          component                          //
 export default function InfoCustomer() {
 
-    //                     state                     //
+//                          state                          //
     const { loginUserId, loginUserRole } = useUserStore();
 
     const [age, setAge] = useState<string>('');
@@ -31,7 +36,7 @@ export default function InfoCustomer() {
 
     const [cookies] = useCookies();
 
-    //                     function                       //
+//                          function                          //
     const navigator = useNavigate();
 
     const getInfoUpdate = (result: GetSignInUserResponseDto | ResponseDto | null) => {
@@ -58,7 +63,7 @@ export default function InfoCustomer() {
         setAge(userAge);
     };
 
-    //                     event handler                     //
+//                          event handler                           //
     const onInfoCustomerUpdateClickHandler = async () => {
         const customerInfoUpdate = {
             userGender: gender,
@@ -90,7 +95,7 @@ export default function InfoCustomer() {
         setGenderMessage(genderMessage);
     };
 
-    //                     effect                     //
+//                          effect                          //
     useEffect(() => {
     if (!cookies.accessToken || !loginUserRole) return;
 
@@ -103,22 +108,18 @@ export default function InfoCustomer() {
     .then(getInfoUpdate);
     }, [loginUserRole, cookies.accessToken]);
 
-    //                     render                     //
+//                          render                          //
     return (
         <div id='info-wrapper'>
-
             <div className='info-sub-title'>개인정보 수정</div>
-
             <div className='info-under-value'>
                 <div className='user-left-null'></div>
                 <div className='info-center-value'>
                     <div className='info-container'>
-
                         <div className='info-box-text'>
                             <div className='info-text'>아이디</div>
                             <div className='id-info-text'>{loginUserId}</div>
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>성별</div>
                             <div className='info-next-box'>
@@ -128,15 +129,12 @@ export default function InfoCustomer() {
                                     <InputBox label={'FEMALE'} type={'radio'} value={'FEMALE'} name={'gender'} onChangeHandler={onGenderChangeHandler} checked={gender === 'FEMALE'} /></div>
                             </div>
                         </div>
-
                         <div className='info-box-text'>
                             <div className='info-text'>연령대
                                 <UserSelectBox value={age} onChange={onAgeChangeHandler} />
                             </div>
                         </div>
-
                     </div>
-
                     <div className='submit-box'>
                         <div className='user-primary-button' onClick={onInfoCustomerUpdateClickHandler}>완료</div>
                     </div>
