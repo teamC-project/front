@@ -1,4 +1,9 @@
-import { ChangeEvent, useRef, useState, useEffect } from 'react';
+import { 
+    ChangeEvent, 
+    useRef, 
+    useState, 
+    useEffect 
+} from 'react';
 import { useCookies } from 'react-cookie';
 import  { Editor } from '@toast-ui/react-editor';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -18,7 +23,7 @@ import "./style.css";
 export default function DesignerUpdate() {
 
 //                          state                           //
-const { designerBoardNumber } = useParams();
+    const { designerBoardNumber } = useParams();
 
     const [cookies] = useCookies();
 
