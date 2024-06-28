@@ -25,6 +25,8 @@ export default function PasswordChangePage() {
     const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
     const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
 
+    const { userPassword } = useParams();
+    
     const [cookies] = useCookies();
 
 //                          function                          //
