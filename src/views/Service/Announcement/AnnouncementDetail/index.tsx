@@ -63,11 +63,11 @@ export default function AnnouncementBoardDetail() {
 
     const getAnnouncementBoardResponse = (result: GetAnnouncementBoardResponseDto | ResponseDto | null) => {
         const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-        result.code === 'AF' ? '인증에 실패 했습니다.' :
-        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'VF' ? '잘못된 접수 번호입니다.' :
+			result.code === 'AF' ? '인증에 실패 했습니다.' :
+			result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);

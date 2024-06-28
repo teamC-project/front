@@ -1,39 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import './style.css';
-import { useUserStore } from 'src/stores';
-import { useNavigate, useParams } from 'react-router';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { getDesignerBoardRequest, increaseViewCountRequest, deleteDesignerBoardRequest } from 'src/apis/designerBoard';
-
-import DesignerBoardComment from '../DesignerComment';
+import { useNavigate, useParams } from 'react-router';
 
 import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 
+import { useUserStore } from 'src/stores';
 
+import ResponseDto from 'src/apis/response.dto';
+import { 
+    getDesignerBoardRequest, 
+    increaseViewCountRequest, 
+    deleteDesignerBoardRequest 
+} from 'src/apis/designerBoard';
+import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 
-//                    component                    //
+import DesignerBoardComment from '../DesignerComment';
+
+import { 
+    DESIGNER_BOARD_LIST_ABSOLUTE_PATH, 
+    DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, 
+    MAIN_PATH 
+} from 'src/constant';
+
+import './style.css';
+
+//                          component                           //
 export default function DesignerDetail() {
 
-    //              state               //
-    const { loginUserId, loginUserRole } = useUserStore();
+//                          state                           //
     const { designerBoardNumber } = useParams();
-    const [cookies] = useCookies();
+    const { loginUserId, loginUserRole } = useUserStore();
+    const { designerIdClickHandler } = useCreateChatRoom();
 
+    const [cookies] = useCookies();
 
     const [title, setTitle] = useState<string>('');
     const [writerId, setWriterId] = useState<string>('');
+    const [contents, setContents] = useState<string>('');
     const [writeDate, setWriteDate] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
-    const [contents, setContents] = useState<string>('');
-    const [comment, setComment] = useState<string | null>(null);
 
-
-    const { designerIdClickHandler } = useCreateChatRoom();
-
-    //                  function                    //
+//                          function                            //
     const navigator = useNavigate();  
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
@@ -61,11 +68,11 @@ export default function DesignerDetail() {
 
     const getDesignerBoardResponse = (result: GetDesignerBoardResponseDto | ResponseDto | null) => {
         const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '잘못된 접수 번호입니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '잘못된 접수 번호입니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물 입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -78,7 +85,6 @@ export default function DesignerDetail() {
 			designerBoardWriteDatetime,
 			designerBoardViewCount,
 			designerBoardContents,
-			designerBoardComment
 			} = result as GetDesignerBoardResponseDto;
 
         setTitle(designerBoardTitle);
@@ -86,7 +92,6 @@ export default function DesignerDetail() {
         setWriteDate(designerBoardWriteDatetime);
         setViewCount(designerBoardViewCount);
         setContents(designerBoardContents);
-        setComment(designerBoardComment);
         
     };
 
@@ -107,7 +112,7 @@ export default function DesignerDetail() {
 		navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
 		};
 
-    //                   event handler                    //
+//                          event handler                           //
     const handleGoToList = () => {
         navigator(DESIGNER_BOARD_LIST_ABSOLUTE_PATH);
     };
@@ -129,42 +134,37 @@ export default function DesignerDetail() {
         .then(deleteDesignerBoardResponse);
     };
 
-    //                   effect                        //
+//                          effect                          //
     useEffect(() => {
-      if (!cookies.accessToken || !designerBoardNumber) return;
-      increaseViewCountRequest(designerBoardNumber, cookies.accessToken)
-        .then(increaseViewCountResponse);
-      getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
-        .then(getDesignerBoardResponse);
+        if (!cookies.accessToken || !designerBoardNumber) return;
+        increaseViewCountRequest(designerBoardNumber, cookies.accessToken)
+            .then(increaseViewCountResponse);
+        getDesignerBoardRequest(designerBoardNumber, cookies.accessToken)
+            .then(getDesignerBoardResponse);
     }, [cookies.accessToken, designerBoardNumber]);
 
-    //              render              //
+//                          render                          //
     return (
     <div className="designer-detail">
 		<div className="designer-detail-title">{title}</div>
 		<div className="designer-detail-container">
-        <div className="designer-detail-information">
-			<div className="designer-detail-information1">작성자: <span  onClick={() => designerIdClickHandler(writerId)}>{writerId}</span></div>
-			<div className="designer-detail-information2">작성일: {writeDate}</div>
-			<div className="designer-detail-information3">조회수: {viewCount}</div> 
-        {loginUserId === writerId && (
-			<>
-            <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
-            {loginUserId === writerId && (
-				<div className="designer-detail-information5" onClick={onUpdateClickHandler}>
-                수정
-				</div>
-            )}
-			</>
-        )}
-        </div>
+            <div className="designer-detail-information">
+                <div className="designer-detail-information1">작성자: <span  onClick={() => designerIdClickHandler(writerId)}>{writerId}</span></div>
+                <div className="designer-detail-information2">작성일: {writeDate}</div>
+                <div className="designer-detail-information3">조회수: {viewCount}</div> 
+                {loginUserId === writerId && (
+                <>
+                <div className="designer-detail-information4" onClick={onDeleteButtonClickHandler}>삭제</div>
+                {loginUserId === writerId && (
+				<div className="designer-detail-information5" onClick={onUpdateClickHandler}>수정</div>
+                )}
+                </>
+                )}
+            </div>
 		</div>
-		<div dangerouslySetInnerHTML={{ __html: contents }} className="designer-detail-view">
-		</div>
+		<div dangerouslySetInnerHTML={{ __html: contents }} className="designer-detail-view"></div>
 		<DesignerBoardComment />
-		<div className="designer-detail-go-to-designerList" onClick={handleGoToList}>
-        목록으로
-		</div>
+		<div className="designer-detail-go-to-designerList" onClick={handleGoToList}>목록으로</div>
     </div>
     );
 }

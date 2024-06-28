@@ -1,16 +1,31 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css'
-import { useNavigate } from 'react-router';
-import { DesignerBoardListItem, DesignerBoardCommentListItem } from 'src/types';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import { 
+	ChangeEvent, 
+	useEffect, 
+	useState 
+} from 'react';
 import { useCookies } from 'react-cookie';
-import { GetDesignerBoardListResponseDto, GetSearchDesignerBoardListResponseDto } from 'src/apis/designerBoard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { getSearchDesignerBoardListRequest } from 'src/apis/designerBoard';
+import { useNavigate } from 'react-router';
+
 import { usePagination } from '../../../../hooks'
 
-//                    component                    //
+import { useUserStore } from 'src/stores';
+
+import { DesignerBoardListItem } from 'src/types';
+
+import ResponseDto from 'src/apis/response.dto';
+import { GetDesignerBoardListResponseDto, GetSearchDesignerBoardListResponseDto } from 'src/apis/designerBoard/dto/response';
+import { getSearchDesignerBoardListRequest } from 'src/apis/designerBoard';
+
+import { 
+	COUNT_PER_PAGE, COUNT_PER_SECTION, 
+	DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH, 
+	DESIGNER_BOARD_WRITE_ABSOLUTE_PATH, 
+	MAIN_PATH 
+} from 'src/constant';
+
+import './style.css';
+
+//                          component                           //
 function ListItem ({
 	designerBoardNumber,
 	designerBoardTitle,
@@ -19,25 +34,19 @@ function ListItem ({
 	designerBoardViewCount
 }: DesignerBoardListItem) {
 
-  //              function              //
+//                          function                            //
 	const navigator = useNavigate();
-	const { loginUserRole, loginUserId } = useUserStore();
 
-  //              event handler              //
-	const isDesigner = loginUserRole === 'ROLE_DESIGNER';
-	const isNotAuthor = isDesigner && (loginUserId !== designerBoardWriterId);
-
+//                          event handler                           //
 	const onClickHandler = () => {
 		navigator(DESIGNER_BOARD_DETAIL_ABSOLUTE_PATH(designerBoardNumber));
 	};
 
-  //              render              //
+//                          render                          //
 	return (
 	<div className='designerboard-list-table-tr' onClick={onClickHandler}>
 		<div className='designerboard-list-table-board-number'>{designerBoardNumber}</div>
-		<div className='designerboard-list-table-title'>
-			{designerBoardTitle}
-		</div>
+		<div className='designerboard-list-table-title'>{designerBoardTitle}</div>
 		<div className='designerboard-list-table-writer-id'>{designerBoardWriterId}</div>
 		<div className='designerboard-list-table-write-date'>{designerBoardWriteDatetime}</div>
 		<div className='designerboard-list-table-viewcount'>{designerBoardViewCount}</div>
@@ -45,10 +54,10 @@ function ListItem ({
 	);
 }
 
-//                    component                    //
+//                          component                           //
 export default function DesignerList() {
 
-  //                    state                    //
+//                          state                           //
 	const { loginUserRole } = useUserStore();
 	const [cookies] = useCookies();
 	const {
@@ -68,7 +77,7 @@ export default function DesignerList() {
 	const [searchWord, setSearchWord] = useState<string>('');
 	const [isSearched, setIsSearched] = useState<boolean>(false);
 
-  //                    function                    //
+//                          function                            //
 	const navigator = useNavigate();
 
 	const getDesignerBoardResponse = (result: GetDesignerBoardListResponseDto | ResponseDto | null) => {
@@ -92,10 +101,10 @@ export default function DesignerList() {
 
 	const getSearchDesignerBoardListResponse = (result: GetSearchDesignerBoardListResponseDto | ResponseDto | null) => {
 		const message = 
-		!result ? '서버에 문제가 있습니다.' :
-		result.code === 'VF' ? '검색어를 입력하세요.' :
-		result.code === 'AF' ? '인증에 실패했습니다.' :
-		result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+			!result ? '서버에 문제가 있습니다.' :
+			result.code === 'VF' ? '검색어를 입력하세요.' :
+			result.code === 'AF' ? '인증에 실패했습니다.' :
+			result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 	
 		if (!result || result.code !== 'SU') {
 		alert(message);
@@ -118,7 +127,7 @@ export default function DesignerList() {
     getSearchDesignerBoardListRequest('', cookies.accessToken).then(getDesignerBoardResponse);
 	};
 
-  //                    event handler                    //
+//                          event handler                           //
 	const onWriteButtonClickHandler = () => {
     navigator(DESIGNER_BOARD_WRITE_ABSOLUTE_PATH);
 	};
@@ -155,7 +164,7 @@ export default function DesignerList() {
 		.then(getSearchDesignerBoardListResponse);
 	};
 
-  //                    effect                    //
+//                          effect                          //
 	useEffect(() => {
 		if (!cookies.accessToken) return;
 		getSearchDesignerBoardListRequest('', cookies.accessToken)
@@ -168,7 +177,7 @@ export default function DesignerList() {
 		.then(getSearchDesignerBoardListResponse);
 	}, [isSearched, searchWord, cookies.accessToken]);
 
-  //                    render                    //
+//                          render                          //
 return (
     <div className='designerboard-list-wrapper'>
 		<div className='designerboard-list-search-box'>

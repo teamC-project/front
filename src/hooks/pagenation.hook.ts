@@ -53,7 +53,7 @@ const usePagination = <T>(countPerPage : number , countPerSection : number) => {
         changeSection(totalPage);
     };
 
-        const onPageClickHandler = (page: number) => {
+    const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
         changePage(boardList, totalLength);
     };

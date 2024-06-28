@@ -651,9 +651,10 @@ export function DesignerSignUp() {
     )
 }
 
-//                component                  //
+//                          component                          //
 export default function Authentication() {
-    //                   render                //
+
+    //                          render                          //
     return (
     <>
     </>
