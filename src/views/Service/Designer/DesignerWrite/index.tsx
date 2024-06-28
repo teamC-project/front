@@ -59,16 +59,16 @@ export default function DesignerWrite() {
     };
 
     const onContentsChangeHandler = (contents: string ) => {
-			setContents(contents);
-	};
+        setContents(contents);
+    };
 
     const onImageChangeHandler = (imageList: {base64: string; url: string}[]) => {
-			setUrlList(imageList);
-	};
+        setUrlList(imageList);
+    };
 
     const onPostButtonClickHandler = () => {
         if (!cookies.accessToken) return;
-    
+
         const requestBody: PostDesignerBoardRequestDto = { 
             designerBoardTitle: title.trim(), 
             designerBoardContents: contents.trim() 
@@ -114,13 +114,13 @@ export default function DesignerWrite() {
                 </div>
             </div>
             <div className='designer-write-contents-box'>
-            <ToastEditor
-                ref={editorRef}
-                body={contents}
-                setBody={onContentsChangeHandler}
-                imageList={urlList}
-                setImageList={onImageChangeHandler}
-            />
+                <ToastEditor
+                    ref={editorRef}
+                    body={contents}
+                    setBody={onContentsChangeHandler}
+                    imageList={urlList}
+                    setImageList={onImageChangeHandler}
+                />
             </div>
             <button className='primary-button' onClick={onPostButtonClickHandler}>올리기</button>
         </div>
