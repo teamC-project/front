@@ -78,25 +78,27 @@ export default function QnaBoardWrite() {
 
 //							render							//
     return (
-        <div id='qna-write-wrapper'>
-            <div className='qna-write-top'>
-                <div className='qna-write-title-box'>
-                    <div className='qna-write-title'>제목</div>
+        <div id='qna-board-write-wrapper'>
+            <div className='qna-board-write-top'>
+                <div className='qna-board-write-title-box'>
+                    <div className='qna-board-write-title'>제목</div>
                     <input 
-					className='qna-write-title-input' 
+					className='qna-board-write-title-input' 
 					placeholder='제목을 입력해주세요.' 
 					value={qnaBoardTitle} 
 					onChange={onTitleChangeHandler}/>
                 </div>
             </div>
+			<div className='qna-board-write-contents-box'>
 			<textarea
 				ref={contentsRef}
-				className="qna-write-contents-textarea"
+				className="qna-board-write-contents-textarea"
 				placeholder="내용을 입력해주세요. / 1000자" 
 				maxLength={1000}
 				value={qnaBoardContents}
 				onChange={onContentsChangeHandler}
 			/>
+			</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>올리기</div>
         </div>
     );
