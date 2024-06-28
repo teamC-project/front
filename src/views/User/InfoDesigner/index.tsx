@@ -67,22 +67,6 @@ export default function InfoDesigner() {
         setCompanyName(userCompanyName);
     };
 
-    const getImageResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '올바르지 않은 이미지입니다.' :
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 이미지입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
-            return;
-        }
-        setImage(image);
-    }
-
 //                          event handler                          //
     const onInfoDesignerUpdateClickHandler = async () => {
         if (!image) return;
@@ -91,14 +75,14 @@ export default function InfoDesigner() {
         reader.onload = async function () {
             const imageDataUrl = reader.result;
 
-            const designerInfoUpdate = {
-                userCompanyName: companyName,
-                userGender: gender,
-                userAge: age,
-                userImage: imageDataUrl
-            };
+        const designerInfoUpdate = {
+            userCompanyName: companyName,
+            userGender: gender,
+            userAge: age,
+            userImage: imageDataUrl
+        };
 
-            const updateResult = await updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate);
+        const updateResult = await updateDesignerInfoRequest(cookies.accessToken, designerInfoUpdate);
             if (updateResult) {
                 alert('개인정보가 업데이트되었습니다.');
                 navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
@@ -139,12 +123,6 @@ export default function InfoDesigner() {
         const file = files[0];
             setImage(file);
     };
-
-    const formData = new FormData();
-        formData.append('companyName', companyName);
-        formData.append('gender', gender);
-        formData.append('age', age);
-        image && formData.append('image', image);
 
 //                          effect                          //
     useEffect(() => {

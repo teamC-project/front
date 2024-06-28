@@ -28,21 +28,6 @@ export default function InfoDeleteUser() {
 //                          function                          //
     const navigator = useNavigate();
 
-    const deleteUserInfoResponse = (result: ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'VF' ? '올바르지 않는 유저입니다.' :
-            result.code === 'NI' ? '존재하지 않는 아이디입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-        if (!result || result.code !== 'SU') {
-            alert(message);
-            return;
-        }
-        navigator(MAIN_PATH);
-    };
-
     const getSignInUserResponse = (result: GetSignInUserResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :

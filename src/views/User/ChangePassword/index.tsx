@@ -12,10 +12,10 @@ import ResponseDto from 'src/apis/response.dto';
 
 import "./style.css";
 
-//                component               //
+//                          component                          //
 export default function PasswordChangePage() {
 
-//                  state                //
+//                          state                          //
     const [password, setPassword] = useState<string>('');
     const [passwordCheck, setPasswordCheck] = useState<string>('');
     const [passwordChange, setPasswordChange] = useState<string>('');
@@ -24,10 +24,10 @@ export default function PasswordChangePage() {
 
     const [isPasswordPattern, setIsPasswordPattern] = useState<boolean>(false);
     const [isEqaulPassword, setIsEqaulPassword] = useState<boolean>(false);
-    
+
     const [cookies] = useCookies();
 
-    //                  function                 //
+//                          function                          //
     const navigator = useNavigate();
 
     const passwordChangeResponse = (result: ResponseDto | null) => {
@@ -47,7 +47,7 @@ export default function PasswordChangePage() {
         }
     };
 
-    //                event handler               //
+//                          event handler                          //
     const onPasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setPassword(value);
@@ -101,29 +101,23 @@ export default function PasswordChangePage() {
     navigator(ANNOUNCEMENT_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                      render                     //
+//                          render                          //
     return (
         <div id='change-wrapper'>
             <div className='change-center-value'>
                 <div className='change-sign-up-box'>
                     <div className='info-sub-title'>비밀번호 재설정</div>
                     <div className='change-sign-up-box-text'>
-
                         <div className='change-sign-up-text'>현재 비밀번호</div>
                         <InputBox type={'password'} value={password} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordHandler} />
-
                         <div className='change-sign-up-text'>새 비밀번호</div>
                         <InputBox type={'password'} value={passwordChange} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-
                         <div className='change-sign-up-text'>새 비밀번호 확인</div>
                         <InputBox type={'password'} value={passwordCheck} placeholder={'비밀번호를 입력해주세요'} onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-
                     </div>
-
                     <div className='submit-box'>
                         <div className='change-submit-box user-primary-button' onClick={onChangePasswordButtonClickHandler}>확인</div>
                     </div>
-
                 </div>
             </div>
         </div>
