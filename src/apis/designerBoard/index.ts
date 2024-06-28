@@ -1,8 +1,24 @@
 import axios from "axios";
-import { PostDesignerBoardCommentRequestDto, PostDesignerBoardRequestDto, PutDesignerBoardCommentRequestDto, PutDesignerBoardRequestDto } from "./dto/request";
-import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
+
+import { 
+    bearerAuthorization, 
+    requestErrorHandler, 
+    requestHandler 
+} from "..";
+
 import ResponseDto from "../response.dto";
-import { GetDesignerBoardCommentListResponseDto, GetDesignerBoardListResponseDto, GetDesignerBoardResponseDto, GetSearchDesignerBoardListResponseDto } from "./dto/response";
+import { 
+    GetDesignerBoardCommentListResponseDto, 
+    GetDesignerBoardListResponseDto, 
+    GetDesignerBoardResponseDto, 
+    GetSearchDesignerBoardListResponseDto 
+} from "./dto/response";
+import { PostDesignerBoardCommentRequestDto, 
+    PostDesignerBoardRequestDto, 
+    PutDesignerBoardCommentRequestDto, 
+    PutDesignerBoardRequestDto 
+} from "./dto/request";
+
 import { 
     DELETE_DESIGNER_BOARD_COMMENT_DELETE_URL, 
     DELETE_DESIGNER_BOARD_DELETE_URL, 
