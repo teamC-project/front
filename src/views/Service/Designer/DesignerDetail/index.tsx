@@ -7,12 +7,20 @@ import { useCreateChatRoom } from 'src/hooks/useCreateChatRoom';
 import { useUserStore } from 'src/stores';
 
 import ResponseDto from 'src/apis/response.dto';
-import { getDesignerBoardRequest, increaseViewCountRequest, deleteDesignerBoardRequest } from 'src/apis/designerBoard';
+import { 
+    getDesignerBoardRequest, 
+    increaseViewCountRequest, 
+    deleteDesignerBoardRequest 
+} from 'src/apis/designerBoard';
 import { GetDesignerBoardResponseDto } from 'src/apis/designerBoard/dto/response';
 
 import DesignerBoardComment from '../DesignerComment';
 
-import { DESIGNER_BOARD_LIST_ABSOLUTE_PATH, DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, MAIN_PATH } from 'src/constant';
+import { 
+    DESIGNER_BOARD_LIST_ABSOLUTE_PATH, 
+    DESIGNER_BOARD_UPDATE_ABSOLUTE_PATH, 
+    MAIN_PATH 
+} from 'src/constant';
 
 import './style.css';
 
