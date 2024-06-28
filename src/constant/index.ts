@@ -1,5 +1,5 @@
 // description : Navigation URL PATH
-export const LOCALHOST = "http://localhost:4200/api/v1/auth/oauth2/"
+export const LOCALHOST = process.env.REACT_APP_BACK_URL + ":4200/api/v1/auth/oauth2/"
 export const SNS_PATH = "/sns/:accessToken/:expires";
 export const MAIN_PATH = "/main";
 export const FOOTER_PATH = "footer";
@@ -130,9 +130,9 @@ export const CHAT_ROOM_DETAIL_ABSOLUTE_PATH = (roomId: number | string) => `${CH
 export const CHAT_ROOM_MESSAGES_ABSOLUTE_PATH = (roomId: number | string) => `${CHAT_ABSOLUTE_PATH}/${roomId}/messages`;
 
 // description: API URL PATH
-export const SERVER_DOMAIN_URL = "http://localhost:4200";
+export const SERVER_DOMAIN_URL = process.env.REACT_APP_BACK_URL + ":4200";
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
-export const CHAT_DOMAIN_URL = "http://localhost:4200";
+export const CHAT_DOMAIN_URL = process.env.REACT_APP_BACK_URL + ":4200";
 
 // description: LOGIN_LOG API URL PATH
 export const LOGIN_LOG_URL = `${SERVER_API_URL}/login-log`;
@@ -201,7 +201,7 @@ export const PUT_TREND_BOARD_LIKE_URL = (trendBoardNumber : number | string) => 
 export const PATCH_TREND_BOARD_INCREASE_VIEW_COUNT_URL = (trendBoardNumber : number | string) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/increase_view_count`
 export const GET_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
 export const DELETE_TREND_BOARD_LIKE_LIST_URL = (trendBoardNumber : number | string ) => `${SERVER_TREND_BOARD_MODULE_URL}${trendBoardNumber}/like_list`
-export const POST_TREND_BOARD_IMAGE_UPLOAD_URL = 'http://localhost:4200/upload'
+export const POST_TREND_BOARD_IMAGE_UPLOAD_URL = process.env.REACT_APP_BACK_URL + ':4200/upload'
 
 // description : Q&A API URL PATH
 export const SERVER_QNA_BOARD_MODULE_URL = `${SERVER_API_URL}/qna_board`;
