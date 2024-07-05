@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.80a86599.css",
-    "main.js": "/static/js/main.7d82a9e0.js",
+    "main.js": "/static/js/main.0c8ea7da.js",
     "static/media/main-page-image.png": "/static/media/main-page-image.c69c9a3ec940e5757482.png",
     "static/media/sign-in-page-image.png": "/static/media/sign-in-page-image.9214c76f61f59322c758.png",
     "static/media/welcome-image.png": "/static/media/welcome-image.77b3fb1858d8a08d8b73.png",
@@ -14,10 +14,10 @@
     "static/media/비밀번호 재설정.png": "/static/media/비밀번호 재설정.09fe07999cdd50bddba4.png",
     "index.html": "/index.html",
     "main.80a86599.css.map": "/static/css/main.80a86599.css.map",
-    "main.7d82a9e0.js.map": "/static/js/main.7d82a9e0.js.map"
+    "main.0c8ea7da.js.map": "/static/js/main.0c8ea7da.js.map"
   },
   "entrypoints": [
     "static/css/main.80a86599.css",
-    "static/js/main.7d82a9e0.js"
+    "static/js/main.0c8ea7da.js"
   ]
 }
